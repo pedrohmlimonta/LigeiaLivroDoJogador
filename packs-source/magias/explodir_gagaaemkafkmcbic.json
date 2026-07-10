@@ -1,0 +1,93 @@
+{
+  "_id": "gagaaemkafkmcbic",
+  "_key": "!items!gagaaemkafkmcbic",
+  "name": "Explodir",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "exitium",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "1m x Nível",
+    "range": "3m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Gritando a palavra exitium, você cria uma explosão em uma área, de pura energia destrutiva, ferindo seus inimigos.</p><p>Dano: Dano Final de Energia 1 (Esquiva, não escalável).</p><p>Efeitos: Você sofre 1 ponto de dano final (não é possível evitar esse dano de qualquer forma).</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Dano Final de Energia 2 (apenas Círculo Intermediário) (-). Dano Final de Energia 3 (apenas Círculo Maior) (-). O dano final sofrido pelo conjurador aumenta para 2 (+2). Alcance (Emanação) e Área (2m) (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Explodir (dano final de energia; você sofre 1 de dano final)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "1",
+        "damageType": "final",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 6,
+        "area": 1,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 1,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

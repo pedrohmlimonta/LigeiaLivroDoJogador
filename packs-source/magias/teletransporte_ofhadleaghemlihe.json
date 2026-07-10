@@ -1,0 +1,93 @@
+{
+  "_id": "ofhadleaghemlihe",
+  "_key": "!items!ofhadleaghemlihe",
+  "name": "Teletransporte",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "krucigon",
+    "tier": "Menor",
+    "casting": "Movimento",
+    "target": "Uma criatura ou objeto",
+    "area": "",
+    "range": "Toque",
+    "duration": "",
+    "description": "<p>Enquanto sussurra a palavra krucigon, você rasga o véu etéreo, permitindo que você, uma criatura ou um objeto no qual tocar viaje através dos planos.</p><p>Efeitos: O alvo é teleportado até uma distância igual a 10m x Círculo x Nível, à sua escolha, em terra firme, para onde você possa ver.</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Teleporta o alvo para qualquer lugar do mesmo plano, que você já tenha visitado (apenas Círculo Intermediário ou Maior) (-4). Teleporta o alvo para outro plano, que você já tenha visitado (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Teletransporte (10m x Círculo x Nível)",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": true,
+          "kind": "teleport",
+          "who": "self",
+          "distance": 10,
+          "lateralSide": "right",
+          "ignoreWalls": true,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

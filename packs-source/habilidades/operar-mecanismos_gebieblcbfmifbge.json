@@ -1,0 +1,39 @@
+{
+  "_id": "gebieblcbfmifbge",
+  "_key": "!items!gebieblcbfmifbge",
+  "name": "Operar Mecanismos",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Faen Oeste",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você usa um equipamento mecânico, ele não possui chance de mau funcionamento. Adicionalmente, você recebe +1 em rolagens para ativar itens arcanomecânicos.</p>",
+    "descAdvanced": "<p>Você recebe +2 em rolagens para ativar itens arcanomecânicos.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

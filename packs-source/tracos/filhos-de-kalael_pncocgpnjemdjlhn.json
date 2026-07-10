@@ -1,0 +1,28 @@
+{
+  "_id": "pncocgpnjemdjlhn",
+  "_key": "!items!pncocgpnjemdjlhn",
+  "name": "Filhos de Kalael",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Abençoado pelas deusas da floresta, da noite e da magia, seu criador recebeu grandes poderes mágicos. Parte desse poder foi passado para seu povo. Você recebe a habilidade Palavra Arcana (energio), sem ter que pagar por ela.</p><p>Raça: elfo cinzento.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

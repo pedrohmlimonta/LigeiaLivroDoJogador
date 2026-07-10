@@ -1,0 +1,111 @@
+{
+  "_id": "janncbngeillanfg",
+  "_key": "!items!janncbngeillanfg",
+  "name": "Rajada Sônica",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "sonigu",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura ou objeto",
+    "area": "",
+    "range": "5m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Você pronuncia a palavra sonigu e sua magia cria poderosas ondas sonoras através do deslocamento de ar em torno do seu alvo, ferindo-o e deixando-o surdo, caso seja uma criatura.</p><p>Dano: Sônico +1 (Esquiva ou Bloqueio).</p><p>Efeitos: Se o alvo sofrer dano, ele deve ser bem sucedido em uma rolagem de Vigor oposta a Conjuração, ou ficará surdo até o fim da cena (Vigor anula).</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Dano: Sônico +2 (apenas Círculo Intermediário) (-). Dano: Sônico +3 (apenas Círculo Maior) (-). O alvo fica sob efeito de dano sônico contínuo até o fim da cena (Vigor anula) (apenas Círculo Maior) (-2). O alvo fica pasmo até o fim da cena (Vigor anula) (apenas Círculo Intermediário ou Maior) (-2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Rajada Sônica (Conjuração vs Esquiva/Bloqueio)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "1",
+        "damageType": "sonico",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Surdo (Vigor anula)",
+            "fxType": "condition",
+            "fxTarget": "surdo",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 10,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

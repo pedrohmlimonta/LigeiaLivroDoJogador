@@ -1,0 +1,31 @@
+{
+  "_id": "fekojkgiolgbmbje",
+  "_key": "!items!fekojkgiolgbmbje",
+  "name": "Escudo de Madeira",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Escudo",
+    "qty": 1,
+    "weight": 0,
+    "price": "5 Vo",
+    "notes": "Deflexão",
+    "description": "<p>Uma base de madeira cuja parte traseira possui tiras de couro usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

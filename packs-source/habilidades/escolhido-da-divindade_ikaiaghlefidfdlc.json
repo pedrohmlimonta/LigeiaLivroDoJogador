@@ -1,0 +1,39 @@
+{
+  "_id": "ikaiaghlefidfdlc",
+  "_key": "!items!ikaiaghlefidfdlc",
+  "name": "Escolhido da Divindade",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Primeiro Aspecto",
+    "lists": "Clérigo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode usar a Forma Divina dos Aspectos da sua divindade, a que você tem acesso.</p>",
+    "descAdvanced": "<p>Você pode usar a Ira Divina dos Aspectos da sua divindade, a que você tem acesso.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

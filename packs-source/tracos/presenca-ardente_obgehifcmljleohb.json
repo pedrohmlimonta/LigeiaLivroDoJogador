@@ -1,0 +1,28 @@
+{
+  "_id": "obgehifcmljleohb",
+  "_key": "!items!obgehifcmljleohb",
+  "name": "Presença Ardente",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Você recebe um bônus igual a... (Observação: o texto deste traço está incompleto na edição do Livro de Regras usada como fonte — a descrição é interrompida no fim da página 45. Complete conforme errata ou decisão da mesa.)</p><p>Herança: psiônico.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

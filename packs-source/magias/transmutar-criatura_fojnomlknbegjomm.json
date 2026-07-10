@@ -1,0 +1,93 @@
+{
+  "_id": "fojnomlknbegjomm",
+  "_key": "!items!fojnomlknbegjomm",
+  "name": "Transmutar Criatura",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "sangon",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "Toque",
+    "duration": "Cena",
+    "description": "<p>Você pronuncia a palavra sangon enquanto toca uma criatura com a palma de sua mão, alterando sua estrutura física ou parte dela.</p><p>Efeitos: Há duas formas de se transmutar uma criatura: a transmutação parcial e a completa. O alvo pode resistir à magia com uma rolagem bem sucedida de Vigor oposta a Conjuração, ou ficará transmutado pela duração da magia (Vigor anula). Na transmutação parcial, você altera apenas uma parte do corpo do alvo, transformando em parte de uma outra criatura. O alvo troca um de seus traços por um traço de uma criatura cujos Pontos de Criação custem no máximo a metade do seu nível (ou o mesmo valor em um custo negativo, caso o alvo seja um inimigo). Um mesmo alvo pode sofrer mais de uma transmutação parcial. Na transmutação completa, você altera totalmente a forma física do alvo para a forma física de uma criatura de Desafio 2 x Nível, mantendo apenas seus pontos de vida, pontos de magia, pontos heróicos e Mente originais. A criatura recebe um bônus para a rolagem igual à diferença entre seu Desafio atual e o Desafio da criatura na qual ela será transformada.</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>O Desafio da Transmutação Completa aumenta em +2 (apenas Círculo Intermediário ou Maior) (-6). O Desafio da Transmutação Completa aumenta em +4 (apenas Círculo Maior) (-8). Apenas Parcial, aumentar +2 nos Pontos de Criação (-3). O alvo recebe o traço da outra criatura sem ter que perder um seu em troca (-2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Transmutar Criatura (Conjuração vs Vigor)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "vigor",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

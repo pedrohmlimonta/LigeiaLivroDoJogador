@@ -1,0 +1,28 @@
+{
+  "_id": "coeeacngbegdamhf",
+  "_key": "!items!coeeacngbegdamhf",
+  "name": "Sangue Ruim",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você recebe 1D nas rolagens para resistir a fome, sede e sono não mágicos. Você adicionalmente recebe 1D para resistir a ameaças climáticas como tempestades, nevascas ou calor intenso.</p><p>Raça: meio-orc.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

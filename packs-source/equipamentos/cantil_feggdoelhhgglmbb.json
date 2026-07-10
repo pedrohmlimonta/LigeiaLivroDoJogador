@@ -1,0 +1,31 @@
+{
+  "_id": "feggdoelhhgglmbb",
+  "_key": "!items!feggdoelhhgglmbb",
+  "name": "Cantil",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Compartimento",
+    "qty": 1,
+    "weight": 0,
+    "price": "2 Va",
+    "notes": "",
+    "description": "<p>Bolsa de couro impermeável contendo um bico anelado e uma tampa para o mesmo.</p><p>Propriedade: permite carregar água suficiente para uma aventura.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

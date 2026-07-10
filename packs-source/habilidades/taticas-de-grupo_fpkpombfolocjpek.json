@@ -1,0 +1,39 @@
+{
+  "_id": "fpkpombfolocjpek",
+  "_key": "!items!fpkpombfolocjpek",
+  "name": "Táticas de Grupo",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Ceifera",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Enquanto você estiver adjacente a um ou mais aliados, você e esses aliados recebem um bônus acumulativo de +1 nas rolagens de defesa. Esses aliados precisam poder vê-lo e ouvi-lo para receber esse bônus.</p>",
+    "descAdvanced": "<p>Enquanto você estiver adjacente a um ou mais aliados, você e esses aliados recebem um bônus acumulativo de +1 nas rolagens de ataque. Esses aliados precisam poder vê-lo e ouvi-lo para receber esse bônus.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 21500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

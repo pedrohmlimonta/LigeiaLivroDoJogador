@@ -1,0 +1,34 @@
+{
+  "_id": "dagknfohpfpolebc",
+  "_key": "!items!dagknfohpfpolebc",
+  "name": "Filhos de Ruff",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você pode gastar 1 ponto de magia para re-rolar um dado de qualquer rolagem.</p><p>Raça: pequenino.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Re-rolar um dado"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

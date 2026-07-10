@@ -1,0 +1,31 @@
+{
+  "_id": "eamfjlbihjplckme",
+  "_key": "!items!eamfjlbihjplckme",
+  "name": "Instrumento Musical",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Dispositivo",
+    "qty": 1,
+    "weight": 0,
+    "price": "20 Vo",
+    "notes": "",
+    "description": "<p>Aparato utilizado para se produzir sons, seja um alaúde, flauta, oboé, tambor, etc.</p><p>Propriedade: utilizado em performances musicais. Também pode ser utilizado como foco na conjuração de magias de Círculo Maior, quando empunhado com as duas mãos e tocado, substituindo também o componente gestual.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "_id": "kahbeboganpeidpp",
+  "_key": "!items!kahbeboganpeidpp",
+  "name": "Rajada Cromática",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "lumo",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Um espaço",
+    "area": "",
+    "range": "5m x Círculo x Nível",
+    "duration": "Uma cena",
+    "description": "<p>Sussurrando a palavra lumo, você lança uma rajada de múltiplas cores em uma direção, causando efeitos diversos àqueles pelos quais a rajada passa.</p><p>Efeitos: Você traça uma linha reta entre você e o espaço alvo dentro do alcance. A magia afeta todas as criaturas na linha. Role um dado para cada criatura afetada pela magia. Cada criatura sofrerá uma condição, pela duração da magia, caso não seja bem sucedida em uma rolagem de Percepção oposta a Conjuração, de acordo com o resultado: Pasmo (1 ou 2), Indefeso (3), Atordoado (4), Cego (5), Inconsciente (6). Criaturas cegas não são afetadas por essa magia. Percepção anula esses efeitos.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>A rolagem no dado, para cada criatura, aumenta 1 ponto (apenas Círculo Intermediário ou Maior) (-2). A rolagem no dado, para cada criatura, aumenta 2 pontos (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Rajada Cromática (Conjuração vs Percepção — linha)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "defenseAttr": "percepcao",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 10,
+        "area": 1,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

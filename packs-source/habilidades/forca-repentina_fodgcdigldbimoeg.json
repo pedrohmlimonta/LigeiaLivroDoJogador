@@ -1,0 +1,39 @@
+{
+  "_id": "fodgcdigldbimoeg",
+  "_key": "!items!fodgcdigldbimoeg",
+  "name": "Força Repentina",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Dunas do Norte",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando corre risco de vida, você adquire força e resistência enormes. Sempre que chegar a uma quantidade de pontos de vida igual ao seu nível, você recebe 1D nas rolagens de Força ou Agilidade até o fim da cena e 2 pontos de sobrevida.</p>",
+    "descAdvanced": "<p>Você recebe 2D nas rolagens de Força ou Agilidade, em vez de 1D, e recebe 4 pontos de sobrevida, em vez de 2.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

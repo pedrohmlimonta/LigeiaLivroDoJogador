@@ -1,0 +1,39 @@
+{
+  "_id": "bakaaonihngpokdj",
+  "_key": "!items!bakaaonihngpokdj",
+  "name": "Proteção dos Espíritos",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Terras dos Vales",
+    "activation": "Ritual (uma cena)",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Após um descanso, você pode realizar um ritual gastando uma cena, para se conectar aos espíritos ancestrais da natureza, para que eles lhe concedam uma proteção. Quando o fizer, você recebe Proteção igual à metade do seu nível contra todo o tipo de dano. Essa Proteção dura até o próximo descanso e cai em 1 ponto cada vez que ela anula qualquer dano sofrido por você.</p>",
+    "descAdvanced": "<p>Você recebe Proteção igual ao seu nível, em vez de metade do nível.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 18700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

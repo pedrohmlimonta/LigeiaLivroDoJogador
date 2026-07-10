@@ -1,0 +1,31 @@
+{
+  "_id": "fhffgahdddmfcmgl",
+  "_key": "!items!fhffgahdddmfcmgl",
+  "name": "Balas de Funda",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Munição",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Va",
+    "notes": "",
+    "description": "<p>Pequenas esferas de pedra utilizadas como munição para as fundas.</p><p>Propriedade: uma vez disparada, a bala tem grandes chances de se despedaçar com o impacto, a menos que tenha uma propriedade mágica. É possível recuperar metade das balas utilizadas em um combate quando ele termina. Pagando 1 Va você tem balas suficientes para uma aventura.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_id": "iobcbnneinegankj",
+  "_key": "!items!iobcbnneinegankj",
+  "name": "Inventor de Engenhocas",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você recebe 1D em rolagens para identificar, reparar e criar itens mecânicos.</p><p>Raça: gnomo das rochas.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

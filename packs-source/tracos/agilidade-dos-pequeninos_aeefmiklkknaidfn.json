@@ -1,0 +1,28 @@
+{
+  "_id": "aeefmiklkknaidfn",
+  "_key": "!items!aeefmiklkknaidfn",
+  "name": "Agilidade dos Pequeninos",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você pode se mover através de espaços de criaturas de tamanho maior que o seu.</p><p>Raça: pequenino.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

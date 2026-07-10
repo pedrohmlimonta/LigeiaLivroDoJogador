@@ -1,0 +1,39 @@
+{
+  "_id": "bdefcjmbhackjkfa",
+  "_key": "!items!bdefcjmbhackjkfa",
+  "name": "Golpe de Sorte",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Gnomo da floresta e ladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Uma vez por cena, você pode escolher ser bem sucedido em um ataque, superando a defesa do alvo por 2 pontos de diferença.</p>",
+    "descAdvanced": "<p>Quando ataca, você pode gastar 1 ponto heróico para que seu resultado neste ataque seja um 12 natural (um acerto crítico).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "_id": "ogodmiokkgiajkag",
+  "_key": "!items!ogodmiokkgiajkag",
+  "name": "Imitar Sons",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "sonigu",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Um espaço vazio",
+    "area": "",
+    "range": "3m x Círculo x Nível",
+    "duration": "Uma cena",
+    "description": "<p>Você sussurra a palavra sonigu, manipulando o vento de forma a criar sons e vozes.</p><p>Efeitos: Cria um som que o conjurador já conheça. Todos os que puderem ouvir o som devem ser bem sucedidos em uma rolagem de Percepção oposta a Conjuração, para notar que se trata de um som falso.</p><p>Carisma concede +1 em Conjuração para esta conjuração. Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Se usado para imitar a voz de alguém, você recebe 1D em rolagens para interagir socialmente para quem ouve o som (apenas Círculo Intermediário ou Maior) (-2). Se usado para imitar a voz de alguém, resultados 1 nos dados são considerados 3 para interagir socialmente com quem ouve a voz (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "_id": "edcoibonegmacmfk",
+  "_key": "!items!edcoibonegmacmfk",
+  "name": "Sangue Aagn",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Usando sua ação rápida, você pode gastar pontos de magia para recuperar pontos de vida. A cada 2 pontos de magia gastos, você recupera 1 ponto de vida.</p><p>Raça: humano.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 2,
+        "label": "Recupera 1 PV"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

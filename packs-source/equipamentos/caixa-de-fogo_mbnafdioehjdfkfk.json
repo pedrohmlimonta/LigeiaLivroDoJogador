@@ -1,0 +1,31 @@
+{
+  "_id": "mbnafdioehjdfkfk",
+  "_key": "!items!mbnafdioehjdfkfk",
+  "name": "Caixa de Fogo",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Utensílio",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Va",
+    "notes": "",
+    "description": "<p>Um recipiente contendo uma pederneira e um isqueiro.</p><p>Propriedade: pode ser usado para acender tochas ou qualquer outro objeto contendo combustível, gastando uma ação. Objetos sem combustível levam uma cena para pegar fogo.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

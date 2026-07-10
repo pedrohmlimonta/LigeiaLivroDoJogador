@@ -1,0 +1,31 @@
+{
+  "_id": "kamibpadfofhhhlh",
+  "_key": "!items!kamibpadfofhhhlh",
+  "name": "Espelho",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Utensílio",
+    "qty": 1,
+    "weight": 0,
+    "price": "5 Vo",
+    "notes": "",
+    "description": "<p>Base de aço espelhado, com cabo inteiriço.</p><p>Propriedade: usado para refletir imagens, pode ser utilizado como foco para magias compostas por iluzio. Para ser usado como foco, deve ser empunhado com uma mão.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "ldaigpbceogbehmj",
+  "_key": "!items!ldaigpbceogbehmj",
+  "name": "Movimento Astuto",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Gnomo das profundezas e ladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Enquanto você estiver escondido, você pode mover metade do seu Deslocamento e ainda continuar escondido sem ter que realizar uma nova rolagem. Você deve estar sob cobertura ao fim desse movimento.</p>",
+    "descAdvanced": "<p>Quando usa essa habilidade, você pode mover todo o seu Deslocamento em vez de apenas metade.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

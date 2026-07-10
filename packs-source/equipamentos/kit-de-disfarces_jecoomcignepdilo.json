@@ -1,0 +1,31 @@
+{
+  "_id": "jecoomcignepdilo",
+  "_key": "!items!jecoomcignepdilo",
+  "name": "Kit de Disfarces",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 0,
+    "price": "25 Vo",
+    "notes": "",
+    "description": "<p>Tinta de cabelo, maquiagem, vestimentas e adereços que mudam sua aparência.</p><p>Propriedade: enquanto estiver usando esses itens, você recebe +1 nas rolagens para se disfarçar.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

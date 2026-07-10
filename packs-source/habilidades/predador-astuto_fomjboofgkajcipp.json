@@ -1,0 +1,39 @@
+{
+  "_id": "fomjboofgkajcipp",
+  "_key": "!items!fomjboofgkajcipp",
+  "name": "Predador Astuto",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Percepção 4+",
+    "lists": "Patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Escolha um inimigo que você possa ver durante seu turno de combate. Até o fim da cena, todos os ataques com arma que você fizer contra esse inimigo recebem os dados de melhoria que você tiver no atributo Percepção.</p>",
+    "descAdvanced": "<p>Os ataques com arma que você fizer contra esse inimigo também recebem os dados de melhoria do atributo Mente.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

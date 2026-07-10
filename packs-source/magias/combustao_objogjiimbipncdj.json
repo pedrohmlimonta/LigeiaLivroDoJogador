@@ -1,0 +1,111 @@
+{
+  "_id": "objogjiimbipncdj",
+  "_key": "!items!objogjiimbipncdj",
+  "name": "Combustão",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "ignis",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "1m x Nível",
+    "range": "3m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Através da pronúncia da palavra ignis, você faz com que a temperatura de uma pequena área suba a ponto de fazer com que as criaturas dentro dela entrem em combustão.</p><p>Efeitos: Todas as criaturas dentro da área devem ser bem sucedidas em uma rolagem de Vigor oposta a Conjuração, ou sofrerão dano contínuo de fogo pelo resto da cena (Vigor anula).</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Os alvos ficam exaustos até o fim da cena (Vigor anula) (apenas Círculo Intermediário ou Maior) (-2). Criaturas atingidas perdem todos os dados de melhoria em ações físicas (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Combustão (Conjuração vs Vigor — área)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "defenseAttr": "vigor",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Dano contínuo de fogo (Vigor anula)",
+            "fxType": "condition",
+            "fxTarget": "dano_continuo",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 1,
+            "tickType": "fogo",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 6,
+        "area": 2,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

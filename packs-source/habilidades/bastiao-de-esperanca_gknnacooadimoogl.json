@@ -1,0 +1,39 @@
+{
+  "_id": "gknnacooadimoogl",
+  "_key": "!items!gknnacooadimoogl",
+  "name": "Bastião de Esperança",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Terras Centrais",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Para cada aliado inconsciente em batalha, você recebe +1 nas rolagens de defesa. Você ignora 1 ponto de dano de queda, armadilhas e doenças.</p>",
+    "descAdvanced": "<p>O bônus por aliado caído é aplicado também às rolagens para anular condições. O dano ignorado aumenta para 2 pontos. Adicionalmente, você fica imune à condição Exausto.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

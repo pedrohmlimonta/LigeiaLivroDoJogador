@@ -1,0 +1,39 @@
+{
+  "_id": "okbnfemcembkklag",
+  "_key": "!items!okbnfemcembkklag",
+  "name": "Reação Furiosa",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Força 4+",
+    "lists": "Bárbaro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Até o final da cena, você recebe um bônus igual a metade do seu nível nas rolagens de ataque com armas corpo a corpo e armas de arremesso, contra criaturas que causarem dano a você.</p>",
+    "descAdvanced": "<p>Um ataque que receba esse bônus possui margem de crítico 11-12 enquanto você estiver ferido, ou 10-12 caso você esteja com uma quantidade de pontos de vida atual menor ou igual ao seu nível.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

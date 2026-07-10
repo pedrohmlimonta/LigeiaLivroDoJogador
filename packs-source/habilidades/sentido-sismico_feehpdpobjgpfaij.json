@@ -1,0 +1,39 @@
+{
+  "_id": "feehpdpobjgpfaij",
+  "_key": "!items!feehpdpobjgpfaij",
+  "name": "Sentido Sísmico",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Guardião e guerreiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você está em contato com o solo, você sabe a localização exata de qualquer criatura tocando o solo em um raio de metros igual ao dobro da sua Percepção.</p>",
+    "descAdvanced": "<p>O raio de alcance dessa habilidade, em metros, é igual ao triplo da Percepção (em vez do dobro). Você sabe também o tipo e o tamanho das criaturas.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

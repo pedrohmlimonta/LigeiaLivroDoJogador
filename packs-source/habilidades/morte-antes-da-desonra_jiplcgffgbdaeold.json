@@ -1,0 +1,39 @@
+{
+  "_id": "jiplcgffgbdaeold",
+  "_key": "!items!jiplcgffgbdaeold",
+  "name": "Morte Antes da Desonra",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Sei Yang",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Sempre que um combate se inicia, você pode apostar sua vida nele. Se o fizer, você receberá 3 pontos de dano final adicional de qualquer ataque ou magia, mas seus ataques e magias causarão 2 pontos de dano final adicionais.</p>",
+    "descAdvanced": "<p>O dano final recebido é igual a 2 (em vez de 3). O dano final causado é igual a 3 (em vez de 2).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

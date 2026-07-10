@@ -1,0 +1,39 @@
+{
+  "_id": "ongohbicjdabgekd",
+  "_key": "!items!ongohbicjdabgekd",
+  "name": "Lábia Natural",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Faen Leste",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de interação social. Adicionalmente, você pode reduzir a quantidade de dias necessários para encontrar itens mágicos à venda em um quarto.</p>",
+    "descAdvanced": "<p>Você pode re-rolar todos os dados com resultado 1 e 2 em rolagens de interação social, até obter um resultado maior. Você reduz um terço, em vez de um quarto dos dias.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "_id": "cdcdfnoeopbkdcoh",
+  "_key": "!items!cdcdfnoeopbkdcoh",
+  "name": "Ensurdecer",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "sonigu",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "1m x Nível",
+    "range": "3m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Pronunciando a palavra sonigu, você manipula as frequências sonoras em uma área, de forma a ensurdecer as criaturas presentes nela.</p><p>Efeitos: Todas as criaturas dentro da área devem ser bem sucedidas em uma rolagem de Vigor oposta a Conjuração, ou ficarão surdas (Percepção anula).</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>O alvo também fica pasmo até o fim da cena (apenas Círculo Intermediário ou Maior) (Vigor anula) (-2). O alvo também fica atordoado até o fim da cena (apenas Círculo Maior) (Vigor anula) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Ensurdecer (Conjuração vs Vigor — área)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "defenseAttr": "vigor",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Surdo (Percepção anula)",
+            "fxType": "condition",
+            "fxTarget": "surdo",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "percepcao",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 6,
+        "area": 2,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

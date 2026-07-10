@@ -1,0 +1,39 @@
+{
+  "_id": "opefppoinkgamhao",
+  "_key": "!items!opefppoinkgamhao",
+  "name": "Magia Sem Materiais",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bruxo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode conjurar magias de círculo maior sem a necessidade de bolsa de componentes ou de um foco. Uma magia conjurada sem os componentes materiais custa 1 ponto de magia adicional para ser conjurada.</p>",
+    "descAdvanced": "<p>Você pode conjurar uma magia sem componentes materiais comuns, sem pagar 1 ponto de magia adicional.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

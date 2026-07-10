@@ -1,0 +1,39 @@
+{
+  "_id": "fnnodkknalnodhep",
+  "_key": "!items!fnnodkknalnodhep",
+  "name": "Sem Brechas",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro, ladino e monge",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode gastar 1 ponto heróico para anular todos os dados de melhoria de uma rolagem de ataque feita contra você. Você deve declarar o uso dessa habilidade antes que o atacante role os dados.</p>",
+    "descAdvanced": "<p>Você pode adicionar uma quantidade de dados de melhoria igual à quantidade de dados anulados à sua rolagem de defesa contra esse ataque.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

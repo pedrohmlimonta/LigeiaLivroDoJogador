@@ -1,0 +1,39 @@
+{
+  "_id": "dgnhhokkokbglbme",
+  "_key": "!items!dgnhhokkokbglbme",
+  "name": "Mercado Negro",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Mente 4+",
+    "lists": "Elfo das profundezas, gnomo das profundezas, infernal, bardo, bruxo e ladino.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode realizar uma rolagem para obter informações sobre mercados proibidos da cidade. Sendo bem sucedido, você sabe onde adquirir itens comuns pagando um terço a menos do valor de venda. Sempre que você gastar seus dias de inatividade procurando por itens mágicos em uma cidade, subtraia seu nível da quantidade de dias necessários para encontrar.</p>",
+    "descAdvanced": "<p>Você consegue comprar itens comuns por metade do preço (em vez de um terço a menos). Sempre que você gastar seus dias de inatividade procurando por itens mágicos em uma cidade, subtraia o dobro do seu nível da quantidade de dias necessários para encontrar.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

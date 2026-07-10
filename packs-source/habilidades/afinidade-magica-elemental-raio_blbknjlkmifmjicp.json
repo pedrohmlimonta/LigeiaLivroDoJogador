@@ -1,0 +1,60 @@
+{
+  "_id": "blbknjlkmifmjicp",
+  "_key": "!items!blbknjlkmifmjicp",
+  "name": "Afinidade Mágica Elemental (Raio)",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Mente 4+",
+    "lists": "Draconiano e infernal",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você possui afinidade com o elemento Raio e causa 1 ponto de dano bruto adicional quando conjura magias relacionadas ao elemento especificado (palavra arcana fulgur).</p>",
+    "descAdvanced": "<p>O dano bruto adicional causado aumenta para 3 pontos de dano.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "damage",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Afinidade (Raio) B: +1 dano",
+        "enabled": true,
+        "level": "B",
+        "damageType": "raio"
+      },
+      {
+        "type": "damage",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Afinidade (Raio) A: +2 dano (total 3)",
+        "enabled": true,
+        "level": "A",
+        "damageType": "raio"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

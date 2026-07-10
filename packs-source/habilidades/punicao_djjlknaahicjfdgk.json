@@ -1,0 +1,39 @@
+{
+  "_id": "djjlknaahicjfdgk",
+  "_key": "!items!djjlknaahicjfdgk",
+  "name": "Punição",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Celestial e Paladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você acerta uma criatura com um ataque corpo a corpo, você pode gastar pontos de magia para causar dano final adicional a ela. A cada 2 pontos de magia gastos, você causa 1 ponto de dano final adicional (limite de 6 de dano).</p>",
+    "descAdvanced": "<p>A cada ponto de magia gasto, você causa 1 ponto de dano final adicional (limite de 6 de dano).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 18900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

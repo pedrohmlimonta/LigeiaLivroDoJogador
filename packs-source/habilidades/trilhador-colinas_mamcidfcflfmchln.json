@@ -1,0 +1,39 @@
+{
+  "_id": "mamcidfcflfmchln",
+  "_key": "!items!mamcidfcflfmchln",
+  "name": "Trilhador (Colinas)",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas, elfo da floresta, elfo das profundezas, gnomo da floresta, gnomo das profundezas, druida, patrulheiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você se movimenta através de terreno difícil sem sofrer penalidades, quando se movimenta no terreno em questão (colinas). Seu Deslocamento aumenta em uma quantidade de metros igual a metade do seu nível, quando se desloca no tipo de terreno escolhido.</p>",
+    "descAdvanced": "<p>Enquanto estiver lutando no tipo de terreno em questão, você pode desengajar de combate corpo a corpo sem sofrer reações de ataque. Seu Deslocamento aumenta em uma quantidade de metros igual ao seu nível, quando se desloca no tipo de terreno escolhido (em vez de metade).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 20700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "abpbbfnldaelclln",
+  "_key": "!items!abpbbfnldaelclln",
+  "name": "Resistência Draconiana",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Seus pontos de vida máximos aumentam em 1.</p><p>Herança: draconiano.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Resistência Draconiana: +1 PV",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

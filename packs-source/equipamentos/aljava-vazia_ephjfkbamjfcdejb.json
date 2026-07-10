@@ -1,0 +1,31 @@
+{
+  "_id": "ephjfkbamjfcdejb",
+  "_key": "!items!ephjfkbamjfcdejb",
+  "name": "Aljava (vazia)",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Compartimento",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Va",
+    "notes": "",
+    "description": "<p>Um cone comprido de couro, com uma alça longa, que permite carregá-lo nas costas.</p><p>Propriedade: compartimento que permite guardar flechas suficientes para uma aventura. Enquanto guardadas neste compartimento, as flechas podem ser sacadas dele com uma ação livre.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

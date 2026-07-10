@@ -1,0 +1,50 @@
+{
+  "_id": "knimeoohnkepmhkl",
+  "_key": "!items!knimeoohnkepmhkl",
+  "name": "Precisão Arcana",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Sael",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Uma vez por rodada, você pode re-rolar um dado com resultado 1 em uma rolagem de Conjuração.</p>",
+    "descAdvanced": "<p>Uma vez por rodada, você pode re-rolar até dois dados com resultado 2 ou menor em uma rolagem de Conjuração.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "reroll1",
+        "target": "conjuracao",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Precisão Arcana: re-rola 1 dado (1) em Conjuração",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

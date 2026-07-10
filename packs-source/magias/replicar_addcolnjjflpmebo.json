@@ -1,0 +1,41 @@
+{
+  "_id": "addcolnjjflpmebo",
+  "_key": "!items!addcolnjjflpmebo",
+  "name": "Replicar",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "pluribus",
+    "tier": "Menor",
+    "casting": "Reação",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "3m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Quando você nota uma ação que favoreça você e seu grupo, você sussurra rapidamente a palavra pluribus, distorcendo o espaço-tempo e fazendo com que a ação se repita.</p><p>Efeitos: Quando uma criatura dentro do alcance faz uma ação, você pode conjurar esta magia sobre ela, fazendo com que ela repita a ação que engatilhou esta magia. Caso a ação tenha algum custo, como pontos de magia, vida ou heróicos, você deve pagar por ela.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>A criatura recebe +1 para rolagens da ação repetida (-2). A criatura recebe +2 para rolagens da ação repetida (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "jdpnooopdfiknimf",
+  "_key": "!items!jdpnooopdfiknimf",
+  "name": "Especialista",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Gnomo da floresta, gnomo das rochas, bardo e ladino.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Escolha uma habilidade que lhe conceda 1D em alguma ação ou tarefa fora de combate. Sempre que esse dado de melhoria for aplicado a uma rolagem, aplique 2D, em vez de 1D.</p>",
+    "descAdvanced": "<p>Sempre que esse dado de melhoria for aplicado a uma rolagem, aplique 3D, em vez de 1D.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

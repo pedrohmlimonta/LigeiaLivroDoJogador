@@ -1,0 +1,28 @@
+{
+  "_id": "bdepbhmalnojdpgl",
+  "_key": "!items!bdepbhmalnojdpgl",
+  "name": "Ilusionista Natural",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você recebe a habilidade Palavra Arcana (iluzio) sem pagar por ela.</p><p>Raça: gnomo da floresta.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

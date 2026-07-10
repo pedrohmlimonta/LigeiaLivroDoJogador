@@ -1,0 +1,39 @@
+{
+  "_id": "eclcepnflphhfdom",
+  "_key": "!items!eclcepnflphhfdom",
+  "name": "Recarga Rápida",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode recarregar uma arma de Recarga usando uma ação rápida (em vez do seu movimento).</p>",
+    "descAdvanced": "<p>Você pode recarregar uma arma de Recarga usando uma ação livre (em vez do seu movimento).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

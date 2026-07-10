@@ -1,0 +1,39 @@
+{
+  "_id": "chihdjagdpknagcp",
+  "_key": "!items!chihdjagdpknagcp",
+  "name": "Impulso de Combate",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Guerreiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você ataca com uma arma corpo a corpo, você pode gastar 1 ponto heróico para fazer uma quantidade de ataques adicionais igual a metade dos pontos heróicos gastos desde seu último descanso (arredondado para cima).</p>",
+    "descAdvanced": "<p>Quando você usa essa habilidade, seus ataques extras recebem um bônus no dano base igual à quantidade de criaturas abatidas por você neste turno. Quando você usa seu movimento para se deslocar, você pode dividir seu Deslocamento entre os ataques.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

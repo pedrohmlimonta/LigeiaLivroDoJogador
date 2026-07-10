@@ -1,0 +1,93 @@
+{
+  "_id": "ddpbpdanfaijknka",
+  "_key": "!items!ddpbpdanfaijknka",
+  "name": "Curar",
+  "type": "magia",
+  "img": "icons/svg/heal.svg",
+  "system": {
+    "wordId": "vitae",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "Toque",
+    "duration": "",
+    "description": "<p>Você toca o alvo com as palmas das mãos cruzadas sobre ele e pronuncia vitae. Uma luz emana de suas mãos, fazendo com que o alvo sinta um conforto vindo delas e neutralizando a dor de seus ferimentos, enquanto eles se cicatrizam.</p><p>Efeitos: Restaura 1 ponto de vida base do alvo e 1 ponto escalonado a cada 2 pontos acima de 10 no resultado da rolagem de Conjuração.</p><p>Medicina concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Restaura 2 pontos de vida base, em vez de 1 (apenas Círculo Intermediário) (-). Restaura 3 pontos de vida base, em vez de 1 (apenas Círculo Maior) (-). O alvo recebe regeneração até o fim da cena (apenas Círculo Maior) (-6). Não funciona em uma determinada raça de humanoide (+1). Só funciona em uma determinada raça de humanoide (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Curar (Conjuração vs 10 — cura 1 + escalonado)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": true,
+        "fixedDifficulty": 10,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "-1",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

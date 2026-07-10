@@ -1,0 +1,31 @@
+{
+  "_id": "mkcbjmamijjggbpi",
+  "_key": "!items!mkcbjmamijjggbpi",
+  "name": "Remédio",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Suprimento",
+    "qty": 1,
+    "weight": 0,
+    "price": "20 Vo",
+    "notes": "",
+    "description": "<p>Um frasco contendo um medicamento líquido que, quando ingerido, melhora a recuperação do personagem.</p><p>Propriedade: quando ingerido, equivale a uma rolagem bem sucedida de cuidados médicos.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_id": "bjhepfolclefdigf",
+  "_key": "!items!bjhepfolclefdigf",
+  "name": "Manoplas de Segurança",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Manoplas",
+    "qty": 1,
+    "weight": 0,
+    "price": "15 Vo",
+    "notes": "",
+    "description": "<p>Luvas de ligas de aço que possuem elos onde pode ser preso firmemente o cabo da arma.</p><p>Propriedade: enquanto estiver usando este acessório, tentativas de desarmá-lo fracassam automaticamente.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

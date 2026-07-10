@@ -1,0 +1,39 @@
+{
+  "_id": "elapijbkbefpljhf",
+  "_key": "!items!elapijbkbefpljhf",
+  "name": "Combater às Cegas",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Monge e patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Mesmo que não possa enxergar, seus outros sentidos funcionam como se fossem seus olhos. Suas rolagens para localizar alvos que não possa ver recebem 1D.</p>",
+    "descAdvanced": "<p>Você não é considerado indefeso quando é atacado por criaturas que não possa ver. Gastando 1 ponto heróico, você sabe a localização de todas as criaturas do combate que não estejam escondidas.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

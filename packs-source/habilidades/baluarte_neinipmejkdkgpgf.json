@@ -1,0 +1,39 @@
+{
+  "_id": "neinipmejkdkgpgf",
+  "_key": "!items!neinipmejkdkgpgf",
+  "name": "Baluarte",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "Vigor 4+",
+    "lists": "Anão das montanhas, guardião, guerreiro, paladino, clérigo (Hipóferus, Kovar, Lohanost, Rhyfel, Pálim, Garganór e Válor).",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Enquanto você estiver vestindo armadura, sua penalidade por usar armadura é reduzida em 1 ponto.</p>",
+    "descAdvanced": "<p>Você pode usar sua ação rápida e gastar 1 ponto heróico para dobrar a Proteção de sua armadura até que você sofra dano.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

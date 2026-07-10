@@ -1,0 +1,39 @@
+{
+  "_id": "npadgapmiffpdpdh",
+  "_key": "!items!npadgapmiffpdpdh",
+  "name": "Explorador (Montanhas)",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas, elfo da floresta, elfo das profundezas, gnomo da floresta, gnomo das profundezas, druida, patrulheiro, clérigo (Than, Kronox, Uru-haau, Neidar e Ruff)",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em ações relacionadas ao terreno (montanhas), enquanto estiver fora de combate.</p>",
+    "descAdvanced": "<p>Você recebe 1D em todas as rolagens em combate, enquanto estiver lutando no terreno em questão (montanhas).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

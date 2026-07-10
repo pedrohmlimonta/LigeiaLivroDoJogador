@@ -1,0 +1,60 @@
+{
+  "_id": "ekililecgnklnnpd",
+  "_key": "!items!ekililecgnklnnpd",
+  "name": "Saque Rápido",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Guerreiro, ladino e patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você troca de arma gastando seu movimento (em vez da sua ação). Você recebe +2 nas rolagens de Iniciativa.</p>",
+    "descAdvanced": "<p>Você troca de arma gastando uma ação rápida em vez de uma ação. Você recebe +4 nas rolagens de Iniciativa (em vez de +2).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "iniciativa",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Saque Rápido B: +2 Iniciativa",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "iniciativa",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Saque Rápido A: +2 Iniciativa (total +4)",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

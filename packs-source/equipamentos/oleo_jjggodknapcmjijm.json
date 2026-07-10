@@ -1,0 +1,31 @@
+{
+  "_id": "jjggodknapcmjijm",
+  "_key": "!items!jjggodknapcmjijm",
+  "name": "Óleo",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Material",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Va",
+    "notes": "",
+    "description": "<p>Frasco de óleo utilizado como combustível da lanterna.</p><p>Propriedade: se usado em uma lanterna como combustível, permite mantê-la acesa por 1 hora.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

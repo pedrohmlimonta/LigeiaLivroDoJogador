@@ -1,0 +1,31 @@
+{
+  "_id": "iomebkaifcdenlph",
+  "_key": "!items!iomebkaifcdenlph",
+  "name": "Lanterna",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Dispositivo",
+    "qty": 1,
+    "weight": 0,
+    "price": "5 Vo",
+    "notes": "",
+    "description": "<p>Uma lanterna coberta que queima óleo para produzir luz.</p><p>Propriedade: este item ilumina num raio de 10m. Um frasco de óleo dura 1 hora. Ela pode ser empunhada com uma das mãos, apoiada em uma superfície sólida ou ser mantida suspensa por alguma corda ou gancho.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "_id": "iaonedcdhmbcaiaf",
+  "_key": "!items!iaonedcdhmbcaiaf",
+  "name": "Detectar",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "augurado",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "3m x Círculo x Nível",
+    "range": "Emanação",
+    "duration": "",
+    "description": "<p>Quando você pronuncia a palavra augurado, sua visão se aguça, fazendo com que seus alvos brilhem em meio ao cenário, mesmo estando atrás de maciças paredes.</p><p>Efeito: Você detecta objetos ou criaturas escondidas. As criaturas devem ser bem sucedidas em uma rolagem de Mente oposta a Conjuração, para evitar serem detectadas. Caso falhem, a magia revela sua localização exata.</p><p>Alerta concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Pode detectar magia (-2). Detecta apenas um tipo de criatura (+2). Não detecta um tipo de criatura (+1). Detecta apenas criaturas com Corrupção 7 ou maior (+2). Detecta apenas criaturas com Corrupção 3 ou menor (+2). Detecta apenas objetos de um tipo de material (+2). Não detecta um tipo de material (-1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Detectar (Conjuração vs Mente — emanação)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "defenseAttr": "mente",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 6,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

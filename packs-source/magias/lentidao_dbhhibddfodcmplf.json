@@ -1,0 +1,111 @@
+{
+  "_id": "dbhhibddfodcmplf",
+  "_key": "!items!dbhhibddfodcmplf",
+  "name": "Lentidão",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "saeculorum",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "3m x Círculo x Nível",
+    "duration": "Uma cena",
+    "description": "<p>Você sussurra a palavra saeculorum, distorcendo o tempo em volta de seu alvo, fazendo com que tudo se mova rápido demais para ele.</p><p>Efeitos: O alvo deve ser bem sucedido em uma rolagem de Agilidade oposta a Conjuração ou ficará lento e não poderá fazer reações pela duração da magia (Agilidade anula).</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>O alvo fica imobilizado e não pode fazer reações até o fim da cena (Agilidade anula) (apenas Círculo Intermediário ou Maior) (-2). O alvo fica paralisado até o fim da cena (Agilidade anula) (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Lentidão (Conjuração vs Agilidade)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "agilidade",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Lento, sem reações (Agilidade anula)",
+            "fxType": "condition",
+            "fxTarget": "lento",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "agilidade",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 6,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

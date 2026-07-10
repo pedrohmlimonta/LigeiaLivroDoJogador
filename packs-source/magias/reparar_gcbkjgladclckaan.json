@@ -1,0 +1,41 @@
+{
+  "_id": "gcbkjgladclckaan",
+  "_key": "!items!gcbkjgladclckaan",
+  "name": "Reparar",
+  "type": "magia",
+  "img": "icons/svg/heal.svg",
+  "system": {
+    "wordId": "kreo",
+    "tier": "Menor",
+    "casting": "Cena",
+    "target": "Um objeto ou Constructo",
+    "area": "",
+    "range": "Toque",
+    "duration": "",
+    "description": "<p>Você toca um objeto ou constructo defeituoso enquanto pronuncia a palavra kreo, transmitindo sua energia arcana de forma a repará-lo.</p><p>Efeitos: Você recupera 1 ponto da Dureza perdida do objeto com defeito (+1 ponto para cada 2 pontos do seu resultado de Conjuração acima de 10). Quando conjurada em um constructo, ele recupera a mesma quantidade de pontos de vida.</p><p>Ofícios concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Repara 3 pontos (apenas Círculo Intermediário ou Maior) (-2). Repara 5 pontos (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

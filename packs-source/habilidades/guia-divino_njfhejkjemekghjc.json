@@ -1,0 +1,39 @@
+{
+  "_id": "njfhejkjemekghjc",
+  "_key": "!items!njfhejkjemekghjc",
+  "name": "Guia Divino",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "Primeiro Aspecto",
+    "lists": "Clérigo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você gasta 1 ponto heróico para re-rolar uma rolagem que você fez, você recebe 1D nessa nova rolagem.</p>",
+    "descAdvanced": "<p>Quando você gasta 1 ponto heróico para re-rolar uma rolagem que você fez, você recebe também +2 nesta rolagem. Adicionalmente, sempre que gastar pontos heróicos, role um dado para cada um. Em um resultado 6, você recupera o ponto heróico gasto.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

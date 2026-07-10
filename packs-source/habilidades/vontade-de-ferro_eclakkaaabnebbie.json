@@ -1,0 +1,39 @@
+{
+  "_id": "eclakkaaabnebbie",
+  "_key": "!items!eclakkaaabnebbie",
+  "name": "Vontade de Ferro",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Elfo solar, anão das terras baixas, bruxo, monge, paladino, clérigo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens para resistir e anular as condições Abalado, Dominado, Enfeitiçado, Atordoado, Pasmo ou Dano Contínuo Psíquico.</p>",
+    "descAdvanced": "<p>Você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular as condições Abalado, Dominado, Enfeitiçado, Atordoado, Pasmo ou Dano Contínuo Psíquico.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 25100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

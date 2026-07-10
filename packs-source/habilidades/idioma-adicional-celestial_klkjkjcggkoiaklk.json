@@ -1,0 +1,39 @@
+{
+  "_id": "klkjkjcggkoiaklk",
+  "_key": "!items!klkjkjcggkoiaklk",
+  "name": "Idioma Adicional (Celestial)",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 5,
+    "costAdvanced": 0,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Humano, meio-elfo, celestial, draconiano, entrópico, infernal, bardo e ladino.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você é capaz de falar, ler e escrever o idioma Celestial.</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

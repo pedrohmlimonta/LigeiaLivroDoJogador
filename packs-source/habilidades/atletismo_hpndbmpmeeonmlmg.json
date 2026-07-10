@@ -1,0 +1,60 @@
+{
+  "_id": "hpndbmpmeeonmlmg",
+  "_key": "!items!hpndbmpmeeonmlmg",
+  "name": "Atletismo",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Meio-orc, pequenino, bárbaro, druida, guardião, guerreiro, ladino, monge, paladino, patrulheiro, clérigo (Garlock e Iperon).",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de atividades atléticas (saltar, nadar, escalar...).</p>",
+    "descAdvanced": "<p>Você recebe 1 ponto adicional no atributo Bloqueio. Resultados naturais 11 ou 12 em suas rolagens de Bloqueio são sucessos críticos. Você pode gastar 1 ponto heróico para considerar um sucesso crítico em uma rolagem de qualquer atividade atlética fora do combate.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "bloqueio",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Atletismo (A): +1 Bloqueio",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "crit",
+        "target": "bloqueio",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Atletismo (A): crítico 11-12 em Bloqueio",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

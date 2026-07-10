@@ -1,0 +1,39 @@
+{
+  "_id": "jkpbaonidngokmbo",
+  "_key": "!items!jkpbaonidngokmbo",
+  "name": "Palavra Arcana (augurado)",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Alto elfo, elfo cinzento, elfo das profundezas, gnomo da floresta, gnomo das profundezas, celestial, draconiano, entrópico, infernal, bardo, druida, mago, monge, paladino e clérigo.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você domina a palavra arcana augurado. Você é capaz de conjurar suas magias de círculo menor e pode criar novas magias compostas por ela.</p>",
+    "descAdvanced": "<p>Você recebe um bônus de +1 nas rolagens de Conjuração quando conjura magias compostas pela palavra arcana augurado. Você pode criar magias com metamagias avançadas e itens mágicos com propriedades da palavra arcana em questão.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

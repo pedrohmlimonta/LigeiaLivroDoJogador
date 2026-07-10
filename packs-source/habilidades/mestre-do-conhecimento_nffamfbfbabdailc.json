@@ -1,0 +1,39 @@
+{
+  "_id": "nffamfbfbabdailc",
+  "_key": "!items!nffamfbfbabdailc",
+  "name": "Mestre do Conhecimento",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bardo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de conhecimento.</p>",
+    "descAdvanced": "<p>Você recebe 2D em rolagens de conhecimento (em vez de 1D).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

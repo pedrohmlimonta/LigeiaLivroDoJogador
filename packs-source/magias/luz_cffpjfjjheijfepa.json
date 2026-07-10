@@ -1,0 +1,41 @@
+{
+  "_id": "cffpjfjjheijfepa",
+  "_key": "!items!cffpjfjjheijfepa",
+  "name": "Luz",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "lumo",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Um objeto",
+    "area": "",
+    "range": "Toque",
+    "duration": "Uma hora",
+    "description": "<p>Você pronuncia a palavra lumo enquanto toca um objeto, fazendo com que o mesmo irradie uma luz intensa o suficiente para que todos possam enxergar.</p><p>Efeitos: O alvo emite uma luz brilhante que ilumina uma área de 10m multiplicado pelo seu nível, centrada nele.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>O alvo pode ser uma criatura (-2). Revela criaturas escondidas dentro da área no momento da conjuração (apenas Círculo Intermediário ou Maior) (-4). Criaturas invisíveis se tornam visíveis sob a luz desta magia (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_id": "lhfhnkmebcoihina",
+  "_key": "!items!lhfhnkmebcoihina",
+  "name": "Símbolo Sagrado / Profano",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Foco",
+    "qty": 1,
+    "weight": 0,
+    "price": "20 Vo",
+    "notes": "",
+    "description": "<p>Um símbolo de uma divindade entalhado em madeira ou metal.</p><p>Propriedade: um objeto utilizado por clérigos para canalizar os poderes de aspecto de sua divindade e por conjuradores ligados a uma religião, como componente para a conjuração de magias de Círculo Maior. Um símbolo sagrado refere-se a uma divindade boa. Um símbolo profano refere-se a uma divindade maligna. Deve ser empunhado com uma das mãos.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

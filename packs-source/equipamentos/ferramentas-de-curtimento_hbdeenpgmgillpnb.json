@@ -1,0 +1,31 @@
+{
+  "_id": "hbdeenpgmgillpnb",
+  "_key": "!items!hbdeenpgmgillpnb",
+  "name": "Ferramentas de Curtimento",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 1,
+    "price": "10 Vo",
+    "notes": "",
+    "description": "<p>Um punhal, uma escova de cerdas de aço e um esticador.</p><p>Propriedade: permite extrair e preparar couro de criaturas. A extração e preparo permite o gasto de 10 Vo a mais por dia de criação de um item de couro.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

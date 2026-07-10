@@ -1,0 +1,39 @@
+{
+  "_id": "cdelaaajjjlpdnfe",
+  "_key": "!items!cdelaaajjjlpdnfe",
+  "name": "Familiar",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Celestial, draconiano, infernal, bruxo e mago",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você tem uma criatura como aliado, que pode se comunicar magicamente com você. A criatura deve ter o traço Familiar e Desafio igual ou menor ao seu nível. Você recebe o benefício garantido pelo traço Familiar do seu familiar escolhido. Você também pode usar sua ação para ordenar o familiar a atacar ou o seu movimento para ordená-lo a se deslocar.</p>",
+    "descAdvanced": "<p>Independente da criatura escolhida como seu familiar, ela agora possui Mente 3, caso o atributo de Mente da versão original da criatura seja menor. Você pode conjurar magias usando a posição do seu familiar como posição do conjurador, em vez da sua própria.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

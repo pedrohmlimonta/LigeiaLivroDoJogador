@@ -1,0 +1,31 @@
+{
+  "_id": "ljppacfchkegigoi",
+  "_key": "!items!ljppacfchkegigoi",
+  "name": "Mochila (vazia)",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Compartimento",
+    "qty": 1,
+    "weight": 0,
+    "price": "2 Vo",
+    "notes": "",
+    "description": "<p>Bolsa grande de couro contendo vários compartimentos.</p><p>Propriedade: esta bolsa contém compartimentos usados para guardar itens que não estejam em uso.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

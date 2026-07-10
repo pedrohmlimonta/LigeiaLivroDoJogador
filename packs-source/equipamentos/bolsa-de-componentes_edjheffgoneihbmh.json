@@ -1,0 +1,31 @@
+{
+  "_id": "edjheffgoneihbmh",
+  "_key": "!items!edjheffgoneihbmh",
+  "name": "Bolsa de Componentes",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Compartimento",
+    "qty": 1,
+    "weight": 0,
+    "price": "20 Vo",
+    "notes": "",
+    "description": "<p>Bolsa contendo vários materiais usados em conjuração de magias.</p><p>Propriedade: requisito alternativo ao foco em conjuração de magias de Círculo Maior.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

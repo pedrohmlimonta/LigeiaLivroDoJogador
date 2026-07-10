@@ -1,0 +1,31 @@
+{
+  "_id": "eiifcpoplioaocek",
+  "_key": "!items!eiifcpoplioaocek",
+  "name": "Tocha",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Suprimento",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Vn",
+    "notes": "",
+    "description": "<p>Haste grossa de madeira, contendo um tecido enrolado em uma das extremidades, imbuído com combustível.</p><p>Propriedade: este item ilumina num raio de 5m e dura 1 hora.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

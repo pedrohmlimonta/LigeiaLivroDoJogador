@@ -1,0 +1,39 @@
+{
+  "_id": "kogdchedebfliohp",
+  "_key": "!items!kogdchedebfliohp",
+  "name": "Usar Escudos",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro, guardião, guerreiro e paladino.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você acerta uma Deflexão em uma rolagem de Bloqueio quando seus dados resultam em números consecutivos também. Adicionalmente, sua deflexão reduz 2 pontos de dano bruto, em vez de 1.</p>",
+    "descAdvanced": "<p>Suas Deflexões reduzem 3 pontos de dano (em vez de 1).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 24400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

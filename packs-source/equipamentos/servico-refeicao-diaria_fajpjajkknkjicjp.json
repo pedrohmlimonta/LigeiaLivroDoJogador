@@ -1,0 +1,31 @@
+{
+  "_id": "fajpjajkknkjicjp",
+  "_key": "!items!fajpjajkknkjicjp",
+  "name": "Serviço: Refeição Diária",
+  "type": "equipamento",
+  "img": "icons/svg/coins.svg",
+  "system": {
+    "category": "Serviço",
+    "qty": 1,
+    "weight": 0,
+    "price": "3 Va",
+    "notes": "",
+    "description": "<p>Serviço ou profissional contratado durante as aventuras. Preço: 3 Va.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "_id": "ocmedmaocgcmpdni",
+  "_key": "!items!ocmedmaocgcmpdni",
+  "name": "Viagem Temporal",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "saeculorum",
+    "tier": "Menor",
+    "casting": "Cena",
+    "target": "Conjurador",
+    "area": "",
+    "range": "",
+    "duration": "Uma rodada",
+    "description": "<p>Você pronuncia saeculorum, para ser tragado pelo tempo, sendo lançado de volta ou adiante, dependendo da sua vontade enquanto pronuncia.</p><p>Efeitos: Você pode viajar uma cena para o passado, alterando o mesmo pela duração da magia. Você também pode viajar uma cena para o futuro, obtendo informações, pela duração da magia.</p><p>Conhecimento (História) concede +1 em Conjuração para esta conjuração. Você precisa gastar 1 ponto heróico para conjurar essa magia.</p>",
+    "peculiarities": "<p>Viajar uma hora pro passado ou pro futuro, em vez de uma cena (apenas Círculo Intermediário ou Maior) (-2). Duração (Uma cena) (apenas Círculo Intermediário ou Maior) (-4). Viajar um dia pro passado ou pro futuro, em vez de uma cena (apenas Círculo Maior) (-6). Duração (Uma hora) (apenas Círculo Maior) (-8). Você perde 1 ponto de vida quando conjura esta magia (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      },
+      {
+        "resource": "heroic",
+        "value": 1,
+        "label": "Custo da magia"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "lfdfadofndmomcjk",
+  "_key": "!items!lfdfadofndmomcjk",
+  "name": "Ímpeto",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Vigor 4+",
+    "lists": "Meio-orc, bárbaro, guardião, guerreiro e paladino",
+    "activation": "Reação",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você fica com 0 pontos de vida, você pode usar sua reação para recuperar pontos de vida igual a metade do seu nível e continuar de pé. Você pode usar essa habilidade uma vez por dia.</p>",
+    "descAdvanced": "<p>Você pode usar essa habilidade uma vez por cena. Você recupera pontos de vida igual ao seu nível.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 25300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

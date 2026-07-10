@@ -1,0 +1,28 @@
+{
+  "_id": "mippoaggmiaafkkc",
+  "_key": "!items!mippoaggmiaafkkc",
+  "name": "Visão no Escuro (10m)",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; herança infernal.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

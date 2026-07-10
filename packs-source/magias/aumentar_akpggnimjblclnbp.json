@@ -1,0 +1,128 @@
+{
+  "_id": "akpggnimjblclnbp",
+  "_key": "!items!akpggnimjblclnbp",
+  "name": "Aumentar",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "majesto",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura ou objeto",
+    "area": "",
+    "range": "Toque",
+    "duration": "Uma cena",
+    "description": "<p>Pronunciando a palavra majesto enquanto toca seu alvo com a palma de sua mão, faz com que suas proporções aumentem de forma descomunal.</p><p>Efeitos: Aumenta em uma categoria o tamanho do alvo. Adicionalmente, criaturas afetadas por essa magia recebem 1D em Força e Vigor pela duração da magia.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Aumenta em 2 categorias, 1D em Força, 2D em Vigor (apenas Círculo Intermediário ou Maior) (-3). Aumenta em 3 categorias, 2D em Força e Vigor (apenas Círculo Maior) (-5). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Aumentar (toque — 1D Força e Vigor)",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Aumentado: 1D Força",
+            "fxType": "dice",
+            "fxTarget": "forca",
+            "fxValue": 1,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          },
+          {
+            "label": "Aumentado: 1D Vigor",
+            "fxType": "dice",
+            "fxTarget": "vigor",
+            "fxValue": 1,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 0,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

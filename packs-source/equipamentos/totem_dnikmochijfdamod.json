@@ -1,0 +1,31 @@
+{
+  "_id": "dnikmochijfdamod",
+  "_key": "!items!dnikmochijfdamod",
+  "name": "Totem",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Foco",
+    "qty": 1,
+    "weight": 0,
+    "price": "20 Vo",
+    "notes": "",
+    "description": "<p>Pequeno tronco de madeira entalhado em imagens comumente relacionadas aos espíritos da natureza.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma das mãos.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

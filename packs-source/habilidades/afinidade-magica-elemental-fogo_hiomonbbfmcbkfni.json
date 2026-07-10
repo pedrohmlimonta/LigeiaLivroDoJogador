@@ -1,0 +1,60 @@
+{
+  "_id": "hiomonbbfmcbkfni",
+  "_key": "!items!hiomonbbfmcbkfni",
+  "name": "Afinidade Mágica Elemental (Fogo)",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Mente 4+",
+    "lists": "Draconiano e infernal",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você possui afinidade com o elemento Fogo e causa 1 ponto de dano bruto adicional quando conjura magias relacionadas ao elemento especificado (palavra arcana ignis).</p>",
+    "descAdvanced": "<p>O dano bruto adicional causado aumenta para 3 pontos de dano.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "damage",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Afinidade (Fogo) B: +1 dano",
+        "enabled": true,
+        "level": "B",
+        "damageType": "fogo"
+      },
+      {
+        "type": "damage",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Afinidade (Fogo) A: +2 dano (total 3)",
+        "enabled": true,
+        "level": "A",
+        "damageType": "fogo"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

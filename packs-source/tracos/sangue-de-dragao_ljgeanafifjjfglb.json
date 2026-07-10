@@ -1,0 +1,28 @@
+{
+  "_id": "ljgeanafifjjfglb",
+  "_key": "!items!ljgeanafifjjfglb",
+  "name": "Sangue de Dragão",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Quando você faz um descanso, você recupera 1 ponto de vida adicional.</p><p>Herança: draconiano.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

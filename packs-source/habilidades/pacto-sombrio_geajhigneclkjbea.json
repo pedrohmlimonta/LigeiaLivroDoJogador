@@ -1,0 +1,45 @@
+{
+  "_id": "geajhigneclkjbea",
+  "_key": "!items!geajhigneclkjbea",
+  "name": "Pacto (Sombrio)",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Mente 4+",
+    "lists": "Bruxo",
+    "activation": "Ritual após descanso",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você possui um pacto com um poderoso ser extraplanar. Você deve escolher o tipo de pacto quando compra essa habilidade e ele não poderá ser mudado no futuro. Pagando 1 ponto de vida em um ritual após um descanso, você recebe benefícios (1 por nível), de acordo com o tipo de extraplanar escolhido. Os benefícios duram até o seu próximo descanso. Habilidades concedidas pelo pacto não contam como requisitos para aprender outras habilidades ou Carreiras.</p><p>Patronos — Um pacto forjado com uma entidade da Umbra, sombras poderosas, servos de Sigh e, em casos raros, até a própria dama da lua.</p><p>Benefícios — Proteção Contra Necrótico (metade do Nível), Furtividade, Ameaça Invisível, Palavra Arcana (tenebrae), Palavra Arcana (mortis), Palavra Arcana (iluzio), Palavra Arcana (sangon), Palavra Arcana (krucigon) e Palavra Arcana (forjuri).</p>",
+    "descAdvanced": "<p>Quando você escolhe uma habilidade da lista do pacto, você tem acesso a ela no nível Avançado. Pagando 2 pontos de vida durante o ritual, você recebe acesso a Palavra Arcana (majesto) [A] ou Palavra Arcana (exitium) [A].</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "hp",
+        "value": 1,
+        "label": "Ritual do pacto (A: 2 PV p/ majesto/exitium)"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_id": "pljlnelhhpgdbmam",
+  "_key": "!items!pljlnelhhpgdbmam",
+  "name": "Camuflagem Natural",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você recebe 1D para se esconder em terreno rochoso.</p><p>Raça: gnomo das profundezas.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

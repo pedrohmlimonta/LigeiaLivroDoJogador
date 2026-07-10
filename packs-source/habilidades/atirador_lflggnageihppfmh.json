@@ -1,0 +1,39 @@
+{
+  "_id": "lflggnageihppfmh",
+  "_key": "!items!lflggnageihppfmh",
+  "name": "Atirador",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Ladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode gastar seu movimento para não sofrer reações de ataque quando fizer ataques à distância nesse turno.</p>",
+    "descAdvanced": "<p>Você pode gastar sua ação rápida para não sofrer reações de ataque quando fizer ataques à distância nesse turno. Você pode gastar seu movimento para receber 1D nos seus ataques à distância nesse turno. Caso você não se mova no mesmo turno em que atacar, você pode gastar 1 ponto heróico, quando acertar um ataque à distância para que ele se torne um acerto crítico.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

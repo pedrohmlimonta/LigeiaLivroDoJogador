@@ -1,0 +1,31 @@
+{
+  "_id": "hjmhohgolpdcbmme",
+  "_key": "!items!hjmhohgolpdcbmme",
+  "name": "Ferramentas de Artesão",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 2,
+    "price": "30 Vo",
+    "notes": "",
+    "description": "<p>Ferramentas adequadas a um determinado ofício de criação de itens.</p><p>Propriedade: este equipamento é necessário para a criação de determinados tipos de itens. Sem ele não é possível produzi-los. Quando comprar estas ferramentas, você deve definir que tipo de artesanato elas produzem.</p><p>Tipos de Artesanato: Carpintaria, Cartografia, Costuraria, Couraria, Entalhe, Forjaria, Funilaria, Joalheria, Olaria, Alvenaria, Pintura, Sapataria, Vidraçaria, Alquimia, Cervejaria, Caligrafia, Cozinha, Venenos.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

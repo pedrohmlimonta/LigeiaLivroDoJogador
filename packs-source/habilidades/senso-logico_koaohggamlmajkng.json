@@ -1,0 +1,60 @@
+{
+  "_id": "koaohggamlmajkng",
+  "_key": "!items!koaohggamlmajkng",
+  "name": "Senso Lógico",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Rúffio",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de pesquisa, rastreio, procurar objetos, compartimentos, armadilhas escondidas, comida, abrigo e identificar objetos. Adicionalmente, você recebe 1 ponto de Proteção contra dano psíquico e +1 em rolagens de defesa contra reações de ataque.</p>",
+    "descAdvanced": "<p>Você recebe 2D nas rolagens, em vez de 1D, 2 pontos de Proteção contra dano psíquico e +2 em rolagens de defesa contra reações de ataque.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Senso Lógico B: RD 1 psíquico",
+        "enabled": true,
+        "level": "B",
+        "damageType": "psiquico"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Senso Lógico A: +1 RD psíquico (total 2)",
+        "enabled": true,
+        "level": "A",
+        "damageType": "psiquico"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

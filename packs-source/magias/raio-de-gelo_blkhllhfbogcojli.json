@@ -1,0 +1,111 @@
+{
+  "_id": "blkhllhfbogcojli",
+  "_key": "!items!blkhllhfbogcojli",
+  "name": "Raio de Gelo",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "glacios",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura ou objeto",
+    "area": "",
+    "range": "5m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Conforme você pronuncia a palavra glacios, a ponta de seu dedo indicador sofre uma queda de temperatura gigantesca, até criar uma centelha gélida o suficiente para que você possa lançar este raio gelado em seu inimigo.</p><p>Dano: Frio +1 (Esquiva).</p><p>Efeitos: Se o alvo sofrer dano, ele deve ser bem sucedido em uma rolagem de Vigor oposta a Conjuração, ou ficará lento até o fim da cena (Vigor anula).</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Dano: Frio +2 (apenas Círculo Intermediário) (-). Dano: Frio +3 (apenas Círculo Maior) (-). O alvo sofre dano contínuo de frio até o fim da cena (Vigor anula) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Raio de Gelo (Conjuração vs Esquiva)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "1",
+        "damageType": "frio",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Lento (Vigor anula)",
+            "fxType": "condition",
+            "fxTarget": "lento",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 10,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

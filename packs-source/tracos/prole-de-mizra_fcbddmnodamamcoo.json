@@ -1,0 +1,28 @@
+{
+  "_id": "fcbddmnodamamcoo",
+  "_key": "!items!fcbddmnodamamcoo",
+  "name": "Prole de Mizra",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Por causa da maldição lançada pela deusa da noite sobre seu povo, cada elfo das profundezas carrega um pedaço da umbra dentro de si. Você recebe a habilidade Palavra Arcana (tenebrae), sem pagar por ela.</p><p>Raça: elfo das profundezas.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

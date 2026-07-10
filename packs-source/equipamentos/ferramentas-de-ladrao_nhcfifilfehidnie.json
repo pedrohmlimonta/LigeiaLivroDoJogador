@@ -1,0 +1,31 @@
+{
+  "_id": "nhcfifilfehidnie",
+  "_key": "!items!nhcfifilfehidnie",
+  "name": "Ferramentas de Ladrão",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 0,
+    "price": "25 Vo",
+    "notes": "",
+    "description": "<p>Inclui chaves mestras, alicates, tesouras e um pequeno espelho.</p><p>Propriedade: enquanto estiver usando essas ferramentas, você recebe +1 nas rolagens para arrombar fechaduras.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

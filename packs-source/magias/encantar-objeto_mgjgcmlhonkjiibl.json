@@ -1,0 +1,41 @@
+{
+  "_id": "mgjgcmlhonkjiibl",
+  "_key": "!items!mgjgcmlhonkjiibl",
+  "name": "Encantar Objeto",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "sorcdiron",
+    "tier": "Menor",
+    "casting": "Ação Rápida",
+    "target": "Um objeto não mágico",
+    "area": "",
+    "range": "Toque",
+    "duration": "Uma cena",
+    "description": "<p>Sussurrando a palavra sorcdiron, enquanto toca um objeto, você aprimora sua eficiência, como se o tornasse mágico.</p><p>Efeitos: Todas as rolagens utilizando o objeto encantado recebem +1, desde que utilizado para a função para a qual fora feito.</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>As rolagens utilizando o objeto recebem +2, em vez de +1 (apenas Círculo Intermediário ou Maior) (-). As rolagens utilizando o objeto recebem +3, em vez de +1 (apenas Círculo Maior) (-). Só funciona em objetos compostos por um material específico (+2). Não funciona em objetos compostos por material específico (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "llpejimlbilionao",
+  "_key": "!items!llpejimlbilionao",
+  "name": "Tenacidade Assustadora",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Ceifera",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em intimidação. Adicionalmente, sempre que você sofrer dano, você pode gastar 1 ponto de magia para receber um bônus acumulativo +1 nas rolagens de bloqueio, esquiva, ataques ou conjuração. Você pode usar sua ação para converter esse bônus em sobrevida.</p>",
+    "descAdvanced": "<p>Quando você converte esse bônus em sobrevida, você recebe o dobro do bônus em sobrevida. Você pode converter o bônus em sobrevida usando seu movimento.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 20600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

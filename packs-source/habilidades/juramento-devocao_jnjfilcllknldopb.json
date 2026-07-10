@@ -1,0 +1,39 @@
+{
+  "_id": "jnjfilcllknldopb",
+  "_key": "!items!jnjfilcllknldopb",
+  "name": "Juramento (Devoção)",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Paladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Escolha um juramento quando comprar esta habilidade. Ao cumprir com um dever do seu Juramento escolhido, você recebe 1 Ponto de Juramento e recebe favores de acordo com os pontos acumulados. Esses pontos diminuem em 1 quando você descansa.</p><p>Deveres — Proteja os Indefesos: sofrer dano de um ataque inimigo enquanto estiver adjacente a um aliado. Salve da Morte: curar um aliado morrendo. Vida de Devoção: conceder uma condição benéfica a um aliado.</p><p>Favores — 1 Ponto: você recebe 1D em rolagens de cuidados médicos. 2 Pontos: você recupera pontos de vida igual ao seu Nível quando cura um aliado. 3 Pontos: você recebe um bônus em Conjuração igual a metade do seu Nível. 4 Pontos: você recebe sobrevida igual ao seu Nível sempre que gastar um ponto heróico para re-rolar uma defesa. 5 Pontos: você recebe regeneração sempre que chega a 1 ponto de vida.</p>",
+    "descAdvanced": "<p>Enquanto você tiver 3 Pontos de Juramento ou mais, você emana uma aura com raio igual à quantidade de Pontos de Juramento. Aliados dentro da aura recebem 1D em rolagens de defesa. Enquanto você tiver 5 Pontos de Juramento ou mais, aliados dentro da aura recebem também 1D em rolagens de ataque. Enquanto você emanar essa aura, você e aliados dentro dela ficam imunes à condição de Abalado.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

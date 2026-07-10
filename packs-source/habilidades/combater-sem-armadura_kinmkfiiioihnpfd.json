@@ -1,0 +1,60 @@
+{
+  "_id": "kinmkfiiioihnpfd",
+  "_key": "!items!kinmkfiiioihnpfd",
+  "name": "Combater sem Armadura",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro e monge",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você não estiver usando nenhuma armadura (escudos são permitidos), você recebe +1 em Esquiva e Bloqueio.</p>",
+    "descAdvanced": "<p>Quando você não estiver usando nenhuma armadura (escudos são permitidos), você recebe Proteção igual a metade do seu Vigor.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Sem armadura: +1 Esquiva",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "bloqueio",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Sem armadura: +1 Bloqueio",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

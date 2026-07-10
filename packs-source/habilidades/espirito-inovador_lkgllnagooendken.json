@@ -1,0 +1,39 @@
+{
+  "_id": "lkgllnagooendken",
+  "_key": "!items!lkgllnagooendken",
+  "name": "Espírito Inovador",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Jardins de Inverno",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode gastar uma cena e fazer ajustes em um de seus equipamentos, modificando de forma que ele lhe conceda +1 nas rolagens de uso para o qual ele foi feito. No entanto, um resultado 6 ou menor na soma dos dois maiores dados de uma rolagem durante o uso danifica o equipamento, causando 3 pontos de dano à sua Dureza.</p>",
+    "descAdvanced": "<p>O equipamento lhe concede +2 nas rolagens de uso para o qual ele foi feito. Uma rolagem 4 ou menos na soma dos dois maiores dados causa 2 pontos de dano em sua Dureza.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "_id": "mfmcpfilpgmejmmj",
+  "_key": "!items!mfmcpfilpgmejmmj",
+  "name": "Armadura de Escamas",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Armadura Pesada",
+    "qty": 1,
+    "weight": 2,
+    "price": "40 Vo",
+    "notes": "Penalidade -3",
+    "description": "<p>Armadura composta de peças sobrepostas de material extremamente durável, como aço ou mesmo escamas de dragão.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -3 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Armadura de Escamas: Proteção 2 (corte)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Armadura de Escamas: Proteção 2 (perfuração)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Armadura de Escamas: Proteção 2 (concussão)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "concussao"
+      },
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": -3,
+        "rerollAll": false,
+        "label": "Armadura de Escamas: penalidade -3 Esquiva",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": -3,
+        "rerollAll": false,
+        "label": "Armadura de Escamas: penalidade -3 Conjuração",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_id": "pejmlkhddkcodlpl",
+  "_key": "!items!pejmlkhddkcodlpl",
+  "name": "Saco de Dormir",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Utensílio",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Vo",
+    "notes": "",
+    "description": "<p>Um enorme saco de couro e peles, utilizado para manter-se aquecido e confortável durante o descanso.</p><p>Propriedade: requisito para um sono adequado durante as viagens.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

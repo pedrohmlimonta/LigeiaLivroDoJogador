@@ -1,0 +1,82 @@
+{
+  "_id": "bmpbigmcjkacimkp",
+  "_key": "!items!bmpbigmcjkacimkp",
+  "name": "Armadura de Peles",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Armadura Leve",
+    "qty": 1,
+    "weight": 1,
+    "price": "60 Vo",
+    "notes": "Penalidade -2",
+    "description": "<p>Armadura feita de peles grossas e pesadas de animais, curtidas e batidas.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -2 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Armadura de Peles: Proteção 2 (corte)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Armadura de Peles: Proteção 2 (perfuração)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Armadura de Peles: Proteção 2 (concussão)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "concussao"
+      },
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": -2,
+        "rerollAll": false,
+        "label": "Armadura de Peles: penalidade -2 Esquiva",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": -2,
+        "rerollAll": false,
+        "label": "Armadura de Peles: penalidade -2 Conjuração",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

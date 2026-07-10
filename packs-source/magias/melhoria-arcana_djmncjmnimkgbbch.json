@@ -1,0 +1,111 @@
+{
+  "_id": "djmncjmnimkgbbch",
+  "_key": "!items!djmncjmnimkgbbch",
+  "name": "Melhoria Arcana",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "sorcdiron",
+    "tier": "Menor",
+    "casting": "Ação Rápida",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "Toque",
+    "duration": "Uma cena",
+    "description": "<p>Enquanto profere a palavra sorcdiron e toca seu alvo, o mesmo sente uma energia percorrer seu corpo, aprimorando suas capacidades.</p><p>Efeitos: O alvo recebe 1D em um atributo à escolha do conjurador.</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Sempre que o alvo rolar 1 em um dado, numa rolagem desse atributo, ele pode re-rolar o dado (apenas Círculo Intermediário ou Maior) (-4). Sempre que o alvo rolar 1 ou 2 em um dado, numa rolagem desse atributo, ele pode re-rolar o dado (apenas Círculo Intermediário ou Maior) (-8). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Melhoria Arcana (1D em um atributo — escolha ao aplicar)",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Melhoria Arcana: 1D no atributo (edite o alvo)",
+            "fxType": "dice",
+            "fxTarget": "forca",
+            "fxValue": 1,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 0,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

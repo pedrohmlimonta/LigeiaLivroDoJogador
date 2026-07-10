@@ -1,0 +1,39 @@
+{
+  "_id": "gikglccknckadcbl",
+  "_key": "!items!gikglccknckadcbl",
+  "name": "Letalidade",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Agilidade 4+",
+    "lists": "Ladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Seus ataques bem sucedidos com armas de Artilharia, Lâminas Pequenas ou Leves a alvos indefesos ou surpresos causam dano final adicional igual à metade do seu nível (arredondado para cima).</p>",
+    "descAdvanced": "<p>Seus ataques bem sucedidos com armas de Artilharia, Lâminas Pequenas ou Leves a alvos indefesos ou surpresos causam dano final adicional igual ao seu nível.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "bfcimojgjhnpejcp",
+  "_key": "!items!bfcimojgjhnpejcp",
+  "name": "Conhecimento (Guerra)",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas, anão das terras baixas, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das profundezas, gnomo das rochas, meio-elfo, draconiano, entrópico, bárbaro, bardo, bruxo, clérigo, druida, mago, monge, paladino, patrulheiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D nas rolagens de Mente relacionadas à área de Guerra.</p>",
+    "descAdvanced": "<p>Você pode gastar 1 ponto heróico para criar um “fato”, para resolver um caso ou para diminuir o grau de dificuldade de um teste de Mente relacionado à área em questão.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "_id": "cocgnmhapbajdnin",
+  "_key": "!items!cocgnmhapbajdnin",
+  "name": "Pele de Escamas",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Draconiano",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Sua pele possui grossas escamas. Você recebe Proteção igual a metade do seu nível, contra corte, perfuração e concussão.</p>",
+    "descAdvanced": "<p>Você pode gastar 1 ponto heróico para aumentar essa proteção em 1 ponto até o fim da cena, mas fica lento até o final do efeito.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Pele de Escamas: RD corte (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "B",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Pele de Escamas: RD perfuração (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "B",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Pele de Escamas: RD concussão (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "B",
+        "damageType": "concussao"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

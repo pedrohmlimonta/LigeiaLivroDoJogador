@@ -1,0 +1,28 @@
+{
+  "_id": "ldimieidkppgockj",
+  "_key": "!items!ldimieidkppgockj",
+  "name": "Caçada de Sangue",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Você recebe 1D em seus ataques quando ataca criaturas que já estejam feridas.</p><p>Herança: infernal.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

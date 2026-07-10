@@ -1,0 +1,111 @@
+{
+  "_id": "akdnjpmpkmndejli",
+  "_key": "!items!akdnjpmpkmndejli",
+  "name": "Forma Etérea",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "krucigon",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura ou objeto",
+    "area": "",
+    "range": "Toque",
+    "duration": "Sustentável — Ação Rápida",
+    "description": "<p>Tocando uma criatura ou objeto e pronunciando a palavra krucigon, você faz com que ela translade para o Véu Etéreo, ficando intangível.</p><p>Efeitos: O alvo fica intangível pela duração da magia.</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>O alvo não provoca reações de ataque quando se move (apenas Círculo Intermediário ou Maior) (-3). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Forma Etérea (toque)",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Intangível (sustentável)",
+            "fxType": "condition",
+            "fxTarget": "intangivel",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 0,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_id": "hmkflikhhkjojgbc",
+  "_key": "!items!hmkflikhhkjojgbc",
+  "name": "Varinha",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Foco",
+    "qty": 1,
+    "weight": 0,
+    "price": "20 Vo",
+    "notes": "",
+    "description": "<p>Uma curta e fina haste feita em madeira, metal ou outro tipo de material rígido.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma mão.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

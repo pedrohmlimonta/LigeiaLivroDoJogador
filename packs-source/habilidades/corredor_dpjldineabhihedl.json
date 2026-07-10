@@ -1,0 +1,60 @@
+{
+  "_id": "dpjldineabhihedl",
+  "_key": "!items!dpjldineabhihedl",
+  "name": "Corredor",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro e monge",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Seu Deslocamento aumenta em 3m.</p>",
+    "descAdvanced": "<p>Seu Deslocamento aumenta em 5m (em vez de 3m). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Lento e Imobilizado.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "deslocamento",
+        "value": 3,
+        "rerollAll": false,
+        "label": "Corredor B: +3m Deslocamento",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "stat",
+        "target": "deslocamento",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Corredor A: +2m (total +5m)",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

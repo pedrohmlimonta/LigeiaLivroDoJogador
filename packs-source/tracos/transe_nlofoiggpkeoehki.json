@@ -1,0 +1,28 @@
+{
+  "_id": "nlofoiggpkeoehki",
+  "_key": "!items!nlofoiggpkeoehki",
+  "name": "Transe",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você não precisa dormir. Em vez disso, você descansa entrando em um transe de 4 horas.</p><p>Raças: elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

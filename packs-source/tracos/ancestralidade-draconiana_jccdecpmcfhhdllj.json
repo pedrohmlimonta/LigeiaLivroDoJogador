@@ -1,0 +1,39 @@
+{
+  "_id": "jccdecpmcfhhdllj",
+  "_key": "!items!jccdecpmcfhhdllj",
+  "name": "Ancestralidade Draconiana",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Você recebe Proteção igual a metade do seu nível (arredondado para cima) contra um tipo de dano, dependendo do tipo de dragão que você escolher para sua ancestralidade: Azul (Raio), Branco (Frio), Bronze (Raio), Cobre (Ácido), Latão (Fogo), Negro (Ácido), Ouro (Fogo), Prata (Frio), Verde (Veneno) ou Vermelho (Fogo).</p><p>Herança: draconiano. Ajuste o efeito de RD abaixo para o tipo escolhido.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Ancestralidade Draconiana: RD do tipo escolhido (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "fogo"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

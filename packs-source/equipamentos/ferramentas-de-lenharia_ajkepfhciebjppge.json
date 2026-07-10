@@ -1,0 +1,31 @@
+{
+  "_id": "ajkepfhciebjppge",
+  "_key": "!items!ajkepfhciebjppge",
+  "name": "Ferramentas de Lenharia",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 1,
+    "price": "10 Vo",
+    "notes": "",
+    "description": "<p>Inclui serrote, machado de lenhador, talhadeira e canivete.</p><p>Propriedade: permite extrair e preparar madeira. A extração e preparo permite o gasto de 10 Vo a mais por dia de criação de um item de madeira.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

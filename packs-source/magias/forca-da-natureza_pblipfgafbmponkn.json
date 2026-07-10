@@ -1,0 +1,93 @@
+{
+  "_id": "pblipfgafbmponkn",
+  "_key": "!items!pblipfgafbmponkn",
+  "name": "Força da Natureza",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "devena",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "2m x Nível",
+    "range": "Emanação",
+    "duration": "Sustentável — Ação Rápida",
+    "description": "<p>Conforme você pronuncia a palavra arcana devena e toca o chão, a natureza à sua volta responde ao seu comando, criando uma área de ameaça aos seus inimigos.</p><p>Efeito: Você cria um efeito diferente dentro da área, de acordo com o terreno natural em que se encontra. O conjurador é imune ao efeito da magia.</p><p>Planícies (Ventania) — 1 dano bruto sônico e Lento até deixar a área. Montanhas (Terremoto) — 1 dano bruto de concussão e Caído. Colinas (Tempestade) — 1 dano bruto de raio e Surdo até deixar a área. Florestas (Nevoeiro) — 1 dano bruto de ácido e Cego até deixar a área. Pântanos (Vinhas) — 1 dano bruto de veneno e Lento até deixar a área. Desertos (Ondas de Calor) — 1 dano bruto de fogo e Enfraquecido até deixar a área. Glacial (Nevasca) — 1 dano bruto de frio e Lento até deixar a área. Subterrâneos (Vácuo) — 1 dano final e Emudecido até deixar a área. (Criaturas que entrarem ou iniciarem seus turnos dentro da área sofrem o efeito.)</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Adiciona um segundo efeito, de outro terreno (apenas Círculo Intermediário ou Maior) (-4). Adiciona dois efeitos de outros terrenos (apenas Círculo Maior) (-6). O terreno afeta você (+2). Só funciona em um tipo de terreno (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Força da Natureza (área persistente, dano por terreno)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "1",
+        "damageType": "concussao",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 4,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": true,
+        "persistRounds": 0,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "_id": "obkgmlklgjhalcfo",
+  "_key": "!items!obkgmlklgjhalcfo",
+  "name": "Armadura Arcana",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "forjuri",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Conjurador",
+    "area": "",
+    "range": "Toque",
+    "duration": "Dia",
+    "description": "<p>Pronunciando a palavra forjuri e tocando o alvo, você fornece ao mesmo uma armadura de energia arcana, que cobre todo o seu corpo.</p><p>Efeitos: O alvo recebe Proteção 1 contra dano de Perfuração, Corte e Concussão. Esta proteção não se acumula com a proteção das armaduras.</p><p>Ofícios concede +1 em Conjuração para esta conjuração. Conhecimento (Guerra) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>A Proteção aumenta para 2 (apenas Círculo Intermediário) (-). A Proteção aumenta para 3 (apenas Círculo Maior) (-). Outro tipo de dano (+2). Um tipo de dano adicional (-1). Alvo muda de Conjurador para Criatura (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Armadura Arcana: Proteção 1 (corte)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Armadura Arcana: Proteção 1 (perfuração)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Armadura Arcana: Proteção 1 (concussão)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "concussao"
+      }
+    ],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

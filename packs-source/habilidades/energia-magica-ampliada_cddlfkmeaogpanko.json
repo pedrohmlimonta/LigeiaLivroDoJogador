@@ -1,0 +1,60 @@
+{
+  "_id": "cddlfkmeaogpanko",
+  "_key": "!items!cddlfkmeaogpanko",
+  "name": "Energia Mágica Ampliada",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Celestial, draconiano e entrópico",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Seus pontos de magia aumentam em 2.</p>",
+    "descAdvanced": "<p>Seus pontos de magia aumentam em 5 em vez de 2.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "mp",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Energia Mágica Ampliada B: +2 PM",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "stat",
+        "target": "mp",
+        "value": 3,
+        "rerollAll": false,
+        "label": "Energia Mágica Ampliada A: +3 PM (total +5)",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "mkgiohdeileapmpd",
+  "_key": "!items!mkgiohdeileapmpd",
+  "name": "Primeiro Aspecto",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Clérigo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Escolha um aspecto relacionado à sua divindade. Você tem acesso à Magia Divina e ao Sentido Divino pertencentes a esse aspecto.</p>",
+    "descAdvanced": "<p>Você tem acesso à Arma Divina do aspecto escolhido.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 18500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

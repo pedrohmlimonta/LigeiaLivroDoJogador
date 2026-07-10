@@ -1,0 +1,39 @@
+{
+  "_id": "kacojhfgpepolpnj",
+  "_key": "!items!kacojhfgpepolpnj",
+  "name": "Recursos",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Terras Centrais, Faen Leste, astrólogo, bardo, bruxo, clérigo, mago, paladino.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pertence à nobreza ou a uma família muito rica. No começo de cada aventura, você pode rolar nas tabelas de tesouros para determinar um item de nível de raridade igual ao seu nível. Você pode escolher ficar com o item ou com um terço de seu valor em ouro.</p>",
+    "descAdvanced": "<p>Você pode rolar em tabelas de nível de raridade igual ao dobro do seu nível. Você pode ficar com o item ou com metade do seu valor em ouro.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

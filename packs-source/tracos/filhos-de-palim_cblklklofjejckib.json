@@ -1,0 +1,28 @@
+{
+  "_id": "cblklklofjejckib",
+  "_key": "!items!cblklklofjejckib",
+  "name": "Filhos de Pálim",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você possui afinidade com minerais, recebendo 1D em todas as rolagens relacionadas a lidar com minerais.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

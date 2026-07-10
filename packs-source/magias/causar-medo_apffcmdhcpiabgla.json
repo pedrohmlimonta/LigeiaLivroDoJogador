@@ -1,0 +1,111 @@
+{
+  "_id": "apffcmdhcpiabgla",
+  "_key": "!items!apffcmdhcpiabgla",
+  "name": "Causar Medo",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "carmo",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "Nível",
+    "range": "Emanação",
+    "duration": "Uma cena",
+    "description": "<p>Você sussurra a palavra carmo enquanto seu olhar brilha vermelho. Em seguida, você entra na mente de cada uma das criaturas ao seu redor, preenchendo-as de medo e desespero.</p><p>Efeito: Todas as criaturas dentro da emanação devem ser bem sucedidas em uma rolagem de Mente oposta a Conjuração, para não ficarem abaladas até o fim da cena (Mente anula). Uma mesma criatura não pode ser afetada por essa magia mais de uma vez no mesmo dia.</p><p>Carisma concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Só afeta um determinado tipo de criatura (+2). Não afeta um determinado tipo de criatura (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1). Alvos ficam também imobilizados até o fim da cena (Mente anula) (-2). Alvos ficam também paralisados até o fim da cena (Mente anula) (-4).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Causar Medo (Conjuração vs Mente — emanação)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "defenseAttr": "mente",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Abalado (Mente anula)",
+            "fxType": "condition",
+            "fxTarget": "abalado",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "mente",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 0,
+        "area": 3,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

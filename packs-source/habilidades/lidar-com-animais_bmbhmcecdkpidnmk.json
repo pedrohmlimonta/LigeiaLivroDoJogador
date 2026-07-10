@@ -1,0 +1,39 @@
+{
+  "_id": "bmbhmcecdkpidnmk",
+  "_key": "!items!bmbhmcecdkpidnmk",
+  "name": "Lidar com Animais",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Gnomo da floresta, bardo, druida e patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens para lidar com criaturas do tipo Fera (cativar, afugentar, adestrar, rastrear...). Você pode adestrar uma criatura do tipo Fera com o traço Montaria e Desafio igual ao seu nível.</p>",
+    "descAdvanced": "<p>Você pode gastar 1 ponto heróico para se comunicar com uma criatura do tipo Fera através de pequenos gestos e sons. Você pode adestrar montarias que não sejam do tipo Fera.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

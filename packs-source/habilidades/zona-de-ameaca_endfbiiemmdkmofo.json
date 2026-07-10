@@ -1,0 +1,39 @@
+{
+  "_id": "endfbiiemmdkmofo",
+  "_key": "!items!endfbiiemmdkmofo",
+  "name": "Zona de Ameaça",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Vigor 4+",
+    "lists": "Guardião",
+    "activation": "Reação",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode usar sua reação para realizar um ataque com arma corpo a corpo contra uma criatura adjacente que tente desengajar, conjurar magia ou realizar um ataque que não inclua você como alvo. Sua ação é feita antes da ação da criatura em questão. Se seu ataque causar dano, a ação ou movimento da criatura são cancelados.</p>",
+    "descAdvanced": "<p>Você pode usar essa habilidade como uma ação livre, em vez de uma rápida. Desta forma, não há limite para quantas vezes ela pode ser usada por rodada. Uma criatura que sofra dano de um de seus ataques engatilhados por essa habilidade fica indefesa.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 25200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

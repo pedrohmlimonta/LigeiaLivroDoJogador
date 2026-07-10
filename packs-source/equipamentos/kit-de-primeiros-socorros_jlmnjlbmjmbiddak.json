@@ -1,0 +1,31 @@
+{
+  "_id": "jlmnjlbmjmbiddak",
+  "_key": "!items!jlmnjlbmjmbiddak",
+  "name": "Kit de Primeiros Socorros",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Va",
+    "notes": "",
+    "description": "<p>Ataduras, unguentos, bandagens, pinças, lâminas devidamente higienizadas e frascos alquímicos que aceleram a cicatrização.</p><p>Propriedade: quando você realiza uma rolagem de cuidados médicos para cuidar de um aliado usando esse kit, você recebe +1 nessa rolagem. Este item é consumido quando utilizado.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "_id": "fcapgakfmgjjdhfg",
+  "_key": "!items!fcapgakfmgjjdhfg",
+  "name": "Alerta",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Gnomos das Profundezas, pequenino, bárbaro, guerreiro, ladino, monge, paladino, patrulheiro, clérigo (Krimmena e Meriak)",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens para descobrir coisas escondidas, encontrar pistas, notar detalhes de um ambiente e tentar escutar sons específicos.</p>",
+    "descAdvanced": "<p>Você recebe +4 na Iniciativa. Você recebe 1D em rolagens para perceber armadilhas e ameaças naturais. Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Cego e Surdo.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "iniciativa",
+        "value": 4,
+        "rerollAll": false,
+        "label": "Alerta (A): +4 Iniciativa",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

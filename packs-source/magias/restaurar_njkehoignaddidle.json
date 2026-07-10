@@ -1,0 +1,41 @@
+{
+  "_id": "njkehoignaddidle",
+  "_key": "!items!njkehoignaddidle",
+  "name": "Restaurar",
+  "type": "magia",
+  "img": "icons/svg/heal.svg",
+  "system": {
+    "wordId": "vitae",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "1m x Nível",
+    "range": "3m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Enquanto pronuncia a palavra vitae, você toca o solo em direção aos seus aliados, entrando em conexão com os mesmos e fazendo com que sua magia restaure suas condições físicas ou mentais.</p><p>Efeitos: Você determina um tipo de condição física ou mental que esteja afetando um ou mais dos alvos. Essa condição é finalizada imediatamente.</p><p>Medicina concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Determine dois tipos de condições diferentes (apenas Círculo Intermediário ou Maior) (-4). Finaliza todas as condições negativas (apenas Círculo Maior) (-8). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

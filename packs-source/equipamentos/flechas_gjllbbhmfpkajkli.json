@@ -1,0 +1,31 @@
+{
+  "_id": "gjllbbhmfpkajkli",
+  "_key": "!items!gjllbbhmfpkajkli",
+  "name": "Flechas",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Munição",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Va",
+    "notes": "",
+    "description": "<p>Pequenas hastes de madeira com pontas de metal pontiagudas. Utilizadas como munição para os arcos.</p><p>Propriedade: uma vez disparada, a flecha se despedaça com o impacto, a menos que tenha uma propriedade mágica. Pagando 1 Va você tem flechas suficientes para uma aventura.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

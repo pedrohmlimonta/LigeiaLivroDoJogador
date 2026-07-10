@@ -1,0 +1,39 @@
+{
+  "_id": "dkjfflieegdejeal",
+  "_key": "!items!dkjfflieegdejeal",
+  "name": "Canção do Viajante",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bardo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você entoa canções que tranquilizam, entretêm e relaxam as mentes de seus aliados. Seus aliados recuperam 1 ponto de vida adicional quando descansam.</p>",
+    "descAdvanced": "<p>Seus aliados recuperam 2 pontos de vida e 1 ponto de magia adicionais, quando descansam.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

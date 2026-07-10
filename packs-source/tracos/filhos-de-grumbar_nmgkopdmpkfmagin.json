@@ -1,0 +1,28 @@
+{
+  "_id": "nmgkopdmpkfmagin",
+  "_key": "!items!nmgkopdmpkfmagin",
+  "name": "Filhos de Grumbar",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>A cada cena que você passar sem combate, você recebe 1 ponto de Sede de Batalha que se acumula. Quando você entra em combate, você pode gastar esses pontos. Quando declarar um ataque, você pode gastar 1 ou mais pontos para receber um bônus para a rolagem de ataque igual à quantidade de pontos gastos.</p><p>Raça: orc.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_id": "fnbogacnanjffbjp",
+  "_key": "!items!fnbogacnanjffbjp",
+  "name": "Forma Animal",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Druida",
+    "activation": "Ação rápida",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode usar sua ação rápida e gastar 1 ponto de magia para se transformar em uma criatura do tipo Fera cujo Desafio seja igual a seu Nível x2. A transformação dura uma cena e altera todas as suas características exceto sua Mente e seus pontos de magia. A nova forma recebe, adicionalmente, 1D em Força ou Agilidade. Todo o dano sofrido na forma animal permanece quando você retorna à sua forma original.</p>",
+    "descAdvanced": "<p>Quando você se transforma usando essa habilidade, você recebe um dos seguintes benefícios: 1D em Percepção; +3m de Deslocamento; Proteção 2 contra Corte, Perfuração e Concussão; Bônus de ataque +2.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Transformar (dura uma cena)"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

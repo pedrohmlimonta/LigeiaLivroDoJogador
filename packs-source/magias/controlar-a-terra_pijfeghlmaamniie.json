@@ -1,0 +1,111 @@
+{
+  "_id": "pijfeghlmaamniie",
+  "_key": "!items!pijfeghlmaamniie",
+  "name": "Controlar a Terra",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "devena",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Um espaço",
+    "area": "",
+    "range": "Nível x Círculo",
+    "duration": "Sustentável — Ação Rápida",
+    "description": "<p>Conforme você pronuncia a palavra arcana devena, o solo se move assumindo uma forma diferente conforme sua vontade.</p><p>Efeito: Você faz com que o chão de terra se mova num espaço alvo dentro do alcance e assuma uma das formas na lista abaixo. Se o espaço alvo escolhido estiver ocupado por alguma criatura, esta deve ser bem sucedida em uma rolagem de Agilidade oposta a Conjuração para não cair no chão.</p><p>Muralha de Pedra — um muro de pedra se ergue do chão. Ele ocupa uma quantidade de metros em linha reta igual ao seu atributo de Mente + Nível, e possui altura igual a seu Nível +1 em metros. Pilar de Pedra — um pilar alto de pedra se ergue do chão. Ele possui diâmetro igual ao seu Nível em metros; a altura dele é igual ao seu atributo de Mente + o dobro do seu Nível. Esfera de Pedra — uma esfera grande de pedra se forma a partir do chão. Ela possui diâmetro igual ao seu Nível em metros.</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Pode movê-la depois de criada, usando sua ação, uma distância igual ao alcance (apenas Círculo Intermediário ou Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Controlar a Terra (Conjuração vs Agilidade se ocupado)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "agilidade",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Caído",
+            "fxType": "condition",
+            "fxTarget": "caido",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "rounds",
+            "durationRounds": 1,
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 4,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

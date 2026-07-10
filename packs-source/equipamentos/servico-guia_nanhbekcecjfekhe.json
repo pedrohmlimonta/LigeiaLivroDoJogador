@@ -1,0 +1,31 @@
+{
+  "_id": "nanhbekcecjfekhe",
+  "_key": "!items!nanhbekcecjfekhe",
+  "name": "Serviço: Guia",
+  "type": "equipamento",
+  "img": "icons/svg/coins.svg",
+  "system": {
+    "category": "Serviço",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Vn por Km",
+    "notes": "",
+    "description": "<p>Serviço ou profissional contratado durante as aventuras. Preço: 1 Vn por Km.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

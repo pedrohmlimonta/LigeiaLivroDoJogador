@@ -1,0 +1,31 @@
+{
+  "_id": "cjllngnnmkfjdonl",
+  "_key": "!items!cjllngnnmkfjdonl",
+  "name": "Ampulheta",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Dispositivo",
+    "qty": 1,
+    "weight": 0,
+    "price": "5 Vo",
+    "notes": "",
+    "description": "<p>Um pequeno frasco de vidro com bases de madeira em suas extremidades, contendo areia, usado para contar o tempo.</p><p>Propriedade: permite calcular o tempo de 1 minuto.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

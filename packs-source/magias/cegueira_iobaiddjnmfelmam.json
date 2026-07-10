@@ -1,0 +1,111 @@
+{
+  "_id": "iobaiddjnmfelmam",
+  "_key": "!items!iobaiddjnmfelmam",
+  "name": "Cegueira",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "tenebrae",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "5m x Círculo x Nível",
+    "duration": "Uma cena",
+    "description": "<p>Você pronuncia tenebrae, enquanto foca sua visão em um único alvo. Os olhos do alvo vibram até arder e se tornam incapazes de absorver a luz.</p><p>Efeitos: O alvo deve ser bem sucedido em uma rolagem de Percepção oposta a Conjuração, ou fica cego pela duração da magia (Percepção anula).</p><p>Conhecimento (Ocultismo) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>É necessário ser bem sucedido em uma rolagem de Mente para anular também (apenas Círculo Intermediário ou Maior) (-2). É necessário ser bem sucedido em uma rolagem de Mente e de Vigor para anular também (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Cegueira (Conjuração vs Percepção)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "percepcao",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Cego (Percepção anula)",
+            "fxType": "condition",
+            "fxTarget": "cego",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "percepcao",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 10,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

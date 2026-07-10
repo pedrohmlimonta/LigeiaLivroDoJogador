@@ -1,0 +1,39 @@
+{
+  "_id": "gicodilggbkmpgab",
+  "_key": "!items!gicodilggbkmpgab",
+  "name": "Juramento (Vingança)",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Paladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Escolha um juramento quando comprar esta habilidade. Ao cumprir com um dever do seu Juramento escolhido, você recebe 1 Ponto de Juramento e recebe favores de acordo com os pontos acumulados. Esses pontos diminuem em 1 quando você descansa.</p><p>Deveres — Elimine os Inimigos: causar dano a um inimigo deixando-o com 0 pontos de vida. Sem Piedade: acertar um golpe crítico em um inimigo. Assista-os Perecer: causar dano contínuo a um inimigo.</p><p>Favores — 1 Ponto: você recebe 1D em rolagens de Percepção para rastrear inimigos. 2 Pontos: você recupera pontos de vida igual ao seu Nível quando elimina um inimigo. 3 Pontos: você recebe um bônus igual a metade do seu nível nos seus ataques concedidos por manobras. 4 Pontos: você recebe sobrevida igual ao seu Nível sempre que gastar um ponto heróico para re-rolar um ataque. 5 Pontos: quando um inimigo sofre dano de um de seus ataques com arma, ele também sofre dano contínuo de sangramento.</p>",
+    "descAdvanced": "<p>Enquanto você tiver 3 Pontos de Juramento ou mais, você emana uma aura com raio igual à quantidade de Pontos de Juramento. Aliados dentro da aura recebem 1D em rolagens de defesa. Enquanto você tiver 5 Pontos de Juramento ou mais, aliados dentro da aura recebem também 1D em rolagens de ataque. Enquanto você emanar essa aura, você e aliados dentro dela ficam imunes à condição de Abalado.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

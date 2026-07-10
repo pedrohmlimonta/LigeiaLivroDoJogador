@@ -1,0 +1,60 @@
+{
+  "_id": "fgjkfmjhgfgiighf",
+  "_key": "!items!fgjkfmjhgfgiighf",
+  "name": "Vigor de Aço",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das terras baixas, anão das montanhas, meio-orc, orc, bárbaro, guardião, monge e paladino.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você tem 3 pontos de vida adicionais.</p>",
+    "descAdvanced": "<p>Você tem 5 pontos de vida adicionais (em vez de 3).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": 3,
+        "rerollAll": false,
+        "label": "Vigor de Aço B: +3 PV",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Vigor de Aço A: +2 PV (total +5)",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 25000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_id": "mbeanbhnalpphele",
+  "_key": "!items!mbeanbhnalpphele",
+  "name": "Espírito Guardião (Carneiro)",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro e druida",
+    "activation": "Ação rápida",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Gastando 1 ponto de magia, você recebe, por uma rodada, o benefício do espírito guardião: Seus ataques bem sucedidos empurram o alvo 2m.</p>",
+    "descAdvanced": "<p>Gastando 2 pontos de magia (em vez de um ponto de magia), o benefício dura uma cena.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Invocar espírito (1 rodada; A: 2 PM = cena)"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

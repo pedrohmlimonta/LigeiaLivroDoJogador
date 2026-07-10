@@ -1,0 +1,31 @@
+{
+  "_id": "lcbehigkicgecagd",
+  "_key": "!items!lcbehigkicgecagd",
+  "name": "Pacote de Explorador",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Conjunto",
+    "qty": 1,
+    "weight": 0,
+    "price": "8 Vo",
+    "notes": "",
+    "description": "<p>Uma mochila contendo o básico necessário para uma viagem.</p><p>Propriedade: uma mochila contendo um saco de dormir, um cantil, uma corda, uma tocha, uma caixa de fogo e dez dias de ração de viagem.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

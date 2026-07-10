@@ -1,0 +1,39 @@
+{
+  "_id": "njaofcmhmjjehkhe",
+  "_key": "!items!njaofcmhmjjehkhe",
+  "name": "Velocidade de Ataque",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Agilidade 4+",
+    "lists": "Bárbaro, guerreiro, monge e patrulheiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você faz ataques múltiplos, a penalidade nos ataques é de -3 em vez de -4.</p>",
+    "descAdvanced": "<p>Quando você faz ataques múltiplos, a penalidade nos ataques é de -2 em vez de -4.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 24500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

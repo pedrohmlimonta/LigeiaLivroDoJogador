@@ -1,0 +1,39 @@
+{
+  "_id": "hiicbjoemhlploka",
+  "_key": "!items!hiicbjoemhlploka",
+  "name": "Presa de Caça (Gigantes)",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Percepção 4+",
+    "lists": "Patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de conhecimento, pesquisa, rastreio e investigação relacionadas a criaturas do tipo Gigantes. Adicionalmente, você recebe 1D em rolagens de ataque e defesa contra criaturas do tipo em questão.</p>",
+    "descAdvanced": "<p>Seus golpes críticos contra criaturas do tipo em questão causam dano contínuo de sangramento (Vigor anula). Enquanto estiver sangrando, a criatura não recebe ocultação contra você e, caso você a atinja com um golpe com arma enquanto ela estiver sangrando, ela ficará lenta (Vigor anula). Um segundo acerto a deixará imobilizada (Vigor anula).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 17600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

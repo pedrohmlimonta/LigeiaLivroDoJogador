@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Gerar documentos dos packs
+        run: python3 scripts/generate.py
+
+      - name: Compilar packs (LevelDB)
+        run: |
+          npm install --no-fund --no-audit
+          node scripts/compile-packs.mjs
+
+      - name: Atualizar versão no module.json
+        run: |
+          python3 -c "
+          import json, os
+          v = os.environ['VER'].lstrip('v')
+          repo = os.environ['GITHUB_REPOSITORY']
+          m = json.load(open('module.json'))
+          m['version'] = v
+          m['manifest'] = f'https://github.com/{repo}/releases/latest/download/module.json'
+          m['download'] = f'https://github.com/{repo}/releases/download/v{v}/ligeia-livro-do-jogador.zip'
+          json.dump(m, open('module.json','w'), ensure_ascii=False, indent=2)
+          " 
+        env:
+          VER: ${{ github.ref_name }}
+
+      - name: Montar zip do módulo
+        run: |
+          zip -r ligeia-livro-do-jogador.zip module.json README.md packs/ -x "*.DS_Store"
+
+      - name: Anexar artefatos à release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            module.json
+            ligeia-livro-do-jogador.zip

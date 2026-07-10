@@ -1,0 +1,50 @@
+{
+  "_id": "keeebgokdaffgphe",
+  "_key": "!items!keeebgokdaffgphe",
+  "name": "Melhorar Atributo (Agilidade)",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 40,
+    "costAdvanced": 0,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Draconiano, infernal e todas as vocações.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D no atributo Agilidade.</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "dice",
+        "target": "agilidade",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Melhorar Atributo: 1D Agilidade",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

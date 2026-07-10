@@ -1,0 +1,39 @@
+{
+  "_id": "jgllgellodmplmde",
+  "_key": "!items!jgllgellodmplmde",
+  "name": "Contragolpe",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro, guardião, guerreiro e monge",
+    "activation": "Reação",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando uma criatura erra um ataque contra você, você pode usar sua reação para imediatamente fazer um ataque contra ela.</p>",
+    "descAdvanced": "<p>Quando uma criatura faz um ataque contra você (independente de errar ou acertar), você pode usar sua reação para imediatamente fazer um ataque contra ela.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

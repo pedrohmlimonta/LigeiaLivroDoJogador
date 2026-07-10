@@ -1,0 +1,31 @@
+{
+  "_id": "eepdnmllbflcgkkg",
+  "_key": "!items!eepdnmllbflcgkkg",
+  "name": "Camelo",
+  "type": "equipamento",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "category": "Montaria",
+    "qty": 1,
+    "weight": 0,
+    "price": "75 Vo",
+    "notes": "Carga 9 · Deslocamento 12m",
+    "description": "<p>Montaria adaptada a climas áridos.</p><p>Carga: 9. Deslocamento: 12m. Enquanto estiver montado, use o Deslocamento da montaria no lugar do Deslocamento do personagem.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

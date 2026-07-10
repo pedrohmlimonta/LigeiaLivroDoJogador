@@ -1,0 +1,60 @@
+{
+  "_id": "efbcanfmlkigkjjg",
+  "_key": "!items!efbcanfmlkigkjjg",
+  "name": "Firmeza Física",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas e anão das terras baixas",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens para evitar ser derrubado ou movido involuntariamente. Seus pontos de vida aumentam em 1 ponto.</p>",
+    "descAdvanced": "<p>Quando uma criatura adjacente tentar derrubá-lo ou movê-lo, você pode gastar 1 ponto heróico para evitar automaticamente e usar sua reação para realizar um ataque contra ela. Seus pontos de vida aumentam em 3 pontos (em vez de 1). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Agarrado, Enfraquecido, Exausto e Paralisado.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Firmeza Física B: +1 PV",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Firmeza Física A: +2 PV (total +3)",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

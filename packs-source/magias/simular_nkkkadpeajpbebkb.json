@@ -1,0 +1,41 @@
+{
+  "_id": "nkkkadpeajpbebkb",
+  "_key": "!items!nkkkadpeajpbebkb",
+  "name": "Simular",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "pluribus",
+    "tier": "Menor",
+    "casting": "Reação",
+    "target": "Conjurador",
+    "area": "",
+    "range": "5m x Círculo",
+    "duration": "",
+    "description": "<p>Você analisa uma ação e, pronunciando a palavra pluribus, você consegue replicá-la de forma perfeita.</p><p>Efeitos: Quando uma criatura dentro do alcance executa uma ação, você usa sua reação para repetir tudo o que ela fez. Você pode copiar a magia conjurada por alguém usando o atributo de Conjuração dela, mesmo que não conheça as palavras arcanas; você pode copiar um ataque com arma de alguém usando o bônus de ataque dele, mesmo que não possua uma arma igual, e causará o mesmo dano base. Quando copia qualquer ação que requeira gasto de pontos de vida, pontos de magia ou pontos heróicos, você deve pagar o mesmo para copiar.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Se sua rolagem nessa reação for uma falha crítica, você fica atordoado até o fim da cena (Mente anula) (+2). Você recebe +1 para a rolagem da ação copiada (-2). Você recebe +2 para a rolagem da ação copiada (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

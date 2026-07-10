@@ -1,0 +1,93 @@
+{
+  "_id": "pgplajmggpfcnnob",
+  "_key": "!items!pgplajmggpfcnnob",
+  "name": "Aura Arcana",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "energio",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "Nível x Círculo",
+    "range": "Aura",
+    "duration": "Sustentação — Ação Rápida",
+    "description": "<p>Conforme você pronuncia a palavra energio, mentalizando um mapa arcano, você cria uma aura de energia em torno de si, que fere qualquer um que se aproxime de você.</p><p>Efeito: Você emana uma aura de energia centrada em si mesmo. Todas as criaturas que entrarem ou iniciarem seus turnos dentro dela sofrem 1 ponto de dano de energia.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>A aura causa 2 pontos de dano de energia (apenas Círculo Intermediário) (-). A aura causa 3 pontos de dano de energia (apenas Círculo Maior) (-). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Aura Arcana (dano de energia na aura)",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "1",
+        "damageType": "energia",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 3,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": true,
+        "persistRounds": 0,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

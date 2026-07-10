@@ -1,0 +1,41 @@
+{
+  "_id": "mgokomppalpeeabj",
+  "_key": "!items!mgokomppalpeeabj",
+  "name": "Visão Futura",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "augurado",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Conjurador",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "description": "<p>Você sussurra a palavra augurado para si mesmo, fazendo com que sua consciência viaje através do tempo, mostrando a você turvas imagens das ameaças que irão prejudicá-lo, auxiliando-o a tomar um melhor caminho.</p><p>Efeito: Você pode re-rolar apenas uma vez todos os dados das suas próximas três rolagens. Você ainda pode gastar pontos heróicos para re-rolar qualquer uma delas normalmente. Você deve ficar com o segundo resultado, caso o faça.</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Cinco rolagens, em vez de três (apenas Círculo Intermediário ou Maior) (-6). Sete rolagens, em vez de três (apenas Círculo Maior) (-8). O conjurador sofre 1 ponto de dano quando conjura (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

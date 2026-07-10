@@ -1,0 +1,39 @@
+{
+  "_id": "ianbehbliiajiofj",
+  "_key": "!items!ianbehbliiajiofj",
+  "name": "Movimento de Natação",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Clérigo (Neidar)",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Usando seu movimento, você pode se deslocar em águas calmas com a mesma habilidade com que se desloca em solo, sem a necessidade de nenhuma rolagem para se deslocar.</p>",
+    "descAdvanced": "<p>Quando você se desloca em ambientes aquáticos, você não fica lento. Adicionalmente, você não precisa realizar rolagens quando se desloca em águas agitadas.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

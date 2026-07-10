@@ -1,0 +1,66 @@
+{
+  "_id": "nhhlhdolopebcfpi",
+  "_key": "!items!nhhlhdolopebcfpi",
+  "name": "Fúria",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro",
+    "activation": "Livre (no seu turno)",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode escolher entrar em fúria durante seu turno, gastando 1 ponto heróico. Enquanto estiver em fúria, você recebe 1D em Força, Sobrevida e Proteção contra Corte, Perfuração e Concussão igual a metade do seu nível (arredondado para cima), mas perde 1D em todas as suas rolagens de Mente. A fúria dura uma quantidade de rodadas igual ao seu Vigor. Quando a Fúria acaba, você fica exausto até o fim da cena (Não anula).</p>",
+    "descAdvanced": "<p>A fúria te dá Sobrevida e Proteção contra Corte, Perfuração e Concussão igual ao seu nível. A fúria dura agora até o fim da cena. Quando ela acaba, você não fica exausto. Enquanto estiver em fúria, você pode gastar um ponto heróico quando fizer um ataque corpo a corpo, para trocar o resultado de um dos dados por um 6.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "dice",
+        "target": "forca",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Fúria: 1D Força",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "dice",
+        "target": "mente",
+        "value": -1,
+        "rerollAll": false,
+        "label": "Fúria: -1D Mente",
+        "enabled": true,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
+    "costs": [
+      {
+        "resource": "heroic",
+        "value": 1,
+        "label": "Entrar em fúria"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

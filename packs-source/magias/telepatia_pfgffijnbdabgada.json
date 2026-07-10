@@ -1,0 +1,41 @@
+{
+  "_id": "pfgffijnbdabgada",
+  "_key": "!items!pfgffijnbdabgada",
+  "name": "Telepatia",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "menso",
+    "tier": "Menor",
+    "casting": "Ação Rápida",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "5m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Após sussurrar a palavra menso, você foca-se nas suas lembranças de um indivíduo que você conheça e envia mentalmente uma mensagem a ele.</p><p>Efeitos: Você pode enviar uma mensagem mentalmente para o alvo. Se o alvo for bem sucedido em uma rolagem de Mente (Normal), ele pode ser capaz de responder de volta mentalmente. Você precisa ter tido algum diálogo com o alvo alguma vez para que esta magia funcione.</p><p>Vontade de Ferro concede +1 em Conjuração para esta conjuração. Carisma concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Alcance (5km x Círculo x Nível) (apenas Círculo Intermediário ou Maior) (-3). Alcance (Qualquer lugar) (apenas Círculo Maior) (-5). O alvo não pode responder de volta (+2). Você não precisa ter tido diálogo com o alvo antes (apenas Círculo Intermediário ou Maior) (-2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

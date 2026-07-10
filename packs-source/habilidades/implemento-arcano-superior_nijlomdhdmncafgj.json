@@ -1,0 +1,39 @@
+{
+  "_id": "nijlomdhdmncafgj",
+  "_key": "!items!nijlomdhdmncafgj",
+  "name": "Implemento Arcano Superior",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Mago",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você pode usar como foco um objeto de valor emocional (exceto armas), no lugar do foco padrão. Você pode encantá-lo com propriedades de outros focos.</p>",
+    "descAdvanced": "<p>Seu foco pode ser uma arma ou qualquer outro item que você possa empunhar.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

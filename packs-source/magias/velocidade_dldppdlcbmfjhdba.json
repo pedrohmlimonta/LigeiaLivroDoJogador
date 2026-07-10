@@ -1,0 +1,41 @@
+{
+  "_id": "dldppdlcbmfjhdba",
+  "_key": "!items!dldppdlcbmfjhdba",
+  "name": "Velocidade",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "saeculorum",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura",
+    "area": "",
+    "range": "Toque",
+    "duration": "Uma cena",
+    "description": "<p>Você toca seu alvo enquanto pronuncia a palavra saeculorum, fazendo com que o tempo flua mais devagar para ele.</p><p>Efeitos: O alvo recebe uma ação de movimento adicional em cada um de seus turnos, pela duração da magia.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>O alvo recebe uma reação adicional (em vez de movimento) (-2). O alvo recebe uma ação adicional (em vez de movimento) (apenas Círculo Intermediário ou Maior) (-6). O alvo recebe um turno adicional (em vez de movimento) (apenas Círculo Maior) (-8). O alvo recebe dois turnos adicionais (em vez de movimento) (apenas Círculo Maior) (-10). O alvo sofre 1 ponto de dano por rodada enquanto estiver sob efeito da magia (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

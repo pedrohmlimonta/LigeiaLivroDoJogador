@@ -1,0 +1,82 @@
+{
+  "_id": "bnohalijaoaffkpg",
+  "_key": "!items!bnohalijaoaffkpg",
+  "name": "Armadura de Couro",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Armadura Leve",
+    "qty": 1,
+    "weight": 1,
+    "price": "25 Vo",
+    "notes": "Penalidade -1",
+    "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Armadura de Couro: Proteção 1 (corte)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Armadura de Couro: Proteção 1 (perfuração)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Armadura de Couro: Proteção 1 (concussão)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "concussao"
+      },
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": -1,
+        "rerollAll": false,
+        "label": "Armadura de Couro: penalidade -1 Esquiva",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": -1,
+        "rerollAll": false,
+        "label": "Armadura de Couro: penalidade -1 Conjuração",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

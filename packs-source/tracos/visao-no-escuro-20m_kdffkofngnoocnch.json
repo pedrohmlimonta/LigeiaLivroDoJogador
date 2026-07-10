@@ -1,0 +1,28 @@
+{
+  "_id": "kdffkofngnoocnch",
+  "_key": "!items!kdffkofngnoocnch",
+  "name": "Visão no Escuro (20m)",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você enxerga no escuro até 20m.</p><p>Raças: elfo das profundezas, gnomo das profundezas, orc.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

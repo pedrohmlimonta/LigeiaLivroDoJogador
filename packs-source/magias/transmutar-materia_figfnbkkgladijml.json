@@ -1,0 +1,93 @@
+{
+  "_id": "figfnbkkgladijml",
+  "_key": "!items!figfnbkkgladijml",
+  "name": "Transmutar Matéria",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "sangon",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Um objeto",
+    "area": "",
+    "range": "Toque",
+    "duration": "Cena",
+    "description": "<p>Você toca um objeto enquanto pronuncia a palavra sangon, alterando suas propriedades químicas.</p><p>Efeitos: Você toca um objeto e altera o Material do qual ele é feito, realizando uma rolagem de Conjuração contra uma dificuldade de número 10 + Dureza do Material do objeto. Se for bem sucedido, o Material do objeto muda para um Material com a Dureza anterior +1/-1 para cada 2 pontos do resultado acima do número alvo.</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Dureza anterior +2/-2 (apenas Círculo Intermediário ou Maior) (-4). Dureza anterior +3/-3 (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Transmutar Matéria (Conjuração vs 10 + Dureza)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": true,
+        "fixedDifficulty": 10,
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

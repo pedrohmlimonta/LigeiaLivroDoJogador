@@ -1,0 +1,31 @@
+{
+  "_id": "fjpibcedkdnifeni",
+  "_key": "!items!fjpibcedkdnifeni",
+  "name": "Cavalo de Guerra",
+  "type": "equipamento",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "category": "Montaria",
+    "qty": 1,
+    "weight": 0,
+    "price": "400 Vo",
+    "notes": "Carga 10 · Deslocamento 15m",
+    "description": "<p>Montaria treinada para o combate.</p><p>Carga: 10. Deslocamento: 15m. Enquanto estiver montado, use o Deslocamento da montaria no lugar do Deslocamento do personagem.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "kjhiciajloinkelc",
+  "_key": "!items!kjhiciajloinkelc",
+  "name": "Ofícios",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas, anão das terras baixas, gnomos das rochas, humano, meio-elfo, pequenino, bardo, monge, clérigo (Aeon, Kovar, Pálim, Eurecca, Seníah e Ruff)",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens para identificar objetos (origem, propósito, material...). Você recebe uma quantidade diária adicional de Pontos Heróicos igual a metade do seu nível, que só podem ser gastos na criação de itens.</p>",
+    "descAdvanced": "<p>Você recebe uma quantidade diária adicional de Pontos Heróicos para criação de itens igual ao seu nível (em vez de metade dele).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

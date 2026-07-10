@@ -1,0 +1,39 @@
+{
+  "_id": "dabmdeebjplnpobc",
+  "_key": "!items!dabmdeebjplnpobc",
+  "name": "Presença do Leão",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Leão Dourado",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Sempre que iniciar um combate, inimigos que possam vê-lo devem realizar uma rolagem de Mente oposta ao seu maior atributo primário. Se falharem, ficarão Pasmos até o fim da cena (Mente anula).</p>",
+    "descAdvanced": "<p>Os inimigos ficam também Abalados. Adicionalmente, você é imune às condições Abalado e Enfeitiçado, e recebe 1D em rolagens de interação social.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 18400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

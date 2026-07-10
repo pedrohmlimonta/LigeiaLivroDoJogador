@@ -1,0 +1,111 @@
+{
+  "_id": "cjabnooockllgaln",
+  "_key": "!items!cjabnooockllgaln",
+  "name": "Rajada Psíquica",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "traumato",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura ou objeto",
+    "area": "",
+    "range": "5m x Círculo x Nível",
+    "duration": "",
+    "description": "<p>Pronunciando a palavra traumato, você lança a uma criatura, ao alcance da sua visão, uma rajada que destrói a sua mente.</p><p>Dano: Psíquico +1 (Mente).</p><p>Efeitos: Se o alvo sofrer dano, ele deve ser bem sucedido em uma rolagem de Mente oposta a Conjuração, ou ficará pasmo até o fim da cena (Mente anula).</p><p>Carisma concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Dano: Psíquico +2 (apenas Círculo Intermediário) (-). Dano: Psíquico +3 (apenas Círculo Maior) (-). O alvo fica abalado até o fim da cena (Mente anula) (apenas Círculo Intermediário ou Maior) (-2). O alvo fica atordoado até o fim da cena (Mente anula) (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Rajada Psíquica (Conjuração vs Mente)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "mente",
+        "defenseAttr2": "",
+        "damage": "1",
+        "damageType": "psiquico",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Pasmo (Mente anula)",
+            "fxType": "condition",
+            "fxTarget": "pasmo",
+            "fxValue": 0,
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": 1,
+            "resist": true,
+            "resistAttr": "mente",
+            "resistVsCast": true,
+            "resistDc": 0,
+            "resistReroll": false,
+            "tickAmount": 0,
+            "tickType": "",
+            "tickResource": "hp"
+          }
+        ],
+        "range": 10,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

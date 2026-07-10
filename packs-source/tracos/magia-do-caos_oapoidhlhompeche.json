@@ -1,0 +1,28 @@
+{
+  "_id": "oapoidhlhompeche",
+  "_key": "!items!oapoidhlhompeche",
+  "name": "Magia do Caos",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Sempre que você conjurar uma magia, role 2d6. Se o resultado for menor que a quantidade de pontos de magia faltantes na sua reserva, sua Conjuração recebe um bônus igual a metade do seu nível e você rola 1d6 e confere o resultado:</p><p>6 — A magia causa 1d6 de dano de energia, caso os alvos sejam inimigos, e cura 1d6 pontos de vida, caso os alvos sejam aliados. Você recebe uma condição positiva à escolha do narrador, até o fim da cena. 5 — A magia se repete em uma área ou alvo diferente, à sua escolha. 4 — A magia se repete em uma área ou alvo diferente, à escolha do narrador. 3 — A magia funciona normalmente. 2 — A magia falha e você recebe uma condição negativa até o fim da cena (Vigor anula), à escolha do narrador. 1 — Sua energia arcana explode e você recebe 1d6 pontos de dano bruto de energia.</p><p>Herança: entrópico.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

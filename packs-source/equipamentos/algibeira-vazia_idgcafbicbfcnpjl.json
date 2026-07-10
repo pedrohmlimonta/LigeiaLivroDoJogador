@@ -1,0 +1,31 @@
+{
+  "_id": "idgcafbicbfcnpjl",
+  "_key": "!items!idgcafbicbfcnpjl",
+  "name": "Algibeira (vazia)",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Compartimento",
+    "qty": 1,
+    "weight": 0,
+    "price": "1 Va",
+    "notes": "",
+    "description": "<p>Uma pequena bolsa de couro que pode ser anexada ao cinto.</p><p>Propriedade: compartimento suficiente para guardar até 30 moedas, balas de funda suficientes para uma aventura ou três frascos de remédio, antídoto, poção, elixir ou óleo. Enquanto guardados neste compartimento, os itens podem ser sacados com uma ação rápida.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

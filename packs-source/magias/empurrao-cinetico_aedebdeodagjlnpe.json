@@ -1,0 +1,93 @@
+{
+  "_id": "aedebdeodagjlnpe",
+  "_key": "!items!aedebdeodagjlnpe",
+  "name": "Empurrão Cinético",
+  "type": "magia",
+  "img": "icons/svg/explosion.svg",
+  "system": {
+    "wordId": "menso",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "5m",
+    "range": "Emanação",
+    "duration": "",
+    "description": "<p>Você pronuncia a palavra menso, fazendo com que uma força invisível maciça ao seu redor empurre todos ao seu redor para longe de você.</p><p>Dano: Concussão +1 (Esquiva ou Bloqueio).</p><p>Efeitos: Criaturas dentro da área são empurradas uma quantidade de metros igual ao dano sofrido.</p><p>Vontade de Ferro concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Dano: Concussão +2 (apenas Círculo Intermediário) (-). Dano: Concussão +3 (apenas Círculo Maior) (-). Alvos de tamanho Médio ou menor são também derrubados (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Empurrão Cinético (Conjuração vs Esquiva/Bloqueio — empurra)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "1",
+        "damageType": "concussao",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": true,
+          "kind": "push",
+          "who": "targets",
+          "distance": 2,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 5,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

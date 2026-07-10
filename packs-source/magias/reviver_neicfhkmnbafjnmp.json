@@ -1,0 +1,41 @@
+{
+  "_id": "neicfhkmnbafjnmp",
+  "_key": "!items!neicfhkmnbafjnmp",
+  "name": "Reviver",
+  "type": "magia",
+  "img": "icons/svg/heal.svg",
+  "system": {
+    "wordId": "vitae",
+    "tier": "Menor",
+    "casting": "Cena",
+    "target": "Uma criatura morta",
+    "area": "",
+    "range": "Toque",
+    "duration": "",
+    "description": "<p>Consumindo uma valiosa gema neste ritual arcano e pronunciando repetidamente a palavra vitae enquanto mantém contato físico com o alvo, você faz com que sua energia vital retorne a seu corpo.</p><p>Efeitos: Você traz de volta à vida um alvo que tenha morrido há uma quantidade de dias igual ao seu nível. O alvo retorna com 1 ponto de vida. É necessário que o alvo tocado não tenha perdido nenhuma parte do corpo para que essa magia funcione.</p><p>Medicina concede +1 em Conjuração para esta conjuração. Você precisa gastar 100.000 Vo em componentes especiais para realizar esta conjuração. Não há habilidade que possa anular a necessidade deles.</p>",
+    "peculiarities": "<p>Traz o alvo de volta à vida com metade dos pontos de vida (apenas Círculo Intermediário ou Maior) (-4). Traz o alvo de volta com todos os pontos de vida (apenas Círculo Maior) (-4). Traz o alvo de volta, mesmo que só haja parte do corpo dele (apenas Círculo Intermediário ou Maior) (-4). Traz o alvo de volta necessitando apenas de um objeto pessoal dele (apenas Círculo Maior) (-6). Traz de volta um alvo que tenha morrido há uma quantidade de semanas igual ao seu nível (apenas Círculo Intermediário ou Maior) (-4). Traz de volta um alvo que tenha morrido há uma quantidade de anos igual ao seu nível (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

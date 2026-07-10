@@ -1,0 +1,41 @@
+{
+  "_id": "pnpkhiehmjdipagp",
+  "_key": "!items!pnpkhiehmjdipagp",
+  "name": "Invocar os Mortos",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "mortis",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Uma criatura de Desafio igual a duas vezes o seu nível ou menos",
+    "area": "",
+    "range": "Toque",
+    "duration": "Permanente",
+    "description": "<p>Tocando uma criatura sem vida e pronunciando a palavra mortis, você preenche o corpo vazio com energias necromânticas, trazendo-a de volta em um estado de não vida.</p><p>Efeitos: O alvo retorna à vida com metade dos pontos de vida e recebe o modelo Zumbi, com pontuação igual ao seu nível -1. Você necessita do corpo inteiro da criatura.</p><p>Conhecimento (Ocultismo) concede +1 em Conjuração para esta conjuração. Medicina concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Uma criatura de Desafio igual a três vezes o seu nível ou menos (apenas Círculo Intermediário ou Maior) (-6). Uma criatura de Desafio igual a quatro vezes o seu nível ou menos (apenas Círculo Maior) (-8). Traz o alvo de volta à vida com todos os pontos de vida (-4). Necessita apenas de parte do corpo dele (apenas Círculo Intermediário ou Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

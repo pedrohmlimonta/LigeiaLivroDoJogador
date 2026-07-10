@@ -1,0 +1,39 @@
+{
+  "_id": "enibjohaeemkeopd",
+  "_key": "!items!enibjohaeemkeopd",
+  "name": "Estudos Místicos",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Percepção 4+",
+    "lists": "Bruxo",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Seus pontos de magia aumentam em 1 ponto para cada habilidade de Conhecimento que você possua em nível básico, e em 2 pontos para cada uma em nível avançado.</p>",
+    "descAdvanced": "<p>Seu atributo de Conjuração aumenta em 1 ponto para cada habilidade de Conhecimento que você possua em nível avançado.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

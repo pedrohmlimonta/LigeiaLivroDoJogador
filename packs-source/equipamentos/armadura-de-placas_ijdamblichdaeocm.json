@@ -1,0 +1,82 @@
+{
+  "_id": "ijdamblichdaeocm",
+  "_key": "!items!ijdamblichdaeocm",
+  "name": "Armadura de Placas",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Armadura Pesada",
+    "qty": 1,
+    "weight": 3,
+    "price": "75 Vo",
+    "notes": "Penalidade -4",
+    "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 3,
+        "rerollAll": false,
+        "label": "Armadura de Placas: Proteção 3 (corte)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 3,
+        "rerollAll": false,
+        "label": "Armadura de Placas: Proteção 3 (perfuração)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 3,
+        "rerollAll": false,
+        "label": "Armadura de Placas: Proteção 3 (concussão)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "concussao"
+      },
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": -4,
+        "rerollAll": false,
+        "label": "Armadura de Placas: penalidade -4 Esquiva",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": -4,
+        "rerollAll": false,
+        "label": "Armadura de Placas: penalidade -4 Conjuração",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

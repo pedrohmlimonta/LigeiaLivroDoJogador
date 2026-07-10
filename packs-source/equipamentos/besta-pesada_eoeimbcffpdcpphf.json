@@ -1,0 +1,83 @@
+{
+  "_id": "eoeimbcffpdcpphf",
+  "_key": "!items!eoeimbcffpdcpphf",
+  "name": "Besta Pesada",
+  "type": "equipamento",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "category": "Arma (Bestas)",
+    "qty": 1,
+    "weight": 1,
+    "price": "45 Vo",
+    "notes": "Militar, Duas Mãos, Artilharia, Alcance 30m, Recarga",
+    "description": "<p>Grupo: Bestas. Ataque: Agilidade. Dano Base: Perfuração +4. Propriedades: Militar, Duas Mãos, Artilharia, Alcance 30m, Recarga.</p>",
+    "actions": [
+      {
+        "label": "Ataque — Besta Pesada",
+        "canRoll": true,
+        "rollAttr": "agilidade",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "4",
+        "damageType": "perfuracao",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 30,
+        "area": 0,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 0,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

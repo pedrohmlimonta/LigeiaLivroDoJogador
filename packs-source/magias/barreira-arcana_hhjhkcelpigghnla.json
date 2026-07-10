@@ -1,0 +1,93 @@
+{
+  "_id": "hhjhkcelpigghnla",
+  "_key": "!items!hhjhkcelpigghnla",
+  "name": "Barreira Arcana",
+  "type": "magia",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "wordId": "forjuri",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "1m x Nível",
+    "range": "Emanação",
+    "duration": "Sustentável — Ação",
+    "description": "<p>Pronunciando a palavra forjuri, você cria em torno de si uma barreira que repele seus inimigos e os mantém afastados, protegendo você e seus aliados.</p><p>Efeitos: Você conjura uma barreira do tamanho da área, em torno de si. Todos os seus inimigos dentro da barreira devem ser bem sucedidos em uma rolagem de Mente oposta a Conjuração, a cada rodada no começo do seu turno, ou serão empurrados para fora da barreira. Inimigos fora da barreira que tentem entrar deverão ser bem sucedidos em uma rolagem de Mente oposta a Conjuração, ou terão seu movimento finalizado adjacente à barreira. Ataques e magias que tenham você ou seus aliados dentro da barreira como alvos devem superar sua rolagem de Conjuração. Magias que afetem áreas devem superar sua rolagem de Conjuração para que afetem espaços dentro da barreira. Caso contrário, o ataque falha. Caso supere, o alvo do ataque deve se defender normalmente. Metamagias acrescentadas a esta magia base que afetarem você também afetam seus aliados dentro da barreira; as que afetariam alvos da magia afetam os inimigos dentro da barreira.</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração. Conhecimento (Guerra) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Consulte o livro para a lista completa de peculiaridades desta magia. Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Barreira Arcana (Conjuração vs Mente — emanação)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "defenseAttr": "mente",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 2,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": true,
+        "persistRounds": 0,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "start"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

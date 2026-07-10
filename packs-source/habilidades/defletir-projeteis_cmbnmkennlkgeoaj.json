@@ -1,0 +1,39 @@
+{
+  "_id": "cmbnmkennlkgeoaj",
+  "_key": "!items!cmbnmkennlkgeoaj",
+  "name": "Defletir Projéteis",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Agilidade 4+",
+    "lists": "Monge",
+    "activation": "Reação (nível A)",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de Esquiva contra ataques à distância por meio de disparo de projéteis. Você pode apanhar os projéteis de ataques à distância dos quais você esquivou com sucesso com uma das mãos, se ela estiver vazia.</p>",
+    "descAdvanced": "<p>Quando você aparar um projétil com a mão vazia, você pode usar sua reação para realizar imediatamente um ataque arremessando o projétil. O ataque usa uma rolagem de Agilidade, possui o mesmo dano básico do ataque bloqueado, alcance igual a 5m x Força e recebe os benefícios de uma arma de arremesso.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

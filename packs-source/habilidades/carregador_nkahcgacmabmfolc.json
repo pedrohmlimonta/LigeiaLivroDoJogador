@@ -1,0 +1,39 @@
+{
+  "_id": "nkahcgacmabmfolc",
+  "_key": "!items!nkahcgacmabmfolc",
+  "name": "Carregador",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas, anão das terras baixas, meio-orc, bárbaro, guardião e guerreiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Sua Sobrecarga e sua Carga Máxima aumentam em 3 pontos.</p>",
+    "descAdvanced": "<p>Sua Sobrecarga e sua Carga Máxima aumentam em 5 pontos, em vez de 3.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

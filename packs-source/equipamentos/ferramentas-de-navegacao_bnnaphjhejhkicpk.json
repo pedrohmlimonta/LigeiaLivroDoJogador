@@ -1,0 +1,31 @@
+{
+  "_id": "bnnaphjhejhkicpk",
+  "_key": "!items!bnnaphjhejhkicpk",
+  "name": "Ferramentas de Navegação",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 0,
+    "price": "25 Vo",
+    "notes": "",
+    "description": "<p>Inclui uma luneta, um anemômetro e uma bússola.</p><p>Propriedade: enquanto estiver usando essas ferramentas, você recebe +1 em rolagens para traçar um curso de navegação e para não se perder no mar.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "lbcoefgbjadmbhbj",
+  "_key": "!items!lbcoefgbjadmbhbj",
+  "name": "Desengajar",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Ladino e monge",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de Esquiva contra reações de ataque, quando se move.</p>",
+    "descAdvanced": "<p>Você pode gastar sua ação para se mover sem sofrer reações de ataque.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

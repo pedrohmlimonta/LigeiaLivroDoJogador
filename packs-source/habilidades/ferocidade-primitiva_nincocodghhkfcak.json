@@ -1,0 +1,60 @@
+{
+  "_id": "nincocodghhkfcak",
+  "_key": "!items!nincocodghhkfcak",
+  "name": "Ferocidade Primitiva",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Terras de Beoven",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1 ponto de Proteção contra frio. Adicionalmente, se você se deslocar 4m ou mais em linha reta na direção de uma criatura e realizar um ataque corpo a corpo contra ela logo após se deslocar, seu ataque recebe uma penalidade de -2 e um bônus de dano igual ao seu nível.</p>",
+    "descAdvanced": "<p>Você recebe 2 pontos de Proteção contra frio, em vez de 1. O ataque recebe uma penalidade de -1, em vez de -2.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Ferocidade B: Proteção 1 (frio)",
+        "enabled": true,
+        "level": "B",
+        "damageType": "frio"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Ferocidade A: +1 Proteção (frio, total 2)",
+        "enabled": true,
+        "level": "A",
+        "damageType": "frio"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 6400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

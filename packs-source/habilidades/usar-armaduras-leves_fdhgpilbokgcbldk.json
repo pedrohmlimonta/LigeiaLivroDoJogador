@@ -1,0 +1,39 @@
+{
+  "_id": "fdhgpilbokgcbldk",
+  "_key": "!items!fdhgpilbokgcbldk",
+  "name": "Usar Armaduras Leves",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas, bárbaro, bardo, bruxo, clérigo, druida, guerreiro, ladino, paladino e patrulheiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Enquanto você estiver vestindo uma armadura leve, sua penalidade e peso são reduzidos em 1 ponto.</p>",
+    "descAdvanced": "<p>Quando você usa uma armadura leve, sua penalidade e peso são reduzidos em 2 pontos (em vez de 1).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 21600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

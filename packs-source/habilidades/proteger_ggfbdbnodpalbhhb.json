@@ -1,0 +1,39 @@
+{
+  "_id": "ggfbdbnodpalbhhb",
+  "_key": "!items!ggfbdbnodpalbhhb",
+  "name": "Proteger",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Guardião e paladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Durante o seu turno, você pode escolher um aliado adjacente como seu protegido. Você só pode ter um protegido por vez. Você recebe metade do dano bruto sofrido pelo seu protegido enquanto ele estiver adjacente a você. Quando você finaliza seu turno sem estar adjacente ao personagem escolhido, ele deixa de ser seu protegido.</p>",
+    "descAdvanced": "<p>Você sofre todo o dano causado ao seu protegido (em vez de apenas metade). Não há limite para o número de protegidos que você pode manter.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 18600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "nimbjodhgnbedgnh",
+  "_key": "!items!nimbjodhgnbedgnh",
+  "name": "Implacável",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Durathor",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Seu limite de carga aumenta em 2 pontos. Adicionalmente, quando você realiza um ataque corpo a corpo e acerta, você empurra o alvo uma quantidade de metros igual ao dano escalonado causado. Um alvo empurrado mais de 4m dessa forma ficará caído. Você recebe +1 em rolagens para evitar ser movido, puxado, empurrado ou derrubado.</p>",
+    "descAdvanced": "<p>Seu limite de carga aumenta em 4 pontos, em vez de 2. Um alvo empurrado mais de 2m dessa forma ficará caído. Você recebe +2 em rolagens para evitar ser movido, puxado, empurrado ou derrubado, em vez de +1.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 10000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

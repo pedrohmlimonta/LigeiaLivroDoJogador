@@ -1,0 +1,56 @@
+{
+  "_id": "jneljpddilpopnkp",
+  "_key": "!items!jneljpddilpopnkp",
+  "name": "Espírito Guardião (Falcão)",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro e druida",
+    "activation": "Ação rápida",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Gastando 1 ponto de magia, você recebe, por uma rodada, o benefício do espírito guardião: 1D em rolagens de Percepção.</p>",
+    "descAdvanced": "<p>Gastando 2 pontos de magia (em vez de um ponto de magia), o benefício dura uma cena.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "dice",
+        "target": "percepcao",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Falcão: 1D Percepção",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Invocar espírito (1 rodada; A: 2 PM = cena)"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

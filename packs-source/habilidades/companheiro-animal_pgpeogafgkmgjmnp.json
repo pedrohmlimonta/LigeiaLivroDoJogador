@@ -1,0 +1,39 @@
+{
+  "_id": "pgpeogafgkmgjmnp",
+  "_key": "!items!pgpeogafgkmgjmnp",
+  "name": "Companheiro Animal",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Druida e patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você adestra uma criatura que tenha o traço Companheiro Animal, cujo Desafio seja igual ou menor ao seu nível. Você pode usar sua ação rápida para ordená-lo a usar sua Ação de Companheiro.</p>",
+    "descAdvanced": "<p>Seu companheiro fica mais forte e recebe 1D em Força, Vigor ou Agilidade, à sua escolha. Você pode ordená-lo a usar sua Ação de Companheiro, usando sua ação livre, em vez de sua ação rápida.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

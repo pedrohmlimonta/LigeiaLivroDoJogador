@@ -1,0 +1,31 @@
+{
+  "_id": "jnllomdniflnkbeh",
+  "_key": "!items!jnllomdniflnkbeh",
+  "name": "Ferramentas de Mineração",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Ferramentas",
+    "qty": 1,
+    "weight": 1,
+    "price": "30 Vo",
+    "notes": "",
+    "description": "<p>Inclui luvas de couro, pá, elmo de minerador e uma picareta de mineração.</p><p>Propriedade: permite extrair minerais. A extração permite o gasto de 10 Vo a mais por dia de criação de um item de metal.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

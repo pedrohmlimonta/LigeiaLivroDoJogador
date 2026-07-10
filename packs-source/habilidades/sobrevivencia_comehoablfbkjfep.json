@@ -1,0 +1,39 @@
+{
+  "_id": "comehoablfbkjfep",
+  "_key": "!items!comehoablfbkjfep",
+  "name": "Sobrevivência",
+  "type": "habilidade",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Elfo da floresta, gnomo da floresta, humano, meio-orc, bárbaro, bardo, druida, guerreiro, patrulheiro, clérigo (Uru-haau).",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de atividades em lugares selvagens (encontrar comida, encontrar abrigo, rastreio...).</p>",
+    "descAdvanced": "<p>Você recebe 1D para rolagens de ataque contra Feras. Se tiver a habilidade Companheiro Animal, você pode ter uma criatura com o traço Companheiro Animal com Desafio um ponto acima do seu nível.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 20000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

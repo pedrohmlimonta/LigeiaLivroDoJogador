@@ -1,0 +1,39 @@
+{
+  "_id": "daaldajdniklkghj",
+  "_key": "!items!daaldajdniklkghj",
+  "name": "Etiqueta",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Leão Dourado, cortesão, samurai",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens contra ser intimidado, ridicularizado, ofendido ou provocado.</p>",
+    "descAdvanced": "<p>Se um personagem falhar em tentar te intimidar, ridicularizar, ofender ou provocar, você pode fazer imediatamente uma rolagem de Mente para fazer o mesmo de volta contra ele, com 1D adicional para essa rolagem.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

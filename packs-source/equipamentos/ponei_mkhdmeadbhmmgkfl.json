@@ -1,0 +1,31 @@
+{
+  "_id": "mkhdmeadbhmmgkfl",
+  "_key": "!items!mkhdmeadbhmmgkfl",
+  "name": "Pônei",
+  "type": "equipamento",
+  "img": "icons/svg/pawprint.svg",
+  "system": {
+    "category": "Montaria",
+    "qty": 1,
+    "weight": 0,
+    "price": "30 Vo",
+    "notes": "Carga 8 · Deslocamento 9m",
+    "description": "<p>Montaria de pequeno porte.</p><p>Carga: 8. Deslocamento: 9m. Enquanto estiver montado, use o Deslocamento da montaria no lugar do Deslocamento do personagem.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

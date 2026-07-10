@@ -1,0 +1,31 @@
+{
+  "_id": "hihgbbmffdlnehgo",
+  "_key": "!items!hihgbbmffdlnehgo",
+  "name": "Escudo de Metal",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Escudo",
+    "qty": 1,
+    "weight": 1,
+    "price": "15 Vo",
+    "notes": "Deflexão",
+    "description": "<p>Uma base metálica cuja parte traseira possui tiras de couro ou elos de aço usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

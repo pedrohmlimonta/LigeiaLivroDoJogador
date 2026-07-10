@@ -1,0 +1,69 @@
+{
+  "_id": "ofnebmiliabaccla",
+  "_key": "!items!ofnebmiliabaccla",
+  "name": "Ancestralidade Celestial",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Você possui Proteção contra Frio, Fogo, Ácido e Veneno igual a metade do seu nível (arredondado para cima).</p><p>Herança: celestial.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Ancestralidade Celestial: RD frio (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "frio"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Ancestralidade Celestial: RD fogo (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "fogo"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Ancestralidade Celestial: RD ácido (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "acido"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Ancestralidade Celestial: RD veneno (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "veneno"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

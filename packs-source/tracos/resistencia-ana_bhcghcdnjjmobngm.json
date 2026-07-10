@@ -1,0 +1,39 @@
+{
+  "_id": "bhcghcdnjjmobngm",
+  "_key": "!items!bhcghcdnjjmobngm",
+  "name": "Resistência Anã",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Você recebe Proteção contra dano de veneno igual a metade do seu nível (arredondado para cima) e 1D em rolagens contra envenenamento.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Resistência Anã: RD veneno (metade do Nível — ajuste)",
+        "enabled": true,
+        "level": "all",
+        "damageType": "veneno"
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

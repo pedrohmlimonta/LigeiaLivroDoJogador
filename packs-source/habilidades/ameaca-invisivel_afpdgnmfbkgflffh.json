@@ -1,0 +1,39 @@
+{
+  "_id": "afpdgnmfbkgflffh",
+  "_key": "!items!afpdgnmfbkgflffh",
+  "name": "Ameaça Invisível",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Agilidade 4+",
+    "lists": "Ladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você está escondido e faz um ataque, caso acerte e o alvo chegue a 0 pontos de vida, você pode fazer uma rolagem de Agilidade para permanecer escondido.</p>",
+    "descAdvanced": "<p>Caso você erre o ataque, ou caso a vítima não chegue a 0 pontos de vida, você pode gastar 1 ponto heróico para permanecer escondido. Testes para permanecer escondido usando esta habilidade recebem 1D. Quando você ataca enquanto está escondido e acerta, pode gastar 1 ponto heróico para obter um sucesso crítico nesse ataque.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

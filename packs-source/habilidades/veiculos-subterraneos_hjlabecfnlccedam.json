@@ -1,0 +1,39 @@
+{
+  "_id": "hjlabecfnlccedam",
+  "_key": "!items!hjlabecfnlccedam",
+  "name": "Veículos (Subterrâneos)",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Gnomo das rochas, bardo, guardião e guerreiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D para conduzir veículos do tipo Subterrâneos. Você não sofre penalidades para atacar ou defender enquanto conduz um veículo do tipo em questão.</p>",
+    "descAdvanced": "<p>Você pode gastar 1 ponto heróico para fazer uma manobra arriscada de condução, pilotando o veículo do tipo em questão. Adicionalmente, você recebe 1D em rolagens para atropelar criaturas, usando o veículo em questão.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 24800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

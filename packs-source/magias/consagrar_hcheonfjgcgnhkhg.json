@@ -1,0 +1,93 @@
+{
+  "_id": "hcheonfjgcgnhkhg",
+  "_key": "!items!hcheonfjgcgnhkhg",
+  "name": "Consagrar",
+  "type": "magia",
+  "img": "icons/svg/heal.svg",
+  "system": {
+    "wordId": "sankta",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "",
+    "area": "1m x Nível",
+    "range": "Emanação",
+    "duration": "",
+    "description": "<p>Sussurrando a palavra sankta, enquanto toca seu peito, você faz com que a área ao seu redor emane energia sagrada, afetando a você e seus aliados de forma positiva e ferindo seus inimigos.</p><p>Dano: Radiante +0 (Esquiva).</p><p>Efeitos: Você e todos os seus aliados dentro da área cancelam condições de Controlado, Enfeitiçado e Abalado. Criaturas dentro da área, com Corrupção 6 ou mais, devem ser bem sucedidas em uma rolagem de Mente oposta a Conjuração para não perderem 1 ponto de Corrupção (não funciona com criaturas com a mesma corrupção que você ou menor).</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Dano: Radiante +1 (apenas Círculo Intermediário) (-). Dano: Radiante +2 (apenas Círculo Maior) (-). Criaturas afetadas ficam pasmas até o fim da cena (Mente anula) (apenas Círculo Intermediário ou Maior) (-2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [
+      {
+        "label": "Consagrar (Conjuração vs Esquiva — emanação)",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": 0,
+        "rollDice": 0,
+        "vsDifficulty": false,
+        "fixedDifficulty": 8,
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "0",
+        "damageType": "radiante",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": 0,
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "range": 0,
+        "area": 2,
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": 1,
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": 1,
+        "costHp": 0,
+        "costHeroic": 0,
+        "persistArea": false,
+        "persistRounds": 1,
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 5600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

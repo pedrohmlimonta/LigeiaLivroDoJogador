@@ -1,0 +1,39 @@
+{
+  "_id": "bnjlhdbcffnhbcci",
+  "_key": "!items!bnjlhdbcffnhbcci",
+  "name": "Empunhadura Dupla",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Guerreiro e patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você ataca com duas armas, a penalidade nos ataques é de -2 (-1 para armas leves), em vez de -4.</p>",
+    "descAdvanced": "<p>Quando você ataca com duas armas, você não sofre penalidades nos ataques.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

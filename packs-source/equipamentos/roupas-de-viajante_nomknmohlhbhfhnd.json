@@ -1,0 +1,31 @@
+{
+  "_id": "nomknmohlhbhfhnd",
+  "_key": "!items!nomknmohlhbhfhnd",
+  "name": "Roupas de Viajante",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Vestimenta",
+    "qty": 1,
+    "weight": 0,
+    "price": "2 Vo",
+    "notes": "",
+    "description": "<p>Trajes muito utilizados por aventureiros, contendo uma camisa ou robe com muitos bolsos, calças, botas e um manto com capuz.</p><p>Propriedade: trajes para aventureiros, normalmente mais resistentes que os trajes comuns.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

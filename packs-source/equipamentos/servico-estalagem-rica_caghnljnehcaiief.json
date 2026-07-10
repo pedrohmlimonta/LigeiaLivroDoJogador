@@ -1,0 +1,31 @@
+{
+  "_id": "caghnljnehcaiief",
+  "_key": "!items!caghnljnehcaiief",
+  "name": "Serviço: Estalagem Rica",
+  "type": "equipamento",
+  "img": "icons/svg/coins.svg",
+  "system": {
+    "category": "Serviço",
+    "qty": 1,
+    "weight": 0,
+    "price": "2 Vo",
+    "notes": "",
+    "description": "<p>Serviço ou profissional contratado durante as aventuras. Preço: 2 Vo.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

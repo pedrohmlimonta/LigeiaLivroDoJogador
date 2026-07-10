@@ -1,0 +1,31 @@
+{
+  "_id": "infhpbfclmpfeecp",
+  "_key": "!items!infhpbfclmpfeecp",
+  "name": "Serviço: Carne",
+  "type": "equipamento",
+  "img": "icons/svg/coins.svg",
+  "system": {
+    "category": "Serviço",
+    "qty": 1,
+    "weight": 0,
+    "price": "2 Va",
+    "notes": "",
+    "description": "<p>Serviço ou profissional contratado durante as aventuras. Preço: 2 Va.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 9300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

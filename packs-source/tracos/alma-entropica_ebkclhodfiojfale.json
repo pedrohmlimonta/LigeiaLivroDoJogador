@@ -1,0 +1,28 @@
+{
+  "_id": "ebkclhodfiojfale",
+  "_key": "!items!ebkclhodfiojfale",
+  "name": "Alma Entrópica",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Após um descanso longo, role 1d6. Você recebe um dado de melhoria em um atributo de acordo com o resultado: 1 (Percepção), 2 (Vigor), 3 (Força), 4 (Agilidade), 5 (Mente) ou 6 (você escolhe).</p><p>Herança: entrópico.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

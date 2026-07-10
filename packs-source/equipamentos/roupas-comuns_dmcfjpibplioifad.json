@@ -1,0 +1,31 @@
+{
+  "_id": "dmcfjpibplioifad",
+  "_key": "!items!dmcfjpibplioifad",
+  "name": "Roupas Comuns",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Vestimenta",
+    "qty": 1,
+    "weight": 0,
+    "price": "5 Va",
+    "notes": "",
+    "description": "<p>Camisa, manto, calça ou saia, e um chapéu ou capuz.</p><p>Propriedade: vestes de pessoas comuns.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "cbejdnelniikinen",
+  "_key": "!items!cbejdnelniikinen",
+  "name": "Escola Arcana",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Mago",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Escolha uma habilidade Palavra Arcana que você tenha aprendido. Você recebe um bônus em rolagens de Conjuração igual a metade do seu nível, para magias que sejam compostas por essa palavra.</p>",
+    "descAdvanced": "<p>Resultados naturais 11 ou 12 em rolagens de Conjuração relacionadas à palavra arcana escolhida são considerados acertos críticos. Adicionalmente, magias compostas por essa palavra arcana, que causem dano, causarão 1 ponto de dano bruto adicional.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

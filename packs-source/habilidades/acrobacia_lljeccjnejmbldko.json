@@ -1,0 +1,60 @@
+{
+  "_id": "lljeccjnejmbldko",
+  "_key": "!items!lljeccjnejmbldko",
+  "name": "Acrobacia",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Pequenino, bárbaro, guerreiro, ladino, monge e patrulheiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens de atividades acrobáticas (evitar queda, andar na corda bamba, atravessar um espaço ocupado...).</p>",
+    "descAdvanced": "<p>Você recebe 1 Ponto adicional em Esquiva. Seus resultados 11 ou 12 em rolagens de Esquiva são sucessos críticos. Quando uma criatura se move adjacente a você, você pode pagar 1 ponto heróico e usar sua reação para imediatamente se mover sem sofrer reações de ataque.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Acrobacia (A): +1 Esquiva",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "crit",
+        "target": "esquiva",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Acrobacia (A): crítico 11-12 em Esquiva",
+        "enabled": true,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

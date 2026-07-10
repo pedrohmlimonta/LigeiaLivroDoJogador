@@ -1,0 +1,31 @@
+{
+  "_id": "bpoaeafbdihaimao",
+  "_key": "!items!bpoaeafbdihaimao",
+  "name": "Orbe",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Foco",
+    "qty": 1,
+    "weight": 0,
+    "price": "20 Vo",
+    "notes": "",
+    "description": "<p>Uma esfera em material mineral. Pode ser transparente ou opaca.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma das mãos.</p>",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

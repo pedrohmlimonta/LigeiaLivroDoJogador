@@ -1,0 +1,39 @@
+{
+  "_id": "bjmdmkodfgeinbga",
+  "_key": "!items!bjmdmkodfgeinbga",
+  "name": "Atirador em Movimento",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Patrulheiro",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando gastar seu movimento para mirar, você ainda pode mover-se metade de seu Deslocamento.</p>",
+    "descAdvanced": "<p>Você pode mirar usando sua ação rápida, em vez de seu movimento.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

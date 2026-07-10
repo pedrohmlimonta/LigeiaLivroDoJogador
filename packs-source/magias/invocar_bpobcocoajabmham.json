@@ -1,0 +1,41 @@
+{
+  "_id": "bpobcocoajabmham",
+  "_key": "!items!bpobcocoajabmham",
+  "name": "Invocar",
+  "type": "magia",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "wordId": "krucigon",
+    "tier": "Menor",
+    "casting": "Ação",
+    "target": "Espaço vazio",
+    "area": "",
+    "range": "Adjacente",
+    "duration": "Sustentável — Movimento",
+    "description": "<p>Você pronuncia a palavra krucigon, trazendo de outro plano uma criatura ou um objeto que você mentalizar.</p><p>Efeitos: Você invoca uma criatura pequena com Desafio igual ao dobro do seu nível ou um objeto encantado que lhe dá +1 para um tipo de rolagem relacionada ao objeto. A criatura é amigável a você e a seus aliados e lutará para defendê-los. Você pode usar esta magia para invocar algum pertence que esteja fora do seu alcance, direto para sua mão, que tenha sido vinculado à magia previamente. Você só pode ter um item vinculado por vez.</p><p>Conhecimento (Religião) concede +1 em Conjuração para esta conjuração.</p>",
+    "peculiarities": "<p>Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Aumente o Desafio em +1 ponto (apenas Círculo Intermediário ou Maior) (-4). Aumente o Desafio em +3 pontos (apenas Círculo Maior) (-6). O objeto encantado te dá +2 para rolagens relacionadas ao objeto (apenas Círculo Intermediário ou Maior) (-4). O objeto encantado te dá +3 para rolagens relacionadas ao objeto (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
+    "metamagics": [],
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": [
+      {
+        "resource": "mp",
+        "value": 1,
+        "label": "Círculo Menor"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

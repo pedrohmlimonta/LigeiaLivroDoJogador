@@ -1,0 +1,39 @@
+{
+  "_id": "eanciinfoelpppel",
+  "_key": "!items!eanciinfoelpppel",
+  "name": "Usar Armas (Bastões)",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Anão das montanhas, anão das terras baixas, alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, pequenino, bárbaro, bardo, bruxo, clérigo, druida, guardião, guerreiro, ladino, mago, monge, paladino e patrulheiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe um bônus acumulativo de +1 nas rolagens de ataque feitas com armas do grupo Bastões. Você também pode gastar 1 ponto heróico para realizar uma manobra de combate dependendo do sub-grupo desta habilidade.</p>",
+    "descAdvanced": "<p>Seus resultados naturais 11-12 são considerados críticos.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 22100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

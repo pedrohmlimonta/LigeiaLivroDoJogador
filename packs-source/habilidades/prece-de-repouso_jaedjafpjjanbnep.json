@@ -1,0 +1,39 @@
+{
+  "_id": "jaedjafpjjanbnep",
+  "_key": "!items!jaedjafpjjanbnep",
+  "name": "Prece de Repouso",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Clérigo, paladino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você realiza uma prece à sua divindade antes de realizar um descanso. Após feita a prece, você e seus aliados que aceitarem ouvir sua prece recuperam 1 ponto de vida adicional quando descansam.</p>",
+    "descAdvanced": "<p>Você e seus aliados que aceitarem ouvir sua prece recuperam 3 pontos de vida adicionais (em vez de 1).</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 16600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

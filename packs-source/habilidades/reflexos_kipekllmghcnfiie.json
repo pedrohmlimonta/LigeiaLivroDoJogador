@@ -1,0 +1,39 @@
+{
+  "_id": "kipekllmghcnfiie",
+  "_key": "!items!kipekllmghcnfiie",
+  "name": "Reflexos",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Pequenino, bárbaro, ladino e monge",
+    "activation": "Reação",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você é bem sucedido em uma rolagem de Esquiva, você pode usar sua reação para mover-se metade do seu Deslocamento.</p>",
+    "descAdvanced": "<p>Quando você se desloca usando essa habilidade, você não pode ser alvo de reações de ataque. Quando você falha numa rolagem de Esquiva, você pode gastar 1 ponto heróico para mudar sua rolagem para um 12 natural.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 19400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

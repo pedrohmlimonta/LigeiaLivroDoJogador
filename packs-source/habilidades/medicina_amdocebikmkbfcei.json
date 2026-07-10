@@ -1,0 +1,39 @@
+{
+  "_id": "amdocebikmkbfcei",
+  "_key": "!items!amdocebikmkbfcei",
+  "name": "Medicina",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Bárbaro, bardo, clérigo, druida, guardião, guerreiro, mago, monge, paladino e patrulheiro.",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens para prestar cuidados médicos, diagnosticar ou realizar tratamento intensivo para outros personagens. Você pode gastar 1 ponto heróico para criar 1 frasco de remédio por nível, durante seu descanso.</p>",
+    "descAdvanced": "<p>Suas rolagens bem sucedidas para prestar cuidados médicos e seus remédios curam 2 pontos de vida, em vez de 1.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}
