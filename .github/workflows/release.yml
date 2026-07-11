@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,7 +40,7 @@ jobs:
           m['manifest'] = f'https://github.com/{repo}/releases/latest/download/module.json'
           m['download'] = f'https://github.com/{repo}/releases/download/v{v}/ligeia-livro-do-jogador.zip'
           json.dump(m, open('module.json','w'), ensure_ascii=False, indent=2)
-          " 
+          "
         env:
           VER: ${{ github.ref_name }}
 
