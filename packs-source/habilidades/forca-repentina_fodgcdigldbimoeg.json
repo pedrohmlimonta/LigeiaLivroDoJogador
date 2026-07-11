@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 2D nas rolagens de Força ou Agilidade, em vez de 1D, e recebe 4 pontos de sobrevida, em vez de 2.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode gastar 1 ponto heróico para criar um “fato”, para resolver um caso ou para diminuir o grau de dificuldade de um teste de Mente relacionado à área em questão.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -9,7 +9,7 @@
     "description": "<p>Você recebe Proteção igual a metade do seu nível (arredondado para cima) contra um tipo de dano, dependendo do tipo de dragão que você escolher para sua ancestralidade: Azul (Raio), Branco (Frio), Bronze (Raio), Cobre (Ácido), Latão (Fogo), Negro (Ácido), Ouro (Fogo), Prata (Frio), Verde (Veneno) ou Vermelho (Fogo).</p><p>Herança: draconiano. Ajuste o efeito de RD abaixo para o tipo escolhido.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

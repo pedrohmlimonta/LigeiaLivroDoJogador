@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode comandar sua montaria a usar sua Ação de Montaria usando uma ação livre em vez de sua ação rápida.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

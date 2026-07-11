@@ -9,7 +9,7 @@
     "description": "<p>Você pode se mover através de espaços de criaturas de tamanho maior que o seu.</p><p>Raça: pequenino.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

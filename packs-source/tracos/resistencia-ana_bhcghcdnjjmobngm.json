@@ -9,7 +9,7 @@
     "description": "<p>Você recebe Proteção contra dano de veneno igual a metade do seu nível (arredondado para cima) e 1D em rolagens contra envenenamento.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

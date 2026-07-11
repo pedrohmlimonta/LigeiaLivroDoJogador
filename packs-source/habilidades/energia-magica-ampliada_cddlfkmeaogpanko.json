@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seus pontos de magia aumentam em 5 em vez de 2.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

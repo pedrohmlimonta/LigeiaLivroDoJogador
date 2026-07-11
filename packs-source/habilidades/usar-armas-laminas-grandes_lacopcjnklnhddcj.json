@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seus resultados naturais 11-12 são considerados críticos.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

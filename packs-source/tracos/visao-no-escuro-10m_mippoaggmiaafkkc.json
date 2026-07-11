@@ -9,7 +9,7 @@
     "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; herança infernal.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

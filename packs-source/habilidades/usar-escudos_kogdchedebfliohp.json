@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Suas Deflexões reduzem 3 pontos de dano (em vez de 1).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

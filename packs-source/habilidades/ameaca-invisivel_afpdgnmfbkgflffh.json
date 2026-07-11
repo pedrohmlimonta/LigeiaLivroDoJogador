@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Caso você erre o ataque, ou caso a vítima não chegue a 0 pontos de vida, você pode gastar 1 ponto heróico para permanecer escondido. Testes para permanecer escondido usando esta habilidade recebem 1D. Quando você ataca enquanto está escondido e acerta, pode gastar 1 ponto heróico para obter um sucesso crítico nesse ataque.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

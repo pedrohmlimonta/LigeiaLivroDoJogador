@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 1 ponto adicional no atributo Bloqueio. Resultados naturais 11 ou 12 em suas rolagens de Bloqueio são sucessos críticos. Você pode gastar 1 ponto heróico para considerar um sucesso crítico em uma rolagem de qualquer atividade atlética fora do combate.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

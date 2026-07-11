@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Corda feita em cânhamo trançado.</p><p>Propriedade: corda de 15m de comprimento com Dureza 2.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>O dano bruto adicional causado aumenta para 3 pontos de dano.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

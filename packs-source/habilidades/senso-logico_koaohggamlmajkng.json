@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 2D nas rolagens, em vez de 1D, 2 pontos de Proteção contra dano psíquico e +2 em rolagens de defesa contra reações de ataque.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

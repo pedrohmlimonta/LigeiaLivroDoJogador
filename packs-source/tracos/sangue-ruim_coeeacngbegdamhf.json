@@ -9,7 +9,7 @@
     "description": "<p>Você recebe 1D nas rolagens para resistir a fome, sede e sono não mágicos. Você adicionalmente recebe 1D para resistir a ameaças climáticas como tempestades, nevascas ou calor intenso.</p><p>Raça: meio-orc.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

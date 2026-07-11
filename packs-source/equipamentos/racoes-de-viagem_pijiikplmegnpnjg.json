@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Comida desidratada, que resiste mais ao tempo que comida normal.</p><p>Propriedade: refeição suficiente para um personagem por um dia.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

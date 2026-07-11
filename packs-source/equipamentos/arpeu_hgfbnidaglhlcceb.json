@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Peça de metal com quatro ganchos, usada para amarrar a uma corda ou corrente.</p><p>Propriedade: caso seja usado amarrado a uma corda ou corrente, concede +1 em rolagens para escalar.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seu limite de carga aumenta em 4 pontos, em vez de 2. Um alvo empurrado mais de 2m dessa forma ficará caído. Você recebe +2 em rolagens para evitar ser movido, puxado, empurrado ou derrubado, em vez de +1.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

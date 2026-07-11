@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Sua Sobrecarga e sua Carga Máxima aumentam em 5 pontos, em vez de 3.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Um enorme saco de couro e peles, utilizado para manter-se aquecido e confortável durante o descanso.</p><p>Propriedade: requisito para um sono adequado durante as viagens.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

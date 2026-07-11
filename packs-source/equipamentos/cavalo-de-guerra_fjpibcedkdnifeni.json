@@ -12,7 +12,7 @@
     "notes": "Carga 10 · Deslocamento 15m",
     "description": "<p>Montaria treinada para o combate.</p><p>Carga: 10. Deslocamento: 15m. Enquanto estiver montado, use o Deslocamento da montaria no lugar do Deslocamento do personagem.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

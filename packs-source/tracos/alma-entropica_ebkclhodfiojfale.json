@@ -9,7 +9,7 @@
     "description": "<p>Após um descanso longo, role 1d6. Você recebe um dado de melhoria em um atributo de acordo com o resultado: 1 (Percepção), 2 (Vigor), 3 (Força), 4 (Agilidade), 5 (Mente) ou 6 (você escolhe).</p><p>Herança: entrópico.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

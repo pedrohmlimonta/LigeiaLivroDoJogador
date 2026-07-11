@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode usar a Ira Divina dos Aspectos da sua divindade, a que você tem acesso.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

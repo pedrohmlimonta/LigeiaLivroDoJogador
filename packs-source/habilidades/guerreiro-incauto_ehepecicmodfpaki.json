@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seus ataques causam 2 pontos de dano adicionais, enquanto estiver indefeso dessa forma.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você consegue comprar itens comuns por metade do preço (em vez de um terço a menos). Sempre que você gastar seus dias de inatividade procurando por itens mágicos em uma cidade, subtraia o dobro do seu nível da quantidade de dias necessários para encontrar.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

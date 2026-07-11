@@ -20,7 +20,7 @@
     "descAdvanced": "<p>O dano necrótico contínuo dura até que uma magia o cancele.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

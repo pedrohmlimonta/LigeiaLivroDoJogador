@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você se desloca usando essa habilidade, você não pode ser alvo de reações de ataque. Quando você falha numa rolagem de Esquiva, você pode gastar 1 ponto heróico para mudar sua rolagem para um 12 natural.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

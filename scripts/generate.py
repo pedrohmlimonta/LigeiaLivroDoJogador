@@ -38,6 +38,10 @@ def main():
         seen = {}
         for i, doc in enumerate(docs):
             doc["sort"] = (i + 1) * 100
+            # Padrão global: todo item mostra o botão de ativação (mode
+            # "active"), mas começa com a checkbox desligada (active False).
+            doc["system"]["mode"] = "active"
+            doc["system"]["active"] = False
             if doc["_id"] in seen:
                 raise SystemExit(f"ID duplicado em {pack}: {doc['name']} x {seen[doc['_id']]}")
             seen[doc["_id"]] = doc["name"]

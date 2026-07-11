@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 1 Ponto adicional em Esquiva. Seus resultados 11 ou 12 em rolagens de Esquiva são sucessos críticos. Quando uma criatura se move adjacente a você, você pode pagar 1 ponto heróico e usar sua reação para imediatamente se mover sem sofrer reações de ataque.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

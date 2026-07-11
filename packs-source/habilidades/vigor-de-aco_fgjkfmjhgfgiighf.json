@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você tem 5 pontos de vida adicionais (em vez de 3).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

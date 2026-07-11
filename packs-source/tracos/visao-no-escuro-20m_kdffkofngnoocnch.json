@@ -9,7 +9,7 @@
     "description": "<p>Você enxerga no escuro até 20m.</p><p>Raças: elfo das profundezas, gnomo das profundezas, orc.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

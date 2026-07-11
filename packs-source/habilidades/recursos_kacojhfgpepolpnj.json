@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode rolar em tabelas de nível de raridade igual ao dobro do seu nível. Você pode ficar com o item ou com metade do seu valor em ouro.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

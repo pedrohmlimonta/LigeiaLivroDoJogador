@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Se um personagem falhar em tentar te intimidar, ridicularizar, ofender ou provocar, você pode fazer imediatamente uma rolagem de Mente para fazer o mesmo de volta contra ele, com 1D adicional para essa rolagem.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

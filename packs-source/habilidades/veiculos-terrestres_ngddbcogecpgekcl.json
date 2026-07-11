@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode gastar 1 ponto heróico para fazer uma manobra arriscada de condução, pilotando o veículo do tipo em questão. Adicionalmente, você recebe 1D em rolagens para atropelar criaturas, usando o veículo em questão.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

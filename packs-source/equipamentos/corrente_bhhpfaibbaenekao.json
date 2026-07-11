@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Elos de metal entrelaçados.</p><p>Propriedade: corrente de 15m de comprimento.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>O dano final recebido é igual a 2 (em vez de 3). O dano final causado é igual a 3 (em vez de 2).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

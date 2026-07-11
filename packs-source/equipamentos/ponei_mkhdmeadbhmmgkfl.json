@@ -12,7 +12,7 @@
     "notes": "Carga 8 · Deslocamento 9m",
     "description": "<p>Montaria de pequeno porte.</p><p>Carga: 8. Deslocamento: 9m. Enquanto estiver montado, use o Deslocamento da montaria no lugar do Deslocamento do personagem.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

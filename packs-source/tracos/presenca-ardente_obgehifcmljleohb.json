@@ -9,7 +9,7 @@
     "description": "<p>Você recebe um bônus igual a... (Observação: o texto deste traço está incompleto na edição do Livro de Regras usada como fonte — a descrição é interrompida no fim da página 45. Complete conforme errata ou decisão da mesa.)</p><p>Herança: psiônico.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Suas rolagens bem sucedidas para prestar cuidados médicos e seus remédios curam 2 pontos de vida, em vez de 1.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

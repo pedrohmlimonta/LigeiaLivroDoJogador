@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Base de aço espelhado, com cabo inteiriço.</p><p>Propriedade: usado para refletir imagens, pode ser utilizado como foco para magias compostas por iluzio. Para ser usado como foco, deve ser empunhado com uma mão.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

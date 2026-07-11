@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Os inimigos ficam também Abalados. Adicionalmente, você é imune às condições Abalado e Enfeitiçado, e recebe 1D em rolagens de interação social.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

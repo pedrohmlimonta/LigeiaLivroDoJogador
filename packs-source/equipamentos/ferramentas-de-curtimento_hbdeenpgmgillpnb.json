@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Um punhal, uma escova de cerdas de aço e um esticador.</p><p>Propriedade: permite extrair e preparar couro de criaturas. A extração e preparo permite o gasto de 10 Vo a mais por dia de criação de um item de couro.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

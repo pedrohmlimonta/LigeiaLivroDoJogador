@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode re-rolar todos os dados com resultado 1 e 2 em rolagens de interação social, até obter um resultado maior. Você reduz um terço, em vez de um quarto dos dias.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

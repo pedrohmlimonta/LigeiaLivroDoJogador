@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Uma haste curta de madeira, metal ou qualquer outro tipo de material rígido.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma mão.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seu companheiro fica mais forte e recebe 1D em Força, Vigor ou Agilidade, à sua escolha. Você pode ordená-lo a usar sua Ação de Companheiro, usando sua ação livre, em vez de sua ação rápida.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

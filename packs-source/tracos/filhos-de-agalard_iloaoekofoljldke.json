@@ -9,7 +9,7 @@
     "description": "<p>Você recebe 1D em rolagens para se defender, evitar e resistir a magias.</p><p>Raças: gnomo da floresta, gnomo das profundezas, gnomo das rochas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

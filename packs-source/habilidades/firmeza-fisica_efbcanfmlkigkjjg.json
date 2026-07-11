@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando uma criatura adjacente tentar derrubá-lo ou movê-lo, você pode gastar 1 ponto heróico para evitar automaticamente e usar sua reação para realizar um ataque contra ela. Seus pontos de vida aumentam em 3 pontos (em vez de 1). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Agarrado, Enfraquecido, Exausto e Paralisado.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

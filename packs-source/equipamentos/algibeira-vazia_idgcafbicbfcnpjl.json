@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Uma pequena bolsa de couro que pode ser anexada ao cinto.</p><p>Propriedade: compartimento suficiente para guardar até 30 moedas, balas de funda suficientes para uma aventura ou três frascos de remédio, antídoto, poção, elixir ou óleo. Enquanto guardados neste compartimento, os itens podem ser sacados com uma ação rápida.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

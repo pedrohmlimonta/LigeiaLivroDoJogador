@@ -9,7 +9,7 @@
     "description": "<p>Os mistérios das florestas são guardados pelo seu deus criador, Illain, protetor da natureza. Seus herdeiros receberam a capacidade de se manterem imperceptíveis em ambientes selvagens. Quando está em um ambiente selvagem (florestas, montanhas, desertos, pântanos...), você recebe 1D em Furtividade e em Esquiva.</p><p>Raça: elfo da floresta.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

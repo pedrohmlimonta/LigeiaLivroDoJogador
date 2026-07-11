@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe +2 em rolagens para ativar itens arcanomecânicos.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

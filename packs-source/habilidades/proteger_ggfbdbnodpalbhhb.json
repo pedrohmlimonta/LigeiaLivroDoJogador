@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você sofre todo o dano causado ao seu protegido (em vez de apenas metade). Não há limite para o número de protegidos que você pode manter.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

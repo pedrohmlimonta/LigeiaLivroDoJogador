@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Frasco de óleo utilizado como combustível da lanterna.</p><p>Propriedade: se usado em uma lanterna como combustível, permite mantê-la acesa por 1 hora.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

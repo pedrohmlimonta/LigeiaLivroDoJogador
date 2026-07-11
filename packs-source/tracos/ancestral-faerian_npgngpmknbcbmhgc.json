@@ -9,7 +9,7 @@
     "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

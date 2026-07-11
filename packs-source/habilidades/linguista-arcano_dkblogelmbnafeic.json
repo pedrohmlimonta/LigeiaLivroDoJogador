@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você consegue identificar runas arcanas e palavras arcanas que não conheça, sem nenhuma rolagem.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 2 pontos de Proteção contra frio, em vez de 1. O ataque recebe uma penalidade de -1, em vez de -2.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

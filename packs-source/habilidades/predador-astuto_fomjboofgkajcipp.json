@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Os ataques com arma que você fizer contra esse inimigo também recebem os dados de melhoria do atributo Mente.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

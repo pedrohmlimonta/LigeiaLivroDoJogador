@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe um bônus de +1 nas rolagens de Conjuração quando conjura magias compostas pela palavra arcana energio. Você pode criar magias com metamagias avançadas e itens mágicos com propriedades da palavra arcana em questão.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

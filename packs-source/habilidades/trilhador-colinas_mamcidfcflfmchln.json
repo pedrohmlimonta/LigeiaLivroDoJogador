@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Enquanto estiver lutando no tipo de terreno em questão, você pode desengajar de combate corpo a corpo sem sofrer reações de ataque. Seu Deslocamento aumenta em uma quantidade de metros igual ao seu nível, quando se desloca no tipo de terreno escolhido (em vez de metade).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

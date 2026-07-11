@@ -9,7 +9,7 @@
     "description": "<p>Por causa da maldição lançada pela deusa da noite sobre seu povo, cada elfo das profundezas carrega um pedaço da umbra dentro de si. Você recebe a habilidade Palavra Arcana (tenebrae), sem pagar por ela.</p><p>Raça: elfo das profundezas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

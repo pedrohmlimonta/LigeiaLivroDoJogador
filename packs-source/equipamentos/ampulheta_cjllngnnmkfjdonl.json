@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Um pequeno frasco de vidro com bases de madeira em suas extremidades, contendo areia, usado para contar o tempo.</p><p>Propriedade: permite calcular o tempo de 1 minuto.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode usar sua ação rápida e gastar 1 ponto heróico para dobrar a Proteção de sua armadura até que você sofra dano.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

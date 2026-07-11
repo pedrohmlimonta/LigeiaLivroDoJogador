@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Serviço ou profissional contratado durante as aventuras. Preço: 1 Vn por Km.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

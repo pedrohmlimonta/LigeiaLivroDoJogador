@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você acerta um golpe crítico com uma arma corpo a corpo, você pode gastar 1 ponto heróico para causar pontos de dano final adicionais igual à sua Força.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

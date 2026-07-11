@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe uma quantidade diária adicional de Pontos Heróicos para criação de itens igual ao seu nível (em vez de metade dele).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -9,7 +9,7 @@
     "description": "<p>Você recebe 1D em rolagens contra venenos e doenças.</p><p>Raça: pequenino.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

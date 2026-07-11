@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Inclui serrote, machado de lenhador, talhadeira e canivete.</p><p>Propriedade: permite extrair e preparar madeira. A extração e preparo permite o gasto de 10 Vo a mais por dia de criação de um item de madeira.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

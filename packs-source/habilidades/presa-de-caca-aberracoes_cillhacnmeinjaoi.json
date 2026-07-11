@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seus golpes críticos contra criaturas do tipo em questão causam dano contínuo de sangramento (Vigor anula). Enquanto estiver sangrando, a criatura não recebe ocultação contra você e, caso você a atinja com um golpe com arma enquanto ela estiver sangrando, ela ficará lenta (Vigor anula). Um segundo acerto a deixará imobilizada (Vigor anula).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

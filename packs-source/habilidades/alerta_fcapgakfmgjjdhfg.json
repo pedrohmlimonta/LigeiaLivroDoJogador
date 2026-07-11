@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe +4 na Iniciativa. Você recebe 1D em rolagens para perceber armadilhas e ameaças naturais. Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Cego e Surdo.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

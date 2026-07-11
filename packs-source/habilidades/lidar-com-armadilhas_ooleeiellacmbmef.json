@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você leva apenas 1 minuto para preparar uma armadilha. Você gasta um terço a menos do valor da armadilha.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você não é considerado indefeso quando é atacado por criaturas que não possa ver. Gastando 1 ponto heróico, você sabe a localização de todas as criaturas do combate que não estejam escondidas.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

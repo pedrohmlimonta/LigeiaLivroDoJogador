@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Estojo de madeira feito para armazenar virotes.</p><p>Propriedade: compartimento que permite guardar virotes suficientes para uma aventura. Enquanto guardados neste compartimento, os virotes podem ser sacados dele com uma ação livre.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

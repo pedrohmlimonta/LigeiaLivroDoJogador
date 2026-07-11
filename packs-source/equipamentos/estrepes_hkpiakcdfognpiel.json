@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Espinhos de metal em forma triangular.</p><p>Propriedade: Alcance 5m. Você pode arremessá-los de forma a cobrir até 6 espaços, adjacentes entre eles. Qualquer criatura que adentrar essa área deve ser bem sucedida em uma rolagem de Agilidade (Difícil) para não ficar lenta até sair da área. Os estrepes podem ser recuperados após o combate; no entanto, cada novo uso terá a dificuldade da rolagem de Agilidade reduzida em 2 pontos e cobrirá 1 espaço a menos. Quando a quantidade de espaços cobertos chegar a 0, eles acabam.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Aparato utilizado para se produzir sons, seja um alaúde, flauta, oboé, tambor, etc.</p><p>Propriedade: utilizado em performances musicais. Também pode ser utilizado como foco na conjuração de magias de Círculo Maior, quando empunhado com as duas mãos e tocado, substituindo também o componente gestual.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

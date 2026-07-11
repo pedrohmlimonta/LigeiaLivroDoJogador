@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 1D em todas as rolagens em combate, enquanto estiver lutando no terreno em questão (subterrâneos).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

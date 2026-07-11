@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Trajes muito utilizados por aventureiros, contendo uma camisa ou robe com muitos bolsos, calças, botas e um manto com capuz.</p><p>Propriedade: trajes para aventureiros, normalmente mais resistentes que os trajes comuns.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

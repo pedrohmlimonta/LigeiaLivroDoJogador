@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Inclui uma luneta, um anemômetro e uma bússola.</p><p>Propriedade: enquanto estiver usando essas ferramentas, você recebe +1 em rolagens para traçar um curso de navegação e para não se perder no mar.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

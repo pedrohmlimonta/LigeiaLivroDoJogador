@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você usa uma armadura leve, sua penalidade e peso são reduzidos em 2 pontos (em vez de 1).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

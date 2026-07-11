@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seus ataques bem sucedidos com armas de Artilharia, Lâminas Pequenas ou Leves a alvos indefesos ou surpresos causam dano final adicional igual ao seu nível.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Pequenas hastes de madeira com pontas de metal pontiagudas. Utilizadas como munição para as bestas.</p><p>Propriedade: uma vez disparado, o virote se despedaça com o impacto, a menos que tenha uma propriedade mágica. Pagando 1 Va você tem virotes suficientes para uma aventura.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

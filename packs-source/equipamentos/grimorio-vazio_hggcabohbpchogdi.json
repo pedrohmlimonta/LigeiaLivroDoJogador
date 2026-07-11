@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Um livro com capa de couro resistente e várias páginas em branco.</p><p>Propriedade: item necessário para anotar magias aprendidas e criadas. Um conjurador que não tenha a posse do seu grimório não poderá conjurar suas magias de Círculo Intermediário e Maior.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

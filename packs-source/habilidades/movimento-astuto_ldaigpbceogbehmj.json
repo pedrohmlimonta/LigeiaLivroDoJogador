@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando usa essa habilidade, você pode mover todo o seu Deslocamento em vez de apenas metade.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>O equipamento lhe concede +2 nas rolagens de uso para o qual ele foi feito. Uma rolagem 4 ou menos na soma dos dois maiores dados causa 2 pontos de dano em sua Dureza.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

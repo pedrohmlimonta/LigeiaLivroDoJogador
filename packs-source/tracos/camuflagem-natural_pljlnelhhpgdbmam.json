@@ -9,7 +9,7 @@
     "description": "<p>Você recebe 1D para se esconder em terreno rochoso.</p><p>Raça: gnomo das profundezas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

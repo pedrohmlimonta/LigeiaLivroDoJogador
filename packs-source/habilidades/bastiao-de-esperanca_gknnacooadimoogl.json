@@ -20,7 +20,7 @@
     "descAdvanced": "<p>O bônus por aliado caído é aplicado também às rolagens para anular condições. O dano ignorado aumenta para 2 pontos. Adicionalmente, você fica imune à condição Exausto.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

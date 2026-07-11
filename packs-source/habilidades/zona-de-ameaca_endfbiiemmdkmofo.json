@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode usar essa habilidade como uma ação livre, em vez de uma rápida. Desta forma, não há limite para quantas vezes ela pode ser usada por rodada. Uma criatura que sofra dano de um de seus ataques engatilhados por essa habilidade fica indefesa.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

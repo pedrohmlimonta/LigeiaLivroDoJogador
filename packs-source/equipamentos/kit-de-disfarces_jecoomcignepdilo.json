@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Tinta de cabelo, maquiagem, vestimentas e adereços que mudam sua aparência.</p><p>Propriedade: enquanto estiver usando esses itens, você recebe +1 nas rolagens para se disfarçar.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

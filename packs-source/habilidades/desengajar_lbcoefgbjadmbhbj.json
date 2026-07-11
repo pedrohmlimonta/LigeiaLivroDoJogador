@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode gastar sua ação para se mover sem sofrer reações de ataque.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

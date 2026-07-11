@@ -115,7 +115,7 @@
         "persistTrigger": "both"
       }
     ],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

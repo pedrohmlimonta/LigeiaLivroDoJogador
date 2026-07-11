@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Uma mochila contendo o básico necessário para uma viagem.</p><p>Propriedade: uma mochila contendo um saco de dormir, um cantil, uma corda, uma tocha, uma caixa de fogo e dez dias de ração de viagem.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

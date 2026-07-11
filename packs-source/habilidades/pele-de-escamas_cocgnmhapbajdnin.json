@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode gastar 1 ponto heróico para aumentar essa proteção em 1 ponto até o fim da cena, mas fica lento até o final do efeito.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

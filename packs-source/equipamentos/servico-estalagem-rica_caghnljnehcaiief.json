@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Serviço ou profissional contratado durante as aventuras. Preço: 2 Vo.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

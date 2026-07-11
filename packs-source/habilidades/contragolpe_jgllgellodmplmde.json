@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando uma criatura faz um ataque contra você (independente de errar ou acertar), você pode usar sua reação para imediatamente fazer um ataque contra ela.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

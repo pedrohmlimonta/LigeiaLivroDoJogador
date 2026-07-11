@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Um recipiente contendo uma pederneira e um isqueiro.</p><p>Propriedade: pode ser usado para acender tochas ou qualquer outro objeto contendo combustível, gastando uma ação. Objetos sem combustível levam uma cena para pegar fogo.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

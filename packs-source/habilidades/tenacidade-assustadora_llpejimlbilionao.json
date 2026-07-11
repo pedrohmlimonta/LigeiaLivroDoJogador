@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você converte esse bônus em sobrevida, você recebe o dobro do bônus em sobrevida. Você pode converter o bônus em sobrevida usando seu movimento.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

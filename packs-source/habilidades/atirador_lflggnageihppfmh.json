@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode gastar sua ação rápida para não sofrer reações de ataque quando fizer ataques à distância nesse turno. Você pode gastar seu movimento para receber 1D nos seus ataques à distância nesse turno. Caso você não se mova no mesmo turno em que atacar, você pode gastar 1 ponto heróico, quando acertar um ataque à distância para que ele se torne um acerto crítico.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

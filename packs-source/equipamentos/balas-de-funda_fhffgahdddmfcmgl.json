@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Pequenas esferas de pedra utilizadas como munição para as fundas.</p><p>Propriedade: uma vez disparada, a bala tem grandes chances de se despedaçar com o impacto, a menos que tenha uma propriedade mágica. É possível recuperar metade das balas utilizadas em um combate quando ele termina. Pagando 1 Va você tem balas suficientes para uma aventura.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Pequeno tronco de madeira entalhado em imagens comumente relacionadas aos espíritos da natureza.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma das mãos.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

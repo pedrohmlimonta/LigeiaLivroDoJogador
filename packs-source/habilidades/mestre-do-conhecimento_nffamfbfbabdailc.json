@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 2D em rolagens de conhecimento (em vez de 1D).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

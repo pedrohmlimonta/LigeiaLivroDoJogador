@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode mirar usando sua ação rápida, em vez de seu movimento.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

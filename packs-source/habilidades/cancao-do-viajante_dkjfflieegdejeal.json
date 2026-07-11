@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seus aliados recuperam 2 pontos de vida e 1 ponto de magia adicionais, quando descansam.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

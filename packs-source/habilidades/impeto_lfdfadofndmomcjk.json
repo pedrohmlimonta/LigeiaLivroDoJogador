@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode usar essa habilidade uma vez por cena. Você recupera pontos de vida igual ao seu nível.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

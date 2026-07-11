@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Feito em papel, usado para escrever mensagens e magias.</p><p>Propriedade: item utilizado para escrever mensagens e armazenar magias. Para armazenar uma magia em um pergaminho, o conjurador deve pagar os pontos de magia necessários para conjurá-la. O processo requer uma hora para concluir a tarefa. Após armazenada no pergaminho, a magia não consome pontos de magia para ser conjurada, queimando o pergaminho na conjuração.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

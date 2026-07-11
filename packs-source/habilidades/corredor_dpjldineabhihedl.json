@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seu Deslocamento aumenta em 5m (em vez de 3m). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Lento e Imobilizado.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

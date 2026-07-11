@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você e seus aliados que aceitarem ouvir sua prece recuperam 3 pontos de vida adicionais (em vez de 1).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

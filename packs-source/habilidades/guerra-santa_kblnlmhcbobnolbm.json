@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 1D em suas rolagens de ataque e defesa contra servos de religiões opostas à sua. Quando você usar algum poder divino, você pode gastar 1 ponto heróico para que servos de religiões rivais que possam vê-lo ajoelhem-se, ficando pasmos (Mente anula) até o fim da cena e indefesos até o começo do turno deles.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

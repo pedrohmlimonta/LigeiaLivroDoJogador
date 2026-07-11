@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Magias preparadas de Círculo Intermediário ou Maior custam 1 ponto a menos de magia para serem conjuradas.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

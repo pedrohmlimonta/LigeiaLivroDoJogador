@@ -20,7 +20,7 @@
     "descAdvanced": "<p>A cada ponto de magia gasto, você causa 1 ponto de dano final adicional (limite de 6 de dano).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

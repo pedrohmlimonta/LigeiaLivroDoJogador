@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular as condições Abalado, Dominado, Enfeitiçado, Atordoado, Pasmo ou Dano Contínuo Psíquico.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

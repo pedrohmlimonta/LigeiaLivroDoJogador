@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você gastar um ponto heróico para recuperar pontos de vida igual ao seu nível, some 5 pontos a esse valor (em vez de 3). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Inconsciente e Morrendo.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

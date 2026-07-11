@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você se desloca em ambientes aquáticos, você não fica lento. Adicionalmente, você não precisa realizar rolagens quando se desloca em águas agitadas.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

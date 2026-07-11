@@ -9,7 +9,7 @@
     "description": "<p>Você recebe 1D em rolagens para identificar, reparar e criar itens mecânicos.</p><p>Raça: gnomo das rochas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Haste grossa de madeira, contendo um tecido enrolado em uma das extremidades, imbuído com combustível.</p><p>Propriedade: este item ilumina num raio de 5m e dura 1 hora.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

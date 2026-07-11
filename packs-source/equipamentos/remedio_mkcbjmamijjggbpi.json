@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Um frasco contendo um medicamento líquido que, quando ingerido, melhora a recuperação do personagem.</p><p>Propriedade: quando ingerido, equivale a uma rolagem bem sucedida de cuidados médicos.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

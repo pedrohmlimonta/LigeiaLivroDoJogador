@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode adicionar uma quantidade de dados de melhoria igual à quantidade de dados anulados à sua rolagem de defesa contra esse ataque.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

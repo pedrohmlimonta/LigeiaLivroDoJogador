@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Se você não se mover no turno em que mirar, seu bônus no ataque por mirar aumenta para 3 pontos.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

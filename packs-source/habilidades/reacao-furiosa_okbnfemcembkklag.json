@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Um ataque que receba esse bônus possui margem de crítico 11-12 enquanto você estiver ferido, ou 10-12 caso você esteja com uma quantidade de pontos de vida atual menor ou igual ao seu nível.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

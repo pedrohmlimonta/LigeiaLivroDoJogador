@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Uma vez por rodada, você pode re-rolar até dois dados com resultado 2 ou menor em uma rolagem de Conjuração.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Seu atributo de Conjuração aumenta em 1 ponto para cada habilidade de Conhecimento que você possua em nível avançado.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -9,7 +9,7 @@
     "description": "<p>Você recebe 20 pontos de antecedentes adicionais na criação do personagem. Você pode gastar esses pontos adicionais para comprar habilidades de outras vocações ou raças como se fossem da sua lista (sem ter que pagar o dobro).</p><p>Raça: humano.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

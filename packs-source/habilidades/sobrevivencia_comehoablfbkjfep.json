@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você recebe 1D para rolagens de ataque contra Feras. Se tiver a habilidade Companheiro Animal, você pode ter uma criatura com o traço Companheiro Animal com Desafio um ponto acima do seu nível.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

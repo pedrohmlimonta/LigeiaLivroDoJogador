@@ -9,7 +9,7 @@
     "description": "<p>Seus pontos de vida máximos aumentam em 1.</p><p>Herança: draconiano.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

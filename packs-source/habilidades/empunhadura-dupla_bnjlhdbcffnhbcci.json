@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você ataca com duas armas, você não sofre penalidades nos ataques.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

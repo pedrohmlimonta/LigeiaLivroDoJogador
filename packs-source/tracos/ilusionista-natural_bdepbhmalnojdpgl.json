@@ -9,7 +9,7 @@
     "description": "<p>Você recebe a habilidade Palavra Arcana (iluzio) sem pagar por ela.</p><p>Raça: gnomo da floresta.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

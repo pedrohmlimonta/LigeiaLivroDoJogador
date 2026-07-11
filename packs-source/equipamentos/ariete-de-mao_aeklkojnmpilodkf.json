@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Um tronco de madeira preso a elos de aço e com uma ponta de aço em uma das extremidades. Em suas laterais, há quatro alças de ferro permitindo quatro pessoas segurá-lo ao mesmo tempo.</p><p>Propriedade: quando tenta derrubar uma porta usando este acessório, até três aliados podem prestar-lhe auxílio nesta tarefa.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

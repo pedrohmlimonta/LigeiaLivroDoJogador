@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você aparar um projétil com a mão vazia, você pode usar sua reação para realizar imediatamente um ataque arremessando o projétil. O ataque usa uma rolagem de Agilidade, possui o mesmo dano básico do ataque bloqueado, alcance igual a 5m x Força e recebe os benefícios de uma arma de arremesso.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

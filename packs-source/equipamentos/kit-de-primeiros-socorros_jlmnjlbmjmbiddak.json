@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Ataduras, unguentos, bandagens, pinças, lâminas devidamente higienizadas e frascos alquímicos que aceleram a cicatrização.</p><p>Propriedade: quando você realiza uma rolagem de cuidados médicos para cuidar de um aliado usando esse kit, você recebe +1 nessa rolagem. Este item é consumido quando utilizado.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

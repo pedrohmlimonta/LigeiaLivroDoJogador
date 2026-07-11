@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode conjurar uma magia sem componentes verbais, sem pagar 1 ponto de magia adicional.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

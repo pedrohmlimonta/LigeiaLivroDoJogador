@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Camisa, manto, calça ou saia, e um chapéu ou capuz.</p><p>Propriedade: vestes de pessoas comuns.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

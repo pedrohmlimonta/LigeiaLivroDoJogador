@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Bolsa de couro impermeável contendo um bico anelado e uma tampa para o mesmo.</p><p>Propriedade: permite carregar água suficiente para uma aventura.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

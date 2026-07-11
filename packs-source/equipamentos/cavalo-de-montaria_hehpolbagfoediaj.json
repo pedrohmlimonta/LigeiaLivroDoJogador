@@ -12,7 +12,7 @@
     "notes": "Carga 9 · Deslocamento 12m",
     "description": "<p>Montaria comum para viagens.</p><p>Carga: 9. Deslocamento: 12m. Enquanto estiver montado, use o Deslocamento da montaria no lugar do Deslocamento do personagem.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

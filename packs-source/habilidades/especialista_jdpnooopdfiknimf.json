@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Sempre que esse dado de melhoria for aplicado a uma rolagem, aplique 3D, em vez de 1D.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

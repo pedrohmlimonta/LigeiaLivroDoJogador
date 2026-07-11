@@ -20,7 +20,7 @@
     "descAdvanced": "<p>O raio de alcance dessa habilidade, em metros, é igual ao triplo da Percepção (em vez do dobro). Você sabe também o tipo e o tamanho das criaturas.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

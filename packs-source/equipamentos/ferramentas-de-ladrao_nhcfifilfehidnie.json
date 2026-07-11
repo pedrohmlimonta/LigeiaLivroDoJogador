@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Inclui chaves mestras, alicates, tesouras e um pequeno espelho.</p><p>Propriedade: enquanto estiver usando essas ferramentas, você recebe +1 nas rolagens para arrombar fechaduras.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

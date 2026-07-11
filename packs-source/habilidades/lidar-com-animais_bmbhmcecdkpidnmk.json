@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você pode gastar 1 ponto heróico para se comunicar com uma criatura do tipo Fera através de pequenos gestos e sons. Você pode adestrar montarias que não sejam do tipo Fera.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

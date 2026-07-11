@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Enquanto você tiver 3 Pontos de Juramento ou mais, você emana uma aura com raio igual à quantidade de Pontos de Juramento. Aliados dentro da aura recebem 1D em rolagens de defesa. Enquanto você tiver 5 Pontos de Juramento ou mais, aliados dentro da aura recebem também 1D em rolagens de ataque. Enquanto você emanar essa aura, você e aliados dentro dela ficam imunes à condição de Abalado.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

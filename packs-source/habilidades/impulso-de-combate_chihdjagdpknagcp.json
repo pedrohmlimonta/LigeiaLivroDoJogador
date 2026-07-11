@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você usa essa habilidade, seus ataques extras recebem um bônus no dano base igual à quantidade de criaturas abatidas por você neste turno. Quando você usa seu movimento para se deslocar, você pode dividir seu Deslocamento entre os ataques.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -9,7 +9,7 @@
     "description": "<p>Você recebe um bônus de +1 em rolagens contra Abalado, Dominado, Enfeitiçado, Atordoado, Pasmo ou Dano Contínuo Psíquico para cada nível da habilidade Vontade de Ferro que você tiver aprendido.</p><p>Herança: psiônico.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

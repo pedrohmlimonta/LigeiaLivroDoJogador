@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Inclui luvas de couro, pá, elmo de minerador e uma picareta de mineração.</p><p>Propriedade: permite extrair minerais. A extração permite o gasto de 10 Vo a mais por dia de criação de um item de metal.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

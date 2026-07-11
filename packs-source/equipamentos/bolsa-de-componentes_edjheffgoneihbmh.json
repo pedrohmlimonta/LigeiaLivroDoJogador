@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Bolsa contendo vários materiais usados em conjuração de magias.</p><p>Propriedade: requisito alternativo ao foco em conjuração de magias de Círculo Maior.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

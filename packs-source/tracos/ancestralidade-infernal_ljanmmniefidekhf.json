@@ -9,7 +9,7 @@
     "description": "<p>Você possui Proteção contra fogo igual a metade do seu nível (arredondado para cima).</p><p>Herança: infernal.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

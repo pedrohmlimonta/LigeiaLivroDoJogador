@@ -9,7 +9,7 @@
     "description": "<p>A cada cena que você passar sem combate, você recebe 1 ponto de Sede de Batalha que se acumula. Quando você entra em combate, você pode gastar esses pontos. Quando declarar um ataque, você pode gastar 1 ou mais pontos para receber um bônus para a rolagem de ataque igual à quantidade de pontos gastos.</p><p>Raça: orc.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

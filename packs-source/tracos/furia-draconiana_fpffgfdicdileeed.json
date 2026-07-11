@@ -9,7 +9,7 @@
     "description": "<p>Se você perder mais da metade dos seus pontos de vida, você recebe +1 de bônus em seus ataques.</p><p>Herança: draconiano.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

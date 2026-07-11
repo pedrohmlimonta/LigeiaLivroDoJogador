@@ -9,7 +9,7 @@
     "description": "<p>Você possui afinidade com minerais, recebendo 1D em todas as rolagens relacionadas a lidar com minerais.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

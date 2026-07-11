@@ -9,7 +9,7 @@
     "description": "<p>Quando você faz um descanso, você recupera 1 ponto de vida adicional.</p><p>Herança: draconiano.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

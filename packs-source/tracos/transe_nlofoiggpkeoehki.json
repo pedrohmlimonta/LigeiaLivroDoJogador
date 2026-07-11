@@ -9,7 +9,7 @@
     "description": "<p>Você não precisa dormir. Em vez disso, você descansa entrando em um transe de 4 horas.</p><p>Raças: elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

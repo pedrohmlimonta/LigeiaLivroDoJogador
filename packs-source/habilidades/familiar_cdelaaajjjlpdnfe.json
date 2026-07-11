@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Independente da criatura escolhida como seu familiar, ela agora possui Mente 3, caso o atributo de Mente da versão original da criatura seja menor. Você pode conjurar magias usando a posição do seu familiar como posição do conjurador, em vez da sua própria.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Bolsa grande de couro contendo vários compartimentos.</p><p>Propriedade: esta bolsa contém compartimentos usados para guardar itens que não estejam em uso.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

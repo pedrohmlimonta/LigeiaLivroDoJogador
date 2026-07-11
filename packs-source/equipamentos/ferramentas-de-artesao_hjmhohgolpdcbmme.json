@@ -12,7 +12,7 @@
     "notes": "",
     "description": "<p>Ferramentas adequadas a um determinado ofício de criação de itens.</p><p>Propriedade: este equipamento é necessário para a criação de determinados tipos de itens. Sem ele não é possível produzi-los. Quando comprar estas ferramentas, você deve definir que tipo de artesanato elas produzem.</p><p>Tipos de Artesanato: Carpintaria, Cartografia, Costuraria, Couraria, Entalhe, Forjaria, Funilaria, Joalheria, Olaria, Alvenaria, Pintura, Sapataria, Vidraçaria, Alquimia, Cervejaria, Caligrafia, Cozinha, Venenos.</p>",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

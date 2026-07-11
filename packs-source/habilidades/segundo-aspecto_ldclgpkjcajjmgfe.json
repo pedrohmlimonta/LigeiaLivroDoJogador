@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você tem acesso à Arma Divina do aspecto escolhido.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

@@ -9,7 +9,7 @@
     "description": "<p>Abençoado pelas deusas da floresta, da noite e da magia, seu criador recebeu grandes poderes mágicos. Parte desse poder foi passado para seu povo. Você recebe a habilidade Palavra Arcana (energio), sem ter que pagar por ela.</p><p>Raça: elfo cinzento.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []

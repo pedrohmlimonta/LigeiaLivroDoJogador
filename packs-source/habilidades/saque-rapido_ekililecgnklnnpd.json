@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Você troca de arma gastando uma ação rápida em vez de uma ação. Você recebe +4 nas rolagens de Iniciativa (em vez de +2).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [
       {

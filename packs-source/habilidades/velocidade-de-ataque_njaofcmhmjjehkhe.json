@@ -20,7 +20,7 @@
     "descAdvanced": "<p>Quando você faz ataques múltiplos, a penalidade nos ataques é de -2 em vez de -4.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "passive",
+    "mode": "active",
     "active": false,
     "effects": [],
     "costs": []
