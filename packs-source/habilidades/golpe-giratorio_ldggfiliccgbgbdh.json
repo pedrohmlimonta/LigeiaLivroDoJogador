@@ -1,0 +1,39 @@
+{
+  "_id": "ldggfiliccgbgbdh",
+  "_key": "!items!ldggfiliccgbgbdh",
+  "name": "Golpe Giratório",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 0,
+    "costAdvanced": 0,
+    "costSpecial": 80,
+    "prereq": "",
+    "lists": "Legionário",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>—</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "<p>(Épica) Enquanto estiver empunhando um escudo, quando você realiza um ataque corpo a corpo com arma, criaturas adjacentes, além do alvo, sofrem o dano escalonado desse ataque.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

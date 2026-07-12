@@ -1,0 +1,58 @@
+{
+  "_id": "bgpdpcgmeppeflob",
+  "_key": "!items!bgpdpcgmeppeflob",
+  "name": "Arquimago",
+  "type": "carreira",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "description": "<p>Estudiosos avançados das magias, capazes de liberar o fluxo arcano dentro de si e moldar magias no ato da conjuração. Magos e Bruxos se tornam aptos mais rapidamente a assumir esta carreira.</p><p>Pré-requisitos — Corrupção: Qualquer. Raça: Qualquer. Tempo Necessário: 60 dias de estudos em uma escola arcana. Habilidades Necessárias: Palavra Arcana (Qualquer) [A], Preparação Arcana [B], Conhecimento (Arcano) [A], Linguista Arcano [A].</p><p>Características: +2 Pontos de Magia Máximos.</p>",
+    "skillList": [
+      "Alta Arcana",
+      "Fluxo Arcano",
+      "Magia Sem Gestos",
+      "Magia Sem Materiais",
+      "Magia Silenciosa",
+      "Mestre Conjurador",
+      "Mestre do Conhecimento"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Característica do Arquimago",
+        "img": "icons/svg/upgrade.svg",
+        "system": {
+          "source": "other",
+          "description": "<p>+2 Pontos de Magia Máximos.</p><p>Concedida ao adquirir a carreira Arquimago.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "stat",
+              "target": "mp",
+              "value": 2,
+              "rerollAll": false,
+              "label": "Arquimago: +2 PM máximos",
+              "enabled": true,
+              "level": "all",
+              "damageType": ""
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.jahjfkjjlblkilng"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

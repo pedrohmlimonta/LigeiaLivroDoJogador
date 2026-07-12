@@ -1,0 +1,150 @@
+{
+  "_id": "mmpffiacccbcjojg",
+  "_key": "!items!mmpffiacccbcjojg",
+  "name": "Elfo Solar",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Elfos ligados a Auralia, capazes de atravessar a Selva Faérian em curtos saltos.</p><p>Características — Dado de Melhoria: Agilidade ou Mente. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
+    "skillList": [
+      "Conhecimento (Arcano)",
+      "Conhecimento (História)",
+      "Vontade de Ferro",
+      "Usar Armas (Arcos)",
+      "Usar Armas (Lâminas Grandes)",
+      "Usar Armas (Lâminas Pequenas)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Ancestral Faerian",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.npgngpmknbcbmhgc"
+      },
+      {
+        "name": "Transe",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você não precisa dormir. Em vez disso, você descansa entrando em um transe de 4 horas.</p><p>Raças: elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.nlofoiggpkeoehki"
+      },
+      {
+        "name": "Filhos de Auralia",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você pode viajar pelo plano da Selva Faérian para se locomover mais rápido quando necessário. Você possui Deslocamento de teletransporte 5m, mais 1m adicional para cada ponto em Mente. Cada vez que você teleporta, você perde 1 ponto de magia.</p><p>Raça: elfo solar.</p>",
+          "isWeapon": false,
+          "actions": [
+            {
+              "label": "Teleporte Faérian (5m + Mente)",
+              "canRoll": false,
+              "rollAttr": "forca",
+              "rollBonus": 0,
+              "rollDice": 0,
+              "vsDifficulty": false,
+              "fixedDifficulty": 8,
+              "difficultyAttr": "nenhum",
+              "targetMode": "self",
+              "includeSelf": false,
+              "defenseAttr": "esquiva",
+              "defenseAttr2": "",
+              "damage": "",
+              "damageType": "",
+              "damageResource": "hp",
+              "scalingDamage": false,
+              "skipRollDialog": true,
+              "extraDamage": [],
+              "movement": {
+                "enabled": true,
+                "kind": "teleport",
+                "who": "self",
+                "distance": 8,
+                "lateralSide": "right",
+                "ignoreWalls": true,
+                "snap": true
+              },
+              "appliesEffects": [],
+              "range": 0,
+              "area": 0,
+              "macroUuid": "",
+              "macroName": "",
+              "macroEnabled": true,
+              "aaConfig": null,
+              "aaName": "",
+              "aaEnabled": true,
+              "animFile": "",
+              "animPlacement": "target",
+              "animScale": 1,
+              "animEnabled": true,
+              "animAttach": false,
+              "costMp": 1,
+              "costHp": 0,
+              "costHeroic": 0,
+              "persistArea": false,
+              "persistRounds": 1,
+              "persistAffectsSelf": false,
+              "persistRerollAttack": false,
+              "persistTrigger": "both"
+            }
+          ],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": [
+            {
+              "resource": "mp",
+              "value": 1,
+              "label": "Teleporte (5m + Mente)"
+            }
+          ]
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.opinejngfplgialn"
+      }
+    ],
+    "moveBonus": 5
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_id": "pogbikfnlknmppkm",
+  "_key": "!items!pogbikfnlknmppkm",
+  "name": "Bardo",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Artistas e eruditos que inspiram aliados com música, lábia e conhecimento vasto.</p><p>Bônus de Pontos de Vida: +2. Bônus de Pontos de Magia: +2.</p>",
+    "skillList": [
+      "Canção do Viajante",
+      "Carisma",
+      "Conhecimento (Arcano)",
+      "Conhecimento (Guerra)",
+      "Conhecimento (História)",
+      "Conhecimento (Natureza)",
+      "Especialista",
+      "Inspirar",
+      "Lidar com Armadilhas",
+      "Lidar com Animais",
+      "Medicina",
+      "Melhorar Atributo (Agilidade)",
+      "Melhorar Atributo (Mente)",
+      "Mercado Negro",
+      "Mestre do Conhecimento",
+      "Montar Criatura",
+      "Ofícios",
+      "Palavra Arcana (carmo)",
+      "Palavra Arcana (iluzio)",
+      "Palavra Arcana (inanis)",
+      "Palavra Arcana (sonigu)",
+      "Palavra Arcana (sorcdiron)",
+      "Palavra Arcana (traumato)",
+      "Palavra Arcana (vitae)",
+      "Sobrevivência",
+      "Usar Armaduras Leves",
+      "Usar Armas (Bestas)",
+      "Usar Armas (Lâminas Pequenas)",
+      "Usar Armas (Simples)"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 2,
+    "mpBonus": 2
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

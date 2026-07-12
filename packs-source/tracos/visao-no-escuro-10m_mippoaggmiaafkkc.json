@@ -6,7 +6,7 @@
   "img": "icons/svg/aura.svg",
   "system": {
     "source": "race",
-    "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; herança infernal.</p>",
+    "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
     "isWeapon": false,
     "actions": [],
     "mode": "active",
@@ -16,7 +16,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 3300,
+  "sort": 4000,
   "flags": {},
   "ownership": {
     "default": 0

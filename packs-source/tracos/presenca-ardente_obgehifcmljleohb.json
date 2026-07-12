@@ -6,7 +6,7 @@
   "img": "icons/svg/eye.svg",
   "system": {
     "source": "heritage",
-    "description": "<p>Você recebe um bônus igual a... (Observação: o texto deste traço está incompleto na edição do Livro de Regras usada como fonte — a descrição é interrompida no fim da página 45. Complete conforme errata ou decisão da mesa.)</p><p>Herança: psiônico.</p>",
+    "description": "<p>Você recebe um bônus igual a metade do seu nível em rolagens necessárias para o sucesso das habilidades Presença Aterradora, Provocar e Grito de Guerra.</p><p>Herança: psiônico.</p>",
     "isWeapon": false,
     "actions": [],
     "mode": "active",
@@ -16,7 +16,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 900,
+  "sort": 1000,
   "flags": {},
   "ownership": {
     "default": 0

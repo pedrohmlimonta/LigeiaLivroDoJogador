@@ -1,0 +1,91 @@
+{
+  "_id": "cbccncbbmiefhlci",
+  "_key": "!items!cbccncbbmiefhlci",
+  "name": "Meio-elfo",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Filhos de dois mundos, combinam a graça élfica com a versatilidade humana.</p><p>Características — Dado de Melhoria: Agilidade, Percepção ou Mente. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional, Élfico e mais um à escolha. Corrupção: +0.</p>",
+    "skillList": [
+      "Carisma",
+      "Conhecimento (Arcano)",
+      "Conhecimento (História)",
+      "Conhecimento (Natureza)",
+      "Ofícios"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Ancestral Faerian",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.npgngpmknbcbmhgc"
+      },
+      {
+        "name": "Versatilidade dos Humanos",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 10 pontos de antecedentes adicionais na criação do personagem. Você pode gastar esses pontos adicionais para comprar habilidades de outras vocações ou raças como se fossem da sua lista (sem ter que pagar o dobro).</p><p>Raça: meio-elfo.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.dbgjmajehnbfoipc"
+      },
+      {
+        "name": "Talentoso",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Escolha uma habilidade que te dê 1D em uma rolagem fora de combate. Você recebe um bônus igual a metade do seu nível em todas as rolagens que adicionar esse dado de melhoria.</p><p>Raça: meio-elfo.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.nbkonllfdloihnhe"
+      }
+    ],
+    "moveBonus": 5
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

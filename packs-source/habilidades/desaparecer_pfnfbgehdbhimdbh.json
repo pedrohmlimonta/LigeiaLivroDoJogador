@@ -1,0 +1,39 @@
+{
+  "_id": "pfnfbgehdbhimdbh",
+  "_key": "!items!pfnfbgehdbhimdbh",
+  "name": "Desaparecer",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 0,
+    "costAdvanced": 0,
+    "costSpecial": 60,
+    "prereq": "",
+    "lists": "Assassino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>—</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "<p>(Épica) Você pode realizar rolagens para se esconder, mesmo que não tenha cobertura, contanto que o ambiente tenha pouca ou nenhuma luz. Você é considerado invisível, mas fica visível novamente caso se mova, ataque ou fale.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "_id": "ocpafkiehnknfmec",
+  "_key": "!items!ocpafkiehnknfmec",
+  "name": "Pequenino",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Pequenos, ágeis e sortudos, abençoados por Ruff.</p><p>Características — Dado de Melhoria: Agilidade ou Percepção. Bônus de Deslocamento: +4m. Tamanho: Pequeno. Idiomas Iniciais: Regional e mais um à escolha. Corrupção: +0.</p>",
+    "skillList": [
+      "Acrobacia",
+      "Alerta",
+      "Atletismo",
+      "Furtividade",
+      "Ofícios",
+      "Reflexos",
+      "Usar Armas (Fundas)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Agilidade dos Pequeninos",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você pode se mover através de espaços de criaturas de tamanho maior que o seu.</p><p>Raça: pequenino.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.aeefmiklkknaidfn"
+      },
+      {
+        "name": "Filhos de Ruff",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você pode gastar 1 ponto de magia para re-rolar um dado de qualquer rolagem.</p><p>Raça: pequenino.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": [
+            {
+              "resource": "mp",
+              "value": 1,
+              "label": "Re-rolar um dado"
+            }
+          ]
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.dagknfohpfpolebc"
+      },
+      {
+        "name": "Resistência dos Pequeninos",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens contra venenos e doenças.</p><p>Raça: pequenino.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.hgllhmoppimpohic"
+      }
+    ],
+    "moveBonus": 4
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

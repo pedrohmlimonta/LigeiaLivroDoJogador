@@ -1,0 +1,39 @@
+{
+  "_id": "fcacaebhgedhdffn",
+  "_key": "!items!fcacaebhgedhdffn",
+  "name": "Terceiro Aspecto",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "Segundo Aspecto",
+    "lists": "Sacerdote",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você manifesta agora o último aspecto da sua divindade. Você tem acesso à Magia Divina e ao Sentido Divino pertencentes a esse aspecto.</p>",
+    "descAdvanced": "<p>Você tem acesso à Arma Divina do aspecto escolhido.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 21900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

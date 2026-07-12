@@ -1,0 +1,39 @@
+{
+  "_id": "onbkjkndkocibknd",
+  "_key": "!items!onbkjkndkocibknd",
+  "name": "Golpe Letal",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 0,
+    "costAdvanced": 0,
+    "costSpecial": 80,
+    "prereq": "",
+    "lists": "Assassino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>—</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "<p>(Épica) Quando ataca uma criatura indefesa, o dano garantido pela sua Letalidade é dobrado.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 8100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -3,7 +3,8 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const packs = ["habilidades", "magias", "equipamentos", "tracos"];
+const packs = ["habilidades", "magias", "equipamentos", "tracos",
+               "racas", "herancas", "vocacoes", "carreiras"];
 
 for (const pack of packs) {
   const src = path.join(root, "packs-source", pack);

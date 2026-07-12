@@ -1,0 +1,39 @@
+{
+  "_id": "incnlipnbbpkcena",
+  "_key": "!items!incnlipnbbpkcena",
+  "name": "Mestre Conjurador",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 0,
+    "costAdvanced": 0,
+    "costSpecial": 80,
+    "prereq": "",
+    "lists": "Arquimago",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>—</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "<p>(Épica) Quando você falha em uma rolagem de Conjuração, você não perde seus pontos de magia.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 13400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

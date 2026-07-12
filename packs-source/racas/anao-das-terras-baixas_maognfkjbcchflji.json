@@ -1,0 +1,92 @@
+{
+  "_id": "maognfkjbcchflji",
+  "_key": "!items!maognfkjbcchflji",
+  "name": "Anão das Terras Baixas",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Anões das colinas e cidades baixas, comerciantes e artesãos de vontade firme.</p><p>Características — Dado de Melhoria: Vigor ou Mente. Bônus de Deslocamento: +4m. Tamanho: Médio. Idiomas Iniciais: Regional e Anão. Corrupção: +0.</p>",
+    "skillList": [
+      "Carisma",
+      "Carregador",
+      "Conhecimento (História)",
+      "Firmeza Física",
+      "Ofícios",
+      "Presa de Caça (Gigantes)",
+      "Usar Armas (Machados)",
+      "Usar Armas (Martelos)",
+      "Vigor de Aço",
+      "Vontade de Ferro"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Resistência Anã",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe Proteção contra dano de veneno igual a metade do seu nível (arredondado para cima) e 1D em rolagens contra envenenamento.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "rd",
+              "target": "all",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Resistência Anã: RD veneno (metade do Nível — ajuste)",
+              "enabled": true,
+              "level": "all",
+              "damageType": "veneno"
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.bhcghcdnjjmobngm"
+      },
+      {
+        "name": "Filhos de Pálim",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você possui afinidade com minerais, recebendo 1D em todas as rolagens relacionadas a lidar com minerais.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.cblklklofjejckib"
+      }
+    ],
+    "moveBonus": 4
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

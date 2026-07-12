@@ -1,0 +1,63 @@
+{
+  "_id": "gmdpjnpjfoimfcda",
+  "_key": "!items!gmdpjnpjfoimfcda",
+  "name": "Entrópico",
+  "type": "heranca",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "description": "<p>Tocados pelo caos primordial, sua magia é imprevisível e mutável.</p><p>Custo: 20 pontos de antecedentes. Restrições: Nenhuma. Corrupção: —.</p>",
+    "skillList": [
+      "Carisma",
+      "Conhecimento (Arcano)",
+      "Conhecimento (Natureza)",
+      "Energia Mágica Ampliada",
+      "Palavra Arcana (exitium)",
+      "Palavra Arcana (majesto)",
+      "Palavra Arcana (pluribus)",
+      "Palavra Arcana (saeculorum)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Alma Entrópica",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Após um descanso longo, role 1d6. Você recebe um dado de melhoria em um atributo de acordo com o resultado: 1 (Percepção), 2 (Vigor), 3 (Força), 4 (Agilidade), 5 (Mente) ou 6 (você escolhe).</p><p>Herança: entrópico.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.ebkclhodfiojfale"
+      },
+      {
+        "name": "Magia do Caos",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Sempre que você conjurar uma magia, role 2d6. Se o resultado for menor que a quantidade de pontos de magia faltantes na sua reserva, sua Conjuração recebe um bônus igual a metade do seu nível e você rola 1d6 e confere o resultado:</p><p>6 — A magia causa 1d6 de dano de energia, caso os alvos sejam inimigos, e cura 1d6 pontos de vida, caso os alvos sejam aliados. Você recebe uma condição positiva à escolha do narrador, até o fim da cena. 5 — A magia se repete em uma área ou alvo diferente, à sua escolha. 4 — A magia se repete em uma área ou alvo diferente, à escolha do narrador. 3 — A magia funciona normalmente. 2 — A magia falha e você recebe uma condição negativa até o fim da cena (Vigor anula), à escolha do narrador. 1 — Sua energia arcana explode e você recebe 1d6 pontos de dano bruto de energia.</p><p>Herança: entrópico.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.oapoidhlhompeche"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

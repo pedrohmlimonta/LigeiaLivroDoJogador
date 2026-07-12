@@ -13,7 +13,7 @@
     "range": "Nível x Círculo",
     "duration": "Sustentável — Ação Rápida",
     "description": "<p>Você pronuncia a palavra arcana devena enquanto mentaliza uma fera se materializando no lugar onde você está focando sua visão, trazendo um animal de um lugar distante para auxiliá-lo.</p><p>Efeito: Você invoca uma criatura do tipo fera pequena, com Desafio igual ao dobro do seu Nível ou menos, no espaço alvo. A criatura é amigável a você e seus aliados, e hostil a seus inimigos, atacando-os em seu turno.</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
-    "peculiarities": "<p>Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1). (Consulte o livro para as demais peculiaridades de invocação.)</p>",
+    "peculiarities": "<p>Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Desafio 3 + seu nível, ou menos (apenas Círculo Intermediário ou Maior) (-4). Desafio 6 + seu nível ou menos (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
     "actions": [],
     "mode": "active",

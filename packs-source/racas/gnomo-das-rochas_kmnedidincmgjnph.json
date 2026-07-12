@@ -1,0 +1,82 @@
+{
+  "_id": "kmnedidincmgjnph",
+  "_key": "!items!kmnedidincmgjnph",
+  "name": "Gnomo das Rochas",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Gnomos inventores e estudiosos, criadores de engenhocas notáveis.</p><p>Características — Dado de Melhoria: Mente ou Vigor. Bônus de Deslocamento: +4m. Tamanho: Pequeno. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
+    "skillList": [
+      "Carisma",
+      "Conhecimento (Arcano)",
+      "Conhecimento (Guerra)",
+      "Conhecimento (História)",
+      "Conhecimento (Natureza)",
+      "Conhecimento (Religião)",
+      "Especialista",
+      "Lidar com Armadilhas",
+      "Ofícios",
+      "Veículos (Terrestres)",
+      "Veículos (Aéreos)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Filhos de Agalard",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens para se defender, evitar e resistir a magias.</p><p>Raças: gnomo da floresta, gnomo das profundezas, gnomo das rochas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.iloaoekofoljldke"
+      },
+      {
+        "name": "Inventor de Engenhocas",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens para identificar, reparar e criar itens mecânicos.</p><p>Raça: gnomo das rochas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.iobcbnneinegankj"
+      }
+    ],
+    "moveBonus": 4
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

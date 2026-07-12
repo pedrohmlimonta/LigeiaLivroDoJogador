@@ -1,0 +1,52 @@
+{
+  "_id": "enhgoibaoohbaojl",
+  "_key": "!items!enhgoibaoohbaojl",
+  "name": "Monge",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Ascetas disciplinados que transformam o próprio corpo em arma.</p><p>Bônus de Pontos de Vida: +2. Bônus de Pontos de Magia: +1.</p>",
+    "skillList": [
+      "Acrobacia",
+      "Alerta",
+      "Artes Marciais",
+      "Atletismo",
+      "Combater às Cegas",
+      "Combater sem Armadura",
+      "Conhecimento (Arcano)",
+      "Conhecimento (Natureza)",
+      "Conhecimento (Religião)",
+      "Corredor",
+      "Defletir Projéteis",
+      "Desengajar",
+      "Furtividade",
+      "Medicina",
+      "Melhorar Atributo (Agilidade)",
+      "Melhorar Atributo (Força)",
+      "Melhorar Atributo (Mente)",
+      "Ofícios",
+      "Palavra Arcana (sorcdiron)",
+      "Reflexos",
+      "Sem Brechas",
+      "Usar Armas (Desarmado)",
+      "Usar Armas (Simples)",
+      "Velocidade de Ataque",
+      "Vigor de Aço",
+      "Vontade de Ferro"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 2,
+    "mpBonus": 1
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1000,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

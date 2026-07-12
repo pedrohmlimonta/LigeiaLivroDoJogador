@@ -1,0 +1,39 @@
+{
+  "_id": "oodmopijlkpahodd",
+  "_key": "!items!oodmopijlkpahodd",
+  "name": "Alta Arcana",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 80,
+    "prereq": "",
+    "lists": "Arquimago",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você conjura uma magia de círculo Menor ou Intermediário, você pode gastar 1 ponto heróico para adicionar uma de suas Metamagias a esta conjuração.</p>",
+    "descAdvanced": "<p>Você pode gastar 2 pontos de magia, no lugar do ponto heróico, quando usa essa habilidade.</p>",
+    "descSpecial": "<p>Você não gasta pontos heróicos, nem de magia, para fazê-lo.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

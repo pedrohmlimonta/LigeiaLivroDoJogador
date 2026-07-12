@@ -1,0 +1,57 @@
+{
+  "_id": "mljkedpdccknffnj",
+  "_key": "!items!mljkedpdccknffnj",
+  "name": "Guerreiro",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Mestres das armas e das táticas, versáteis em qualquer estilo de combate.</p><p>Bônus de Pontos de Vida: +3. Bônus de Pontos de Magia: +0.</p>",
+    "skillList": [
+      "Acrobacia",
+      "Alerta",
+      "Atletismo",
+      "Baluarte",
+      "Carisma",
+      "Carregador",
+      "Conhecimento (Guerra)",
+      "Contragolpe",
+      "Empunhadura Dupla",
+      "Golpear com Escudo",
+      "Ímpeto",
+      "Impulso de Combate",
+      "Medicina",
+      "Melhorar Atributo (Agilidade)",
+      "Melhorar Atributo (Força)",
+      "Montar Criatura",
+      "Recuperar o Fôlego",
+      "Saque Rápido",
+      "Sobrevivência",
+      "Táticas de Grupo",
+      "Usar Armaduras Leves",
+      "Usar Armas (Arremesso)",
+      "Usar Armas (Artilharia)",
+      "Usar Armas (Corpo a Corpo)",
+      "Usar Armas (Duas Mãos)",
+      "Usar Armas (Militar)",
+      "Usar Armas (Simples)",
+      "Usar Armas (Uma Mão)",
+      "Usar Escudos",
+      "Veículos (Terrestres)",
+      "Velocidade de Ataque"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 3,
+    "mpBonus": 0
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

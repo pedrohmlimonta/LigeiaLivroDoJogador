@@ -1,0 +1,58 @@
+{
+  "_id": "lcecfcfjfdoebhbj",
+  "_key": "!items!lcecfcfjfdoebhbj",
+  "name": "Bárbaro",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Combatentes selvagens movidos pela fúria, resistentes e devastadores no corpo a corpo.</p><p>Bônus de Pontos de Vida: +4. Bônus de Pontos de Magia: +0.</p>",
+    "skillList": [
+      "Acrobacia",
+      "Alerta",
+      "Atletismo",
+      "Carregador",
+      "Combater sem Armadura",
+      "Conhecimento (Natureza)",
+      "Corredor",
+      "Medicina",
+      "Montar Criatura",
+      "Sobrevivência",
+      "Usar Armaduras Leves",
+      "Usar Armas (Arremesso)",
+      "Usar Armas (Duas Mãos)",
+      "Usar Armas (Militar)",
+      "Usar Armas (Simples)",
+      "Usar Armas (Uma Mão)",
+      "Usar Escudos",
+      "Contragolpe",
+      "Espírito Guardião (Qualquer)",
+      "Fúria",
+      "Golpe Crítico Brutal",
+      "Grito de Guerra",
+      "Guerreiro Incauto",
+      "Ímpeto",
+      "Melhorar Atributo (Força)",
+      "Melhorar Atributo (Vigor)",
+      "Presença Aterradora",
+      "Reação Furiosa",
+      "Reflexos",
+      "Sem Brechas",
+      "Velocidade de Ataque",
+      "Vigor de Aço"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 4,
+    "mpBonus": 0
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_id": "nahckamelefbnjec",
+  "_key": "!items!nahckamelefbnjec",
+  "name": "Bruxo",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Conjuradores que obtêm poder por meio de pactos com entidades extraplanares.</p><p>Bônus de Pontos de Vida: +2. Bônus de Pontos de Magia: +0.</p>",
+    "skillList": [
+      "Carisma",
+      "Conhecimento (Arcano)",
+      "Conhecimento (História)",
+      "Conhecimento (Natureza)",
+      "Conhecimento (Ocultismo)",
+      "Conhecimento (Religião)",
+      "Estudos Místicos",
+      "Familiar",
+      "Linguista Arcano",
+      "Magia Sem Gestos",
+      "Magia Sem Materiais",
+      "Magia Silenciosa",
+      "Melhorar Atributo (Mente)",
+      "Melhorar Atributo (Vigor)",
+      "Mercado Negro",
+      "Pacto (Qualquer)",
+      "Usar Armaduras Leves",
+      "Usar Armas (Simples)",
+      "Vontade de Ferro"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 2,
+    "mpBonus": 0
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

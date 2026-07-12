@@ -6,10 +6,14 @@ Módulo de compêndios para o sistema não-oficial [`ligeia-rpg`](https://github
 
 | Pack | Documentos | Fonte no livro |
 | --- | --- | --- |
-| **Habilidades** | 253 | Sessão 9 — cada sub-grupo é um item próprio (ex.: `Usar Armas (Machados)`, `Palavra Arcana (ignis)`, `Espírito Guardião (Urso)`), com descrições dos níveis Básico e Avançado, custos, pré-requisitos, listas e, quando aplicável, ações, efeitos e custos de ativação já configurados |
+| **Habilidades** | 266 | Sessão 9 — cada sub-grupo é um item próprio (ex.: `Usar Armas (Machados)`, `Palavra Arcana (ignis)`, `Espírito Guardião (Urso)`), com descrições dos níveis Básico e Avançado, custos, pré-requisitos, listas e, quando aplicável, ações, efeitos e custos de ativação já configurados |
 | **Magias** | 70 | Sessão 11 — todas as magias de exemplo (Círculo Menor) das 28 palavras arcanas, com características, dano, efeitos aplicáveis (condições com rolagem de resistência), peculiaridades de criação e custo de 1 PM nas ações |
-| **Equipamentos** | 104 | Sessão 10 — armaduras (com efeitos de Proteção/penalidade), todas as armas (com ações de ataque, dano e alcance), escudos, munições, ferramentas, itens gerais, montarias e serviços |
-| **Traços** | 34 | Sessões 4 e 5 — traços de todas as raças e das cinco heranças, com efeitos mecânicos onde cabível |
+| **Equipamentos** | 110 | Sessão 10 — armaduras (com efeitos de Proteção/penalidade), todas as armas (com ações de ataque, dano e alcance), escudos, munições, ferramentas, itens gerais, montarias e serviços |
+| **Traços** | 41 | Sessões 4 e 5 — traços de todas as raças e das cinco heranças, com efeitos mecânicos onde cabível |
+| **Raças** | 15 | Sessão 4 — cada raça com descrição, características (dado de melhoria, tamanho, idiomas, corrupção), bônus de deslocamento, lista de habilidades iniciais e os traços raciais embutidos (grantedTraits) |
+| **Heranças** | 5 | Sessão 5 — custo, restrições, corrupção, lista de habilidades e traços da herança embutidos |
+| **Vocações** | 12 | Sessão 6 — bônus de PV/PM e lista completa de habilidades iniciais |
+| **Carreiras** | 4 | Sessão 16 — pré-requisitos, lista de progressão (com habilidades de nível Épico) e a característica como traço embutido (ex.: Arquimago +2 PM) |
 
 ### Convenções mecânicas
 

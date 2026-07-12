@@ -1,0 +1,50 @@
+{
+  "_id": "fafkfejlphoehcdn",
+  "_key": "!items!fafkfejlphoehcdn",
+  "name": "Guardião",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Defensores implacáveis que protegem aliados e controlam o campo de batalha.</p><p>Bônus de Pontos de Vida: +4. Bônus de Pontos de Magia: +0.</p>",
+    "skillList": [
+      "Atletismo",
+      "Baluarte",
+      "Carregador",
+      "Contragolpe",
+      "Golpear com Escudo",
+      "Ímpeto",
+      "Medicina",
+      "Melhorar Atributo (Força)",
+      "Melhorar Atributo (Vigor)",
+      "Montar Criatura",
+      "Proteger",
+      "Provocar",
+      "Recuperar o Fôlego",
+      "Sentido Sísmico",
+      "Táticas de Grupo",
+      "Usar Armas (Arremesso)",
+      "Usar Armas (Artilharia)",
+      "Usar Armas (Militar)",
+      "Usar Armas (Simples)",
+      "Usar Armas (Uma Mão)",
+      "Usar Escudos",
+      "Veículos (Terrestres)",
+      "Vigor de Aço",
+      "Zona de Ameaça"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 4,
+    "mpBonus": 0
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

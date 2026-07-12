@@ -1,0 +1,50 @@
+{
+  "_id": "abehhdhkmgcahjpo",
+  "_key": "!items!abehhdhkmgcahjpo",
+  "name": "Ladino",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Especialistas em furtividade, precisão e golpes oportunos.</p><p>Bônus de Pontos de Vida: +2. Bônus de Pontos de Magia: +0.</p>",
+    "skillList": [
+      "Acrobacia",
+      "Alerta",
+      "Ameaça Invisível",
+      "Atirador",
+      "Atletismo",
+      "Carisma",
+      "Desengajar",
+      "Especialista",
+      "Furtividade",
+      "Golpe Cegante",
+      "Golpe de Sorte",
+      "Letalidade",
+      "Lidar com Armadilhas",
+      "Melhorar Atributo (Agilidade)",
+      "Melhorar Atributo (Percepção)",
+      "Mercado Negro",
+      "Movimento Astuto",
+      "Reflexos",
+      "Saque Rápido",
+      "Sem Brechas",
+      "Usar Armaduras Leves",
+      "Usar Armas (Arremesso)",
+      "Usar Armas (Artilharia)",
+      "Usar Armas (Lâminas Pequenas)"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 2,
+    "mpBonus": 0
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "_id": "oinpgenpbpadhjdi",
+  "_key": "!items!oinpgenpbpadhjdi",
+  "name": "Gnomo das Profundezas",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Gnomos furtivos das cavernas profundas, camuflados entre as rochas.</p><p>Características — Dado de Melhoria: Mente ou Agilidade. Bônus de Deslocamento: +4m. Tamanho: Pequeno. Idiomas Iniciais: Regional e Élfico. Corrupção: +1.</p>",
+    "skillList": [
+      "Alerta",
+      "Conhecimento (Arcano)",
+      "Explorador (Subterrâneos)",
+      "Furtividade",
+      "Mercado Negro",
+      "Movimento Astuto",
+      "Palavra Arcana (iluzio)",
+      "Palavra Arcana (tenebrae)",
+      "Trilhador (Subterrâneos)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (20m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 20m.</p><p>Raças: elfo das profundezas, gnomo das profundezas, orc.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.kdffkofngnoocnch"
+      },
+      {
+        "name": "Filhos de Agalard",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens para se defender, evitar e resistir a magias.</p><p>Raças: gnomo da floresta, gnomo das profundezas, gnomo das rochas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.iloaoekofoljldke"
+      },
+      {
+        "name": "Camuflagem Natural",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D para se esconder em terreno rochoso.</p><p>Raça: gnomo das profundezas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.pljlnelhhpgdbmam"
+      }
+    ],
+    "moveBonus": 4
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

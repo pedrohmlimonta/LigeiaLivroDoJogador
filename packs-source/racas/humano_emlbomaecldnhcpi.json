@@ -1,0 +1,64 @@
+{
+  "_id": "emlbomaecldnhcpi",
+  "_key": "!items!emlbomaecldnhcpi",
+  "name": "Humano",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Versáteis e ambiciosos, os humanos se adaptam a qualquer caminho.</p><p>Características — Dado de Melhoria: Um atributo à escolha. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional e um à escolha. Corrupção: +0.</p>",
+    "skillList": [
+      "Ofícios",
+      "Sobrevivência"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Versátil",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 20 pontos de antecedentes adicionais na criação do personagem. Você pode gastar esses pontos adicionais para comprar habilidades de outras vocações ou raças como se fossem da sua lista (sem ter que pagar o dobro).</p><p>Raça: humano.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mbgohnmdpkbhnbdm"
+      },
+      {
+        "name": "Sangue Aagn",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Usando sua ação rápida, você pode gastar pontos de magia para recuperar pontos de vida. A cada 2 pontos de magia gastos, você recupera 1 ponto de vida.</p><p>Raça: humano.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": [
+            {
+              "resource": "mp",
+              "value": 2,
+              "label": "Recupera 1 PV"
+            }
+          ]
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.edcoibonegmacmfk"
+      }
+    ],
+    "moveBonus": 5
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

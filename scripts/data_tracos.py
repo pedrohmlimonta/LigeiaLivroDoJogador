@@ -8,7 +8,7 @@ IMG_HERANCA = "icons/svg/eye.svg"
 TRACOS = [
     # ------------------------------ Raças -------------------------------
     traco("Visão no Escuro (10m)", "race",
-          "Você enxerga no escuro até 10m.\n\nRaças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; herança infernal.",
+          "Você enxerga no escuro até 10m.\n\nRaças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.",
           img=IMG_RACA),
     traco("Visão no Escuro (20m)", "race",
           "Você enxerga no escuro até 20m.\n\nRaças: elfo das profundezas, gnomo das profundezas, orc.",
@@ -128,6 +128,6 @@ TRACOS = [
                           cost_mp=1)],
           img=IMG_HERANCA),
     traco("Presença Ardente", "heritage",
-          "Você recebe um bônus igual a... (Observação: o texto deste traço está incompleto na edição do Livro de Regras usada como fonte — a descrição é interrompida no fim da página 45. Complete conforme errata ou decisão da mesa.)\n\nHerança: psiônico.",
+          "Você recebe um bônus igual a metade do seu nível em rolagens necessárias para o sucesso das habilidades Presença Aterradora, Provocar e Grito de Guerra.\n\nHerança: psiônico.",
           img=IMG_HERANCA),
 ]

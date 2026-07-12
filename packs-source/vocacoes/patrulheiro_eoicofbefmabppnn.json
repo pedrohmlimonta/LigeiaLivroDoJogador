@@ -1,0 +1,51 @@
+{
+  "_id": "eoicofbefmabppnn",
+  "_key": "!items!eoicofbefmabppnn",
+  "name": "Patrulheiro",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Caçadores e rastreadores dos ermos, mortais com arcos e armas duplas.</p><p>Bônus de Pontos de Vida: +2. Bônus de Pontos de Magia: +0.</p>",
+    "skillList": [
+      "Acrobacia",
+      "Alerta",
+      "Atirador",
+      "Atirador em Movimento",
+      "Atletismo",
+      "Combater às Cegas",
+      "Companheiro Animal",
+      "Conhecimento (Natureza)",
+      "Empunhadura Dupla",
+      "Exímio Atirador",
+      "Furtividade",
+      "Lidar com Animais",
+      "Melhorar Atributo (Agilidade)",
+      "Melhorar Atributo (Percepção)",
+      "Montar Criatura",
+      "Predador Astuto",
+      "Recarga Rápida",
+      "Saque Rápido",
+      "Sobrevivência",
+      "Trilhador (Qualquer)",
+      "Usar Armas (Arremesso)",
+      "Usar Armas (Simples)",
+      "Usar Armas (Uma Mão)",
+      "Usar Escudos",
+      "Velocidade de Ataque"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 2,
+    "mpBonus": 0
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

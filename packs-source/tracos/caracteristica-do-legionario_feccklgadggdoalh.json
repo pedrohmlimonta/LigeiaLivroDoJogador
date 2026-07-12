@@ -1,0 +1,39 @@
+{
+  "_id": "feccklgadggdoalh",
+  "_key": "!items!feccklgadggdoalh",
+  "name": "Característica do Legionário",
+  "type": "traco",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "source": "other",
+    "description": "<p>+3 Pontos de Vida Máximos.</p><p>Concedida ao adquirir a carreira Legionário.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": 3,
+        "rerollAll": false,
+        "label": "Legionário: +3 PV máximos",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

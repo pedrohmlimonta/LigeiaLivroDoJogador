@@ -1,0 +1,54 @@
+{
+  "_id": "nckbcbmmnhjhjaea",
+  "_key": "!items!nckbcbmmnhjhjaea",
+  "name": "Paladino",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Guerreiros sagrados unidos por juramentos e pela fé em sua divindade.</p><p>Bônus de Pontos de Vida: +3. Bônus de Pontos de Magia: +1.</p>",
+    "skillList": [
+      "Alerta",
+      "Atletismo",
+      "Baluarte",
+      "Carisma",
+      "Conhecimento (História)",
+      "Conhecimento (Religião)",
+      "Golpear com Escudo",
+      "Guerra Santa",
+      "Ímpeto",
+      "Juramento (Qualquer)",
+      "Medicina",
+      "Melhorar Atributo (Força)",
+      "Melhorar Atributo (Mente)",
+      "Montar Criatura",
+      "Palavra Arcana (sorcdiron)",
+      "Palavra Arcana (vitae)",
+      "Prece de Repouso",
+      "Presença Aterradora",
+      "Proteger",
+      "Punição",
+      "Usar Armaduras Leves",
+      "Usar Armas (Duas Mãos)",
+      "Usar Armas (Militar)",
+      "Usar Armas (Simples)",
+      "Usar Armas (Uma Mão)",
+      "Usar Escudos",
+      "Vigor de Aço",
+      "Vontade de Ferro"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 3,
+    "mpBonus": 1
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

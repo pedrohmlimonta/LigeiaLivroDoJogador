@@ -1,0 +1,63 @@
+{
+  "_id": "mckcajlgghbjnblm",
+  "_key": "!items!mckcajlgghbjnblm",
+  "name": "Legionário",
+  "type": "carreira",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "description": "<p>Combatentes veteranos de trincheira, treinados para enfrentar grandes unidades sozinhos, equilibrando ataque e defesa. Guerreiros, Guardiões e Paladinos se tornam aptos mais rapidamente a assumir esta carreira.</p><p>Pré-requisitos — Corrupção: Qualquer. Raça: Qualquer. Tempo Necessário: 60 dias atuando em guerras. Habilidades Necessárias: Conhecimento (Guerra) [A], Sobrevivência [B], Recuperar o Fôlego [A], Ímpeto [A].</p><p>Características: +3 Pontos de Vida Máximos.</p>",
+    "skillList": [
+      "Carregador",
+      "Corredor",
+      "Desengajar",
+      "Enfrentar a Horda",
+      "Firmeza Física",
+      "Golpe Giratório",
+      "Golpear com Escudo",
+      "Grito de Guerra",
+      "Impulso de Combate",
+      "Proteger",
+      "Usar Escudos",
+      "Velocidade de Ataque"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Característica do Legionário",
+        "img": "icons/svg/upgrade.svg",
+        "system": {
+          "source": "other",
+          "description": "<p>+3 Pontos de Vida Máximos.</p><p>Concedida ao adquirir a carreira Legionário.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "stat",
+              "target": "hp",
+              "value": 3,
+              "rerollAll": false,
+              "label": "Legionário: +3 PV máximos",
+              "enabled": true,
+              "level": "all",
+              "damageType": ""
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.feccklgadggdoalh"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

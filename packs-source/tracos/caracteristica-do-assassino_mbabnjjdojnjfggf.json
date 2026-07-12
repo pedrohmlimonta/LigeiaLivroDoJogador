@@ -1,0 +1,39 @@
+{
+  "_id": "mbabnjjdojnjfggf",
+  "_key": "!items!mbabnjjdojnjfggf",
+  "name": "Característica do Assassino",
+  "type": "traco",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "source": "other",
+    "description": "<p>+1 Ponto de Vida Máximo.</p><p>Concedida ao adquirir a carreira Assassino.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": 1,
+        "rerollAll": false,
+        "label": "Assassino: +1 PV máximo",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

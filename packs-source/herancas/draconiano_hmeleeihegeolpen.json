@@ -1,0 +1,125 @@
+{
+  "_id": "hmeleeihegeolpen",
+  "_key": "!items!hmeleeihegeolpen",
+  "name": "Draconiano",
+  "type": "heranca",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "description": "<p>Herdeiros do sangue dos dragões, com escamas, presas e sopros elementais.</p><p>Custo: 30 pontos de antecedentes. Restrições: Nenhuma. Corrupção: +1 (Vermelho, Azul, Preto, Branco e Verde) ou +0 (Dourado, Prateado, Bronze, Latão e Cobre).</p>",
+    "skillList": [
+      "Afinidade Mágica Elemental (Ancestralidade)",
+      "Asas",
+      "Carisma",
+      "Conhecimento (Arcano)",
+      "Conhecimento (História)",
+      "Energia Mágica Ampliada",
+      "Familiar (Dragonete)",
+      "Melhorar Atributo (Força)",
+      "Melhorar Atributo (Mente)",
+      "Palavra Arcana (Ancestralidade)",
+      "Palavra Arcana (exitium)",
+      "Palavra Arcana (majesto)",
+      "Palavra Arcana (pluribus)",
+      "Palavra Arcana (saeculorum)",
+      "Pele de Escamas",
+      "Presas",
+      "Presença Aterradora",
+      "Sopro de Dragão"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Fúria Draconiana",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Se você perder mais da metade dos seus pontos de vida, você recebe +1 de bônus em seus ataques.</p><p>Herança: draconiano.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.fpffgfdicdileeed"
+      },
+      {
+        "name": "Sangue de Dragão",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Quando você faz um descanso, você recupera 1 ponto de vida adicional.</p><p>Herança: draconiano.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.ljgeanafifjjfglb"
+      },
+      {
+        "name": "Ancestralidade Draconiana",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Você recebe Proteção igual a metade do seu nível (arredondado para cima) contra um tipo de dano, dependendo do tipo de dragão que você escolher para sua ancestralidade: Azul (Raio), Branco (Frio), Bronze (Raio), Cobre (Ácido), Latão (Fogo), Negro (Ácido), Ouro (Fogo), Prata (Frio), Verde (Veneno) ou Vermelho (Fogo).</p><p>Herança: draconiano. Ajuste o efeito de RD abaixo para o tipo escolhido.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "rd",
+              "target": "all",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Ancestralidade Draconiana: RD do tipo escolhido (metade do Nível — ajuste)",
+              "enabled": true,
+              "level": "all",
+              "damageType": "fogo"
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.jccdecpmcfhhdllj"
+      },
+      {
+        "name": "Resistência Draconiana",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Seus pontos de vida máximos aumentam em 1.</p><p>Herança: draconiano.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "stat",
+              "target": "hp",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Resistência Draconiana: +1 PV",
+              "enabled": true,
+              "level": "all",
+              "damageType": ""
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.abpbbfnldaelclln"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

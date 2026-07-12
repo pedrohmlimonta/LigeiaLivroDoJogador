@@ -1,0 +1,28 @@
+{
+  "_id": "moopbpdojgdcihjg",
+  "_key": "!items!moopbpdojgdcihjg",
+  "name": "Conjuração Celestial",
+  "type": "traco",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "source": "heritage",
+    "description": "<p>Quando você conjura magias compostas pela Palavra Arcana (vitae), elas curam 1 ponto de vida adicional.</p><p>Herança: celestial.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

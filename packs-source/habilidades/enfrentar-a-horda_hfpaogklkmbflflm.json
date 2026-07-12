@@ -1,0 +1,39 @@
+{
+  "_id": "hfpaogklkmbflflm",
+  "_key": "!items!hfpaogklkmbflflm",
+  "name": "Enfrentar a Horda",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 10,
+    "costAdvanced": 30,
+    "costSpecial": 60,
+    "prereq": "",
+    "lists": "Legionário",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você ataca uma criatura com uma arma corpo a corpo, você pode movê-la até 2m.</p>",
+    "descAdvanced": "<p>Criaturas atingidas por seus ataques com arma corpo a corpo ficam imobilizadas até o fim da cena (Força anula).</p>",
+    "descSpecial": "<p>Quando você ataca uma criatura com uma arma corpo a corpo, você recebe +1 nesta rolagem de ataque para cada outra criatura hostil adjacente a você.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

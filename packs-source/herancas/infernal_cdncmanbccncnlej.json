@@ -1,0 +1,96 @@
+{
+  "_id": "cdncmanbccncnlej",
+  "_key": "!items!cdncmanbccncnlej",
+  "name": "Infernal",
+  "type": "heranca",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "description": "<p>Descendentes de diabos do Inferno, com chifres, garras e afinidade com o fogo.</p><p>Custo: 30 pontos de antecedentes. Restrições: Nenhuma. Corrupção: +1.</p>",
+    "skillList": [
+      "Afinidade Mágica Elemental (Fogo)",
+      "Asas",
+      "Carisma",
+      "Cauda",
+      "Familiar (Imp)",
+      "Furtividade",
+      "Garras",
+      "Melhorar Atributo (Força)",
+      "Melhorar Atributo (Mente)",
+      "Mercado Negro",
+      "Palavra Arcana (exitium)",
+      "Palavra Arcana (ignis)",
+      "Palavra Arcana (majesto)",
+      "Palavra Arcana (pluribus)",
+      "Palavra Arcana (saeculorum)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Ancestralidade Infernal",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Você possui Proteção contra fogo igual a metade do seu nível (arredondado para cima).</p><p>Herança: infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "rd",
+              "target": "all",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Ancestralidade Infernal: RD fogo (metade do Nível — ajuste)",
+              "enabled": true,
+              "level": "all",
+              "damageType": "fogo"
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.ljanmmniefidekhf"
+      },
+      {
+        "name": "Caçada de Sangue",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Você recebe 1D em seus ataques quando ataca criaturas que já estejam feridas.</p><p>Herança: infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.ldimieidkppgockj"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "lglajaiiglfemlfp",
+  "_key": "!items!lglajaiiglfemlfp",
+  "name": "Fluxo Arcano",
+  "type": "habilidade",
+  "img": "icons/svg/daze.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 0,
+    "costAdvanced": 0,
+    "costSpecial": 60,
+    "prereq": "",
+    "lists": "Arquimago",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>—</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "<p>(Épica) Quando você chega a 0 pontos de magia, você recebe regeneração arcana até o fim da cena ou até alcançar seus pontos de magia máximos.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 7100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

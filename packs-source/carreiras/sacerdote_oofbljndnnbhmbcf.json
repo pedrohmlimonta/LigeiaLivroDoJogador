@@ -1,0 +1,54 @@
+{
+  "_id": "oofbljndnnbhmbcf",
+  "_key": "!items!oofbljndnnbhmbcf",
+  "name": "Sacerdote",
+  "type": "carreira",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "description": "<p>Autoridades de alta escala na hierarquia religiosa, os mortais mais próximos de sua divindade, capazes de manifestar parcialmente seu poder em combate. Clérigos se tornam aptos mais rapidamente a assumir esta carreira.</p><p>Pré-requisitos — Corrupção: Qualquer. Raça: Qualquer. Tempo Necessário: 60 dias de estudos e trabalhos a serviço da igreja de sua divindade. Habilidades Necessárias: Primeiro Aspecto [A], Segundo Aspecto [A], Guerreiro da Fé [B], Escolhido da Divindade [B].</p><p>Características: +1 Ponto de Vida Máximo.</p>",
+    "skillList": [
+      "Autoridade Divina",
+      "Manifestação Divina",
+      "Terceiro Aspecto"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Característica do Sacerdote",
+        "img": "icons/svg/upgrade.svg",
+        "system": {
+          "source": "other",
+          "description": "<p>+1 Ponto de Vida Máximo.</p><p>Concedida ao adquirir a carreira Sacerdote.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "stat",
+              "target": "hp",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Sacerdote: +1 PV máximo",
+              "enabled": true,
+              "level": "all",
+              "damageType": ""
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.naecdnmepfnopkpp"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

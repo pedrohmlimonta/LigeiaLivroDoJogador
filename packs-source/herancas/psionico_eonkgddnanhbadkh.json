@@ -1,0 +1,144 @@
+{
+  "_id": "eonkgddnanhbadkh",
+  "_key": "!items!eonkgddnanhbadkh",
+  "name": "Psiônico",
+  "type": "heranca",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "description": "<p>Mentes despertas capazes de moldar energia e dominar a própria vontade.</p><p>Custo: 30 pontos de antecedentes. Restrições: Nenhuma. Corrupção: —.</p>",
+    "skillList": [
+      "Acrobacia",
+      "Alerta",
+      "Atletismo",
+      "Carisma",
+      "Conhecimento (Arcano)",
+      "Grito de Guerra",
+      "Melhorar Atributo (Mente)",
+      "Palavra Arcana (augurado)",
+      "Palavra Arcana (menso)",
+      "Palavra Arcana (sorcdiron)",
+      "Palavra Arcana (traumato)",
+      "Presença Aterradora",
+      "Provocar",
+      "Sentido Sísmico",
+      "Sobrevivência",
+      "Vontade de Ferro"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Vontade de Diamante",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Você recebe um bônus de +1 em rolagens contra Abalado, Dominado, Enfeitiçado, Atordoado, Pasmo ou Dano Contínuo Psíquico para cada nível da habilidade Vontade de Ferro que você tiver aprendido.</p><p>Herança: psiônico.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.pcllhdjdcgjmffhn"
+      },
+      {
+        "name": "Moldar Energia",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Você pode usar seu movimento e gastar uma quantidade de pontos de magia para criar um objeto feito com a energia da sua mente, caso você seja bem sucedido em uma rolagem de Mente. A dificuldade para criar itens com peso 0 é Normal. A dificuldade aumenta em um nível a cada ponto de peso que o item a ser criado tiver acima de 0. O custo em pontos de magia é de 1 ponto + 1 ponto adicional por cada ponto de peso. Os itens funcionam normalmente, como qualquer outro, com exceção das armas, cujo dano é sempre de energia. O item dura até o fim da cena.</p><p>Herança: psiônico.</p>",
+          "isWeapon": false,
+          "actions": [
+            {
+              "label": "Moldar Energia (Mente vs dificuldade)",
+              "canRoll": true,
+              "rollAttr": "mente",
+              "rollBonus": 0,
+              "rollDice": 0,
+              "vsDifficulty": true,
+              "fixedDifficulty": 8,
+              "difficultyAttr": "nenhum",
+              "targetMode": "none",
+              "includeSelf": false,
+              "defenseAttr": "esquiva",
+              "defenseAttr2": "",
+              "damage": "",
+              "damageType": "",
+              "damageResource": "hp",
+              "scalingDamage": false,
+              "skipRollDialog": true,
+              "extraDamage": [],
+              "movement": {
+                "enabled": false,
+                "kind": "push",
+                "who": "targets",
+                "distance": 0,
+                "lateralSide": "right",
+                "ignoreWalls": false,
+                "snap": true
+              },
+              "appliesEffects": [],
+              "range": 0,
+              "area": 0,
+              "macroUuid": "",
+              "macroName": "",
+              "macroEnabled": true,
+              "aaConfig": null,
+              "aaName": "",
+              "aaEnabled": true,
+              "animFile": "",
+              "animPlacement": "target",
+              "animScale": 1,
+              "animEnabled": true,
+              "animAttach": false,
+              "costMp": 1,
+              "costHp": 0,
+              "costHeroic": 0,
+              "persistArea": false,
+              "persistRounds": 1,
+              "persistAffectsSelf": false,
+              "persistRerollAttack": false,
+              "persistTrigger": "both"
+            }
+          ],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": [
+            {
+              "resource": "mp",
+              "value": 1,
+              "label": "Criar objeto (peso 0; +1 PM por ponto de peso)"
+            }
+          ]
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mfocjfelmfgddopc"
+      },
+      {
+        "name": "Presença Ardente",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Você recebe um bônus igual a metade do seu nível em rolagens necessárias para o sucesso das habilidades Presença Aterradora, Provocar e Grito de Guerra.</p><p>Herança: psiônico.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.obgehifcmljleohb"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

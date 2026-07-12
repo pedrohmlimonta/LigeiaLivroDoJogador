@@ -1,0 +1,53 @@
+{
+  "_id": "ajbfpenobegklhkf",
+  "_key": "!items!ajbfpenobegklhkf",
+  "name": "Mago",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Estudiosos das palavras arcanas, com o mais amplo repertório de magias.</p><p>Bônus de Pontos de Vida: +1. Bônus de Pontos de Magia: +3.</p>",
+    "skillList": [
+      "Carisma",
+      "Conhecimento (História)",
+      "Conhecimento (Religião)",
+      "Escola Arcana",
+      "Familiar",
+      "Implemento Arcano Superior",
+      "Linguista Arcano",
+      "Medicina",
+      "Melhorar Atributo (Mente)",
+      "Palavra Arcana (acida)",
+      "Palavra Arcana (augurado)",
+      "Palavra Arcana (energio)",
+      "Palavra Arcana (fulgur)",
+      "Palavra Arcana (glacios)",
+      "Palavra Arcana (ignis)",
+      "Palavra Arcana (iluzio)",
+      "Palavra Arcana (inanis)",
+      "Palavra Arcana (kreo)",
+      "Palavra Arcana (krucigon)",
+      "Palavra Arcana (lumo)",
+      "Palavra Arcana (mortis)",
+      "Palavra Arcana (noxia)",
+      "Palavra Arcana (sonigu)",
+      "Palavra Arcana (sorcdiron)",
+      "Palavra Arcana (tenebrae)",
+      "Preparação Arcana",
+      "Usar Armas (Simples)"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 1,
+    "mpBonus": 3
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

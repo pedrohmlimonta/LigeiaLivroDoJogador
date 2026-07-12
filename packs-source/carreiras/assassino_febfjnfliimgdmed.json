@@ -1,0 +1,57 @@
+{
+  "_id": "febfjnfliimgdmed",
+  "_key": "!items!febfjnfliimgdmed",
+  "name": "Assassino",
+  "type": "carreira",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "description": "<p>Especialistas em eliminar vítimas sem serem vistos, precisos, letais e hábeis com venenos. Ladinos se tornam aptos mais rapidamente a assumir esta carreira.</p><p>Pré-requisitos — Corrupção: 6+. Raça: Qualquer. Tempo Necessário: 60 dias e testes em uma guilda de assassinos. Habilidades Necessárias: Ameaça Invisível [A], Golpe Cegante [B], Letalidade [A], Movimento Astuto [A].</p><p>Características: +1 Ponto de Vida Máximo.</p>",
+    "skillList": [
+      "Contragolpe",
+      "Desaparecer",
+      "Golpe Letal",
+      "Lidar com Venenos",
+      "Sem Falhas",
+      "Velocidade de Ataque"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Característica do Assassino",
+        "img": "icons/svg/upgrade.svg",
+        "system": {
+          "source": "other",
+          "description": "<p>+1 Ponto de Vida Máximo.</p><p>Concedida ao adquirir a carreira Assassino.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "stat",
+              "target": "hp",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Assassino: +1 PV máximo",
+              "enabled": true,
+              "level": "all",
+              "damageType": ""
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mbabnjjdojnjfggf"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

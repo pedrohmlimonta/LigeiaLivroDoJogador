@@ -1,0 +1,28 @@
+{
+  "_id": "nelddnchlgaemkjn",
+  "_key": "!items!nelddnchlgaemkjn",
+  "name": "Filhos de Éllon",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Agraciados pelo príncipe dos faérian, seu criador, seu povo possui uma resistência à magia herdada do próprio Éllon. Você recebe 1D em rolagens para se defender, evitar e resistir a magias.</p><p>Raça: alto elfo.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

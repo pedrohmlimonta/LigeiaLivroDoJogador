@@ -1,0 +1,91 @@
+{
+  "_id": "fihcidpaihieeaja",
+  "_key": "!items!fihcidpaihieeaja",
+  "name": "Elfo Cinzento",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Elfos eruditos abençoados por Kalael com grande afinidade mágica.</p><p>Características — Dado de Melhoria: Agilidade ou Mente. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
+    "skillList": [
+      "Conhecimento (Arcano)",
+      "Conhecimento (Religião)",
+      "Usar Armas (Arcos)",
+      "Usar Armas (Lâminas Grandes)",
+      "Usar Armas (Lâminas Pequenas)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Ancestral Faerian",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.npgngpmknbcbmhgc"
+      },
+      {
+        "name": "Transe",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você não precisa dormir. Em vez disso, você descansa entrando em um transe de 4 horas.</p><p>Raças: elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.nlofoiggpkeoehki"
+      },
+      {
+        "name": "Filhos de Kalael",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Abençoado pelas deusas da floresta, da noite e da magia, seu criador recebeu grandes poderes mágicos. Parte desse poder foi passado para seu povo. Você recebe a habilidade Palavra Arcana (energio), sem ter que pagar por ela.</p><p>Raça: elfo cinzento.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.pncocgpnjemdjlhn"
+      }
+    ],
+    "moveBonus": 5
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

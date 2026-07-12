@@ -1,0 +1,39 @@
+{
+  "_id": "eeipkhhbhbfhfiea",
+  "_key": "!items!eeipkhhbhbfhfiea",
+  "name": "Sem Falhas",
+  "type": "habilidade",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 80,
+    "prereq": "",
+    "lists": "Assassino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você ataca uma criatura indefesa com uma arma leve, seus resultados 1 nos dados de ataque são considerados 2.</p>",
+    "descAdvanced": "<p>Quando você ataca uma criatura indefesa com uma arma leve, seus resultados 1 no ataque são considerados 3.</p>",
+    "descSpecial": "<p>O alvo não precisa estar indefeso para esta habilidade.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 20900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

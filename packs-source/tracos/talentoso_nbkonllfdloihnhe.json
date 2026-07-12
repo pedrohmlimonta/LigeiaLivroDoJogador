@@ -1,0 +1,28 @@
+{
+  "_id": "nbkonllfdloihnhe",
+  "_key": "!items!nbkonllfdloihnhe",
+  "name": "Talentoso",
+  "type": "traco",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "source": "race",
+    "description": "<p>Escolha uma habilidade que te dê 1D em uma rolagem fora de combate. Você recebe um bônus igual a metade do seu nível em todas as rolagens que adicionar esse dado de melhoria.</p><p>Raça: meio-elfo.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

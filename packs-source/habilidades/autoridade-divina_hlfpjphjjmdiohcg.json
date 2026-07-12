@@ -1,0 +1,39 @@
+{
+  "_id": "hlfpjphjjmdiohcg",
+  "_key": "!items!hlfpjphjjmdiohcg",
+  "name": "Autoridade Divina",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 0,
+    "costAdvanced": 0,
+    "costSpecial": 60,
+    "prereq": "",
+    "lists": "Sacerdote",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>—</p>",
+    "descAdvanced": "<p>—</p>",
+    "descSpecial": "<p>(Épica) Sempre que realizar rolagens de interação social, re-role os resultados 1. Os novos resultados não podem ser re-rolados. Adicionalmente, caso sua Corrupção seja inferior a 5, criaturas com Corrupção 7 ou superior ficam enfraquecidas enquanto estiverem adjacentes a você. Caso sua Corrupção seja superior a 5, essa habilidade afeta criaturas com Corrupção 3 ou inferior.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

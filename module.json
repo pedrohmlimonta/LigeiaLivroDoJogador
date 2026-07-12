@@ -68,13 +68,66 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "racas",
+      "label": "Raças",
+      "path": "packs/racas",
+      "type": "Item",
+      "system": "ligeia-rpg",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "herancas",
+      "label": "Heranças",
+      "path": "packs/herancas",
+      "type": "Item",
+      "system": "ligeia-rpg",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "vocacoes",
+      "label": "Vocações",
+      "path": "packs/vocacoes",
+      "type": "Item",
+      "system": "ligeia-rpg",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "carreiras",
+      "label": "Carreiras",
+      "path": "packs/carreiras",
+      "type": "Item",
+      "system": "ligeia-rpg",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "packFolders": [
     {
       "name": "Ligeia — Livro do Jogador",
       "sorting": "m",
-      "packs": ["habilidades", "magias", "equipamentos", "tracos"]
+      "packs": [
+        "habilidades",
+        "magias",
+        "equipamentos",
+        "tracos",
+        "racas",
+        "herancas",
+        "vocacoes",
+        "carreiras"
+      ]
     }
   ],
   "languages": [],

@@ -224,3 +224,29 @@ def traco(name, source, description, is_weapon=False, mode="passive",
         "costs": costs or [],
     }
     return base_doc(name, "traco", img, system, sort)
+
+
+def trait_snapshot(trait_doc):
+    """Snapshot de um traço para o campo grantedTraits das definições."""
+    return {
+        "name": trait_doc["name"],
+        "img": trait_doc["img"],
+        "system": trait_doc["system"],
+        "sourceUuid": f"Compendium.ligeia-livro-do-jogador.tracos.Item.{trait_doc['_id']}",
+    }
+
+
+def definicao(name, itype, description, skill_list=None, granted=None,
+              img="icons/svg/mystery-man.svg", sort=0, **extra):
+    """Item de definição: raca, heranca, vocacao ou carreira.
+
+    granted: lista de documentos de traço (dicts) a embutir como snapshots.
+    extra: moveBonus (raca) ou hpBonus/mpBonus (vocacao).
+    """
+    system = {
+        "description": p(description),
+        "skillList": skill_list or [],
+        "grantedTraits": [trait_snapshot(t) for t in (granted or [])],
+    }
+    system.update(extra)
+    return base_doc(name, itype, img, system, sort)

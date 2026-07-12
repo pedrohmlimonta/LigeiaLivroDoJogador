@@ -1,0 +1,39 @@
+{
+  "_id": "kplhadmkabecembf",
+  "_key": "!items!kplhadmkabecembf",
+  "name": "Asas",
+  "type": "habilidade",
+  "img": "icons/svg/regen.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 0,
+    "prereq": "",
+    "lists": "Celestial, draconiano e infernal",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você desenvolveu asas provindas de algum tipo de poder. Você pode escolher voar, em vez de mover-se em solo firme, usando seu movimento, mas deve concluir o movimento em solo firme. Seu Deslocamento voando é o mesmo que quando caminha.</p>",
+    "descAdvanced": "<p>Você pode flutuar a meio metro acima do chão ilimitadamente. Quando escolhe mover-se voando, você pode mover-se o dobro do seu Deslocamento.</p>",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

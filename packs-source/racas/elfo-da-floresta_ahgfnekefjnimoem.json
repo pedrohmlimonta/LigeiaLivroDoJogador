@@ -1,0 +1,94 @@
+{
+  "_id": "ahgfnekefjnimoem",
+  "_key": "!items!ahgfnekefjnimoem",
+  "name": "Elfo da Floresta",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Elfos guardiões das matas de Illain, imperceptíveis em ambientes selvagens.</p><p>Características — Dado de Melhoria: Agilidade ou Percepção. Bônus de Deslocamento: +6m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
+    "skillList": [
+      "Conhecimento (Natureza)",
+      "Explorador (Florestas)",
+      "Furtividade",
+      "Sobrevivência",
+      "Trilhador (Florestas)",
+      "Usar Armas (Arcos)",
+      "Usar Armas (Lâminas Grandes)",
+      "Usar Armas (Lâminas Pequenas)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Ancestral Faerian",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.npgngpmknbcbmhgc"
+      },
+      {
+        "name": "Transe",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você não precisa dormir. Em vez disso, você descansa entrando em um transe de 4 horas.</p><p>Raças: elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.nlofoiggpkeoehki"
+      },
+      {
+        "name": "Filhos de Illain",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Os mistérios das florestas são guardados pelo seu deus criador, Illain, protetor da natureza. Seus herdeiros receberam a capacidade de se manterem imperceptíveis em ambientes selvagens. Quando está em um ambiente selvagem (florestas, montanhas, desertos, pântanos...), você recebe 1D em Furtividade e em Esquiva.</p><p>Raça: elfo da floresta.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.dpoadgedmnfpnaif"
+      }
+    ],
+    "moveBonus": 6
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

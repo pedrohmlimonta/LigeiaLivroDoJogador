@@ -1,0 +1,124 @@
+{
+  "_id": "hapmgjikknbeehlo",
+  "_key": "!items!hapmgjikknbeehlo",
+  "name": "Celestial",
+  "type": "heranca",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "description": "<p>Descendentes de seres de Solária, com sangue angelical.</p><p>Custo: 20 pontos de antecedentes. Restrições: Nenhuma. Corrupção: -1.</p>",
+    "skillList": [
+      "Asas",
+      "Carisma",
+      "Energia Mágica Ampliada",
+      "Familiar (Querubim)",
+      "Palavra Arcana (exitium)",
+      "Palavra Arcana (lumo)",
+      "Palavra Arcana (majesto)",
+      "Palavra Arcana (pluribus)",
+      "Palavra Arcana (saeculorum)",
+      "Palavra Arcana (sankta)",
+      "Palavra Arcana (sorcdiron)",
+      "Palavra Arcana (vitae)",
+      "Punição"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (10m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.mippoaggmiaafkkc"
+      },
+      {
+        "name": "Ancestralidade Celestial",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Você possui Proteção contra Frio, Fogo, Ácido e Veneno igual a metade do seu nível (arredondado para cima).</p><p>Herança: celestial.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [
+            {
+              "type": "rd",
+              "target": "all",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Ancestralidade Celestial: RD frio (metade do Nível — ajuste)",
+              "enabled": true,
+              "level": "all",
+              "damageType": "frio"
+            },
+            {
+              "type": "rd",
+              "target": "all",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Ancestralidade Celestial: RD fogo (metade do Nível — ajuste)",
+              "enabled": true,
+              "level": "all",
+              "damageType": "fogo"
+            },
+            {
+              "type": "rd",
+              "target": "all",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Ancestralidade Celestial: RD ácido (metade do Nível — ajuste)",
+              "enabled": true,
+              "level": "all",
+              "damageType": "acido"
+            },
+            {
+              "type": "rd",
+              "target": "all",
+              "value": 1,
+              "rerollAll": false,
+              "label": "Ancestralidade Celestial: RD veneno (metade do Nível — ajuste)",
+              "enabled": true,
+              "level": "all",
+              "damageType": "veneno"
+            }
+          ],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.ofnebmiliabaccla"
+      },
+      {
+        "name": "Conjuração Celestial",
+        "img": "icons/svg/eye.svg",
+        "system": {
+          "source": "heritage",
+          "description": "<p>Quando você conjura magias compostas pela Palavra Arcana (vitae), elas curam 1 ponto de vida adicional.</p><p>Herança: celestial.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.moopbpdojgdcihjg"
+      }
+    ]
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

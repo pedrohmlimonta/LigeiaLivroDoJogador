@@ -1,0 +1,39 @@
+{
+  "_id": "fkkmegghkoogcdin",
+  "_key": "!items!fkkmegghkoogcdin",
+  "name": "Lidar com Venenos",
+  "type": "habilidade",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 80,
+    "prereq": "",
+    "lists": "Assassino",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você recebe 1D em rolagens para coletar e manusear venenos.</p>",
+    "descAdvanced": "<p>Venenos aplicados em sua arma têm duração de 2 ataques, em vez de 1.</p>",
+    "descSpecial": "<p>Venenos preparados por você recebem +2 na dificuldade das rolagens de resistência.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

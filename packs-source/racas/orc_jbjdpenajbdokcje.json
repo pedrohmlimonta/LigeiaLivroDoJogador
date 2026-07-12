@@ -1,0 +1,60 @@
+{
+  "_id": "jbjdpenajbdokcje",
+  "_key": "!items!jbjdpenajbdokcje",
+  "name": "Orc",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Guerreiros ferozes de Grumbar, movidos pela sede de batalha.</p><p>Características — Dado de Melhoria: Força ou Vigor. Bônus de Deslocamento: +6m. Tamanho: Médio. Idiomas Iniciais: Regional e Orc. Corrupção: +1.</p>",
+    "skillList": [
+      "Guerreiro Incauto",
+      "Grito de Guerra",
+      "Recuperar o Fôlego",
+      "Vigor de Aço"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (20m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 20m.</p><p>Raças: elfo das profundezas, gnomo das profundezas, orc.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.kdffkofngnoocnch"
+      },
+      {
+        "name": "Filhos de Grumbar",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>A cada cena que você passar sem combate, você recebe 1 ponto de Sede de Batalha que se acumula. Quando você entra em combate, você pode gastar esses pontos. Quando declarar um ataque, você pode gastar 1 ou mais pontos para receber um bônus para a rolagem de ataque igual à quantidade de pontos gastos.</p><p>Raça: orc.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.nmgkopdmpkfmagin"
+      }
+    ],
+    "moveBonus": 6
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

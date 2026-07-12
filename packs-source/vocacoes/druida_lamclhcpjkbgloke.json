@@ -1,0 +1,49 @@
+{
+  "_id": "lamclhcpjkbgloke",
+  "_key": "!items!lamclhcpjkbgloke",
+  "name": "Druida",
+  "type": "vocacao",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<p>Guardiões da natureza que conjuram seus ciclos e assumem formas animais.</p><p>Bônus de Pontos de Vida: +2. Bônus de Pontos de Magia: +2.</p>",
+    "skillList": [
+      "Atletismo",
+      "Carisma",
+      "Companheiro Animal",
+      "Conhecimento (Arcano)",
+      "Conhecimento (História)",
+      "Conhecimento (Natureza)",
+      "Conhecimento (Religião)",
+      "Espírito Guardião (Qualquer)",
+      "Explorador (Qualquer)",
+      "Forma Animal",
+      "Lidar com Animais",
+      "Magia Unilateral",
+      "Medicina",
+      "Melhorar Atributo (Mente)",
+      "Melhorar Atributo (Percepção)",
+      "Palavra Arcana (devena)",
+      "Palavra Arcana (krucigon)",
+      "Palavra Arcana (noxia)",
+      "Palavra Arcana (sangon)",
+      "Sobrevivência",
+      "Trilhador (Qualquer)",
+      "Usar Armaduras Leves",
+      "Usar Armas (Simples)"
+    ],
+    "grantedTraits": [],
+    "hpBonus": 2,
+    "mpBonus": 2
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_id": "jahjfkjjlblkilng",
+  "_key": "!items!jahjfkjjlblkilng",
+  "name": "Característica do Arquimago",
+  "type": "traco",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "source": "other",
+    "description": "<p>+2 Pontos de Magia Máximos.</p><p>Concedida ao adquirir a carreira Arquimago.</p>",
+    "isWeapon": false,
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "stat",
+        "target": "mp",
+        "value": 2,
+        "rerollAll": false,
+        "label": "Arquimago: +2 PM máximos",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

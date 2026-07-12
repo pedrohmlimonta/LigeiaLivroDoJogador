@@ -1,0 +1,39 @@
+{
+  "_id": "kiicahicgmojjfch",
+  "_key": "!items!kiicahicgmojjfch",
+  "name": "Manifestação Divina",
+  "type": "habilidade",
+  "img": "icons/svg/angel.svg",
+  "system": {
+    "level": "B",
+    "costBasic": 20,
+    "costAdvanced": 40,
+    "costSpecial": 60,
+    "prereq": "",
+    "lists": "Sacerdote",
+    "activation": "Reação",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Seu deus intervém em favor de seus aliados. Quando um aliado que você possa ver ficar com menos da metade dos pontos de vida, você pode gastar 1 ponto heróico e usar sua reação para que ele recupere pontos de vida iguais ao seu nível. Se isso não elevar os pontos de vida dele acima da metade, você recupera o ponto heróico gasto.</p>",
+    "descAdvanced": "<p>Quando essa habilidade eleva os pontos de vida de seu aliado acima da metade, inimigos adjacentes a ele devem ser bem sucedidos em uma rolagem de Mente (Difícil) ou ficarão Atordoados até o fim da cena (Mente anula).</p>",
+    "descSpecial": "<p>Adicionalmente, seu aliado recebe regeneração até o fim da cena ou até ficar sem ferimentos.</p>",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 12500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

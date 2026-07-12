@@ -1,0 +1,94 @@
+{
+  "_id": "gefhijgmommfkkdf",
+  "_key": "!items!gefhijgmommfkkdf",
+  "name": "Elfo das Profundezas",
+  "type": "raca",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>Elfos marcados pela maldição de Mizra, senhores das sombras do subterrâneo.</p><p>Características — Dado de Melhoria: Agilidade ou Percepção. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +1.</p>",
+    "skillList": [
+      "Carisma",
+      "Explorador (Subterrâneos)",
+      "Furtividade",
+      "Mercado Negro",
+      "Trilhador (Subterrâneos)",
+      "Usar Armas (Arcos)",
+      "Usar Armas (Lâminas Grandes)",
+      "Usar Armas (Lâminas Pequenas)"
+    ],
+    "grantedTraits": [
+      {
+        "name": "Visão no Escuro (20m)",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você enxerga no escuro até 20m.</p><p>Raças: elfo das profundezas, gnomo das profundezas, orc.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.kdffkofngnoocnch"
+      },
+      {
+        "name": "Ancestral Faerian",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.npgngpmknbcbmhgc"
+      },
+      {
+        "name": "Transe",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Você não precisa dormir. Em vez disso, você descansa entrando em um transe de 4 horas.</p><p>Raças: elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.nlofoiggpkeoehki"
+      },
+      {
+        "name": "Prole de Mizra",
+        "img": "icons/svg/aura.svg",
+        "system": {
+          "source": "race",
+          "description": "<p>Por causa da maldição lançada pela deusa da noite sobre seu povo, cada elfo das profundezas carrega um pedaço da umbra dentro de si. Você recebe a habilidade Palavra Arcana (tenebrae), sem pagar por ela.</p><p>Raça: elfo das profundezas.</p>",
+          "isWeapon": false,
+          "actions": [],
+          "mode": "active",
+          "active": false,
+          "effects": [],
+          "costs": []
+        },
+        "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.fcbddmnodamamcoo"
+      }
+    ],
+    "moveBonus": 5
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 700,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}
