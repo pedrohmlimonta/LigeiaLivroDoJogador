@@ -250,3 +250,41 @@ def definicao(name, itype, description, skill_list=None, granted=None,
     }
     system.update(extra)
     return base_doc(name, itype, img, system, sort)
+
+
+def complicacao(name, lists, desc_b, desc_a, xp_b=0, xp_a=0, xp_e=0, desc_e="",
+                prereq="", activation="", target="", area="", rng="", duration="",
+                mode="passive", effects=None, costs=None, actions=None,
+                img="icons/svg/downgrade.svg", sort=0):
+    """Complicação (sistema ligeia-rpg >= 0.2.0 com tipo complicacao).
+
+    XP é CONCEDIDO por nível: xp_b/xp_a/xp_e (0 = tabela padrão do sistema,
+    CONFIG.LIGEIA.complicationXp = B 20 / A 40 / E 80).
+
+    Exemplo:
+        complicacao("Código de Honra", "Qualquer",
+                    "Você segue um código rígido...",
+                    "Quebrar o código causa...", 20, 40)
+    """
+    system = {
+        "level": "B",
+        "xpBasic": xp_b,
+        "xpAdvanced": xp_a,
+        "xpSpecial": xp_e,
+        "prereq": prereq,
+        "lists": lists,
+        "activation": activation,
+        "target": target,
+        "area": area,
+        "range": rng,
+        "duration": duration,
+        "descBasic": p(desc_b),
+        "descAdvanced": p(desc_a),
+        "descSpecial": p(desc_e) if desc_e else "",
+        "actions": actions or [],
+        "mode": mode,
+        "active": False,
+        "effects": effects or [],
+        "costs": costs or [],
+    }
+    return base_doc(name, "complicacao", img, system, sort)

@@ -33,7 +33,7 @@ https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/releases/latest/download/
 
 **Manual**: clone/extraia esta pasta em `Data/modules/ligeia-livro-do-jogador/`. Os packs compilados (`packs/`) já acompanham o repositório.
 
-Requer o sistema `ligeia-rpg` (mínimo 0.2.0). Ative o módulo no mundo e os quatro compêndios aparecem na pasta **Ligeia — Livro do Jogador**.
+Requer o sistema `ligeia-rpg` (mínimo 0.2.0, incluindo a versão com o tipo de item **Complicação**; Foundry v13/v14). Observação: o Livro de Regras não possui uma lista de complicações, então o módulo não inclui esse pack — o pipeline (`scripts/data_complicacoes.py`) já está pronto para gerar um pack "Complicações" caso você adicione as da sua mesa. Ative o módulo no mundo e os quatro compêndios aparecem na pasta **Ligeia — Livro do Jogador**.
 
 ## Arquitetura e build
 

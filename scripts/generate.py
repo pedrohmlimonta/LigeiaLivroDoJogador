@@ -20,11 +20,12 @@ from data_tracos import TRACOS
 from data_tracos_2 import TRACOS_2
 from data_racas_herancas import RACAS, HERANCAS
 from data_vocacoes_carreiras import VOCACOES, CARREIRAS
+from data_complicacoes import COMPLICACOES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Tipos que possuem o botão de ativação (mode/active) no schema do sistema.
-ACTIVATABLE_TYPES = {"habilidade", "magia", "equipamento", "traco"}
+ACTIVATABLE_TYPES = {"habilidade", "magia", "equipamento", "traco", "complicacao"}
 
 PACKS = {
     "habilidades": sorted(HABILIDADES_1 + HABILIDADES_2 + HABILIDADES_3 + HABILIDADES_4,
@@ -38,12 +39,15 @@ PACKS = {
     "herancas": HERANCAS,
     "vocacoes": VOCACOES,
     "carreiras": CARREIRAS,
+    "complicacoes": COMPLICACOES,
 }
 
 
 def main():
     total = 0
     for pack, docs in PACKS.items():
+        if not docs:
+            continue  # pack vazio (ex.: complicacoes sem conteúdo)
         outdir = os.path.join(ROOT, "packs-source", pack)
         os.makedirs(outdir, exist_ok=True)
         for old in os.listdir(outdir):
