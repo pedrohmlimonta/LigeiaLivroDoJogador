@@ -1,7 +1,7 @@
 {
   "_id": "cflebeickkcgpebf",
   "_key": "!items!cflebeickkcgpebf",
-  "name": "Efeito Colateral (acida)",
+  "name": "Efeito Colateral [acida]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (acida)",
+    "prereq": "Palavra Arcana [acida]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

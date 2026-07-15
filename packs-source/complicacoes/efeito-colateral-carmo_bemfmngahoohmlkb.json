@@ -1,7 +1,7 @@
 {
   "_id": "bemfmngahoohmlkb",
   "_key": "!items!bemfmngahoohmlkb",
-  "name": "Efeito Colateral (carmo)",
+  "name": "Efeito Colateral [carmo]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (carmo)",
+    "prereq": "Palavra Arcana [carmo]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

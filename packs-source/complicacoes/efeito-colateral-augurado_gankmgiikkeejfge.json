@@ -1,7 +1,7 @@
 {
   "_id": "gankmgiikkeejfge",
   "_key": "!items!gankmgiikkeejfge",
-  "name": "Efeito Colateral (augurado)",
+  "name": "Efeito Colateral [augurado]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (augurado)",
+    "prereq": "Palavra Arcana [augurado]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

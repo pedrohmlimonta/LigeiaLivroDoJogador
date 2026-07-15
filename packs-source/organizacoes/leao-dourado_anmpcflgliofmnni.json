@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>Um reino teocrático, com uma educação rígida e com uma poderosa ordem de cavalaria. Seu povo possui uma altivez e uma presença tremenda.</p>",
     "skillList": [
-      "Conhecimento (Religião)",
+      "Conhecimento [Religião]",
       "Etiqueta",
       "Montar Criatura",
-      "Usar Armas (Lâminas Grandes)",
+      "Usar Armas [Lâminas Grandes]",
       "Presença do Leão"
     ],
     "grantedTraits": []

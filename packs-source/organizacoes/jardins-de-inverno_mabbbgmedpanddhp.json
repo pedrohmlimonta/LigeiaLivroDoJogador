@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>Nação de povo estudioso e engenhoso, cujas habilidades regionais refletem sua inventividade.</p>",
     "skillList": [
-      "Conhecimento (Qualquer)",
+      "Conhecimento [Qualquer]",
       "Ofícios",
-      "Usar Armas (Arcos)",
-      "Usar Armas (Lanças)",
+      "Usar Armas [Arcos]",
+      "Usar Armas [Lanças]",
       "Espírito Inovador"
     ],
     "grantedTraits": []

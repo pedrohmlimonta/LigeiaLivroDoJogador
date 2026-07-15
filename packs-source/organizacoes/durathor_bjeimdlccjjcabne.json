@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>A nação de Durathor é uma nação acostumada a viver nas montanhas e em seus subterrâneos, trabalhando das minas repletas de riquezas minerais, ao tilintar do martelo das forjas e das picaretas a escavar. O trabalho árduo enrijeceu o povo das montanhas e os deixou duros como pedra.</p>",
     "skillList": [
-      "Explorador (Montanhas)",
+      "Explorador [Montanhas]",
       "Ofícios",
-      "Usar Armas (Martelos)",
-      "Usar Armas (Picaretas)",
+      "Usar Armas [Martelos]",
+      "Usar Armas [Picaretas]",
       "Implacável"
     ],
     "grantedTraits": []

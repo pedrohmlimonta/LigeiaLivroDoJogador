@@ -1,7 +1,7 @@
 {
   "_id": "mmoneefpdonflnkm",
   "_key": "!items!mmoneefpdonflnkm",
-  "name": "Efeito Colateral (devena)",
+  "name": "Efeito Colateral [devena]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (devena)",
+    "prereq": "Palavra Arcana [devena]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

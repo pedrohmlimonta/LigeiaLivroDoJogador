@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>O povo norniano sofreu muitas perdas nos últimos anos, sendo assolados por maldições, pragas e fome. Sem nenhum amparo, devido à perda recente de seu regente, eles tiveram que sobreviver e se reerguer sozinhos.</p>",
     "skillList": [
-      "Conhecimento (Ocultismo)",
+      "Conhecimento [Ocultismo]",
       "Medicina",
-      "Usar Armas (Haste)",
-      "Usar Armas (Lâminas Grandes)",
+      "Usar Armas [Haste]",
+      "Usar Armas [Lâminas Grandes]",
       "Marca da Mácula"
     ],
     "grantedTraits": []

@@ -8,14 +8,14 @@
     "description": "<p>Gnomos travessos das matas, ilusionistas natos e amigos dos animais.</p><p>Características — Dado de Melhoria: Mente ou Agilidade. Bônus de Deslocamento: +4m. Tamanho: Pequeno. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
     "skillList": [
       "Carisma",
-      "Conhecimento (Natureza)",
+      "Conhecimento [Natureza]",
       "Especialista",
-      "Explorador (Florestas)",
+      "Explorador [Florestas]",
       "Golpe de Sorte",
       "Lidar com Animais",
       "Montar Criatura",
       "Sobrevivência",
-      "Trilhador (Florestas)"
+      "Trilhador [Florestas]"
     ],
     "grantedTraits": [
       {

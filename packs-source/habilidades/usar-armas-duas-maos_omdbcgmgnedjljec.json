@@ -1,7 +1,7 @@
 {
   "_id": "omdbcgmgnedjljec",
   "_key": "!items!omdbcgmgnedjljec",
-  "name": "Usar Armas (Duas Mãos)",
+  "name": "Usar Armas [Duas Mãos]",
   "type": "habilidade",
   "img": "icons/svg/sword.svg",
   "system": {

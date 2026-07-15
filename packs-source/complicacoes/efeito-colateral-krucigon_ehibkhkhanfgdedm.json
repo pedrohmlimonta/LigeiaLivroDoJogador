@@ -1,7 +1,7 @@
 {
   "_id": "ehibkhkhanfgdedm",
   "_key": "!items!ehibkhkhanfgdedm",
-  "name": "Efeito Colateral (krucigon)",
+  "name": "Efeito Colateral [krucigon]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (krucigon)",
+    "prereq": "Palavra Arcana [krucigon]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

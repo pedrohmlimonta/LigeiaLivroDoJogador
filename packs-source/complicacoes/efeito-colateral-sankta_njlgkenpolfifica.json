@@ -1,7 +1,7 @@
 {
   "_id": "njlgkenpolfifica",
   "_key": "!items!njlgkenpolfifica",
-  "name": "Efeito Colateral (sankta)",
+  "name": "Efeito Colateral [sankta]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (sankta)",
+    "prereq": "Palavra Arcana [sankta]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

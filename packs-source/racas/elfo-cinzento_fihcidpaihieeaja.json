@@ -7,11 +7,11 @@
   "system": {
     "description": "<p>Elfos eruditos abençoados por Kalael com grande afinidade mágica.</p><p>Características — Dado de Melhoria: Agilidade ou Mente. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
     "skillList": [
-      "Conhecimento (Arcano)",
-      "Conhecimento (Religião)",
-      "Usar Armas (Arcos)",
-      "Usar Armas (Lâminas Grandes)",
-      "Usar Armas (Lâminas Pequenas)"
+      "Conhecimento [Arcano]",
+      "Conhecimento [Religião]",
+      "Usar Armas [Arcos]",
+      "Usar Armas [Lâminas Grandes]",
+      "Usar Armas [Lâminas Pequenas]"
     ],
     "grantedTraits": [
       {

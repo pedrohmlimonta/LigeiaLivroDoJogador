@@ -7,21 +7,21 @@
   "system": {
     "description": "<p>Descendentes de diabos do Inferno, com chifres, garras e afinidade com o fogo.</p><p>Custo: 30 pontos de antecedentes. Restrições: Nenhuma. Corrupção: +1.</p>",
     "skillList": [
-      "Afinidade Mágica Elemental (Fogo)",
+      "Afinidade Mágica Elemental [Fogo]",
       "Asas",
       "Carisma",
       "Cauda",
-      "Familiar (Imp)",
+      "Familiar [Imp]",
       "Furtividade",
       "Garras",
-      "Melhorar Atributo (Força)",
-      "Melhorar Atributo (Mente)",
+      "Melhorar Atributo [Força]",
+      "Melhorar Atributo [Mente]",
       "Mercado Negro",
-      "Palavra Arcana (exitium)",
-      "Palavra Arcana (ignis)",
-      "Palavra Arcana (majesto)",
-      "Palavra Arcana (pluribus)",
-      "Palavra Arcana (saeculorum)"
+      "Palavra Arcana [exitium]",
+      "Palavra Arcana [ignis]",
+      "Palavra Arcana [majesto]",
+      "Palavra Arcana [pluribus]",
+      "Palavra Arcana [saeculorum]"
     ],
     "grantedTraits": [
       {

@@ -1,7 +1,7 @@
 {
   "_id": "egikmgjoapbdpdkc",
   "_key": "!items!egikmgjoapbdpdkc",
-  "name": "Melhorar Atributo (Força)",
+  "name": "Melhorar Atributo [Força]",
   "type": "habilidade",
   "img": "icons/svg/regen.svg",
   "system": {

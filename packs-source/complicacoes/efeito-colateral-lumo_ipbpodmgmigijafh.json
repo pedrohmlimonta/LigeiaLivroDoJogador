@@ -1,7 +1,7 @@
 {
   "_id": "ipbpodmgmigijafh",
   "_key": "!items!ipbpodmgmigijafh",
-  "name": "Efeito Colateral (lumo)",
+  "name": "Efeito Colateral [lumo]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (lumo)",
+    "prereq": "Palavra Arcana [lumo]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

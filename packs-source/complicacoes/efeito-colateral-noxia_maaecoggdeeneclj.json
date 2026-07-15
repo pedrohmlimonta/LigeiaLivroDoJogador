@@ -1,7 +1,7 @@
 {
   "_id": "maaecoggdeeneclj",
   "_key": "!items!maaecoggdeeneclj",
-  "name": "Efeito Colateral (noxia)",
+  "name": "Efeito Colateral [noxia]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (noxia)",
+    "prereq": "Palavra Arcana [noxia]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

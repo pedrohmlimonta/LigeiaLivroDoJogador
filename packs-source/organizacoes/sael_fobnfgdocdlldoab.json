@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>O povo saelar é um povo estudioso e com extremo interesse nas artes arcanas. Seus filhos são ensinados a dominar a magia desde crianças. A única arma que aprendem a usar são os bastões, que também são muitas vezes usados como foco arcano, na conjuração de suas magias. Os saelares são tão precisos e metódicos em suas conjurações, que dificilmente falham em executá-las.</p>",
     "skillList": [
-      "Conhecimento (Arcano)",
-      "Conhecimento (Ocultismo)",
-      "Palavra Arcana (Único)",
-      "Usar Armas (Bastões)",
+      "Conhecimento [Arcano]",
+      "Conhecimento [Ocultismo]",
+      "Palavra Arcana [Único]",
+      "Usar Armas [Bastões]",
       "Precisão Arcana"
     ],
     "grantedTraits": []

@@ -1,7 +1,7 @@
 {
   "_id": "iollnlojldbboifa",
   "_key": "!items!iollnlojldbboifa",
-  "name": "Efeito Colateral (inanis)",
+  "name": "Efeito Colateral [inanis]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (inanis)",
+    "prereq": "Palavra Arcana [inanis]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

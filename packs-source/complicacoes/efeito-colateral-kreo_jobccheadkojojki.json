@@ -1,7 +1,7 @@
 {
   "_id": "jobccheadkojojki",
   "_key": "!items!jobccheadkojojki",
-  "name": "Efeito Colateral (kreo)",
+  "name": "Efeito Colateral [kreo]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (kreo)",
+    "prereq": "Palavra Arcana [kreo]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

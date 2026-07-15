@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>O povo do vale é composto por humanos de uma linhagem muito antiga e extremamente ligada à natureza e seus espíritos ancestrais. Eles são grandes conhecedores da fauna, da flora e do herbalismo.</p>",
     "skillList": [
-      "Conhecimento (Natureza)",
-      "Espírito Guardião (Único)",
+      "Conhecimento [Natureza]",
+      "Espírito Guardião [Único]",
       "Medicina",
-      "Usar Armas (Dardos)",
+      "Usar Armas [Dardos]",
       "Proteção dos Espíritos"
     ],
     "grantedTraits": []

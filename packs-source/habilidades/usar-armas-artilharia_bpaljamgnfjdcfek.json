@@ -1,7 +1,7 @@
 {
   "_id": "bpaljamgnfjdcfek",
   "_key": "!items!bpaljamgnfjdcfek",
-  "name": "Usar Armas (Artilharia)",
+  "name": "Usar Armas [Artilharia]",
   "type": "habilidade",
   "img": "icons/svg/sword.svg",
   "system": {

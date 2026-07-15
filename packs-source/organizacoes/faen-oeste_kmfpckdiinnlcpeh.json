@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>A nação de Faen Oeste é extremamente acostumada a lidar com os objetos mecânicos e arcanomecânicos produzidos em sua capital, Grandía.</p>",
     "skillList": [
-      "Conhecimento (Arcano)",
+      "Conhecimento [Arcano]",
       "Ofícios",
-      "Usar Armas (Bestas)",
-      "Veículos (Qualquer)",
+      "Usar Armas [Bestas]",
+      "Veículos [Qualquer]",
       "Operar Mecanismos"
     ],
     "grantedTraits": []

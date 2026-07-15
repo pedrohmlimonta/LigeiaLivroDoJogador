@@ -8,14 +8,14 @@
     "description": "<p>Gnomos furtivos das cavernas profundas, camuflados entre as rochas.</p><p>Características — Dado de Melhoria: Mente ou Agilidade. Bônus de Deslocamento: +4m. Tamanho: Pequeno. Idiomas Iniciais: Regional e Élfico. Corrupção: +1.</p>",
     "skillList": [
       "Alerta",
-      "Conhecimento (Arcano)",
-      "Explorador (Subterrâneos)",
+      "Conhecimento [Arcano]",
+      "Explorador [Subterrâneos]",
       "Furtividade",
       "Mercado Negro",
       "Movimento Astuto",
-      "Palavra Arcana (iluzio)",
-      "Palavra Arcana (tenebrae)",
-      "Trilhador (Subterrâneos)"
+      "Palavra Arcana [iluzio]",
+      "Palavra Arcana [tenebrae]",
+      "Trilhador [Subterrâneos]"
     ],
     "grantedTraits": [
       {

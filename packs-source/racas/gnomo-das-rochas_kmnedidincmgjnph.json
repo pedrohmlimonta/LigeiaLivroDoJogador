@@ -8,16 +8,16 @@
     "description": "<p>Gnomos inventores e estudiosos, criadores de engenhocas notáveis.</p><p>Características — Dado de Melhoria: Mente ou Vigor. Bônus de Deslocamento: +4m. Tamanho: Pequeno. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
     "skillList": [
       "Carisma",
-      "Conhecimento (Arcano)",
-      "Conhecimento (Guerra)",
-      "Conhecimento (História)",
-      "Conhecimento (Natureza)",
-      "Conhecimento (Religião)",
+      "Conhecimento [Arcano]",
+      "Conhecimento [Guerra]",
+      "Conhecimento [História]",
+      "Conhecimento [Natureza]",
+      "Conhecimento [Religião]",
       "Especialista",
       "Lidar com Armadilhas",
       "Ofícios",
-      "Veículos (Terrestres)",
-      "Veículos (Aéreos)"
+      "Veículos [Terrestres]",
+      "Veículos [Aéreos]"
     ],
     "grantedTraits": [
       {

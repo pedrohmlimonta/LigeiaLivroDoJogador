@@ -8,9 +8,9 @@
     "description": "<p>Filhos de dois mundos, combinam a graça élfica com a versatilidade humana.</p><p>Características — Dado de Melhoria: Agilidade, Percepção ou Mente. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional, Élfico e mais um à escolha. Corrupção: +0.</p>",
     "skillList": [
       "Carisma",
-      "Conhecimento (Arcano)",
-      "Conhecimento (História)",
-      "Conhecimento (Natureza)",
+      "Conhecimento [Arcano]",
+      "Conhecimento [História]",
+      "Conhecimento [Natureza]",
       "Ofícios"
     ],
     "grantedTraits": [

@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>A nação aisengardiana possui o sangue dos primeiros homens do sul de Ligeia. São um povo abençoado por Iperon, o Deus da Força, e de onde descendem a maior parte dos humanos das Terras Centrais. Eles ainda carregam costumes bárbaros e são muito resistentes ao clima gelado do sul.</p>",
     "skillList": [
-      "Explorador (Glacial)",
+      "Explorador [Glacial]",
       "Sobrevivência",
-      "Usar Armas (Arremesso)",
-      "Usar Armas (Machados)",
+      "Usar Armas [Arremesso]",
+      "Usar Armas [Machados]",
       "Ferocidade Primitiva"
     ],
     "grantedTraits": []

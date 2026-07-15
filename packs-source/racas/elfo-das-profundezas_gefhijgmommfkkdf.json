@@ -8,13 +8,13 @@
     "description": "<p>Elfos marcados pela maldição de Mizra, senhores das sombras do subterrâneo.</p><p>Características — Dado de Melhoria: Agilidade ou Percepção. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +1.</p>",
     "skillList": [
       "Carisma",
-      "Explorador (Subterrâneos)",
+      "Explorador [Subterrâneos]",
       "Furtividade",
       "Mercado Negro",
-      "Trilhador (Subterrâneos)",
-      "Usar Armas (Arcos)",
-      "Usar Armas (Lâminas Grandes)",
-      "Usar Armas (Lâminas Pequenas)"
+      "Trilhador [Subterrâneos]",
+      "Usar Armas [Arcos]",
+      "Usar Armas [Lâminas Grandes]",
+      "Usar Armas [Lâminas Pequenas]"
     ],
     "grantedTraits": [
       {

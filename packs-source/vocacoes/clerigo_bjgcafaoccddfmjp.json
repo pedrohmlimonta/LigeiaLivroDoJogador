@@ -8,19 +8,19 @@
     "description": "<p>Servos devotos que canalizam os aspectos de sua divindade em milagres.</p><p>Bônus de Pontos de Vida: +2. Bônus de Pontos de Magia: +0.</p>",
     "skillList": [
       "Carisma",
-      "Conhecimento (Religião)",
+      "Conhecimento [Religião]",
       "Escolhido da Divindade",
       "Guerra Santa",
       "Guerreiro da Fé",
       "Guia Divino",
       "Magia Unilateral",
       "Medicina",
-      "Melhorar Atributo (Mente)",
+      "Melhorar Atributo [Mente]",
       "Prece de Repouso",
       "Primeiro Aspecto",
       "Segundo Aspecto",
       "Usar Armaduras Leves",
-      "Usar Armas (Simples)"
+      "Usar Armas [Simples]"
     ],
     "grantedTraits": [],
     "hpBonus": 2,

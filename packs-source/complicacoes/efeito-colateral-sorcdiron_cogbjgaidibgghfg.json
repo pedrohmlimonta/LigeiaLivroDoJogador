@@ -1,7 +1,7 @@
 {
   "_id": "cogbjgaidibgghfg",
   "_key": "!items!cogbjgaidibgghfg",
-  "name": "Efeito Colateral (sorcdiron)",
+  "name": "Efeito Colateral [sorcdiron]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (sorcdiron)",
+    "prereq": "Palavra Arcana [sorcdiron]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

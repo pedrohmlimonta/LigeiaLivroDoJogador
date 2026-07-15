@@ -7,11 +7,11 @@
   "system": {
     "description": "<p>Elfos de traços finos e herança arcana, agraciados pelo príncipe dos faérian.</p><p>Características — Dado de Melhoria: Agilidade ou Mente. Bônus de Deslocamento: +5m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
     "skillList": [
-      "Conhecimento (Arcano)",
-      "Palavra Arcana (lumo)",
-      "Usar Armas (Arcos)",
-      "Usar Armas (Lâminas Grandes)",
-      "Usar Armas (Lâminas Pequenas)"
+      "Conhecimento [Arcano]",
+      "Palavra Arcana [lumo]",
+      "Usar Armas [Arcos]",
+      "Usar Armas [Lâminas Grandes]",
+      "Usar Armas [Lâminas Pequenas]"
     ],
     "grantedTraits": [
       {

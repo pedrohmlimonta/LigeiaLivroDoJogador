@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>O povo do deserto é um dos povos mais resistentes que existe em Ligeia, sobrevivendo a ameaças do deserto, como fome, sede, calor intenso, orcs das ruínas de Baruk e outras criaturas ainda piores, como os vermes púrpura. Devido à escassez em recursos minerais, eles quase não possuem acesso a armas de metal, acabando por se tornarem bons com armas como chicotes e clavas.</p>",
     "skillList": [
-      "Explorador (Desertos)",
+      "Explorador [Desertos]",
       "Sobrevivência",
-      "Usar Armas (Chicotes)",
-      "Usar Armas (Maças)",
+      "Usar Armas [Chicotes]",
+      "Usar Armas [Maças]",
       "Força Repentina"
     ],
     "grantedTraits": []

@@ -7,14 +7,14 @@
   "system": {
     "description": "<p>Elfos guardiões das matas de Illain, imperceptíveis em ambientes selvagens.</p><p>Características — Dado de Melhoria: Agilidade ou Percepção. Bônus de Deslocamento: +6m. Tamanho: Médio. Idiomas Iniciais: Regional e Élfico. Corrupção: +0.</p>",
     "skillList": [
-      "Conhecimento (Natureza)",
-      "Explorador (Florestas)",
+      "Conhecimento [Natureza]",
+      "Explorador [Florestas]",
       "Furtividade",
       "Sobrevivência",
-      "Trilhador (Florestas)",
-      "Usar Armas (Arcos)",
-      "Usar Armas (Lâminas Grandes)",
-      "Usar Armas (Lâminas Pequenas)"
+      "Trilhador [Florestas]",
+      "Usar Armas [Arcos]",
+      "Usar Armas [Lâminas Grandes]",
+      "Usar Armas [Lâminas Pequenas]"
     ],
     "grantedTraits": [
       {

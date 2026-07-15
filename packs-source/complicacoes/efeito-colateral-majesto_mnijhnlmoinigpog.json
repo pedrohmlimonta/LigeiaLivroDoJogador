@@ -1,7 +1,7 @@
 {
   "_id": "mnijhnlmoinigpog",
   "_key": "!items!mnijhnlmoinigpog",
-  "name": "Efeito Colateral (majesto)",
+  "name": "Efeito Colateral [majesto]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (majesto)",
+    "prereq": "Palavra Arcana [majesto]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

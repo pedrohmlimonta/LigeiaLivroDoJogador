@@ -1,7 +1,7 @@
 {
   "_id": "fjnjkiaiiadiopjb",
   "_key": "!items!fjnjkiaiiadiopjb",
-  "name": "Efeito Colateral (sangon)",
+  "name": "Efeito Colateral [sangon]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (sangon)",
+    "prereq": "Palavra Arcana [sangon]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

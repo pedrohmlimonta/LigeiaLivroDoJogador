@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>Os ruffianos são um povo pacífico e que aprecia o conforto de seus lares e a vida no campo. Eles adoram lidar com os animais e os ofícios mais comuns. No entanto, a característica mais impressionante entre eles é a sua incrível habilidade de resolver situações complicadas e enigmáticas.</p>",
     "skillList": [
-      "Conhecimento (História)",
+      "Conhecimento [História]",
       "Lidar com Animais",
       "Ofícios",
-      "Usar Armas (Simples)",
+      "Usar Armas [Simples]",
       "Senso Lógico"
     ],
     "grantedTraits": []

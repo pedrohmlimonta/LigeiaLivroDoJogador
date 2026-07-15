@@ -8,13 +8,13 @@
     "description": "<p>Tocados pelo caos primordial, sua magia é imprevisível e mutável.</p><p>Custo: 20 pontos de antecedentes. Restrições: Nenhuma. Corrupção: —.</p>",
     "skillList": [
       "Carisma",
-      "Conhecimento (Arcano)",
-      "Conhecimento (Natureza)",
+      "Conhecimento [Arcano]",
+      "Conhecimento [Natureza]",
       "Energia Mágica Ampliada",
-      "Palavra Arcana (exitium)",
-      "Palavra Arcana (majesto)",
-      "Palavra Arcana (pluribus)",
-      "Palavra Arcana (saeculorum)"
+      "Palavra Arcana [exitium]",
+      "Palavra Arcana [majesto]",
+      "Palavra Arcana [pluribus]",
+      "Palavra Arcana [saeculorum]"
     ],
     "grantedTraits": [
       {

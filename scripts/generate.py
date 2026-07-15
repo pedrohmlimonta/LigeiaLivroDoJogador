@@ -3,6 +3,7 @@
 """Gera os documentos JSON dos compêndios em packs-source/."""
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +28,22 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Tipos que possuem o botão de ativação (mode/active) no schema do sistema.
 ACTIVATABLE_TYPES = {"habilidade", "magia", "equipamento", "traco", "complicacao"}
+
+# Tipos cujos nomes usam sub-grupos: "Base (Sub)" -> "Base [Sub]".
+SUBGROUP_NAME_TYPES = {"habilidade", "complicacao"}
+# Tipos de definição cujas skillList referenciam habilidades por nome.
+DEFINITION_TYPES = {"raca", "heranca", "vocacao", "carreira", "organizacao"}
+
+_TRAILING_PARENS = re.compile(r"\s\(([^()]*)\)$")
+
+
+def bracketize(text):
+    """Converte o sub-grupo final de parênteses para colchetes.
+
+    "Usar Armas (Machados)" -> "Usar Armas [Machados]".
+    Não altera nomes sem parêntese final.
+    """
+    return _TRAILING_PARENS.sub(r" [\1]", text)
 
 PACKS = {
     "habilidades": sorted(HABILIDADES_1 + HABILIDADES_2 + HABILIDADES_3 + HABILIDADES_4,
@@ -57,6 +74,15 @@ def main():
         seen = {}
         for i, doc in enumerate(docs):
             doc["sort"] = (i + 1) * 100
+            # Sub-grupos com colchetes: nos nomes de habilidades e
+            # complicações (inclusive prereq) e em todas as skillList.
+            if doc["type"] in SUBGROUP_NAME_TYPES:
+                doc["name"] = bracketize(doc["name"])
+                if doc["system"].get("prereq"):
+                    doc["system"]["prereq"] = bracketize(doc["system"]["prereq"])
+            if doc["type"] in DEFINITION_TYPES:
+                doc["system"]["skillList"] = [bracketize(s)
+                                              for s in doc["system"]["skillList"]]
             # Padrão global: itens ativáveis mostram o botão de ativação
             # (mode "active") com a checkbox desligada (active False).
             # Tipos de definição (raca/heranca/vocacao/carreira) não possuem

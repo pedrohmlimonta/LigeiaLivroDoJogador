@@ -7,10 +7,10 @@
   "system": {
     "description": "<p>Uma nação forte e brutal. Um povo extremamente militarizado e de um vigor que assusta qualquer estrangeiro.</p>",
     "skillList": [
-      "Conhecimento (Guerra)",
-      "Usar Armas (Machados)",
-      "Usar Armas (Manguais)",
-      "Usar Armas (Lanças)",
+      "Conhecimento [Guerra]",
+      "Usar Armas [Machados]",
+      "Usar Armas [Manguais]",
+      "Usar Armas [Lanças]",
       "Tenacidade Assustadora"
     ],
     "grantedTraits": []

@@ -1,7 +1,7 @@
 {
   "_id": "pbdpgglmnielodih",
   "_key": "!items!pbdpgglmnielodih",
-  "name": "Efeito Colateral (energio)",
+  "name": "Efeito Colateral [energio]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (energio)",
+    "prereq": "Palavra Arcana [energio]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",

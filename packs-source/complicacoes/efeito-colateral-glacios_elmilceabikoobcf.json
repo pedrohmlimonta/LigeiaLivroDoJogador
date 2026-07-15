@@ -1,7 +1,7 @@
 {
   "_id": "elmilceabikoobcf",
   "_key": "!items!elmilceabikoobcf",
-  "name": "Efeito Colateral (glacios)",
+  "name": "Efeito Colateral [glacios]",
   "type": "complicacao",
   "img": "icons/svg/downgrade.svg",
   "system": {
@@ -9,7 +9,7 @@
     "xpBasic": 10,
     "xpAdvanced": 0,
     "xpSpecial": 0,
-    "prereq": "Palavra Arcana (glacios)",
+    "prereq": "Palavra Arcana [glacios]",
     "lists": "Palavra Arcana",
     "activation": "",
     "target": "",
