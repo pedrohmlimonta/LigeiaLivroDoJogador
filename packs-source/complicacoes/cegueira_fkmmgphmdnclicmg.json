@@ -1,0 +1,50 @@
+{
+  "_id": "fkmmgphmdnclicmg",
+  "_key": "!items!fkmmgphmdnclicmg",
+  "name": "Cegueira",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 20,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "",
+    "lists": "",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você nasceu cego ou sofreu algo que o deixou cego. Seja lá qual for, você deve sobreviver apenas com os outros sentidos.</p><p>Você está constantemente sob a condição Cego.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "info",
+        "target": "all",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Constantemente sob a condição Cego",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

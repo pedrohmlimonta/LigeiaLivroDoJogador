@@ -1,0 +1,29 @@
+{
+  "_id": "bjeimdlccjjcabne",
+  "_key": "!items!bjeimdlccjjcabne",
+  "name": "Durathor",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>A nação de Durathor é uma nação acostumada a viver nas montanhas e em seus subterrâneos, trabalhando das minas repletas de riquezas minerais, ao tilintar do martelo das forjas e das picaretas a escavar. O trabalho árduo enrijeceu o povo das montanhas e os deixou duros como pedra.</p>",
+    "skillList": [
+      "Explorador (Montanhas)",
+      "Ofícios",
+      "Usar Armas (Martelos)",
+      "Usar Armas (Picaretas)",
+      "Implacável"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

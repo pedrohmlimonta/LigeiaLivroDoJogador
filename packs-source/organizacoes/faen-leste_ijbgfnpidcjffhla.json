@@ -1,0 +1,29 @@
+{
+  "_id": "ijbgfnpidcjffhla",
+  "_key": "!items!ijbgfnpidcjffhla",
+  "name": "Faen Leste",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>A nação de Faen Leste possui uma tremenda influência e habilidade de falar em público. Tendo uma habilidade natural para o comércio e para a diplomacia.</p>",
+    "skillList": [
+      "Mercado Negro",
+      "Ofícios",
+      "Usar Armas (Lâminas Pequenas)",
+      "Recursos",
+      "Lábia Natural"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

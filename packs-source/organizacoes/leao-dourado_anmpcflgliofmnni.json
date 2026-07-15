@@ -1,0 +1,29 @@
+{
+  "_id": "anmpcflgliofmnni",
+  "_key": "!items!anmpcflgliofmnni",
+  "name": "Leão Dourado",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>Um reino teocrático, com uma educação rígida e com uma poderosa ordem de cavalaria. Seu povo possui uma altivez e uma presença tremenda.</p>",
+    "skillList": [
+      "Conhecimento (Religião)",
+      "Etiqueta",
+      "Montar Criatura",
+      "Usar Armas (Lâminas Grandes)",
+      "Presença do Leão"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

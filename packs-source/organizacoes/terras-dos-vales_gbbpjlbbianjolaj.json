@@ -1,0 +1,29 @@
+{
+  "_id": "gbbpjlbbianjolaj",
+  "_key": "!items!gbbpjlbbianjolaj",
+  "name": "Terras dos Vales",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>O povo do vale é composto por humanos de uma linhagem muito antiga e extremamente ligada à natureza e seus espíritos ancestrais. Eles são grandes conhecedores da fauna, da flora e do herbalismo.</p>",
+    "skillList": [
+      "Conhecimento (Natureza)",
+      "Espírito Guardião (Único)",
+      "Medicina",
+      "Usar Armas (Dardos)",
+      "Proteção dos Espíritos"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

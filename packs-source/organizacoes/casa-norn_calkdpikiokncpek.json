@@ -1,0 +1,29 @@
+{
+  "_id": "calkdpikiokncpek",
+  "_key": "!items!calkdpikiokncpek",
+  "name": "Casa Norn",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>O povo norniano sofreu muitas perdas nos últimos anos, sendo assolados por maldições, pragas e fome. Sem nenhum amparo, devido à perda recente de seu regente, eles tiveram que sobreviver e se reerguer sozinhos.</p>",
+    "skillList": [
+      "Conhecimento (Ocultismo)",
+      "Medicina",
+      "Usar Armas (Haste)",
+      "Usar Armas (Lâminas Grandes)",
+      "Marca da Mácula"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

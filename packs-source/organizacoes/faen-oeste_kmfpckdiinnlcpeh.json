@@ -1,0 +1,29 @@
+{
+  "_id": "kmfpckdiinnlcpeh",
+  "_key": "!items!kmfpckdiinnlcpeh",
+  "name": "Faen Oeste",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>A nação de Faen Oeste é extremamente acostumada a lidar com os objetos mecânicos e arcanomecânicos produzidos em sua capital, Grandía.</p>",
+    "skillList": [
+      "Conhecimento (Arcano)",
+      "Ofícios",
+      "Usar Armas (Bestas)",
+      "Veículos (Qualquer)",
+      "Operar Mecanismos"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

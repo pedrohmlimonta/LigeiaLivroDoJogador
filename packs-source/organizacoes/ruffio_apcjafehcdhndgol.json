@@ -1,0 +1,29 @@
+{
+  "_id": "apcjafehcdhndgol",
+  "_key": "!items!apcjafehcdhndgol",
+  "name": "Rúffio",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>Os ruffianos são um povo pacífico e que aprecia o conforto de seus lares e a vida no campo. Eles adoram lidar com os animais e os ofícios mais comuns. No entanto, a característica mais impressionante entre eles é a sua incrível habilidade de resolver situações complicadas e enigmáticas.</p>",
+    "skillList": [
+      "Conhecimento (História)",
+      "Lidar com Animais",
+      "Ofícios",
+      "Usar Armas (Simples)",
+      "Senso Lógico"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

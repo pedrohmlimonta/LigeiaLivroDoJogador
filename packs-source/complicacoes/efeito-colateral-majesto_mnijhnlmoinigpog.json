@@ -1,0 +1,50 @@
+{
+  "_id": "mnijhnlmoinigpog",
+  "_key": "!items!mnijhnlmoinigpog",
+  "name": "Efeito Colateral (majesto)",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 10,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "Palavra Arcana (majesto)",
+    "lists": "Palavra Arcana",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você conjura magias compostas por uma determinada palavra arcana, ela sempre foge ao seu controle e produz um efeito prejudicial a você e/ou pessoas próximas.</p><p>Quando você conjura magias compostas pela palavra arcana majesto e o resultado da Conjuração é 12 ou menor, a magia produz um efeito colateral, independente dela funcionar ou não.</p><p>Efeito Colateral — Objeto Aumentado: Um objeto seu tem seu tamanho aumentado até o ponto de não ser possível carregá-lo (à escolha do narrador).</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "info",
+        "target": "all",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Conjuração ≤ 12 com majesto: Objeto Aumentado",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 2200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

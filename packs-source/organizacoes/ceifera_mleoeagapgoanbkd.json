@@ -1,0 +1,29 @@
+{
+  "_id": "mleoeagapgoanbkd",
+  "_key": "!items!mleoeagapgoanbkd",
+  "name": "Ceifera",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>Uma nação forte e brutal. Um povo extremamente militarizado e de um vigor que assusta qualquer estrangeiro.</p>",
+    "skillList": [
+      "Conhecimento (Guerra)",
+      "Usar Armas (Machados)",
+      "Usar Armas (Manguais)",
+      "Usar Armas (Lanças)",
+      "Tenacidade Assustadora"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 300,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "_id": "mabbbgmedpanddhp",
+  "_key": "!items!mabbbgmedpanddhp",
+  "name": "Jardins de Inverno",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>Nação de povo estudioso e engenhoso, cujas habilidades regionais refletem sua inventividade.</p>",
+    "skillList": [
+      "Conhecimento (Qualquer)",
+      "Ofícios",
+      "Usar Armas (Arcos)",
+      "Usar Armas (Lanças)",
+      "Espírito Inovador"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

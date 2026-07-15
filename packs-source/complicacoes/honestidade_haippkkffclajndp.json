@@ -1,0 +1,50 @@
+{
+  "_id": "haippkkffclajndp",
+  "_key": "!items!haippkkffclajndp",
+  "name": "Honestidade",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 10,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "",
+    "lists": "",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você é incapaz de trapacear ou mentir, dizendo a verdade mesmo que isso possa colocar em risco a sua vida e a de seus companheiros.</p><p>Você é incapaz de roubar, trapacear, mentir ou desobedecer leis locais, e tentará impedir que seus companheiros os façam. Caso você não seja capaz de impedir que um companheiro seu o faça, você perderá 1 ponto heróico.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "info",
+        "target": "all",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Honestidade: não mente/trapaceia; falhar em impedir aliados custa 1 PH",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3600,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

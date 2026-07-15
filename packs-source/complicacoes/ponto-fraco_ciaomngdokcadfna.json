@@ -1,0 +1,50 @@
+{
+  "_id": "ciaomngdokcadfna",
+  "_key": "!items!ciaomngdokcadfna",
+  "name": "Ponto Fraco",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 10,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "",
+    "lists": "",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você possui um ponto fraco em seu corpo. Em combate, os inimigos que sabem disso podem tirar vantagem para derrotá-lo mais facilmente.</p><p>Sempre que você sofrer dano de um ataque, role um dado. Se o resultado for 3 ou menos, o inimigo acertou no seu ponto fraco e tem ciência disso. Você é considerado indefeso para todos os ataques dele permanentemente.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "info",
+        "target": "all",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Ponto Fraco: ao sofrer dano, role 1d6; 3- = indefeso contra esse inimigo",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

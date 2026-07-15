@@ -1,0 +1,60 @@
+{
+  "_id": "mlgimohlnhabfpam",
+  "_key": "!items!mlgimohlnhabfpam",
+  "name": "Doença Grave",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 20,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "",
+    "lists": "",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você possui uma doença grave, algo que torna seu organismo extremamente frágil. Doenças, venenos e quaisquer danos ao seu corpo poderiam matá-lo mais facilmente.</p><p>Você re-rola quaisquer resultados \"6\" nos dados de rolagens de Vigor obrigatoriamente e não pode rolar dados de melhoria nas mesmas.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "reroll6",
+        "target": "vigor",
+        "value": 1,
+        "rerollAll": true,
+        "label": "Doença Grave: re-rola todos os 6 em Vigor",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "info",
+        "target": "vigor",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Doença Grave: não pode rolar dados de melhoria nas mesmas (aplique manualmente na rolagem)",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "_id": "pajdogjiefpbohnk",
+  "_key": "!items!pajdogjiefpbohnk",
+  "name": "Pacifista",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 10,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "",
+    "lists": "",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você se nega a ferir qualquer tipo de criatura, evitando combates e batalhas, mesmo sabendo que isso pode ser prejudicial para o seu grupo.</p><p>Você não pode fazer qualquer ação que cause dano a inimigos. Quando você sofre dano causado por um inimigo, você deve ser bem sucedido em uma rolagem de Mente cuja dificuldade é igual a 10 + o dano sofrido para se manter pacífico. Caso você falhe, você perde 1 ponto heróico e pode atacar inimigos normalmente.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "info",
+        "target": "all",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Pacifista: não causa dano; Mente (10 + dano sofrido) para se manter pacífico",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4800,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

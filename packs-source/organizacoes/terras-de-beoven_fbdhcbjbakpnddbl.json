@@ -1,0 +1,29 @@
+{
+  "_id": "fbdhcbjbakpnddbl",
+  "_key": "!items!fbdhcbjbakpnddbl",
+  "name": "Terras de Beoven",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>A nação aisengardiana possui o sangue dos primeiros homens do sul de Ligeia. São um povo abençoado por Iperon, o Deus da Força, e de onde descendem a maior parte dos humanos das Terras Centrais. Eles ainda carregam costumes bárbaros e são muito resistentes ao clima gelado do sul.</p>",
+    "skillList": [
+      "Explorador (Glacial)",
+      "Sobrevivência",
+      "Usar Armas (Arremesso)",
+      "Usar Armas (Machados)",
+      "Ferocidade Primitiva"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

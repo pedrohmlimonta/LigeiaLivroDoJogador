@@ -1,0 +1,29 @@
+{
+  "_id": "bbllpamepokanfan",
+  "_key": "!items!bbllpamepokanfan",
+  "name": "Sei Yang",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>Uma nação situada no oriente, cujo povo se devota aos espíritos ancestrais da natureza que regem cada clã. Possuem um senso moral e ético muito forte.</p><p>Habilidades Regionais de acordo com o Clã — Ohitsuji (Carneiro): Usar Armas (Lâminas Grandes) / Espírito Guardião (Carneiro); Washi (Águia): Arcos / Águia; Kuma (Urso): Duas Mãos / Urso; Kame (Tartaruga): Martelos / Tartaruga; Uma (Cavalo): Correntes / Cavalo; Hebi (Serpente): Lâminas Pequenas / Serpente; Ookami (Lobo): Lâminas Pequenas / Lobo; Osuushi (Touro): Machados / Búfalo; Koi (Carpa): Lanças / Carpa; Saru (Macaco): Desarmado / Macaco; Shika (Cervo): Haste / Cervo; Shishi (Leão): Lâminas Grandes / Leão; Sasori (Escorpião): Arremesso / Serpente; Ryu (Dragão): Uma Mão / Lobo; Tora (Tigre): Uma Mão / Leão; Karasu (Corvo): Corpo a Corpo / Águia.</p>",
+    "skillList": [
+      "Espírito Guardião (Único, depende do Clã)",
+      "Usar Armas (Único, depende do Clã)",
+      "Conhecimento (História)",
+      "Medicina",
+      "Morte Antes da Desonra"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

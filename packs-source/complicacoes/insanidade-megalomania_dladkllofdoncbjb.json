@@ -1,0 +1,50 @@
+{
+  "_id": "dladkllofdoncbjb",
+  "_key": "!items!dladkllofdoncbjb",
+  "name": "Insanidade (Megalomania)",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 10,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "",
+    "lists": "",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Você possui algum tipo de insanidade, o que faz com que algumas pessoas não acreditem em coisas que você diz ou mesmo tenham dificuldades em confiar em você.</p><p>Você recebe a insanidade Megalomania.</p><p>Megalomania: Você acredita ser extremamente poderoso, sempre tomando a frente nos combates. Em um combate, no começo de cada turno, você deve ser bem sucedido em uma rolagem de Mente para não ficar adjacente ao inimigo mais próximo e atacá-lo. A dificuldade para o teste é igual a 8 + o seu total de pontos de vida perdidos.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "info",
+        "target": "all",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Insanidade: Megalomania",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 4200,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

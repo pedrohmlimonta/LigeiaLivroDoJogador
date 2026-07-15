@@ -1,0 +1,60 @@
+{
+  "_id": "bgkbhdaneicfdelc",
+  "_key": "!items!bgkbhdaneicfdelc",
+  "name": "Fraco",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 20,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "",
+    "lists": "",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Força física não é bem o seu forte, independente do seu porte. Você tem dificuldade com feitos de força, seus braços ou pernas tremem mediante o esforço.</p><p>Você re-rola quaisquer resultados \"6\" nos dados de rolagens de Força obrigatoriamente e não pode rolar dados de melhoria nas mesmas.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "reroll6",
+        "target": "forca",
+        "value": 1,
+        "rerollAll": true,
+        "label": "Fraco: re-rola todos os 6 em Força",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "info",
+        "target": "forca",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Fraco: não pode rolar dados de melhoria nas mesmas (aplique manualmente na rolagem)",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 3500,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

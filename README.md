@@ -14,6 +14,8 @@ Módulo de compêndios para o sistema não-oficial [`ligeia-rpg`](https://github
 | **Heranças** | 5 | Sessão 5 — custo, restrições, corrupção, lista de habilidades e traços da herança embutidos |
 | **Vocações** | 12 | Sessão 6 — bônus de PV/PM e lista completa de habilidades iniciais |
 | **Carreiras** | 4 | Sessão 16 — pré-requisitos, lista de progressão (com habilidades de nível Épico) e a característica como traço embutido (ex.: Arquimago +2 PM) |
+| **Organizações** | 14 | Sessão 7 — as Nações de Ligeia, cada uma com a lista de Habilidades Regionais (Sei Yang inclui a tabela de Clãs) |
+| **Complicações** | 50 | Avulso 09 (Complicações, Playtest v0.1) — 12 complicações avulsas, Efeito Colateral expandido por palavra arcana (×28) e Insanidade por tipo (×10), com XP concedido em xpBasic e efeitos configurados (reroll6 nos atributos; demais como info) |
 
 ### Convenções mecânicas
 
@@ -33,7 +35,7 @@ https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/releases/latest/download/
 
 **Manual**: clone/extraia esta pasta em `Data/modules/ligeia-livro-do-jogador/`. Os packs compilados (`packs/`) já acompanham o repositório.
 
-Requer o sistema `ligeia-rpg` (mínimo 0.2.0, incluindo a versão com o tipo de item **Complicação**; Foundry v13/v14). Observação: o Livro de Regras não possui uma lista de complicações, então o módulo não inclui esse pack — o pipeline (`scripts/data_complicacoes.py`) já está pronto para gerar um pack "Complicações" caso você adicione as da sua mesa. Ative o módulo no mundo e os quatro compêndios aparecem na pasta **Ligeia — Livro do Jogador**.
+Requer o sistema `ligeia-rpg` (mínimo 0.2.0, incluindo a versão com o tipo de item **Complicação**; Foundry v13/v14). O pack Complicações usa como fonte o suplemento oficial Avulso 09 — Complicações (Dinho Reis, CC-BY-NC-ND), mesma observação de licença do Livro de Regras. Ative o módulo no mundo e os quatro compêndios aparecem na pasta **Ligeia — Livro do Jogador**.
 
 ## Arquitetura e build
 

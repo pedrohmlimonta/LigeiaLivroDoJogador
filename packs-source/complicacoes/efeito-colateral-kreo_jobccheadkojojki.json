@@ -1,0 +1,50 @@
+{
+  "_id": "jobccheadkojojki",
+  "_key": "!items!jobccheadkojojki",
+  "name": "Efeito Colateral (kreo)",
+  "type": "complicacao",
+  "img": "icons/svg/downgrade.svg",
+  "system": {
+    "level": "B",
+    "xpBasic": 10,
+    "xpAdvanced": 0,
+    "xpSpecial": 0,
+    "prereq": "Palavra Arcana (kreo)",
+    "lists": "Palavra Arcana",
+    "activation": "",
+    "target": "",
+    "area": "",
+    "range": "",
+    "duration": "",
+    "descBasic": "<p>Quando você conjura magias compostas por uma determinada palavra arcana, ela sempre foge ao seu controle e produz um efeito prejudicial a você e/ou pessoas próximas.</p><p>Quando você conjura magias compostas pela palavra arcana kreo e o resultado da Conjuração é 12 ou menor, a magia produz um efeito colateral, independente dela funcionar ou não.</p><p>Efeito Colateral — Imperfeição: O objeto criado é imperfeito e rolagens em seu uso recebem -2.</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
+    "descAdvanced": "",
+    "descSpecial": "",
+    "actions": [],
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "info",
+        "target": "all",
+        "value": 0,
+        "rerollAll": false,
+        "label": "Conjuração ≤ 12 com kreo: Imperfeição",
+        "enabled": true,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 1900,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

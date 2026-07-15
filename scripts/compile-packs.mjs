@@ -4,7 +4,7 @@ import path from "path";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const packs = ["habilidades", "magias", "equipamentos", "tracos",
-               "racas", "herancas", "vocacoes", "carreiras", "complicacoes"];
+               "racas", "herancas", "vocacoes", "carreiras", "organizacoes", "complicacoes"];
 
 import fs from "fs";
 

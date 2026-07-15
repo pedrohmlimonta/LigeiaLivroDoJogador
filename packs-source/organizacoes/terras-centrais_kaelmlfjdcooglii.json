@@ -1,0 +1,29 @@
+{
+  "_id": "kaelmlfjdcooglii",
+  "_key": "!items!kaelmlfjdcooglii",
+  "name": "Terras Centrais",
+  "type": "organizacao",
+  "img": "icons/svg/castle.svg",
+  "system": {
+    "description": "<p>O povo das terras centrais é o mais abrangente racialmente. Essa relação entre as raças aprimorou as habilidades interpessoais da nação Otherana ao longo dos anos. São uma nação rica e muito perseverante, tendo resistido até mesmo ao Ataque de Lennor.</p>",
+    "skillList": [
+      "Carisma",
+      "Recursos",
+      "Usar Armas (Haste)",
+      "Usar Armas (Lâminas Grandes)",
+      "Bastião de Esperança"
+    ],
+    "grantedTraits": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100,
+  "flags": {},
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "coreVersion": "13",
+    "systemId": "ligeia-rpg"
+  }
+}

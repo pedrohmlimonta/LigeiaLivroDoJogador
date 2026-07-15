@@ -21,6 +21,7 @@ from data_tracos_2 import TRACOS_2
 from data_racas_herancas import RACAS, HERANCAS
 from data_vocacoes_carreiras import VOCACOES, CARREIRAS
 from data_complicacoes import COMPLICACOES
+from data_organizacoes import ORGANIZACOES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,7 +40,8 @@ PACKS = {
     "herancas": HERANCAS,
     "vocacoes": VOCACOES,
     "carreiras": CARREIRAS,
-    "complicacoes": COMPLICACOES,
+    "organizacoes": ORGANIZACOES,
+    "complicacoes": sorted(COMPLICACOES, key=lambda d: d["name"].lower()),
 }
 
 
