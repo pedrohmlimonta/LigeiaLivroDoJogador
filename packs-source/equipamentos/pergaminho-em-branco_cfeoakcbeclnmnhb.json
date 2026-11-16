@@ -6,13 +6,24 @@
   "img": "icons/svg/item-bag.svg",
   "system": {
     "category": "Material",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 0,
     "price": "1 Va",
     "notes": "",
     "description": "<p>Feito em papel, usado para escrever mensagens e magias.</p><p>Propriedade: item utilizado para escrever mensagens e armazenar magias. Para armazenar uma magia em um pergaminho, o conjurador deve pagar os pontos de magia necessários para conjurá-la. O processo requer uma hora para concluir a tarefa. Após armazenada no pergaminho, a magia não consome pontos de magia para ser conjurada, queimando o pergaminho na conjuração.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -20,12 +31,11 @@
   "effects": [],
   "folder": null,
   "sort": 7700,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

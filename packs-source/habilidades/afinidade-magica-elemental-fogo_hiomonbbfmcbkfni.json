@@ -20,26 +20,39 @@
     "descAdvanced": "<p>O dano bruto adicional causado aumenta para 3 pontos de dano.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "damage",
         "target": "all",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Afinidade (Fogo) B: +1 dano",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": "fogo"
       },
       {
         "type": "damage",
         "target": "all",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Afinidade (Fogo) A: +2 dano (total 3)",
         "enabled": true,
+        "enchant": false,
         "level": "A",
         "damageType": "fogo"
       }
@@ -49,12 +62,11 @@
   "effects": [],
   "folder": null,
   "sort": 200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

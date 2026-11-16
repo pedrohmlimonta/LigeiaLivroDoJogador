@@ -6,6 +6,8 @@
   "img": "icons/svg/upgrade.svg",
   "system": {
     "wordId": "saeculorum",
+    "wordId2": "",
+    "wordId3": "",
     "tier": "Menor",
     "casting": "Ação",
     "target": "Uma criatura",
@@ -16,26 +18,35 @@
     "peculiarities": "<p>O alvo recebe uma reação adicional (em vez de movimento) (-2). O alvo recebe uma ação adicional (em vez de movimento) (apenas Círculo Intermediário ou Maior) (-6). O alvo recebe um turno adicional (em vez de movimento) (apenas Círculo Maior) (-8). O alvo recebe dois turnos adicionais (em vez de movimento) (apenas Círculo Maior) (-10). O alvo sofre 1 ponto de dano por rodada enquanto estiver sob efeito da magia (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [],
     "costs": [
       {
         "resource": "mp",
-        "value": 1,
-        "label": "Círculo Menor"
+        "value": "1",
+        "label": "Círculo Menor",
+        "level": "all"
       }
     ]
   },
   "effects": [],
   "folder": null,
   "sort": 5100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

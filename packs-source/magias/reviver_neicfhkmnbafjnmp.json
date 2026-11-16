@@ -6,6 +6,8 @@
   "img": "icons/svg/heal.svg",
   "system": {
     "wordId": "vitae",
+    "wordId2": "",
+    "wordId3": "",
     "tier": "Menor",
     "casting": "Cena",
     "target": "Uma criatura morta",
@@ -16,26 +18,35 @@
     "peculiarities": "<p>Traz o alvo de volta à vida com metade dos pontos de vida (apenas Círculo Intermediário ou Maior) (-4). Traz o alvo de volta com todos os pontos de vida (apenas Círculo Maior) (-4). Traz o alvo de volta, mesmo que só haja parte do corpo dele (apenas Círculo Intermediário ou Maior) (-4). Traz o alvo de volta necessitando apenas de um objeto pessoal dele (apenas Círculo Maior) (-6). Traz de volta um alvo que tenha morrido há uma quantidade de semanas igual ao seu nível (apenas Círculo Intermediário ou Maior) (-4). Traz de volta um alvo que tenha morrido há uma quantidade de anos igual ao seu nível (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [],
     "costs": [
       {
         "resource": "mp",
-        "value": 1,
-        "label": "Círculo Menor"
+        "value": "1",
+        "label": "Círculo Menor",
+        "level": "all"
       }
     ]
   },
   "effects": [],
   "folder": null,
   "sort": 7000,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

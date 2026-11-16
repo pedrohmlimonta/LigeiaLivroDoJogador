@@ -9,16 +9,27 @@
     "description": "<p>+3 Pontos de Vida Máximos.</p><p>Concedida ao adquirir a carreira Legionário.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "stat",
         "target": "hp",
-        "value": 3,
+        "value": "3",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Legionário: +3 PV máximos",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       }
@@ -28,12 +39,11 @@
   "effects": [],
   "folder": null,
   "sort": 1600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

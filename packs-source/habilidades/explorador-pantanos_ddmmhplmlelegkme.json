@@ -20,20 +20,41 @@
     "descAdvanced": "<p>Você recebe 1D em todas as rolagens em combate, enquanto estiver lutando no terreno em questão (pântanos).</p>",
     "descSpecial": "",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "rollDice",
+        "target": "all",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Explorador (Pântanos): +1 dado em todas as rolagens aplicáveis (ligue quando valer)",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],
   "folder": null,
   "sort": 6500,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

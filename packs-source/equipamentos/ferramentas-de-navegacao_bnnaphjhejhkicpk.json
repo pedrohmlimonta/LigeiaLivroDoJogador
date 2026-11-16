@@ -6,13 +6,24 @@
   "img": "icons/svg/anchor.svg",
   "system": {
     "category": "Ferramentas",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 0,
     "price": "25 Vo",
     "notes": "",
     "description": "<p>Inclui uma luneta, um anemômetro e uma bússola.</p><p>Propriedade: enquanto estiver usando essas ferramentas, você recebe +1 em rolagens para traçar um curso de navegação e para não se perder no mar.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -20,12 +31,11 @@
   "effects": [],
   "folder": null,
   "sort": 5600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

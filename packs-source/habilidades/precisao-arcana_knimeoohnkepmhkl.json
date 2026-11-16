@@ -20,16 +20,27 @@
     "descAdvanced": "<p>Uma vez por rodada, você pode re-rolar até dois dados com resultado 2 ou menor em uma rolagem de Conjuração.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "reroll1",
         "target": "conjuracao",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Precisão Arcana: re-rola 1 dado (1) em Conjuração",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       }
@@ -39,12 +50,11 @@
   "effects": [],
   "folder": null,
   "sort": 17800,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

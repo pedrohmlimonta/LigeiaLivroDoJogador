@@ -20,7 +20,16 @@
     "descAdvanced": "<p>Enquanto você estiver adjacente a um ou mais aliados, você e esses aliados recebem um bônus acumulativo de +1 nas rolagens de ataque. Esses aliados precisam poder vê-lo e ouvi-lo para receber esse bônus.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 22800,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

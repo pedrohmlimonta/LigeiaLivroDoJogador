@@ -20,20 +20,41 @@
     "descAdvanced": "<p>Se um personagem falhar em tentar te intimidar, ridicularizar, ofender ou provocar, você pode fazer imediatamente uma rolagem de Mente para fazer o mesmo de volta contra ele, com 1D adicional para essa rolagem.</p>",
     "descSpecial": "",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "rollDice",
+        "target": "all",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Etiqueta: +1 dado em todas as rolagens aplicáveis (ligue quando valer)",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],
   "folder": null,
   "sort": 5600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

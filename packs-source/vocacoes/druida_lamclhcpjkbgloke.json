@@ -32,18 +32,17 @@
       "Usar Armas [Simples]"
     ],
     "grantedTraits": [],
-    "hpBonus": 2,
-    "mpBonus": 2
+    "hpBonus": "2",
+    "mpBonus": "2"
   },
   "effects": [],
   "folder": null,
   "sort": 500,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

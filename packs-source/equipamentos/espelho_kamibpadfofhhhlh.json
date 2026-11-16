@@ -6,13 +6,24 @@
   "img": "icons/svg/item-bag.svg",
   "system": {
     "category": "Utensílio",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 0,
     "price": "5 Vo",
     "notes": "",
     "description": "<p>Base de aço espelhado, com cabo inteiriço.</p><p>Propriedade: usado para refletir imagens, pode ser utilizado como foco para magias compostas por iluzio. Para ser usado como foco, deve ser empunhado com uma mão.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -20,12 +31,11 @@
   "effects": [],
   "folder": null,
   "sort": 7000,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

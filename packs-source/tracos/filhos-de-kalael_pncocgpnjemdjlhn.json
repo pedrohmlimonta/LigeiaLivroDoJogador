@@ -9,7 +9,16 @@
     "description": "<p>Abençoado pelas deusas da floresta, da noite e da magia, seu criador recebeu grandes poderes mágicos. Parte desse poder foi passado para seu povo. Você recebe a habilidade Palavra Arcana (energio), sem ter que pagar por ela.</p><p>Raça: elfo cinzento.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -17,12 +26,11 @@
   "effects": [],
   "folder": null,
   "sort": 2500,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

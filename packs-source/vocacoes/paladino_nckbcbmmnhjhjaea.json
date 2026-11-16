@@ -37,18 +37,17 @@
       "Vontade de Ferro"
     ],
     "grantedTraits": [],
-    "hpBonus": 3,
-    "mpBonus": 1
+    "hpBonus": "3",
+    "mpBonus": "1"
   },
   "effects": [],
   "folder": null,
   "sort": 1100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

@@ -20,20 +20,53 @@
     "descAdvanced": "<p>Seus resultados naturais 11-12 são considerados críticos.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "arma:militar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "+1 ataque com armas de Militar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "crit",
+        "target": "arma:militar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Crítico 11-12 com armas de Militar",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],
   "folder": null,
   "sort": 25000,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

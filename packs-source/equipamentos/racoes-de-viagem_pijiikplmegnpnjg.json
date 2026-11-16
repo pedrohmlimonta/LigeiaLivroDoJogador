@@ -6,13 +6,24 @@
   "img": "icons/svg/item-bag.svg",
   "system": {
     "category": "Suprimento",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 0,
     "price": "5 Va",
     "notes": "",
     "description": "<p>Comida desidratada, que resiste mais ao tempo que comida normal.</p><p>Propriedade: refeição suficiente para um personagem por um dia.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -20,12 +31,11 @@
   "effects": [],
   "folder": null,
   "sort": 8000,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

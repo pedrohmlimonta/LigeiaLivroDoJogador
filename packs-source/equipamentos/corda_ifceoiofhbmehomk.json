@@ -6,13 +6,24 @@
   "img": "icons/svg/anchor.svg",
   "system": {
     "category": "Utensílio",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 0,
     "price": "1 Va",
     "notes": "",
     "description": "<p>Corda feita em cânhamo trançado.</p><p>Propriedade: corda de 15m de comprimento com Dureza 2.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -20,12 +31,11 @@
   "effects": [],
   "folder": null,
   "sort": 6800,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

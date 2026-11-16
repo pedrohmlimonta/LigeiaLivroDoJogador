@@ -20,7 +20,16 @@
     "descAdvanced": "<p>Enquanto você tiver 3 Pontos de Juramento ou mais, você emana uma aura com raio igual à quantidade de Pontos de Juramento. Aliados dentro da aura recebem 1D em rolagens de defesa. Enquanto você tiver 5 Pontos de Juramento ou mais, aliados dentro da aura recebem também 1D em rolagens de ataque. Enquanto você emanar essa aura, você e aliados dentro dela ficam imunes à condição de Abalado.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 11300,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

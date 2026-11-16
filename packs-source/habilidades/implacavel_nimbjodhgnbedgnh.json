@@ -20,7 +20,16 @@
     "descAdvanced": "<p>Seu limite de carga aumenta em 4 pontos, em vez de 2. Um alvo empurrado mais de 2m dessa forma ficará caído. Você recebe +2 em rolagens para evitar ser movido, puxado, empurrado ou derrubado, em vez de +1.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 10800,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

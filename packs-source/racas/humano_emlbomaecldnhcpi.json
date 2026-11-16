@@ -19,7 +19,16 @@
           "description": "<p>Você recebe 20 pontos de antecedentes adicionais na criação do personagem. Você pode gastar esses pontos adicionais para comprar habilidades de outras vocações ou raças como se fossem da sua lista (sem ter que pagar o dobro).</p><p>Raça: humano.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -33,32 +42,98 @@
           "source": "race",
           "description": "<p>Usando sua ação rápida, você pode gastar pontos de magia para recuperar pontos de vida. A cada 2 pontos de magia gastos, você recupera 1 ponto de vida.</p><p>Raça: humano.</p>",
           "isWeapon": false,
-          "actions": [],
-          "mode": "active",
+          "actions": [
+            {
+              "label": "Sangue Aagn — 2 PM recuperam 1 PV",
+              "level": "all",
+              "canRoll": false,
+              "rollAttr": "forca",
+              "rollBonus": "0",
+              "rollDice": "0",
+              "vsDifficulty": false,
+              "fixedDifficulty": "8",
+              "difficultyAttr": "nenhum",
+              "targetMode": "self",
+              "includeSelf": true,
+              "areaFilter": "all",
+              "defenseAttr": "esquiva",
+              "defenseAttr2": "",
+              "damage": "",
+              "damageType": "",
+              "damageResource": "hp",
+              "scalingDamage": false,
+              "heal": "1",
+              "healResource": "hp",
+              "scalingHeal": false,
+              "tempStack": false,
+              "skipRollDialog": true,
+              "extraDamage": [],
+              "movement": {
+                "enabled": false,
+                "kind": "push",
+                "who": "targets",
+                "distance": "0",
+                "lateralSide": "right",
+                "ignoreWalls": false,
+                "snap": true
+              },
+              "preActivations": [],
+              "appliesEffects": [],
+              "lineWidth": "1.5",
+              "coneAngle": "45",
+              "isWeapon": false,
+              "isMelee": false,
+              "range": "0",
+              "area": "0",
+              "macroUuid": "",
+              "macroName": "",
+              "macroEnabled": true,
+              "aaConfig": null,
+              "aaName": "",
+              "aaEnabled": true,
+              "animFile": "",
+              "animPlacement": "target",
+              "animScale": "1",
+              "animEnabled": true,
+              "animAttach": false,
+              "costMp": "2",
+              "costHp": "0",
+              "costHeroic": "0",
+              "persistArea": false,
+              "persistRounds": "1",
+              "persistAffectsSelf": false,
+              "persistRerollAttack": false,
+              "persistTrigger": "both"
+            }
+          ],
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": [
-            {
-              "resource": "mp",
-              "value": 2,
-              "label": "Recupera 1 PV"
-            }
-          ]
+          "costs": []
         },
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.edcoibonegmacmfk"
       }
     ],
-    "moveBonus": 5
+    "size": "medio",
+    "moveBonus": "0"
   },
   "effects": [],
   "folder": null,
   "sort": 1100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

@@ -9,16 +9,27 @@
     "description": "<p>+2 Pontos de Magia Máximos.</p><p>Concedida ao adquirir a carreira Arquimago.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "stat",
         "target": "mp",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Arquimago: +2 PM máximos",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       }
@@ -28,12 +39,11 @@
   "effects": [],
   "folder": null,
   "sort": 1400,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

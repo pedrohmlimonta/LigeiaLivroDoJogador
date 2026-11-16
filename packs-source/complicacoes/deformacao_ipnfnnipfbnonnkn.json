@@ -20,16 +20,27 @@
     "descAdvanced": "",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "info",
         "target": "all",
-        "value": 0,
+        "value": "0",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Deformação: -3 em interação social",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       }
@@ -39,12 +50,11 @@
   "effects": [],
   "folder": null,
   "sort": 200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

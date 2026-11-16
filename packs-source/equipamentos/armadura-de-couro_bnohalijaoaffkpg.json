@@ -6,62 +6,83 @@
   "img": "icons/svg/shield.svg",
   "system": {
     "category": "Armadura Leve",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 1,
     "price": "25 Vo",
     "notes": "Penalidade -1",
     "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p>",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Couro: Proteção 1 (corte)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "corte"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Couro: Proteção 1 (perfuração)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "perfuracao"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Couro: Proteção 1 (concussão)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "concussao"
       },
       {
         "type": "bonus",
         "target": "esquiva",
-        "value": -1,
+        "value": "-1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Couro: penalidade -1 Esquiva",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       },
       {
         "type": "bonus",
         "target": "conjuracao",
-        "value": -1,
+        "value": "-1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Couro: penalidade -1 Conjuração",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       }
@@ -71,12 +92,11 @@
   "effects": [],
   "folder": null,
   "sort": 100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

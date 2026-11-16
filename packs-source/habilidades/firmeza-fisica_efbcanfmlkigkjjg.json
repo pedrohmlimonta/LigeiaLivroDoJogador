@@ -20,26 +20,51 @@
     "descAdvanced": "<p>Quando uma criatura adjacente tentar derrubá-lo ou movê-lo, você pode gastar 1 ponto heróico para evitar automaticamente e usar sua reação para realizar um ataque contra ela. Seus pontos de vida aumentam em 3 pontos (em vez de 1). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Agarrado, Enfraquecido, Exausto e Paralisado.</p>",
     "descSpecial": "",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [
       {
-        "type": "stat",
-        "target": "hp",
-        "value": 1,
+        "type": "rollDice",
+        "target": "all",
+        "value": "1",
         "rerollAll": false,
-        "label": "Firmeza Física B: +1 PV",
+        "vulnPercent": false,
+        "label": "Firmeza Física: +1 dado em todas as rolagens aplicáveis (ligue quando valer)",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       },
       {
         "type": "stat",
         "target": "hp",
-        "value": 2,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Firmeza Física B: +1 PV",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "stat",
+        "target": "hp",
+        "value": "2",
+        "rerollAll": false,
+        "vulnPercent": false,
         "label": "Firmeza Física A: +2 PV (total +3)",
         "enabled": true,
+        "enchant": false,
         "level": "A",
         "damageType": ""
       }
@@ -49,12 +74,11 @@
   "effects": [],
   "folder": null,
   "sort": 7000,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

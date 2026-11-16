@@ -9,7 +9,16 @@
     "description": "<p>Se você perder mais da metade dos seus pontos de vida, você recebe +1 de bônus em seus ataques.</p><p>Herança: draconiano.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -17,12 +26,11 @@
   "effects": [],
   "folder": null,
   "sort": 700,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

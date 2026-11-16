@@ -20,26 +20,39 @@
     "descAdvanced": "",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "reroll6",
         "target": "mente",
-        "value": 1,
+        "value": "1",
         "rerollAll": true,
+        "vulnPercent": false,
         "label": "Débil: re-rola todos os 6 em Mente",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       },
       {
         "type": "info",
         "target": "mente",
-        "value": 0,
+        "value": "0",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Débil: não pode rolar dados de melhoria nas mesmas (aplique manualmente na rolagem)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       }
@@ -49,12 +62,11 @@
   "effects": [],
   "folder": null,
   "sort": 600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

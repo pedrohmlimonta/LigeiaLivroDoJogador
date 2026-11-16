@@ -20,7 +20,16 @@
     "descAdvanced": "<p>Quando você se desloca usando essa habilidade, você não pode ser alvo de reações de ataque. Quando você falha numa rolagem de Esquiva, você pode gastar 1 ponto heróico para mudar sua rolagem para um 12 natural.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 20500,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

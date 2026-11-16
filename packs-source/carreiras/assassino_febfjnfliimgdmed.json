@@ -23,16 +23,27 @@
           "description": "<p>+1 Ponto de Vida Máximo.</p><p>Concedida ao adquirir a carreira Assassino.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [
             {
               "type": "stat",
               "target": "hp",
-              "value": 1,
+              "value": "1",
               "rerollAll": false,
+              "vulnPercent": false,
               "label": "Assassino: +1 PV máximo",
               "enabled": true,
+              "enchant": false,
               "level": "all",
               "damageType": ""
             }
@@ -46,12 +57,11 @@
   "effects": [],
   "folder": null,
   "sort": 200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

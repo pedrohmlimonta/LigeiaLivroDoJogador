@@ -25,7 +25,16 @@
           "description": "<p>Você enxerga no escuro até 20m.</p><p>Raças: elfo das profundezas, gnomo das profundezas, orc.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -40,7 +49,16 @@
           "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -55,7 +73,16 @@
           "description": "<p>Você não precisa dormir. Em vez disso, você descansa entrando em um transe de 4 horas.</p><p>Raças: elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -70,7 +97,16 @@
           "description": "<p>Por causa da maldição lançada pela deusa da noite sobre seu povo, cada elfo das profundezas carrega um pedaço da umbra dentro de si. Você recebe a habilidade Palavra Arcana (tenebrae), sem pagar por ela.</p><p>Raça: elfo das profundezas.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -78,17 +114,17 @@
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.fcbddmnodamamcoo"
       }
     ],
-    "moveBonus": 5
+    "size": "medio",
+    "moveBonus": "0"
   },
   "effects": [],
   "folder": null,
   "sort": 700,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

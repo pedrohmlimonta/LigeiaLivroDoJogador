@@ -20,7 +20,16 @@
     "descAdvanced": "<p>—</p>",
     "descSpecial": "<p>(Épica) Você pode realizar rolagens para se esconder, mesmo que não tenha cobertura, contanto que o ambiente tenha pouca ou nenhuma luz. Você é considerado invisível, mas fica visível novamente caso se mova, ataque ou fale.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 3400,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

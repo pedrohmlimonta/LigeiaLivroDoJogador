@@ -20,7 +20,16 @@
     "descAdvanced": "<p>Você pode gastar sua ação rápida para não sofrer reações de ataque quando fizer ataques à distância nesse turno. Você pode gastar seu movimento para receber 1D nos seus ataques à distância nesse turno. Caso você não se mova no mesmo turno em que atacar, você pode gastar 1 ponto heróico, quando acertar um ataque à distância para que ele se torne um acerto crítico.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 1200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

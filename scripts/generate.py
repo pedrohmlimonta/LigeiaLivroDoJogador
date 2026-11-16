@@ -9,6 +9,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from builders import slugify
+from enhance import enhance
 from data_habilidades_1 import HABILIDADES_1
 from data_habilidades_2 import HABILIDADES_2
 from data_habilidades_3 import HABILIDADES_3
@@ -25,9 +26,6 @@ from data_complicacoes import COMPLICACOES
 from data_organizacoes import ORGANIZACOES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Tipos que possuem o botão de ativação (mode/active) no schema do sistema.
-ACTIVATABLE_TYPES = {"habilidade", "magia", "equipamento", "traco", "complicacao"}
 
 # Tipos cujos nomes usam sub-grupos: "Base (Sub)" -> "Base [Sub]".
 SUBGROUP_NAME_TYPES = {"habilidade", "complicacao"}
@@ -74,6 +72,9 @@ def main():
         seen = {}
         for i, doc in enumerate(docs):
             doc["sort"] = (i + 1) * 100
+            # Aprimoramentos automáticos (perícias, fórmulas @nivel, alcance
+            # de magias, classificação passive/active) — ver enhance.py.
+            enhance(doc)
             # Sub-grupos com colchetes: nos nomes de habilidades e
             # complicações (inclusive prereq) e em todas as skillList.
             if doc["type"] in SUBGROUP_NAME_TYPES:
@@ -83,13 +84,6 @@ def main():
             if doc["type"] in DEFINITION_TYPES:
                 doc["system"]["skillList"] = [bracketize(s)
                                               for s in doc["system"]["skillList"]]
-            # Padrão global: itens ativáveis mostram o botão de ativação
-            # (mode "active") com a checkbox desligada (active False).
-            # Tipos de definição (raca/heranca/vocacao/carreira) não possuem
-            # esses campos no schema.
-            if doc["type"] in ACTIVATABLE_TYPES:
-                doc["system"]["mode"] = "active"
-                doc["system"]["active"] = False
             if doc["_id"] in seen:
                 raise SystemExit(f"ID duplicado em {pack}: {doc['name']} x {seen[doc['_id']]}")
             seen[doc["_id"]] = doc["name"]

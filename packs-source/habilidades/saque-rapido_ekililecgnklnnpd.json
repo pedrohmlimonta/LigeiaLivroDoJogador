@@ -20,26 +20,39 @@
     "descAdvanced": "<p>Você troca de arma gastando uma ação rápida em vez de uma ação. Você recebe +4 nas rolagens de Iniciativa (em vez de +2).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "bonus",
         "target": "iniciativa",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Saque Rápido B: +2 Iniciativa",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       },
       {
         "type": "bonus",
         "target": "iniciativa",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Saque Rápido A: +2 Iniciativa (total +4)",
         "enabled": true,
+        "enchant": false,
         "level": "A",
         "damageType": ""
       }
@@ -49,12 +62,11 @@
   "effects": [],
   "folder": null,
   "sort": 20600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

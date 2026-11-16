@@ -1,126 +1,47 @@
 # -*- coding: utf-8 -*-
-"""Helpers para construir documentos Item do sistema ligeia-rpg."""
+"""Construtores de documentos de Item no schema do sistema ligeia-rpg 0.2.x
+(versão 22: fórmulas @variáveis, ações por nível, cura, tipagens de arma,
+encantamentos, tamanhos, filtros de área).
+
+Valores numéricos que o schema guarda como string (fórmulas) aceitam int ou
+str aqui e são normalizados por _s(). Fórmulas úteis: "@nivel",
+"ceil(@nivel/2)", "floor(@nivel/2)", "2*@vigor", "5+@mente".
+"""
 import hashlib
 import re
 import unicodedata
 
-VALID_ID = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+VERSION = "0.2.0"
+
+
+def _s(v, default="0"):
+    """Normaliza número/None para o formato string do schema."""
+    if v is None:
+        return default
+    if isinstance(v, bool):
+        return "1" if v else "0"
+    return str(v)
 
 
 def make_id(*parts):
-    """ID determinístico de 16 chars a partir do nome (estável entre builds)."""
-    h = hashlib.sha1(("|".join(parts)).encode("utf-8")).hexdigest()
-    out = []
-    i = 0
-    while len(out) < 16:
-        out.append(VALID_ID[int(h[i % len(h)], 16) % len(VALID_ID)])
-        i += 1
-        h = h + hashlib.sha1((h + str(i)).encode()).hexdigest()
-    return "".join(out)[:16]
+    h = hashlib.sha1("|".join(str(p) for p in parts).encode("utf-8")).hexdigest()
+    # 16 chars válidos para Foundry (a-p a partir do hex)
+    return "".join("abcdefghijklmnop"[int(c, 16)] for c in h[:16])
 
 
-def slugify(name):
-    s = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
-    s = re.sub(r"[^A-Za-z0-9]+", "-", s).strip("-").lower()
-    return s
+def slugify(text):
+    t = unicodedata.normalize("NFD", text)
+    t = "".join(c for c in t if unicodedata.category(c) != "Mn")
+    t = re.sub(r"[^A-Za-z0-9]+", "-", t).strip("-").lower()
+    return t or "item"
 
 
 def p(text):
-    """Envelopa parágrafos simples em <p>."""
-    text = text.strip()
+    """Texto simples -> HTML em parágrafos."""
     if not text:
         return ""
-    parts = [t.strip() for t in text.split("\n\n") if t.strip()]
-    return "".join(f"<p>{t}</p>" for t in parts)
-
-
-def effect(etype, target, value, level="all", label="", damage_type="", enabled=True, reroll_all=False):
-    return {
-        "type": etype,
-        "target": target,
-        "value": value,
-        "rerollAll": reroll_all,
-        "label": label,
-        "enabled": enabled,
-        "level": level,
-        "damageType": damage_type,
-    }
-
-
-def cost(resource, value, label=""):
-    return {"resource": resource, "value": value, "label": label}
-
-
-def applies(label, fx_type="condition", fx_target="", fx_value=0, duration_mode="scene",
-            duration_rounds=1, resist=False, resist_attr="vigor", resist_vs_cast=True,
-            resist_dc=0, resist_reroll=False, tick_amount=0, tick_type="", tick_resource="hp",
-            fx_all=False):
-    return {
-        "label": label,
-        "fxType": fx_type,
-        "fxTarget": fx_target,
-        "fxValue": fx_value,
-        "fxAll": fx_all,
-        "durationMode": duration_mode,
-        "durationRounds": duration_rounds,
-        "resist": resist,
-        "resistAttr": resist_attr,
-        "resistVsCast": resist_vs_cast,
-        "resistDc": resist_dc,
-        "resistReroll": resist_reroll,
-        "tickAmount": tick_amount,
-        "tickType": tick_type,
-        "tickResource": tick_resource,
-    }
-
-
-def action(label="Ação", can_roll=True, roll_attr="forca", roll_bonus=0, roll_dice=0,
-           vs_difficulty=False, fixed_difficulty=8, difficulty_attr="nenhum",
-           target_mode="target", include_self=False, defense_attr="esquiva", defense_attr2="",
-           damage="", damage_type="", damage_resource="hp", scaling_damage=False,
-           applies_effects=None, movement=None, rng=0, area=0,
-           cost_mp=0, cost_hp=0, cost_heroic=0, extra_damage=None,
-           persist_area=False, persist_rounds=1, persist_affects_self=False,
-           persist_reroll_attack=False, persist_trigger="both", skip_roll_dialog=True):
-    mv = {
-        "enabled": False, "kind": "push", "who": "targets", "distance": 0,
-        "lateralSide": "right", "ignoreWalls": False, "snap": True,
-    }
-    if movement:
-        mv.update(movement)
-        mv["enabled"] = True
-    return {
-        "label": label,
-        "canRoll": can_roll,
-        "rollAttr": roll_attr,
-        "rollBonus": roll_bonus,
-        "rollDice": roll_dice,
-        "vsDifficulty": vs_difficulty,
-        "fixedDifficulty": fixed_difficulty,
-        "difficultyAttr": difficulty_attr,
-        "targetMode": target_mode,
-        "includeSelf": include_self,
-        "defenseAttr": defense_attr,
-        "defenseAttr2": defense_attr2,
-        "damage": damage,
-        "damageType": damage_type,
-        "damageResource": damage_resource,
-        "scalingDamage": scaling_damage,
-        "skipRollDialog": skip_roll_dialog,
-        "extraDamage": extra_damage or [],
-        "movement": mv,
-        "appliesEffects": applies_effects or [],
-        "range": rng,
-        "area": area,
-        "macroUuid": "", "macroName": "", "macroEnabled": True,
-        "aaConfig": None, "aaName": "", "aaEnabled": True,
-        "animFile": "", "animPlacement": "target", "animScale": 1, "animEnabled": True,
-        "animAttach": False,
-        "costMp": cost_mp, "costHp": cost_hp, "costHeroic": cost_heroic,
-        "persistArea": persist_area, "persistRounds": persist_rounds,
-        "persistAffectsSelf": persist_affects_self,
-        "persistRerollAttack": persist_reroll_attack, "persistTrigger": persist_trigger,
-    }
+    parts = [x.strip() for x in text.split("\n\n") if x.strip()]
+    return "".join(f"<p>{x.replace(chr(10), '<br>')}</p>" for x in parts)
 
 
 def base_doc(name, itype, img, system, sort=0):
@@ -135,16 +56,188 @@ def base_doc(name, itype, img, system, sort=0):
         "effects": [],
         "folder": None,
         "sort": sort,
-        "flags": {},
         "ownership": {"default": 0},
-        "_stats": {"coreVersion": "13", "systemId": "ligeia-rpg"},
+        "flags": {},
+        "_stats": {"coreVersion": "13"},
     }
 
 
-def habilidade(name, lists, desc_b, desc_a, cost_b, cost_a, prereq="", activation="",
-               target="", area="", rng="", duration="", desc_e="", cost_e=0,
-               mode="passive", effects=None, costs=None, actions=None,
-               img="icons/svg/book.svg", sort=0):
+# ---------------------------------------------------------------------------
+#  Efeitos, custos, ações
+# ---------------------------------------------------------------------------
+
+def effect(etype, target, value, level="all", label="", damage_type="",
+           enabled=True, reroll_all=False, vuln_percent=False, enchant=False):
+    """Efeito mecânico de item.
+
+    Tipos: dice, rollDice, bonus, attr, stat, set, damage, rd, vuln,
+    reroll1, reroll6, crit, fumble, tempHp, areaFilter, condition, size,
+    restore, info.
+    Alvos de rolagem incluem "arma:<tag>" e "conjuracao:<palavra>".
+    value aceita fórmula: "ceil(@nivel/2)".
+    """
+    return {
+        "type": etype,
+        "target": target,
+        "value": _s(value),
+        "rerollAll": reroll_all,
+        "vulnPercent": vuln_percent,
+        "label": label,
+        "enabled": enabled,
+        "enchant": enchant,
+        "level": level,
+        "damageType": damage_type,
+    }
+
+
+def cost(resource, value, label="", level="all"):
+    """Custo de ativação (mp, hp, hpTemp, heroic); level B/A/E restringe."""
+    return {"resource": resource, "value": _s(value), "label": label, "level": level}
+
+
+def applies(label, fx_type="condition", fx_target="", fx_value=0, fx_all=False,
+            duration_mode="scene", duration_rounds=1, resist=False,
+            resist_attr="vigor", resist_vs_cast=True, resist_dc=0,
+            resist_reroll=False, tick_amount=0, tick_type="",
+            tick_resource="hp", tick_heal_amount=0, tick_heal_resource="hp",
+            fx_enchant=False, grant_temp_hp=0):
+    """Efeito aplicado ao alvo quando a ação acerta (vira efeito ativo com
+    duração). fx_value aceita fórmula com @variáveis do CONJURADOR."""
+    return {
+        "label": label,
+        "fxType": fx_type,
+        "fxTarget": fx_target,
+        "fxValue": _s(fx_value),
+        "fxAll": fx_all,
+        "durationMode": duration_mode,
+        "durationRounds": _s(duration_rounds, "1"),
+        "resist": resist,
+        "resistAttr": resist_attr,
+        "resistVsCast": resist_vs_cast,
+        "resistDc": _s(resist_dc),
+        "resistReroll": resist_reroll,
+        "tickAmount": _s(tick_amount),
+        "tickType": tick_type,
+        "tickResource": tick_resource,
+        "tickHealAmount": _s(tick_heal_amount),
+        "tickHealResource": tick_heal_resource,
+        "fxFile": "",
+        "fxScale": "1",
+        "fxAaConfig": None,
+        "fxAaName": "",
+        "fxAaPersist": True,
+        "fxEnchant": fx_enchant,
+        "grantTempHp": _s(grant_temp_hp),
+    }
+
+
+def extra_damage(formula, dtype="", resource="hp", scaling=False):
+    return {"formula": _s(formula, ""), "type": dtype, "resource": resource,
+            "scaling": scaling}
+
+
+def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
+           roll_dice=0, vs_difficulty=False, fixed_difficulty=8,
+           difficulty_attr="nenhum", target_mode="target", include_self=False,
+           area_filter="all", defense_attr="esquiva", defense_attr2="",
+           damage="", damage_type="", damage_resource="hp",
+           scaling_damage=False, heal="", heal_resource="hp",
+           scaling_heal=False, temp_stack=False, extra=None, movement=None,
+           applies_effects=None, line_width="1.5", cone_angle="45",
+           rng=0, area=0, cost_mp=0, cost_hp=0, cost_heroic=0,
+           is_weapon=False, is_melee=False, persist_area=False,
+           persist_rounds=1, persist_affects_self=False,
+           persist_reroll_attack=False, persist_trigger="both",
+           pre_activations=None, skip_roll_dialog=True):
+    """Uma ação de item (schema v22).
+
+    - level: "all"/"B"/"A"/"E" — nível em que a ação existe (habilidades).
+    - roll_bonus/roll_dice/rng/area/custos/damage/heal aceitam fórmulas
+      com @variáveis ("@nivel", "ceil(@nivel/2)", "2*@vigor").
+    - movement: dict com kind/who/distance/... (enabled é ligado aqui).
+    """
+    mv = {"enabled": False, "kind": "push", "who": "targets", "distance": "0",
+          "lateralSide": "right", "ignoreWalls": False, "snap": True}
+    if movement:
+        mv.update(movement)
+        mv["enabled"] = True
+        mv["distance"] = _s(mv.get("distance", 0))
+        if mv["kind"] == "teleport":
+            mv["ignoreWalls"] = True
+    return {
+        "label": label,
+        "level": level,
+        "canRoll": can_roll,
+        "rollAttr": roll_attr,
+        "rollBonus": _s(roll_bonus),
+        "rollDice": _s(roll_dice),
+        "vsDifficulty": vs_difficulty,
+        "fixedDifficulty": _s(fixed_difficulty, "8"),
+        "difficultyAttr": difficulty_attr,
+        "targetMode": target_mode,
+        "includeSelf": include_self,
+        "areaFilter": area_filter,
+        "defenseAttr": defense_attr,
+        "defenseAttr2": defense_attr2,
+        "damage": _s(damage, ""),
+        "damageType": damage_type,
+        "damageResource": damage_resource,
+        "scalingDamage": scaling_damage,
+        "heal": _s(heal, ""),
+        "healResource": heal_resource,
+        "scalingHeal": scaling_heal,
+        "tempStack": temp_stack,
+        "skipRollDialog": skip_roll_dialog,
+        "extraDamage": extra or [],
+        "movement": mv,
+        "preActivations": pre_activations or [],
+        "appliesEffects": applies_effects or [],
+        "lineWidth": _s(line_width, "1.5"),
+        "coneAngle": _s(cone_angle, "45"),
+        "isWeapon": is_weapon,
+        "isMelee": is_melee,
+        "range": _s(rng, ""),
+        "area": _s(area, ""),
+        "macroUuid": "", "macroName": "", "macroEnabled": True,
+        "aaConfig": None, "aaName": "", "aaEnabled": True,
+        "animFile": "", "animPlacement": "target", "animScale": "1",
+        "animEnabled": True, "animAttach": False,
+        "costMp": _s(cost_mp),
+        "costHp": _s(cost_hp),
+        "costHeroic": _s(cost_heroic),
+        "persistArea": persist_area,
+        "persistRounds": _s(persist_rounds, "1"),
+        "persistAffectsSelf": persist_affects_self,
+        "persistRerollAttack": persist_reroll_attack,
+        "persistTrigger": persist_trigger,
+    }
+
+
+def _activatable(mode, effects, costs):
+    """Campos comuns dos itens ativáveis (inclui os novos da v22)."""
+    return {
+        "enchantments": [],
+        "costsCumulative": False,
+        "noEnchant": False,
+        "fxFile": "", "fxScale": "1",
+        "fxAaConfig": None, "fxAaName": "", "fxAaPersist": True,
+        "animOnActivate": True,
+        "mode": mode,
+        "active": False,
+        "effects": effects or [],
+        "costs": costs or [],
+    }
+
+
+# ---------------------------------------------------------------------------
+#  Itens
+# ---------------------------------------------------------------------------
+
+def habilidade(name, lists, desc_b, desc_a, cost_b, cost_a, cost_e=0,
+               desc_e="", prereq="", activation="", target="", area="",
+               rng="", duration="", mode="passive", effects=None, costs=None,
+               actions=None, img="icons/svg/book.svg", sort=0,
+               costs_cumulative=False):
     system = {
         "level": "B",
         "costBasic": cost_b,
@@ -153,75 +246,85 @@ def habilidade(name, lists, desc_b, desc_a, cost_b, cost_a, prereq="", activatio
         "prereq": prereq,
         "lists": lists,
         "activation": activation,
-        "target": target,
-        "area": area,
-        "range": rng,
-        "duration": duration,
+        "target": target, "area": area, "range": rng, "duration": duration,
         "descBasic": p(desc_b),
         "descAdvanced": p(desc_a),
-        "descSpecial": p(desc_e),
+        "descSpecial": p(desc_e) if desc_e else "",
         "actions": actions or [],
-        "mode": mode,
-        "active": False,
-        "effects": effects or [],
-        "costs": costs or [],
+        **_activatable(mode, effects, costs),
     }
+    system["costsCumulative"] = costs_cumulative
     return base_doc(name, "habilidade", img, system, sort)
 
 
-def magia(name, word_id, tier, casting, target, area, rng, duration, description,
-          peculiarities="", metamagics=None, mode="active", effects=None, costs=None,
-          actions=None, img="icons/svg/daze.svg", sort=0):
+def complicacao(name, lists, desc_b, desc_a, xp_b=0, xp_a=0, xp_e=0, desc_e="",
+                prereq="", activation="", target="", area="", rng="",
+                duration="", mode="passive", effects=None, costs=None,
+                actions=None, img="icons/svg/downgrade.svg", sort=0):
     system = {
-        "wordId": word_id,
+        "level": "B",
+        "xpBasic": xp_b,
+        "xpAdvanced": xp_a,
+        "xpSpecial": xp_e,
+        "prereq": prereq,
+        "lists": lists,
+        "activation": activation,
+        "target": target, "area": area, "range": rng, "duration": duration,
+        "descBasic": p(desc_b),
+        "descAdvanced": p(desc_a),
+        "descSpecial": p(desc_e) if desc_e else "",
+        "actions": actions or [],
+        **_activatable(mode, effects, costs),
+    }
+    return base_doc(name, "complicacao", img, system, sort)
+
+
+def magia(name, word, tier, casting, target, area, rng, duration, desc,
+          pecs, word2="", word3="", actions=None, effects=None, costs=None,
+          mode="active", img="icons/svg/daze.svg", sort=0):
+    system = {
+        "wordId": word,
+        "wordId2": word2,
+        "wordId3": word3,
         "tier": tier,
         "casting": casting,
-        "target": target,
-        "area": area,
-        "range": rng,
-        "duration": duration,
-        "description": p(description),
-        "peculiarities": p(peculiarities),
-        "metamagics": metamagics or [],
+        "target": target, "area": area, "range": rng, "duration": duration,
+        "description": p(desc),
+        "peculiarities": p(pecs),
+        "metamagics": [],
         "actions": actions or [],
-        "mode": mode,
-        "active": False,
-        "effects": effects or [],
-        "costs": costs or [],
+        **_activatable(mode, effects, costs),
     }
     return base_doc(name, "magia", img, system, sort)
 
 
-def equipamento(name, category, price, weight, description, notes="", qty=1,
-                mode="passive", effects=None, costs=None, actions=None,
-                img="icons/svg/item-bag.svg", sort=0):
+def equipamento(name, category, price, weight, description, notes="",
+                tags=None, qty=1, mode="passive", effects=None, costs=None,
+                actions=None, img="icons/svg/item-bag.svg", sort=0):
     system = {
         "category": category,
+        "tags": tags or [],
+        "tagsExtra": "",
         "qty": qty,
         "weight": weight,
         "price": price,
         "notes": notes,
         "description": p(description),
         "actions": actions or [],
-        "mode": mode,
-        "active": False,
-        "effects": effects or [],
-        "costs": costs or [],
+        **_activatable(mode, effects, costs),
     }
     return base_doc(name, "equipamento", img, system, sort)
 
 
 def traco(name, source, description, is_weapon=False, mode="passive",
-          effects=None, costs=None, actions=None, img="icons/svg/aura.svg", sort=0):
+          effects=None, costs=None, actions=None, img="icons/svg/aura.svg",
+          sort=0):
     system = {
         "source": source,
         "description": p(description),
         "isWeapon": is_weapon,
         "actions": actions or [],
-        "mode": mode,
-        "active": False,
-        "effects": effects or [],
-        "costs": costs or [],
+        **_activatable(mode, effects, costs),
     }
     return base_doc(name, "traco", img, system, sort)
 
@@ -237,54 +340,24 @@ def trait_snapshot(trait_doc):
 
 
 def definicao(name, itype, description, skill_list=None, granted=None,
-              img="icons/svg/mystery-man.svg", sort=0, **extra):
-    """Item de definição: raca, heranca, vocacao ou carreira.
+              img="icons/svg/mystery-man.svg", sort=0, size=None, **extra):
+    """Item de definição: raca, heranca, vocacao, organizacao ou carreira.
 
-    granted: lista de documentos de traço (dicts) a embutir como snapshots.
-    extra: moveBonus (raca) ou hpBonus/mpBonus (vocacao).
+    - raca: size ("pequeno"/"medio"/...) + moveBonus (ajuste por cima do
+      deslocamento da categoria; o livro dá o total, então moveBonus =
+      bônus do livro - move da categoria).
+    - vocacao: hpBonus/mpBonus (aceitam fórmula).
     """
     system = {
         "description": p(description),
         "skillList": skill_list or [],
         "grantedTraits": [trait_snapshot(t) for t in (granted or [])],
     }
+    if itype == "raca":
+        system["size"] = size or "medio"
+        system["moveBonus"] = _s(extra.pop("moveBonus", 0))
+    if itype == "vocacao":
+        system["hpBonus"] = _s(extra.pop("hpBonus", 0))
+        system["mpBonus"] = _s(extra.pop("mpBonus", 0))
     system.update(extra)
     return base_doc(name, itype, img, system, sort)
-
-
-def complicacao(name, lists, desc_b, desc_a, xp_b=0, xp_a=0, xp_e=0, desc_e="",
-                prereq="", activation="", target="", area="", rng="", duration="",
-                mode="passive", effects=None, costs=None, actions=None,
-                img="icons/svg/downgrade.svg", sort=0):
-    """Complicação (sistema ligeia-rpg >= 0.2.0 com tipo complicacao).
-
-    XP é CONCEDIDO por nível: xp_b/xp_a/xp_e (0 = tabela padrão do sistema,
-    CONFIG.LIGEIA.complicationXp = B 20 / A 40 / E 80).
-
-    Exemplo:
-        complicacao("Código de Honra", "Qualquer",
-                    "Você segue um código rígido...",
-                    "Quebrar o código causa...", 20, 40)
-    """
-    system = {
-        "level": "B",
-        "xpBasic": xp_b,
-        "xpAdvanced": xp_a,
-        "xpSpecial": xp_e,
-        "prereq": prereq,
-        "lists": lists,
-        "activation": activation,
-        "target": target,
-        "area": area,
-        "range": rng,
-        "duration": duration,
-        "descBasic": p(desc_b),
-        "descAdvanced": p(desc_a),
-        "descSpecial": p(desc_e) if desc_e else "",
-        "actions": actions or [],
-        "mode": mode,
-        "active": False,
-        "effects": effects or [],
-        "costs": costs or [],
-    }
-    return base_doc(name, "complicacao", img, system, sort)

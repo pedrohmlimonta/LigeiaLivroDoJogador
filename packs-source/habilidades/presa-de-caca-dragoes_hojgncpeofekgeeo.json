@@ -20,20 +20,41 @@
     "descAdvanced": "<p>Seus golpes críticos contra criaturas do tipo em questão causam dano contínuo de sangramento (Vigor anula). Enquanto estiver sangrando, a criatura não recebe ocultação contra você e, caso você a atinja com um golpe com arma enquanto ela estiver sangrando, ela ficará lenta (Vigor anula). Um segundo acerto a deixará imobilizada (Vigor anula).</p>",
     "descSpecial": "",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "rollDice",
+        "target": "all",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Presa de Caça (Dragões): +1 dado em todas as rolagens aplicáveis (ligue quando valer)",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],
   "folder": null,
   "sort": 18400,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

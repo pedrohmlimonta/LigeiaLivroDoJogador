@@ -20,7 +20,16 @@
     "descAdvanced": "<p>—</p>",
     "descSpecial": "<p>(Épica) Sempre que realizar rolagens de interação social, re-role os resultados 1. Os novos resultados não podem ser re-rolados. Adicionalmente, caso sua Corrupção seja inferior a 5, criaturas com Corrupção 7 ou superior ficam enfraquecidas enquanto estiverem adjacentes a você. Caso sua Corrupção seja superior a 5, essa habilidade afeta criaturas com Corrupção 3 ou inferior.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 1500,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

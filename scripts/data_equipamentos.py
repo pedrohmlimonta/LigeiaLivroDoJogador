@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """Equipamentos. Fonte: Livro de Regras, Sessão 10."""
+import re
+
 from builders import equipamento, effect, action
 
 IMG_ARMOR = "icons/svg/shield.svg"
@@ -29,18 +31,51 @@ def _armadura(nome, preco, cat, prot, peso, pen, desc, props="-"):
     )
 
 
+_TAG_IDS = {
+    "arcos": "arcos", "bastões": "bastoes", "cajados": "cajados",
+    "bestas": "bestas", "chicotes": "chicotes", "dardos": "dardos",
+    "desarmado": "desarmado", "fundas": "fundas",
+    "lâminas grandes": "laminas_grandes", "lâminas pequenas": "laminas_pequenas",
+    "lanças": "lancas", "maças": "macas", "machados": "machados",
+    "manguais": "manguais", "martelos": "martelos", "picaretas": "picaretas",
+    "alcance": "alcance", "arremesso": "arremesso", "artilharia": "artilharia",
+    "corpo a corpo": "corpo_a_corpo", "duas mãos": "duas_maos",
+    "haste": "haste", "leve": "leve", "militar": "militar",
+    "pesada": "pesada", "recarga": "recarga", "simples": "simples",
+    "uma mão": "uma_mao", "versátil": "versatil",
+}
+
+
+def _weapon_tags(grupo, props):
+    """Converte grupo + string de propriedades do livro em tags do sistema."""
+    tags = []
+    gid = _TAG_IDS.get(grupo.lower())
+    if gid:
+        tags.append(gid)
+    for raw in props.split(","):
+        nome = raw.strip().lower()
+        nome = re.sub(r"\s+\d+m$", "", nome)  # "alcance 5m" -> "alcance"
+        tid = _TAG_IDS.get(nome)
+        if tid and tid not in tags:
+            tags.append(tid)
+    return tags
+
+
 def _arma(nome, preco, grupo, ataque, dano, dtipo, peso, props, alcance=0, versatil=False, desc=""):
     roll_attr = "agilidade" if ataque == "Agilidade" else "forca"
+    melee = "corpo a corpo" in props.lower()
     acts = [action(
         f"Ataque — {nome}",
         roll_attr=roll_attr, damage=str(dano), damage_type=dtipo,
         defense_attr="esquiva", defense_attr2="bloqueio", rng=alcance,
+        is_weapon=True, is_melee=melee,
     )]
     if versatil:
         acts.append(action(
             f"Ataque — {nome} (duas mãos, +1 dano)",
             roll_attr=roll_attr, damage=str(dano + 1), damage_type=dtipo,
             defense_attr="esquiva", defense_attr2="bloqueio", rng=alcance,
+            is_weapon=True, is_melee=melee,
         ))
     tipo_label = {"corte": "Corte", "perfuracao": "Perfuração", "concussao": "Concussão"}[dtipo]
     body = (desc + "\n\n" if desc else "") + (
@@ -49,7 +84,8 @@ def _arma(nome, preco, grupo, ataque, dano, dtipo, peso, props, alcance=0, versa
     )
     return equipamento(
         nome, f"Arma ({grupo})", preco, peso, body,
-        notes=props, actions=acts, img=IMG_WEAPON,
+        notes=props, tags=_weapon_tags(grupo, props), actions=acts,
+        img=IMG_WEAPON,
     )
 
 

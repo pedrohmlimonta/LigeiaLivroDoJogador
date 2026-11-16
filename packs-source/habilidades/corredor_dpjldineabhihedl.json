@@ -20,26 +20,39 @@
     "descAdvanced": "<p>Seu Deslocamento aumenta em 5m (em vez de 3m). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Lento e Imobilizado.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "stat",
         "target": "deslocamento",
-        "value": 3,
+        "value": "3",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Corredor B: +3m Deslocamento",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       },
       {
         "type": "stat",
         "target": "deslocamento",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Corredor A: +2m (total +5m)",
         "enabled": true,
+        "enchant": false,
         "level": "A",
         "damageType": ""
       }
@@ -49,12 +62,11 @@
   "effects": [],
   "folder": null,
   "sort": 3200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

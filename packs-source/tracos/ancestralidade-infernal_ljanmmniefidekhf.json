@@ -9,16 +9,27 @@
     "description": "<p>Você possui Proteção contra fogo igual a metade do seu nível (arredondado para cima).</p><p>Herança: infernal.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "ceil(@nivel/2)",
         "rerollAll": false,
-        "label": "Ancestralidade Infernal: RD fogo (metade do Nível — ajuste)",
+        "vulnPercent": false,
+        "label": "Ancestralidade Infernal: RD fogo",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "fogo"
       }
@@ -28,12 +39,11 @@
   "effects": [],
   "folder": null,
   "sort": 400,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

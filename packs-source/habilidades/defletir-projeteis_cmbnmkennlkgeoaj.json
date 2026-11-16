@@ -20,20 +20,41 @@
     "descAdvanced": "<p>Quando você aparar um projétil com a mão vazia, você pode usar sua reação para realizar imediatamente um ataque arremessando o projétil. O ataque usa uma rolagem de Agilidade, possui o mesmo dano básico do ataque bloqueado, alcance igual a 5m x Força e recebe os benefícios de uma arma de arremesso.</p>",
     "descSpecial": "",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "rollDice",
+        "target": "esquiva",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Defletir Projéteis: +1 dado em rolagens de Esquiva aplicáveis (ligue quando valer)",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],
   "folder": null,
   "sort": 3300,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

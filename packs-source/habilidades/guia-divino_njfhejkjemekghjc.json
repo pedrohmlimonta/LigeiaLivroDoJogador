@@ -20,7 +20,16 @@
     "descAdvanced": "<p>Quando você gasta 1 ponto heróico para re-rolar uma rolagem que você fez, você recebe também +2 nesta rolagem. Adicionalmente, sempre que gastar pontos heróicos, role um dado para cada um. Em um resultado 6, você recupera o ponto heróico gasto.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 8700,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

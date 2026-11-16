@@ -6,13 +6,24 @@
   "img": "icons/svg/anchor.svg",
   "system": {
     "category": "Utensílio",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 0,
     "price": "2 Vo",
     "notes": "",
     "description": "<p>Peça de metal com quatro ganchos, usada para amarrar a uma corda ou corrente.</p><p>Propriedade: caso seja usado amarrado a uma corda ou corrente, concede +1 em rolagens para escalar.</p>",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -20,12 +31,11 @@
   "effects": [],
   "folder": null,
   "sort": 6200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

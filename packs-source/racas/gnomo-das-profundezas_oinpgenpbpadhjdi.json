@@ -26,7 +26,16 @@
           "description": "<p>Você enxerga no escuro até 20m.</p><p>Raças: elfo das profundezas, gnomo das profundezas, orc.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -41,7 +50,16 @@
           "description": "<p>Você recebe 1D em rolagens para se defender, evitar e resistir a magias.</p><p>Raças: gnomo da floresta, gnomo das profundezas, gnomo das rochas.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -56,7 +74,16 @@
           "description": "<p>Você recebe 1D para se esconder em terreno rochoso.</p><p>Raça: gnomo das profundezas.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -64,17 +91,17 @@
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.pljlnelhhpgdbmam"
       }
     ],
-    "moveBonus": 4
+    "size": "pequeno",
+    "moveBonus": "0"
   },
   "effects": [],
   "folder": null,
   "sort": 900,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

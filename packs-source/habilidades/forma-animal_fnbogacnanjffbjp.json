@@ -20,26 +20,35 @@
     "descAdvanced": "<p>Quando você se transforma usando essa habilidade, você recebe um dos seguintes benefícios: 1D em Percepção; +3m de Deslocamento; Proteção 2 contra Corte, Perfuração e Concussão; Bônus de ataque +2.</p>",
     "descSpecial": "",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [],
     "costs": [
       {
         "resource": "mp",
-        "value": 1,
-        "label": "Transformar (dura uma cena)"
+        "value": "1",
+        "label": "Transformar (dura uma cena)",
+        "level": "all"
       }
     ]
   },
   "effects": [],
   "folder": null,
   "sort": 7200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

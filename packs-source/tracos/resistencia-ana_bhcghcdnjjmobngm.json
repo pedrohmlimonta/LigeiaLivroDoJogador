@@ -9,16 +9,27 @@
     "description": "<p>Você recebe Proteção contra dano de veneno igual a metade do seu nível (arredondado para cima) e 1D em rolagens contra envenenamento.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "ceil(@nivel/2)",
         "rerollAll": false,
-        "label": "Resistência Anã: RD veneno (metade do Nível — ajuste)",
+        "vulnPercent": false,
+        "label": "Resistência Anã: RD veneno",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "veneno"
       }
@@ -28,12 +39,11 @@
   "effects": [],
   "folder": null,
   "sort": 3200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

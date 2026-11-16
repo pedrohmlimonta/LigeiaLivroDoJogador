@@ -20,20 +20,41 @@
     "descAdvanced": "<p>Você recebe um bônus de +1 nas rolagens de Conjuração quando conjura magias compostas pela palavra arcana devena. Você pode criar magias com metamagias avançadas e itens mágicos com propriedades da palavra arcana em questão.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "conjuracao:devena",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "+1 Conjuração com magias de devena",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],
   "folder": null,
   "sort": 15100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

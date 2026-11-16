@@ -9,7 +9,16 @@
     "description": "<p>Você possui afinidade com minerais, recebendo 1D em todas as rolagens relacionadas a lidar com minerais.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -17,12 +26,11 @@
   "effects": [],
   "folder": null,
   "sort": 2600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

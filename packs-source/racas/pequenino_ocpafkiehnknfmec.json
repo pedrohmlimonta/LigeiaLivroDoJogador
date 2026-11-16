@@ -24,7 +24,16 @@
           "description": "<p>Você pode se mover através de espaços de criaturas de tamanho maior que o seu.</p><p>Raça: pequenino.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -38,17 +47,83 @@
           "source": "race",
           "description": "<p>Você pode gastar 1 ponto de magia para re-rolar um dado de qualquer rolagem.</p><p>Raça: pequenino.</p>",
           "isWeapon": false,
-          "actions": [],
-          "mode": "active",
+          "actions": [
+            {
+              "label": "Filhos de Ruff — 1 PM re-rola um dado",
+              "level": "all",
+              "canRoll": false,
+              "rollAttr": "forca",
+              "rollBonus": "0",
+              "rollDice": "0",
+              "vsDifficulty": false,
+              "fixedDifficulty": "8",
+              "difficultyAttr": "nenhum",
+              "targetMode": "none",
+              "includeSelf": false,
+              "areaFilter": "all",
+              "defenseAttr": "esquiva",
+              "defenseAttr2": "",
+              "damage": "",
+              "damageType": "",
+              "damageResource": "hp",
+              "scalingDamage": false,
+              "heal": "",
+              "healResource": "hp",
+              "scalingHeal": false,
+              "tempStack": false,
+              "skipRollDialog": true,
+              "extraDamage": [],
+              "movement": {
+                "enabled": false,
+                "kind": "push",
+                "who": "targets",
+                "distance": "0",
+                "lateralSide": "right",
+                "ignoreWalls": false,
+                "snap": true
+              },
+              "preActivations": [],
+              "appliesEffects": [],
+              "lineWidth": "1.5",
+              "coneAngle": "45",
+              "isWeapon": false,
+              "isMelee": false,
+              "range": "0",
+              "area": "0",
+              "macroUuid": "",
+              "macroName": "",
+              "macroEnabled": true,
+              "aaConfig": null,
+              "aaName": "",
+              "aaEnabled": true,
+              "animFile": "",
+              "animPlacement": "target",
+              "animScale": "1",
+              "animEnabled": true,
+              "animAttach": false,
+              "costMp": "1",
+              "costHp": "0",
+              "costHeroic": "0",
+              "persistArea": false,
+              "persistRounds": "1",
+              "persistAffectsSelf": false,
+              "persistRerollAttack": false,
+              "persistTrigger": "both"
+            }
+          ],
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": [
-            {
-              "resource": "mp",
-              "value": 1,
-              "label": "Re-rolar um dado"
-            }
-          ]
+          "costs": []
         },
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.dagknfohpfpolebc"
       },
@@ -60,7 +135,16 @@
           "description": "<p>Você recebe 1D em rolagens contra venenos e doenças.</p><p>Raça: pequenino.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -68,17 +152,17 @@
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.hgllhmoppimpohic"
       }
     ],
-    "moveBonus": 4
+    "size": "pequeno",
+    "moveBonus": "0"
   },
   "effects": [],
   "folder": null,
   "sort": 1500,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

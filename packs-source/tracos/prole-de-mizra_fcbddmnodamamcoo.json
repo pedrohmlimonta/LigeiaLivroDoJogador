@@ -9,7 +9,16 @@
     "description": "<p>Por causa da maldição lançada pela deusa da noite sobre seu povo, cada elfo das profundezas carrega um pedaço da umbra dentro de si. Você recebe a habilidade Palavra Arcana (tenebrae), sem pagar por ela.</p><p>Raça: elfo das profundezas.</p>",
     "isWeapon": false,
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -17,12 +26,11 @@
   "effects": [],
   "folder": null,
   "sort": 3100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

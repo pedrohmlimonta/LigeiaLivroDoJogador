@@ -20,7 +20,16 @@
     "descAdvanced": "<p>Enquanto estiver lutando no tipo de terreno em questão, você pode desengajar de combate corpo a corpo sem sofrer reações de ataque. Seu Deslocamento aumenta em uma quantidade de metros igual ao seu nível, quando se desloca no tipo de terreno escolhido (em vez de metade).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [],
     "costs": []
@@ -28,12 +37,11 @@
   "effects": [],
   "folder": null,
   "sort": 22600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

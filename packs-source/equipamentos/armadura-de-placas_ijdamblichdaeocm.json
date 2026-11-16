@@ -6,62 +6,83 @@
   "img": "icons/svg/shield.svg",
   "system": {
     "category": "Armadura Pesada",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 3,
     "price": "75 Vo",
     "notes": "Penalidade -4",
     "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p>",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [
       {
         "type": "rd",
         "target": "all",
-        "value": 3,
+        "value": "3",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Placas: Proteção 3 (corte)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "corte"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 3,
+        "value": "3",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Placas: Proteção 3 (perfuração)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "perfuracao"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 3,
+        "value": "3",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Placas: Proteção 3 (concussão)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "concussao"
       },
       {
         "type": "bonus",
         "target": "esquiva",
-        "value": -4,
+        "value": "-4",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Placas: penalidade -4 Esquiva",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       },
       {
         "type": "bonus",
         "target": "conjuracao",
-        "value": -4,
+        "value": "-4",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Armadura de Placas: penalidade -4 Conjuração",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       }
@@ -71,12 +92,11 @@
   "effects": [],
   "folder": null,
   "sort": 500,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

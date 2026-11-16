@@ -6,62 +6,83 @@
   "img": "icons/svg/shield.svg",
   "system": {
     "category": "Armadura Pesada",
+    "tags": [],
+    "tagsExtra": "",
     "qty": 1,
     "weight": 2,
     "price": "50 Vo",
     "notes": "Penalidade -2",
     "description": "<p>Armadura feita de anéis metálicos entrelaçados em um tecido de aço.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -2 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p>",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [
       {
         "type": "rd",
         "target": "all",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Cota de Malha: Proteção 2 (corte)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "corte"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Cota de Malha: Proteção 2 (perfuração)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "perfuracao"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Cota de Malha: Proteção 2 (concussão)",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": "concussao"
       },
       {
         "type": "bonus",
         "target": "esquiva",
-        "value": -2,
+        "value": "-2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Cota de Malha: penalidade -2 Esquiva",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       },
       {
         "type": "bonus",
         "target": "conjuracao",
-        "value": -2,
+        "value": "-2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Cota de Malha: penalidade -2 Conjuração",
         "enabled": true,
+        "enchant": false,
         "level": "all",
         "damageType": ""
       }
@@ -71,12 +92,11 @@
   "effects": [],
   "folder": null,
   "sort": 300,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

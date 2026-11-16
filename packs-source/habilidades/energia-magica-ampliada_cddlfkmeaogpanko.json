@@ -20,26 +20,39 @@
     "descAdvanced": "<p>Seus pontos de magia aumentam em 5 em vez de 2.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "stat",
         "target": "mp",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Energia Mágica Ampliada B: +2 PM",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       },
       {
         "type": "stat",
         "target": "mp",
-        "value": 3,
+        "value": "3",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Energia Mágica Ampliada A: +3 PM (total +5)",
         "enabled": true,
+        "enchant": false,
         "level": "A",
         "damageType": ""
       }
@@ -49,12 +62,11 @@
   "effects": [],
   "folder": null,
   "sort": 3700,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

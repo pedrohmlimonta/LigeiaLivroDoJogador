@@ -20,36 +20,51 @@
     "descAdvanced": "<p>Você pode gastar 1 ponto heróico para aumentar essa proteção em 1 ponto até o fim da cena, mas fica lento até o final do efeito.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "ceil(@nivel/2)",
         "rerollAll": false,
-        "label": "Pele de Escamas: RD corte (metade do Nível — ajuste)",
+        "vulnPercent": false,
+        "label": "Pele de Escamas: RD corte",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": "corte"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "ceil(@nivel/2)",
         "rerollAll": false,
-        "label": "Pele de Escamas: RD perfuração (metade do Nível — ajuste)",
+        "vulnPercent": false,
+        "label": "Pele de Escamas: RD perfuração",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": "perfuracao"
       },
       {
         "type": "rd",
         "target": "all",
-        "value": 1,
+        "value": "ceil(@nivel/2)",
         "rerollAll": false,
-        "label": "Pele de Escamas: RD concussão (metade do Nível — ajuste)",
+        "vulnPercent": false,
+        "label": "Pele de Escamas: RD concussão",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": "concussao"
       }
@@ -59,12 +74,11 @@
   "effects": [],
   "folder": null,
   "sort": 17600,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

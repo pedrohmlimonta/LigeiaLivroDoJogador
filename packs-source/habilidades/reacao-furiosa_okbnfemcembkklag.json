@@ -20,20 +20,53 @@
     "descAdvanced": "<p>Um ataque que receba esse bônus possui margem de crítico 11-12 enquanto você estiver ferido, ou 10-12 caso você esteja com uma quantidade de pontos de vida atual menor ou igual ao seu nível.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "attackMelee",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Reação Furiosa: +metade do Nível vs quem te feriu (ligue quando valer)",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "crit",
+        "target": "attackMelee",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Reação Furiosa (A): crítico 11-12 ferido (10-12 com PV ≤ Nível)",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],
   "folder": null,
   "sort": 20100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

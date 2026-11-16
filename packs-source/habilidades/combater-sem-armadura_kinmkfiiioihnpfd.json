@@ -20,26 +20,39 @@
     "descAdvanced": "<p>Quando você não estiver usando nenhuma armadura (escudos são permitidos), você recebe Proteção igual a metade do seu Vigor.</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "bonus",
         "target": "esquiva",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Sem armadura: +1 Esquiva",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       },
       {
         "type": "bonus",
         "target": "bloqueio",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Sem armadura: +1 Bloqueio",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       }
@@ -49,12 +62,11 @@
   "effects": [],
   "folder": null,
   "sort": 2200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

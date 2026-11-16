@@ -31,7 +31,7 @@ RACAS = [
                     "Usar Armas (Machados)", "Usar Armas (Martelos)", "Trilhador (Montanhas)",
                     "Vigor de Aço"],
         granted=_g("Visão no Escuro (10m)", "Resistência Anã", "Filhos de Pálim"),
-        moveBonus=4, img=IMG_RACA_DEF,
+        size="medio", moveBonus=-1, img=IMG_RACA_DEF,
     ),
     definicao(
         "Anão das Terras Baixas", "raca",
@@ -41,7 +41,7 @@ RACAS = [
                     "Presa de Caça (Gigantes)", "Usar Armas (Machados)", "Usar Armas (Martelos)",
                     "Vigor de Aço", "Vontade de Ferro"],
         granted=_g("Visão no Escuro (10m)", "Resistência Anã", "Filhos de Pálim"),
-        moveBonus=4, img=IMG_RACA_DEF,
+        size="medio", moveBonus=-1, img=IMG_RACA_DEF,
     ),
     definicao(
         "Alto Elfo", "raca",
@@ -49,7 +49,7 @@ RACAS = [
         + _carac_raca("Agilidade ou Mente", 5, "Médio", "Regional e Élfico", "+0"),
         skill_list=["Conhecimento (Arcano)", "Palavra Arcana (lumo)"] + _ELFO_ARMAS,
         granted=_g("Visão no Escuro (10m)", "Ancestral Faerian", "Transe", "Filhos de Éllon"),
-        moveBonus=5, img=IMG_RACA_DEF,
+        size="medio", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Elfo Cinzento", "raca",
@@ -57,7 +57,7 @@ RACAS = [
         + _carac_raca("Agilidade ou Mente", 5, "Médio", "Regional e Élfico", "+0"),
         skill_list=["Conhecimento (Arcano)", "Conhecimento (Religião)"] + _ELFO_ARMAS,
         granted=_g("Visão no Escuro (10m)", "Ancestral Faerian", "Transe", "Filhos de Kalael"),
-        moveBonus=5, img=IMG_RACA_DEF,
+        size="medio", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Elfo Solar", "raca",
@@ -65,7 +65,7 @@ RACAS = [
         + _carac_raca("Agilidade ou Mente", 5, "Médio", "Regional e Élfico", "+0"),
         skill_list=["Conhecimento (Arcano)", "Conhecimento (História)", "Vontade de Ferro"] + _ELFO_ARMAS,
         granted=_g("Visão no Escuro (10m)", "Ancestral Faerian", "Transe", "Filhos de Auralia"),
-        moveBonus=5, img=IMG_RACA_DEF,
+        size="medio", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Elfo da Floresta", "raca",
@@ -74,7 +74,7 @@ RACAS = [
         skill_list=["Conhecimento (Natureza)", "Explorador (Florestas)", "Furtividade",
                     "Sobrevivência", "Trilhador (Florestas)"] + _ELFO_ARMAS,
         granted=_g("Visão no Escuro (10m)", "Ancestral Faerian", "Transe", "Filhos de Illain"),
-        moveBonus=6, img=IMG_RACA_DEF,
+        size="medio", moveBonus=1, img=IMG_RACA_DEF,
     ),
     definicao(
         "Elfo das Profundezas", "raca",
@@ -83,7 +83,7 @@ RACAS = [
         skill_list=["Carisma", "Explorador (Subterrâneos)", "Furtividade", "Mercado Negro",
                     "Trilhador (Subterrâneos)"] + _ELFO_ARMAS,
         granted=_g("Visão no Escuro (20m)", "Ancestral Faerian", "Transe", "Prole de Mizra"),
-        moveBonus=5, img=IMG_RACA_DEF,
+        size="medio", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Gnomo da Floresta", "raca",
@@ -93,7 +93,7 @@ RACAS = [
                     "Golpe de Sorte", "Lidar com Animais", "Montar Criatura", "Sobrevivência",
                     "Trilhador (Florestas)"],
         granted=_g("Visão no Escuro (10m)", "Filhos de Agalard", "Ilusionista Natural"),
-        moveBonus=4, img=IMG_RACA_DEF,
+        size="pequeno", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Gnomo das Profundezas", "raca",
@@ -103,7 +103,7 @@ RACAS = [
                     "Mercado Negro", "Movimento Astuto", "Palavra Arcana (iluzio)",
                     "Palavra Arcana (tenebrae)", "Trilhador (Subterrâneos)"],
         granted=_g("Visão no Escuro (20m)", "Filhos de Agalard", "Camuflagem Natural"),
-        moveBonus=4, img=IMG_RACA_DEF,
+        size="pequeno", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Gnomo das Rochas", "raca",
@@ -114,7 +114,7 @@ RACAS = [
                     "Especialista", "Lidar com Armadilhas", "Ofícios", "Veículos (Terrestres)",
                     "Veículos (Aéreos)"],
         granted=_g("Visão no Escuro (10m)", "Filhos de Agalard", "Inventor de Engenhocas"),
-        moveBonus=4, img=IMG_RACA_DEF,
+        size="pequeno", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Humano", "raca",
@@ -122,7 +122,7 @@ RACAS = [
         + _carac_raca("Um atributo à escolha", 5, "Médio", "Regional e um à escolha", "+0"),
         skill_list=["Ofícios", "Sobrevivência"],
         granted=_g("Versátil", "Sangue Aagn"),
-        moveBonus=5, img=IMG_RACA_DEF,
+        size="medio", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Meio-elfo", "raca",
@@ -133,7 +133,7 @@ RACAS = [
                     "Conhecimento (Natureza)", "Ofícios"],
         granted=_g("Visão no Escuro (10m)", "Ancestral Faerian", "Versatilidade dos Humanos",
                    "Talentoso"),
-        moveBonus=5, img=IMG_RACA_DEF,
+        size="medio", moveBonus=0, img=IMG_RACA_DEF,
     ),
     definicao(
         "Meio-orc", "raca",
@@ -142,7 +142,7 @@ RACAS = [
         skill_list=["Atletismo", "Carregador", "Guerreiro Incauto", "Ímpeto", "Recuperar o Fôlego",
                     "Sobrevivência", "Vigor de Aço"],
         granted=_g("Visão no Escuro (10m)", "Sangue Ruim"),
-        moveBonus=6, img=IMG_RACA_DEF,
+        size="medio", moveBonus=1, img=IMG_RACA_DEF,
     ),
     definicao(
         "Orc", "raca",
@@ -150,7 +150,7 @@ RACAS = [
         + _carac_raca("Força ou Vigor", 6, "Médio", "Regional e Orc", "+1"),
         skill_list=["Guerreiro Incauto", "Grito de Guerra", "Recuperar o Fôlego", "Vigor de Aço"],
         granted=_g("Visão no Escuro (20m)", "Filhos de Grumbar"),
-        moveBonus=6, img=IMG_RACA_DEF,
+        size="medio", moveBonus=1, img=IMG_RACA_DEF,
     ),
     definicao(
         "Pequenino", "raca",
@@ -159,7 +159,7 @@ RACAS = [
         skill_list=["Acrobacia", "Alerta", "Atletismo", "Furtividade", "Ofícios", "Reflexos",
                     "Usar Armas (Fundas)"],
         granted=_g("Agilidade dos Pequeninos", "Filhos de Ruff", "Resistência dos Pequeninos"),
-        moveBonus=4, img=IMG_RACA_DEF,
+        size="pequeno", moveBonus=0, img=IMG_RACA_DEF,
     ),
 ]
 

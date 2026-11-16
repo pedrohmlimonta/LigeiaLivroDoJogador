@@ -55,13 +55,21 @@ TERRENOS_TRILHADOR = [
     "Subterrâneos", "Glacial",
 ]
 
-GRUPOS_ARMAS = [
-    "Corpo a Corpo", "Artilharia", "Arremesso", "Uma Mão", "Duas Mãos",
-    "Simples", "Militar", "Superior", "Haste", "Lâminas Pequenas",
-    "Lâminas Grandes", "Lanças", "Arcos", "Bestas", "Machados", "Martelos",
-    "Maças", "Bastões", "Chicotes", "Dardos", "Fundas", "Manguais",
-    "Picaretas", "Armas de Fogo", "Desarmado", "Naturais", "Orientais",
-]
+# Grupo do livro -> id de tipagem de arma do sistema (CONFIG.weaponTags +
+# tipagens inventadas, normalizadas como weaponTagId faz).
+GRUPOS_ARMAS = {
+    "Corpo a Corpo": "corpo_a_corpo", "Artilharia": "artilharia",
+    "Arremesso": "arremesso", "Uma Mão": "uma_mao", "Duas Mãos": "duas_maos",
+    "Simples": "simples", "Militar": "militar", "Superior": "superior",
+    "Haste": "haste", "Lâminas Pequenas": "laminas_pequenas",
+    "Lâminas Grandes": "laminas_grandes", "Lanças": "lancas",
+    "Arcos": "arcos", "Bestas": "bestas", "Machados": "machados",
+    "Martelos": "martelos", "Maças": "macas", "Bastões": "bastoes",
+    "Chicotes": "chicotes", "Dardos": "dardos", "Fundas": "fundas",
+    "Manguais": "manguais", "Picaretas": "picaretas",
+    "Armas de Fogo": "armas_de_fogo", "Desarmado": "desarmado",
+    "Naturais": "naturais", "Orientais": "orientais",
+}
 
 SOPROS = [
     ("Fogo", "fogo"), ("Frio", "frio"), ("Raio", "raio"),
@@ -94,8 +102,15 @@ HABILIDADES_3 = [
             _PACTO_BASE + f"\n\nPatronos — {patronos}\n\nBenefícios — {beneficios}",
             _PACTO_AVANCADO,
             20, 40, prereq="Mente 4+",
-            mode="active", activation="Ritual após descanso",
-            costs=[cost("hp", 1, "Ritual do pacto (A: 2 PV p/ majesto/exitium)")],
+            activation="Ritual após descanso",
+            actions=[
+                action("Ritual do pacto (1 PV — escolha os benefícios)",
+                       can_roll=False, target_mode="self", include_self=True,
+                       cost_hp=1),
+                action("Ritual com majesto/exitium (A — 2 PV)", level="A",
+                       can_roll=False, target_mode="self", include_self=True,
+                       cost_hp=2),
+            ],
             img=IMG["magia"],
         )
         for nome, patronos, beneficios in PACTOS
@@ -107,6 +122,8 @@ HABILIDADES_3 = [
             f"Você domina a palavra arcana {palavra}. Você é capaz de conjurar suas magias de círculo menor e pode criar novas magias compostas por ela.",
             f"Você recebe um bônus de +1 nas rolagens de Conjuração quando conjura magias compostas pela palavra arcana {palavra}. Você pode criar magias com metamagias avançadas e itens mágicos com propriedades da palavra arcana em questão.",
             10, 30,
+            effects=[effect("bonus", f"conjuracao:{palavra}", 1, level="A",
+                            label=f"+1 Conjuração com magias de {palavra}")],
             img=IMG["magia"],
         )
         for palavra in PALAVRAS_ARCANAS
@@ -187,14 +204,22 @@ HABILIDADES_3 = [
         "O alcance da aura é de 4m x seu nível.",
         20, 40,
         activation="Livre",
-        actions=[action("Presença Aterradora (Mente vs Mente — Abalado)",
-                        roll_attr="mente", target_mode="aura", area=4, defense_attr="mente",
-                        cost_heroic=1,
-                        persist_area=True, persist_rounds=0, persist_trigger="both",
-                        persist_reroll_attack=False,
-                        applies_effects=[applies("Abalado (Mente anula)", fx_type="condition",
-                                                 fx_target="abalado", duration_mode="scene",
-                                                 resist=True, resist_attr="mente")])],
+        actions=[
+            action("Presença Aterradora (B — aura 2m x Nível, Mente vs Mente)",
+                   roll_attr="mente", target_mode="aura", area_filter="enemies",
+                   area="2*@nivel", defense_attr="mente", cost_heroic=1,
+                   persist_area=True, persist_rounds=0, persist_trigger="both",
+                   applies_effects=[applies("Abalado (Mente anula)", fx_type="condition",
+                                            fx_target="abalado", duration_mode="scene",
+                                            resist=True, resist_attr="mente")]),
+            action("Presença Aterradora (A — aura 4m x Nível)", level="A",
+                   roll_attr="mente", target_mode="aura", area_filter="enemies",
+                   area="4*@nivel", defense_attr="mente", cost_heroic=1,
+                   persist_area=True, persist_rounds=0, persist_trigger="both",
+                   applies_effects=[applies("Abalado (Mente anula)", fx_type="condition",
+                                            fx_target="abalado", duration_mode="scene",
+                                            resist=True, resist_attr="mente")]),
+        ],
         img=IMG["social"],
     ),
     habilidade(
@@ -219,7 +244,21 @@ HABILIDADES_3 = [
         "Após um descanso, você pode realizar um ritual gastando uma cena, para se conectar aos espíritos ancestrais da natureza, para que eles lhe concedam uma proteção. Quando o fizer, você recebe Proteção igual à metade do seu nível contra todo o tipo de dano. Essa Proteção dura até o próximo descanso e cai em 1 ponto cada vez que ela anula qualquer dano sofrido por você.",
         "Você recebe Proteção igual ao seu nível, em vez de metade do nível.",
         10, 30,
-        mode="active", activation="Ritual (uma cena)",
+        activation="Ritual (uma cena)",
+        actions=[
+            action("Ritual de Proteção (B — RD metade do Nível, todo dano)",
+                   can_roll=False, target_mode="self", include_self=True,
+                   applies_effects=[applies("Proteção dos Espíritos (cai 1 ao absorver)",
+                                            fx_type="rd", fx_target="all",
+                                            fx_value="ceil(@nivel/2)",
+                                            duration_mode="scene")]),
+            action("Ritual de Proteção (A — RD igual ao Nível)", level="A",
+                   can_roll=False, target_mode="self", include_self=True,
+                   applies_effects=[applies("Proteção dos Espíritos (cai 1 ao absorver)",
+                                            fx_type="rd", fx_target="all",
+                                            fx_value="@nivel",
+                                            duration_mode="scene")]),
+        ],
         img=IMG["magia"],
     ),
     habilidade(
@@ -237,9 +276,15 @@ HABILIDADES_3 = [
         "Você recebe um bônus para essa rolagem de Mente igual a metade do seu nível (arredondado para cima).",
         20, 40,
         activation="Ação rápida",
-        actions=[action("Provocar (Mente vs Percepção)",
-                        roll_attr="mente", target_mode="aura", area=20,
-                        defense_attr="percepcao")],
+        actions=[
+            action("Provocar (Mente vs Percepção)",
+                   roll_attr="mente", target_mode="aura", area_filter="enemies",
+                   area=20, defense_attr="percepcao"),
+            action("Provocar (A — com +metade do Nível)", level="A",
+                   roll_attr="mente", roll_bonus="ceil(@nivel/2)",
+                   target_mode="aura", area_filter="enemies", area=20,
+                   defense_attr="percepcao"),
+        ],
         img=IMG["social"],
     ),
     habilidade(
@@ -248,6 +293,15 @@ HABILIDADES_3 = [
         "Quando você acerta uma criatura com um ataque corpo a corpo, você pode gastar pontos de magia para causar dano final adicional a ela. A cada 2 pontos de magia gastos, você causa 1 ponto de dano final adicional (limite de 6 de dano).",
         "A cada ponto de magia gasto, você causa 1 ponto de dano final adicional (limite de 6 de dano).",
         20, 40,
+        activation="Livre (ao acertar um ataque corpo a corpo)",
+        actions=[
+            action("Punição (B — 2 PM: +1 de dano final no alvo)",
+                   can_roll=False, target_mode="target", cost_mp=2,
+                   damage="1", damage_type="final"),
+            action("Punição (A — 1 PM: +1 de dano final no alvo)", level="A",
+                   can_roll=False, target_mode="target", cost_mp=1,
+                   damage="1", damage_type="final"),
+        ],
         img=IMG["combate"],
     ),
     habilidade(
@@ -256,6 +310,13 @@ HABILIDADES_3 = [
         "Até o final da cena, você recebe um bônus igual a metade do seu nível nas rolagens de ataque com armas corpo a corpo e armas de arremesso, contra criaturas que causarem dano a você.",
         "Um ataque que receba esse bônus possui margem de crítico 11-12 enquanto você estiver ferido, ou 10-12 caso você esteja com uma quantidade de pontos de vida atual menor ou igual ao seu nível.",
         20, 40, prereq="Força 4+",
+        mode="active",
+        effects=[
+            effect("bonus", "attackMelee", "ceil(@nivel/2)", level="B",
+                   label="Reação Furiosa: +metade do Nível vs quem te feriu (ligue quando valer)"),
+            effect("crit", "attackMelee", 1, level="A",
+                   label="Reação Furiosa (A): crítico 11-12 ferido (10-12 com PV ≤ Nível)"),
+        ],
         img=IMG["combate"],
     ),
     habilidade(
@@ -272,6 +333,14 @@ HABILIDADES_3 = [
         "Quando você gastar um ponto heróico para recuperar pontos de vida igual ao seu nível, some 3 pontos a esse valor.",
         "Quando você gastar um ponto heróico para recuperar pontos de vida igual ao seu nível, some 5 pontos a esse valor (em vez de 3). Adicionalmente, você recebe um bônus igual a metade do seu nível em rolagens para resistir e anular condições de Inconsciente e Morrendo.",
         20, 40, prereq="Vigor 4+",
+        actions=[
+            action("Recuperar o Fôlego (B — PH recupera Nível+3 PV)",
+                   can_roll=False, target_mode="self", include_self=True,
+                   cost_heroic=1, heal="@nivel+3", heal_resource="hp"),
+            action("Recuperar o Fôlego (A — PH recupera Nível+5 PV)", level="A",
+                   can_roll=False, target_mode="self", include_self=True,
+                   cost_heroic=1, heal="@nivel+5", heal_resource="hp"),
+        ],
         img=IMG["corpo"],
     ),
     habilidade(
@@ -355,16 +424,24 @@ HABILIDADES_3 = [
             f"Criaturas que sofrerem dano do sopro devem ser bem sucedidas em uma rolagem de Vigor oposta a Vigor, ou sofrerão dano contínuo de {elem.lower()} (Vigor anula).",
             20, 40,
             activation="Ação",
-            actions=[action(
-                f"Sopro de Dragão — {elem} (dano = metade do Nível; área = PM gastos)",
-                roll_attr="vigor", target_mode="area", area=1, rng=8,
-                damage="1", damage_type=dtipo, cost_mp=1,
-                defense_attr="esquiva", defense_attr2="bloqueio",
-                applies_effects=[applies(f"Dano contínuo de {elem.lower()} (Vigor anula) — nível A",
-                                         fx_type="condition", fx_target="dano_continuo",
-                                         duration_mode="scene", resist=True, resist_attr="vigor",
-                                         tick_amount=1, tick_type=dtipo)],
-            )],
+            actions=[
+                action(
+                    f"Sopro de Dragão — {elem} (área = PM gastos; ajuste a área)",
+                    roll_attr="vigor", target_mode="area", area=1, rng="2*@vigor",
+                    damage="ceil(@nivel/2)", damage_type=dtipo, cost_mp=1,
+                    defense_attr="esquiva", defense_attr2="bloqueio"),
+                action(
+                    f"Sopro de Dragão (A) — {elem} com dano contínuo",
+                    level="A",
+                    roll_attr="vigor", target_mode="area", area=1, rng="2*@vigor",
+                    damage="ceil(@nivel/2)", damage_type=dtipo, cost_mp=1,
+                    defense_attr="esquiva", defense_attr2="bloqueio",
+                    applies_effects=[applies(f"Dano contínuo de {elem.lower()} (Vigor anula)",
+                                             fx_type="condition", fx_target="dano_continuo",
+                                             duration_mode="scene", resist=True,
+                                             resist_attr="vigor",
+                                             tick_amount=1, tick_type=dtipo)]),
+            ],
             img=IMG["combate"],
         )
         for elem, dtipo in SOPROS
@@ -383,6 +460,17 @@ HABILIDADES_3 = [
         "Você recebe 1D em intimidação. Adicionalmente, sempre que você sofrer dano, você pode gastar 1 ponto de magia para receber um bônus acumulativo +1 nas rolagens de bloqueio, esquiva, ataques ou conjuração. Você pode usar sua ação para converter esse bônus em sobrevida.",
         "Quando você converte esse bônus em sobrevida, você recebe o dobro do bônus em sobrevida. Você pode converter o bônus em sobrevida usando seu movimento.",
         10, 30,
+        activation="Livre (ao sofrer dano)",
+        actions=[
+            action("Acumular tenacidade (+1 nas rolagens, cena)",
+                   can_roll=False, target_mode="self", include_self=True, cost_mp=1,
+                   applies_effects=[applies("Tenacidade: +1 acumulativo", fx_type="bonus",
+                                            fx_target="all", fx_value=1,
+                                            duration_mode="scene")]),
+            action("Converter bônus em sobrevida (remova os acúmulos)",
+                   can_roll=False, target_mode="self", include_self=True,
+                   heal=1, heal_resource="hpTemp", temp_stack=True),
+        ],
         img=IMG["corpo"],
     ),
     *[
@@ -411,9 +499,15 @@ HABILIDADES_3 = [
             f"Você recebe um bônus acumulativo de +1 nas rolagens de ataque feitas com armas do grupo {grupo}. Você também pode gastar 1 ponto heróico para realizar uma manobra de combate dependendo do sub-grupo desta habilidade.",
             "Seus resultados naturais 11-12 são considerados críticos.",
             10, 30,
+            effects=[
+                effect("bonus", f"arma:{tag}", 1, level="B",
+                       label=f"+1 ataque com armas de {grupo}"),
+                effect("crit", f"arma:{tag}", 1, level="A",
+                       label=f"Crítico 11-12 com armas de {grupo}"),
+            ],
             img=IMG["combate"],
         )
-        for grupo in GRUPOS_ARMAS
+        for grupo, tag in GRUPOS_ARMAS.items()
     ],
     habilidade(
         "Usar Escudos",

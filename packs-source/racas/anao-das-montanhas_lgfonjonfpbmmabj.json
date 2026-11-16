@@ -29,7 +29,16 @@
           "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -44,16 +53,27 @@
           "description": "<p>Você recebe Proteção contra dano de veneno igual a metade do seu nível (arredondado para cima) e 1D em rolagens contra envenenamento.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [
             {
               "type": "rd",
               "target": "all",
-              "value": 1,
+              "value": "ceil(@nivel/2)",
               "rerollAll": false,
-              "label": "Resistência Anã: RD veneno (metade do Nível — ajuste)",
+              "vulnPercent": false,
+              "label": "Resistência Anã: RD veneno",
               "enabled": true,
+              "enchant": false,
               "level": "all",
               "damageType": "veneno"
             }
@@ -70,7 +90,16 @@
           "description": "<p>Você possui afinidade com minerais, recebendo 1D em todas as rolagens relacionadas a lidar com minerais.</p><p>Raças: anão das montanhas, anão das terras baixas.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -78,17 +107,17 @@
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.cblklklofjejckib"
       }
     ],
-    "moveBonus": 4
+    "size": "medio",
+    "moveBonus": "-1"
   },
   "effects": [],
   "folder": null,
   "sort": 100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

@@ -20,26 +20,39 @@
     "descAdvanced": "<p>Você tem 5 pontos de vida adicionais (em vez de 3).</p>",
     "descSpecial": "",
     "actions": [],
-    "mode": "active",
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
     "active": false,
     "effects": [
       {
         "type": "stat",
         "target": "hp",
-        "value": 3,
+        "value": "3",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Vigor de Aço B: +3 PV",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       },
       {
         "type": "stat",
         "target": "hp",
-        "value": 2,
+        "value": "2",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Vigor de Aço A: +2 PV (total +5)",
         "enabled": true,
+        "enchant": false,
         "level": "A",
         "damageType": ""
       }
@@ -49,12 +62,11 @@
   "effects": [],
   "folder": null,
   "sort": 26300,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

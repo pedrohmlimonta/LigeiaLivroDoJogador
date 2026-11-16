@@ -17,13 +17,18 @@ Módulo de compêndios para o sistema não-oficial [`ligeia-rpg`](https://github
 | **Organizações** | 14 | Sessão 7 — as Nações de Ligeia, cada uma com a lista de Habilidades Regionais (Sei Yang inclui a tabela de Clãs) |
 | **Complicações** | 50 | Avulso 09 (Complicações, Playtest v0.1) — 12 complicações avulsas, Efeito Colateral expandido por palavra arcana (×28) e Insanidade por tipo (×10), com XP concedido em xpBasic e efeitos configurados (reroll6 nos atributos; demais como info) |
 
-### Convenções mecânicas
+### Convenções mecânicas (sistema 0.2.x, build 22+)
 
-- **Efeitos com nível**: efeitos marcados `(B)` valem desde o nível Básico; efeitos `(A)` somam-se ao mudar o item para Avançado (ex.: Corredor: +3m no B e +2m no A, totalizando +5m).
-- **Valores "metade do Nível"**: o sistema não escala efeitos por nível automaticamente, então esses efeitos foram registrados com valor 1 e rótulo `(metade do Nível — ajuste)`. Ajuste o valor na ficha conforme o nível do personagem.
-- **Dano "+Nível"** (Cauda, Garras, Presas, Artes Marciais, Sopro de Dragão): a fórmula de dano da ação vem com o valor base 1 e a instrução no rótulo — edite o número conforme o nível.
-- **Habilidades de modo ativo** (Fúria, Espírito Guardião, Forma Animal, Pacto...) já vêm com `mode: active` e custos de ativação configurados; ligue/desligue na ficha.
-- **Condições aplicáveis**: ações que impõem condições (Abalado, Cego, Dano Contínuo...) usam `appliesEffects` com a rolagem de resistência indicada no livro (ex.: *Vigor anula*).
+- **Fórmulas automáticas**: valores "metade do Nível", "+Nível", "dobro do Vigor" etc. usam fórmulas `@variáveis` resolvidas pela ficha (`ceil(@nivel/2)`, `@nivel`, `2*@vigor`) — nada de ajustar números na mão. Vale para efeitos, danos, curas, alcances, áreas e durações.
+- **Passivo × ativável**: efeitos incondicionais (Usar Armas, Vigor de Aço, RDs raciais, Palavra Arcana [A], características de carreira, complicações) são `passive` — valem sempre. Efeitos situacionais (perícias, posturas, Reação Furiosa) são `active` com a checkbox desligada — ligue quando a situação valer.
+- **Perícias com as duas opções**: habilidades de "1D em rolagens de X" (Ofícios, Carisma, Conhecimento...) têm um efeito ativável *e* uma ação de rolagem pronta com o dado já somado (ex.: "Ofícios — rolar Mente +1D"). Use a que preferir.
+- **Efeitos com nível**: efeitos e ações marcados B/A/E passam a valer no nível correspondente da habilidade (ex.: Usar Armas dá +1 no B e crítico 11-12 no A; Fúria tem ação própria de Avançado).
+- **Posturas e transformações por ação**: Fúria, Espírito Guardião, Guerreiro Incauto, Proteção dos Espíritos, buffs de magia (Armadura Arcana, Aumento Arcano...) são ações que aplicam efeitos com a duração correta (rodadas ou cena) — inclusive sobrevida vinculada (Fúria, Urso) e regeneração por rodada (Fluxo Arcano, Manifestação Divina).
+- **Tipagens de arma**: as armas carregam as tipagens do livro (`tags`) e Usar Armas [Grupo] dá o bônus apenas às armas daquele grupo, automaticamente. Ações de arma usam `isWeapon`/`isMelee` (bônus de tamanho e alcance corpo a corpo).
+- **Palavras arcanas**: Palavra Arcana [x] no Avançado soma +1 de Conjuração só às magias compostas pela palavra; alcances e áreas das magias Menores vêm com as fórmulas do livro (`5*@nivel` etc.) e toque vira alcance corpo a corpo.
+- **Encantamentos**: Encantar Objeto pergunta qual item do alvo encantar e grava o bônus nas ações daquele item pela cena.
+- **Cura nativa**: Curar, Recuperar o Fôlego, Sangue Aagn, Manifestação Divina usam o campo de cura das ações (com escalonamento "+1 por 2 acima" onde o livro manda).
+- **Condições aplicáveis**: ações que impõem condições (Abalado, Cego, Dano Contínuo...) usam `appliesEffects` com duração e a rolagem de resistência do livro (ex.: *Vigor anula*), incluindo dano contínuo por rodada.
 
 ## Instalação
 

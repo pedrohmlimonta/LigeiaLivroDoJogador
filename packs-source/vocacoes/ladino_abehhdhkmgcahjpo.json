@@ -33,18 +33,17 @@
       "Usar Armas [Lâminas Pequenas]"
     ],
     "grantedTraits": [],
-    "hpBonus": 2,
-    "mpBonus": 0
+    "hpBonus": "2",
+    "mpBonus": "0"
   },
   "effects": [],
   "folder": null,
   "sort": 800,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

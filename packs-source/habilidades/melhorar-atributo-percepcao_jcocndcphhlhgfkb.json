@@ -20,16 +20,27 @@
     "descAdvanced": "<p>—</p>",
     "descSpecial": "",
     "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
     "mode": "active",
     "active": false,
     "effects": [
       {
         "type": "dice",
         "target": "percepcao",
-        "value": 1,
+        "value": "1",
         "rerollAll": false,
+        "vulnPercent": false,
         "label": "Melhorar Atributo: 1D Percepção",
         "enabled": true,
+        "enchant": false,
         "level": "B",
         "damageType": ""
       }
@@ -39,12 +50,11 @@
   "effects": [],
   "folder": null,
   "sort": 13100,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }

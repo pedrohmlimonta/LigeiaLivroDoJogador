@@ -22,7 +22,16 @@
           "description": "<p>Você enxerga no escuro até 10m.</p><p>Raças: anões, alto elfo, elfo cinzento, elfo solar, elfo da floresta, gnomo da floresta, gnomo das rochas, meio-elfo, meio-orc; heranças celestial e infernal.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -37,7 +46,16 @@
           "description": "<p>Você recebe 1D em rolagens contra as condições Dominado, Enfeitiçado e Abalado. Adicionalmente, você não pode ser posto para dormir.</p><p>Raças: alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, meio-elfo.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -52,7 +70,16 @@
           "description": "<p>Você recebe 10 pontos de antecedentes adicionais na criação do personagem. Você pode gastar esses pontos adicionais para comprar habilidades de outras vocações ou raças como se fossem da sua lista (sem ter que pagar o dobro).</p><p>Raça: meio-elfo.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -67,7 +94,16 @@
           "description": "<p>Escolha uma habilidade que te dê 1D em uma rolagem fora de combate. Você recebe um bônus igual a metade do seu nível em todas as rolagens que adicionar esse dado de melhoria.</p><p>Raça: meio-elfo.</p>",
           "isWeapon": false,
           "actions": [],
-          "mode": "active",
+          "enchantments": [],
+          "costsCumulative": false,
+          "noEnchant": false,
+          "fxFile": "",
+          "fxScale": "1",
+          "fxAaConfig": null,
+          "fxAaName": "",
+          "fxAaPersist": true,
+          "animOnActivate": true,
+          "mode": "passive",
           "active": false,
           "effects": [],
           "costs": []
@@ -75,17 +111,17 @@
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.tracos.Item.nbkonllfdloihnhe"
       }
     ],
-    "moveBonus": 5
+    "size": "medio",
+    "moveBonus": "0"
   },
   "effects": [],
   "folder": null,
   "sort": 1200,
-  "flags": {},
   "ownership": {
     "default": 0
   },
+  "flags": {},
   "_stats": {
-    "coreVersion": "13",
-    "systemId": "ligeia-rpg"
+    "coreVersion": "13"
   }
 }
