@@ -21,7 +21,8 @@ const listas = mod.chavesDasTabelas();
 const todas = new Set(listas.flat());
 const inexistentes = [...todas].filter((k) => !FREE.has(k) && !PAT.has(k));
 ok(inexistentes.length === 0, `todas as ${todas.size} chaves existem no JB2A (inexistentes: ${inexistentes.join(', ') || 'nenhuma'})`);
-ok(listas.every((l) => l.some((k) => FREE.has(k) && PAT.has(k))), 'toda lista tem ao menos uma chave do JB2A gratuito E do Patreon');
+ok(mod.chavesDasTabelas({ comOpcionais: false }).every((l) => l.some((k) => FREE.has(k) && PAT.has(k))),
+   'toda lista tem ao menos uma chave do JB2A gratuito E do Patreon (arremesso é opcional)');
 const seguras = [...todas].filter((k) => FREE.has(k) && PAT.has(k)).sort();
 ok(JSON.stringify(seguras) === JSON.stringify([...mod.SEGURAS].sort()),
    `SEGURAS = chaves das tabelas presentes nas duas versões (${mod.SEGURAS.size})`);
@@ -121,6 +122,103 @@ ok(n === 2 && d.system.actions[0].aaConfig === null && d.system.actions[0].appli
    `limparAnimacoesAutomaticas tirou ${n} (ação + condição)`);
 ok(JSON.stringify(d.system.actions[1].aaConfig) === JSON.stringify(minha), 'e deixou a sua');
 ok(mod.contarAnimacoesAutomaticas(d) === 0, 'contagem zerada');
+
+const raiz = new URL('../packs-source/', import.meta.url).pathname;
+const doPack = (pack, nome) => {
+  const pasta = `${raiz}/${pack}`;
+  for (const f of fs.readdirSync(pasta)) {
+    const x = JSON.parse(fs.readFileSync(`${pasta}/${f}`, 'utf8'));
+    if (x.name === nome) return x;
+  }
+  throw new Error(`${pack}/${nome} não encontrado`);
+};
+const acao = (doc, re) => doc.system.actions.find((x) => re.test(x.label));
+
+console.log('8) Armas');
+d = doPack('equipamentos', 'Espada Longa');
+a = d.system.actions[0];
+ok(a.aaConfig?.menu === 'melee' && chave(a.aaConfig) === 'melee.weapon.sword.01.white', `Espada Longa: golpe ${chave(a.aaConfig)}`);
+ok(a.aaConfig.meleeSwitch?.options?.switchType === 'off',
+   'troca por projétil explícita e desligada (o padrão "on" do AA procuraria um arremesso inexistente)');
+d = doPack('equipamentos', 'Adaga');
+a = d.system.actions[0];
+ok(a.aaConfig.meleeSwitch.options.switchType === 'custom' && a.aaConfig.meleeSwitch.video.animation === 'dagger',
+   'Adaga: golpe de perto, adaga arremessada de longe');
+ok(chave(doPack('equipamentos', 'Arco Longo').system.actions[0].aaConfig) === 'range.weapon.arrow.regular.regular', 'Arco Longo: flecha');
+ok(chave(doPack('equipamentos', 'Besta Pesada').system.actions[0].aaConfig) === 'range.weapon.bolt.physical.orange', 'Besta Pesada: virote');
+ok(chave(doPack('equipamentos', 'Mordida').system.actions[0].aaConfig) === 'melee.creature.bite.01.red', 'Mordida: mordida');
+d = doPack('equipamentos', 'Soco');
+ok(chave(acao(d, /^Ataque/).aaConfig) === 'melee.weapon.unarmedstrike.physical.blue'
+   && chave(acao(d, /Artes Marciais A/).aaConfig) === 'melee.weapon.flurryofblows.physical.blue',
+   'Soco comum e Soco de Artes Marciais (rajada de golpes)');
+d = clone(doPack('equipamentos', 'Machado de Mão'));
+mod.animarItem(d, { existe: (k) => PAT.has(k) });
+ok(d.system.actions[0].aaConfig.meleeSwitch.options.switchType === 'custom'
+   && d.system.actions[0].aaConfig.metaData.arremesso === 'range.weapon.handaxe.01.white',
+   'com o JB2A Patreon, o Machado de Mão arremessado vira machado voando');
+let semArma = [];
+for (const f of fs.readdirSync(`${raiz}/equipamentos`)) {
+  const x = JSON.parse(fs.readFileSync(`${raiz}/equipamentos/${f}`, 'utf8'));
+  for (const y of x.system.actions ?? []) if (!y.aaConfig) semArma.push(`${x.name}: ${y.label}`);
+}
+ok(semArma.length === 0, `toda ação de arma tem animação (${semArma.join('; ') || 'ok'})`);
+
+console.log('9) Habilidades e traços');
+d = doPack('habilidades', 'Fúria');
+ok(chave(acao(d, /Entrar em Fúria \(B/).aaConfig) === 'static.energy.circle.complete.orange'
+   && acao(d, /Entrar em Fúria \(B/).aaConfig.primary.options.playOn === 'source', 'Fúria: energia ao redor do bárbaro');
+d = clone(doPack('habilidades', 'Fúria'));
+mod.animarItem(d, { existe: (k) => PAT.has(k) });
+ok(chave(d.system.actions[0].aaConfig) === 'static.energy.strands.01.red', 'Fúria com Patreon: energia vermelha');
+ok(chave(acao(doPack('habilidades', 'Inspirar'), /^Inspirar:/).aaConfig) === 'static.spell.bardicinspiration.inspire.greenorange',
+   'Inspirar: inspiração do bardo');
+d = doPack('habilidades', 'Sopro de Dragão [Fogo]');
+a = d.system.actions[0];
+ok(a.aaConfig.menu === 'range' && chave(a.aaConfig) === 'range.spell.fireballbeam.01.orange', 'Sopro de Dragão [Fogo]: jato até cada atingido');
+d = doPack('habilidades', 'Presa de Caça [Feras]');
+a = acao(d, /sangramento/);
+ok(chave(a.aaConfig) === 'static.spell.huntersmark.eye.green' && chave(a.appliesEffects[0].fxAaConfig) === 'static.conditions.drop.02.red',
+   'Presa de Caça: marca do caçador e sangramento enquanto durar');
+d = doPack('habilidades', 'Usar Armas [Fundas]');
+ok(!acao(d, /^Manobra/).aaConfig && chave(acao(d, /Tiro Atordoante —/).aaConfig) === 'static.generic.ui.stun.purple',
+   'manobra: a preparação em você fica quieta; o efeito no alvo mostra o ícone da condição');
+ok(chave(acao(doPack('habilidades', 'Recuperar o Fôlego'), /\(B/).aaConfig) === 'static.spell.generichealing.01.green',
+   'Recuperar o Fôlego: cura em você');
+ok(!doPack('habilidades', 'Acrobacia').system.actions.some((x) => x.aaConfig), 'rolagens de perícia ficam sem animação');
+ok(!doPack('habilidades', 'Atirador').system.actions.some((x) => x.aaConfig), 'ajuste de número em você fica sem animação');
+ok(doPack('habilidades', 'Pacto [Faérian]').system.actions.every((x) => chave(x.aaConfig) === 'static.leaves.outburst.01.pink'),
+   'Pacto [Faérian]: o ritual ganha folhas faérian');
+ok(chave(doPack('tracos', 'Filhos de Auralia').system.actions[0].aaConfig) === 'static.leaves.outburst.01.pink',
+   'Filhos de Auralia: teleporte faérian');
+
+console.log('10) Instantâneos e complicações');
+const porUuid = new Map();
+for (const pack of fs.readdirSync(raiz)) {
+  for (const f of fs.readdirSync(`${raiz}/${pack}`)) {
+    const x = JSON.parse(fs.readFileSync(`${raiz}/${pack}/${f}`, 'utf8'));
+    porUuid.set(`Compendium.ligeia-livro-do-jogador.${pack}.Item.${x._id}`, x);
+  }
+}
+let copias = 0, diferentes = [];
+for (const x of porUuid.values()) {
+  for (const sn of [...(x.system.grantedTraits ?? []), ...(x.system.keySkills ?? [])]) {
+    const origem = sn.sourceUuid && porUuid.get(sn.sourceUuid);
+    if (!origem) continue;
+    copias++;
+    if (JSON.stringify(origem.system) !== JSON.stringify(sn.system)) diferentes.push(`${x.name} › ${sn.name}`);
+  }
+}
+ok(copias > 50 && diferentes.length === 0, `${copias} cópias embutidas idênticas ao item (com as animações)`);
+const barb = doPack('vocacoes', 'Bárbaro').system.keySkills.find((k) => k.name === 'Fúria');
+ok(chave(barb.system.actions[0].aaConfig) === 'static.energy.circle.complete.orange', 'a Fúria do Bárbaro já vem animada');
+const bruxo = doPack('vocacoes', 'Bruxo').system.keySkills.find((k) => /^Pacto/.test(k.name));
+ok(bruxo.system.actions.every((x) => x.aaConfig), 'chave genérica (Pacto [Único]) também animada');
+let compl = 0;
+for (const f of fs.readdirSync(`${raiz}/complicacoes`)) {
+  const x = JSON.parse(fs.readFileSync(`${raiz}/complicacoes/${f}`, 'utf8'));
+  compl += (x.system.actions ?? []).length;
+}
+ok(compl === 0, 'complicações não têm ações (efeitos permanentes): nada a animar');
 
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

@@ -65,8 +65,88 @@
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
-        "aaConfig": null,
-        "aaName": "",
+        "aaConfig": {
+          "id": "3WJWihqjcFgzNpYy",
+          "label": "Sopro de Dragão [Ácido]",
+          "menu": "range",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "range.spell.disintegrate.01.green",
+            "nome": "Sopro de Dragão"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "spell",
+              "animation": "disintegrate",
+              "variant": "01",
+              "color": "green",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "animationSource": false,
+              "isReturning": false,
+              "onlyX": false,
+              "randomOffset": false,
+              "reverse": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Sopro de Dragão [Ácido] (automática)",
         "aaEnabled": true,
         "animFile": "",
         "animPlacement": "target",
@@ -138,8 +218,94 @@
             "tickHealResource": "hp",
             "fxFile": "",
             "fxScale": "1",
-            "fxAaConfig": null,
-            "fxAaName": "",
+            "fxAaConfig": {
+              "id": "JxohbMyiQ8JmbguI",
+              "label": "Sopro de Dragão [Ácido]",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.energy.strands.02.green",
+                "nome": "Corrosão"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "energy",
+                  "animation": "strands",
+                  "variant": "02",
+                  "color": "green",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Corrosão (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
             "grantTempHp": "0"
@@ -154,8 +320,88 @@
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
-        "aaConfig": null,
-        "aaName": "",
+        "aaConfig": {
+          "id": "udgxSiMYFwe7uudb",
+          "label": "Sopro de Dragão [Ácido]",
+          "menu": "range",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "range.spell.disintegrate.01.green",
+            "nome": "Sopro de Dragão"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "spell",
+              "animation": "disintegrate",
+              "variant": "01",
+              "color": "green",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "animationSource": false,
+              "isReturning": false,
+              "onlyX": false,
+              "randomOffset": false,
+              "reverse": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Sopro de Dragão [Ácido] (automática)",
         "aaEnabled": true,
         "animFile": "",
         "animPlacement": "target",

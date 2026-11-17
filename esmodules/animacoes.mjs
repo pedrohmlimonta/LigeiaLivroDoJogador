@@ -1,11 +1,12 @@
 /**
- * LIGEIA — ANIMAÇÕES AUTOMÁTICAS DAS MAGIAS (Livro do Jogador)
+ * LIGEIA — ANIMAÇÕES AUTOMÁTICAS (Livro do Jogador)
  * ===========================================================================
- * Escolhe, para cada ação de uma magia, uma animação do Automated Animations
- * (efeitos do JB2A) que combine com o que a ação faz — o elemento do dano, a
- * forma (projétil, toque, área, emanação, em você) e o que ela causa (cura,
- * proteção, condição) — e, para cada condição que ela aplica, um visual que
- * fica no token enquanto a condição durar.
+ * Escolhe, para cada ação de uma magia, arma, habilidade ou traço, uma
+ * animação do Automated Animations (efeitos do JB2A) que combine com o que a
+ * ação faz — o golpe da arma, o elemento do dano, a forma (projétil, toque,
+ * área, emanação, em você) e o que ela causa (cura, proteção, condição) — e,
+ * para cada condição que ela aplica, um visual que fica no token enquanto a
+ * condição durar.
  *
  * ONDE FICA: exatamente onde o sistema guarda uma animação PUXADA do item —
  *   ação ............ action.aaConfig (+ aaName, aaEnabled)
@@ -315,13 +316,25 @@ const POR_MAGIA = {
  * scripts/aa-chaves.json (catálogo do Automated Animations v8).
  */
 export const SEGURAS = new Set([
+  "melee.creature.bite.01.red", "melee.creature.claw.01.red", "melee.generic.slashing.01.orange",
+  "melee.weapon.club.01.white", "melee.weapon.dagger.01.white",
+  "melee.weapon.flurryofblows.physical.blue", "melee.weapon.glaive.01.white",
+  "melee.weapon.greataxe.01.white", "melee.weapon.greatclub.01.white",
+  "melee.weapon.greatsword.01.white", "melee.weapon.halberd.01.white",
+  "melee.weapon.hammer.01.white", "melee.weapon.handaxe.01.white", "melee.weapon.mace.01.white",
+  "melee.weapon.mace.02.white", "melee.weapon.maul.01.white", "melee.weapon.rapier.01.white",
+  "melee.weapon.scimitar.01.white", "melee.weapon.shortsword.01.white",
+  "melee.weapon.spear.01.white", "melee.weapon.sword.01.white",
+  "melee.weapon.unarmedstrike.physical.blue", "melee.weapon.warhammer.01.white",
   "range.generic.energybeam.01.blue", "range.generic.energystrand.01.purple",
   "range.generic.iceshard.01.blue", "range.spell.chainlightning.primary.blue",
   "range.spell.disintegrate.01.green", "range.spell.eldritchblast.01.purple",
-  "range.spell.firebolt.01.orange", "range.spell.guidingbolt.01.yellowblue",
-  "range.spell.magicmissile.01.purple", "range.spell.rayoffrost.01.blue",
-  "range.spell.scorchingray.01.orange", "range.spell.witchbolt.01.blue",
-  "range.weapon.arrow.physical.blue", "range.weapon.dagger.01.white",
+  "range.spell.fireballbeam.01.orange", "range.spell.firebolt.01.orange",
+  "range.spell.guidingbolt.01.yellowblue", "range.spell.magicmissile.01.purple",
+  "range.spell.rayoffrost.01.blue", "range.spell.scorchingray.01.orange",
+  "range.spell.witchbolt.01.blue", "range.weapon.arrow.physical.blue",
+  "range.weapon.arrow.regular.regular", "range.weapon.bolt.physical.orange",
+  "range.weapon.bullet.1.orange", "range.weapon.dagger.01.white",
   "static.chains.standard.loop.red", "static.conditions.crackedshield.02.purple",
   "static.conditions.dizzystars.01.blueorange", "static.conditions.drop.02.red",
   "static.conditions.fear.01.darkpurple", "static.conditions.heart.01.pink",
@@ -330,31 +343,42 @@ export const SEGURAS = new Set([
   "static.conditions.poison.02.darkgreen", "static.conditions.poison.03.darkgreen",
   "static.conditions.skull.02.purple", "static.conditions.snowflakes.02.blue",
   "static.conditions.stun.02.purple", "static.creature.bite.01.red",
-  "static.creature.claw.01.red", "static.energy.shimmer.01.blue",
-  "static.energy.sparkles.01.blue", "static.energy.strands.01.green",
-  "static.energy.strands.02.green", "static.fire.eruption.01.orange",
-  "static.fire.fireworks.01.orangeyellow", "static.fire.groundcrack.01.orange",
-  "static.generic.explosion.01.blue", "static.generic.explosion.01.orange",
-  "static.generic.impact.01.blue", "static.generic.impact.01.orange",
-  "static.generic.impact.01.yellow", "static.generic.outpulse.01.whiteblue",
-  "static.generic.smoke.01.grey", "static.generic.vortex.loop.blue",
-  "static.generic.whirl.loop.blue", "static.ice.icespikes.01.white",
-  "static.ice.snowflake.01.whiteblue", "static.lightning.ball.01.blue",
+  "static.creature.claw.01.red", "static.energy.circle.complete.orange",
+  "static.energy.shimmer.01.blue", "static.energy.sparkles.01.blue",
+  "static.energy.strands.01.green", "static.energy.strands.02.green",
+  "static.fire.eruption.01.orange", "static.fire.fireworks.01.orangeyellow",
+  "static.fire.groundcrack.01.orange", "static.generic.explosion.01.blue",
+  "static.generic.explosion.01.orange", "static.generic.impact.01.blue",
+  "static.generic.impact.01.orange", "static.generic.impact.01.yellow",
+  "static.generic.outpulse.01.whiteblue", "static.generic.outpulse.02.whiteblue",
+  "static.generic.smoke.01.grey", "static.generic.smoke.02.grey", "static.generic.smoke.03.grey",
+  "static.generic.ui.crackedshield.purple", "static.generic.ui.drop.red",
+  "static.generic.ui.fear.darkpurple", "static.generic.ui.heart.pink",
+  "static.generic.ui.poison.darkgreen", "static.generic.ui.skull.purple",
+  "static.generic.ui.snowflake.blue", "static.generic.ui.stun.purple",
+  "static.generic.vortex.loop.blue", "static.generic.whirl.loop.blue",
+  "static.ice.icespikes.01.white", "static.ice.snowflake.01.whiteblue",
+  "static.leaves.outburst.01.pink", "static.lightning.ball.01.blue",
   "static.lightning.staticelectricity.01.blue", "static.lightning.staticelectricity.02.blue",
-  "static.magicsign.abjuration.02.blue", "static.magicsign.conjuration.02.yellow",
-  "static.magicsign.divination.02.blue", "static.magicsign.enchantment.02.pink",
-  "static.magicsign.illusion.02.purple", "static.magicsign.transmutation.02.yellow",
-  "static.marker.bubble.01.blue", "static.marker.energystrand.02.purpleblue",
-  "static.music.notes.01.blue", "static.particles.inwardstars.01.greenyellow",
-  "static.plants.ring.complete.greenyellow", "static.shieldfx.fire.01.orange",
-  "static.shieldspell.complete.01.blue", "static.spell.antilifeshell.01.blue",
-  "static.spell.armsofhadar.01.darkpurple", "static.spell.bless.intro.yellow",
+  "static.liquid.splash.01.blue", "static.magicsign.abjuration.02.blue",
+  "static.magicsign.conjuration.02.yellow", "static.magicsign.divination.02.blue",
+  "static.magicsign.enchantment.02.pink", "static.magicsign.illusion.02.purple",
+  "static.magicsign.transmutation.02.yellow", "static.marker.bubble.01.blue",
+  "static.marker.circleofstars.01.blue", "static.marker.energystrand.02.purpleblue",
+  "static.marker.music.01.greenorange", "static.marker.roundshield.complete.orange",
+  "static.marker.smokering.loop.purpleblue", "static.music.notes.01.blue",
+  "static.nature.feathers.outburst.textured", "static.particles.inwardstars.01.greenyellow",
+  "static.plants.ring.complete.greenyellow", "static.shieldfx.earth.01.orange",
+  "static.shieldfx.fire.01.orange", "static.shieldspell.complete.01.blue",
+  "static.spell.antilifeshell.01.blue", "static.spell.armsofhadar.01.darkpurple",
+  "static.spell.bardicinspiration.inspire.greenorange", "static.spell.bless.intro.yellow",
   "static.spell.calllightning.01.blue", "static.spell.cloudofdaggers.01.blue",
   "static.spell.curewounds.01.blue", "static.spell.darkness.01.black",
   "static.spell.detectmagic.01.blue", "static.spell.divinesmite.source.yellowblue",
   "static.spell.divinesmite.target.yellowblue", "static.spell.entangle.01.brown",
   "static.spell.entangle.01.green", "static.spell.fireball.explode.orange",
   "static.spell.generichealing.01.green", "static.spell.generichealing.01.yellow",
+  "static.spell.generichealing.02.greenorange", "static.spell.huntersmark.eye.green",
   "static.spell.mistystep.01.blue", "static.spell.sacredflame.target.yellow",
   "static.spell.shatter.01.blue", "static.spell.sleep.symbol.pink",
   "static.spell.sleetstorm.01.blue", "static.spell.sneakattack.01.darkgreen",
@@ -442,6 +466,25 @@ function opcoesProjetil() {
   };
 }
 
+function opcoesGolpe() {
+  return { ...opcoesComuns(), size: 1 };
+}
+
+/**
+ * Troca do golpe pelo projétil quando o alvo está longe (armas de arremesso).
+ * Sem projétil, a troca fica desligada: o golpe vai até o alvo. Precisa ser
+ * explícito — o padrão do Automated Animations ("on") procuraria um
+ * arremesso que pode não existir no JB2A gratuito.
+ */
+function trocaPorDistancia(chave) {
+  const [, menuType, animation, variant, color] = (chave || "range.weapon.arrow.regular.regular").split(".");
+  return {
+    video: { dbSection: "range", menuType, animation, variant, color, enableCustom: false, customPath: "" },
+    sound: SOM(),
+    options: { detect: "automatic", range: 2, isReturning: false, switchType: chave ? "custom" : "off" },
+  };
+}
+
 /** Identificador estável (16 caracteres) a partir de um texto. */
 function idDe(texto) {
   const abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -461,19 +504,24 @@ function idDe(texto) {
 }
 
 /**
- * Uma entrada do Automated Animations ("menu" ontoken ou range), no mesmo
- * formato que o menu dele grava num item (versão 5).
+ * Uma entrada do Automated Animations ("menu" melee, range ou ontoken), no
+ * mesmo formato que o menu dele grava num item (versão 5).
+ * @param {string|null} [arremesso] projétil do golpe quando o alvo está longe
  */
-export function entradaAA({ chave, playOn = "default", size = 1, persistent = false, label = "", nome = "", semente = "" }) {
+export function entradaAA({ chave, playOn = "default", size = 1, persistent = false, label = "", nome = "",
+                            semente = "", arremesso = null }) {
   const [dbSection, menuType, animation, variant, color] = chave.split(".");
-  const menu = dbSection === "range" ? "range" : "ontoken";
-  return {
+  const menu = dbSection === "range" ? "range" : dbSection === "melee" ? "melee" : "ontoken";
+  const opcoes = menu === "range" ? opcoesProjetil()
+    : menu === "melee" ? opcoesGolpe()
+    : opcoesNoToken({ playOn, size, persistent });
+  const entrada = {
     id: idDe(`${semente}|${chave}`),
     label,
     menu,
     macro: { enable: false, name: "", args: "", playWhen: "0" },
     soundOnly: { sound: SOM() },
-    metaData: { origem: MODULE_ID, automatica: true, chave, nome },
+    metaData: { origem: MODULE_ID, automatica: true, chave, nome, ...(arremesso ? { arremesso } : {}) },
     isEnabled: true,
     isCustomized: true,
     fromAmmo: false,
@@ -481,12 +529,14 @@ export function entradaAA({ chave, playOn = "default", size = 1, persistent = fa
     primary: {
       video: { dbSection, menuType, animation, variant, color, enableCustom: false, customPath: "" },
       sound: SOM(),
-      options: menu === "range" ? opcoesProjetil() : opcoesNoToken({ playOn, size, persistent }),
+      options: opcoes,
     },
     source: { enable: false },
     secondary: { enable: false },
     target: { enable: false },
   };
+  if (menu === "melee") entrada.meleeSwitch = trocaPorDistancia(arremesso);
+  return entrada;
 }
 
 /* ------------------------------------------------------------------ */
@@ -650,35 +700,337 @@ export function visualDoEfeito(e) {
 const escolher = (lista, existe) => (lista ?? []).find((k) => existe(k)) ?? null;
 
 /* ------------------------------------------------------------------ */
+/*  Equipamentos, habilidades e traços                                 */
+/* ------------------------------------------------------------------ */
+
+const FLECHA = ["range.weapon.arrow.physical.white", "range.weapon.arrow.regular.regular"];
+const VIROTE = ["range.weapon.bolt.physical.white", "range.weapon.bolt.physical.orange"];
+const SOCO = ["melee.weapon.unarmedstrike.physical.blue"];
+const MARCIAL = ["melee.weapon.flurryofblows.physical.blue"];
+const CAJADO = ["melee.weapon.quarterstaff.01.white", "melee.weapon.club.01.white"];
+const LANCA = ["melee.weapon.spear.01.white"];
+const LANCA_ARREMESSO = ["range.weapon.spear.01.white", "range.weapon.javelin.01.white"];
+
+/**
+ * Armas do livro, pelo nome do equipamento (sem acento):
+ *   golpe      corpo a corpo (do atacante até o alvo)
+ *   tiro       à distância (projétil)
+ *   arremesso  projétil quando o alvo está longe — o Automated Animations
+ *              troca o golpe por ele sozinho, pela distância
+ *   marcial    golpe das ações de Artes Marciais (Soco, Chute)
+ */
+export const ARMAS = {
+  "adaga": { golpe: ["melee.weapon.dagger.01.white"], arremesso: ["range.weapon.dagger.01.white"] },
+  "alabarda": { golpe: ["melee.weapon.halberd.01.white"] },
+  "arco curto": { tiro: FLECHA },
+  "arco longo": { tiro: FLECHA },
+  "ataque desarmado": { golpe: SOCO },
+  "azagaia": { tiro: ["range.weapon.javelin.01.white", "range.weapon.arrow.regular.regular"] },
+  "besta de mao": { tiro: VIROTE },
+  "besta leve": { tiro: VIROTE },
+  "besta pesada": { tiro: VIROTE },
+  "bordao": { golpe: CAJADO },
+  "cajado": { golpe: CAJADO },
+  "cauda": { golpe: ["melee.weapon.greatclub.01.white"] },
+  "chicote longo": { golpe: ["melee.generic.slashing.01.orange"] },
+  "chute": { golpe: SOCO, marcial: MARCIAL },
+  "cimitarra": { golpe: ["melee.weapon.scimitar.01.white"] },
+  "clava": { golpe: ["melee.weapon.club.01.white"] },
+  "clava grande": { golpe: ["melee.weapon.greatclub.01.white"] },
+  "dardo": { tiro: ["range.weapon.dart.01.white", "range.weapon.dagger.01.white"] },
+  "espada curta": { golpe: ["melee.weapon.shortsword.01.white"] },
+  "espada grande": { golpe: ["melee.weapon.greatsword.01.white"] },
+  "espada longa": { golpe: ["melee.weapon.sword.01.white"] },
+  "florete": { golpe: ["melee.weapon.rapier.01.white"] },
+  "foice curta": { golpe: ["melee.weapon.scimitar.01.white"] },
+  "foice longa": { golpe: ["melee.weapon.glaive.01.white"] },
+  "funda": { tiro: ["range.weapon.sling.01.white", "range.weapon.bullet.1.orange"] },
+  "garras": { golpe: ["melee.creature.claw.01.red"] },
+  "glaive": { golpe: ["melee.weapon.glaive.01.white"] },
+  "lanca curta": { golpe: LANCA, arremesso: LANCA_ARREMESSO },
+  "lanca longa": { golpe: LANCA },
+  "maca": { golpe: ["melee.weapon.mace.01.white"] },
+  "maca estrela": { golpe: ["melee.weapon.mace.02.white"] },
+  "machado de batalha": { golpe: ["melee.weapon.greataxe.01.white"] },
+  "machado de mao": { golpe: ["melee.weapon.handaxe.01.white"], arremesso: ["range.weapon.handaxe.01.white"] },
+  "machado grande": { golpe: ["melee.weapon.greataxe.01.white"] },
+  "malho": { golpe: ["melee.weapon.maul.01.white"] },
+  "mangual": { golpe: ["melee.weapon.mace.01.white"] },
+  "martelo de arremesso": { golpe: ["melee.weapon.hammer.01.white"], arremesso: ["range.weapon.hammer.01.white"] },
+  "martelo de guerra": { golpe: ["melee.weapon.warhammer.01.white"] },
+  "mordida": { golpe: ["melee.creature.bite.01.red"] },
+  "picareta": { golpe: ["melee.weapon.warhammer.01.white"] },
+  "pique": { golpe: LANCA },
+  "presas": { golpe: ["melee.creature.bite.01.red"] },
+  "soco": { golpe: SOCO, marcial: MARCIAL },
+  "tridente": { golpe: LANCA, arremesso: LANCA_ARREMESSO },
+};
+
+/** Arma fora da tabela: pela tipagem (a primeira que bater). */
+const POR_TIPAGEM = [
+  ["arcos", { tiro: FLECHA }],
+  ["bestas", { tiro: VIROTE }],
+  ["fundas", { tiro: ["range.weapon.sling.01.white", "range.weapon.bullet.1.orange"] }],
+  ["dardos", { tiro: ["range.weapon.dart.01.white", "range.weapon.dagger.01.white"] }],
+  ["laminas_pequenas", { golpe: ["melee.weapon.shortsword.01.white"] }],
+  ["laminas_grandes", { golpe: ["melee.weapon.sword.01.white"] }],
+  ["machados", { golpe: ["melee.weapon.handaxe.01.white"] }],
+  ["macas", { golpe: ["melee.weapon.mace.01.white"] }],
+  ["manguais", { golpe: ["melee.weapon.mace.01.white"] }],
+  ["martelos", { golpe: ["melee.weapon.warhammer.01.white"] }],
+  ["picaretas", { golpe: ["melee.weapon.warhammer.01.white"] }],
+  ["lancas", { golpe: LANCA }],
+  ["chicotes", { golpe: ["melee.generic.slashing.01.orange"] }],
+  ["cajados", { golpe: CAJADO }],
+  ["naturais", { golpe: SOCO }],
+  ["desarmado", { golpe: SOCO }],
+];
+/** Arma sem tipagem conhecida: pelo tipo de dano. */
+const POR_DANO = {
+  corte: { golpe: ["melee.weapon.sword.01.white"] },
+  perfuracao: { golpe: ["melee.weapon.rapier.01.white"] },
+  concussao: { golpe: ["melee.weapon.mace.01.white"] },
+};
+
+/** Ícone da condição imposta por um golpe (o visual que dura vem depois). */
+const ICONES_CONDICAO = {
+  abalado: ["static.generic.ui.fear.darkpurple"],
+  atordoado: ["static.generic.ui.stun.purple"],
+  pasmo: ["static.generic.ui.stun.purple"],
+  indefeso: ["static.generic.ui.crackedshield.purple"],
+  enfraquecido: ["static.generic.ui.skull.purple"],
+  lento: ["static.generic.ui.snowflake.blue"],
+  dominado: ["static.generic.ui.heart.pink"],
+  enfeiticado: ["static.generic.ui.heart.pink"],
+  cego: ["static.generic.smoke.02.grey"],
+};
+/** Sangramento e afins (dano contínuo físico). */
+const ICONE_SANGRAMENTO = ["static.generic.ui.drop.red"];
+/** O golpe em si, quando não há nada mais específico. */
+const IMPACTO = { nome: "Impacto", chaves: ["static.generic.impact.01.yellow"] };
+/** Cura sem magia (Medicina, Recuperar o Fôlego...). */
+const CURA_FISICA = { nome: "Cura", chaves: ["static.spell.generichealing.01.green"] };
+const FISICOS = new Set(["corte", "perfuracao", "concussao"]);
+
+/** Sopro de Dragão: um jato do dragão até cada criatura atingida. */
+const SOPRO = {
+  fogo: ["range.spell.fireballbeam.01.orange", "range.spell.firebolt.01.orange"],
+  frio: ["range.spell.rayoffrost.01.blue"],
+  raio: ["range.spell.witchbolt.01.blue"],
+  acido: ["range.spell.firebolt.01.green", "range.spell.disintegrate.01.green"],
+  veneno: ["range.generic.poison.01.greenyellow", "range.spell.disintegrate.01.green"],
+};
+
+const FURIA = [{ nome: "Fúria", chaves: ["static.energy.strands.01.red", "static.energy.circle.complete.orange"] }];
+const FERA = ["static.spell.huntersmark.paw.green", "static.spell.spiritguardians.01.lightgreen", "static.plants.ring.complete.greenyellow"];
+const DIVINO = ["static.spell.divinesmite.target.yellowblue"];
+const ESCUDO = ["static.marker.towershield.complete.blue", "static.marker.roundshield.complete.orange"];
+
+/**
+ * Habilidades e traços com animação escolhida à mão (nome sem acento; vale o
+ * nome exato e, depois, o começo do nome — "pacto" cobre todos os pactos).
+ * Cada regra vale para as ações cujo rótulo bate com `rotulo` (ou todas):
+ *   chaves     a animação (a primeira que existir)
+ *   pular      a ação fica sem animação
+ *   triviais   anima também ações que só rolam/registram (rituais, reações)
+ *   porElemento  lista por tipo de dano da ação
+ *   playOn, size  quando o padrão da forma da ação não serve
+ * Fora daqui, um efeito que você aplica EM VOCÊ só ganha animação se curar;
+ * rolagens de perícia e ativações sem efeito ficam sem.
+ */
+const POR_ITEM = {
+  "artes marciais": [{ nome: "Golpes marciais", chaves: MARCIAL }],
+  "autoridade divina": [{ nome: "Autoridade divina", chaves: ["static.spell.bless.intro.yellow"] }],
+  "baluarte": [{ nome: "Baluarte", chaves: ESCUDO }],
+  "cancao do viajante": [{ nome: "Canção", chaves: ["static.marker.music.01.greenorange"] }],
+  "cauda": [{ nome: "Cauda", chaves: ["melee.weapon.greatclub.01.white"] }],
+  "combater sem armadura": [{ nome: "Defesa sem armadura", chaves: ["static.energy.shimmer.01.blue"] }],
+  "defletir projeteis": [{ rotulo: /arremessar/i, nome: "Projétil devolvido", chaves: ["range.weapon.arrow.regular.regular"], triviais: true },
+                         { pular: true }],
+  "desaparecer": [{ nome: "Desaparecer", chaves: ["static.generic.smoke.02.grey"] }],
+  "espirito guardiao": [{ nome: "Espírito Guardião", size: 1.5,
+    chaves: ["static.spell.spiritguardians.01.lightgreen", "static.plants.ring.complete.greenyellow"] }],
+  "espirito guardiao [carpa]": [{ nome: "Espírito da Carpa", chaves: ["static.liquid.splash.01.blue"] }],
+  "espirito guardiao [falcao]": [{ nome: "Espírito do Falcão", chaves: ["static.nature.feathers.outburst.textured"] }],
+  "espirito guardiao [leao]": [{ nome: "Espírito do Leão", chaves: FERA, size: 1.5 }],
+  "espirito guardiao [lobo]": [{ nome: "Espírito do Lobo", chaves: FERA, size: 1.5 }],
+  "espirito guardiao [urso]": [{ nome: "Espírito do Urso", chaves: FERA, size: 1.5 }],
+  "espirito guardiao [tartaruga]": [{ nome: "Espírito da Tartaruga", chaves: ["static.shieldfx.earth.01.orange"] }],
+  "fluxo arcano": [{ nome: "Fluxo Arcano", chaves: ["static.energy.sparkles.01.blue"] }],
+  "forca repentina": [{ nome: "Força Repentina", chaves: ["static.particles.inwarddots.01.red", "static.generic.outpulse.02.whiteblue"] }],
+  "forma animal": [{ rotulo: /^forma animal/i, nome: "Transformação", chaves: ["static.generic.smoke.03.grey"] }, { pular: true }],
+  "furia": FURIA,
+  "garras": [{ rotulo: /^ataque/i, nome: "Garras", chaves: ["melee.creature.claw.01.red"] },
+             { nome: "Garras", chaves: ["static.creature.claw.01.red"] }],
+  "golpe critico brutal": [{ nome: "Golpe brutal", chaves: ["static.generic.boulderimpact.01.white", "static.generic.impact.01.orange"] }],
+  "golpe letal": [{ nome: "Golpe letal", chaves: ["static.spell.sneakattack.01.darkgreen"] }],
+  "golpear com escudo": [{ nome: "Golpe de escudo", chaves: IMPACTO.chaves }],
+  "grito de guerra": [{ nome: "Grito de guerra", chaves: ["static.generic.outpulse.02.whiteblue"] }],
+  "guerra santa": [{ nome: "Guerra santa", chaves: DIVINO }],
+  "guia divino": [{ nome: "Guia divino", chaves: ["static.spell.bless.intro.yellow"] }],
+  "impulso de combate": [{ nome: "Impulso de combate", triviais: true,
+    chaves: ["static.particles.inwarddots.01.orange", "static.generic.outpulse.02.whiteblue"] }],
+  "inspirar": [{ nome: "Inspiração", chaves: ["static.spell.bardicinspiration.inspire.greenorange"] }],
+  "juramento": [{ nome: "Aura do juramento", chaves: ["static.spell.spiritguardians.01.yellowblue"] }],
+  "letalidade": [{ nome: "Letalidade", chaves: ["static.spell.sneakattack.01.darkgreen"] }],
+  "manifestacao divina": [{ rotulo: /inimig/i, nome: "Manifestação divina", chaves: DIVINO },
+                          { nome: "Manifestação divina", chaves: ["static.spell.generichealing.01.yellow"] }],
+  "pacto": [{ nome: "Ritual do pacto", chaves: ["static.marker.smokering.loop.purpleblue"], triviais: true }],
+  "pacto [abissal]": [{ nome: "Pacto abissal", chaves: ["static.spell.armsofhadar.01.darkpurple"], triviais: true }],
+  "pacto [celestial]": [{ nome: "Pacto celestial", chaves: ["static.spell.divinesmite.source.yellowblue"], triviais: true }],
+  "pacto [elemental]": [{ nome: "Pacto elemental", chaves: ["static.energy.circle.complete.orange"], triviais: true }],
+  "pacto [faerian]": [{ nome: "Pacto faérian", chaves: ["static.leaves.outburst.01.pink"], triviais: true }],
+  "pacto [infernal]": [{ nome: "Pacto infernal", chaves: ["static.generic.fire.ring.red", "static.fire.groundcrack.01.orange"], triviais: true }],
+  "pacto [sombrio]": [{ nome: "Pacto sombrio", chaves: ["static.marker.smokering.loop.purpleblue"], triviais: true }],
+  "pele de escamas": [{ nome: "Escamas", chaves: ["static.shieldfx.earth.01.orange"] }],
+  "prece de repouso": [{ nome: "Prece", chaves: ["static.spell.generichealing.01.yellow"] }],
+  "presa de caca": [{ nome: "Presa de caça", chaves: ["static.spell.huntersmark.eye.green"] }],
+  "presas": [{ rotulo: /^ataque/i, nome: "Presas", chaves: ["melee.creature.bite.01.red"] },
+             { nome: "Presas", chaves: ["static.creature.bite.01.red"] }],
+  "presenca aterradora": [{ nome: "Presença aterradora", chaves: ["static.generic.outpulse.01.purplepink", "static.spell.armsofhadar.01.darkpurple"] }],
+  "protecao dos espiritos": [{ nome: "Proteção dos espíritos", chaves: ["static.marker.circleofstars.01.greenorange", "static.marker.circleofstars.01.blue"] }],
+  "proteger": [{ nome: "Proteger", chaves: ESCUDO }],
+  "provocar": [{ nome: "Provocação", chaves: ["static.generic.outpulse.02.whiteblue"] }],
+  "punicao": [{ nome: "Punição", chaves: DIVINO }],
+  "reacao furiosa": FURIA,
+  "sopro de dragao": [{ nome: "Sopro de Dragão", porElemento: SOPRO }],
+  // Traços
+  "filhos de auralia": [{ nome: "Teleporte faérian", chaves: ["static.leaves.outburst.01.pink", "static.spell.mistystep.01.blue"] }],
+  "moldar energia": [{ nome: "Moldar energia", chaves: ["static.energy.shimmer.01.purple", "static.energy.shimmer.01.blue"], triviais: true }],
+  "sangue aagn": [{ nome: "Sangue Aagn", chaves: ["static.particles.inwardstars.01.red", "static.spell.generichealing.02.greenorange"] }],
+};
+
+/** Regras de um item: nome exato, ou o começo de nome mais longo. */
+function regrasDoItem(nome) {
+  const n = semAcento(nome);
+  if (POR_ITEM[n]) return POR_ITEM[n];
+  let melhor = null;
+  for (const k of Object.keys(POR_ITEM)) {
+    if ((n.startsWith(`${k} `) || n.startsWith(`${k}[`)) && (!melhor || k.length > melhor.length)) melhor = k;
+  }
+  return melhor ? POR_ITEM[melhor] : null;
+}
+
+/** Um ataque que rola contra um alvo (mesmo com dano base 0, como os de arma). */
+function ataqueDeArma(a) {
+  return !!a.canRoll && (a.targetMode || "target") === "target" && preenchido(a.damage) && !!a.damageType;
+}
+
+/** A ação só rola ou registra algo (perícia, ativação sem efeito). */
+function acaoTrivial(a) {
+  if (causaDano(a) || drenaPM(a) || preenchido(a.heal) || ataqueDeArma(a)) return false;
+  if ((a.appliesEffects ?? []).length || a.movement?.enabled) return false;
+  return true;
+}
+
+const playOnPadrao = (forma, ofensiva) =>
+  ["emSi", "aura", "teleporte"].includes(forma) ? "source" : ofensiva ? "target" : "default";
+const tamanhoPadrao = (forma) => (forma === "aura" ? 2.5 : forma === "area" || forma === "linha" ? 1.25 : 1);
+
+/** Arma do equipamento: golpe, tiro ou arremesso. */
+function visualDeArma(a, data) {
+  if (!(a.isWeapon || /^ataque\b/i.test(a.label ?? ""))) return null;
+  if (!ataqueDeArma(a) && !causaDano(a)) return null;
+  const nome = semAcento(data.name);
+  const tags = (data.system?.tags ?? []).map((t) => semAcento(t));
+  const A = ARMAS[nome] ?? POR_TIPAGEM.find(([t]) => tags.includes(t))?.[1] ?? POR_DANO[a.damageType] ?? null;
+  if (!A) return null;
+  const marcial = A.marcial && /artes marciais/i.test(a.label ?? "");
+  const lista = marcial ? A.marcial : (A.golpe && (a.isMelee || !A.tiro)) ? A.golpe : A.tiro ?? A.golpe;
+  return { lista, nome: data.name, playOn: "target", size: 1, arremesso: lista === A.golpe ? A.arremesso : null };
+}
+
+/** Ícone da primeira condição negativa que a ação impõe. */
+function iconeDaCondicao(a) {
+  for (const e of a.appliesEffects ?? []) {
+    if (e?.fxType !== "condition" || !NEGATIVAS.has(e.fxTarget)) continue;
+    if (e.fxTarget === "dano_continuo") {
+      if (FISICOS.has(e.tickType) || !e.tickType) return { lista: ICONE_SANGRAMENTO, nome: "Sangramento" };
+      if (e.tickType === "veneno") return { lista: ["static.generic.ui.poison.darkgreen"], nome: "Veneno" };
+      continue;
+    }
+    const lista = ICONES_CONDICAO[e.fxTarget];
+    if (lista) return { lista, nome: CONDICOES[e.fxTarget]?.nome ?? e.fxTarget };
+  }
+  return null;
+}
+
+/**
+ * A animação de UMA ação de equipamento, habilidade ou traço.
+ * @returns {{lista: string[], nome: string, playOn: string, size: number, arremesso?: string[]} | null}
+ */
+export function visualDeItem(a, data) {
+  const forma = formaDe(a);
+  const nat = naturezaDe(a, forma);
+  // Empurrar, puxar ou mover o alvo também é coisa que se faz CONTRA alguém.
+  const moveOutro = !!a.movement?.enabled && a.movement.who !== "self" && forma !== "emSi";
+  const ofensiva = nat.tipo === "ofensiva" || moveOutro;
+  const trivial = acaoTrivial(a);
+
+  const regra = regrasDoItem(data?.name ?? "")?.find((r) => !r.rotulo || r.rotulo.test(a.label ?? ""));
+  if (regra) {
+    if (regra.pular || (trivial && !regra.triviais)) return null;
+    const lista = regra.porElemento ? regra.porElemento[elementoDe(a)] : regra.chaves;
+    if (lista) {
+      return { lista, nome: regra.nome ?? data.name, playOn: regra.playOn ?? playOnPadrao(forma, ofensiva || trivial),
+               size: regra.size ?? tamanhoPadrao(forma) };
+    }
+  }
+  if (trivial) return null;
+  if (data?.type === "equipamento") {
+    const arma = visualDeArma(a, data);
+    if (arma) return arma;
+  }
+
+  const size = tamanhoPadrao(forma);
+  if (nat.tipo === "teleporte") return { lista: TELEPORTE.chaves, nome: TELEPORTE.nome, playOn: "source", size: 1 };
+  if (nat.tipo === "beneficio") {
+    // Em você, só a cura (e a sobrevida, os PM) pede animação; os ajustes de
+    // número que você liga em si mesmo ficam quietos.
+    if (forma === "emSi" && !["cura", "sobrevida", "pm"].includes(nat.beneficio)) return null;
+    const B = nat.beneficio === "cura" ? CURA_FISICA : (BENEFICIOS[nat.beneficio] ?? BENEFICIOS.bencao);
+    return { lista: B.chaves, nome: B.nome, playOn: playOnPadrao(forma, false), size };
+  }
+  if (forma === "emSi") return null;
+
+  const playOn = playOnPadrao(forma, ofensiva);
+  const elem = elementoDe(a);
+  const depoisDoAcerto = !a.canRoll; // complemento de um golpe que já acertou
+  if (elem && !FISICOS.has(elem)) {
+    const dano = (causaDano(a) || drenaPM(a)) && !depoisDoAcerto;
+    return { lista: deElemento(ELEMENTOS[elem], forma, dano), nome: ELEMENTOS[elem].nome, playOn, size };
+  }
+  if (forma === "aura") return { lista: GENERICO.aura, nome: "Presença", playOn, size };
+  const icone = iconeDaCondicao(a);
+  if (icone) return { lista: icone.lista, nome: icone.nome, playOn, size };
+  if (elem && !depoisDoAcerto) return { lista: ELEMENTOS[elem].toque, nome: ELEMENTOS[elem].nome, playOn, size };
+  return { lista: IMPACTO.chaves, nome: IMPACTO.nome, playOn, size };
+}
+
+/* ------------------------------------------------------------------ */
 /*  API                                                                */
 /* ------------------------------------------------------------------ */
 
 /**
- * Põe animações automáticas numa magia (dados do item, mutação in-place).
- * Ações e efeitos com animação que NÃO é deste módulo (puxada do item, ou
- * caminho digitado no "Avançado") ficam como estão.
- *
- * @param {object} data dados do item (toObject / JSON do compêndio)
- * @param {object} [opcoes]
- * @param {(chave:string)=>boolean} [opcoes.existe] a chave existe no JB2A instalado?
- * @returns {{acoes: number, efeitos: number}} quantas animações ficaram
+ * Grava as animações escolhidas nas ações e nos efeitos aplicáveis de um
+ * item. O que tem animação que NÃO é deste módulo (puxada do item, ou
+ * caminho digitado no "Avançado") fica como está.
  */
-export function animarMagia(data, { existe = chaveSegura } = {}) {
+function animarAcoes(data, visualDe, { existe, base }) {
   const sys = data?.system;
   const out = { acoes: 0, efeitos: 0 };
   if (!sys || !Array.isArray(sys.actions)) return out;
-  const base = data.flags?.[MODULE_ID]?.receita?.base ?? data.name ?? "";
   sys.actions.forEach((a, i) => {
     if (!a || typeof a !== "object") return;
-    const palavra = String(a._palavra || sys.wordId || "").toLowerCase();
     const livreAcao = !preenchido(a.animFile) && (!temConfig(a.aaConfig) || animacaoAutomatica(a.aaConfig));
     if (livreAcao) {
-      const v = visualDaAcao(a, { palavra, base });
+      const v = visualDe(a);
       const chave = v && escolher(v.lista, existe);
       if (chave) {
         a.aaConfig = entradaAA({ chave, playOn: v.playOn, size: v.size, label: data.name ?? "",
-                                 nome: v.nome, semente: `${base}|${i}|${a.label ?? ""}` });
-        a.aaName = `${data.name ?? "Magia"} (automática)`;
+                                 nome: v.nome, semente: `${base}|${i}|${a.label ?? ""}`,
+                                 arremesso: v.arremesso ? escolher(v.arremesso, existe) : null });
+        a.aaName = `${data.name ?? "Item"} (automática)`;
         a.aaEnabled = true;
         out.acoes++;
       } else if (animacaoAutomatica(a.aaConfig)) {
@@ -705,7 +1057,35 @@ export function animarMagia(data, { existe = chaveSegura } = {}) {
 }
 
 /**
- * Tira as animações automáticas (deste módulo) de uma magia — mutação
+ * Põe animações automáticas numa magia (dados do item, mutação in-place).
+ * Ações e efeitos com animação que NÃO é deste módulo (puxada do item, ou
+ * caminho digitado no "Avançado") ficam como estão.
+ *
+ * @param {object} data dados do item (toObject / JSON do compêndio)
+ * @param {object} [opcoes]
+ * @param {(chave:string)=>boolean} [opcoes.existe] a chave existe no JB2A instalado?
+ * @returns {{acoes: number, efeitos: number}} quantas animações ficaram
+ */
+export function animarMagia(data, { existe = chaveSegura } = {}) {
+  const sys = data?.system ?? {};
+  const base = data?.flags?.[MODULE_ID]?.receita?.base ?? data?.name ?? "";
+  return animarAcoes(data, (a) => visualDaAcao(a, {
+    palavra: String(a._palavra || sys.wordId || "").toLowerCase(), base,
+  }), { existe, base });
+}
+
+/**
+ * Põe animações automáticas em qualquer item do Ligeia: magia, arma,
+ * habilidade, traço, complicação... (dados do item, mutação in-place).
+ * @returns {{acoes: number, efeitos: number}}
+ */
+export function animarItem(data, { existe = chaveSegura } = {}) {
+  if (data?.type === "magia") return animarMagia(data, { existe });
+  return animarAcoes(data, (a) => visualDeItem(a, data), { existe, base: data?.name ?? "" });
+}
+
+/**
+ * Tira as animações automáticas (deste módulo) de um item — mutação
  * in-place nos dados do item. As que você puxou ficam.
  * @returns {number} quantas foram removidas
  */
@@ -730,8 +1110,12 @@ export function contarAnimacoesAutomaticas(data) {
   return n;
 }
 
-/** Todas as chaves citadas nas tabelas (para os testes). */
-export function chavesDasTabelas() {
+/**
+ * Todas as listas de chaves das tabelas (para os testes). Sem `comOpcionais`,
+ * deixa de fora as de arremesso: sem uma delas, o golpe simplesmente vai até
+ * o alvo, então elas não precisam de plano B no JB2A gratuito.
+ */
+export function chavesDasTabelas({ comOpcionais = true } = {}) {
   const listas = [];
   for (const E of Object.values(ELEMENTOS)) listas.push(E.projetil, E.toque, E.area, E.aura, E.continuo);
   for (const T of Object.values(TEMAS)) listas.push(T.projetil, T.alvo, T.area, T.aura, T.emSi);
@@ -742,5 +1126,17 @@ export function chavesDasTabelas() {
   for (const porElem of Object.values(POR_MAGIA)) {
     for (const porForma of Object.values(porElem)) listas.push(...Object.values(porForma));
   }
+  for (const A of [...Object.values(ARMAS), ...POR_TIPAGEM.map(([, x]) => x), ...Object.values(POR_DANO)]) {
+    listas.push(A.golpe, A.tiro, A.marcial);
+    if (comOpcionais) listas.push(A.arremesso);
+  }
+  for (const regras of Object.values(POR_ITEM)) {
+    for (const r of regras) {
+      listas.push(r.chaves);
+      if (r.porElemento) listas.push(...Object.values(r.porElemento));
+    }
+  }
+  listas.push(...Object.values(ICONES_CONDICAO), ICONE_SANGRAMENTO, ["static.generic.ui.poison.darkgreen"],
+              IMPACTO.chaves, CURA_FISICA.chaves);
   return listas.filter(Array.isArray);
 }

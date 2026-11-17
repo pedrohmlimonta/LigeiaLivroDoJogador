@@ -154,7 +154,7 @@ def validar_animacao(v, onde, cfg, persistente):
         v.err(onde, f"animação deveria ser objeto (é {type(cfg).__name__})")
         return
     menu = cfg.get("menu")
-    v.choice(onde, "animação.menu", menu, {"ontoken", "range"})
+    v.choice(onde, "animação.menu", menu, {"ontoken", "range", "melee"})
     if cfg.get("version") != 5:
         v.err(onde, f"animação com version {cfg.get('version')!r}: o Automated Animations ignora flags abaixo da 5")
     if cfg.get("isEnabled") is not True or cfg.get("isCustomized") is not True:
@@ -170,8 +170,20 @@ def validar_animacao(v, onde, cfg, persistente):
     chave = ".".join(partes)
     if AMBOS is not None and chave not in AMBOS:
         v.err(onde, f"animação {chave!r} não existe nas duas versões do JB2A (gratuito e Patreon)")
-    if (menu == "range") != (partes[0] == "range"):
-        v.err(onde, f"animação {chave!r} com menu {menu!r}")
+    esperado = {"range": "range", "melee": "melee"}.get(partes[0], "ontoken")
+    if menu != esperado:
+        v.err(onde, f"animação {chave!r} com menu {menu!r} (esperado {esperado!r})")
+    if menu == "melee":
+        # A troca por projétil precisa ser explícita: o padrão do AA ("on")
+        # procuraria um arremesso que pode não existir no JB2A gratuito.
+        troca = cfg.get("meleeSwitch") or {}
+        tipo = (troca.get("options") or {}).get("switchType")
+        v.choice(onde, "animação.meleeSwitch.switchType", tipo, {"off", "custom"})
+        if tipo == "custom":
+            tv = troca.get("video") or {}
+            tchave = ".".join(str(tv.get(k, "")) for k in ("dbSection", "menuType", "animation", "variant", "color"))
+            if AMBOS is not None and tchave not in AMBOS:
+                v.err(onde, f"arremesso {tchave!r} não existe nas duas versões do JB2A")
     if vid.get("enableCustom"):
         v.err(onde, "animação automática não deve usar caminho personalizado")
     op = prim.get("options") or {}

@@ -26,7 +26,7 @@
  * do módulo "Animações automáticas nas magias criadas" desliga o recurso.
  */
 
-import { animarMagia, limparAnimacoesAutomaticas, criarVerificador,
+import { animarMagia, animarItem, limparAnimacoesAutomaticas, criarVerificador,
          contarAnimacoesAutomaticas } from "./animacoes.mjs";
 
 const MODULE_ID = "ligeia-livro-do-jogador";
@@ -1035,7 +1035,7 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", () => {
   game.modules.get(MODULE_ID).api = {
-    abrirCriacaoDeMagia, METAMAGIAS, animarMagia, limparAnimacoesAutomaticas,
+    abrirCriacaoDeMagia, METAMAGIAS, animarMagia, animarItem, limparAnimacoesAutomaticas,
   };
   console.log("Ligeia — Livro do Jogador | Criação de Magias pronta (botão na ficha).");
 });

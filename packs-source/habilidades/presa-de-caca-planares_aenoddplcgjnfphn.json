@@ -138,8 +138,94 @@
             "tickHealResource": "hp",
             "fxFile": "",
             "fxScale": "1",
-            "fxAaConfig": null,
-            "fxAaName": "",
+            "fxAaConfig": {
+              "id": "a9ViWDYdBde8FgjT",
+              "label": "Presa de Caça [Planares]",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.conditions.drop.02.red",
+                "nome": "Sangramento"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "conditions",
+                  "animation": "drop",
+                  "variant": "02",
+                  "color": "red",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Sangramento (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
             "grantTempHp": "0"
@@ -154,8 +240,94 @@
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
-        "aaConfig": null,
-        "aaName": "",
+        "aaConfig": {
+          "id": "3Msj1hzSARI8en0x",
+          "label": "Presa de Caça [Planares]",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.huntersmark.eye.green",
+            "nome": "Presa de caça"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "huntersmark",
+              "variant": "eye",
+              "color": "green",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "target",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Presa de Caça [Planares] (automática)",
         "aaEnabled": true,
         "animFile": "",
         "animPlacement": "target",
@@ -227,8 +399,94 @@
             "tickHealResource": "hp",
             "fxFile": "",
             "fxScale": "1",
-            "fxAaConfig": null,
-            "fxAaName": "",
+            "fxAaConfig": {
+              "id": "R2AYhmxHi8JYXxxc",
+              "label": "Presa de Caça [Planares]",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.conditions.snowflakes.02.blue",
+                "nome": "Lento"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "conditions",
+                  "animation": "snowflakes",
+                  "variant": "02",
+                  "color": "blue",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Lento (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
             "grantTempHp": "0"
@@ -243,8 +501,94 @@
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
-        "aaConfig": null,
-        "aaName": "",
+        "aaConfig": {
+          "id": "LwxSIj25q8AGHMBY",
+          "label": "Presa de Caça [Planares]",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.huntersmark.eye.green",
+            "nome": "Presa de caça"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "huntersmark",
+              "variant": "eye",
+              "color": "green",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "target",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Presa de Caça [Planares] (automática)",
         "aaEnabled": true,
         "animFile": "",
         "animPlacement": "target",
@@ -316,8 +660,94 @@
             "tickHealResource": "hp",
             "fxFile": "",
             "fxScale": "1",
-            "fxAaConfig": null,
-            "fxAaName": "",
+            "fxAaConfig": {
+              "id": "4zg2RJecxY8kUM0H",
+              "label": "Presa de Caça [Planares]",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.chains.standard.loop.red",
+                "nome": "Imobilizado"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "chains",
+                  "animation": "standard",
+                  "variant": "loop",
+                  "color": "red",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Imobilizado (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
             "grantTempHp": "0"
@@ -332,8 +762,94 @@
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
-        "aaConfig": null,
-        "aaName": "",
+        "aaConfig": {
+          "id": "QKqy9gAqHrnmnrM7",
+          "label": "Presa de Caça [Planares]",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.huntersmark.eye.green",
+            "nome": "Presa de caça"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "huntersmark",
+              "variant": "eye",
+              "color": "green",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "target",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Presa de Caça [Planares] (automática)",
         "aaEnabled": true,
         "animFile": "",
         "animPlacement": "target",
