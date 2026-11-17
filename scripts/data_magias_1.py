@@ -166,11 +166,16 @@ MAGIAS_1 = [
        "Sustentável — Ação Rápida",
        "Tocando seu alvo enquanto pronuncia a palavra arcana forjuri, você faz com que surja um escudo de energia arcana flutuante girando em torno do mesmo.\n\nEfeitos: O alvo recebe +1 nas rolagens de Bloqueio e é considerado como se empunhasse um escudo, mas sem ocupar as mãos. Suas rolagens de Bloqueio com esse escudo usam Mente em vez de Força.\n\nOfícios concede +1 em Conjuração para esta conjuração. Conhecimento (Guerra) concede +1 em Conjuração para esta conjuração.",
        "Deflexão reduz 2 pontos de dano (apenas Círculo Intermediário) (-). Deflexão reduz 3 pontos de dano (apenas Círculo Maior) (-). Bloqueia magias esquiváveis (apenas Círculo Maior) (-4). Alvo muda de Conjurador para Criatura (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
-       actions=[action("Escudo Arcano (+1 Bloqueio — sustentável)",
+       actions=[action("Escudo Arcano (+1 Bloqueio, Bloqueio com Mente — sustentável)",
                        can_roll=False, target_mode="self", include_self=True, cost_mp=1,
                        applies_effects=[applies("Escudo Arcano: +1 Bloqueio",
                                                 fx_type="bonus", fx_target="bloqueio",
-                                                fx_value=1, duration_mode="scene")])],
+                                                fx_value=1, duration_mode="scene"),
+                                        # "Suas rolagens de Bloqueio com esse escudo
+                                        # usam Mente em vez de Força."
+                                        applies("Escudo Arcano: Bloqueio com Mente",
+                                                fx_type="set", fx_target="bloqueio",
+                                                fx_value="@mente", duration_mode="scene")])],
        img=IMG_BUFF),
     _m("Barreira Arcana", "forjuri", "Ação", "", "1m x Nível", "Emanação",
        "Sustentável — Ação",

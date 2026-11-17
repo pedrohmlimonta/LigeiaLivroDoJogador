@@ -19,7 +19,7 @@
     "metamagics": [],
     "actions": [
       {
-        "label": "Escudo Arcano (+1 Bloqueio — sustentável)",
+        "label": "Escudo Arcano (+1 Bloqueio, Bloqueio com Mente — sustentável)",
         "level": "all",
         "canRoll": false,
         "rollAttr": "forca",
@@ -79,6 +79,32 @@
             "fxAaPersist": true,
             "fxEnchant": false,
             "grantTempHp": "0"
+          },
+          {
+            "label": "Escudo Arcano: Bloqueio com Mente",
+            "fxType": "set",
+            "fxTarget": "bloqueio",
+            "fxValue": "@mente",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
           }
         ],
         "lineWidth": "1.5",
@@ -91,7 +117,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "7p6xX6EeTA1DEyxi",
+          "id": "9WpiZzGMokSqPwDS",
           "label": "Escudo Arcano",
           "menu": "ontoken",
           "macro": {

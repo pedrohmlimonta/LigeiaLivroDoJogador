@@ -42,6 +42,8 @@ ROLL_TARGETS = {"all", "forca", "agilidade", "vigor", "mente", "percepcao",
                 "defense", "attackMelee", "attackRanged", "defenseMelee",
                 "defenseRanged"}
 STAT_TARGETS = {"hp", "mp", "heroic", "deslocamento"}
+SET_TARGETS = {"forca", "agilidade", "vigor", "mente", "percepcao", "bloqueio", "esquiva",
+               "conjuracao", "iniciativa", "deslocamento", "percepcao_passiva"}
 ATTACK_ATTRS = {"forca", "agilidade", "vigor", "mente", "percepcao", "conjuracao",
                 "bloqueio", "esquiva"}
 DEFENSE_ATTRS = ATTACK_ATTRS | {""}
@@ -147,6 +149,8 @@ def validar_aplicavel(v, onde, ap):
         v.err(onde, f"applies {tp} com alvo {t!r}")
     if tp == "stat" and t not in STAT_TARGETS:
         v.err(onde, f"applies stat com alvo {t!r}")
+    if tp == "set" and t not in SET_TARGETS:
+        v.err(onde, f"applies set (definir valor) com alvo {t!r}")
     if ap.get("fxEnchant") and str(ap.get("fxValue", "0")) in ("0", ""):
         v.err(onde, "encantamento com valor 0 é descartado pelo sistema")
 

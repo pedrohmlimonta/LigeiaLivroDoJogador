@@ -224,5 +224,15 @@ a = d.system.actions[0];
 ok(a.damageResource === 'mp' && a.extraDamage.some((x) => x.type === 'fogo' && x.resource === 'hp' && x.scaling && x.formula === '2'),
    'Queimar Magia + Flamejante: o dreno de PM fica e o fogo entra como dano extra escalonado');
 
+console.log('12) Escudo Arcano: +1 no Bloqueio e Bloqueio com Mente');
+b = load('escudo-arcano');
+const efs = b.system.actions[0].appliesEffects;
+ok(efs.some((x) => x.fxType === 'bonus' && x.fxTarget === 'bloqueio' && x.fxValue === '1'), '+1 nas rolagens de Bloqueio');
+ok(efs.some((x) => x.fxType === 'set' && x.fxTarget === 'bloqueio' && x.fxValue === '@mente' && x.durationMode === 'scene'),
+   'Definir valor: Bloqueio = @mente (usa Mente em vez de Força)');
+d = await criar(b, 'Intermediária', 'forjuri', 'energio', '', M.energio[0], null);
+ok(d.system.actions[0].appliesEffects.some((x) => x.fxType === 'set' && x.fxValue === '@mente'),
+   'a magia criada a partir do Escudo Arcano mantém o Bloqueio com Mente');
+
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);
