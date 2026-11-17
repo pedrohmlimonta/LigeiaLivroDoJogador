@@ -2,6 +2,8 @@
 // Confere o catálogo de propriedades do livro, a mana (1 PM por palavra; lendário e consumível sem
 // mana), o que cada propriedade grava no item e — passando TODAS as propriedades por um item
 // compatível — que o resultado passa no validador do schema do sistema (scripts/validate.py).
+// Também os itens conjuradores: a magia guardada, a descrição do que ela faz, o pergaminho, a
+// magia vinculada que vem e vai com o item e as 70 magias do compêndio no validador.
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
@@ -15,7 +17,8 @@ class ApplicationV2 {
   async close() { this.#state = -1; }
 }
 globalThis.foundry = { utils: { escapeHTML: (s) => String(s) }, applications: { api: { ApplicationV2 } } };
-globalThis.Hooks = { on() {}, once() {} };
+const ganchos = {};
+globalThis.Hooks = { on(nome, fn) { (ganchos[nome] ??= []).push(fn); }, once() {} };
 globalThis.ui = { notifications: { info() {}, warn() {} } };
 globalThis.document = { createElement: () => ({ className: '', innerHTML: '' }) };
 globalThis.game = { user: { isGM: false }, packs: new Map(), items: [] };
@@ -279,6 +282,180 @@ html = (await app._renderHTML()).innerHTML;
 ok(/value="ignis-imunidade-a-fogo"\s+disabled/.test(html), 'num item Menor, Imunidade a Fogo (+600.000) fica bloqueada');
 ok(eAtaque({ label: 'Ataque — Adaga', isWeapon: true }) && !eAtaque({ label: '✦ Ataque — Adaga — X', isWeapon: true }),
    'as versões ✦ não viram base de novas versões');
+
+console.log('9) Item conjurador: o item guarda uma magia');
+const { construirItemConjurador, dadosDaMagiaDoItem, sincronizarMagiasDoItem, refazerEncantamentos, eLendario,
+        propriedadesGravadas, resumoDaAcao, palavrasDaMagia } = mod;
+const magias = fs.readdirSync(`${raiz}/packs-source/magias`)
+  .map((f) => JSON.parse(fs.readFileSync(`${raiz}/packs-source/magias/${f}`, 'utf8')));
+const magia = (nome) => {
+  const d = magias.find((x) => x.name === nome);
+  if (!d) throw new Error(`magia ${nome}`);
+  return JSON.parse(JSON.stringify(d));
+};
+const receita = (d) => d.flags[MOD].encantamentos.at(-1);
+const esfera = magia('Esfera Ígnea');
+d = construirItemConjurador(eq('Varinha'), { magia: esfera });
+let rc = receita(d);
+ok(rc.tipo === 'magia' && rc.nivel === 'Menor' && rc.pm === 1 && rc.palavras.join() === 'ignis' && rc.magia.name === 'Esfera Ígnea',
+   'Varinha + Esfera Ígnea: item conjurador Menor, 1 PM, palavra ignis, magia guardada no item');
+ok(d.system.actions.length === 0 && d.system.price === '420 Vo', 'o item não ganha ação própria; preço +400 Vo (criar magia Menor)');
+ok(propriedadesGravadas(d) === 1, 'a magia guardada conta como uma propriedade (Dureza)');
+const desc = d.system.description;
+ok(desc.includes('Item conjurador') && desc.includes('Como usar') && desc.includes('<b>1 PM</b>')
+   && desc.includes('dano Fogo +1 (escalonado)') && desc.includes('rola Conjuração contra Esquiva dos alvos')
+   && desc.includes('alcance 5m × Nível') && desc.includes('Dano contínuo de fogo') && desc.includes('runa da centelha'),
+   'a descrição do item diz o que a magia faz (rolagem, alcance, dano, condição) e traz o texto dela');
+let comp = dadosDaMagiaDoItem({ id: 'v1', name: d.name }, rc);
+ok(comp.type === 'magia' && comp.name === 'Esfera Ígnea (Varinha)' && comp.system.tier === 'Menor' && comp.system.wordId === 'ignis'
+   && comp.system.actions[0].costMp === '1' && comp.flags[MOD].doItem === 'v1' && comp.flags[MOD].encId === rc.id,
+   'magia vinculada: uma magia de verdade (tipo, círculo e palavra — os bônus de palavra valem), 1 PM');
+ok(comp.system.description.includes('Magia do item') && !comp.system.active, 'ela avisa de onde vem e começa desligada');
+const maior = magia('Esfera Ígnea');
+Object.assign(maior.system, { tier: 'Maior', wordId2: 'majesto', wordId3: 'majesto' });
+maior.name = 'Tempestade da Chama';
+maior.system.actions.forEach((a) => { a.costMp = '3'; });
+d = construirItemConjurador(eq('Cajado'), { magia: maior });
+rc = receita(d);
+ok(rc.nivel === 'Maior' && rc.pm === 3 && palavrasDaMagia(maior).join() === 'ignis,majesto,majesto' && d.system.price === '200.020 Vo',
+   'magia Maior (criada, 3 palavras): item conjurador Maior, 3 PM, +200.000 Vo');
+ok(dadosDaMagiaDoItem({ id: 'c1', name: d.name }, rc).system.actions.every((a) => a.costMp === '3'), 'conjurar pelo item custa os 3 PM do círculo');
+d = construirItemConjurador(eq('Varinha'), { magia: esfera, lendario: true });
+comp = dadosDaMagiaDoItem({ id: 'v1', name: d.name }, receita(d));
+ok(comp.system.actions.every((a) => a.costMp === '0') && comp.system.costs.length === 0 && d.system.description.includes('lendário'),
+   'lendário: conjura sem mana');
+const pergaminho = eq('Pergaminho (em branco)');
+d = construirItemConjurador(pergaminho, { magia: esfera });
+rc = receita(d);
+comp = dadosDaMagiaDoItem({ id: 'g1', name: d.name }, rc);
+ok(d.name === 'Pergaminho de Esfera Ígnea' && rc.pergaminho && d.system.price === pergaminho.system.price,
+   'pergaminho: vira "Pergaminho de Esfera Ígnea" (gravar custa os PM e 1 hora, não Vo)');
+ok(comp.system.casting === 'Rodada completa (pergaminho)' && comp.system.actions.every((a) => a.costMp === '1' && a.label.includes('queima o pergaminho')),
+   'conjurar do pergaminho também custa 1 PM, leva uma rodada completa e queima o pergaminho');
+ok(d.system.description.includes('queima o pergaminho') && d.system.description.includes('também custa 1 PM'), 'e a descrição explica isso');
+d = construirItemConjurador(eq('Varinha'), { magia: magia('Imagem Ilusória') });
+comp = dadosDaMagiaDoItem({ id: 'v2', name: d.name }, receita(d));
+ok(d.system.description.includes('sem rolagem automática') && comp.system.costs[0]?.value === '1',
+   'magia só descritiva: a descrição avisa e a magia vinculada cobra 1 PM ao ser ativada');
+// propriedades + magia no mesmo item; lendário depois; desfazer
+let duplo = encantar(eq('Cajado'), 'Menor', ['forjuri-abjuracao']);
+duplo = construirItemConjurador(duplo, { magia: esfera });
+ok(propriedadesGravadas(duplo) === 2, 'o mesmo item pode ter propriedades e magia guardada');
+const duploL = refazerEncantamentos(duplo, { lendario: true });
+ok(eLendario(duploL) && duploL.flags[MOD].encantamentos.map((r) => r.tipo ?? 'propriedades').join() === 'propriedades,magia'
+   && dadosDaMagiaDoItem({ id: 'x', name: duploL.name }, receita(duploL)).system.actions.every((a) => a.costMp === '0'),
+   'tornar lendário refaz os dois encantamentos sem mana');
+const volta2 = desfazerEncantamento(duplo);
+ok(volta2[`flags.${MOD}.encantamentos`].length === 1 && !volta2['system.description'].includes('Item conjurador'),
+   'desfazer tira só a magia guardada');
+ok(resumoDaAcao({ label: 'X', canRoll: false, targetMode: 'self', heal: 'ceil(@nivel/2)', healResource: 'hp', costMp: '2' })
+   === 'em você · recupera metade do Nível (para cima) PV · 2 PM', 'resumo de cura com fórmula no jeito do livro');
+
+console.log('10) A magia vinculada vem e vai com o item');
+let seq = 0;
+class AtorFalso {
+  constructor(nome) { this.documentName = 'Actor'; this.name = nome; this._itens = []; this.apagados = []; }
+  get items() { const lista = this._itens; return Object.assign([...lista], { get: (id) => lista.find((i) => i.id === id) }); }
+  _pôr(dados) {
+    const it = { ...JSON.parse(JSON.stringify(dados)), id: dados.id ?? `i${++seq}`, parent: this };
+    it.flags ??= {};
+    it.delete = async () => { await this.deleteEmbeddedDocuments('Item', [it.id]); };
+    it.toObject = () => { const { parent: _p, delete: _d, toObject: _t, ...resto } = it; return JSON.parse(JSON.stringify(resto)); };
+    this._itens.push(it);
+    return it;
+  }
+  async createEmbeddedDocuments(_t, lista) { return lista.map((x) => this._pôr(x)); }
+  async deleteEmbeddedDocuments(_t, ids) { this.apagados.push(...ids); this._itens = this._itens.filter((i) => !ids.includes(i.id)); return ids; }
+  async updateEmbeddedDocuments(_t, lista) { for (const u of lista) Object.assign(this._itens.find((i) => i.id === u._id), u); return lista; }
+}
+const vinc = (ator, id) => ator.items.filter((i) => i.type === 'magia' && i.flags?.[MOD]?.doItem === id);
+const lyra = new AtorFalso('Lyra');
+const varinha = lyra._pôr({ ...construirItemConjurador(eq('Varinha'), { magia: esfera }), id: 'var1' });
+let r = await sincronizarMagiasDoItem(varinha);
+ok(r.criadas === 1 && vinc(lyra, 'var1').length === 1 && vinc(lyra, 'var1')[0].name === 'Esfera Ígnea (Varinha)',
+   'com o item na ficha, a magia "Esfera Ígnea (Varinha)" aparece');
+r = await sincronizarMagiasDoItem(varinha);
+ok(r.criadas === 0 && r.apagadas === 0 && vinc(lyra, 'var1').length === 1, 'sincronizar de novo não duplica');
+const comoLendaria = refazerEncantamentos(varinha.toObject(), { lendario: true });
+varinha.flags = comoLendaria.flags;
+r = await sincronizarMagiasDoItem(varinha);
+ok(r.apagadas === 1 && r.criadas === 1 && vinc(lyra, 'var1')[0].system.actions.every((a) => a.costMp === '0'),
+   'tornou lendária: a magia vinculada é trocada pela sem mana');
+varinha.name = 'Varinha do Fogo';
+r = await sincronizarMagiasDoItem(varinha);
+ok(r.renomeadas === 1 && vinc(lyra, 'var1')[0].name === 'Esfera Ígnea (Varinha do Fogo)', 'renomeou o item: a magia acompanha');
+// ganchos (rodam só para quem fez a mudança)
+globalThis.game.user.id = 'u1';
+globalThis.foundry.utils.hasProperty = (o, k) => k.split('.').reduce((x, p) => (x && typeof x === 'object' && p in x ? x[p] : undefined), o) !== undefined;
+const gancho = (nome) => ganchos[nome]?.find(() => true);
+await gancho('deleteItem')?.(varinha, {}, 'u1');
+await new Promise((res) => setTimeout(res, 0));
+ok(vinc(lyra, 'var1').length === 0, 'item apagado da ficha: a magia vinculada vai junto');
+const bruno = new AtorFalso('Bruno');
+const orfa = bruno._pôr({ ...dadosDaMagiaDoItem({ id: 'var1', name: 'Varinha' }, receita(varinha)) });
+await gancho('createItem')?.(orfa, {}, 'u1');
+await new Promise((res) => setTimeout(res, 0));
+ok(!bruno.items.get(orfa.id), 'magia vinculada arrastada sozinha para outra ficha é removida (sem o item, ela não existe)');
+const daOutra = bruno._pôr({ ...construirItemConjurador(eq('Varinha'), { magia: esfera }), id: 'var2' });
+await gancho('createItem')?.(daOutra, {}, 'u1');
+await new Promise((res) => setTimeout(res, 0));
+ok(vinc(bruno, 'var2').length === 1, 'o item que chega numa ficha traz a magia com ele');
+await gancho('createItem')?.(bruno._pôr({ ...construirItemConjurador(eq('Varinha'), { magia: esfera }), id: 'var3' }), {}, 'u2');
+await new Promise((res) => setTimeout(res, 0));
+ok(vinc(bruno, 'var3').length === 0, 'só o cliente de quem fez a mudança mexe na ficha');
+
+console.log('11) As 70 magias do compêndio em itens conjuradores passam no validador');
+const tmp2 = fs.mkdtempSync(path.join(os.tmpdir(), 'conjurador-'));
+fs.mkdirSync(`${tmp2}/packs-source/conjuradores`, { recursive: true });
+let n2 = 0;
+for (const m of magias) {
+  for (const [base, lendario] of [[eq('Varinha'), false], [eq('Pergaminho (em branco)'), false], [eq('Cajado'), true]]) {
+    const it = construirItemConjurador(base, { magia: m, lendario });
+    const c = dadosDaMagiaDoItem({ id: 'x', name: it.name }, receita(it));
+    for (const doc of [it, c]) {
+      fs.writeFileSync(`${tmp2}/packs-source/conjuradores/${String(n2++).padStart(4, '0')}.json`, JSON.stringify({ ...doc, _id: `cj${n2}` }));
+    }
+  }
+}
+let saida2 = '';
+let codigo2 = 0;
+try {
+  saida2 = execFileSync('python3', ['-c', `import sys; sys.path.insert(0, ${JSON.stringify(`${raiz}scripts`)}); import validate; sys.exit(validate.main(${JSON.stringify(tmp2)}))`], { encoding: 'utf8' });
+} catch (e) { codigo2 = e.status; saida2 = `${e.stdout}${e.stderr}`; }
+ok(codigo2 === 0, `${n2} documentos (itens e magias vinculadas): ${saida2.trim().split('\n')[0]}`);
+if (codigo2) console.log(saida2.split('\n').slice(0, 15).join('\n'));
+fs.rmSync(tmp2, { recursive: true, force: true });
+
+console.log('12) A janela no modo Item conjurador');
+const perg3 = eq('Pergaminho (em branco)');
+perg3.system.qty = 3;
+const objeto = (raw, id) => ({ id, type: raw.type, name: raw.name, img: raw.img, system: raw.system, flags: raw.flags ?? {},
+  toObject: () => JSON.parse(JSON.stringify(raw)) });
+const maga = {
+  name: 'Lyra', type: 'personagem', isOwner: true, system: { resources: { mp: { value: 5 } } },
+  items: [
+    { id: 'p1', type: 'habilidade', name: 'Palavra Arcana [ignis]', system: { level: 'B' } },
+    objeto(magia('Esfera Ígnea'), 'm1'),
+    { ...objeto(magia('Raio Arcano'), 'm9'), flags: { [MOD]: { doItem: 'zzz' } } },
+    objeto(eq('Varinha'), 'e0'), objeto(perg3, 'e1'),
+  ],
+};
+const app2 = new EncantamentoApp(maga);
+Object.assign(app2.forja, { tipo: 'magia', itemId: 'e0' });
+html = (await app2._renderHTML()).innerHTML;
+ok(html.includes('Esfera Ígnea — Menor · ignis · 1 PM') && !html.includes('Raio Arcano —'),
+   'lista as magias da ficha (não as vinculadas a outros itens)');
+ok(html.includes('data-action="encantar" disabled'), 'botão desligado até escolher a magia');
+app2.forja.magiaChave = 'ficha:m1';
+html = (await app2._renderHTML()).innerHTML;
+ok(html.includes('rola Conjuração contra Esquiva dos alvos') && html.includes('+400 Vo') && html.includes('Esfera Ígnea (Varinha)')
+   && html.includes('Gravar magia no item') && !html.includes('data-action="encantar" disabled'),
+   'prévia do que o item vai conjurar, preço e o nome da magia na ficha');
+ok(html.includes('no <b>Avançado</b>'), 'avisa que o livro pede a palavra no Avançado');
+app2.forja.itemId = 'e1';
+html = (await app2._renderHTML()).innerHTML;
+ok(html.includes('Pergaminho: gravar custa <b>1 PM</b> agora (de Lyra)') && html.includes('sai 1 da pilha de 3')
+   && html.includes('Pergaminho de Esfera Ígnea'), 'pergaminho: avisa a mana da gravação e que separa um da pilha');
 
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

@@ -35,6 +35,11 @@
  * extra nas magias de um foco, bônus em perícias...) fica marcado: um
  * lembrete com o nome da propriedade entra nos efeitos ativos ao ativar, e o
  * texto completo fica na descrição.
+ *
+ * ITEM CONJURADOR (o outro tipo de encantamento): em vez de propriedades, o
+ * item guarda uma magia que quem estiver com ele pode conjurar, pagando os PM
+ * do círculo e usando a própria Conjuração — com os bônus de palavra. Ver
+ * "Itens conjuradores" mais abaixo.
  */
 
 import { PROPRIEDADES } from "./propriedades.mjs";
@@ -59,7 +64,7 @@ export const NOME_DO_NIVEL = { 1: "Menor", 2: "Intermediário", 3: "Maior" };
 /** As 28 palavras arcanas do livro (as que têm propriedades). */
 export const PALAVRAS = [...new Set(PROPRIEDADES.map((p) => p.palavra))].sort();
 
-const semAcento = (s) => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+const semAcento = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 const esc = (s) => (globalThis.foundry?.utils?.escapeHTML ? foundry.utils.escapeHTML(String(s ?? "")) : String(s ?? ""));
 const clone = (x) => (x === undefined ? undefined : JSON.parse(JSON.stringify(x)));
 export const formatarVo = (n) => `${Number(n || 0).toLocaleString("pt-BR")} Vo`;
@@ -701,9 +706,10 @@ export function somarPreco(preco, total) {
   return formatarVo(base + total);
 }
 
-/** Quantas propriedades este módulo já gravou no item. */
+/** Quantas propriedades este módulo já gravou no item (cada magia guardada conta uma). */
 export function propriedadesGravadas(data) {
-  return (data?.flags?.[MODULE_ID]?.encantamentos ?? []).reduce((n, e) => n + (e.propriedades?.length ?? 0), 0);
+  return (data?.flags?.[MODULE_ID]?.encantamentos ?? [])
+    .reduce((n, e) => n + (e?.tipo === "magia" ? 1 : (e?.propriedades?.length ?? 0)), 0);
 }
 
 /**
@@ -903,6 +909,10 @@ export function refazerEncantamentos(dados, { lendario }, cfg = {}) {
   atual.name = receitas[0].antes.name;
   atual.flags[MODULE_ID].encantamentos = [];
   for (const rec of receitas) {
+    if (rec.tipo === "magia") {
+      atual = construirItemConjurador(atual, { magia: rec.magia, lendario, pergaminho: !!rec.pergaminho });
+      continue;
+    }
     const porId = new Map((rec.propriedades ?? []).map((p) => [p.id, p]));
     const slots = rec.slots?.length ? rec.slots : (rec.propriedades ?? []).map((p) => ({ palavra: p.palavra, id: p.id }));
     const escolhas = slots.map((sl) => {
@@ -924,6 +934,299 @@ export function refazerEncantamentos(dados, { lendario }, cfg = {}) {
 export function eLendario(dados) {
   const receitas = dados?.flags?.[MODULE_ID]?.encantamentos ?? [];
   return receitas.length > 0 && receitas.every((r) => r.lendario);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Itens conjuradores: o item guarda uma magia                         */
+/* ------------------------------------------------------------------ */
+/*
+ * Em vez de propriedades, o item guarda UMA magia (uma por encantamento).
+ * Quem estiver com ele conjura a magia com a própria Conjuração, pagando os
+ * PM do círculo — e, como numa magia comum, valem os bônus de Palavra Arcana
+ * e dos focos das palavras dela. Para isso o sistema precisa de uma magia de
+ * verdade (é o tipo "magia" que carrega as palavras): enquanto o item estiver
+ * numa ficha, o módulo mantém nela a MAGIA VINCULADA "Magia (Item)", criada
+ * e apagada junto com o item. O item em si leva a magia guardada (flags) e a
+ * descrição do que ela faz.
+ *
+ * Nível do item = círculo da magia (Menor 1 PM, Intermediária 2, Maior 3).
+ * Preço e tempo: os de criar uma magia daquele círculo (Sessão 11). Item
+ * lendário conjura sem mana. Pergaminho: quem grava paga os PM na gravação
+ * (1 hora) e quem conjura paga de novo; conjurar leva uma rodada completa e
+ * queima o pergaminho.
+ */
+
+/** Círculo da magia → nível do item conjurador. */
+export const NIVEL_DA_MAGIA = { "Menor": "Menor", "Intermediária": "Intermediário", "Maior": "Maior" };
+
+/** Criar uma magia (Sessão 11) — o preço e o tempo de guardá-la num item. */
+export const CRIACAO_DA_MAGIA = {
+  "Menor": { preco: 400, tempo: "1 dia" },
+  "Intermediário": { preco: 7000, tempo: "7 dias" },
+  "Maior": { preco: 200000, tempo: "30 dias" },
+};
+
+/** O item é um pergaminho? */
+export const ePergaminho = (data) => /^pergaminho\b/i.test(String(data?.name ?? "").trim());
+
+/** Palavras da magia (tantas quanto o círculo pede). */
+export function palavrasDaMagia(magia) {
+  const s = magia?.system ?? {};
+  const n = { "Menor": 1, "Intermediária": 2, "Maior": 3 }[s.tier] ?? 1;
+  return [s.wordId, s.wordId2, s.wordId3].slice(0, n).map((w) => semAcento(w)).filter(Boolean);
+}
+
+/** O que guardar da magia escolhida: o item leva a magia consigo. */
+export function retratoDaMagia(doc) {
+  const d = typeof doc?.toObject === "function" ? doc.toObject() : clone(doc);
+  const nossos = clone(d?.flags?.[MODULE_ID] ?? {});
+  delete nossos.doItem;
+  delete nossos.encId;
+  return { name: d?.name ?? "Magia", img: d?.img || "icons/svg/explosion.svg",
+    system: clone(d?.system ?? {}), flags: { [MODULE_ID]: nossos } };
+}
+
+const ROTULO_ATTR = {
+  forca: "Força", agilidade: "Agilidade", vigor: "Vigor", mente: "Mente", percepcao: "Percepção",
+  conjuracao: "Conjuração", esquiva: "Esquiva", bloqueio: "Bloqueio", iniciativa: "Iniciativa",
+};
+const ROTULO_VAR = { ...ROTULO_ATTR, nivel: "Nível", deslocamento: "Deslocamento" };
+const ROTULO_RECURSO = { hp: "PV", mp: "PM", heroic: "PH", hpTemp: "de sobrevida" };
+
+/** Fórmula do sistema → texto do livro ("5*@nivel" → "5 × Nível"). */
+export function formulaLegivel(f) {
+  let s = String(f ?? "").trim();
+  if (!s) return "";
+  s = s.replace(/ceil\(@nivel\/2\)/g, "metade do Nível (para cima)")
+    .replace(/floor\(@nivel\/2\)/g, "metade do Nível")
+    .replace(/@(\w+)/g, (_, v) => ROTULO_VAR[v] ?? v)
+    .replace(/\*/g, " × ")
+    .replace(/\s+/g, " ");
+  return s.trim();
+}
+
+/** Distância em metros, no jeito do livro ("5*@nivel" → "5m × Nível"). */
+function metros(f) {
+  const s = String(f ?? "").trim();
+  if (!s) return "";
+  if (/^\d+(\.\d+)?$/.test(s)) return `${s}m`;
+  const m = s.match(/^(\d+)\s*\*\s*(.+)$/);
+  if (m) return `${m[1]}m × ${formulaLegivel(m[2])}`;
+  return `${formulaLegivel(s)} (em metros)`;
+}
+
+/** O que UMA ação faz, em texto (vai para a descrição do item). */
+export function resumoDaAcao(a) {
+  const p = [];
+  const regiao = ["target", "area", "aura", "line", "cone", "lineCustom"].includes(a.targetMode);
+  if (a.canRoll) {
+    const def = regiao && a.defenseAttr
+      ? ` contra ${ROTULO_ATTR[a.defenseAttr] ?? a.defenseAttr}${a.defenseAttr2 ? ` ou ${ROTULO_ATTR[a.defenseAttr2] ?? a.defenseAttr2}` : ""} dos alvos`
+      : "";
+    p.push(`rola ${ROTULO_ATTR[a.rollAttr] ?? a.rollAttr}${def}`);
+  }
+  if (a.vsDifficulty) p.push(`contra CD ${formulaLegivel(a.fixedDifficulty)}`);
+  const area = metros(a.area);
+  const alcance = String(a.range ?? "").trim() === "0" ? "" : metros(a.range);
+  switch (a.targetMode) {
+    case "self": p.push("em você"); break;
+    case "target": p.push("num alvo"); break;
+    case "area": p.push(`área de ${area || "?"} de raio`); break;
+    case "aura": p.push(`aura de ${area || "?"} em volta de você`); break;
+    case "line": p.push(`linha de ${alcance || "?"}`); break;
+    case "cone": p.push(`cone de ${alcance || "?"}`); break;
+    case "lineCustom": p.push(`linha de ${area || "?"}`); break;
+    default: break;
+  }
+  if (alcance && !["line", "cone", "self"].includes(a.targetMode)) p.push(`alcance ${alcance}`);
+  const dano = String(a.damage ?? "").trim();
+  const recurso = a.damageResource ?? "hp";
+  if (dano) {
+    if (recurso !== "hp") p.push(`drena ${formulaLegivel(dano)} ${ROTULO_RECURSO[recurso]}`);
+    else if (a.damageType === "final") p.push(`Dano Final ${formulaLegivel(dano)} (ignora a Proteção)`);
+    else {
+      const tipo = DTYPES[a.damageType] ?? "";
+      p.push(a.scalingDamage ? `dano ${tipo} +${formulaLegivel(dano)} (escalonado)`.replace(/\s+/g, " ")
+        : `dano ${tipo} ${formulaLegivel(dano)} (fixo)`.replace(/\s+/g, " "));
+    }
+  }
+  for (const ex of a.extraDamage ?? []) {
+    if (!String(ex.formula ?? "").trim()) continue;
+    const r = ex.resource ?? "hp";
+    p.push(r !== "hp" ? `drena mais ${formulaLegivel(ex.formula)} ${ROTULO_RECURSO[r]}`
+      : `mais ${ex.scaling ? "+" : ""}${formulaLegivel(ex.formula)} de ${DTYPES[ex.type] ?? "dano"}${ex.scaling ? " (escalonado)" : ""}`);
+  }
+  if (String(a.heal ?? "").trim()) {
+    p.push(`recupera ${formulaLegivel(a.heal)} ${ROTULO_RECURSO[a.healResource ?? "hp"] ?? "PV"}${a.scalingHeal ? " (+1 a cada 2 acima)" : ""}`);
+  }
+  const efeitos = (a.appliesEffects ?? []).map((e) => {
+    const dur = e.durationMode === "rounds" ? `${formulaLegivel(e.durationRounds)} rodada(s)` : "até o fim da cena";
+    const res = e.resist && !/anula/i.test(e.label ?? "")
+      ? ` (${ROTULO_ATTR[e.resistAttr] ?? e.resistAttr} anula${e.resistVsCast ? "" : `, CD ${formulaLegivel(e.resistDc)}`})` : "";
+    return `${e.label} — ${dur}${res}`;
+  });
+  if (efeitos.length) p.push(`aplica ${efeitos.join("; ")}`);
+  const mv = a.movement;
+  if (mv?.enabled) {
+    const quem = mv.who === "self" ? "você" : "os alvos";
+    const dist = String(mv.distance ?? "0").trim() === "0" ? "à vontade" : metros(mv.distance);
+    const verbo = { teleport: "teleporta", push: "empurra", pull: "puxa", lateral: "desloca de lado", place: "move" }[mv.kind] ?? "move";
+    p.push(`${verbo} ${quem} ${dist}`);
+  }
+  if (a.persistArea) {
+    const r = Number(a.persistRounds) || 0;
+    p.push(`a área fica ${r > 0 ? `${r} rodada(s)` : "até o fim da cena"}`);
+  }
+  const custo = Number(a.costMp) || 0;
+  p.push(custo ? `${custo} PM` : "sem mana");
+  return p.join(" · ");
+}
+
+/** A magia guardada como ela fica no item (custo do lendário, pergaminho). */
+function magiaAjustada(retrato, { lendario = false, pergaminho = false } = {}) {
+  const m = clone(retrato);
+  const s = m.system ?? (m.system = {});
+  s.actions = Array.isArray(s.actions) ? s.actions : [];
+  if (lendario) {
+    for (const a of s.actions) a.costMp = "0";
+    s.costs = [];
+  }
+  if (pergaminho) {
+    // "Conjurar uma magia a partir de um pergaminho requer sempre uma
+    // rodada completa" — e ele queima na conjuração.
+    s.casting = "Rodada completa (pergaminho)";
+    for (const a of s.actions) a.label = `${a.label} — queima o pergaminho`;
+  }
+  return m;
+}
+
+/** Bloco da descrição do item: a magia guardada e o que ela faz. */
+function descricaoDoItemConjurador({ magia, nivel, pm, lendario, pergaminho, palavras, preco, tempo, itemNome }) {
+  const s = magia.system ?? {};
+  const circulo = s.tier || "Menor";
+  const uso = lendario
+    ? "sem gastar mana (item <b>lendário</b>)"
+    : `pagando <b>${pm} PM</b> (Círculo ${esc(circulo)}) a cada conjuração`;
+  const caracteristicas = [["Conjurar", s.casting], ["Alvo", s.target], ["Área", s.area], ["Alcance", s.range], ["Duração", s.duration]]
+    .filter(([, v]) => String(v ?? "").trim())
+    .map(([k, v]) => `<b>${k}:</b> ${esc(v)}`).join(" · ");
+  const acoes = s.actions ?? [];
+  const oQueFaz = acoes.length
+    ? `<p><b>O que a magia faz:</b></p><ul>${acoes.map((a) => `<li><b>${esc(a.label)}</b>: ${esc(resumoDaAcao(a))}.</li>`).join("")}</ul>`
+    : `<p><b>O que a magia faz:</b> efeito descrito abaixo, sem rolagem automática — ative a magia na ficha para pagar a mana.</p>`;
+  const perg = pergaminho
+    ? `<p><b>Pergaminho:</b> gravar a magia custou ${pm || NIVEIS_ITEM[nivel]?.pm} PM a quem a gravou (1 hora). Conjurar a partir dele `
+      + `${lendario ? "não gasta mana" : `também custa ${pm} PM`}, leva sempre uma rodada completa e <b>queima o pergaminho</b> — apague-o da ficha depois de conjurar.</p>`
+    : "";
+  const custo = pergaminho
+    ? "<p>Gravação: 1 hora e os PM da magia.</p>"
+    : `<p>Preço: +${formatarVo(preco)} (como criar uma magia de Círculo ${esc(circulo)}: ${esc(tempo)}).</p>`;
+  return `<hr><h3>✦ Item conjurador — ${esc(magia.name)}</h3>`
+    + `<p><b>Magia guardada:</b> ${esc(magia.name)} (Círculo ${esc(circulo)}${palavras.length ? ` · ${esc(palavras.join(" + "))}` : ""}) — item conjurador ${esc(nivel)}.</p>`
+    + `<p><b>Como usar:</b> quem estiver com o item conjura a magia com a própria Conjuração, ${uso}. Os bônus de Palavra Arcana `
+    + `e dos focos das palavras da magia valem. Com o item na ficha, a magia aparece na lista de Magias como `
+    + `<b>${esc(magia.name)} (${esc(itemNome)})</b> — e sai junto com ele.</p>`
+    + perg
+    + (caracteristicas ? `<p>${caracteristicas}</p>` : "")
+    + oQueFaz
+    + (String(s.description ?? "").trim() ? `<div class="ligeia-magia-guardada">${s.description}</div>` : "")
+    + custo;
+}
+
+/**
+ * Grava uma magia num equipamento (cópia; devolve os dados para
+ * `item.update`). O item ganha a descrição do que a magia faz, o preço e a
+ * receita; a magia vinculada na ficha é feita por sincronizarMagiasDoItem.
+ *
+ * @param {object} dados  item.toObject()
+ * @param {object} opcoes
+ * @param {object} opcoes.magia  a magia (documento ou retratoDaMagia)
+ * @param {boolean} [opcoes.lendario]  conjura sem mana
+ * @param {boolean} [opcoes.pergaminho]  regra do pergaminho (padrão: pelo nome)
+ * @param {string} [opcoes.nome]  novo nome (vazio mantém; pergaminho em branco vira "Pergaminho de X")
+ */
+export function construirItemConjurador(dados, { magia, lendario = false, pergaminho = null, nome = "" }) {
+  const data = clone(dados);
+  data.system ??= {};
+  const sys = data.system;
+  const retrato = retratoDaMagia(magia);
+  const nivel = NIVEL_DA_MAGIA[retrato.system?.tier] ?? "Menor";
+  const N = NIVEIS_ITEM[nivel];
+  const ehPergaminho = pergaminho ?? ePergaminho(data);
+  const palavras = palavrasDaMagia(retrato);
+  const { preco, tempo } = ehPergaminho ? { preco: 0, tempo: "1 hora" } : CRIACAO_DA_MAGIA[nivel];
+  const antes = {
+    name: data.name,
+    system: { actions: clone(sys.actions ?? []), effects: clone(sys.effects ?? []), description: sys.description ?? "", price: sys.price ?? "" },
+  };
+  const emBranco = /^pergaminho(\s*\(em branco\))?$/i.test(String(data.name ?? "").trim());
+  data.name = (nome && nome.trim()) || (ehPergaminho && emBranco ? `Pergaminho de ${retrato.name}` : data.name);
+  const ajustada = magiaAjustada(retrato, { lendario, pergaminho: ehPergaminho });
+  sys.description = (sys.description ?? "") + descricaoDoItemConjurador({
+    magia: ajustada, nivel, pm: lendario ? 0 : N.pm, lendario, pergaminho: ehPergaminho, palavras, preco, tempo, itemNome: data.name,
+  });
+  if (preco) sys.price = somarPreco(sys.price, preco);
+  data.flags ??= {};
+  data.flags[MODULE_ID] ??= {};
+  data.flags[MODULE_ID].encantamentos = [...(data.flags[MODULE_ID].encantamentos ?? []), {
+    id: novoId(), tipo: "magia", nivel, pm: N.pm, lendario, pergaminho: ehPergaminho, palavras,
+    magia: retrato, propriedades: [], preco, antes,
+  }];
+  return data;
+}
+
+/** Dados da magia vinculada que vai para a ficha de quem tem o item. */
+export function dadosDaMagiaDoItem(item, rec) {
+  const m = magiaAjustada(rec.magia, { lendario: rec.lendario, pergaminho: rec.pergaminho });
+  const aviso = `<p><em>✦ Magia do item <b>${esc(item.name)}</b> (item conjurador ${esc(rec.nivel)}`
+    + `${rec.lendario ? ", lendário: conjura sem mana" : ""}${rec.pergaminho ? ", pergaminho: queima ao conjurar" : ""}). `
+    + `Ela vem e vai junto com o item.</em></p>`;
+  m.system.description = aviso + (m.system.description ?? "");
+  m.system.active = false;
+  return {
+    name: `${m.name} (${item.name})`, type: "magia", img: m.img, system: m.system,
+    flags: { [MODULE_ID]: { ...(m.flags?.[MODULE_ID] ?? {}), doItem: item.id ?? item._id, encId: rec.id } },
+  };
+}
+
+const receitasDeMagia = (item) => (item?.flags?.[MODULE_ID]?.encantamentos ?? []).filter((r) => r?.tipo === "magia" && r.magia);
+const magiasVinculadas = (actor, itemId) => [...(actor?.items ?? [])]
+  .filter((i) => i.type === "magia" && i.flags?.[MODULE_ID]?.doItem === itemId);
+
+/**
+ * Deixa a ficha com exatamente as magias vinculadas que o item guarda: cria
+ * as que faltam, apaga as que sobraram e acerta o nome se o item mudou de
+ * nome. Só age em itens que estão numa ficha.
+ * @returns {Promise<{criadas: number, apagadas: number, renomeadas: number}>}
+ */
+export async function sincronizarMagiasDoItem(item) {
+  const out = { criadas: 0, apagadas: 0, renomeadas: 0 };
+  const actor = item?.parent;
+  if (!actor || actor.documentName !== "Actor" || item.type !== "equipamento") return out;
+  const receitas = receitasDeMagia(item);
+  const atuais = magiasVinculadas(actor, item.id);
+  const ids = new Set(receitas.map((r) => r.id));
+  const ja = new Set(atuais.map((m) => m.flags[MODULE_ID].encId));
+  const apagar = atuais.filter((m) => !ids.has(m.flags[MODULE_ID].encId)).map((m) => m.id);
+  const criar = receitas.filter((r) => !ja.has(r.id)).map((r) => dadosDaMagiaDoItem(item, r));
+  const renomear = atuais.filter((m) => ids.has(m.flags[MODULE_ID].encId)).map((m) => {
+    const r = receitas.find((x) => x.id === m.flags[MODULE_ID].encId);
+    const nome = `${r.magia.name} (${item.name})`;
+    return m.name === nome ? null : { _id: m.id, name: nome };
+  }).filter(Boolean);
+  if (apagar.length) await actor.deleteEmbeddedDocuments("Item", apagar);
+  if (criar.length) await actor.createEmbeddedDocuments("Item", criar);
+  if (renomear.length) await actor.updateEmbeddedDocuments("Item", renomear);
+  return { criadas: criar.length, apagadas: apagar.length, renomeadas: renomear.length };
+}
+
+/** Magias do compêndio do Livro do Jogador (em cache). */
+let _magiasDoCompendio = null;
+async function magiasDoCompendio() {
+  if (_magiasDoCompendio) return _magiasDoCompendio;
+  const pack = globalThis.game?.packs?.get?.(`${MODULE_ID}.magias`);
+  _magiasDoCompendio = pack ? await pack.getDocuments() : [];
+  return _magiasDoCompendio;
 }
 
 /* ------------------------------------------------------------------ */
@@ -972,6 +1275,7 @@ export class EncantamentoApp extends ApplicationV2 {
     // Estado da janela (não pode se chamar "state": é getter da ApplicationV2).
     this.forja = {
       itemId: item?.id ?? "", nivel: "Menor", lendario: false, nome: "", liberarTodas: false,
+      tipo: "propriedades", magiaChave: "",
       slots: [0, 1, 2].map(() => ({ palavra: "", propId: "", var: -1, todas: false })),
     };
     this.minhas = palavrasComNivel(this.actor);
@@ -1078,24 +1382,138 @@ export class EncantamentoApp extends ApplicationV2 {
       ${aviso}<div class="props">${lista}</div></fieldset>`;
   }
 
-  async _renderHTML() {
+  /** Magias que dá para guardar: as da ficha; o Mestre libera compêndio e mundo. */
+  async carregarMagias() {
+    const lista = [];
+    const daFicha = [...(this.actor?.items ?? [])].filter((i) => i.type === "magia" && !i.flags?.[MODULE_ID]?.doItem);
+    for (const it of daFicha) lista.push({ chave: `ficha:${it.id}`, origem: `Na ficha de ${this.actor.name}`, doc: it });
+    this.temMagiasNaFicha = daFicha.length > 0;
+    const mestre = !!globalThis.game?.user?.isGM;
+    if (mestre && (this.forja.liberarTodas || !daFicha.length)) {
+      for (const d of await magiasDoCompendio()) lista.push({ chave: `pack:${d.id ?? d._id}`, origem: "Compêndio do Livro do Jogador", doc: d });
+      for (const d of globalThis.game?.items ?? []) {
+        if (d.type === "magia") lista.push({ chave: `mundo:${d.id}`, origem: "Magias do mundo", doc: d });
+      }
+    }
+    const ordem = new Map();
+    lista.forEach((m) => { if (!ordem.has(m.origem)) ordem.set(m.origem, ordem.size); });
+    lista.sort((a, b) => (ordem.get(a.origem) - ordem.get(b.origem)) || String(a.doc.name).localeCompare(String(b.doc.name), "pt"));
+    this.magias = lista;
+  }
+
+  get magiaEscolhida() {
+    return (this.magias ?? []).find((m) => m.chave === this.forja.magiaChave) ?? null;
+  }
+
+  #corpoMagia(item) {
+    const s = this.forja;
+    const escolhida = this.magiaEscolhida;
+    const retrato = escolhida ? retratoDaMagia(escolhida.doc) : null;
+    const grupos = new Map();
+    for (const m of this.magias ?? []) {
+      if (!grupos.has(m.origem)) grupos.set(m.origem, []);
+      grupos.get(m.origem).push(m);
+    }
+    const opcoes = [...grupos.entries()].map(([origem, lista]) => `<optgroup label="${esc(origem)}">${lista.map((m) => {
+      const tier = m.doc.system?.tier || "Menor";
+      const pal = palavrasDaMagia(m.doc).join(" + ");
+      const pm = NIVEIS_ITEM[NIVEL_DA_MAGIA[tier] ?? "Menor"].pm;
+      return `<option value="${esc(m.chave)}" ${m.chave === s.magiaChave ? "selected" : ""}>${esc(m.doc.name)} — ${esc(tier)}${pal ? ` · ${esc(pal)}` : ""} · ${pm} PM</option>`;
+    }).join("")}</optgroup>`).join("");
+    const pergaminho = item ? ePergaminho(item) : false;
+    let info = "";
+    let previa = "";
+    if (retrato) {
+      const nivel = NIVEL_DA_MAGIA[retrato.system?.tier] ?? "Menor";
+      const pm = NIVEIS_ITEM[nivel].pm;
+      const palavras = palavrasDaMagia(retrato);
+      const liberado = !!globalThis.game?.user?.isGM && (s.liberarTodas || !this.temMagiasNaFicha);
+      const avisos = (!this.actor || liberado) ? [] : palavras.map((w) => {
+        const p = this.palavras.get(w);
+        if (!p) return `⚠ ${esc(this.actor.name)} não tem Palavra Arcana [${esc(w)}] na ficha.`;
+        if (p.nivel === "B") return `⚠ O livro pede Palavra Arcana [${esc(w)}] no <b>Avançado</b> para encantar (a ficha tem no Básico).`;
+        return "";
+      }).filter(Boolean);
+      info = `<p>Item conjurador <b>${esc(nivel)}</b> (Círculo ${esc(retrato.system?.tier || "Menor")}${palavras.length ? ` · ${esc(palavras.join(" + "))}` : ""})
+        — quem estiver com ele conjura pagando <b>${s.lendario ? "nenhuma mana (lendário)" : `${pm} PM`}</b>, com a própria Conjuração e os bônus de palavra que tiver.</p>
+        ${avisos.map((a) => `<p class="aviso">${a}</p>`).join("")}
+        ${pergaminho ? `<p class="aviso">📜 Pergaminho: gravar custa <b>${pm} PM</b> agora${this.actor ? ` (de ${esc(this.actor.name)})` : ""} e 1 hora;
+          conjurar também custa ${s.lendario ? "nada (lendário)" : `${pm} PM`}, leva uma rodada completa e queima o pergaminho.
+          ${(Number(item.system?.qty) || 1) > 1 ? `A magia vai para um pergaminho só (sai 1 da pilha de ${Number(item.system.qty)}).` : ""}</p>` : ""}`;
+      const ajustada = magiaAjustada(retrato, { lendario: s.lendario, pergaminho });
+      const acoes = ajustada.system.actions ?? [];
+      previa = acoes.length
+        ? `<div class="previa"><b>O que o item vai conjurar</b> (vai para a descrição dele):<ul>${acoes.map((a) =>
+          `<li><b>${esc(a.label)}</b>: ${esc(resumoDaAcao(a))}</li>`).join("")}</ul></div>`
+        : `<div class="previa"><b>O que o item vai conjurar:</b> magia descritiva, sem rolagem automática (a descrição dela vai para o item).</div>`;
+    }
+    const nomePadrao = item ? ((pergaminho && retrato && /^pergaminho(\s*\(em branco\))?$/i.test(item.name.trim())) ? `Pergaminho de ${retrato.name}` : item.name) : "";
+    const nivel = retrato ? (NIVEL_DA_MAGIA[retrato.system?.tier] ?? "Menor") : null;
+    const { preco, tempo } = !retrato ? { preco: 0, tempo: "" } : (pergaminho ? { preco: 0, tempo: "1 hora" } : CRIACAO_DA_MAGIA[nivel]);
+    const html = `
+      <fieldset><legend>2 · Magia guardada no item</legend>
+        ${(this.magias ?? []).length ? `<label>Magia
+          <select name="magiaChave">${`<option value="">— escolha —</option>`}${opcoes}</select></label>`
+          : `<p class="aviso">⚠ ${esc(this.actor?.name ?? "Este personagem")} não tem magias na ficha — quem encanta precisa saber a magia
+            (o Mestre pode liberar as do compêndio).</p>`}
+        ${info}${previa}
+      </fieldset>
+      <fieldset><legend>Nome e resumo</legend>
+        <label>Nome do item
+          <input type="text" name="nome" value="${esc(s.nome)}" placeholder="${esc(nomePadrao)}"></label>
+        <div class="resumo">
+          ${retrato ? `Item conjurador <b>${esc(nivel)}</b> · Conjurar: <b>${s.lendario ? "sem mana (lendário)" : `${NIVEIS_ITEM[nivel].pm} PM por conjuração`}</b>
+            · ${pergaminho ? `Gravação: <b>1 hora e ${NIVEIS_ITEM[nivel].pm} PM</b>` : `Preço: <b>+${formatarVo(preco)}</b> (como criar uma magia de Círculo ${esc(retrato.system?.tier || "Menor")}: ${esc(tempo)})`}
+            <br><em>Com o item na ficha, a magia aparece na lista de Magias como "${esc(retrato.name)} (${esc(s.nome?.trim() || nomePadrao)})" — e sai junto com ele.</em>`
+            : "Escolha a magia."}
+        </div>
+      </fieldset>`;
+    return { html, pronto: !!(item && retrato), rotulo: "Gravar magia no item" };
+  }
+
+  #corpoPropriedades(item) {
     const s = this.forja;
     const N = NIVEIS_ITEM[s.nivel];
-    const itens = this.itensEncantaveis;
-    if (!s.itemId && itens.length === 1) s.itemId = itens[0].id;
-    const item = this.item;
     const tipos = item ? tiposDoItem(item) : new Set();
     const escolhas = this.escolhas();
     const completas = escolhas.filter((e) => e.prop && e.variante);
     const unicas = [...new Map(completas.map((e) => [e.prop.id, e])).values()];
     const total = unicas.reduce((t, e) => t + (e.variante?.preco ?? 0), 0);
     const repetidas = completas.length - unicas.length;
-    const jaTem = item ? propriedadesGravadas(item) : 0;
     const pm = s.lendario ? 0 : N.pm;
+    const html = `
+      ${[0, 1, 2].slice(0, N.n).map((i) => this.#blocoPalavra(i, item, tipos, N)).join("")}
+      <fieldset><legend>Nome e resumo</legend>
+        <label>Nome do item encantado
+          <input type="text" name="nome" value="${esc(s.nome)}" placeholder="${esc(item ? `${item.name}${unicas.length ? ` (${unicas.map((e) => e.prop.nome).join(", ")})` : ""}` : "")}"></label>
+        <div class="resumo">
+          Item <b>${esc(s.nivel)}</b> · Mana para ativar: <b>${s.lendario ? "nenhuma (lendário)" : `${pm} PM por uso`}</b>
+          · Preço das propriedades: <b>+${formatarVo(total)}</b> (criação: metade, ${formatarVo(Math.ceil(total / 2))}, abatendo 20 Vo por ponto heroico gasto)
+          ${repetidas ? `<br><em>A mesma propriedade em mais de uma palavra conta uma vez — ela já vem no nível do item.</em>` : ""}
+          ${unicas.some((e) => e.prop.consumivel) ? `<br><em>Poções, bombas, óleos e pedras são consumidos ao usar e não gastam mana.</em>` : ""}
+        </div>
+      </fieldset>`;
+    return { html, pronto: !!item && completas.length === N.n, rotulo: "Encantar item" };
+  }
 
-    const el = document.createElement("div");
+  async _renderHTML() {
+    const s = this.forja;
+    const N = NIVEIS_ITEM[s.nivel];
+    const itens = this.itensEncantaveis;
+    if (!s.itemId && itens.length === 1) s.itemId = itens[0].id;
+    const item = this.item;
+    const jaTem = item ? propriedadesGravadas(item) : 0;
+    const conjurador = s.tipo === "magia";
+    if (conjurador) await this.carregarMagias();
+    const corpo = conjurador ? this.#corpoMagia(item) : this.#corpoPropriedades(item);
+    const mestre = !!globalThis.game?.user?.isGM;
+    const auto = conjurador ? !this.temMagiasNaFicha : !this.minhas.size;
+
+    // Um <form> por janela: os botões de opção (tipo, propriedade) ficam
+    // agrupados só dentro dela, mesmo com duas janelas abertas.
+    const el = document.createElement("form");
     el.className = "encantamento-form";
-    const semPalavras = !this.palavras.size;
+    const semPalavras = !conjurador && !this.palavras.size;
     el.innerHTML = `
       <style>
         .ligeia-encantamento .encantamento-form { padding: 6px 10px; max-height: 74vh; overflow-y: auto; }
@@ -1106,6 +1524,8 @@ export class EncantamentoApp extends ApplicationV2 {
         .ligeia-encantamento .linha { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
         .ligeia-encantamento .linha > label { flex: 1 1 180px; }
         .ligeia-encantamento select, .ligeia-encantamento input[type=text] { width: 100%; }
+        .ligeia-encantamento .tipos { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+        .ligeia-encantamento .tipos label { flex: 1 1 240px; padding: 4px 6px; border-radius: 4px; background: rgba(120,120,160,0.08); }
         .ligeia-encantamento .props { max-height: 260px; overflow-y: auto; margin-top: 4px; }
         .ligeia-encantamento .prop { margin: 3px 0; padding: 3px 4px; border-radius: 4px; font-size: 0.92em; }
         .ligeia-encantamento .prop:hover, .ligeia-encantamento .prop.sel { background: rgba(120,120,160,0.12); }
@@ -1118,47 +1538,43 @@ export class EncantamentoApp extends ApplicationV2 {
         .ligeia-encantamento .prop .var { margin-top: 3px; }
         .ligeia-encantamento .auto { color: #3a7; } .ligeia-encantamento .manual { color: #a83; }
         .ligeia-encantamento .todas { font-size: 0.9em; margin-top: 6px; }
+        .ligeia-encantamento .previa { font-size: 0.92em; background: rgba(120,120,160,0.08); border-radius: 4px; padding: 4px 8px; margin-top: 4px; }
+        .ligeia-encantamento .previa ul { margin: 2px 0 0 18px; }
         .ligeia-encantamento .dica { opacity: 0.75; font-style: italic; }
         .ligeia-encantamento .aviso { color: #b60; font-size: 0.92em; margin: 3px 0; }
         .ligeia-encantamento .resumo { background: rgba(120,120,160,0.12); border-radius: 6px; padding: 6px 10px; margin: 6px 0; }
-        .ligeia-encantamento footer { display: flex; gap: 8px; justify-content: flex-end; margin: 8px 0 4px; }
+        .ligeia-encantamento footer { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; margin: 8px 0 4px; }
       </style>
       ${semPalavras ? `<p class="aviso">⚠ ${esc(this.actor?.name ?? "Este personagem")} não tem nenhuma habilidade
         "Palavra Arcana [x]" na ficha — adicione ao menos uma para encantar itens.</p>` : ""}
-      ${globalThis.game?.user?.isGM ? `<label class="dica"><input type="checkbox" name="liberarTodas" ${this.todasAsPalavras ? "checked" : ""}
-        ${this.minhas.size ? "" : "disabled"}> Mestre: liberar todas as palavras arcanas${this.minhas.size ? "" : " (a ficha não tem nenhuma)"}</label>` : ""}
-      <fieldset><legend>1 · Item e nível</legend>
+      ${mestre ? `<label class="dica"><input type="checkbox" name="liberarTodas" ${s.liberarTodas || auto ? "checked" : ""}
+        ${auto ? "disabled" : ""}> Mestre: liberar todas as ${conjurador ? "magias (compêndio e mundo)" : "palavras arcanas"}${auto ? ` (a ficha não tem nenhuma)` : ""}</label>` : ""}
+      <fieldset><legend>1 · Item e ${conjurador ? "tipo" : "nível"}</legend>
+        <div class="tipos">
+          <label><input type="radio" name="tipo" value="propriedades" ${conjurador ? "" : "checked"}> <b>Propriedades mágicas</b> — até 3 palavras arcanas, uma propriedade de cada</label>
+          <label><input type="radio" name="tipo" value="magia" ${conjurador ? "checked" : ""}> <b>Item conjurador</b> — o item guarda uma magia, e quem estiver com ele pode conjurá-la</label>
+        </div>
         <div class="linha">
           <label>Item
             <select name="itemId" ${this.itemFixo ? "disabled" : ""}>${this.#opcoes(itens.map((i) =>
               [i.id, `${i.name}${i.system?.category ? ` (${i.system.category})` : ""}${propriedadesGravadas(i) ? " ✦" : ""}`]),
               s.itemId, itens.length ? "— escolha —" : "— nenhum equipamento na ficha —")}</select>
           </label>
-          <label>Nível do item
+          ${conjurador ? "" : `<label>Nível do item
             <select name="nivel">${this.#opcoes(Object.entries(NIVEIS_ITEM).map(([k, v]) =>
               [k, `${k} (${v.n} palavra${v.n > 1 ? "s" : ""} · ${v.pm} PM)`]), s.nivel)}</select>
-          </label>
+          </label>`}
         </div>
-        <label><input type="checkbox" name="lendario" ${s.lendario ? "checked" : ""}> <b>Item lendário</b> — ativa as propriedades sem gastar mana</label>
+        <label><input type="checkbox" name="lendario" ${s.lendario ? "checked" : ""}> <b>Item lendário</b> — ${conjurador ? "conjura a magia sem gastar mana" : "ativa as propriedades sem gastar mana"}</label>
         ${jaTem ? `<p class="aviso">⚠ ${esc(item.name)} já tem ${jaTem} propriedade(s) mágica(s): ao fim do encantamento,
           role a Dureza do item com −${jaTem}. Se falhar, o item se quebra e perde todas as propriedades.</p>` : ""}
       </fieldset>
-      ${[0, 1, 2].slice(0, N.n).map((i) => this.#blocoPalavra(i, item, tipos, N)).join("")}
-      <fieldset><legend>Nome e resumo</legend>
-        <label>Nome do item encantado
-          <input type="text" name="nome" value="${esc(s.nome)}" placeholder="${esc(item ? `${item.name}${unicas.length ? ` (${unicas.map((e) => e.prop.nome).join(", ")})` : ""}` : "")}"></label>
-        <div class="resumo">
-          Item <b>${esc(s.nivel)}</b> · Mana para ativar: <b>${s.lendario ? "nenhuma (lendário)" : `${pm} PM por uso`}</b>
-          · Preço das propriedades: <b>+${formatarVo(total)}</b> (criação: metade, ${formatarVo(Math.ceil(total / 2))}, abatendo 20 Vo por ponto heroico gasto)
-          ${repetidas ? `<br><em>A mesma propriedade em mais de uma palavra conta uma vez — ela já vem no nível do item.</em>` : ""}
-          ${unicas.some((e) => e.prop.consumivel) ? `<br><em>Poções, bombas, óleos e pedras são consumidos ao usar e não gastam mana.</em>` : ""}
-        </div>
-      </fieldset>
+      ${corpo.html}
       <footer>
         <button type="button" data-action="cancelar">Cancelar</button>
         ${item && propriedadesGravadas(item) ? `<button type="button" data-action="lendario" title="Refaz os encantamentos deste item ${eLendario(item) ? "voltando a gastar mana" : "como item lendário, sem gastar mana"}"><i class="fa-solid fa-crown"></i> ${eLendario(item) ? "Voltar a gastar mana" : "Tornar lendário"}</button>
           <button type="button" data-action="desfazer"><i class="fa-solid fa-rotate-left"></i> Desfazer último encantamento</button>` : ""}
-        <button type="button" data-action="encantar" ${item && completas.length === N.n ? "" : "disabled"}><i class="fa-solid fa-gem"></i> Encantar item</button>
+        <button type="button" data-action="encantar" ${corpo.pronto ? "" : "disabled"}><i class="fa-solid ${conjurador ? "fa-book-sparkles" : "fa-gem"}"></i> ${corpo.rotulo}</button>
       </footer>`;
     return el;
   }
@@ -1178,7 +1594,10 @@ export class EncantamentoApp extends ApplicationV2 {
   #listeners(root) {
     const s = this.forja;
     const on = (sel, ev, fn) => root.querySelectorAll(sel).forEach((n) => n.addEventListener(ev, fn));
+    on("form.encantamento-form", "submit", (e) => e.preventDefault()); // Enter no nome não recarrega
     on("select[name=itemId]", "change", (e) => { s.itemId = e.target.value; this.render(); });
+    on("input[name=tipo]", "change", (e) => { s.tipo = e.target.value; this.render(); });
+    on("select[name=magiaChave]", "change", (e) => { s.magiaChave = e.target.value; this.render(); });
     on("select[name=nivel]", "change", (e) => { s.nivel = e.target.value; this.render(); });
     on("input[name=lendario]", "change", (e) => { s.lendario = e.target.checked; this.render(); });
     on("input[name=liberarTodas]", "change", (e) => { s.liberarTodas = e.target.checked; this.render(); });
@@ -1200,6 +1619,7 @@ export class EncantamentoApp extends ApplicationV2 {
 
   async encantar() {
     const s = this.forja;
+    if (s.tipo === "magia") return this.gravarMagia();
     const item = this.item;
     if (!item) return ui.notifications.warn("Escolha o item a encantar.");
     const N = NIVEIS_ITEM[s.nivel];
@@ -1226,6 +1646,50 @@ export class EncantamentoApp extends ApplicationV2 {
       + `${nProps} propriedade${nProps > 1 ? "s" : ""}${nAnim ? `, ${nAnim} animaç${nAnim > 1 ? "ões" : "ão"} automática${nAnim > 1 ? "s" : ""}` : ""}.`);
     this.close();
     item.sheet?.render(true);
+  }
+
+  /** Item conjurador: grava a magia escolhida no item. */
+  async gravarMagia() {
+    const s = this.forja;
+    const item = this.item;
+    if (!item) return ui.notifications.warn("Escolha o item.");
+    const escolhida = this.magiaEscolhida;
+    if (!escolhida) return ui.notifications.warn("Escolha a magia a guardar no item.");
+    const retrato = retratoDaMagia(escolhida.doc);
+    const nivel = NIVEL_DA_MAGIA[retrato.system?.tier] ?? "Menor";
+    const pm = NIVEIS_ITEM[nivel].pm;
+    const pergaminho = ePergaminho(item);
+    const quem = this.actor;
+    const pmAtual = Number(quem?.system?.resources?.mp?.value) || 0;
+    // Pergaminho: quem grava paga os PM da magia (e quem conjurar paga de novo).
+    if (pergaminho && quem && pmAtual < pm) {
+      return ui.notifications.warn(`Gravar ${retrato.name} no pergaminho custa ${pm} PM — ${quem.name} tem ${pmAtual}.`);
+    }
+    let alvo = item;
+    if (pergaminho && (Number(item.system?.qty) || 1) > 1) {
+      // Uma magia por pergaminho: separa um da pilha.
+      const um = item.toObject();
+      delete um._id;
+      um.system.qty = 1;
+      await item.update({ "system.qty": Number(item.system.qty) - 1 });
+      alvo = item.parent
+        ? (await item.parent.createEmbeddedDocuments("Item", [um]))[0]
+        : await (globalThis.CONFIG?.Item?.documentClass ?? globalThis.Item).create(um);
+    }
+    const data = construirItemConjurador(alvo.toObject(), { magia: retrato, lendario: s.lendario, pergaminho, nome: s.nome });
+    await alvo.update({
+      name: data.name,
+      "system.description": data.system.description,
+      "system.price": data.system.price,
+      [`flags.${MODULE_ID}.encantamentos`]: data.flags[MODULE_ID].encantamentos,
+    });
+    if (pergaminho && quem) await quem.update({ "system.resources.mp.value": pmAtual - pm });
+    ui.notifications.info(`${data.name}: ${retrato.name} guardada (item conjurador ${nivel}, `
+      + `${s.lendario ? "lendário, sem mana" : `${pm} PM por conjuração`})`
+      + `${pergaminho && quem ? ` — gravar custou ${pm} PM a ${quem.name}` : ""}. `
+      + `${alvo.parent ? "A magia aparece na lista de Magias da ficha." : "A magia aparece na ficha de quem receber o item."}`);
+    this.close();
+    alvo.sheet?.render(true);
   }
 
   async alternarLendario() {
@@ -1331,10 +1795,46 @@ globalThis.Hooks?.on("renderActorSheetV2", botaoNaFicha);
 globalThis.Hooks?.on("renderItemSheet", botaoNaFicha);
 globalThis.Hooks?.on("renderItemSheetV2", botaoNaFicha);
 
+/* ------------------------------------------------------------------ */
+/*  Magias vinculadas: vêm e vão junto com o item conjurador            */
+/* ------------------------------------------------------------------ */
+// Quem fez a mudança é quem cuida da ficha (os ganchos rodam em todos os
+// clientes; só um deve criar/apagar).
+const fuiEu = (userId) => userId === globalThis.game?.user?.id;
+
+globalThis.Hooks?.on("createItem", (item, options, userId) => {
+  if (!fuiEu(userId)) return;
+  if (item.type === "equipamento" && receitasDeMagia(item).length) {
+    sincronizarMagiasDoItem(item);
+  } else if (item.type === "magia" && item.flags?.[MODULE_ID]?.doItem) {
+    // Magia vinculada arrastada sozinha para outra ficha: sem o item, ela não existe.
+    const actor = item.parent;
+    if (actor?.documentName === "Actor" && !actor.items.get(item.flags[MODULE_ID].doItem)) {
+      item.delete();
+      ui.notifications?.warn(`${item.name} vem de um item conjurador: leve o item para a ficha e a magia aparece com ele.`);
+    }
+  }
+});
+
+globalThis.Hooks?.on("updateItem", (item, mudancas, options, userId) => {
+  if (!fuiEu(userId) || item.type !== "equipamento" || item.parent?.documentName !== "Actor") return;
+  const mexeu = globalThis.foundry?.utils?.hasProperty?.(mudancas, `flags.${MODULE_ID}.encantamentos`) || "name" in (mudancas ?? {});
+  if (mexeu) sincronizarMagiasDoItem(item);
+});
+
+globalThis.Hooks?.on("deleteItem", (item, options, userId) => {
+  if (!fuiEu(userId) || item.type !== "equipamento") return;
+  const actor = item.parent;
+  if (actor?.documentName !== "Actor") return;
+  const ids = magiasVinculadas(actor, item.id).map((m) => m.id);
+  if (ids.length) actor.deleteEmbeddedDocuments("Item", ids);
+});
+
 globalThis.Hooks?.once("ready", () => {
   const mod = game.modules.get(MODULE_ID);
   mod.api = Object.assign(mod.api ?? {}, {
     abrirEncantamento, construirEncantamento, desfazerEncantamento, refazerEncantamentos, PROPRIEDADES, regraDe,
+    construirItemConjurador, sincronizarMagiasDoItem, dadosDaMagiaDoItem,
   });
   console.log("Ligeia — Livro do Jogador | Encantamento de Itens pronto (botão ✦ na ficha).");
 });
