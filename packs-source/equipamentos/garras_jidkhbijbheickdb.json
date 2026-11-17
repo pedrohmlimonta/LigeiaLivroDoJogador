@@ -36,7 +36,7 @@
         "damage": "@nivel",
         "damageType": "corte",
         "damageResource": "hp",
-        "scalingDamage": false,
+        "scalingDamage": true,
         "heal": "",
         "healResource": "hp",
         "scalingHeal": false,

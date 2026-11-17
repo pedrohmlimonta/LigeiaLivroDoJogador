@@ -36,7 +36,7 @@
         "damage": "1",
         "damageType": "radiante",
         "damageResource": "hp",
-        "scalingDamage": false,
+        "scalingDamage": true,
         "heal": "",
         "healResource": "hp",
         "scalingHeal": false,

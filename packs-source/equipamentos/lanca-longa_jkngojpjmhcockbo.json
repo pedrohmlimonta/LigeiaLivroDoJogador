@@ -38,7 +38,7 @@
         "damage": "5",
         "damageType": "perfuracao",
         "damageResource": "hp",
-        "scalingDamage": false,
+        "scalingDamage": true,
         "heal": "",
         "healResource": "hp",
         "scalingHeal": false,

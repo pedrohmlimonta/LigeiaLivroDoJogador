@@ -12,6 +12,9 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from enhance_dano import escalonamento_da_magia  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 EFFECT_TYPES = {"dice", "rollDice", "bonus", "attr", "stat", "set", "damage", "rd",
@@ -239,7 +242,34 @@ def validar_acao(v, onde, a):
                         "mas a ação não rola: a CD seria 0")
 
 
+TIPOS_DANO_ROTULO = ("Corte", "Perfuração", "Concussão", "Ácido", "Fogo", "Frio", "Raio", "Veneno",
+                     "Energia", "Necrótico", "Radiante", "Sônico", "Psíquico")
+_ROTULO_ESCALONADO = re.compile(r"(?:=|\()\s*(?:%s)\s\+(?:\d+|Nível)" % "|".join(TIPOS_DANO_ROTULO))
+
+
+def validar_escalonamento(v, onde, tipo, s):
+    """Dano escalonado ("+N" no livro) — ver enhance_dano.py."""
+    escala_magia = escalonamento_da_magia(s.get("description", "")) if tipo == "magia" else None
+    for i, a in enumerate(s.get("actions", [])):
+        if str(a.get("damage", "")).strip() == "" or a.get("damageResource", "hp") != "hp":
+            continue
+        lugar = f"{onde} › ação[{i}] {a.get('label', '')[:34]}"
+        esc = bool(a.get("scalingDamage"))
+        if a.get("damageType") == "final":
+            if esc:
+                v.err(lugar, "dano final não escala")
+            continue
+        if tipo == "equipamento" and (a.get("isWeapon") or a.get("label", "").startswith("Ataque —")) and not esc:
+            v.err(lugar, "ataque de arma sem dano escalonado (o livro dá \"Dano Base: Tipo +N\")")
+        if escala_magia is not None and esc != escala_magia:
+            v.err(lugar, f"dano {'escalonado' if escala_magia else 'fixo'} na descrição, "
+                         f"{'escalonado' if esc else 'fixo'} na ação")
+        if _ROTULO_ESCALONADO.search(a.get("label", "")) and not esc:
+            v.err(lugar, "o rótulo diz \"Tipo +N\" mas o dano não está escalonado")
+
+
 def validar_sistema(v, onde, tipo, s):
+    validar_escalonamento(v, onde, tipo, s)
     leveled = tipo in ("habilidade", "complicacao")
     if tipo in ("habilidade", "complicacao"):
         v.choice(onde, "level", s.get("level"), {"B", "A", "E"})

@@ -15,6 +15,7 @@ import re
 
 from builders import action, effect
 from enhance_levels import apply_level_upgrades
+from enhance_dano import aplicar_escalonamento
 
 ATTR_LABEL = {
     "forca": "Força", "agilidade": "Agilidade", "vigor": "Vigor",
@@ -244,6 +245,8 @@ def enhance(doc):
         doc["system"]["mode"] = "active"
         doc["system"]["active"] = False
     _niveis_explicitos(doc)
+    # Dano escalonado ("+N" no livro) — ver enhance_dano.py.
+    aplicar_escalonamento(doc)
     # Snapshots embutidos nas definições (traços de raça/herança/carreira e
     # habilidades-chave de vocação) recebem os mesmos aprimoramentos.
     #
@@ -265,6 +268,7 @@ def enhance(doc):
             _formula_sweep(sub)
             _classify_mode(sub)
             _niveis_explicitos(sub)
+            aplicar_escalonamento(sub)
     return doc
 
 

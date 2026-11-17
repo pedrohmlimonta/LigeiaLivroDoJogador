@@ -24,10 +24,11 @@ jobs:
       - name: Gerar documentos dos packs
         run: python3 scripts/generate.py
 
-      - name: Testes (Criação de Magias e animações)
+      - name: Testes (Criação de Magias, animações e dano escalonado)
         run: |
           node tests/animacoes.test.mjs
           node tests/spellforge.test.mjs
+          node tests/dano.test.mjs
 
       - name: Compilar packs (LevelDB)
         run: |

@@ -37,7 +37,7 @@
         "damage": "5",
         "damageType": "corte",
         "damageResource": "hp",
-        "scalingDamage": false,
+        "scalingDamage": true,
         "heal": "",
         "healResource": "hp",
         "scalingHeal": false,

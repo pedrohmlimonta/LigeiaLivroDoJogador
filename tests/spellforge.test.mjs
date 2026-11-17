@@ -194,5 +194,35 @@ const baseMinha = { name: bc.name, system: sysc,
 d = await criar(baseMinha, 'Intermediária', 'energio', 'ignis', '', M.ignis.find((m) => m.name === 'Magia Flamejante'), null);
 ok(JSON.stringify(d.system.actions[0].aaConfig) === JSON.stringify(minha), 'animação que você pôs na magia de base é mantida');
 
+console.log('11) Dano escalonado: "+N" escala, sem o "+" é fixo');
+const flam = M.ignis.find((m) => m.name === 'Magia Flamejante');
+ok(load('esfera-ignea').system.actions[0].scalingDamage === true, 'Esfera Ígnea (Fogo +1) escala');
+ok(load('missil-magico').system.actions[0].scalingDamage === false, 'Míssil Mágico (Energia 1, não escalonável) é fixo');
+ok(load('explodir').system.actions[0].scalingDamage === false, 'Explodir (Dano Final de Energia 1) é fixo');
+ok(load('visao-aterradora').system.actions[0].scalingDamage === true, 'Visão Aterradora (Psíquico +0) escala com base 0');
+d = await criar(load('raio-arcano'), 'Maior', 'energio', 'ignis', 'fulgur', flam, M.fulgur.find((m) => m.name === 'Magia Eletrizante'));
+a = d.system.actions[0];
+ok(a.damage === '4' && a.scalingDamage === true && /Raio \+4 \(escalonado\)/.test(d.system.description),
+   'Raio Arcano Maior: Raio +4, escalonado, e a receita mostra no formato do livro');
+d = await criar(load('cegueira'), 'Intermediária', 'tenebrae', 'ignis', '', flam, null);
+a = d.system.actions.find((x) => x.damage);
+ok(a?.damage === '2' && a.damageType === 'fogo' && a.scalingDamage === true,
+   'Cegueira + Magia Flamejante (sem dano na base): Fogo +2 pelo círculo, escalonado');
+d = await criar(load('missil-magico'), 'Intermediária', 'exitium', 'ignis', '', flam, null);
+a = d.system.actions[0];
+ok(a.damageType === 'fogo' && a.damage === '2' && a.scalingDamage === false && /Fogo 2 \(fixo/.test(d.system.description),
+   'Míssil Mágico + Flamejante: troca para fogo e continua fixo');
+d = await criar(load('explodir'), 'Intermediária', 'exitium', 'ignis', '', flam, null);
+a = d.system.actions[0];
+ok(a.damageType === 'final' && a.damage === '2' && a.scalingDamage === false && /Dano Final de Fogo 2/.test(d.system.description),
+   'Explodir (exitium) + Flamejante: continua dano final, fixo — o elemento vira fogo');
+d = await criar(load('visao-aterradora'), 'Intermediária', 'iluzio', 'ignis', '', flam, null);
+ok(d.system.actions.length === 1 && d.system.actions[0].damageType === 'fogo' && d.system.actions[0].scalingDamage === true,
+   '"Psíquico +0" já causa dano: a metamagia só troca o tipo (não cria outro dano)');
+d = await criar(load('queimar-magia'), 'Intermediária', 'inanis', 'ignis', '', flam, null);
+a = d.system.actions[0];
+ok(a.damageResource === 'mp' && a.extraDamage.some((x) => x.type === 'fogo' && x.resource === 'hp' && x.scaling && x.formula === '2'),
+   'Queimar Magia + Flamejante: o dreno de PM fica e o fogo entra como dano extra escalonado');
+
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

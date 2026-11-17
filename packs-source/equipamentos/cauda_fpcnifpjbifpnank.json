@@ -36,7 +36,7 @@
         "damage": "@nivel",
         "damageType": "concussao",
         "damageResource": "hp",
-        "scalingDamage": false,
+        "scalingDamage": true,
         "heal": "",
         "healResource": "hp",
         "scalingHeal": false,

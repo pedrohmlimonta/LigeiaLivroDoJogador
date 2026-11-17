@@ -428,6 +428,16 @@ const esc = (s) => foundry.utils.escapeHTML ? foundry.utils.escapeHTML(String(s)
 /*  Aplicação das metamagias ao item criado                            */
 /* ------------------------------------------------------------------ */
 
+/**
+ * A ação causa dano de vida? "Psíquico +0" causa (dano base 0, escalonado);
+ * um 0 fixo não causa; PM drenados (Queimar Magia) não são dano.
+ */
+function causaDanoDeVida(a) {
+  const d = String(a.damage ?? "").trim();
+  if (!d || (a.damageResource ?? "hp") !== "hp") return false;
+  return d !== "0" || !!a.scalingDamage;
+}
+
 function acoesOfensivas(data) {
   return data.system.actions.filter((a) =>
     ["target", "area", "aura", "line", "cone", "lineCustom"].includes(a.targetMode));
@@ -485,15 +495,33 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
   };
   switch (meta.kind) {
     case "damage": {
+      // A base já causa dano? Troca só o TIPO — e o dano continua como era:
+      // escalonado ("Fogo +1") ou fixo ("Energia 1, não escalonável"). Dano
+      // final continua final (ignora a Proteção); só o elemento é outro.
       let alguma = false;
       for (const a of sys.actions) {
-        if ((a.damage ?? "") !== "" && a.damage !== "0") { a.damageType = meta.dtype; alguma = true; }
-        for (const ex of a.extraDamage ?? []) if (ex.formula) ex.type = meta.dtype;
+        if (causaDanoDeVida(a)) {
+          if (a.damageType !== "final") a.damageType = meta.dtype;
+          alguma = true;
+        }
+        for (const ex of a.extraDamage ?? []) {
+          if (ex.formula && (ex.resource ?? "hp") === "hp") ex.type = meta.dtype;
+        }
       }
       if (!alguma) {
+        // Não causa: ganha dano +1/+2/+3 pelo círculo — o "+" é dano
+        // escalonado (base = círculo, +1 a cada 2 acima da defesa).
         const a = ancora();
-        a.damage = String(circ);              // +1/+2/+3 pelo círculo
-        a.damageType = meta.dtype;
+        if (String(a.damage ?? "").trim() !== "" && (a.damageResource ?? "hp") !== "hp") {
+          // A ação já drena PM (Queimar Magia): o dano entra como parcela extra.
+          a.extraDamage ??= [];
+          a.extraDamage.push({ formula: String(circ), type: meta.dtype, resource: "hp", scaling: true });
+        } else {
+          a.damage = String(circ);
+          a.damageType = meta.dtype;
+          a.damageResource = "hp";
+          a.scalingDamage = true;
+        }
       }
       break;
     }
@@ -716,9 +744,24 @@ export async function construirMagia(state, { animar = true, existe = null } = {
     `<li><strong>${esc(m.name)}</strong> (${esc(m.wordId)}): ${esc(m.description)}${
       repetida && i === 1 ? " <em>— aplicada pela segunda vez (área/alcance/alvos triplicam; não dobram o dobrado)</em>" : ""}</li>`).join("");
   const palavras = [palavra1, circ >= 2 ? palavra2 : null, circ >= 3 ? palavra3 : null].filter(Boolean);
+  // Dano no formato do livro: "+N" é escalonado; sem o "+", fixo.
+  const principal = data.system.actions.find((a) => causaDanoDeVida(a));
+  let linhaDano = "";
+  if (principal) {
+    const metaDano = [circ >= 3 ? meta3 : null, circ >= 2 ? meta2 : null].find((m) => m?.kind === "damage");
+    const valor = esc(principal.damage);
+    if (principal.damageType === "final") {
+      const elem = metaDano ? ` de ${DTYPES[metaDano.dtype]}` : "";
+      linhaDano = `Dano Final${elem} ${valor} (fixo — ignora a Proteção)`;
+    } else {
+      const tipo = DTYPES[principal.damageType] ?? principal.damageType;
+      linhaDano = principal.scalingDamage ? `${tipo} +${valor} (escalonado)` : `${tipo} ${valor} (fixo, não escalonável)`;
+    }
+  }
   data.system.description = (data.system.description || "") + `
 <hr><p><strong>Magia criada — Círculo ${esc(tier)}</strong> (custo ${pm} PM; bônus de peculiaridades: ${delta >= 0 ? "+" : ""}${delta})</p>
 <p>Palavras: ${esc(palavras.join(", "))}. Base: ${esc(base.name)}.</p>
+${linhaDano ? `<p>Dano: ${linhaDano}.</p>` : ""}
 ${linhasApr ? `<p>Aprimoramentos do círculo (gratuitos):</p><ul>${linhasApr}</ul>` : ""}
 ${linhasPec ? `<p>Peculiaridades escolhidas:</p><ul>${linhasPec}</ul>` : ""}
 ${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}`;
