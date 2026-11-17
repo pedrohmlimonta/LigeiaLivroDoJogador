@@ -91,7 +91,32 @@ ok(mod.slotFormula('3m x Círculo x Nível', 3) === '9*@nivel', mod.slotFormula(
 ok(mod.slotFormula('1m x Nível', 3) === '@nivel', mod.slotFormula('1m x Nível', 3));
 ok(mod.slotFormula('Toque', 2) === null, 'Toque não escala');
 
-console.log('7) Janela da oficina: abre, lista as palavras da ficha e cria a magia no personagem');
+console.log('7) Palavras repetidas — Esfera Ígnea (ignis) + majesto Ampliada + majesto Dimensional, Maior');
+const amp = M.majesto.find((m) => m.name === 'Magia Ampliada');
+const dim = M.majesto.find((m) => m.name === 'Magia Dimensional');
+d = await criar(load('esfera-ignea'), 'Maior', 'ignis', 'majesto', 'majesto', amp, dim);
+a = d.system.actions[0];
+ok(d.system.wordId2 === 'majesto' && d.system.wordId3 === 'majesto', 'a mesma palavra nas posições 2 e 3');
+ok(a.targetMode === 'area' && a.area === '3*@nivel', `Ampliada: magia de alvo vira área ${a.area} (1m x Círculo 3 x Nível)`);
+ok(a.range === '2*(15*@nivel)', `Dimensional: alcance ${a.range} (dobro de 5m x 3 x Nível)`);
+ok(a.damageType === 'fogo' && a.costMp === '3', `continua de fogo e custa ${a.costMp} PM`);
+ok(!Object.keys(a).some((k) => k.startsWith('_')), 'sem campos auxiliares no item salvo');
+
+console.log('8) A mesma metamagia duas vezes — triplica, não dobra o dobrado');
+d = await criar(load('combustao'), 'Maior', 'ignis', 'majesto', 'majesto', amp, amp);
+ok(d.system.actions[0].area === '3*(@nivel)', `área da base (Nível) x3 = ${d.system.actions[0].area}`);
+d = await criar(load('esfera-ignea'), 'Maior', 'ignis', 'majesto', 'majesto', amp, amp);
+ok(d.system.actions[0].area === '2*(3*@nivel)', `alvo → área (1ª) e área dobrada (2ª) = ${d.system.actions[0].area}`);
+ok(/segunda vez/.test(d.system.description), 'a receita registra a metamagia aplicada duas vezes');
+const ard = M.ignis.find((m) => m.name === 'Magia Ardente');
+d = await criar(load('esfera-ignea'), 'Maior', 'ignis', 'ignis', 'ignis', ard, ard);
+ok(d.system.actions[0].appliesEffects.filter((x) => x.label.startsWith('Magia Ardente')).length === 1,
+   'condição repetida (Magia Ardente 2x) entra uma vez só');
+d = await criar(load('aumentar'), 'Intermediária', 'majesto', 'majesto', '', dim, null);
+a = d.system.actions[0];
+ok(a.isMelee === false && a.range === '6*@nivel', `Dimensional em magia de toque: alcance ${a.range} (3m x Círculo 2 x Nível)`);
+
+console.log('9) Janela da oficina: abre, lista as palavras da ficha e cria a magia no personagem');
 const criadas = [];
 const ator = { name: 'Arcanista', items: [
     { type: 'habilidade', name: 'Palavra Arcana [energio]', system: { level: 'B' } },
@@ -116,6 +141,12 @@ if (app) {
   await app.render();
   html = app.element.filho.innerHTML;
   ok(html.includes('<b>3 PM</b>') && html.includes('Magia Eletrizante'), 'resumo mostra custo e metamagias do círculo Maior');
+  app.forja.palavra2 = 'energio'; app.forja.palavra3 = 'energio'; await app.render();
+  html = app.element.filho.innerHTML;
+  const opcoes = (nome) => (html.split(`name="${nome}"`)[1] || '').split('</select>')[0];
+  ok(opcoes('palavra2').includes('value="energio" selected') && opcoes('palavra3').includes('value="energio" selected'),
+     'os seletores aceitam repetir a palavra principal');
+  Object.assign(app.forja, { palavra2: 'ignis', palavra3: 'fulgur' });
   await app.criar();
   const nova = criadas[0];
   ok(criadas.length === 1 && nova.system.tier === 'Maior' && nova.system.actions[0].damageType === 'raio'

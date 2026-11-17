@@ -9,7 +9,9 @@
  *   3. Marque quantas peculiaridades quiser — a soma entra como bônus (ou
  *      penalidade) fixa na rolagem de Conjuração da magia criada.
  *   4. Intermediária: segunda palavra (também na ficha) + UMA metamagia dela.
- *      Maior: terceira palavra + mais uma metamagia.
+ *      Maior: terceira palavra + mais uma metamagia. As palavras podem se
+ *      repetir (ignis + majesto + majesto: Ampliada e Dimensional na mesma
+ *      magia); a mesma metamagia duas vezes triplica, não dobra o dobrado.
  *      Metamagia de dano sobre magia que JÁ causa dano: troca apenas o TIPO
  *      do dano (não soma). Em conflito, a metamagia da 3ª palavra prevalece.
  *
@@ -507,19 +509,40 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
       }));
       break;
     case "area2x":
+      // Aplicada mais de uma vez (palavra repetida: majesto + majesto), soma
+      // a área da base em vez de dobrar o já dobrado — a regra que o livro dá
+      // para a Magia Múltipla: 2× na primeira, 3× na segunda.
       for (const a of sys.actions) {
-        if (["area", "aura", "cone", "line", "lineCustom"].includes(a.targetMode) && a.area) {
-          a.area = `2*(${a.area})`;
+        const regiao = ["area", "aura", "cone", "line", "lineCustom"].includes(a.targetMode);
+        if (regiao && a.area && a.area !== "0") {
+          a._areaBase ??= a.area;
+          a._ampliada = (a._ampliada ?? 0) + 1;
+          a.area = `${a._ampliada + 1}*(${a._areaBase})`;
         } else if (a.targetMode === "target") {
+          // Magia de alvo vira Área (1m x Círculo x Nível); uma segunda
+          // Ampliada dobra essa área.
           a.targetMode = "area";
-          a.area = `${circ}*@nivel`;
+          a._areaBase = `${circ}*@nivel`;
+          a._ampliada = 0;
+          a.area = a._areaBase;
         }
       }
       break;
     case "range2x":
+      // Emanação, aura e magias no próprio conjurador não são afetadas.
       for (const a of sys.actions) {
-        if (a.isMelee) { a.isMelee = false; a.range = `3*${circ}*@nivel`; }
-        else if (a.range && a.range !== "0") a.range = `2*(${a.range})`;
+        if (a.targetMode === "self" || a.targetMode === "aura") continue;
+        if (a.isMelee) {
+          // Toque passa a ter alcance de 3m x Círculo x Nível.
+          a.isMelee = false;
+          a._alcanceBase = `${3 * circ}*@nivel`;
+          a._dimensional = 0;
+          a.range = a._alcanceBase;
+        } else if (a.range && a.range !== "0") {
+          a._alcanceBase ??= a.range;
+          a._dimensional = (a._dimensional ?? 0) + 1;
+          a.range = `${a._dimensional + 1}*(${a._alcanceBase})`;
+        }
       }
       break;
     case "aura":
@@ -648,15 +671,26 @@ export async function construirMagia(state) {
     if (alvo) alvo.costMp = String(pm);
   }
 
-  // Metamagias — a da 3ª palavra é aplicada DEPOIS (prevalece em conflito)
+  // Metamagias — a da 3ª palavra é aplicada DEPOIS (prevalece em conflito).
+  // Palavras podem se repetir (ignis + majesto + majesto). A mesma metamagia
+  // duas vezes vale o que o livro diz para a Magia Múltipla: área/alcance
+  // triplicam (não dobram o dobrado); condições e o efeito em você não se
+  // aplicam duas vezes.
+  const repetida = circ >= 3 && meta2 && meta3 && meta2.name === meta3.name;
   if (circ >= 2 && meta2) aplicarMetamagia(data, meta2, circ, escolha2);
-  if (circ >= 3 && meta3) aplicarMetamagia(data, meta3, circ, escolha3);
+  if (circ >= 3 && meta3 && !(repetida && ["condition", "selfcond"].includes(meta3.kind))) {
+    aplicarMetamagia(data, meta3, circ, escolha3);
+  }
+  for (const a of data.system.actions) {
+    delete a._areaBase; delete a._ampliada; delete a._alcanceBase; delete a._dimensional;
+  }
 
   // Receita na descrição
   const linhasPec = pecsValidas.map((p) => `<li>${esc(p.texto)} (${p.mod >= 0 ? "+" : ""}${p.mod})</li>`).join("");
   const linhasApr = aprimorados.map((a) => `<li>${esc(a.texto)}${a.tipo ? "" : " <em>(aplique manualmente)</em>"}</li>`).join("");
-  const metas = data.system.metamagics.map((m) =>
-    `<li><strong>${esc(m.name)}</strong> (${esc(m.wordId)}): ${esc(m.description)}</li>`).join("");
+  const metas = data.system.metamagics.map((m, i) =>
+    `<li><strong>${esc(m.name)}</strong> (${esc(m.wordId)}): ${esc(m.description)}${
+      repetida && i === 1 ? " <em>— aplicada pela segunda vez (área/alcance/alvos triplicam; não dobram o dobrado)</em>" : ""}</li>`).join("");
   const palavras = [palavra1, circ >= 2 ? palavra2 : null, circ >= 3 ? palavra3 : null].filter(Boolean);
   data.system.description = (data.system.description || "") + `
 <hr><p><strong>Magia criada — Círculo ${esc(tier)}</strong> (custo ${pm} PM; bônus de peculiaridades: ${delta >= 0 ? "+" : ""}${delta})</p>
@@ -756,8 +790,9 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     const el = document.createElement("div");
     el.className = "spellforge-form";
     const semPalavras = !this.palavras.size;
-    const optPal = (atual, excluir) => this.#opcoes(
-      [...this.palavras.entries()].filter(([p]) => !excluir.includes(p))
+    // Todas as palavras da ficha em cada seletor: as palavras podem se repetir.
+    const optPal = (atual) => this.#opcoes(
+      [...this.palavras.entries()]
         .map(([p, fonte]) => [p, fonte.startsWith("traço") ? `${p} (${fonte})` : p]),
       atual, "— escolha —");
 
@@ -792,7 +827,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
             <select name="tier">${this.#opcoes(Object.keys(TIERS).map((t) => [t, `${t} (${TIERS[t].pm} PM)`]), s.tier, "—").replace('<option value="">—</option>', "")}</select>
           </label>
           <label>Palavra principal
-            <select name="palavra1" ${semPalavras ? "disabled" : ""}>${optPal(s.palavra1, [])}</select>
+            <select name="palavra1" ${semPalavras ? "disabled" : ""}>${optPal(s.palavra1)}</select>
           </label>
           <label>Magia Menor de base
             <select name="baseId" ${!s.palavra1 ? "disabled" : ""}>${this.#opcoes(this.bases.map((b) => [b.id, b.name]), s.baseId, s.palavra1 ? "— escolha —" : "— escolha a palavra —")}</select>
@@ -817,14 +852,15 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       </fieldset>
       ${circ >= 2 ? `
       <fieldset><legend>3 · Segunda palavra e metamagia</legend>
+        <p class="dica">As palavras podem se repetir (ex.: ignis + majesto + majesto).</p>
         <label>Segunda palavra arcana
-          <select name="palavra2">${optPal(s.palavra2, [s.palavra1])}</select></label>
+          <select name="palavra2">${optPal(s.palavra2)}</select></label>
         ${this.#metamagiaBloco(2, s.palavra2, s.meta2i, s.escolha2)}
       </fieldset>` : ""}
       ${circ >= 3 ? `
       <fieldset><legend>4 · Terceira palavra e metamagia (prevalece em conflito)</legend>
         <label>Terceira palavra arcana
-          <select name="palavra3">${optPal(s.palavra3, [s.palavra1, s.palavra2])}</select></label>
+          <select name="palavra3">${optPal(s.palavra3)}</select></label>
         ${this.#metamagiaBloco(3, s.palavra3, s.meta3i, s.escolha3)}
       </fieldset>` : ""}
       <fieldset><legend>Nome e resumo</legend>
@@ -834,6 +870,8 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
           Custo: <b>${pm} PM</b> · Bônus de Conjuração: <b>${soma >= 0 ? "+" : ""}${soma}</b>
           ${circ >= 2 ? ` · Metamagia 2: <b>${esc((METAMAGIAS[s.palavra2] ?? [])[s.meta2i]?.name ?? "—")}</b>` : ""}
           ${circ >= 3 ? ` · Metamagia 3: <b>${esc((METAMAGIAS[s.palavra3] ?? [])[s.meta3i]?.name ?? "—")}</b>` : ""}
+          ${circ >= 3 && s.palavra2 && s.palavra2 === s.palavra3 && s.meta2i >= 0 && s.meta2i === s.meta3i
+            ? `<br><em>A mesma metamagia duas vezes: área/alcance/alvos triplicam (não dobram o dobrado).</em>` : ""}
         </div>
       </fieldset>
       <footer>
@@ -854,8 +892,6 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     on('select[name=tier]', "change", (e) => { s.tier = e.target.value; this.render(); });
     on('select[name=palavra1]', "change", (e) => {
       s.palavra1 = e.target.value; s.baseId = ""; s.pecsMarcadas.clear();
-      if (s.palavra2 === s.palavra1) { s.palavra2 = ""; s.meta2i = -1; }
-      if (s.palavra3 === s.palavra1) { s.palavra3 = ""; s.meta3i = -1; }
       this.render();
     });
     on('select[name=baseId]', "change", (e) => { s.baseId = e.target.value; s.pecsMarcadas.clear(); this.render(); });
@@ -867,7 +903,6 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     on('input[name=ajuste]', "change", (e) => { s.ajuste = Number(e.target.value) || 0; this.render(); });
     on('select[name=palavra2]', "change", (e) => {
       s.palavra2 = e.target.value; s.meta2i = -1; s.escolha2 = {};
-      if (s.palavra3 === s.palavra2) { s.palavra3 = ""; s.meta3i = -1; }
       this.render();
     });
     on('select[name=palavra3]', "change", (e) => { s.palavra3 = e.target.value; s.meta3i = -1; s.escolha3 = {}; this.render(); });
