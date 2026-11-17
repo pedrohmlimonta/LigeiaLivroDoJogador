@@ -299,7 +299,11 @@ d = construirItemConjurador(eq('Varinha'), { magia: esfera });
 let rc = receita(d);
 ok(rc.tipo === 'magia' && rc.nivel === 'Menor' && rc.pm === 1 && rc.palavras.join() === 'ignis' && rc.magia.name === 'Esfera Ígnea',
    'Varinha + Esfera Ígnea: item conjurador Menor, 1 PM, palavra ignis, magia guardada no item');
-ok(d.system.actions.length === 0 && d.system.price === '420 Vo', 'o item não ganha ação própria; preço +400 Vo (criar magia Menor)');
+const gat = d.system.actions;
+ok(gat.length === 1 && gat[0].label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — 1 PM' && gat[0].costMp === '0' && !gat[0].canRoll
+   && gat[0].targetMode === 'none' && gat[0].preActivations[0]?.ref === 'action||0|Esfera Ígnea (Varinha)' && gat[0].preActivations[0]?.enabled,
+   'o item ganha a ação da magia: "✦ Esfera Ígnea (Conjuração vs Esquiva) — 1 PM", que dispara a ação da magia vinculada');
+ok(d.system.price === '420 Vo', 'preço +400 Vo (criar magia Menor)');
 ok(propriedadesGravadas(d) === 1, 'a magia guardada conta como uma propriedade (Dureza)');
 const desc = d.system.description;
 ok(desc.includes('Item conjurador') && desc.includes('Como usar') && desc.includes('<b>1 PM</b>')
@@ -322,8 +326,8 @@ ok(rc.nivel === 'Maior' && rc.pm === 3 && palavrasDaMagia(maior).join() === 'ign
 ok(dadosDaMagiaDoItem({ id: 'c1', name: d.name }, rc).system.actions.every((a) => a.costMp === '3'), 'conjurar pelo item custa os 3 PM do círculo');
 d = construirItemConjurador(eq('Varinha'), { magia: esfera, lendario: true });
 comp = dadosDaMagiaDoItem({ id: 'v1', name: d.name }, receita(d));
-ok(comp.system.actions.every((a) => a.costMp === '0') && comp.system.costs.length === 0 && d.system.description.includes('lendário'),
-   'lendário: conjura sem mana');
+ok(comp.system.actions.every((a) => a.costMp === '0') && comp.system.costs.length === 0 && d.system.description.includes('lendário')
+   && d.system.actions[0].label.endsWith('— sem mana (lendário)'), 'lendário: conjura sem mana');
 const pergaminho = eq('Pergaminho (em branco)');
 d = construirItemConjurador(pergaminho, { magia: esfera });
 rc = receita(d);
@@ -332,11 +336,15 @@ ok(d.name === 'Pergaminho de Esfera Ígnea' && rc.pergaminho && d.system.price =
    'pergaminho: vira "Pergaminho de Esfera Ígnea" (gravar custa os PM e 1 hora, não Vo)');
 ok(comp.system.casting === 'Rodada completa (pergaminho)' && comp.system.actions.every((a) => a.costMp === '1' && a.label.includes('queima o pergaminho')),
    'conjurar do pergaminho também custa 1 PM, leva uma rodada completa e queima o pergaminho');
-ok(d.system.description.includes('queima o pergaminho') && d.system.description.includes('também custa 1 PM'), 'e a descrição explica isso');
+ok(d.system.description.includes('queima o pergaminho') && d.system.description.includes('também custa 1 PM')
+   && d.system.actions[0].label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — queima o pergaminho — 1 PM'
+   && d.system.actions[0].preActivations[0].ref === 'action||0|Esfera Ígnea (Pergaminho de Esfera Ígnea)', 'e a descrição e a ação do pergaminho explicam isso');
 d = construirItemConjurador(eq('Varinha'), { magia: magia('Imagem Ilusória') });
 comp = dadosDaMagiaDoItem({ id: 'v2', name: d.name }, receita(d));
-ok(d.system.description.includes('sem rolagem automática') && comp.system.costs[0]?.value === '1',
-   'magia só descritiva: a descrição avisa e a magia vinculada cobra 1 PM ao ser ativada');
+ok(comp.system.actions.length === 1 && comp.system.actions[0].label === 'Conjurar Imagem Ilusória (rolagem de Conjuração)'
+   && comp.system.actions[0].canRoll && comp.system.actions[0].rollAttr === 'conjuracao' && comp.system.actions[0].costMp === '1'
+   && comp.system.costs.length === 0 && d.system.actions[0].label === '✦ Conjurar Imagem Ilusória (rolagem de Conjuração) — 1 PM',
+   'magia só descritiva: ganha "Conjurar" (rolagem de Conjuração, 1 PM) e o item a dispara');
 // propriedades + magia no mesmo item; lendário depois; desfazer
 let duplo = encantar(eq('Cajado'), 'Menor', ['forjuri-abjuracao']);
 duplo = construirItemConjurador(duplo, { magia: esfera });
@@ -346,8 +354,8 @@ ok(eLendario(duploL) && duploL.flags[MOD].encantamentos.map((r) => r.tipo ?? 'pr
    && dadosDaMagiaDoItem({ id: 'x', name: duploL.name }, receita(duploL)).system.actions.every((a) => a.costMp === '0'),
    'tornar lendário refaz os dois encantamentos sem mana');
 const volta2 = desfazerEncantamento(duplo);
-ok(volta2[`flags.${MOD}.encantamentos`].length === 1 && !volta2['system.description'].includes('Item conjurador'),
-   'desfazer tira só a magia guardada');
+ok(volta2[`flags.${MOD}.encantamentos`].length === 1 && !volta2['system.description'].includes('Item conjurador')
+   && !volta2['system.actions'].some((a) => a.label.includes('Esfera Ígnea')), 'desfazer tira só a magia guardada (e as ações dela)');
 ok(resumoDaAcao({ label: 'X', canRoll: false, targetMode: 'self', heal: 'ceil(@nivel/2)', healResource: 'hp', costMp: '2' })
    === 'em você · recupera metade do Nível (para cima) PV · 2 PM', 'resumo de cura com fórmula no jeito do livro');
 
@@ -360,7 +368,15 @@ class AtorFalso {
     const it = { ...JSON.parse(JSON.stringify(dados)), id: dados.id ?? `i${++seq}`, parent: this };
     it.flags ??= {};
     it.delete = async () => { await this.deleteEmbeddedDocuments('Item', [it.id]); };
-    it.toObject = () => { const { parent: _p, delete: _d, toObject: _t, ...resto } = it; return JSON.parse(JSON.stringify(resto)); };
+    it.toObject = () => { const { parent: _p, delete: _d, toObject: _t, update: _u, ...resto } = it; return JSON.parse(JSON.stringify(resto)); };
+    it.update = async (mud) => {
+      for (const [k, v] of Object.entries(mud)) {
+        const ps = k.split('.');
+        let o = it;
+        while (ps.length > 1) { const pp = ps.shift(); o = (o[pp] ??= {}); }
+        o[ps[0]] = v;
+      }
+    };
     this._itens.push(it);
     return it;
   }
@@ -381,9 +397,29 @@ varinha.flags = comoLendaria.flags;
 r = await sincronizarMagiasDoItem(varinha);
 ok(r.apagadas === 1 && r.criadas === 1 && vinc(lyra, 'var1')[0].system.actions.every((a) => a.costMp === '0'),
    'tornou lendária: a magia vinculada é trocada pela sem mana');
+// Como o sistema acha o alvo de uma ativação prévia: pelo id, senão pelo nome.
+const resolver = (ator, ref) => {
+  const [tipo, id, i, ...nome] = String(ref).split('|');
+  const alvo = ator.items.get(id) ?? ator.items.find((x) => x.name === nome.join('|'));
+  return tipo === 'action' && alvo ? { item: alvo, acao: alvo.system.actions[Number(i)] } : null;
+};
+// O select de ativação prévia da ficha do item (sistema, htmlDeOpcoesPre): uma opção por ação de cada
+// item da ficha, "action|id|índice|nome". A referência guardada só aparece marcada — e sobrevive à
+// próxima edição da ficha, que é salva a cada mudança — se for IGUAL a uma delas.
+const opcoesDaFicha = (ator) => [...ator.items].flatMap((it) => (it.system?.actions ?? [])
+  .map((_a, idx) => ['action', it.id, idx, String(it.name ?? '').replace(/\|/g, '/')].join('|')));
+let disparo = resolver(lyra, varinha.system.actions[0].preActivations[0].ref);
+ok(disparo?.item.type === 'magia' && disparo.item.flags[MOD].doItem === 'var1' && disparo.acao.label === 'Esfera Ígnea (Conjuração vs Esquiva)',
+   'a ação ✦ do item acha a ação da magia vinculada (é ela que rola, com os bônus de palavra)');
 varinha.name = 'Varinha do Fogo';
 r = await sincronizarMagiasDoItem(varinha);
-ok(r.renomeadas === 1 && vinc(lyra, 'var1')[0].name === 'Esfera Ígnea (Varinha do Fogo)', 'renomeou o item: a magia acompanha');
+disparo = resolver(lyra, varinha.system.actions[0].preActivations[0].ref);
+ok(r.renomeadas === 1 && r.referencias === 1 && vinc(lyra, 'var1')[0].name === 'Esfera Ígnea (Varinha do Fogo)' && disparo?.item.flags[MOD].doItem === 'var1',
+   'renomeou o item: a magia acompanha e a ação ✦ continua achando ela');
+const ana = new AtorFalso('Ana');
+const varA = ana._pôr({ ...construirItemConjurador(eq('Varinha'), { magia: esfera }), id: 'varA' });
+await Promise.all([mod.sincronizar(varA), mod.sincronizar(varA), mod.sincronizar(varA)]);
+ok(vinc(ana, 'varA').length === 1, 'pedidos simultâneos de sincronizar não duplicam a magia');
 // ganchos (rodam só para quem fez a mudança)
 globalThis.game.user.id = 'u1';
 globalThis.foundry.utils.hasProperty = (o, k) => k.split('.').reduce((x, p) => (x && typeof x === 'object' && p in x ? x[p] : undefined), o) !== undefined;
@@ -456,6 +492,151 @@ app2.forja.itemId = 'e1';
 html = (await app2._renderHTML()).innerHTML;
 ok(html.includes('Pergaminho: gravar custa <b>1 PM</b> agora (de Lyra)') && html.includes('sai 1 da pilha de 3')
    && html.includes('Pergaminho de Esfera Ígnea'), 'pergaminho: avisa a mana da gravação e que separa um da pilha');
+
+console.log('13) Gravar pela janela (o caminho que grava no item)');
+const cora = new AtorFalso('Cora');
+cora.type = 'personagem';
+cora.system = { resources: { mp: { value: 5 } } };
+cora.update = async (mud) => {
+  for (const [k, v] of Object.entries(mud)) {
+    const ps = k.split('.');
+    let o = cora;
+    while (ps.length > 1) { const pp = ps.shift(); o = (o[pp] ??= {}); }
+    o[ps[0]] = v;
+  }
+};
+cora._pôr({ id: 'pa', type: 'habilidade', name: 'Palavra Arcana [ignis]', system: { level: 'A' } });
+cora._pôr({ ...magia('Esfera Ígnea'), id: 'mEsf' });
+const espada = cora._pôr({ ...eq('Espada Longa'), id: 'esp' });
+const pilha = cora._pôr({ ...eq('Pergaminho (em branco)'), id: 'pil' });
+pilha.system.qty = 3;
+const app3 = new EncantamentoApp(cora);
+Object.assign(app3.forja, { tipo: 'magia', itemId: 'esp', magiaChave: 'ficha:mEsf' });
+await app3.carregarMagias();
+await app3.gravarMagia();
+const acaoNaEspada = espada.system.actions.find((a) => a.label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — 1 PM');
+ok(!!acaoNaEspada && espada.system.actions.filter((a) => a.label.startsWith('Ataque')).length === 2,
+   'gravar pela janela: a Espada Longa ganha a ação da magia (e os ataques dela continuam lá)');
+ok(vinc(cora, 'esp').length === 1 && resolver(cora, acaoNaEspada.preActivations[0].ref)?.item.flags[MOD].doItem === 'esp',
+   'a magia vinculada já está na ficha e a ação da espada dispara ela');
+ok(acaoNaEspada.preActivations[0].ref === `action|${vinc(cora, 'esp')[0].id}|0|Esfera Ígnea (Espada Longa)`
+   && opcoesDaFicha(cora).includes(acaoNaEspada.preActivations[0].ref),
+   'a referência leva o id e o nome da magia vinculada: na ficha da espada ela aparece marcada e não se perde ao editar');
+ok(espada.system.description.includes('O que a magia faz') && espada.system.price === '424 Vo', 'descrição e preço gravados no item');
+const app4 = new EncantamentoApp(cora);
+Object.assign(app4.forja, { tipo: 'magia', itemId: 'pil', magiaChave: 'ficha:mEsf' });
+await app4.carregarMagias();
+await app4.gravarMagia();
+const escrito = cora.items.find((i) => i.name === 'Pergaminho de Esfera Ígnea');
+ok(pilha.system.qty === 2 && escrito?.system.qty === 1 && cora.system.resources.mp.value === 4,
+   'pergaminho pela janela: sai um da pilha e gravar custa 1 PM a quem grava');
+ok(escrito && vinc(cora, escrito.id).length === 1 && escrito.system.actions.some((a) => a.label.includes('queima o pergaminho')),
+   'o pergaminho escrito tem a ação da magia e a magia vinculada');
+
+console.log('14) Ações ✦ em outras fichas, itens gravados na 0.2.8 e o Sequencer');
+const gatilho = (it) => it.system.actions.find((a) => String(a.label).startsWith('✦'));
+const dani = new AtorFalso('Dani');
+const alabarda = dani._pôr({ ...construirItemConjurador(eq('Alabarda'), { magia: esfera }), id: 'ala' });
+await sincronizarMagiasDoItem(alabarda);
+ok(gatilho(alabarda).preActivations[0].ref === `action|${vinc(dani, 'ala')[0].id}|0|Esfera Ígnea (Alabarda)`
+   && opcoesDaFicha(dani).includes(gatilho(alabarda).preActivations[0].ref),
+   'Alabarda + Esfera Ígnea: a ação ✦ aponta para a magia vinculada com id e nome (igual à opção da ficha)');
+const eva = new AtorFalso('Eva');
+const copia = eva._pôr({ ...alabarda.toObject(), id: 'ala2' });
+await gancho('createItem')?.(copia, {}, 'u1');
+await mod.sincronizar(copia);
+ok(vinc(eva, 'ala2').length === 1 && gatilho(copia).preActivations[0].ref === `action|${vinc(eva, 'ala2')[0].id}|0|Esfera Ígnea (Alabarda)`,
+   'levada para outra ficha: a ação ✦ passa a apontar para a magia vinculada de lá');
+const compE = vinc(eva, 'ala2')[0];
+await eva.updateEmbeddedDocuments('Item', [{ _id: compE.id, name: 'Bola de Fogo' }]);
+await gancho('updateItem')?.(compE, { name: 'Bola de Fogo' }, {}, 'u1');
+await mod.sincronizar(copia);
+ok(vinc(eva, 'ala2')[0].name === 'Esfera Ígnea (Alabarda)' && opcoesDaFicha(eva).includes(gatilho(copia).preActivations[0].ref),
+   'magia vinculada renomeada à mão volta ao nome do item (e a ação ✦ continua marcada)');
+// Como a 0.2.8 gravava: sem a ação ✦ no item, receita sem "gatilhos", a descrição antiga.
+const como028 = (dados) => {
+  const d = JSON.parse(JSON.stringify(dados));
+  d.system.actions = d.system.actions.filter((a) => !String(a.label).startsWith('✦'));
+  for (const rc2 of d.flags[MOD].encantamentos) delete rc2.gatilhos;
+  d.system.description = d.system.description
+    .replace('usa as ações <b>✦</b> dele e conjura', 'conjura')
+    .replace('a magia também aparece', 'a magia aparece')
+    .replace('— é ela que as ações ✦ disparam, e ela sai junto com o item.</p>', '— e sai junto com ele.</p>');
+  return d;
+};
+const fred = new AtorFalso('Fred');
+const velha = fred._pôr({ ...como028(construirItemConjurador(eq('Alabarda'), { magia: esfera })), id: 'alaV' });
+fred._pôr(dadosDaMagiaDoItem(velha, receita(velha)));
+const qtdAntes = velha.system.actions.length;
+r = await sincronizarMagiasDoItem(velha);
+ok(r.migrado && velha.system.actions.length === qtdAntes + 1 && gatilho(velha)?.label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — 1 PM'
+   && receita(velha).gatilhos && r.apagadas === 1 && r.criadas === 1 && vinc(fred, 'alaV').length === 1,
+   'Alabarda gravada na 0.2.8 (sem a ação): ganha a ação ✦ e a magia vinculada é refeita');
+ok(opcoesDaFicha(fred).includes(gatilho(velha).preActivations[0].ref)
+   && resolver(fred, gatilho(velha).preActivations[0].ref)?.acao.label === 'Esfera Ígnea (Conjuração vs Esquiva)',
+   'e a ação ✦ dela dispara a magia vinculada');
+ok(velha.system.description.includes('usa as ações <b>✦</b> dele') && velha.system.description.includes('é ela que as ações ✦ disparam')
+   && !velha.system.description.includes('— e sai junto com ele.'), 'a descrição antiga é acertada');
+r = await sincronizarMagiasDoItem(velha);
+ok(!r.migrado && !r.criadas && !r.apagadas && !r.referencias && velha.system.actions.filter((a) => String(a.label).startsWith('✦')).length === 1,
+   'só uma vez: sincronizar de novo não muda nada');
+const gil = new AtorFalso('Gil');
+const ala3 = gil._pôr({ ...encantar(como028(construirItemConjurador(eq('Alabarda'), { magia: esfera })), 'Menor', ['ignis-dano-flamejante']), id: 'ala3' });
+await sincronizarMagiasDoItem(ala3);
+const desfeitoAla = desfazerEncantamento(ala3.toObject());
+ok(desfeitoAla['system.actions'].some((a) => String(a.label).startsWith('✦ Esfera Ígnea')) && desfeitoAla[`flags.${MOD}.encantamentos`].length === 1,
+   'desfazer um encantamento feito depois da magia não leva a ação ✦ junto');
+const hugo = new AtorFalso('Hugo');
+const varI = hugo._pôr({ ...como028(construirItemConjurador(eq('Varinha'), { magia: magia('Imagem Ilusória') })), id: 'varI' });
+const comp028 = dadosDaMagiaDoItem(varI, receita(varI));
+comp028.system.actions = [];
+hugo._pôr(comp028);
+await sincronizarMagiasDoItem(varI);
+ok(resolver(hugo, gatilho(varI).preActivations[0].ref)?.acao?.label === 'Conjurar Imagem Ilusória (rolagem de Conjuração)',
+   'magia só descritiva da 0.2.8: a magia vinculada volta com a ação "Conjurar", que a ação ✦ dispara');
+const limbo = new AtorFalso('limbo');
+const doMundo = limbo._pôr({ ...como028(construirItemConjurador(eq('Varinha'), { magia: esfera })), id: 'w1' });
+doMundo.parent = null;
+r = await sincronizarMagiasDoItem(doMundo);
+ok(r.migrado && !!gatilho(doMundo) && vinc(limbo, 'w1').length === 0,
+   'item do mundo (fora de ficha) também ganha a ação ✦; a magia vinculada só nasce numa ficha');
+const ivo = new AtorFalso('Ivo');
+const varIvo = ivo._pôr({ ...como028(construirItemConjurador(eq('Varinha'), { magia: esfera })), id: 'varIvo' });
+const doMundo2 = limbo._pôr({ ...como028(construirItemConjurador(eq('Cajado'), { magia: esfera })), id: 'w2' });
+doMundo2.parent = null;
+const jogo = { actors: globalThis.game.actors, items: globalThis.game.items, users: globalThis.game.users };
+Object.assign(globalThis.game, { actors: [ivo], items: [doMundo2], users: { activeGM: { id: 'u1' } } });
+globalThis.game.user.isGM = false;
+ok(await mod.conferirItensConjuradores() === 0 && !gatilho(varIvo), 'ao abrir o mundo, só o Mestre confere os itens');
+globalThis.game.user.isGM = true;
+const nMig = await mod.conferirItensConjuradores();
+ok(nMig === 2 && !!gatilho(varIvo) && !!gatilho(doMundo2) && vinc(ivo, 'varIvo').length === 1
+   && opcoesDaFicha(ivo).includes(gatilho(varIvo).preActivations[0].ref),
+   'o Mestre, ao abrir o mundo, completa os itens da 0.2.8 (das fichas e do mundo)');
+ok(await mod.conferirItensConjuradores() === 0, 'na vez seguinte não há o que completar');
+Object.assign(globalThis.game, jogo);
+globalThis.game.user.isGM = false;
+// O sistema encerra o visual de um efeito chamando Sequencer.EffectManager.endEffects SOLTO da classe.
+class GerenteFalso {
+  static _validateFilters(f) { return f?.origin || f?.name ? f : false; }
+  static async endEffects(f = {}, push = true) {
+    const v = this._validateFilters(f);
+    if (!v) throw new Error('filtro');
+    return { ...v, push };
+  }
+}
+const seqFalso = { EffectManager: GerenteFalso };
+let erroSolto = null;
+const solto = seqFalso.EffectManager.endEffects;
+try { await solto({ origin: 'x' }); } catch (e) { erroSolto = e; }
+ok(erroSolto instanceof TypeError && /_validateFilters/.test(erroSolto.message),
+   'sem o ajuste, a chamada solta quebra como no Sequencer 4.3 ("reading \'_validateFilters\'")');
+ok(mod.prenderEndEffects(seqFalso) && !mod.prenderEndEffects(seqFalso), 'o ajuste prende endEffects ao EffectManager (uma vez só)');
+const soltoDepois = seqFalso.EffectManager.endEffects;
+const fim1 = await soltoDepois({ origin: 'x' });
+const fim2 = await seqFalso.EffectManager.endEffects({ name: 'y' }, false);
+ok(fim1.origin === 'x' && fim1.push === true && fim2.name === 'y' && fim2.push === false,
+   'com o ajuste, a chamada solta funciona e a normal continua igual (com os mesmos argumentos)');
 
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

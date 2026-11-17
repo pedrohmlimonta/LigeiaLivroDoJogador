@@ -1087,6 +1087,16 @@ function magiaAjustada(retrato, { lendario = false, pergaminho = false } = {}) {
   const m = clone(retrato);
   const s = m.system ?? (m.system = {});
   s.actions = Array.isArray(s.actions) ? s.actions : [];
+  if (!s.actions.length) {
+    // Magia só descritiva: ganha uma ação de conjurar (rolagem de Conjuração,
+    // com os PM do círculo), para o item ter o que disparar. A mana passa a
+    // sair dessa ação — ligar a magia na ficha deixa de cobrar de novo.
+    const pm = { "Menor": 1, "Intermediária": 2, "Maior": 3 }[s.tier] ?? 1;
+    s.actions.push(novaAcao(`Conjurar ${m.name} (rolagem de Conjuração)`, {
+      canRoll: true, rollAttr: "conjuracao", targetMode: "none", includeSelf: false, costMp: String(pm),
+    }));
+    s.costs = [];
+  }
   if (lendario) {
     for (const a of s.actions) a.costMp = "0";
     s.costs = [];
@@ -1113,7 +1123,7 @@ function descricaoDoItemConjurador({ magia, nivel, pm, lendario, pergaminho, pal
   const acoes = s.actions ?? [];
   const oQueFaz = acoes.length
     ? `<p><b>O que a magia faz:</b></p><ul>${acoes.map((a) => `<li><b>${esc(a.label)}</b>: ${esc(resumoDaAcao(a))}.</li>`).join("")}</ul>`
-    : `<p><b>O que a magia faz:</b> efeito descrito abaixo, sem rolagem automática — ative a magia na ficha para pagar a mana.</p>`;
+    : `<p><b>O que a magia faz:</b> efeito descrito abaixo.</p>`;
   const perg = pergaminho
     ? `<p><b>Pergaminho:</b> gravar a magia custou ${pm || NIVEIS_ITEM[nivel]?.pm} PM a quem a gravou (1 hora). Conjurar a partir dele `
       + `${lendario ? "não gasta mana" : `também custa ${pm} PM`}, leva sempre uma rodada completa e <b>queima o pergaminho</b> — apague-o da ficha depois de conjurar.</p>`
@@ -1123,9 +1133,9 @@ function descricaoDoItemConjurador({ magia, nivel, pm, lendario, pergaminho, pal
     : `<p>Preço: +${formatarVo(preco)} (como criar uma magia de Círculo ${esc(circulo)}: ${esc(tempo)}).</p>`;
   return `<hr><h3>✦ Item conjurador — ${esc(magia.name)}</h3>`
     + `<p><b>Magia guardada:</b> ${esc(magia.name)} (Círculo ${esc(circulo)}${palavras.length ? ` · ${esc(palavras.join(" + "))}` : ""}) — item conjurador ${esc(nivel)}.</p>`
-    + `<p><b>Como usar:</b> quem estiver com o item conjura a magia com a própria Conjuração, ${uso}. Os bônus de Palavra Arcana `
-    + `e dos focos das palavras da magia valem. Com o item na ficha, a magia aparece na lista de Magias como `
-    + `<b>${esc(magia.name)} (${esc(itemNome)})</b> — e sai junto com ele.</p>`
+    + `<p><b>Como usar:</b> quem estiver com o item usa as ações <b>✦</b> dele e conjura a magia com a própria Conjuração, ${uso}. `
+    + `Os bônus de Palavra Arcana e dos focos das palavras da magia valem. Com o item na ficha, a magia também aparece na lista `
+    + `de Magias como <b>${esc(nomeDaMagiaVinculada(magia.name, itemNome))}</b> — é ela que as ações ✦ disparam, e ela sai junto com o item.</p>`
     + perg
     + (caracteristicas ? `<p>${caracteristicas}</p>` : "")
     + oQueFaz
@@ -1162,6 +1172,8 @@ export function construirItemConjurador(dados, { magia, lendario = false, pergam
   const emBranco = /^pergaminho(\s*\(em branco\))?$/i.test(String(data.name ?? "").trim());
   data.name = (nome && nome.trim()) || (ehPergaminho && emBranco ? `Pergaminho de ${retrato.name}` : data.name);
   const ajustada = magiaAjustada(retrato, { lendario, pergaminho: ehPergaminho });
+  sys.actions = Array.isArray(sys.actions) ? sys.actions : [];
+  sys.actions.push(...gatilhosDaMagia(ajustada, data.name, lendario));
   sys.description = (sys.description ?? "") + descricaoDoItemConjurador({
     magia: ajustada, nivel, pm: lendario ? 0 : N.pm, lendario, pergaminho: ehPergaminho, palavras, preco, tempo, itemNome: data.name,
   });
@@ -1170,9 +1182,82 @@ export function construirItemConjurador(dados, { magia, lendario = false, pergam
   data.flags[MODULE_ID] ??= {};
   data.flags[MODULE_ID].encantamentos = [...(data.flags[MODULE_ID].encantamentos ?? []), {
     id: novoId(), tipo: "magia", nivel, pm: N.pm, lendario, pergaminho: ehPergaminho, palavras,
-    magia: retrato, propriedades: [], preco, antes,
+    magia: retrato, propriedades: [], preco, antes, gatilhos: true,
   }];
   return data;
+}
+
+/** Nome da magia vinculada na ficha: "Esfera Ígnea (Varinha de Fogo)". */
+export const nomeDaMagiaVinculada = (magia, item) => `${magia} (${item})`;
+
+/**
+ * Referência de ativação prévia para a ação i da magia vinculada, no formato
+ * do sistema (buildPreActivationRef): "action|id|i|nome". Com o id da magia
+ * vinculada ela fica IGUAL à opção do select da ficha do item — sem ele o
+ * select não marca nada e a primeira edição na ficha apagaria a referência.
+ * O id só existe depois que a magia vinculada é criada (sincronizarMagiasDoItem).
+ */
+const refDaMagia = (i, nome, id = "") => ["action", id ?? "", Number(i) || 0, String(nome ?? "").replace(/\|/g, "/")].join("|");
+
+/** O que a ação da magia cobra, para o rótulo da ação ✦: "1 PM", "sem mana". */
+function custoDaAcao(a, lendario) {
+  if (lendario) return "sem mana (lendário)";
+  const pm = String(a?.costMp ?? "").trim();
+  return pm && pm !== "0" ? `${pm} PM` : "sem mana";
+}
+
+/**
+ * As ações ✦ que a magia põe no item, uma por ação da magia: cada uma
+ * DISPARA a ação da magia vinculada (ativação prévia), que é quem rola — por
+ * ser uma magia, ela recebe os bônus de palavra. O PM sai da ação da magia.
+ */
+function gatilhosDaMagia(ajustada, itemNome, lendario) {
+  const vinculada = nomeDaMagiaVinculada(ajustada.name, itemNome);
+  return (ajustada.system?.actions ?? []).map((a, i) => novaAcao(`✦ ${a.label} — ${custoDaAcao(a, lendario)}`, {
+    canRoll: false, targetMode: "none", includeSelf: false, costMp: "0",
+    preActivations: [{ ref: refDaMagia(i, vinculada), enabled: true }],
+  }));
+}
+
+/** Trechos da descrição gravada pela 0.2.8 (sem ações ✦) e como ficam agora. */
+const DESCRICAO_028 = [
+  ["quem estiver com o item conjura a magia com a própria Conjuração,",
+    "quem estiver com o item usa as ações <b>✦</b> dele e conjura a magia com a própria Conjuração,"],
+  ["a magia aparece na lista de Magias como", "a magia também aparece na lista de Magias como"],
+  ["— e sai junto com ele.</p>", "— é ela que as ações ✦ disparam, e ela sai junto com o item.</p>"],
+  ["efeito descrito abaixo, sem rolagem automática — ative a magia na ficha para pagar a mana.", "efeito descrito abaixo."],
+];
+
+/**
+ * Itens gravados na 0.2.8 guardam a magia sem as ações ✦ no item. Acrescenta
+ * as ações (uma vez por magia guardada), também nas fotos "antes" dos
+ * encantamentos feitos depois dela — senão desfazer um deles as levaria
+ * junto —, acerta a descrição e troca o id da receita, para a magia vinculada
+ * ser refeita no formato atual (magia só descritiva ganha a ação "Conjurar").
+ * @returns {object|null} dados para `item.update`, ou null se nada falta
+ */
+export function migrarGatilhos(dados) {
+  const receitas = dados?.flags?.[MODULE_ID]?.encantamentos ?? [];
+  if (!receitas.some((r) => r?.tipo === "magia" && r.magia && !r.gatilhos)) return null;
+  const lista = clone(receitas);
+  const acoes = clone(dados.system?.actions ?? []);
+  lista.forEach((r, k) => {
+    if (r?.tipo !== "magia" || !r.magia || r.gatilhos) return;
+    const novas = gatilhosDaMagia(magiaAjustada(r.magia, { lendario: r.lendario, pergaminho: r.pergaminho }), dados.name, r.lendario);
+    acoes.push(...novas);
+    for (const depois of lista.slice(k + 1)) {
+      if (Array.isArray(depois?.antes?.system?.actions)) depois.antes.system.actions.push(...clone(novas));
+    }
+    r.id = novoId();
+    r.gatilhos = true;
+  });
+  let descricao = String(dados.system?.description ?? "");
+  for (const [velho, novo] of DESCRICAO_028) descricao = descricao.split(velho).join(novo);
+  return {
+    "system.actions": acoes,
+    "system.description": descricao,
+    [`flags.${MODULE_ID}.encantamentos`]: lista,
+  };
 }
 
 /** Dados da magia vinculada que vai para a ficha de quem tem o item. */
@@ -1184,7 +1269,7 @@ export function dadosDaMagiaDoItem(item, rec) {
   m.system.description = aviso + (m.system.description ?? "");
   m.system.active = false;
   return {
-    name: `${m.name} (${item.name})`, type: "magia", img: m.img, system: m.system,
+    name: nomeDaMagiaVinculada(m.name, item.name), type: "magia", img: m.img, system: m.system,
     flags: { [MODULE_ID]: { ...(m.flags?.[MODULE_ID] ?? {}), doItem: item.id ?? item._id, encId: rec.id } },
   };
 }
@@ -1195,14 +1280,22 @@ const magiasVinculadas = (actor, itemId) => [...(actor?.items ?? [])]
 
 /**
  * Deixa a ficha com exatamente as magias vinculadas que o item guarda: cria
- * as que faltam, apaga as que sobraram e acerta o nome se o item mudou de
- * nome. Só age em itens que estão numa ficha.
- * @returns {Promise<{criadas: number, apagadas: number, renomeadas: number}>}
+ * as que faltam, apaga as que sobraram, acerta o nome se o item mudou de
+ * nome e aponta as ações ✦ do item para elas (id e nome). Antes, completa um
+ * item gravado na 0.2.8 com as ações ✦ (migrarGatilhos) — isso vale também
+ * fora de uma ficha; o resto, só com o item numa ficha.
+ * @returns {Promise<{criadas: number, apagadas: number, renomeadas: number, referencias: number, migrado: boolean}>}
  */
 export async function sincronizarMagiasDoItem(item) {
-  const out = { criadas: 0, apagadas: 0, renomeadas: 0 };
-  const actor = item?.parent;
-  if (!actor || actor.documentName !== "Actor" || item.type !== "equipamento") return out;
+  const out = { criadas: 0, apagadas: 0, renomeadas: 0, referencias: 0, migrado: false };
+  if (item?.type !== "equipamento") return out;
+  const migracao = migrarGatilhos(typeof item.toObject === "function" ? item.toObject() : item);
+  if (migracao) {
+    await item.update(migracao);
+    out.migrado = true;
+  }
+  const actor = item.parent;
+  if (!actor || actor.documentName !== "Actor") return out;
   const receitas = receitasDeMagia(item);
   const atuais = magiasVinculadas(actor, item.id);
   const ids = new Set(receitas.map((r) => r.id));
@@ -1211,13 +1304,63 @@ export async function sincronizarMagiasDoItem(item) {
   const criar = receitas.filter((r) => !ja.has(r.id)).map((r) => dadosDaMagiaDoItem(item, r));
   const renomear = atuais.filter((m) => ids.has(m.flags[MODULE_ID].encId)).map((m) => {
     const r = receitas.find((x) => x.id === m.flags[MODULE_ID].encId);
-    const nome = `${r.magia.name} (${item.name})`;
+    const nome = nomeDaMagiaVinculada(r.magia.name, item.name);
     return m.name === nome ? null : { _id: m.id, name: nome };
   }).filter(Boolean);
-  if (apagar.length) await actor.deleteEmbeddedDocuments("Item", apagar);
+  if (apagar.length) {
+    // Apagar um item faz o sistema encerrar os visuais dele (veja prenderEndEffects).
+    prenderEndEffects();
+    await actor.deleteEmbeddedDocuments("Item", apagar);
+  }
   if (criar.length) await actor.createEmbeddedDocuments("Item", criar);
   if (renomear.length) await actor.updateEmbeddedDocuments("Item", renomear);
-  return { criadas: criar.length, apagadas: apagar.length, renomeadas: renomear.length };
+  Object.assign(out, { criadas: criar.length, apagadas: apagar.length, renomeadas: renomear.length });
+  // As ações ✦ do item apontam para a magia vinculada com o id e o nome dela,
+  // exatamente como a opção do select da ficha (veja refDaMagia). Uma ação ✦
+  // é reconhecida pelo id da magia vinculada ou pelo nome "Magia (…)" — o
+  // nome do item pode ter mudado, ou o item veio de outra ficha.
+  const porReceita = new Map(magiasVinculadas(actor, item.id).map((m) => [m.flags[MODULE_ID].encId, m]));
+  const vinculadas = receitas.map((r) => ({ m: porReceita.get(r.id), prefixo: `${r.magia.name} (`.replace(/\|/g, "/") }))
+    .filter((x) => x.m);
+  const acoes = clone(item.system?.actions ?? []);
+  for (const a of acoes) {
+    for (const pre of a?.preActivations ?? []) {
+      const [tipo = "", id = "", indice = "", ...resto] = String(pre?.ref ?? "").split("|");
+      if (tipo !== "action") continue;
+      const alvo = resto.join("|");
+      const dona = vinculadas.find((x) => x.m.id === id) ?? vinculadas.find((x) => alvo.startsWith(x.prefixo));
+      if (!dona) continue;
+      const certa = refDaMagia(indice, dona.m.name, dona.m.id);
+      if (pre.ref === certa) continue;
+      pre.ref = certa;
+      out.referencias++;
+    }
+  }
+  if (out.referencias) await item.update({ "system.actions": acoes });
+  return out;
+}
+
+/** Magia vinculada → o item conjurador dela, na mesma ficha. */
+const itemDaMagia = (magia) => {
+  const id = magia?.flags?.[MODULE_ID]?.doItem;
+  return id && magia.parent?.documentName === "Actor" ? magia.parent.items.get(id) ?? null : null;
+};
+
+/**
+ * Sincroniza em fila, item a item: o gancho de atualização e a janela podem
+ * pedir ao mesmo tempo, e duas sincronizações simultâneas criariam a magia
+ * vinculada duas vezes.
+ */
+const _filas = new Map();
+export function sincronizar(item) {
+  const chave = item?.uuid ?? item?.id;
+  const antes = _filas.get(chave) ?? Promise.resolve();
+  const agora = antes.catch(() => {}).then(() => sincronizarMagiasDoItem(item)).catch((e) => {
+    console.error("Ligeia — Livro do Jogador | magia vinculada:", e);
+    globalThis.ui?.notifications?.warn(`Não foi possível acertar a magia vinculada de ${item?.name}: ${e?.message ?? e}`);
+  });
+  _filas.set(chave, agora);
+  return agora;
 }
 
 /** Magias do compêndio do Livro do Jogador (em cache). */
@@ -1679,15 +1822,17 @@ export class EncantamentoApp extends ApplicationV2 {
     const data = construirItemConjurador(alvo.toObject(), { magia: retrato, lendario: s.lendario, pergaminho, nome: s.nome });
     await alvo.update({
       name: data.name,
+      "system.actions": data.system.actions,
       "system.description": data.system.description,
       "system.price": data.system.price,
       [`flags.${MODULE_ID}.encantamentos`]: data.flags[MODULE_ID].encantamentos,
     });
     if (pergaminho && quem) await quem.update({ "system.resources.mp.value": pmAtual - pm });
+    if (alvo.parent) await sincronizar(alvo);
     ui.notifications.info(`${data.name}: ${retrato.name} guardada (item conjurador ${nivel}, `
       + `${s.lendario ? "lendário, sem mana" : `${pm} PM por conjuração`})`
       + `${pergaminho && quem ? ` — gravar custou ${pm} PM a ${quem.name}` : ""}. `
-      + `${alvo.parent ? "A magia aparece na lista de Magias da ficha." : "A magia aparece na ficha de quem receber o item."}`);
+      + `Conjure pela ação ✦ do item${alvo.parent ? " (a magia também aparece na lista de Magias da ficha)." : "; a magia vinculada aparece na ficha de quem receber o item."}`);
     this.close();
     alvo.sheet?.render(true);
   }
@@ -1805,7 +1950,7 @@ const fuiEu = (userId) => userId === globalThis.game?.user?.id;
 globalThis.Hooks?.on("createItem", (item, options, userId) => {
   if (!fuiEu(userId)) return;
   if (item.type === "equipamento" && receitasDeMagia(item).length) {
-    sincronizarMagiasDoItem(item);
+    sincronizar(item);
   } else if (item.type === "magia" && item.flags?.[MODULE_ID]?.doItem) {
     // Magia vinculada arrastada sozinha para outra ficha: sem o item, ela não existe.
     const actor = item.parent;
@@ -1817,9 +1962,17 @@ globalThis.Hooks?.on("createItem", (item, options, userId) => {
 });
 
 globalThis.Hooks?.on("updateItem", (item, mudancas, options, userId) => {
-  if (!fuiEu(userId) || item.type !== "equipamento" || item.parent?.documentName !== "Actor") return;
+  if (!fuiEu(userId) || item.parent?.documentName !== "Actor") return;
+  if (item.type === "magia") {
+    // Magia vinculada renomeada à mão: ela segue o nome do item (e as ações ✦
+    // do item procuram por ele), então volta ao nome certo.
+    const dono = "name" in (mudancas ?? {}) ? itemDaMagia(item) : null;
+    if (dono) sincronizar(dono);
+    return;
+  }
+  if (item.type !== "equipamento") return;
   const mexeu = globalThis.foundry?.utils?.hasProperty?.(mudancas, `flags.${MODULE_ID}.encantamentos`) || "name" in (mudancas ?? {});
-  if (mexeu) sincronizarMagiasDoItem(item);
+  if (mexeu) sincronizar(item);
 });
 
 globalThis.Hooks?.on("deleteItem", (item, options, userId) => {
@@ -1827,14 +1980,69 @@ globalThis.Hooks?.on("deleteItem", (item, options, userId) => {
   const actor = item.parent;
   if (actor?.documentName !== "Actor") return;
   const ids = magiasVinculadas(actor, item.id).map((m) => m.id);
-  if (ids.length) actor.deleteEmbeddedDocuments("Item", ids);
+  if (ids.length) {
+    prenderEndEffects();
+    actor.deleteEmbeddedDocuments("Item", ids);
+  }
 });
+
+/**
+ * Ao abrir o mundo, o Mestre (um só, o ativo) confere os itens conjuradores
+ * das fichas e do mundo: completa os gravados na 0.2.8 com as ações ✦ e
+ * acerta as magias vinculadas e as referências. Itens já em dia não mudam.
+ * @returns {Promise<number>} quantos itens foram completados com as ações ✦
+ */
+export async function conferirItensConjuradores() {
+  const g = globalThis.game;
+  const gm = g?.users?.activeGM;
+  if (!g?.user?.isGM || (gm && gm.id !== g.user.id)) return 0;
+  const itens = [];
+  for (const actor of g.actors ?? []) for (const it of actor.items ?? []) itens.push(it);
+  for (const it of g.items ?? []) itens.push(it);
+  let migrados = 0;
+  for (const it of itens) {
+    if (it.type !== "equipamento" || !receitasDeMagia(it).length) continue;
+    const r = await sincronizar(it);
+    if (r?.migrado) migrados++;
+  }
+  if (migrados) {
+    globalThis.ui?.notifications?.info(`Livro do Jogador: ${migrados} item(ns) conjurador(es) ganharam as ações ✦ da magia guardada.`);
+  }
+  return migrados;
+}
+
+/**
+ * Compatibilidade com o Sequencer 4.x: o sistema (endEffectFx, chamado quando
+ * um item sai da ficha ou é desligado) pega `Sequencer.EffectManager.endEffects`
+ * solto da classe e o chama sem ela — e o Sequencer usa `this` lá dentro
+ * ("Cannot read properties of undefined (reading '_validateFilters')"). Além
+ * do erro no console, o visual do efeito não era encerrado. Prendendo o
+ * método à própria classe, a chamada solta passa a funcionar; quem chama do
+ * jeito normal (EffectManager.endEffects(...)) não percebe diferença.
+ * @returns {boolean} true se ajustou
+ */
+export function prenderEndEffects(Sequencer = globalThis.Sequencer) {
+  try {
+    const EM = Sequencer?.EffectManager;
+    const original = EM?.endEffects;
+    if (typeof original !== "function" || original._ligeiaPreso) return false;
+    const preso = function endEffects(...args) { return original.apply(EM, args); };
+    preso._ligeiaPreso = true;
+    EM.endEffects = preso;
+    return EM.endEffects === preso;
+  } catch (e) {
+    console.warn("Ligeia — Livro do Jogador | não foi possível ajustar o Sequencer.EffectManager.endEffects:", e);
+    return false;
+  }
+}
 
 globalThis.Hooks?.once("ready", () => {
   const mod = game.modules.get(MODULE_ID);
   mod.api = Object.assign(mod.api ?? {}, {
     abrirEncantamento, construirEncantamento, desfazerEncantamento, refazerEncantamentos, PROPRIEDADES, regraDe,
-    construirItemConjurador, sincronizarMagiasDoItem, dadosDaMagiaDoItem,
+    construirItemConjurador, sincronizarMagiasDoItem, sincronizar, dadosDaMagiaDoItem, migrarGatilhos, conferirItensConjuradores,
   });
+  prenderEndEffects();
+  conferirItensConjuradores().catch((e) => console.error("Ligeia — Livro do Jogador | itens conjuradores:", e));
   console.log("Ligeia — Livro do Jogador | Encantamento de Itens pronto (botão ✦ na ficha).");
 });
