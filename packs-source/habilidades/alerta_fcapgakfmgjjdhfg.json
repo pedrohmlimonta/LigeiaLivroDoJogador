@@ -6,9 +6,9 @@
   "img": "icons/svg/book.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Gnomos das Profundezas, pequenino, bárbaro, guerreiro, ladino, monge, paladino, patrulheiro, clérigo (Krimmena e Meriak)",
     "activation": "",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Alerta — rolar Percepção +1D",
-        "level": "all",
+        "level": "B",
         "canRoll": true,
         "rollAttr": "percepcao",
         "rollBonus": "0",
@@ -92,7 +92,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -101,8 +101,8 @@
         "value": "1",
         "rerollAll": false,
         "vulnPercent": false,
-        "label": "Alerta: +1 dado em rolagens de Percepção aplicáveis (ligue quando valer)",
-        "enabled": true,
+        "label": "Alerta: +1 dado para achar coisas escondidas, pistas, detalhes e sons (ligue quando valer)",
+        "enabled": false,
         "enchant": false,
         "level": "B",
         "damageType": ""
@@ -115,6 +115,30 @@
         "vulnPercent": false,
         "label": "Alerta (A): +4 Iniciativa",
         "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "percepcao",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Alerta (A): +1 dado para perceber armadilhas e ameaças naturais (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "all",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Alerta (A): +metade do Nível para resistir/anular Cego e Surdo (ligue quando valer)",
+        "enabled": false,
         "enchant": false,
         "level": "A",
         "damageType": ""

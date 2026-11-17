@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Draconiano",
     "activation": "Ação",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Sopro de Dragão — Raio (área = PM gastos; ajuste a área)",
-        "level": "all",
+        "level": "B",
         "canRoll": true,
         "rollAttr": "vigor",
         "rollBonus": "0",

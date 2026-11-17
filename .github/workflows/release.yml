@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -43,7 +46,7 @@ jobs:
 
       - name: Montar zip do módulo
         run: |
-          zip -r ligeia-livro-do-jogador.zip module.json README.md packs/ -x "*.DS_Store"
+          zip -r ligeia-livro-do-jogador.zip module.json README.md packs/ esmodules/ -x "*.DS_Store"
 
       - name: Anexar artefatos à release
         uses: softprops/action-gh-release@v2

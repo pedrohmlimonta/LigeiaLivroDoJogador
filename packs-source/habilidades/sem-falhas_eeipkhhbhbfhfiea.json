@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 80,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "80",
     "prereq": "",
     "lists": "Assassino",
     "activation": "",

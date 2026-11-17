@@ -6,9 +6,9 @@
   "img": "icons/svg/angel.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "Mente 4+",
     "lists": "Elfo das profundezas, gnomo das profundezas, infernal, bardo, bruxo e ladino.",
     "activation": "",

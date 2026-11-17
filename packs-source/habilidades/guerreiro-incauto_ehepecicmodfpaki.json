@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Meio-orc, orc e bárbaro",
     "activation": "Livre (no seu turno)",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Postura incauta (B — 1 rodada)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",
@@ -224,9 +224,9 @@
             "grantTempHp": "0"
           },
           {
-            "label": "+2 de dano nos ataques",
+            "label": "+2 de dano nos ataques com arma",
             "fxType": "damage",
-            "fxTarget": "all",
+            "fxTarget": "arma",
             "fxValue": "2",
             "fxAll": false,
             "durationMode": "rounds",

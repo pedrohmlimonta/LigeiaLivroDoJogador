@@ -19,7 +19,7 @@
     "metamagics": [],
     "actions": [
       {
-        "label": "Encantar Objeto (escolha o item do alvo — +1, cena)",
+        "label": "Encantar Objeto (escolha o item do alvo — +1; tire o encantamento do item no fim da cena)",
         "level": "all",
         "canRoll": false,
         "rollAttr": "forca",

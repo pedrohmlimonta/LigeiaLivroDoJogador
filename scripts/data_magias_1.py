@@ -179,7 +179,7 @@ MAGIAS_1 = [
        actions=[action("Barreira Arcana (Conjuração vs Mente — emanação)",
                        roll_attr="conjuracao", target_mode="aura", area=2,
                        defense_attr="mente", cost_mp=1,
-                       persist_area=True, persist_rounds=0, persist_trigger="start")],
+                       persist_area=True, persist_rounds=0, persist_trigger="turn")],
        img=IMG_BUFF),
     # ------------------------------- FULGUR -----------------------------
     _m("Relâmpago", "fulgur", "Ação", "Uma criatura ou objeto", "", "5m x Círculo x Nível", "",

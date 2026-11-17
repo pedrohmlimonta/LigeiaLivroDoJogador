@@ -6,9 +6,9 @@
   "img": "icons/svg/angel.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Terras Centrais",
     "activation": "",
@@ -31,7 +31,32 @@
     "animOnActivate": true,
     "mode": "passive",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "defense",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Bastião de Esperança: +1 na defesa por aliado inconsciente na batalha (ligue quando valer; some +1 por aliado)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "all",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Bastião de Esperança (A): o mesmo bônus nas rolagens para anular condições (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],

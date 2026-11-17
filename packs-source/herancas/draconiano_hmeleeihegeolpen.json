@@ -7,16 +7,24 @@
   "system": {
     "description": "<p>Herdeiros do sangue dos dragões, com escamas, presas e sopros elementais.</p><p>Custo: 30 pontos de antecedentes. Restrições: Nenhuma. Corrupção: +1 (Vermelho, Azul, Preto, Branco e Verde) ou +0 (Dourado, Prateado, Bronze, Latão e Cobre).</p>",
     "skillList": [
-      "Afinidade Mágica Elemental [Ancestralidade]",
+      "Afinidade Mágica Elemental [Fogo]",
+      "Afinidade Mágica Elemental [Gelo]",
+      "Afinidade Mágica Elemental [Raio]",
+      "Afinidade Mágica Elemental [Veneno]",
+      "Afinidade Mágica Elemental [Ácido]",
       "Asas",
       "Carisma",
       "Conhecimento [Arcano]",
       "Conhecimento [História]",
       "Energia Mágica Ampliada",
-      "Familiar [Dragonete]",
+      "Familiar",
       "Melhorar Atributo [Força]",
       "Melhorar Atributo [Mente]",
-      "Palavra Arcana [Ancestralidade]",
+      "Palavra Arcana [acida]",
+      "Palavra Arcana [fulgur]",
+      "Palavra Arcana [glacios]",
+      "Palavra Arcana [ignis]",
+      "Palavra Arcana [noxia]",
       "Palavra Arcana [exitium]",
       "Palavra Arcana [majesto]",
       "Palavra Arcana [pluribus]",
@@ -24,7 +32,11 @@
       "Pele de Escamas",
       "Presas",
       "Presença Aterradora",
-      "Sopro de Dragão"
+      "Sopro de Dragão [Fogo]",
+      "Sopro de Dragão [Frio]",
+      "Sopro de Dragão [Raio]",
+      "Sopro de Dragão [Veneno]",
+      "Sopro de Dragão [Ácido]"
     ],
     "grantedTraits": [
       {

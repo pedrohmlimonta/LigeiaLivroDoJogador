@@ -10,7 +10,10 @@
       "Conhecimento [Arcano]",
       "Ofícios",
       "Usar Armas [Bestas]",
-      "Veículos [Qualquer]",
+      "Veículos [Aéreos]",
+      "Veículos [Marítimos]",
+      "Veículos [Subterrâneos]",
+      "Veículos [Terrestres]",
       "Operar Mecanismos"
     ],
     "grantedTraits": []

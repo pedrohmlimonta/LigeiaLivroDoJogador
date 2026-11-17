@@ -221,7 +221,7 @@ MAGIAS_2 = [
        "Uma cena",
        "Sussurrando a palavra sorcdiron, enquanto toca um objeto, você aprimora sua eficiência, como se o tornasse mágico.\n\nEfeitos: Todas as rolagens utilizando o objeto encantado recebem +1, desde que utilizado para a função para a qual fora feito.\n\nConhecimento (Religião) concede +1 em Conjuração para esta conjuração.",
        "As rolagens utilizando o objeto recebem +2, em vez de +1 (apenas Círculo Intermediário ou Maior) (-). As rolagens utilizando o objeto recebem +3, em vez de +1 (apenas Círculo Maior) (-). Só funciona em objetos compostos por um material específico (+2). Não funciona em objetos compostos por material específico (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
-       actions=[action("Encantar Objeto (escolha o item do alvo — +1, cena)",
+       actions=[action("Encantar Objeto (escolha o item do alvo — +1; tire o encantamento do item no fim da cena)",
                        can_roll=False, target_mode="target", include_self=True,
                        is_melee=True, cost_mp=1,
                        applies_effects=[applies("Encantado: +1 nas rolagens do item",

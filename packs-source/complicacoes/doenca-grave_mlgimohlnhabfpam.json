@@ -6,9 +6,9 @@
   "img": "icons/svg/downgrade.svg",
   "system": {
     "level": "B",
-    "xpBasic": 20,
-    "xpAdvanced": 0,
-    "xpSpecial": 0,
+    "xpBasic": "20",
+    "xpAdvanced": "0",
+    "xpSpecial": "0",
     "prereq": "",
     "lists": "",
     "activation": "",
@@ -41,7 +41,7 @@
         "label": "Doença Grave: re-rola todos os 6 em Vigor",
         "enabled": true,
         "enchant": false,
-        "level": "all",
+        "level": "B",
         "damageType": ""
       },
       {
@@ -53,7 +53,7 @@
         "label": "Doença Grave: não pode rolar dados de melhoria nas mesmas (aplique manualmente na rolagem)",
         "enabled": true,
         "enchant": false,
-        "level": "all",
+        "level": "B",
         "damageType": ""
       }
     ],

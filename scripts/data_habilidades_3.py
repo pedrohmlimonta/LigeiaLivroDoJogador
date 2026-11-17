@@ -47,7 +47,7 @@ PACTOS = [
 TIPOS_CRIATURA = [
     "Aberrações", "Feras", "Constructos", "Dragões", "Planares", "Fadas",
     "Gigantes", "Bestiais", "Plantas", "Mortos-vivos", "Insetos",
-    "Humanoides (escolha uma raça)",
+    "Humanoides — escolha uma raça",
 ]
 
 TERRENOS_TRILHADOR = [
@@ -68,7 +68,7 @@ GRUPOS_ARMAS = {
     "Chicotes": "chicotes", "Dardos": "dardos", "Fundas": "fundas",
     "Manguais": "manguais", "Picaretas": "picaretas",
     "Armas de Fogo": "armas_de_fogo", "Desarmado": "desarmado",
-    "Naturais": "naturais", "Orientais": "orientais",
+    "Naturais": "naturais", "Orientais": "orientais", "Leves": "leve",
 }
 
 SOPROS = [

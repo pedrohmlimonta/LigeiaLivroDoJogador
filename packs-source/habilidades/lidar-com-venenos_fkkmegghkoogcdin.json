@@ -6,9 +6,9 @@
   "img": "icons/svg/book.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 80,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "80",
     "prereq": "",
     "lists": "Assassino",
     "activation": "",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Lidar com Venenos — rolar Mente +1D",
-        "level": "all",
+        "level": "B",
         "canRoll": true,
         "rollAttr": "mente",
         "rollBonus": "0",

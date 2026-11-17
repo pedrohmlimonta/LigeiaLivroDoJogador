@@ -14,6 +14,7 @@ automação transversal:
 import re
 
 from builders import action, effect
+from enhance_levels import apply_level_upgrades
 
 ATTR_LABEL = {
     "forca": "Força", "agilidade": "Agilidade", "vigor": "Vigor",
@@ -35,11 +36,11 @@ PERICIAS = {
     "Atletismo": ("forca", "forca", None),
     "Carisma": ("mente", "mente", None),
     "Conhecimento (": ("mente", "mente", None),
-    "Defletir Projéteis": ("esquiva", None, None),
-    "Desengajar": ("esquiva", None, None),
-    "Etiqueta": ("all", None, None),
-    "Explorador (": ("all", None, None),
-    "Firmeza Física": ("all", None, None),
+    "Defletir Projéteis": ("esquiva", "esquiva", None),
+    "Desengajar": ("esquiva", "esquiva", None),
+    "Etiqueta": ("all", "mente", None),
+    "Explorador (": ("all", "percepcao", None),
+    "Firmeza Física": ("all", "forca", None),
     "Furtividade": ("agilidade", "agilidade", None),
     "Guerra Santa": ("mente", "mente", None),
     "Lábia Natural": ("mente", "mente", None),
@@ -50,12 +51,12 @@ PERICIAS = {
     "Mestre do Conhecimento": ("mente", "mente", None),
     "Montar Criatura": ("agilidade", "agilidade", None),
     "Ofícios": ("mente", "mente", None),
-    "Presa de Caça (": ("all", None, None),
+    "Presa de Caça (": ("all", "mente", None),
     "Senso Lógico": ("mente", "mente", ("rollDice", "mente", 1)),
     "Sobrevivência": ("percepcao", "percepcao", None),
-    "Tenacidade Assustadora": ("mente", None, None),
+    "Tenacidade Assustadora": ("mente", "mente", None),
     "Veículos (": ("agilidade", "agilidade", None),
-    "Vontade de Ferro": ("all", None, _A_BONUS_MEIO_NIVEL),
+    "Vontade de Ferro": ("all", "mente", _A_BONUS_MEIO_NIVEL),
 }
 
 
@@ -89,7 +90,8 @@ def _enhance_pericia(doc):
             sysd["effects"].append(effect(
                 et, tg, vl, level="A",
                 label=f"{doc['name']} (Avançado): aprimoramento adicional"))
-    if roll_attr and not any(a.get("canRoll") for a in sysd["actions"]):
+    if roll_attr and not any(a.get("canRoll") and a.get("targetMode") == "none"
+                             for a in sysd["actions"]):
         sysd["actions"].insert(0, action(
             f"{doc['name']} — rolar {ATTR_LABEL[roll_attr]} +1D",
             roll_attr=roll_attr, roll_dice=1, target_mode="none",
@@ -137,6 +139,10 @@ def _slot_formula(text):
     t = (text or "").strip().lower()
     if not t:
         return None
+    t2 = t.replace("í", "i")
+    # "Nível x Círculo", "Círculo x Nível" e "Nível" (sem metragem)
+    if re.match(r"^(nivel\s*x\s*circulo|circulo\s*x\s*nivel|nivel)$", t2):
+        return "@nivel"
     t = t.replace("í", "i").replace("x", "x")
     m = re.match(r"^(\d+)\s*m?\s*(?:x\s*(circulo|nivel)\s*)?(?:x\s*(circulo|nivel)\s*)?$",
                  t.replace("círculo", "circulo").replace("nível", "nivel"))
@@ -183,6 +189,10 @@ _TIPOS_INCONDICIONAIS = {"stat", "rd", "crit", "fumble", "attr", "vuln",
 def _efeito_incondicional(e):
     if e["type"] in _TIPOS_INCONDICIONAIS:
         return True
+    # "dice" = dado de melhoria que MUDA o atributo (Melhorar Atributo):
+    # é permanente, não situacional.
+    if e["type"] == "dice":
+        return True
     if e["type"] in ("bonus", "dice", "rollDice"):
         t = e.get("target", "")
         return (t in _ALVOS_ESTRUTURAIS or t.startswith("arma:")
@@ -191,12 +201,16 @@ def _efeito_incondicional(e):
 
 
 def _classify_mode(doc):
-    if doc.pop("_mode_locked", False):
-        return
+    doc.pop("_mode_locked", None)
     sysd = doc["system"]
     if "mode" not in sysd:
         return
-    effects = sysd.get("effects", [])
+    if sysd["mode"] is not None:      # modo declarado nos dados: respeita
+        sysd["active"] = False
+        return
+    # Efeitos que começam desligados são interruptores individuais (ligados
+    # no próprio efeito, na ficha): não pedem que o item inteiro seja ativável.
+    effects = [e for e in sysd.get("effects", []) if e.get("enabled", True)]
     costs = [c for c in sysd.get("costs", []) if c.get("value") not in ("0", "")]
     if costs:
         sysd["mode"] = "active"
@@ -217,13 +231,51 @@ _FORCE_ACTIVE = ("Armadura de ", "Cota de Malha", "Armadura de Placas",
 def enhance(doc):
     """Aplicada a cada documento pelo generate.py (antes dos colchetes)."""
     t = doc["type"]
+    is_pericia = False
     if t == "habilidade":
+        is_pericia = bool(_match_pericia(doc["name"]))
         _enhance_pericia(doc)
     if t == "magia":
         _enhance_magia(doc)
+    apply_level_upgrades(doc, is_pericia)
     _formula_sweep(doc)
     _classify_mode(doc)
     if t == "equipamento" and any(doc["name"].startswith(x) for x in _FORCE_ACTIVE):
         doc["system"]["mode"] = "active"
         doc["system"]["active"] = False
+    _niveis_explicitos(doc)
+    # Snapshots embutidos nas definições (traços de raça/herança/carreira e
+    # habilidades-chave de vocação) recebem os mesmos aprimoramentos.
+    #
+    # Instantâneos com sourceUuid compartilham o objeto `system` com o item do
+    # compêndio (já aprimorado quando o pack dele foi gerado) — passar de novo
+    # duplicaria ações. Só as chaves genéricas montadas para a vocação
+    # (Pacto [Único], Juramento [Qualquer], Presa de Caça [Qualquer]) são
+    # cópias e passam pelo pipeline inteiro aqui.
+    sysd = doc["system"]
+    for campo, tipo in (("grantedTraits", "traco"), ("keySkills", "habilidade")):
+        for snap in sysd.get(campo, []):
+            if snap.get("sourceUuid"):
+                continue
+            sub = {"type": tipo, "name": snap["name"], "system": snap["system"]}
+            if tipo == "habilidade":
+                pericia = bool(_match_pericia(sub["name"]))
+                _enhance_pericia(sub)
+                apply_level_upgrades(sub, pericia)
+            _formula_sweep(sub)
+            _classify_mode(sub)
+            _niveis_explicitos(sub)
     return doc
+
+
+def _niveis_explicitos(doc):
+    """Habilidades/complicações: ações e efeitos "Sempre" passam a "Básico",
+    para o seletor B/A/E da ficha mostrar o nível de cada um. (Custos ficam
+    como estão: para custos, "Sempre" e "Básico" significam coisas diferentes.)"""
+    if doc["type"] not in ("habilidade", "complicacao"):
+        return
+    s = doc["system"]
+    for coll in (s.get("actions", []), s.get("effects", [])):
+        for x in coll:
+            if x.get("level", "all") == "all":
+                x["level"] = "B"

@@ -6,9 +6,9 @@
   "img": "icons/svg/downgrade.svg",
   "system": {
     "level": "B",
-    "xpBasic": 10,
-    "xpAdvanced": 0,
-    "xpSpecial": 0,
+    "xpBasic": "10",
+    "xpAdvanced": "0",
+    "xpSpecial": "0",
     "prereq": "Palavra Arcana [glacios]",
     "lists": "Palavra Arcana",
     "activation": "",
@@ -41,7 +41,7 @@
         "label": "Conjuração ≤ 12 com glacios: Congelar os Nervos",
         "enabled": true,
         "enchant": false,
-        "level": "all",
+        "level": "B",
         "damageType": ""
       }
     ],

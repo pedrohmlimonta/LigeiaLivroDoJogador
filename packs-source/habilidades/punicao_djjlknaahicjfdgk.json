@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Celestial e Paladino",
     "activation": "Livre (ao acertar um ataque corpo a corpo)",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Punição (B — 2 PM: +1 de dano final no alvo)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",

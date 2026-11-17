@@ -6,9 +6,9 @@
   "img": "icons/svg/regen.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "Vigor 4+",
     "lists": "Meio-orc, orc, guardião e guerreiro",
     "activation": "",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Recuperar o Fôlego (B — PH recupera Nível+3 PV)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",
@@ -156,7 +156,20 @@
     "animOnActivate": true,
     "mode": "passive",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "all",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Recuperar o Fôlego (A): +metade do Nível para resistir/anular Inconsciente e Morrendo (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],

@@ -85,7 +85,7 @@
         "coneAngle": "45",
         "isWeapon": false,
         "isMelee": false,
-        "range": "4",
+        "range": "@nivel",
         "area": "0",
         "macroUuid": "",
         "macroName": "",

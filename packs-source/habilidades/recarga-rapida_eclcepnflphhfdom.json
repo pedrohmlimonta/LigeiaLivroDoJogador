@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Patrulheiro",
     "activation": "",

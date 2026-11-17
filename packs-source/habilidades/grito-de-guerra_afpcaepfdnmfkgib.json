@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "Mente 4+",
     "lists": "Orc, bárbaro, paladino, clérigo (Garlock, Vargoth e Grumbar)",
     "activation": "Ação rápida",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Grito de Guerra — 1D de ataque aos aliados (cena)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",

@@ -214,7 +214,11 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
 
 
 def _activatable(mode, effects, costs):
-    """Campos comuns dos itens ativáveis (inclui os novos da v22)."""
+    """Campos comuns dos itens ativáveis (inclui os novos da v22).
+
+    mode=None = automático: o enhance.py decide passive/active pelos efeitos
+    e custos. Um modo escrito nos dados é respeitado como está.
+    """
     return {
         "enchantments": [],
         "costsCumulative": False,
@@ -233,16 +237,33 @@ def _activatable(mode, effects, costs):
 #  Itens
 # ---------------------------------------------------------------------------
 
+def _xp_habilidade(cost_b, cost_a, cost_e):
+    """Custos de XP no formato do sistema (string).
+
+    Vazio = tabela padrão (20/40/80); "0" = de graça. No livro, "-" marca um
+    nível que não existe: ele vira "0" para nunca cobrar XP por um nível sem
+    conteúdo (ex.: Melhorar Atributo 40/-, habilidades só Épicas -/-/60).
+    Épico não citado no livro fica vazio (padrão do sistema).
+    """
+    b = str(cost_b) if cost_b else "0"
+    a = str(cost_a) if cost_a else "0"
+    e = str(cost_e) if cost_e else ""
+    return b, a, e
+
+
 def habilidade(name, lists, desc_b, desc_a, cost_b, cost_a, cost_e=0,
                desc_e="", prereq="", activation="", target="", area="",
-               rng="", duration="", mode="passive", effects=None, costs=None,
+               rng="", duration="", mode=None, effects=None, costs=None,
                actions=None, img="icons/svg/book.svg", sort=0,
                costs_cumulative=False):
+    xb, xa, xe = _xp_habilidade(cost_b, cost_a, cost_e)
+    so_epica = not cost_b and not cost_a and bool(cost_e)
     system = {
-        "level": "B",
-        "costBasic": cost_b,
-        "costAdvanced": cost_a,
-        "costSpecial": cost_e,
+        # Habilidades só Épicas (- / - / 60) já entram no nível Épico.
+        "level": "E" if so_epica else "B",
+        "costBasic": xb,
+        "costAdvanced": xa,
+        "costSpecial": xe,
         "prereq": prereq,
         "lists": lists,
         "activation": activation,
@@ -259,13 +280,15 @@ def habilidade(name, lists, desc_b, desc_a, cost_b, cost_a, cost_e=0,
 
 def complicacao(name, lists, desc_b, desc_a, xp_b=0, xp_a=0, xp_e=0, desc_e="",
                 prereq="", activation="", target="", area="", rng="",
-                duration="", mode="passive", effects=None, costs=None,
+                duration="", mode=None, effects=None, costs=None,
                 actions=None, img="icons/svg/downgrade.svg", sort=0):
+    # XP concedido (string): complicações do Avulso 09 têm um nível só, então
+    # Avançado/Épico ficam "0" (vazio daria XP da tabela por nível inexistente).
     system = {
         "level": "B",
-        "xpBasic": xp_b,
-        "xpAdvanced": xp_a,
-        "xpSpecial": xp_e,
+        "xpBasic": str(xp_b) if xp_b else "",
+        "xpAdvanced": str(xp_a) if xp_a else "0",
+        "xpSpecial": str(xp_e) if xp_e else "0",
         "prereq": prereq,
         "lists": lists,
         "activation": activation,
@@ -299,7 +322,7 @@ def magia(name, word, tier, casting, target, area, rng, duration, desc,
 
 
 def equipamento(name, category, price, weight, description, notes="",
-                tags=None, qty=1, mode="passive", effects=None, costs=None,
+                tags=None, qty=1, mode=None, effects=None, costs=None,
                 actions=None, img="icons/svg/item-bag.svg", sort=0):
     system = {
         "category": category,
@@ -316,7 +339,7 @@ def equipamento(name, category, price, weight, description, notes="",
     return base_doc(name, "equipamento", img, system, sort)
 
 
-def traco(name, source, description, is_weapon=False, mode="passive",
+def traco(name, source, description, is_weapon=False, mode=None,
           effects=None, costs=None, actions=None, img="icons/svg/aura.svg",
           sort=0):
     system = {
@@ -339,8 +362,24 @@ def trait_snapshot(trait_doc):
     }
 
 
+def key_skill_snapshot(hab_doc, in_pack=True):
+    """Snapshot de uma habilidade para o campo keySkills das vocações.
+
+    in_pack=False para chaves montadas só para a vocação (Pacto [Único]...),
+    que não existem como item do compêndio.
+    """
+    return {
+        "name": hab_doc["name"],
+        "img": hab_doc["img"],
+        "system": hab_doc["system"],
+        "sourceUuid": (f"Compendium.ligeia-livro-do-jogador.habilidades.Item.{hab_doc['_id']}"
+                       if in_pack else ""),
+    }
+
+
 def definicao(name, itype, description, skill_list=None, granted=None,
-              img="icons/svg/mystery-man.svg", sort=0, size=None, **extra):
+              key_skills=None, img="icons/svg/mystery-man.svg", sort=0,
+              size=None, **extra):
     """Item de definição: raca, heranca, vocacao, organizacao ou carreira.
 
     - raca: size ("pequeno"/"medio"/...) + moveBonus (ajuste por cima do
@@ -359,5 +398,7 @@ def definicao(name, itype, description, skill_list=None, granted=None,
     if itype == "vocacao":
         system["hpBonus"] = _s(extra.pop("hpBonus", 0))
         system["mpBonus"] = _s(extra.pop("mpBonus", 0))
+        system["keySkills"] = [key_skill_snapshot(h, in_pack=not h.get("_generic"))
+                               for h in (key_skills or [])]
     system.update(extra)
     return base_doc(name, itype, img, system, sort)

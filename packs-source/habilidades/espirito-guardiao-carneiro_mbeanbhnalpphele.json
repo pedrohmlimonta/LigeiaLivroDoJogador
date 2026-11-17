@@ -6,9 +6,9 @@
   "img": "icons/svg/pawprint.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Bárbaro e druida",
     "activation": "Ação rápida",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Invocar Carneiro (B — 1 rodada, 1 PM)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",
@@ -58,7 +58,7 @@
         "appliesEffects": [
           {
             "label": "Espírito do Carneiro: Seus ataques bem sucedidos empurram o alvo 2m.",
-            "fxType": "info",
+            "fxType": "bonus",
             "fxTarget": "all",
             "fxValue": "0",
             "fxAll": false,
@@ -147,7 +147,7 @@
         "appliesEffects": [
           {
             "label": "Espírito do Carneiro: Seus ataques bem sucedidos empurram o alvo 2m.",
-            "fxType": "info",
+            "fxType": "bonus",
             "fxTarget": "all",
             "fxValue": "0",
             "fxAll": false,

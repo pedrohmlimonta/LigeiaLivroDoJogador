@@ -5,10 +5,10 @@
   "type": "habilidade",
   "img": "icons/svg/daze.svg",
   "system": {
-    "level": "B",
-    "costBasic": 0,
-    "costAdvanced": 0,
-    "costSpecial": 60,
+    "level": "E",
+    "costBasic": "0",
+    "costAdvanced": "0",
+    "costSpecial": "60",
     "prereq": "",
     "lists": "Arquimago",
     "activation": "",
@@ -58,8 +58,8 @@
         "appliesEffects": [
           {
             "label": "Regeneração arcana (1 PM/rodada)",
-            "fxType": "restore",
-            "fxTarget": "mp",
+            "fxType": "bonus",
+            "fxTarget": "all",
             "fxValue": "0",
             "fxAll": false,
             "durationMode": "scene",

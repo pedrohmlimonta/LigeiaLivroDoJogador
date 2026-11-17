@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "Agilidade 4+",
     "lists": "Bárbaro, guerreiro, monge e patrulheiro.",
     "activation": "",
@@ -36,7 +36,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 25800,
+  "sort": 25900,
   "ownership": {
     "default": 0
   },

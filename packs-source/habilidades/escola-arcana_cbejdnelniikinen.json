@@ -6,9 +6,9 @@
   "img": "icons/svg/daze.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Mago",
     "activation": "",
@@ -29,9 +29,46 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "passive",
+    "mode": "active",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Escola Arcana: +metade do Nível — troque o alvo para a SUA palavra (Conjuração — palavra) e ligue",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "crit",
+        "target": "conjuracao",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Escola Arcana (A): crítico 11-12 — troque o alvo para a SUA palavra",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "info",
+        "target": "all",
+        "value": "0",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Escola Arcana (A): magias de dano da palavra causam +1 de dano bruto",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],

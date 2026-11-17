@@ -6,9 +6,9 @@
   "img": "icons/svg/book.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Guardião e guerreiro",
     "activation": "",

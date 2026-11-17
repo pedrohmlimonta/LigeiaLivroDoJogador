@@ -6,9 +6,9 @@
   "img": "icons/svg/regen.svg",
   "system": {
     "level": "B",
-    "costBasic": 40,
-    "costAdvanced": 0,
-    "costSpecial": 0,
+    "costBasic": "40",
+    "costAdvanced": "0",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Draconiano, infernal e todas as vocações.",
     "activation": "",
@@ -29,7 +29,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {

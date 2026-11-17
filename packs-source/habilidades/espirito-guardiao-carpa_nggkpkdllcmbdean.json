@@ -6,9 +6,9 @@
   "img": "icons/svg/pawprint.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Bárbaro e druida",
     "activation": "Ação rápida",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Invocar Carpa (B — 1 rodada, 1 PM)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",

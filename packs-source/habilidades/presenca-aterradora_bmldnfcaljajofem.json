@@ -6,9 +6,9 @@
   "img": "icons/svg/angel.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Draconiano, bárbaro, paladino, clérigo (Gobel, Umberham)",
     "activation": "Livre",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Presença Aterradora (B — aura 2m x Nível, Mente vs Mente)",
-        "level": "all",
+        "level": "B",
         "canRoll": true,
         "rollAttr": "mente",
         "rollBonus": "0",

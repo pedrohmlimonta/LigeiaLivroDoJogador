@@ -6,9 +6,9 @@
   "img": "icons/svg/daze.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Terras dos Vales",
     "activation": "Ritual (uma cena)",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Ritual de Proteção (B — RD metade do Nível, todo dano)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",

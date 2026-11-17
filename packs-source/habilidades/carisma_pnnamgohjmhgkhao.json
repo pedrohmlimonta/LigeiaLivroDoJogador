@@ -6,9 +6,9 @@
   "img": "icons/svg/angel.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Anão das terras baixas, elfo das profundezas, gnomo da floresta, gnomo das rochas, meio-elfo, celestial, draconiano, infernal, bardo, bruxo, clérigo, druida, guerreiro, ladino, mago, monge e paladino.",
     "activation": "Livre (nível A)",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Carisma — rolar Mente +1D",
-        "level": "all",
+        "level": "B",
         "canRoll": true,
         "rollAttr": "mente",
         "rollBonus": "0",
@@ -84,7 +84,7 @@
       },
       {
         "label": "Presença Carismática (A): +1 aliados que possam ouvi-lo",
-        "level": "all",
+        "level": "A",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",
@@ -173,7 +173,7 @@
       },
       {
         "label": "Presença Carismática (A): -1 inimigos que possam ouvi-lo",
-        "level": "all",
+        "level": "A",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",

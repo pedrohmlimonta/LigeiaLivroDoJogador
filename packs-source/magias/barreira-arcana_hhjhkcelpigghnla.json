@@ -78,7 +78,7 @@
         "persistRounds": "0",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "start"
+        "persistTrigger": "turn"
       }
     ],
     "enchantments": [],

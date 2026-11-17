@@ -6,9 +6,9 @@
   "img": "icons/svg/pawprint.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Bárbaro e druida",
     "activation": "Ação rápida",
@@ -16,13 +16,13 @@
     "area": "",
     "range": "",
     "duration": "",
-    "descBasic": "<p>Gastando 1 ponto de magia, você recebe, por uma rodada, o benefício do espírito guardião: +2 no dano bruto se estiver adjacente a um aliado.</p>",
+    "descBasic": "<p>Gastando 1 ponto de magia, você recebe, por uma rodada, o benefício do espírito guardião: +2 no dano bruto com armas se adjacente a um aliado.</p>",
     "descAdvanced": "<p>Gastando 2 pontos de magia (em vez de um ponto de magia), o benefício dura uma cena.</p>",
     "descSpecial": "",
     "actions": [
       {
         "label": "Invocar Lobo (B — 1 rodada, 1 PM)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",
@@ -57,9 +57,9 @@
         "preActivations": [],
         "appliesEffects": [
           {
-            "label": "Espírito do Lobo: +2 no dano bruto se estiver adjacente a um aliado.",
+            "label": "Espírito do Lobo: +2 no dano bruto com armas se adjacente a um aliado.",
             "fxType": "damage",
-            "fxTarget": "all",
+            "fxTarget": "arma",
             "fxValue": "2",
             "fxAll": false,
             "durationMode": "rounds",
@@ -146,9 +146,9 @@
         "preActivations": [],
         "appliesEffects": [
           {
-            "label": "Espírito do Lobo: +2 no dano bruto se estiver adjacente a um aliado.",
+            "label": "Espírito do Lobo: +2 no dano bruto com armas se adjacente a um aliado.",
             "fxType": "damage",
-            "fxTarget": "all",
+            "fxTarget": "arma",
             "fxValue": "2",
             "fxAll": false,
             "durationMode": "scene",

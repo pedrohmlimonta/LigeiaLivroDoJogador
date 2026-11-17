@@ -86,7 +86,7 @@
         "isWeapon": false,
         "isMelee": false,
         "range": "0",
-        "area": "3",
+        "area": "@nivel",
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,

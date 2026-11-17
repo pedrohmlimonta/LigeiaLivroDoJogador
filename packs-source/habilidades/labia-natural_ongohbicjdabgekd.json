@@ -6,9 +6,9 @@
   "img": "icons/svg/angel.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Faen Leste",
     "activation": "",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Lábia Natural — rolar Mente +1D",
-        "level": "all",
+        "level": "B",
         "canRoll": true,
         "rollAttr": "mente",
         "rollBonus": "0",
@@ -105,6 +105,18 @@
         "enabled": true,
         "enchant": false,
         "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "reroll1",
+        "target": "mente",
+        "value": "1",
+        "rerollAll": true,
+        "vulnPercent": false,
+        "label": "Lábia (A): re-rola os 1 em interação social (re-role os 2 manualmente)",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
         "damageType": ""
       }
     ],

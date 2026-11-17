@@ -19,7 +19,7 @@ HABILIDADES_1 = [
         "Você recebe 1 Ponto adicional em Esquiva. Seus resultados 11 ou 12 em rolagens de Esquiva são sucessos críticos. Quando uma criatura se move adjacente a você, você pode pagar 1 ponto heróico e usar sua reação para imediatamente se mover sem sofrer reações de ataque.",
         10, 30,
         effects=[
-            effect("bonus", "esquiva", 1, level="A", label="Acrobacia (A): +1 Esquiva"),
+            effect("attr", "esquiva", 1, level="A", label="Acrobacia (A): +1 Esquiva"),
             effect("crit", "esquiva", 1, level="A", label="Acrobacia (A): crítico 11-12 em Esquiva"),
         ],
         img=IMG["corpo"],
@@ -31,9 +31,14 @@ HABILIDADES_1 = [
             f"Você possui afinidade com o elemento {nome} e causa 1 ponto de dano bruto adicional quando conjura magias relacionadas ao elemento especificado (palavra arcana {palavra}).",
             "O dano bruto adicional causado aumenta para 3 pontos de dano.",
             20, 40, prereq="Mente 4+",
-            effects=[
-                effect("damage", "all", 1, level="B", label=f"Afinidade ({nome}) B: +1 dano", damage_type=dtipo),
-                effect("damage", "all", 2, level="A", label=f"Afinidade ({nome}) A: +2 dano (total 3)", damage_type=dtipo),
+            activation="Livre (ao acertar uma magia da palavra)",
+            actions=[
+                action(f"Afinidade ({nome}) B — +1 de dano de {nome.lower()} no alvo da magia",
+                       level="B", can_roll=False, target_mode="target",
+                       damage=1, damage_type=dtipo),
+                action(f"Afinidade ({nome}) A — +3 de dano de {nome.lower()} no alvo da magia",
+                       level="A", can_roll=False, target_mode="target",
+                       damage=3, damage_type=dtipo),
             ],
             img=IMG["magia"],
         )
@@ -99,7 +104,7 @@ HABILIDADES_1 = [
         "Você recebe 1 ponto adicional no atributo Bloqueio. Resultados naturais 11 ou 12 em suas rolagens de Bloqueio são sucessos críticos. Você pode gastar 1 ponto heróico para considerar um sucesso crítico em uma rolagem de qualquer atividade atlética fora do combate.",
         10, 30,
         effects=[
-            effect("bonus", "bloqueio", 1, level="A", label="Atletismo (A): +1 Bloqueio"),
+            effect("attr", "bloqueio", 1, level="A", label="Atletismo (A): +1 Bloqueio"),
             effect("crit", "bloqueio", 1, level="A", label="Atletismo (A): crítico 11-12 em Bloqueio"),
         ],
         img=IMG["corpo"],
@@ -185,6 +190,9 @@ HABILIDADES_1 = [
         effects=[
             effect("bonus", "esquiva", 1, level="B", label="Sem armadura: +1 Esquiva"),
             effect("bonus", "bloqueio", 1, level="B", label="Sem armadura: +1 Bloqueio"),
+            effect("rd", "all", "ceil(@vigor/2)", level="A", label="Sem armadura (A): RD corte = metade do Vigor", damage_type="corte"),
+            effect("rd", "all", "ceil(@vigor/2)", level="A", label="Sem armadura (A): RD perfuração = metade do Vigor", damage_type="perfuracao"),
+            effect("rd", "all", "ceil(@vigor/2)", level="A", label="Sem armadura (A): RD concussão = metade do Vigor", damage_type="concussao"),
         ],
         img=IMG["corpo"],
     ),
@@ -302,45 +310,49 @@ HABILIDADES_1 = [
                        can_roll=False, target_mode="self", include_self=True,
                        cost_mp=1,
                        applies_effects=[
-                           applies(f"Espírito do {animal}: {beneficio}",
-                                   duration_mode="rounds", duration_rounds=1,
-                                   **ap_kw)
+                           applies(f"Espírito do {animal}: {beneficio}" + (f" ({kw['fx_target']})" if len(aps) > 1 else ""),
+                                   duration_mode="rounds", duration_rounds=1, **kw)
+                           for kw in aps
                        ]),
                 action(f"Invocar {animal} (A — uma cena, 2 PM)", level="A",
                        can_roll=False, target_mode="self", include_self=True,
                        cost_mp=2,
                        applies_effects=[
-                           applies(f"Espírito do {animal}: {beneficio}",
-                                   duration_mode="scene", **ap_kw)
+                           applies(f"Espírito do {animal}: {beneficio}" + (f" ({kw['fx_target']})" if len(aps) > 1 else ""),
+                                   duration_mode="scene", **kw)
+                           for kw in aps
                        ]),
             ],
             img=IMG["fera"],
         )
-        for animal, beneficio, ap_kw in [
+        for animal, beneficio, aps in [
+            # bonus com valor 0 = lembrete com duração (o sistema descarta o
+            # modificador, mas mantém o efeito ativo, a sobrevida e os ticks)
             ("Falcão", "1D em rolagens de Percepção.",
-             dict(fx_type="dice", fx_target="percepcao", fx_value=1)),
+             [dict(fx_type="dice", fx_target="percepcao", fx_value=1)]),
             ("Urso", "3 pontos de sobrevida.",
-             dict(fx_type="info", fx_target="all", grant_temp_hp=3)),
-            ("Tartaruga", "Proteção (corte/perf./concussão) igual a metade do Nível.",
-             dict(fx_type="rd", fx_target="all", fx_value="ceil(@nivel/2)")),
+             [dict(fx_type="bonus", fx_target="all", fx_value=0, grant_temp_hp=3)]),
+            ("Tartaruga", "Proteção igual a metade do Nível.",
+             [dict(fx_type="rd", fx_target=t_, fx_value="ceil(@nivel/2)")
+              for t_ in ("corte", "perfuracao", "concussao")]),
             ("Carneiro", "Seus ataques bem sucedidos empurram o alvo 2m.",
-             dict(fx_type="info", fx_target="all")),
+             [dict(fx_type="bonus", fx_target="all", fx_value=0)]),
             ("Leão", "1D em ataques corpo a corpo.",
-             dict(fx_type="rollDice", fx_target="attackMelee", fx_value=1)),
+             [dict(fx_type="rollDice", fx_target="attackMelee", fx_value=1)]),
             ("Cavalo", "Bônus de Deslocamento igual à sua Força.",
-             dict(fx_type="stat", fx_target="deslocamento", fx_value="@forca")),
+             [dict(fx_type="stat", fx_target="deslocamento", fx_value="@forca")]),
             ("Serpente", "1D em ações furtivas.",
-             dict(fx_type="rollDice", fx_target="agilidade", fx_value=1)),
-            ("Lobo", "+2 no dano bruto se estiver adjacente a um aliado.",
-             dict(fx_type="damage", fx_target="all", fx_value=2)),
+             [dict(fx_type="rollDice", fx_target="agilidade", fx_value=1)]),
+            ("Lobo", "+2 no dano bruto com armas se adjacente a um aliado.",
+             [dict(fx_type="damage", fx_target="arma", fx_value=2)]),
             ("Búfalo", "Seus ataques bem sucedidos derrubam o alvo.",
-             dict(fx_type="info", fx_target="all")),
+             [dict(fx_type="bonus", fx_target="all", fx_value=0)]),
             ("Carpa", "1D em Conjuração.",
-             dict(fx_type="rollDice", fx_target="conjuracao", fx_value=1)),
+             [dict(fx_type="rollDice", fx_target="conjuracao", fx_value=1)]),
             ("Macaco", "1D em ataques à distância.",
-             dict(fx_type="rollDice", fx_target="attackRanged", fx_value=1)),
+             [dict(fx_type="rollDice", fx_target="attackRanged", fx_value=1)]),
             ("Cervo", "1D em interações sociais.",
-             dict(fx_type="rollDice", fx_target="mente", fx_value=1)),
+             [dict(fx_type="rollDice", fx_target="mente", fx_value=1)]),
         ]
     ],
     habilidade(

@@ -6,9 +6,9 @@
   "img": "icons/svg/book.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Gnomo da floresta, gnomo das rochas, bardo e ladino.",
     "activation": "",

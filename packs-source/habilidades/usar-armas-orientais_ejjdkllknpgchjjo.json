@@ -6,9 +6,9 @@
   "img": "icons/svg/sword.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Anão das montanhas, anão das terras baixas, alto elfo, elfo cinzento, elfo solar, elfo da floresta, elfo das profundezas, pequenino, bárbaro, bardo, bruxo, clérigo, druida, guardião, guerreiro, ladino, mago, monge, paladino e patrulheiro.",
     "activation": "",
@@ -61,7 +61,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 25200,
+  "sort": 25300,
   "ownership": {
     "default": 0
   },

@@ -6,9 +6,9 @@
   "img": "icons/svg/pawprint.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Celestial, draconiano, infernal, bruxo e mago",
     "activation": "",

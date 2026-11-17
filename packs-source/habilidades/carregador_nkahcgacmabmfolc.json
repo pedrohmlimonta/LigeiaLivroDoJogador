@@ -6,9 +6,9 @@
   "img": "icons/svg/regen.svg",
   "system": {
     "level": "B",
-    "costBasic": 10,
-    "costAdvanced": 30,
-    "costSpecial": 0,
+    "costBasic": "10",
+    "costAdvanced": "30",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Anão das montanhas, anão das terras baixas, meio-orc, bárbaro, guardião e guerreiro.",
     "activation": "",

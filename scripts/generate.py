@@ -35,6 +35,81 @@ DEFINITION_TYPES = {"raca", "heranca", "vocacao", "carreira", "organizacao"}
 _TRAILING_PARENS = re.compile(r"\s\(([^()]*)\)$")
 
 
+# Entradas GENÉRICAS das listas do livro ("[Qualquer]", "[Único]"...). O
+# sistema compara nomes exatos (com colchetes), então cada uma é expandida
+# para as variantes reais do compêndio. Filtro opcional de subgrupos.
+EXPANDIR = {
+    "Afinidade Mágica Elemental [Ancestralidade]": ("Afinidade Mágica Elemental", None),
+    "Conhecimento [Qualquer]": ("Conhecimento", None),
+    "Espírito Guardião [Qualquer]": ("Espírito Guardião", None),
+    "Espírito Guardião [Único]": ("Espírito Guardião", None),
+    "Espírito Guardião [Único, depende do Clã]": ("Espírito Guardião", None),
+    "Explorador [Qualquer]": ("Explorador", None),
+    "Juramento [Qualquer]": ("Juramento", None),
+    "Pacto [Único]": ("Pacto", None),
+    "Palavra Arcana [Único]": ("Palavra Arcana", None),
+    # Ancestralidade dracônica: ácido, raio, frio, fogo, veneno
+    "Palavra Arcana [Ancestralidade]": ("Palavra Arcana", ["acida", "fulgur", "glacios", "ignis", "noxia"]),
+    "Presa de Caça [Qualquer]": ("Presa de Caça", None),
+    "Sopro de Dragão": ("Sopro de Dragão", None),
+    "Trilhador [Qualquer]": ("Trilhador", None),
+    # Tabela de Clãs de Sei Yang
+    "Usar Armas [Único, depende do Clã]": ("Usar Armas", [
+        "Lâminas Grandes", "Arcos", "Duas Mãos", "Martelos", "Lâminas Pequenas",
+        "Machados", "Lanças", "Desarmado", "Haste", "Arremesso", "Uma Mão",
+        "Corpo a Corpo"]),
+    "Veículos [Qualquer]": ("Veículos", None),
+}
+# Mantêm também a própria entrada genérica (são nomes de habilidade-chave).
+MANTER_GENERICO = {"Pacto [Único]", "Juramento [Qualquer]", "Presa de Caça [Qualquer]"}
+# Grafias do livro que diferem do nome da habilidade.
+RENOMEAR = {
+    "Explorador [Glacial]": "Explorador [Glaciais]",
+    "Familiar [Dragonete]": "Familiar",
+    "Familiar [Imp]": "Familiar",
+    "Familiar [Querubim]": "Familiar",
+}
+
+
+def _norm(s):
+    import unicodedata
+    s = unicodedata.normalize("NFD", str(s))
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return re.sub(r"\s+", " ", s.lower().strip())
+
+
+def expandir_lista(lista, catalogo, chaves=()):
+    """Expande genéricos, corrige grafias e remove duplicatas (ordem mantida)."""
+    out = []
+    for s in lista:
+        s = RENOMEAR.get(s, s)
+        if s in EXPANDIR:
+            base, filtro = EXPANDIR[s]
+            filtro_n = {_norm(f) for f in filtro} if filtro else None
+            if s in MANTER_GENERICO and s in chaves:
+                out.append(s)
+            for nome in catalogo:
+                m = re.match(rf"^{re.escape(base)} \[(.+)\]$", nome)
+                if m and (filtro_n is None or _norm(m.group(1)) in filtro_n):
+                    out.append(nome)
+        else:
+            out.append(s)
+    return list(dict.fromkeys(out))
+
+
+def _rotulos_com_colchetes(sysd, antigo, novo):
+    """Os rótulos de ações e efeitos citam o nome do item ("Explorador
+    (Florestas) — rolar..."): acompanham a troca para colchetes."""
+    if antigo == novo:
+        return
+    for e in sysd.get("effects", []):
+        e["label"] = e.get("label", "").replace(antigo, novo)
+    for a in sysd.get("actions", []):
+        a["label"] = a.get("label", "").replace(antigo, novo)
+        for ap in a.get("appliesEffects", []):
+            ap["label"] = ap.get("label", "").replace(antigo, novo)
+
+
 def bracketize(text):
     """Converte o sub-grupo final de parênteses para colchetes.
 
@@ -62,6 +137,11 @@ PACKS = {
 
 def main():
     total = 0
+    # Catálogo de nomes de habilidade (já com colchetes) para expandir e
+    # validar as listas das definições.
+    catalogo = [bracketize(d["name"]) for d in PACKS["habilidades"]]
+    catalogo_n = {_norm(n) for n in catalogo}
+    problemas = []
     for pack, docs in PACKS.items():
         if not docs:
             continue  # pack vazio (ex.: complicacoes sem conteúdo)
@@ -78,12 +158,23 @@ def main():
             # Sub-grupos com colchetes: nos nomes de habilidades e
             # complicações (inclusive prereq) e em todas as skillList.
             if doc["type"] in SUBGROUP_NAME_TYPES:
-                doc["name"] = bracketize(doc["name"])
+                antigo = doc["name"]
+                doc["name"] = bracketize(antigo)
+                _rotulos_com_colchetes(doc["system"], antigo, doc["name"])
                 if doc["system"].get("prereq"):
                     doc["system"]["prereq"] = bracketize(doc["system"]["prereq"])
             if doc["type"] in DEFINITION_TYPES:
-                doc["system"]["skillList"] = [bracketize(s)
-                                              for s in doc["system"]["skillList"]]
+                for k in doc["system"].get("keySkills", []):
+                    antigo = k["name"]
+                    k["name"] = bracketize(antigo)
+                    if not k.get("sourceUuid"):   # os do compêndio já vieram prontos
+                        _rotulos_com_colchetes(k["system"], antigo, k["name"])
+                chaves = {k["name"] for k in doc["system"].get("keySkills", [])}
+                lista = [bracketize(s) for s in doc["system"]["skillList"]]
+                doc["system"]["skillList"] = expandir_lista(lista, catalogo, chaves)
+                for s in doc["system"]["skillList"]:
+                    if _norm(s) not in catalogo_n and s not in chaves:
+                        problemas.append(f"{pack}/{doc['name']}: '{s}' não existe no compêndio")
             if doc["_id"] in seen:
                 raise SystemExit(f"ID duplicado em {pack}: {doc['name']} x {seen[doc['_id']]}")
             seen[doc["_id"]] = doc["name"]
@@ -94,6 +185,16 @@ def main():
         print(f"packs-source/{pack}: {len(docs)} documentos")
         total += len(docs)
     print(f"Total: {total} documentos")
+    if problemas:
+        print("\nERRO — entradas de lista sem habilidade correspondente:")
+        for p_ in problemas:
+            print("  -", p_)
+        raise SystemExit(1)
+    # Confere cada documento contra o schema do sistema (choices, tipos,
+    # fórmulas) — o build falha se algo seria recusado pelo Foundry.
+    import validate
+    if validate.main(ROOT):
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

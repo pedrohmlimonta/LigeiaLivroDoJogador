@@ -6,9 +6,9 @@
   "img": "icons/svg/daze.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Mago",
     "activation": "",
@@ -31,7 +31,20 @@
     "animOnActivate": true,
     "mode": "passive",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "rollDice",
+        "target": "conjuracao",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Preparação Arcana: +1 dado ao conjurar uma magia preparada (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],

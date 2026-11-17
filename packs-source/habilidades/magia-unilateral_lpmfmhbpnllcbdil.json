@@ -6,9 +6,9 @@
   "img": "icons/svg/daze.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Clérigo e druida",
     "activation": "",
@@ -31,7 +31,20 @@
     "animOnActivate": true,
     "mode": "passive",
     "active": false,
-    "effects": [],
+    "effects": [
+      {
+        "type": "areaFilter",
+        "target": "enemies",
+        "value": "0",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Magia Unilateral (A): áreas não afetam aliados — ligue ao conjurar (vale para TODAS as suas áreas enquanto ligado)",
+        "enabled": false,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      }
+    ],
     "costs": []
   },
   "effects": [],

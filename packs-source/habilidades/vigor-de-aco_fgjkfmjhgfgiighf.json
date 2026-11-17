@@ -6,9 +6,9 @@
   "img": "icons/svg/regen.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "",
     "lists": "Anão das terras baixas, anão das montanhas, meio-orc, orc, bárbaro, guardião, monge e paladino.",
     "activation": "",
@@ -61,7 +61,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 26300,
+  "sort": 26400,
   "ownership": {
     "default": 0
   },

@@ -6,9 +6,9 @@
   "img": "icons/svg/daze.svg",
   "system": {
     "level": "B",
-    "costBasic": 20,
-    "costAdvanced": 40,
-    "costSpecial": 0,
+    "costBasic": "20",
+    "costAdvanced": "40",
+    "costSpecial": "",
     "prereq": "Mente 4+",
     "lists": "Bruxo",
     "activation": "Ritual após descanso",
@@ -22,7 +22,7 @@
     "actions": [
       {
         "label": "Ritual do pacto (1 PV — escolha os benefícios)",
-        "level": "all",
+        "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
         "rollBonus": "0",
