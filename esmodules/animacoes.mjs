@@ -1085,6 +1085,21 @@ export function animarItem(data, { existe = chaveSegura } = {}) {
 }
 
 /**
+ * Animações de um item ENCANTADO (Encantamento de Itens): as ações que as
+ * propriedades criaram vêm marcadas com a palavra arcana (`_palavra`) e
+ * animam como as magias daquela palavra — o brilho de proteção ao ativar,
+ * a bomba de ácido, a aura de chamas. Os ataques da arma (inclusive as
+ * versões ✦ com a propriedade) e o resto do item animam como item.
+ * @returns {{acoes: number, efeitos: number}}
+ */
+export function animarItemEncantado(data, { existe = chaveSegura } = {}) {
+  const base = data?.name ?? "";
+  return animarAcoes(data, (a) => (a._palavra && !a.isWeapon)
+    ? visualDaAcao(a, { palavra: String(a._palavra).toLowerCase(), base })
+    : visualDeItem(a, data), { existe, base });
+}
+
+/**
  * Tira as animações automáticas (deste módulo) de um item — mutação
  * in-place nos dados do item. As que você puxou ficam.
  * @returns {number} quantas foram removidas

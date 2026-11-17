@@ -237,7 +237,7 @@ const TIERS = {
   "Maior": { circ: 3, pm: 3 },
 };
 
-const DTYPES = {
+export const DTYPES = {
   acido: "Ácido", concussao: "Concussão", corte: "Corte", energia: "Energia",
   fogo: "Fogo", frio: "Frio", necrotico: "Necrótico", perfuracao: "Perfuração",
   psiquico: "Psíquico", radiante: "Radiante", raio: "Raio", sonico: "Sônico",
@@ -247,7 +247,7 @@ const BONUS_TARGETS = {
   attack: "Ataque", deslocamento: "Deslocamento", iniciativa: "Iniciativa",
   esquiva: "Esquiva", bloqueio: "Bloqueio", conjuracao: "Conjuração",
 };
-const ATTRS = { forca: "Força", agilidade: "Agilidade", vigor: "Vigor",
+export const ATTRS = { forca: "Força", agilidade: "Agilidade", vigor: "Vigor",
                 mente: "Mente", percepcao: "Percepção" };
 
 /* ------------------------------------------------------------------ */
@@ -255,7 +255,7 @@ const ATTRS = { forca: "Força", agilidade: "Agilidade", vigor: "Vigor",
 /* ------------------------------------------------------------------ */
 
 /** Traços que CONCEDEM a habilidade Palavra Arcana (livro, Sessão 4). */
-const TRACOS_COM_PALAVRA = {
+export const TRACOS_COM_PALAVRA = {
   "filhos de kalael": "energio",
   "prole de mizra": "tenebrae",
   "ilusionista natural": "iluzio",
@@ -443,7 +443,7 @@ function acoesOfensivas(data) {
     ["target", "area", "aura", "line", "cone", "lineCustom"].includes(a.targetMode));
 }
 
-function novoApplies(label, extra = {}) {
+export function novoApplies(label, extra = {}) {
   return Object.assign({
     label, fxType: "condition", fxTarget: "", fxValue: "0", fxAll: false,
     durationMode: "scene", durationRounds: "1",
@@ -455,7 +455,7 @@ function novoApplies(label, extra = {}) {
   }, extra);
 }
 
-function novaAcao(label, extra = {}) {
+export function novaAcao(label, extra = {}) {
   return Object.assign({
     label, level: "all", canRoll: false, rollAttr: "conjuracao",
     rollBonus: "0", rollDice: "0", vsDifficulty: false, fixedDifficulty: "8",
@@ -1065,10 +1065,11 @@ function animacoesLigadas() {
 
 Hooks.once("init", () => {
   game.settings.register(MODULE_ID, "animacoesAutomaticas", {
-    name: "Animações automáticas nas magias criadas",
-    hint: "A Criação de Magias escolhe uma animação do Automated Animations (JB2A) que combine com cada ação "
-      + "e com cada condição da magia criada. Ela fica guardada como animação puxada: na ficha do item, ●/○ "
-      + "desliga, ✕ remove e \"limpar animações\" tira todas. Desmarcado, as magias criadas saem sem animação.",
+    name: "Animações automáticas nas magias criadas e nos itens encantados",
+    hint: "A Criação de Magias e o Encantamento de Itens escolhem uma animação do Automated Animations (JB2A) "
+      + "que combine com cada ação e com cada condição do que foi criado. Ela fica guardada como animação puxada: "
+      + "na ficha do item, ●/○ desliga, ✕ remove e \"limpar animações\" tira todas. Desmarcado, as magias "
+      + "criadas e as propriedades encantadas saem sem animação.",
     scope: "world",
     config: true,
     type: Boolean,
@@ -1077,8 +1078,10 @@ Hooks.once("init", () => {
 });
 
 Hooks.once("ready", () => {
-  game.modules.get(MODULE_ID).api = {
+  // O Encantamento de Itens também pendura funções aqui: soma, não troca.
+  const mod = game.modules.get(MODULE_ID);
+  mod.api = Object.assign(mod.api ?? {}, {
     abrirCriacaoDeMagia, METAMAGIAS, animarMagia, animarItem, limparAnimacoesAutomaticas,
-  };
+  });
   console.log("Ligeia — Livro do Jogador | Criação de Magias pronta (botão na ficha).");
 });
