@@ -18,7 +18,16 @@
  * O resultado é um item de magia criado na ficha, com ações ajustadas
  * (bônus das peculiaridades, custo de PM do círculo, dano/condições das
  * metamagias) e a receita registrada na descrição.
+ *
+ * Animações: cada ação e cada condição da magia criada ganham uma animação
+ * do Automated Animations que combine com o que ela ficou fazendo (ver
+ * animacoes.mjs). Ficam guardadas como animação PUXADA — na ficha do item,
+ * ●/○ desliga, ✕ remove e "🎞️ limpar animações" tira todas. A configuração
+ * do módulo "Animações automáticas nas magias criadas" desliga o recurso.
  */
+
+import { animarMagia, limparAnimacoesAutomaticas, criarVerificador,
+         contarAnimacoesAutomaticas } from "./animacoes.mjs";
 
 const MODULE_ID = "ligeia-livro-do-jogador";
 const PACK_MAGIAS = `${MODULE_ID}.magias`;
@@ -252,7 +261,7 @@ const TRACOS_COM_PALAVRA = {
   "ilusionista natural": "iluzio",
 };
 
-const semAcento = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+const semAcento = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
 /**
  * Palavras arcanas que o personagem domina: habilidades "Palavra Arcana [x]"
@@ -617,7 +626,15 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
 /*  Construção do item final                                           */
 /* ------------------------------------------------------------------ */
 
-export async function construirMagia(state) {
+/**
+ * Monta os dados do item da magia criada.
+ * @param {object} state escolhas da oficina
+ * @param {object} [opcoes]
+ * @param {boolean} [opcoes.animar=true] pôr animações automáticas
+ * @param {(chave:string)=>boolean} [opcoes.existe] a animação existe no JB2A
+ *   instalado? (padrão: consulta a base do Sequencer)
+ */
+export async function construirMagia(state, { animar = true, existe = null } = {}) {
   const { base, tier, nome, palavra1, palavra2, palavra3,
           pecs, ajuste, meta2, meta3, escolha2, escolha3 } = state;
   const { circ, pm } = TIERS[tier];
@@ -677,9 +694,16 @@ export async function construirMagia(state) {
   // triplicam (não dobram o dobrado); condições e o efeito em você não se
   // aplicam duas vezes.
   const repetida = circ >= 3 && meta2 && meta3 && meta2.name === meta3.name;
-  if (circ >= 2 && meta2) aplicarMetamagia(data, meta2, circ, escolha2);
+  // As ações que uma metamagia cria levam a palavra dela (para a animação
+  // seguir o tema certo: Magia Furtiva de iluzio numa magia de ignis).
+  const aplicar = (meta, palavra, escolha) => {
+    const antes = new Set(data.system.actions);
+    aplicarMetamagia(data, meta, circ, escolha);
+    for (const a of data.system.actions) if (!antes.has(a)) a._palavra = palavra;
+  };
+  if (circ >= 2 && meta2) aplicar(meta2, palavra2, escolha2);
   if (circ >= 3 && meta3 && !(repetida && ["condition", "selfcond"].includes(meta3.kind))) {
-    aplicarMetamagia(data, meta3, circ, escolha3);
+    aplicar(meta3, palavra3, escolha3);
   }
   for (const a of data.system.actions) {
     delete a._areaBase; delete a._ampliada; delete a._alcanceBase; delete a._dimensional;
@@ -708,6 +732,13 @@ ${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}`;
       metamagias: data.system.metamagics.map((m) => m.name),
     },
   };
+
+  // Animações que combinem com o que a magia ficou fazendo. As automáticas
+  // que vieram da base são refeitas (a forma pode ter mudado: alvo → área);
+  // as que você puxou ou digitou ficam como estão.
+  if (animar) animarMagia(data, { existe: existe ?? criarVerificador() });
+  else limparAnimacoesAutomaticas(data);
+  for (const a of data.system.actions) delete a._palavra;
 
   return data;
 }
@@ -938,9 +969,11 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       base, tier: s.tier, nome: s.nome.trim(), palavra1: s.palavra1,
       palavra2: s.palavra2, palavra3: s.palavra3, pecs, ajuste: s.ajuste,
       meta2, meta3, escolha2: s.escolha2, escolha3: s.escolha3,
-    });
+    }, { animar: animacoesLigadas() });
     const [item] = await this.actor.createEmbeddedDocuments("Item", [data]);
-    ui.notifications.info(`Magia criada: ${item.name} (${s.tier}, ${TIERS[s.tier].pm} PM).`);
+    const nAnim = contarAnimacoesAutomaticas(data);
+    ui.notifications.info(`Magia criada: ${item.name} (${s.tier}, ${TIERS[s.tier].pm} PM)${
+      nAnim ? ` — com ${nAnim} animaç${nAnim > 1 ? "ões" : "ão"} automática${nAnim > 1 ? "s" : ""} (remova pelo ✕ na ficha do item, se quiser)` : ""}.`);
     this.close();
     item.sheet?.render(true);
   }
@@ -981,7 +1014,28 @@ function inserirBotao(app, html) {
 Hooks.on("renderActorSheet", inserirBotao);
 Hooks.on("renderActorSheetV2", inserirBotao);
 
+/** A configuração "Animações automáticas nas magias criadas" está ligada? */
+function animacoesLigadas() {
+  try { return game.settings.get(MODULE_ID, "animacoesAutomaticas") !== false; }
+  catch (e) { return true; } // configuração ainda não registrada
+}
+
+Hooks.once("init", () => {
+  game.settings.register(MODULE_ID, "animacoesAutomaticas", {
+    name: "Animações automáticas nas magias criadas",
+    hint: "A Criação de Magias escolhe uma animação do Automated Animations (JB2A) que combine com cada ação "
+      + "e com cada condição da magia criada. Ela fica guardada como animação puxada: na ficha do item, ●/○ "
+      + "desliga, ✕ remove e \"limpar animações\" tira todas. Desmarcado, as magias criadas saem sem animação.",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+});
+
 Hooks.once("ready", () => {
-  game.modules.get(MODULE_ID).api = { abrirCriacaoDeMagia, METAMAGIAS };
+  game.modules.get(MODULE_ID).api = {
+    abrirCriacaoDeMagia, METAMAGIAS, animarMagia, limparAnimacoesAutomaticas,
+  };
   console.log("Ligeia — Livro do Jogador | Criação de Magias pronta (botão na ficha).");
 });

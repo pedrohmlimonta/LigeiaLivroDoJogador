@@ -7,7 +7,7 @@ Módulo de compêndios para o sistema não-oficial [`ligeia-rpg`](https://github
 | Pack | Documentos | Fonte no livro |
 | --- | --- | --- |
 | **Habilidades** | 267 | Sessão 9 — cada sub-grupo é um item próprio (ex.: `Usar Armas [Machados]`, `Palavra Arcana [ignis]`, `Espírito Guardião [Urso]`), com descrições dos níveis Básico e Avançado, custos, pré-requisitos, listas e, quando aplicável, ações, efeitos e custos de ativação já configurados |
-| **Magias** | 70 | Sessão 11 — todas as magias de exemplo (Círculo Menor) das 28 palavras arcanas, com características, dano, efeitos aplicáveis (condições com rolagem de resistência), peculiaridades de criação e custo de 1 PM nas ações |
+| **Magias** | 70 | Sessão 11 — todas as magias de exemplo (Círculo Menor) das 28 palavras arcanas, com características, dano, efeitos aplicáveis (condições com rolagem de resistência), peculiaridades de criação, custo de 1 PM nas ações e animações automáticas (Automated Animations + JB2A, removíveis na ficha) |
 | **Equipamentos** | 110 | Sessão 10 — armaduras (com efeitos de Proteção/penalidade), todas as armas (com ações de ataque, dano e alcance), escudos, munições, ferramentas, itens gerais, montarias e serviços |
 | **Traços** | 41 | Sessões 4 e 5 — traços de todas as raças e das cinco heranças, com efeitos mecânicos onde cabível |
 | **Raças** | 15 | Sessão 4 — cada raça com descrição, características (dado de melhoria, tamanho, idiomas, corrupção), bônus de deslocamento, lista de habilidades iniciais e os traços raciais embutidos (grantedTraits) |
@@ -51,11 +51,25 @@ Ao trocar de círculo, o **alcance e a área escalam** (“5m x Círculo x Níve
 
 A magia criada entra na ficha com a receita registrada na descrição (palavras, aprimoramentos, peculiaridades e metamagias) e também em `flags` do item. API: `game.modules.get("ligeia-livro-do-jogador").api.abrirCriacaoDeMagia(actor)`.
 
+## Animações automáticas das magias
+
+Com o **Automated Animations**, o **Sequencer** e o **JB2A** (gratuito ou Patreon) ativos, as magias tocam uma animação que combina com o que fazem:
+
+- **Como ela é escolhida**: pelo **elemento do dano** (fogo, frio, raio, ácido, necrótico...) e pela **forma** da ação — projétil até o alvo, no alvo tocado, em cada criatura atingida pela área, no conjurador nas emanações, em você nas magias pessoais. Cura, sobrevida, proteção e bônus têm a sua (curewounds, bolha, escudo, bênção...); sem dano, vale o **tema da palavra** (trevas para tenebrae, encantamento para carmo, adivinhação para augurado, travessia para krucigon...). As **condições** aplicadas ganham um visual que fica no token **enquanto durarem** (medo, atordoado, pasmo, correntes, chamas ou corrosão do dano contínuo...).
+- **Compêndio**: as 53 magias com ações já vêm animadas (57 ações e 22 condições); as 17 só descritivas, sem ação, não têm onde tocar. O compêndio usa apenas animações que existem **nas duas** versões do JB2A.
+- **Criação de Magias**: a animação é escolhida de novo para a magia criada, de acordo com o que ela ficou fazendo — a Esfera Ígnea Ampliada deixa de ser projétil e explode em cada atingido, a Magia Flamejante troca o raio por fogo, e as ações criadas por uma metamagia seguem a palavra dela (Magia Furtiva de iluzio numa magia de ignis: ilusão em você). Com o JB2A Patreon instalado, a oficina usa as versões mais caprichadas (nuvem verde na Nuvem Tóxica, raio verde-escuro no Raio Necrótico...).
+- **Para remover**: elas ficam guardadas como **animação puxada** do sistema, nada de novo. Na ficha do item, em cada ação, **●/○** desliga e **✕** remove; em cada efeito aplicável, **✕** remove o visual; e o botão **🎞️ limpar animações** do cabeçalho tira todas do item de uma vez. Nada é gravado no menu do Automated Animations do item, então, removida, ela não volta tocando como reserva. Para a oficina criar magias sem animação, desmarque **Animações automáticas nas magias criadas** nas configurações do módulo. Uma animação que você puxou ou digitou (no "Avançado") nunca é trocada — nem na magia de base de uma criação.
+- **Trocar por outra**: configure a animação no menu do Automated Animations do item (botão A-A no cabeçalho) e use **↻** / **🎞️ Puxar animação do item** na ação — o fluxo normal do sistema.
+- **Áreas**: o sistema entrega ao Automated Animations as criaturas atingidas, não o ponto do template, então a explosão de uma área toca em cada atingido.
+- O módulo *Automated Animations For All* não é necessário com o sistema Ligeia (o sistema já chama o Automated Animations); se ele estiver ligado e alguma animação sair dobrada, desligue-o.
+
+As regras ficam em `esmodules/animacoes.mjs` — as mesmas para o compêndio e para a oficina. API: `animarMagia(dados)` e `limparAnimacoesAutomaticas(dados)` em `game.modules.get("ligeia-livro-do-jogador").api`, sobre os dados de um item (`item.toObject()`).
+
 ## Validação e testes
 
-O build (`python3 scripts/generate.py`) termina conferindo os 588 documentos contra o schema do sistema (`scripts/validate.py`): todas as opções enumeradas (tipos de efeito, níveis, modos de alvo, recursos, condições, tipos de dano), campos string × número, fórmulas e `@variáveis`, e armadilhas conhecidas do motor (ex.: `restore` é instantâneo e não sustenta regeneração; dano bônus só soma por tipagem de arma; resistência “contra a rolagem” numa ação que não rola teria CD 0). Também confere que cada traço concedido e cada habilidade-chave embutidos nas definições são idênticos ao item do compêndio para o qual apontam. Qualquer erro interrompe o build — inclusive na Action de release.
+O build (`python3 scripts/generate.py`) termina conferindo os 588 documentos contra o schema do sistema (`scripts/validate.py`): todas as opções enumeradas (tipos de efeito, níveis, modos de alvo, recursos, condições, tipos de dano), campos string × número, fórmulas e `@variáveis`, e armadilhas conhecidas do motor (ex.: `restore` é instantâneo e não sustenta regeneração; dano bônus só soma por tipagem de arma; resistência “contra a rolagem” numa ação que não rola teria CD 0). Também confere que cada traço concedido e cada habilidade-chave embutidos nas definições são idênticos ao item do compêndio para o qual apontam, e que cada animação automática está no formato que o Automated Animations lê (versão 5, ligada, no token e persistente nos visuais de efeito) e cita uma animação presente no JB2A gratuito **e** no Patreon (catálogo em `scripts/aa-chaves.json`, extraído da base do Automated Animations v8, MIT). Qualquer erro interrompe o build — inclusive na Action de release.
 
-A oficina de magias tem testes em `tests/spellforge.test.mjs` (`node tests/spellforge.test.mjs`), cobrindo prioridade das metamagias, escala por círculo, aprimoramentos gratuitos, peculiaridades por círculo e a própria janela: ela é aberta sobre um ApplicationV2 de teste com os mesmos getters do Foundry v13 (`state`, `element`, `title`...), lista as palavras da ficha e cria a magia no personagem.
+A oficina de magias tem testes em `tests/spellforge.test.mjs` (`node tests/spellforge.test.mjs`), cobrindo prioridade das metamagias, escala por círculo, aprimoramentos gratuitos, peculiaridades por círculo, as animações da magia criada e a própria janela: ela é aberta sobre um ApplicationV2 de teste com os mesmos getters do Foundry v13 (`state`, `element`, `title`...), lista as palavras da ficha e cria a magia no personagem. As tabelas de animação têm testes próprios em `tests/animacoes.test.mjs` (chaves reais, plano B do JB2A gratuito em toda lista, consulta à base do Sequencer, preservação das animações que você puxou e remoção).
 
 ## Instalação
 
@@ -67,7 +81,7 @@ https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/releases/latest/download/
 
 **Manual**: clone/extraia esta pasta em `Data/modules/ligeia-livro-do-jogador/`. Os packs compilados (`packs/`) já acompanham o repositório.
 
-Requer o sistema `ligeia-rpg` (mínimo 0.2.0, incluindo a versão com o tipo de item **Complicação**; Foundry v13/v14). O pack Complicações usa como fonte o suplemento oficial Avulso 09 — Complicações (Dinho Reis, CC-BY-NC-ND), mesma observação de licença do Livro de Regras. Ative o módulo no mundo e os quatro compêndios aparecem na pasta **Ligeia — Livro do Jogador**.
+Requer o sistema `ligeia-rpg` (mínimo 0.2.0, incluindo a versão com o tipo de item **Complicação**; Foundry v13/v14). O pack Complicações usa como fonte o suplemento oficial Avulso 09 — Complicações (Dinho Reis, CC-BY-NC-ND), mesma observação de licença do Livro de Regras. Ative o módulo no mundo e os compêndios aparecem na pasta **Ligeia — Livro do Jogador**. Opcional, para as animações das magias: Automated Animations + Sequencer + JB2A.
 
 ## Arquitetura e build
 
@@ -79,6 +93,8 @@ scripts/
   enhance.py             # automação transversal (perícias, fórmulas, passivo × ativável)
   enhance_levels.py      # ações/efeitos por nível (B/A/E) e ações "Ativar" dos ativáveis
   enhance_audit.py       # revisão de todas as habilidades: gastos por nível, manobras, perícias mistas
+  animar-compendio.mjs   # animações automáticas nas magias (Node; chamado pelo generate.py)
+  aa-chaves.json         # catálogo das animações do JB2A gratuito e Patreon (Automated Animations v8)
   validate.py            # validação contra o schema do sistema (roda no fim do build)
   data_habilidades_*.py  # dados transcritos do livro (Sessão 9)
   data_magias_*.py       # magias de exemplo (Sessão 11)
@@ -86,7 +102,12 @@ scripts/
   data_tracos.py         # Sessões 4 e 5
   generate.py            # escreve packs-source/**/*.json (IDs determinísticos)
   compile-packs.mjs      # compila packs-source/ -> packs/ (LevelDB, foundryvtt-cli)
+esmodules/
+  spellforge.mjs         # Criação de Magias (botão na ficha)
+  animacoes.mjs          # regras das animações automáticas (compêndio e oficina)
 ```
+
+O `generate.py` precisa do Node.js para animar as magias (sem ele, avisa e gera as magias sem animação).
 
 Para rebuildar após editar os dados:
 

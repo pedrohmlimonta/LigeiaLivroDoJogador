@@ -24,6 +24,11 @@ jobs:
       - name: Gerar documentos dos packs
         run: python3 scripts/generate.py
 
+      - name: Testes (Criação de Magias e animações)
+        run: |
+          node tests/animacoes.test.mjs
+          node tests/spellforge.test.mjs
+
       - name: Compilar packs (LevelDB)
         run: |
           npm install --no-fund --no-audit

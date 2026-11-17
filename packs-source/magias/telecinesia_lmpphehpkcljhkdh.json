@@ -74,8 +74,94 @@
             "tickHealResource": "hp",
             "fxFile": "",
             "fxScale": "1",
-            "fxAaConfig": null,
-            "fxAaName": "",
+            "fxAaConfig": {
+              "id": "cZFeLMXdn2wge2pz",
+              "label": "Telecinésia",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.marker.energystrand.02.purpleblue",
+                "nome": "Telecinese"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "marker",
+                  "animation": "energystrand",
+                  "variant": "02",
+                  "color": "purpleblue",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Telecinese (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
             "grantTempHp": "0"
@@ -90,8 +176,94 @@
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
-        "aaConfig": null,
-        "aaName": "",
+        "aaConfig": {
+          "id": "qlW3qTMuK8V1dTyr",
+          "label": "Telecinésia",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.generic.whirl.loop.blue",
+            "nome": "Cinese"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "generic",
+              "animation": "whirl",
+              "variant": "loop",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "target",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Telecinésia (automática)",
         "aaEnabled": true,
         "animFile": "",
         "animPlacement": "target",

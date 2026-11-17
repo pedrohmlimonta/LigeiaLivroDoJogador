@@ -48,6 +48,21 @@ VARS = {"nivel", "forca", "agilidade", "vigor", "mente", "percepcao", "bloqueio"
 FORMULA = re.compile(r"^[0-9@a-z\.\+\-\*\/\(\) ,_]*$")
 SIZES = {"minusculo", "diminuto", "miudo", "pequeno", "medio", "grande", "enorme",
          "imenso", "colossal", "continental"}
+MODULO = "ligeia-livro-do-jogador"
+PLAY_ON = {"source", "target", "default", "both"}
+
+
+def _chaves_jb2a():
+    """Chaves do Automated Animations presentes no JB2A gratuito E no Patreon."""
+    caminho = os.path.join(ROOT, "scripts", "aa-chaves.json")
+    try:
+        cat = json.load(open(caminho, encoding="utf-8"))
+    except OSError:
+        return None
+    return set(cat["free"]) & set(cat["patreon"])
+
+
+AMBOS = _chaves_jb2a()
 
 
 class V:
@@ -133,6 +148,41 @@ def validar_aplicavel(v, onde, ap):
         v.err(onde, "encantamento com valor 0 é descartado pelo sistema")
 
 
+def validar_animacao(v, onde, cfg, persistente):
+    """Animação automática guardada como animação puxada (Automated Animations v8)."""
+    if not isinstance(cfg, dict):
+        v.err(onde, f"animação deveria ser objeto (é {type(cfg).__name__})")
+        return
+    menu = cfg.get("menu")
+    v.choice(onde, "animação.menu", menu, {"ontoken", "range"})
+    if cfg.get("version") != 5:
+        v.err(onde, f"animação com version {cfg.get('version')!r}: o Automated Animations ignora flags abaixo da 5")
+    if cfg.get("isEnabled") is not True or cfg.get("isCustomized") is not True:
+        v.err(onde, "animação precisa de isEnabled e isCustomized verdadeiros (senão o AA a ignora)")
+    if (cfg.get("metaData") or {}).get("origem") != MODULO:
+        v.err(onde, "animação sem metaData.origem do módulo (a Criação de Magias não a reconheceria)")
+    prim = cfg.get("primary") or {}
+    vid = prim.get("video") or {}
+    partes = [vid.get(k) for k in ("dbSection", "menuType", "animation", "variant", "color")]
+    if not all(isinstance(x, str) and x for x in partes):
+        v.err(onde, f"animação com vídeo incompleto {vid!r}")
+        return
+    chave = ".".join(partes)
+    if AMBOS is not None and chave not in AMBOS:
+        v.err(onde, f"animação {chave!r} não existe nas duas versões do JB2A (gratuito e Patreon)")
+    if (menu == "range") != (partes[0] == "range"):
+        v.err(onde, f"animação {chave!r} com menu {menu!r}")
+    if vid.get("enableCustom"):
+        v.err(onde, "animação automática não deve usar caminho personalizado")
+    op = prim.get("options") or {}
+    if menu == "ontoken":
+        v.choice(onde, "animação.playOn", op.get("playOn"), PLAY_ON)
+        if not (isinstance(op.get("size"), (int, float)) and op.get("size") > 0):
+            v.err(onde, f"animação com tamanho {op.get('size')!r}")
+    if persistente and not (menu == "ontoken" and op.get("persistent") is True):
+        v.err(onde, "visual de efeito precisa ser no token e persistente (dura enquanto o efeito durar)")
+
+
 def validar_acao(v, onde, a):
     v.choice(onde, "action.level", a.get("level", "all"), LEVELS)
     v.choice(onde, "action.targetMode", a.get("targetMode"), TARGET_MODES)
@@ -159,8 +209,16 @@ def validar_acao(v, onde, a):
     for ex in a.get("extraDamage", []):
         v.choice(onde, "extraDamage.resource", ex.get("resource", "hp"), RES3)
         v.formula(onde, "extraDamage.formula", ex.get("formula", ""))
+    if a.get("aaConfig"):
+        validar_animacao(v, f"{onde} › animação", a["aaConfig"], False)
+        if a.get("aaEnabled") is not True or not a.get("aaName"):
+            v.err(onde, "ação com animação automática precisa de aaEnabled e aaName")
     for i, ap in enumerate(a.get("appliesEffects", [])):
         validar_aplicavel(v, f"{onde} › aplica[{i}] {ap.get('label', '')[:30]}", ap)
+        if ap.get("fxAaConfig"):
+            validar_animacao(v, f"{onde} › aplica[{i}] › visual", ap["fxAaConfig"], True)
+            if not ap.get("fxAaName") or ap.get("fxAaPersist") is not True:
+                v.err(onde, f"aplica[{i}] com visual automático precisa de fxAaName e fxAaPersist")
         # Sem rolagem, a "CD = resultado da conjuração/ataque" vira 0 e a
         # condição cai no primeiro teste: use CD fixa ou "refazer a cada rodada".
         if (ap.get("resist") and ap.get("resistVsCast") and not ap.get("resistReroll")
@@ -219,6 +277,10 @@ def main(root=ROOT):
             docs.append((pack, d))
             por_uuid[f"Compendium.ligeia-livro-do-jogador.{pack}.Item.{d['_id']}"] = d
             validar_sistema(v, f"{pack}/{d['name']}", d["type"], d["system"])
+            # A animação fica nas ações: uma animação no ITEM tocaria como
+            # reserva e voltaria depois de removida da ação.
+            if (d.get("flags") or {}).get("autoanimations"):
+                v.err(f"{pack}/{d['name']}", "flags.autoanimations no item (use a animação da ação)")
     # Instantâneos (traços concedidos e habilidades-chave) que apontam para um
     # item do compêndio têm de ser idênticos a ele: é o que a ficha recria.
     for pack, d in docs:

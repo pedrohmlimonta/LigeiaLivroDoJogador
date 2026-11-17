@@ -152,7 +152,47 @@ if (app) {
   ok(criadas.length === 1 && nova.system.tier === 'Maior' && nova.system.actions[0].damageType === 'raio'
      && !('_id' in nova), `criou "${nova?.name}" na ficha (Maior, dano de raio, id novo)`);
   ok(app.state === -1, 'a janela fecha depois de criar');
+  const anim = nova?.system.actions[0].aaConfig;
+  ok(anim?.metaData?.origem === 'ligeia-livro-do-jogador' && anim.primary.video.animation === 'chainlightning',
+     'a magia criada pela janela já vem com animação (raio, pela metamagia da 3ª palavra)');
 }
+
+console.log('10) Animações da magia criada acompanham o que ela ficou fazendo');
+const anim = await import(new URL('../esmodules/animacoes.mjs', import.meta.url).href);
+const chave = (cfg) => cfg && ['dbSection', 'menuType', 'animation', 'variant', 'color'].map((k) => cfg.primary.video[k]).join('.');
+d = await criar(load('esfera-ignea'), 'Intermediária', 'ignis', 'majesto', '', amp, null);
+a = d.system.actions[0];
+ok(a.targetMode === 'area' && a.aaConfig?.menu === 'ontoken' && a.aaConfig.primary.options.playOn === 'target'
+   && chave(a.aaConfig) === 'static.spell.fireball.explode.orange',
+   `Esfera Ígnea Ampliada: deixa de ser projétil e explode em cada atingido (${chave(a.aaConfig)})`);
+d = await criar(load('raio-arcano'), 'Intermediária', 'energio', 'ignis', '', M.ignis.find((m) => m.name === 'Magia Flamejante'), null);
+ok(chave(d.system.actions[0].aaConfig) === 'range.spell.firebolt.01.orange', 'Raio Arcano Flamejante: dano de fogo → projétil de fogo');
+const furtiva = M.iluzio.find((m) => m.name === 'Magia Furtiva');
+d = await criar(load('esfera-ignea'), 'Intermediária', 'ignis', 'iluzio', '', furtiva, null);
+const voce = d.system.actions.find((x) => /\(você\)/.test(x.label));
+ok(chave(voce?.aaConfig) === 'static.magicsign.illusion.02.purple' && voce.aaConfig.primary.options.playOn === 'source',
+   'ação criada pela metamagia segue a palavra DELA (Magia Furtiva de iluzio: ilusão em você)');
+ok(chave(d.system.actions[0].aaConfig) === 'range.spell.firebolt.01.orange', 'a ação da base continua com a dela');
+ok(!d.system.actions.some((x) => '_palavra' in x), 'sem campo auxiliar de palavra no item salvo');
+d = await criar(load('raio-arcano'), 'Intermediária', 'energio', 'vitae', '', M.vitae.find((m) => m.name === 'Magia Curativa'), null);
+const cura = d.system.actions.find((x) => x.heal);
+ok(chave(cura?.aaConfig) === 'static.spell.curewounds.01.blue' && cura.aaConfig.primary.options.playOn === 'default',
+   'Magia Curativa: cura no alvo (ou em você)');
+d = await criar(load('rajada-acida'), 'Intermediária', 'acida', 'ignis', '', ard, null);
+const vis = d.system.actions[0].appliesEffects.map((x) => chave(x.fxAaConfig));
+ok(vis.includes('static.shieldfx.fire.01.orange') && vis.includes('static.energy.strands.02.green'),
+   'Magia Ardente: o dano contínuo de fogo ganha chamas, ao lado da corrosão da base');
+d = await mod.construirMagia({ base: load('esfera-ignea'), tier: 'Menor', nome: '', palavra1: 'ignis', palavra2: '', palavra3: '',
+  pecs: [], ajuste: 0, meta2: null, meta3: null, escolha2: {}, escolha3: {} }, { animar: false });
+ok(anim.contarAnimacoesAutomaticas(d) === 0, 'configuração desligada: a magia criada sai sem animação automática (nem a da base)');
+const bc = load('raio-arcano');
+const sysc = JSON.parse(JSON.stringify(bc.system));
+const minha = { menu: 'ontoken', primary: { video: { dbSection: 'static', menuType: 'spell', animation: 'bless', variant: 'intro', color: 'yellow' } } };
+sysc.actions[0].aaConfig = minha;
+const baseMinha = { name: bc.name, system: sysc,
+  toObject() { return JSON.parse(JSON.stringify({ name: bc.name, type: 'magia', system: sysc, flags: {} })); } };
+d = await criar(baseMinha, 'Intermediária', 'energio', 'ignis', '', M.ignis.find((m) => m.name === 'Magia Flamejante'), null);
+ok(JSON.stringify(d.system.actions[0].aaConfig) === JSON.stringify(minha), 'animação que você pôs na magia de base é mantida');
 
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

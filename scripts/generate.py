@@ -135,6 +135,18 @@ PACKS = {
 }
 
 
+def animar_magias():
+    """Põe as animações automáticas em packs-source/magias (Node)."""
+    import shutil
+    import subprocess
+    node = shutil.which("node")
+    if not node:
+        print("AVISO — Node.js não encontrado: as magias saem sem as animações "
+              "automáticas (scripts/animar-compendio.mjs).")
+        return
+    subprocess.run([node, os.path.join(ROOT, "scripts", "animar-compendio.mjs")], check=True)
+
+
 def main():
     total = 0
     # Catálogo de nomes de habilidade (já com colchetes) para expandir e
@@ -190,6 +202,9 @@ def main():
         for p_ in problemas:
             print("  -", p_)
         raise SystemExit(1)
+    # Animações automáticas das magias: as mesmas regras da Criação de Magias
+    # (esmodules/animacoes.mjs), rodadas pelo Node para não haver duas cópias.
+    animar_magias()
     # Confere cada documento contra o schema do sistema (choices, tipos,
     # fórmulas) — o build falha se algo seria recusado pelo Foundry.
     import validate
