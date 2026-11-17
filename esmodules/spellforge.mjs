@@ -682,7 +682,7 @@ ${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}`;
 /*  A janela da oficina                                                */
 /* ------------------------------------------------------------------ */
 
-class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
+export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
   static DEFAULT_OPTIONS = {
     id: "ligeia-spellforge-{id}",
     classes: ["ligeia-spellforge"],
@@ -693,7 +693,9 @@ class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
   constructor(actor, options = {}) {
     super(options);
     this.actor = actor;
-    this.state = {
+    // Estado da oficina. Não pode se chamar "state": em ApplicationV2 esse
+    // nome é um getter (estado de renderização) e atribuir a ele quebra.
+    this.forja = {
       tier: "Menor", palavra1: "", palavra2: "", palavra3: "",
       baseId: "", nome: "", ajuste: 0,
       pecsMarcadas: new Set(), meta2i: -1, meta3i: -1,
@@ -706,8 +708,8 @@ class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
   get title() { return `Criação de Magias — ${this.actor.name}`; }
 
   async carregarBases() {
-    this.bases = this.state.palavra1 ? await magiasBase(this.state.palavra1) : [];
-    if (!this.bases.find((b) => b.id === this.state.baseId)) this.state.baseId = "";
+    this.bases = this.forja.palavra1 ? await magiasBase(this.forja.palavra1) : [];
+    if (!this.bases.find((b) => b.id === this.forja.baseId)) this.forja.baseId = "";
   }
 
   #opcoes(lista, atual, vazio) {
@@ -742,7 +744,7 @@ class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
 
   async _renderHTML() {
     await this.carregarBases();
-    const s = this.state;
+    const s = this.forja;
     const { circ, pm } = TIERS[s.tier];
     const base = this.bases.find((b) => b.id === s.baseId) ?? null;
     const pecs = base ? parsePeculiaridades(base) : [];
@@ -847,7 +849,7 @@ class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
   }
 
   #listeners(root) {
-    const s = this.state;
+    const s = this.forja;
     const on = (sel, ev, fn) => root.querySelectorAll(sel).forEach((n) => n.addEventListener(ev, fn));
     on('select[name=tier]', "change", (e) => { s.tier = e.target.value; this.render(); });
     on('select[name=palavra1]', "change", (e) => {
@@ -880,11 +882,11 @@ class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     }
     on('input[name=nome]', "input", (e) => { s.nome = e.target.value; });
     on('[data-action=cancelar]', "click", () => this.close());
-    on('[data-action=criar]', "click", () => this.#criar());
+    on('[data-action=criar]', "click", () => this.criar());
   }
 
-  async #criar() {
-    const s = this.state;
+  async criar() {
+    const s = this.forja;
     const base = this.bases.find((b) => b.id === s.baseId);
     if (!base) return ui.notifications.warn("Escolha a magia de base.");
     const { circ } = TIERS[s.tier];
@@ -912,7 +914,9 @@ class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
 export function abrirCriacaoDeMagia(actor) {
   actor ??= canvas.tokens?.controlled[0]?.actor ?? game.user.character;
   if (!actor) return ui.notifications.warn("Selecione um personagem.");
-  new SpellForgeApp(actor).render(true);
+  const app = new SpellForgeApp(actor);
+  app.render({ force: true });
+  return app;
 }
 
 /* ------------------------------------------------------------------ */

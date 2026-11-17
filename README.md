@@ -54,7 +54,7 @@ A magia criada entra na ficha com a receita registrada na descrição (palavras,
 
 O build (`python3 scripts/generate.py`) termina conferindo os 588 documentos contra o schema do sistema (`scripts/validate.py`): todas as opções enumeradas (tipos de efeito, níveis, modos de alvo, recursos, condições, tipos de dano), campos string × número, fórmulas e `@variáveis`, e armadilhas conhecidas do motor (ex.: `restore` é instantâneo e não sustenta regeneração; dano bônus só soma por tipagem de arma; resistência “contra a rolagem” numa ação que não rola teria CD 0). Também confere que cada traço concedido e cada habilidade-chave embutidos nas definições são idênticos ao item do compêndio para o qual apontam. Qualquer erro interrompe o build — inclusive na Action de release.
 
-A oficina de magias tem testes em `tests/spellforge.test.mjs` (`node tests/spellforge.test.mjs`), cobrindo prioridade das metamagias, escala por círculo, aprimoramentos gratuitos e peculiaridades por círculo.
+A oficina de magias tem testes em `tests/spellforge.test.mjs` (`node tests/spellforge.test.mjs`), cobrindo prioridade das metamagias, escala por círculo, aprimoramentos gratuitos, peculiaridades por círculo e a própria janela: ela é aberta sobre um ApplicationV2 de teste com os mesmos getters do Foundry v13 (`state`, `element`, `title`...), lista as palavras da ficha e cria a magia no personagem.
 
 ## Instalação
 

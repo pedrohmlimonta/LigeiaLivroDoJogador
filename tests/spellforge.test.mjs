@@ -1,10 +1,46 @@
 // Testes da Criação de Magias: node tests/spellforge.test.mjs (após python3 scripts/generate.py)
-globalThis.foundry = { utils: { escapeHTML: (s)=>String(s) }, applications: { api: { ApplicationV2: class {} } } };
-globalThis.Hooks = { on(){}, once(){} };
-globalThis.game = { packs: new Map(), items: [] };
-const mod = await import(new URL('../esmodules/spellforge.mjs', import.meta.url).href);
 import fs from 'fs';
+
+// ApplicationV2 de teste com a mesma superfície pública do Foundry v13: os
+// getters (state, element, id, title, window...) não têm setter, então uma
+// subclasse que atribua a um deles quebra aqui exatamente como quebra no
+// Foundry ("Cannot set property state ... which has only a getter").
+class ApplicationV2 {
+  #state = 0;
+  #element = null;
+  options;
+  position = {};
+  tabGroups = {};
+  constructor(options = {}) { this.options = Object.freeze({ ...this.constructor.DEFAULT_OPTIONS, ...options }); }
+  get state() { return this.#state; }
+  get element() { return this.#element; }
+  get id() { return 'app-1'; }
+  get title() { return this.options.window?.title ?? ''; }
+  get window() { return {}; }
+  get form() { return null; }
+  get rendered() { return this.#state === 2; }
+  get minimized() { return false; }
+  get hasFrame() { return true; }
+  get classList() { return undefined; }
+  async render() {
+    const conteudo = { filho: null, replaceChildren(x) { this.filho = x; }, querySelectorAll() { return []; } };
+    this.#element = conteudo;
+    this._replaceHTML(await this._renderHTML(), conteudo);
+    this.#state = 2;
+    return this;
+  }
+  async close() { this.#state = -1; }
+}
+globalThis.foundry = { utils: { escapeHTML: (s)=>String(s) }, applications: { api: { ApplicationV2 } } };
+globalThis.Hooks = { on(){}, once(){} };
+globalThis.ui = { notifications: { info(){}, warn(){} } };
+globalThis.document = { createElement: () => ({ className: '', innerHTML: '' }) };
 const dir=new URL('../packs-source/magias/', import.meta.url).pathname;
+const todas = fs.readdirSync(dir).map((f) => JSON.parse(fs.readFileSync(`${dir}/${f}`, 'utf8')))
+  .map((raw) => ({ id: raw._id, name: raw.name, type: 'magia', system: raw.system,
+    toObject() { return JSON.parse(JSON.stringify({ _id: raw._id, name: raw.name, type: 'magia', img: raw.img, system: raw.system, flags: {} })); } }));
+globalThis.game = { packs: new Map([['ligeia-livro-do-jogador.magias', { getDocuments: async () => todas }]]), items: [] };
+const mod = await import(new URL('../esmodules/spellforge.mjs', import.meta.url).href);
 const load=(p)=>{ const f=fs.readdirSync(dir).find(x=>x.startsWith(p));
   const raw=JSON.parse(fs.readFileSync(`${dir}/${f}`,'utf8'));
   return { name: raw.name, system: raw.system,
@@ -54,6 +90,38 @@ ok(mod.slotFormula('Nível x Círculo', 2) === '2*@nivel', mod.slotFormula('Nív
 ok(mod.slotFormula('3m x Círculo x Nível', 3) === '9*@nivel', mod.slotFormula('3m x Círculo x Nível', 3));
 ok(mod.slotFormula('1m x Nível', 3) === '@nivel', mod.slotFormula('1m x Nível', 3));
 ok(mod.slotFormula('Toque', 2) === null, 'Toque não escala');
+
+console.log('7) Janela da oficina: abre, lista as palavras da ficha e cria a magia no personagem');
+const criadas = [];
+const ator = { name: 'Arcanista', items: [
+    { type: 'habilidade', name: 'Palavra Arcana [energio]', system: { level: 'B' } },
+    { type: 'habilidade', name: 'Palavra Arcana [ignis]', system: { level: 'A' } },
+    { type: 'habilidade', name: 'Palavra Arcana [fulgur]', system: { level: 'B' } },
+    { type: 'traco', name: 'Prole de Mizra', system: {} }],
+  async createEmbeddedDocuments(tipo, lista) { criadas.push(...lista); return lista.map((x) => ({ ...x, sheet: null })); } };
+let app = null;
+try { app = mod.abrirCriacaoDeMagia(ator); ok(true, 'a janela é construída sem colidir com os getters do ApplicationV2'); }
+catch (e) { ok(false, `abrir a janela: ${e.message}`); }
+if (app) {
+  await app.render({ force: true });
+  let html = app.element.filho.innerHTML;
+  ok(['energio', 'ignis', 'fulgur', 'tenebrae'].every((p) => html.includes(`value="${p}"`)),
+     'palavras da ficha (habilidades + traço racial) aparecem para escolha');
+  app.forja.palavra1 = 'energio'; await app.render();
+  const raio = app.bases.find((x) => x.name === 'Raio Arcano');
+  ok(!!raio && app.element.filho.innerHTML.includes('Raio Arcano'), 'magias Menores de energio listadas como base');
+  Object.assign(app.forja, { tier: 'Maior', baseId: raio?.id, palavra2: 'ignis', palavra3: 'fulgur',
+    meta2i: M.ignis.findIndex((m) => m.name === 'Magia Flamejante'),
+    meta3i: M.fulgur.findIndex((m) => m.name === 'Magia Eletrizante') });
+  await app.render();
+  html = app.element.filho.innerHTML;
+  ok(html.includes('<b>3 PM</b>') && html.includes('Magia Eletrizante'), 'resumo mostra custo e metamagias do círculo Maior');
+  await app.criar();
+  const nova = criadas[0];
+  ok(criadas.length === 1 && nova.system.tier === 'Maior' && nova.system.actions[0].damageType === 'raio'
+     && !('_id' in nova), `criou "${nova?.name}" na ficha (Maior, dano de raio, id novo)`);
+  ok(app.state === -1, 'a janela fecha depois de criar');
+}
 
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);
