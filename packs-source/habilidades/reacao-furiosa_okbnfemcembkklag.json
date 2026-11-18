@@ -55,6 +55,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Reação Furiosa: +metade do Nível vs quem te feriu (ligue quando valer)",
@@ -230,6 +238,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Reação Furiosa: +metade do Nível vs quem te feriu (ligue quando valer)",

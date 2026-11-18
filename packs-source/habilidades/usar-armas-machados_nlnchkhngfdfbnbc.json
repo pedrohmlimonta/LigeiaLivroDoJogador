@@ -55,6 +55,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Arauto do Terror: +dano com a arma",
@@ -144,6 +152,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Abalado (Mente anula)",

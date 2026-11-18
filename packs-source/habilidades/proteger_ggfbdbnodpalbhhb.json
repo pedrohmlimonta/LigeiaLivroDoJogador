@@ -55,6 +55,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Protegido: metade do dano bruto vai para o protetor",
@@ -230,6 +238,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Protegido (A): todo o dano vai para o protetor",

@@ -55,6 +55,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Precisão Incontestável: +4 no ataque",

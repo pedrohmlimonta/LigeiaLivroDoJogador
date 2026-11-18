@@ -55,6 +55,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Atravessar Armaduras: +dano com a arma",

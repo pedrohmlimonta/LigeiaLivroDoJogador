@@ -53,6 +53,14 @@
           "snap": true
         },
         "preActivations": [],
+        "drain": {
+          "enabled": true,
+          "resource": "hp",
+          "from": "scaling",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
         "appliesEffects": [
           {
             "label": "Enfraquecido (Vigor anula)",

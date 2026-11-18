@@ -81,6 +81,7 @@ MAGIAS_2 = [
        actions=[action("Toque Vampírico (Conjuração vs Esquiva — drena vida)",
                        roll_attr="conjuracao", damage="1", damage_type="necrotico",
                        defense_attr="esquiva", cost_mp=1,
+                       drain={"resource": "hp", "from": "scaling", "ratio": 1},
                        applies_effects=[applies("Enfraquecido (Vigor anula)",
                                                 fx_type="condition", fx_target="enfraquecido",
                                                 duration_mode="scene", resist=True,

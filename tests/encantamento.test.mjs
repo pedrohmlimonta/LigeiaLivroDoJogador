@@ -365,7 +365,7 @@ class AtorFalso {
   constructor(nome) { this.documentName = 'Actor'; this.name = nome; this._itens = []; this.apagados = []; }
   get items() { const lista = this._itens; return Object.assign([...lista], { get: (id) => lista.find((i) => i.id === id) }); }
   _pôr(dados) {
-    const it = { ...JSON.parse(JSON.stringify(dados)), id: dados.id ?? `i${++seq}`, parent: this };
+    const it = { ...JSON.parse(JSON.stringify(dados)), id: dados.id ?? dados._id ?? `i${++seq}`, parent: this };
     it.flags ??= {};
     it.delete = async () => { await this.deleteEmbeddedDocuments('Item', [it.id]); };
     it.toObject = () => { const { parent: _p, delete: _d, toObject: _t, update: _u, ...resto } = it; return JSON.parse(JSON.stringify(resto)); };
@@ -382,7 +382,10 @@ class AtorFalso {
   }
   async createEmbeddedDocuments(_t, lista) { return lista.map((x) => this._pôr(x)); }
   async deleteEmbeddedDocuments(_t, ids) { this.apagados.push(...ids); this._itens = this._itens.filter((i) => !ids.includes(i.id)); return ids; }
-  async updateEmbeddedDocuments(_t, lista) { for (const u of lista) Object.assign(this._itens.find((i) => i.id === u._id), u); return lista; }
+  async updateEmbeddedDocuments(_t, lista) {
+    for (const { _id, ...mud } of lista) await this._itens.find((i) => i.id === _id)?.update(mud);
+    return lista;
+  }
 }
 const vinc = (ator, id) => ator.items.filter((i) => i.type === 'magia' && i.flags?.[MOD]?.doItem === id);
 const lyra = new AtorFalso('Lyra');
@@ -423,7 +426,8 @@ ok(vinc(ana, 'varA').length === 1, 'pedidos simultâneos de sincronizar não dup
 // ganchos (rodam só para quem fez a mudança)
 globalThis.game.user.id = 'u1';
 globalThis.foundry.utils.hasProperty = (o, k) => k.split('.').reduce((x, p) => (x && typeof x === 'object' && p in x ? x[p] : undefined), o) !== undefined;
-const gancho = (nome) => ganchos[nome]?.find(() => true);
+// Como o Foundry: todos os ganchos registrados para o evento (o de referências e o do encantamento).
+const gancho = (nome) => async (...args) => { for (const fn of ganchos[nome] ?? []) await fn(...args); };
 await gancho('deleteItem')?.(varinha, {}, 'u1');
 await new Promise((res) => setTimeout(res, 0));
 ok(vinc(lyra, 'var1').length === 0, 'item apagado da ficha: a magia vinculada vai junto');
@@ -637,6 +641,100 @@ const fim1 = await soltoDepois({ origin: 'x' });
 const fim2 = await seqFalso.EffectManager.endEffects({ name: 'y' }, false);
 ok(fim1.origin === 'x' && fim1.push === true && fim2.name === 'y' && fim2.push === false,
    'com o ajuste, a chamada solta funciona e a normal continua igual (com os mesmos argumentos)');
+
+console.log('15) Item conjurador com magia em cadeia (sistema build 27)');
+const sf = await import(new URL('../esmodules/spellforge.mjs', import.meta.url).href);
+const refs = await import(new URL('../esmodules/referencias.mjs', import.meta.url).href);
+const baseDe = (nome) => { const m = magia(nome); return { id: m._id, name: m.name, system: m.system, toObject: () => JSON.parse(JSON.stringify(m)) }; };
+const meta = (p, n) => sf.METAMAGIAS[p].find((m) => m.name === n);
+const invisivel = await sf.construirMagia({ base: baseDe('Esfera Ígnea'), tier: 'Intermediária', nome: 'Esfera Invisível', palavra1: 'ignis',
+  palavra2: 'iluzio', palavra3: '', pecs: [], ajuste: 0, meta2: meta('iluzio', 'Magia Invisível'), meta3: null, escolha2: {}, escolha3: {} });
+const lr = (ref) => refs.lerRef(ref);
+ok(invisivel.system.actions.length === 3 && invisivel.system.actions[0].costMp === '2', 'a magia criada: a principal (2 PM) e as duas de bastidor da Magia Invisível');
+const hana = new AtorFalso('Hana');
+const ala4 = hana._pôr({ ...construirItemConjurador(eq('Alabarda'), { magia: { ...invisivel, toObject: () => JSON.parse(JSON.stringify(invisivel)) } }), id: 'ala4' });
+const gat4 = ala4.system.actions.filter((a) => String(a.label).startsWith('✦'));
+ok(gat4.length === 1 && gat4[0].label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — 2 PM',
+   'a Alabarda ganha só a ação que se usa (✦ ... — 2 PM): as de bastidor vão junto, pela magia vinculada');
+await sincronizarMagiasDoItem(ala4);
+const comp4 = vinc(hana, 'ala4')[0];
+const a0 = comp4?.system.actions[0];
+ok(comp4 && comp4.id === lr(a0.preActivations[0].ref).id && lr(a0.chainActions[0].ref).id === comp4.id
+   && lr(a0.chainActions[0].ref).nome === 'Esfera Invisível (Alabarda)' && opcoesDaFicha(hana).includes(a0.chainActions[0].ref)
+   && opcoesDaFicha(hana).includes(a0.preActivations[0].ref),
+   'na magia vinculada, a ativação prévia e a cadeia apontam para ELA (id e nome dela, marcadas na ficha)');
+ok(resolver(hana, gatilho(ala4).preActivations[0].ref)?.acao === a0 && a0.chainActions[0].when === 'always',
+   'a ação ✦ da Alabarda dispara a principal da magia vinculada, que puxa a Invisível antes e o fim do efeito depois');
+ala4.name = 'Alabarda Sombria';
+await sincronizarMagiasDoItem(ala4);
+const comp4b = vinc(hana, 'ala4')[0];
+ok(comp4b.name === 'Esfera Invisível (Alabarda Sombria)' && lr(comp4b.system.actions[0].chainActions[0].ref).nome === 'Esfera Invisível (Alabarda Sombria)'
+   && opcoesDaFicha(hana).includes(comp4b.system.actions[0].chainActions[0].ref) && opcoesDaFicha(hana).includes(gatilho(ala4).preActivations[0].ref),
+   'renomeou o item: a magia vinculada, a cadeia dela e a ação ✦ acompanham');
+const perg4 = construirItemConjurador(eq('Pergaminho (em branco)'), { magia: { ...invisivel, toObject: () => JSON.parse(JSON.stringify(invisivel)) } });
+const comp4p = dadosDaMagiaDoItem({ id: 'pg4', name: perg4.name }, receita(perg4));
+ok(comp4p.system.actions[0].label.endsWith('queima o pergaminho') && !comp4p.system.actions[1].label.includes('queima')
+   && !comp4p.system.actions[2].label.includes('queima'), 'pergaminho: "queima o pergaminho" só na ação que se usa');
+const lend4 = dadosDaMagiaDoItem({ id: 'cl4', name: 'Cajado' }, receita(construirItemConjurador(eq('Cajado'), { magia: invisivel, lendario: true })));
+ok(lend4.system.actions.every((a) => a.costMp === '0') && /^[A-Za-z0-9]{16}$/.test(lend4._id), 'lendário: nada cobra mana; a magia vinculada já nasce com id próprio');
+const desc4 = ala4.system.description;
+ok(desc4.includes('(dispara sozinha, sem custo)') && desc4.includes('antes da rolagem: Magia Invisível') && desc4.includes('depois, em cadeia: Magia Invisível: fim do efeito'),
+   'a descrição do item mostra o que a principal dispara antes e depois, e quais ações vêm sozinhas');
+const vamp = await sf.construirMagia({ base: baseDe('Esfera Ígnea'), tier: 'Intermediária', nome: '', palavra1: 'ignis',
+  palavra2: 'mortis', palavra3: '', pecs: [], ajuste: 0, meta2: meta('mortis', 'Magia Vampírica'), meta3: null, escolha2: {}, escolha3: {} });
+const dvamp = construirItemConjurador(eq('Varinha'), { magia: vamp }).system.description;
+ok(dvamp.includes('você recupera PV do dano escalonado'), 'o resumo da ação conta o dreno (Magia Vampírica)');
+const rest = await sf.construirMagia({ base: baseDe('Curar'), tier: 'Intermediária', nome: '', palavra1: 'vitae', palavra2: 'vitae', palavra3: '',
+  pecs: [], ajuste: 0, meta2: meta('vitae', 'Magia Restauradora'), meta3: null, escolha2: { condicao: 'cego' }, escolha3: {} });
+ok(construirItemConjurador(eq('Varinha'), { magia: rest }).system.description.includes('tira dos alvos 1 efeito de Cego'),
+   'e a remoção de efeito (Magia Restauradora)');
+const lam = encantar(eq('Espada Longa'), 'Intermediário', ['mortis-lamina-vampirica']);
+const lamAtq = lam.system.actions.filter((x) => String(x.label).startsWith('✦'));
+ok(lamAtq.length === 2 && lamAtq.every((x) => x.drain?.enabled && x.drain.resource === 'hp' && x.drain.from === 'scaling'),
+   'propriedade Lâmina Vampírica: os ataques encantados drenam o dano escalonado como PV (dreno do sistema)');
+// Ganchos das referências: a magia chega numa ficha com outro id (cópia, compêndio) ou muda de nome.
+const ivy = new AtorFalso('Ivy');
+const copiaMagia = ivy._pôr({ ...JSON.parse(JSON.stringify(invisivel)), _id: undefined, id: 'outroIdQualquer1' });
+await gancho('createItem')?.(copiaMagia, {}, 'u1');
+await new Promise((res) => setTimeout(res, 0));
+ok(copiaMagia.system.actions[0].chainActions.every((c) => lr(c.ref).id === 'outroIdQualquer1') && opcoesDaFicha(ivy).includes(copiaMagia.system.actions[0].chainActions[0].ref),
+   'magia com cadeia copiada para outra ficha (id novo): as referências passam a usar o id novo');
+const opts = {};
+await gancho('preUpdateItem')?.(copiaMagia, { name: 'Esfera da Sombra' }, opts);
+copiaMagia.name = 'Esfera da Sombra';
+await gancho('updateItem')?.(copiaMagia, { name: 'Esfera da Sombra' }, opts, 'u1');
+await new Promise((res) => setTimeout(res, 0));
+ok([...copiaMagia.system.actions[0].preActivations, ...copiaMagia.system.actions[0].chainActions].every((c) => lr(c.ref).nome === 'Esfera da Sombra')
+   && opcoesDaFicha(ivy).includes(copiaMagia.system.actions[0].chainActions[0].ref), 'renomeou a magia: as referências acompanham o nome');
+ok(refs.normalizarAutoRefs(copiaMagia, { id: copiaMagia.id, nome: copiaMagia.name }) === 0, 'e já estão no formato certo (nada a mudar)');
+// Validador: magias criadas com cada metamagia que encadeia, gravadas em varinha, pergaminho e cajado lendário.
+const tmp3 = fs.mkdtempSync(path.join(os.tmpdir(), 'conjurador-cadeia-'));
+fs.mkdirSync(`${tmp3}/packs-source/conjuradores`, { recursive: true });
+let n3 = 0;
+const combos = [['Esfera Ígnea', 'ignis', 'krucigon', 'Magia Planar', {}], ['Esfera Ígnea', 'ignis', 'krucigon', 'Magia Planar', { quem: 'voce' }],
+  ['Esfera Ígnea', 'ignis', 'iluzio', 'Magia Invisível', {}], ['Esfera Ígnea', 'ignis', 'iluzio', 'Magia Furtiva', {}],
+  ['Esfera Ígnea', 'ignis', 'exitium', 'Magia Potencializada', {}], ['Esfera Ígnea', 'ignis', 'mortis', 'Magia Vampírica', {}],
+  ['Curar', 'vitae', 'vitae', 'Magia Restauradora', { quem: 'voce', condicao: 'lento' }], ['Imagem Ilusória', 'iluzio', 'vitae', 'Magia Curativa', { quem: 'voce' }],
+  ['Raio Arcano', 'energio', 'krucigon', 'Magia Etérea', {}], ['Escudo Arcano', 'forjuri', 'ignis', 'Magia Ardente', {}],
+  ['Esfera Ígnea', 'ignis', 'menso', 'Magia Telecinética', {}], ['Causar Medo', 'carmo', 'sorcdiron', 'Magia Revigorante', { quem: 'voce' }]];
+for (const [b0, p1, p2, mn, e2] of combos) {
+  const sp = await sf.construirMagia({ base: baseDe(b0), tier: 'Intermediária', nome: '', palavra1: p1, palavra2: p2, palavra3: '',
+    pecs: [], ajuste: 0, meta2: meta(p2, mn), meta3: null, escolha2: e2, escolha3: {} });
+  fs.writeFileSync(`${tmp3}/packs-source/conjuradores/${String(n3++).padStart(4, '0')}.json`, JSON.stringify(sp));
+  for (const [b1, lend] of [['Varinha', false], ['Pergaminho (em branco)', false], ['Cajado', true]]) {
+    const it = { ...construirItemConjurador(eq(b1), { magia: sp, lendario: lend }), _id: `it${String(n3).padStart(14, '0')}` };
+    const c = dadosDaMagiaDoItem({ id: it._id, name: it.name }, receita(it));
+    for (const doc of [it, c]) fs.writeFileSync(`${tmp3}/packs-source/conjuradores/${String(n3++).padStart(4, '0')}.json`, JSON.stringify(doc));
+  }
+}
+let saida3 = '';
+let codigo3 = 0;
+try {
+  saida3 = execFileSync('python3', ['-c', `import sys; sys.path.insert(0, ${JSON.stringify(`${raiz}scripts`)}); import validate; sys.exit(validate.main(${JSON.stringify(tmp3)}))`], { encoding: 'utf8' });
+} catch (e) { codigo3 = e.status; saida3 = `${e.stdout}${e.stderr}`; }
+ok(codigo3 === 0, `${n3} documentos (magias com cadeia, itens e magias vinculadas): ${saida3.trim().split('\n')[0]}`);
+if (codigo3) console.log(saida3.split('\n').slice(0, 15).join('\n'));
+fs.rmSync(tmp3, { recursive: true, force: true });
 
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

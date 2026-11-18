@@ -45,6 +45,7 @@
 import { PROPRIEDADES } from "./propriedades.mjs";
 import { animarItemEncantado, criarVerificador, contarAnimacoesAutomaticas } from "./animacoes.mjs";
 import { novaAcao, novoApplies, DTYPES, ATTRS, TRACOS_COM_PALAVRA } from "./spellforge.mjs";
+import { acoesDisparadas, normalizarAutoRefs, novoIdDocumento, lerRef } from "./referencias.mjs";
 
 const MODULE_ID = "ligeia-livro-do-jogador";
 
@@ -218,9 +219,11 @@ const PROTECAO_DE = {
   "necrotico": "necrotico", "veneno": "veneno", "radiante": "radiante", "som": "sonico", "psiquico": "psiquico",
 };
 const ROTULO_COND = {
-  abalado: "Abalado", agarrado: "Agarrado", atordoado: "Atordoado", cego: "Cego", dominado: "Dominado",
-  enfraquecido: "Enfraquecido", imobilizado: "Imobilizado", intangivel: "Intangível", invisivel: "Invisível",
-  lento: "Lento", paralisado: "Paralisado", pasmo: "Pasmo", surdo: "Surdo", vendo_invisivel: "Vendo Invisível",
+  abalado: "Abalado", agarrado: "Agarrado", atordoado: "Atordoado", caido: "Caído", cego: "Cego",
+  dano_continuo: "Dano Contínuo", dominado: "Dominado", enfeiticado: "Enfeitiçado", enfraquecido: "Enfraquecido",
+  exausto: "Exausto", imobilizado: "Imobilizado", inconsciente: "Inconsciente", indefeso: "Indefeso",
+  intangivel: "Intangível", invisivel: "Invisível", lento: "Lento", oculto: "Oculto", paralisado: "Paralisado",
+  pasmo: "Pasmo", surdo: "Surdo", surpreso: "Surpreso", telecinese: "Telecinese", vendo_invisivel: "Vendo Invisível",
 };
 
 const ef = (type, target, value, extra = {}) => ({ type, target, value: String(value), ...extra });
@@ -394,7 +397,7 @@ const REGRAS = {
     area: String(c.V), includeSelf: false, aplica: [cond("enfraquecido", "vigor", 10)] },
     obs: "Você recupera 1 PV por criatura que ficar enfraquecida." }),
   "mortis-esqueletica": () => ({ info: "1D na Conjuração de magias que pasmem, atordoem, abalem ou dominem mortos-vivos" }),
-  "mortis-lamina-vampirica": () => ({ arma: { sufixo: "cura o dano escalonado causado" },
+  "mortis-lamina-vampirica": () => ({ arma: { sufixo: "cura o dano escalonado causado", dreno: { resource: "hp", from: "scaling" } },
     obs: "Ao causar dano escalonado com esta arma, você recupera PV igual ao dano escalonado." }),
   "mortis-macula": (c) => ({ acao: { rotulo: `aura de ${c.V}m (1 necrótico por turno)`, targetMode: "aura",
     area: String(c.V), includeSelf: false, damage: "1", damageType: "necrotico",
@@ -598,7 +601,7 @@ export function automatizada(regra) {
   if (!regra) return false;
   if (regra.efeitos?.length) return true;
   const a = regra.arma;
-  if (a && (a.extra?.length || a.aplica?.length || a.final || a.base)) return true;
+  if (a && (a.extra?.length || a.aplica?.length || a.final || a.base || a.dreno)) return true;
   const x = regra.acao;
   return !!(x && (x.aplica?.length || x.heal || x.damage || x.movement));
 }
@@ -675,6 +678,11 @@ function aplicarNaArma(a, arma) {
     if (escalava) a.extraDamage.push({ formula: "0", type: tipo, resource: "hp", scaling: true });
   }
   if (arma.base) a.damage = somaFormula(a.damage, arma.base);
+  // Dreno (sistema build 27): parte do dano que passou volta como recurso.
+  if (arma.dreno) {
+    a.drain = { enabled: true, resource: arma.dreno.resource ?? "hp", from: arma.dreno.from ?? "scaling",
+                ratio: String(arma.dreno.ratio ?? "1") };
+  }
 }
 
 /** Campos de ação do sistema a partir de uma regra `acao`. */
@@ -982,7 +990,9 @@ export function retratoDaMagia(doc) {
   const nossos = clone(d?.flags?.[MODULE_ID] ?? {});
   delete nossos.doItem;
   delete nossos.encId;
-  return { name: d?.name ?? "Magia", img: d?.img || "icons/svg/explosion.svg",
+  // O id de origem fica junto: é por ele (e pelo nome) que se reconhecem as
+  // ações que a magia dispara nela mesma (antes da rolagem e em cadeia).
+  return { name: d?.name ?? "Magia", img: d?.img || "icons/svg/explosion.svg", idOriginal: d?._id ?? doc?.id ?? "",
     system: clone(d?.system ?? {}), flags: { [MODULE_ID]: nossos } };
 }
 
@@ -1077,9 +1087,46 @@ export function resumoDaAcao(a) {
     const r = Number(a.persistRounds) || 0;
     p.push(`a área fica ${r > 0 ? `${r} rodada(s)` : "até o fim da cena"}`);
   }
+  const dr = a.drain;
+  if (dr?.enabled) {
+    const parte = { base: "do dano base", scaling: "do dano escalonado", both: "do dano causado" }[dr.from] ?? "do dano causado";
+    const taxa = String(dr.ratio ?? "").trim();
+    const prop = taxa && taxa !== "1" ? ` (× ${formulaLegivel(taxa)})` : "";
+    p.push(`você recupera ${ROTULO_RECURSO[dr.resource] ?? "PM"} ${parte}${prop}`);
+  }
+  const tira = (a.removesEffects ?? []).filter((r) => r && r.enabled !== false).map((r) => {
+    const quantos = String(r.count ?? "").trim() && String(r.count).trim() !== "0" ? `${formulaLegivel(r.count)} ` : "";
+    switch (r.mode) {
+      case "condition": return `${quantos}efeito de ${ROTULO_COND[r.value] ?? r.value}`;
+      case "mine": return `${quantos}efeitos que você aplicou`;
+      case "all": return quantos ? `${quantos}efeitos` : "todos os efeitos";
+      default: return `${quantos}"${r.value}"`;
+    }
+  });
+  if (tira.length) p.push(`tira dos alvos ${tira.join(" e ")}`);
   const custo = Number(a.costMp) || 0;
   p.push(custo ? `${custo} PM` : "sem mana");
   return p.join(" · ");
+}
+
+/** Quando a ação em cadeia dispara (rótulos do sistema). */
+const ROTULO_QUANDO = { always: "sempre", hit: "se acertar", miss: "se errar", crit: "se for crítico", damage: "se causar dano", heal: "se curar" };
+
+/**
+ * O que uma ação dispara na própria magia: "antes da rolagem: …; depois, em
+ * cadeia (se acertar): …". Para a descrição do item conjurador.
+ */
+function encadeamentoDaAcao(m, a) {
+  const acoes = m.system?.actions ?? [];
+  const minha = (r) => r.tipo === "action" && (r.id === m.idOriginal || r.nome === String(m.name ?? "").replace(/\|/g, "/"));
+  const nomeDe = (r) => String(acoes[r.indice]?.label ?? "?").replace(/^↳\s*/, "");
+  const antes = (a.preActivations ?? []).map((x) => lerRef(x.ref)).filter(minha).map(nomeDe);
+  const depois = (a.chainActions ?? []).filter((c) => minha(lerRef(c.ref)))
+    .map((c) => `${nomeDe(lerRef(c.ref))} (${ROTULO_QUANDO[c.when] ?? c.when})`);
+  const partes = [];
+  if (antes.length) partes.push(`antes da rolagem: ${antes.join("; ")}`);
+  if (depois.length) partes.push(`depois, em cadeia: ${depois.join("; ")}`);
+  return partes.join(" — ");
 }
 
 /** A magia guardada como ela fica no item (custo do lendário, pergaminho). */
@@ -1103,11 +1150,18 @@ function magiaAjustada(retrato, { lendario = false, pergaminho = false } = {}) {
   }
   if (pergaminho) {
     // "Conjurar uma magia a partir de um pergaminho requer sempre uma
-    // rodada completa" — e ele queima na conjuração.
+    // rodada completa" — e ele queima na conjuração. Só nas ações que se
+    // usam: as que a magia dispara sozinha (↳) fazem parte da mesma conjuração.
     s.casting = "Rodada completa (pergaminho)";
-    for (const a of s.actions) a.label = `${a.label} — queima o pergaminho`;
+    const internas = internasDaMagia(m);
+    s.actions.forEach((a, i) => { if (!internas.has(i)) a.label = `${a.label} — queima o pergaminho`; });
   }
   return m;
+}
+
+/** Ações que a magia dispara nela mesma (antes da rolagem ou em cadeia): não se usam à parte. */
+function internasDaMagia(m) {
+  return acoesDisparadas(m, { id: m.idOriginal, nome: m.name });
 }
 
 /** Bloco da descrição do item: a magia guardada e o que ela faz. */
@@ -1121,8 +1175,14 @@ function descricaoDoItemConjurador({ magia, nivel, pm, lendario, pergaminho, pal
     .filter(([, v]) => String(v ?? "").trim())
     .map(([k, v]) => `<b>${k}:</b> ${esc(v)}`).join(" · ");
   const acoes = s.actions ?? [];
+  // As ações que a magia dispara sozinha aparecem como parte da que se usa.
+  const internas = internasDaMagia(magia);
   const oQueFaz = acoes.length
-    ? `<p><b>O que a magia faz:</b></p><ul>${acoes.map((a) => `<li><b>${esc(a.label)}</b>: ${esc(resumoDaAcao(a))}.</li>`).join("")}</ul>`
+    ? `<p><b>O que a magia faz:</b></p><ul>${acoes.map((a, i) => {
+      const cadeia = encadeamentoDaAcao(magia, a);
+      const marca = internas.has(i) ? " <em>(dispara sozinha, sem custo)</em>" : "";
+      return `<li><b>${esc(a.label)}</b>${marca}: ${esc(resumoDaAcao(a))}.${cadeia ? ` <em>${esc(cadeia)}.</em>` : ""}</li>`;
+    }).join("")}</ul>`
     : `<p><b>O que a magia faz:</b> efeito descrito abaixo.</p>`;
   const perg = pergaminho
     ? `<p><b>Pergaminho:</b> gravar a magia custou ${pm || NIVEIS_ITEM[nivel]?.pm} PM a quem a gravou (1 hora). Conjurar a partir dele `
@@ -1213,10 +1273,15 @@ function custoDaAcao(a, lendario) {
  */
 function gatilhosDaMagia(ajustada, itemNome, lendario) {
   const vinculada = nomeDaMagiaVinculada(ajustada.name, itemNome);
-  return (ajustada.system?.actions ?? []).map((a, i) => novaAcao(`✦ ${a.label} — ${custoDaAcao(a, lendario)}`, {
-    canRoll: false, targetMode: "none", includeSelf: false, costMp: "0",
-    preActivations: [{ ref: refDaMagia(i, vinculada), enabled: true }],
-  }));
+  // Só as ações que se usam: as que a magia dispara sozinha (↳, em cadeia ou
+  // antes da rolagem) vão junto, pela própria magia vinculada.
+  const internas = internasDaMagia(ajustada);
+  return (ajustada.system?.actions ?? []).flatMap((a, i) => (internas.has(i) ? [] : [
+    novaAcao(`✦ ${a.label} — ${custoDaAcao(a, lendario)}`, {
+      canRoll: false, targetMode: "none", includeSelf: false, costMp: "0",
+      preActivations: [{ ref: refDaMagia(i, vinculada), enabled: true }],
+    }),
+  ]));
 }
 
 /** Trechos da descrição gravada pela 0.2.8 (sem ações ✦) e como ficam agora. */
@@ -1268,8 +1333,14 @@ export function dadosDaMagiaDoItem(item, rec) {
     + `Ela vem e vai junto com o item.</em></p>`;
   m.system.description = aviso + (m.system.description ?? "");
   m.system.active = false;
+  // Id próprio já definido (criada com keepId): as ações em cadeia e as
+  // ativações prévias da magia passam a apontar para ESTA cópia, com o id e o
+  // nome dela — iguais às opções da ficha.
+  const _id = novoIdDocumento();
+  const name = nomeDaMagiaVinculada(m.name, item.name);
+  normalizarAutoRefs(m, { id: _id, nome: name, ids: [rec.magia.idOriginal], nomes: [rec.magia.name] });
   return {
-    name: nomeDaMagiaVinculada(m.name, item.name), type: "magia", img: m.img, system: m.system,
+    _id, name, type: "magia", img: m.img, system: m.system,
     flags: { [MODULE_ID]: { ...(m.flags?.[MODULE_ID] ?? {}), doItem: item.id ?? item._id, encId: rec.id } },
   };
 }
@@ -1305,14 +1376,18 @@ export async function sincronizarMagiasDoItem(item) {
   const renomear = atuais.filter((m) => ids.has(m.flags[MODULE_ID].encId)).map((m) => {
     const r = receitas.find((x) => x.id === m.flags[MODULE_ID].encId);
     const nome = nomeDaMagiaVinculada(r.magia.name, item.name);
-    return m.name === nome ? null : { _id: m.id, name: nome };
+    // As ações em cadeia da magia vinculada apontam para ela pelo nome também.
+    const acoes = clone(m.system?.actions ?? []);
+    const refs = normalizarAutoRefs({ system: { actions: acoes } }, { id: m.id, nome, nomes: [m.name] });
+    if (m.name === nome && !refs) return null;
+    return refs ? { _id: m.id, name: nome, "system.actions": acoes } : { _id: m.id, name: nome };
   }).filter(Boolean);
   if (apagar.length) {
     // Apagar um item faz o sistema encerrar os visuais dele (veja prenderEndEffects).
     prenderEndEffects();
     await actor.deleteEmbeddedDocuments("Item", apagar);
   }
-  if (criar.length) await actor.createEmbeddedDocuments("Item", criar);
+  if (criar.length) await actor.createEmbeddedDocuments("Item", criar, { keepId: true });
   if (renomear.length) await actor.updateEmbeddedDocuments("Item", renomear);
   Object.assign(out, { criadas: criar.length, apagadas: apagar.length, renomeadas: renomear.length });
   // As ações ✦ do item apontam para a magia vinculada com o id e o nome dela,

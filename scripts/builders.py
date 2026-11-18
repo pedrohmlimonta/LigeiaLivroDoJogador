@@ -148,14 +148,23 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
            is_weapon=False, is_melee=False, persist_area=False,
            persist_rounds=1, persist_affects_self=False,
            persist_reroll_attack=False, persist_trigger="both",
-           pre_activations=None, skip_roll_dialog=True):
-    """Uma ação de item (schema v22).
+           pre_activations=None, skip_roll_dialog=True, drain=None,
+           removes_effects=None, chain_actions=None):
+    """Uma ação de item (schema do sistema, build 27).
 
     - level: "all"/"B"/"A"/"E" — nível em que a ação existe (habilidades).
     - roll_bonus/roll_dice/rng/area/custos/damage/heal aceitam fórmulas
       com @variáveis ("@nivel", "ceil(@nivel/2)", "2*@vigor").
     - movement: dict com kind/who/distance/... (enabled é ligado aqui).
+    - drain: dict com resource/from/ratio — parte do dano causado volta como
+      recurso para quem conjurou (enabled é ligado aqui).
+    - removes_effects / chain_actions: listas no formato do sistema.
     """
+    dr = {"enabled": False, "resource": "mp", "from": "both", "ratio": "1"}
+    if drain:
+        dr.update(drain)
+        dr["enabled"] = True
+        dr["ratio"] = _s(dr.get("ratio", 1), "1")
     mv = {"enabled": False, "kind": "push", "who": "targets", "distance": "0",
           "lateralSide": "right", "ignoreWalls": False, "snap": True}
     if movement:
@@ -191,6 +200,9 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
         "extraDamage": extra or [],
         "movement": mv,
         "preActivations": pre_activations or [],
+        "drain": dr,
+        "removesEffects": removes_effects or [],
+        "chainActions": chain_actions or [],
         "appliesEffects": applies_effects or [],
         "lineWidth": _s(line_width, "1.5"),
         "coneAngle": _s(cone_angle, "45"),

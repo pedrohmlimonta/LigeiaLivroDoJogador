@@ -28,6 +28,7 @@
 
 import { animarMagia, animarItem, limparAnimacoesAutomaticas, criarVerificador,
          contarAnimacoesAutomaticas } from "./animacoes.mjs";
+import { refAcao, lerRef, novoIdDocumento, normalizarAutoRefs } from "./referencias.mjs";
 
 const MODULE_ID = "ligeia-livro-do-jogador";
 const PACK_MAGIAS = `${MODULE_ID}.magias`;
@@ -41,8 +42,19 @@ const PACK_MAGIAS = `${MODULE_ID}.magias`;
 /*   selfcond {...}   o CONJURADOR recebe a condição ao conjurar       */
 /*   area2x | range2x | aura   alteram área/alcance/forma              */
 /*   mpdrain          dreno de 4 PM (6 no Círculo Maior)               */
-/*   buff {...}       ação extra de aprimoramento (alvo ou você)       */
+/*   buff {...}       aprimoramento no alvo ou em você (em cadeia)     */
+/*   planar | eterea  teleporte / intangível no alvo ou em você        */
+/*   restauradora     tira uma condição (remoção de efeito do sistema) */
+/*   marcador         efeito-lembrete na cena (forma/traço alterado)   */
+/*   telecinetica     imobilizado + ação de mover o alvo 5m            */
+/*   invisivel        alvos indefesos antes da rolagem; depois, sai    */
+/*   vampirica        dreno: o dano escalonado volta como PV           */
+/*   potencializada   dobra o dano base; você sofre o base (final)     */
 /*   other            registrada na receita (resolução manual)         */
+/*                                                                    */
+/*  alvoOuVoce: o livro deixa escolher, na criação, se a metamagia    */
+/*  vale no alvo ou em você. comDano / semDano: só serve em magia que  */
+/*  causa dano / que não causa.                                        */
 /* ------------------------------------------------------------------ */
 export const METAMAGIAS = {
   acida: [
@@ -80,13 +92,13 @@ export const METAMAGIAS = {
       desc: "O alcance muda para Emanação e o alvo vira Área 1m x Círculo x Nível em torno de você." },
   ],
   exitium: [
-    { name: "Magia Potencializada", lvl: "Básica", kind: "other",
-      desc: "Dobra o dano base da magia; você sofre dano final igual ao dano base ao conjurá-la." },
+    { name: "Magia Potencializada", lvl: "Básica", kind: "potencializada", comDano: true,
+      desc: "Dobra o dano base da magia; você sofre dano final igual ao dano base ao conjurá-la. Só em magias que causem dano." },
   ],
   forjuri: [
-    { name: "Magia Protetora", lvl: "Básica", kind: "buff", buff: "rd", needs: "damageType",
+    { name: "Magia Protetora", lvl: "Básica", kind: "buff", buff: "rd", needs: "damageType", alvoOuVoce: true,
       desc: "O alvo (ou você) recebe Proteção 2 (3 no Círculo Maior) contra um tipo de dano, até o fim da cena." },
-    { name: "Magia Defensora", lvl: "Básica", kind: "buff", buff: "bloqueio",
+    { name: "Magia Defensora", lvl: "Básica", kind: "buff", buff: "bloqueio", alvoOuVoce: true,
       desc: "O alvo (ou você) recebe +1 em Bloqueio até o fim da cena." },
   ],
   fulgur: [
@@ -112,8 +124,8 @@ export const METAMAGIAS = {
   iluzio: [
     { name: "Magia Ilusória", lvl: "Básica", kind: "other",
       desc: "Cria uma ilusão média adjacente a você (sem som/cheiro/tato); Percepção oposta à Conjuração para notar." },
-    { name: "Magia Invisível", lvl: "Básica", kind: "other",
-      desc: "Os alvos são considerados indefesos para se defender desta magia." },
+    { name: "Magia Invisível", lvl: "Básica", kind: "invisivel",
+      desc: "Os alvos são considerados indefesos para se defender desta magia (antes da rolagem ficam Indefesos; depois, o efeito sai)." },
     { name: "Magia Furtiva", lvl: "Básica", kind: "selfcond", cond: "invisivel",
       desc: "Ao conjurar, você fica invisível até o fim da cena (cessa se você atacar)." },
   ],
@@ -130,8 +142,12 @@ export const METAMAGIAS = {
       desc: "Se o alvo for um objeto, recupera 2 pontos de Dureza (3 no Círculo Maior)." },
   ],
   krucigon: [
-    { name: "Magia Arrebatadora", lvl: "Avançada", kind: "other",
+    { name: "Magia Arrebatadora", lvl: "Avançada", kind: "other", semDano: true,
       desc: "Mente oposta à Conjuração ou o alvo é retirado de cena até o fim do turno dele; ao voltar sofre 1 de dano psíquico por círculo. Não se aplica a magias que causem dano." },
+    { name: "Magia Etérea", lvl: "Básica", kind: "eterea", alvoOuVoce: true,
+      desc: "As criaturas afetadas ficam intangíveis até o fim da cena. Pode aplicar em você." },
+    { name: "Magia Planar", lvl: "Básica", kind: "planar", alvoOuVoce: true,
+      desc: "Teleporta o alvo até Mente metros, para um lugar em terra firme. Pode aplicar em você." },
   ],
   lumo: [
     { name: "Magia Luminosa", lvl: "Básica", kind: "other",
@@ -150,13 +166,15 @@ export const METAMAGIAS = {
   menso: [
     { name: "Magia Impactante", lvl: "Básica", kind: "damage", dtype: "concussao",
       desc: "Se a base não causa dano, causa dano de Concussão +1/+2/+3 pelo círculo; se causa, o dano passa a ser de Concussão." },
+    { name: "Magia Telecinética", lvl: "Básica", kind: "telecinetica", cond: "imobilizado", resist: "forca",
+      desc: "Força oposta à Conjuração ou Imobilizado até o fim da cena (Força anula); enquanto durar, você pode mover um dos alvos até 5m usando sua ação." },
   ],
   mortis: [
     { name: "Magia Necrótica", lvl: "Básica", kind: "damage", dtype: "necrotico",
       desc: "Se a base não causa dano, causa dano Necrótico +1/+2/+3 pelo círculo; se causa, o dano passa a ser Necrótico." },
     { name: "Magia Debilitante", lvl: "Avançada", kind: "condition", cond: "enfraquecido", resist: "vigor",
       desc: "Vigor oposto à Conjuração ou Enfraquecido até o fim da cena (Vigor anula)." },
-    { name: "Magia Vampírica", lvl: "Básica", kind: "other",
+    { name: "Magia Vampírica", lvl: "Básica", kind: "vampirica", comDano: true,
       desc: "Você recupera PV igual ao dano escalonado causado. Só em magias que causem dano." },
   ],
   noxia: [
@@ -180,8 +198,10 @@ export const METAMAGIAS = {
   sangon: [
     { name: "Magia Alquímica", lvl: "Básica", kind: "other",
       desc: "Transmuta o material de objetos-alvo (Conjuração vs 10 + Dureza; ±1 por 2 acima)." },
-    { name: "Magia Deformante", lvl: "Básica", kind: "other",
+    { name: "Magia Deformante", lvl: "Básica", kind: "marcador", marcador: "Traço trocado (Magia Deformante)", resist: "vigor", alvoOuVoce: true,
       desc: "Troca um traço do alvo por um de outra criatura (até 2x Nível em Pontos de Criação) até o fim da cena (Vigor anula). Pode aplicar em você." },
+    { name: "Magia Metamórfica", lvl: "Básica", kind: "marcador", marcador: "Forma alterada (Magia Metamórfica)", resist: "vigor", alvoOuVoce: true,
+      desc: "Vigor oposto à Conjuração ou o alvo assume a forma de uma criatura de Desafio até 2 x Nível até o fim da cena (Vigor anula; ele soma a diferença de Desafio à rolagem). Pode aplicar em você." },
   ],
   sankta: [
     { name: "Magia Purificadora", lvl: "Básica", kind: "other",
@@ -198,15 +218,17 @@ export const METAMAGIAS = {
       desc: "Se a base não causa dano, causa dano Sônico +1/+2/+3 pelo círculo; se causa, o dano passa a ser Sônico." },
     { name: "Magia Reticente", lvl: "Básica", kind: "other",
       desc: "Cria área de silêncio (1m x Nível) na área/em torno do alvo; Força oposta à Conjuração para emitir som." },
+    { name: "Magia Sonora", lvl: "Básica", kind: "other",
+      desc: "As ilusões, criações ou invocações da magia emitem um som (barulho ou voz); Percepção oposta à Conjuração para notar que é falso." },
   ],
   sorcdiron: [
-    { name: "Magia Adjetiva", lvl: "Básica", kind: "buff", buff: "dice", needs: "attr",
+    { name: "Magia Adjetiva", lvl: "Básica", kind: "buff", buff: "dice", needs: "attr", alvoOuVoce: true,
       desc: "O alvo (ou você) recebe 1D em um atributo à sua escolha até o fim da cena." },
-    { name: "Magia Aperfeiçoante", lvl: "Básica", kind: "buff", buff: "bonus", needs: "bonusTarget",
+    { name: "Magia Aperfeiçoante", lvl: "Básica", kind: "buff", buff: "bonus", needs: "bonusTarget", alvoOuVoce: true,
       desc: "O alvo (ou você) recebe +1 em ataque, Deslocamento, Iniciativa, Esquiva, Bloqueio ou Conjuração até o fim da cena." },
     { name: "Magia Artifícia", lvl: "Básica", kind: "other",
       desc: "Objeto não mágico alvo recebe +1 por círculo nas rolagens de uso, até o fim da cena." },
-    { name: "Magia Revigorante", lvl: "Básica", kind: "buff", buff: "sobrevida",
+    { name: "Magia Revigorante", lvl: "Básica", kind: "buff", buff: "sobrevida", alvoOuVoce: true,
       desc: "O alvo (ou você) recebe 1 de sobrevida por 2 pontos da Conjuração acima de 10." },
   ],
   tenebrae: [
@@ -222,12 +244,12 @@ export const METAMAGIAS = {
       desc: "Mente oposta à Conjuração ou dano contínuo psíquico pelo resto da cena (Mente anula)." },
   ],
   vitae: [
-    { name: "Magia Curativa", lvl: "Básica", kind: "buff", buff: "cura",
+    { name: "Magia Curativa", lvl: "Básica", kind: "buff", buff: "cura", alvoOuVoce: true,
       desc: "Cura 1 PV dos afetados (2 no Intermediário, 3 no Maior). Pode aplicar em você." },
-    { name: "Magia Regeneradora", lvl: "Avançado", kind: "buff", buff: "regen",
+    { name: "Magia Regeneradora", lvl: "Avançado", kind: "buff", buff: "regen", alvoOuVoce: true,
       desc: "O alvo (ou você) recebe regeneração até o fim da cena." },
-    { name: "Magia Restauradora", lvl: "Básica", kind: "other",
-      desc: "Neutraliza uma condição negativa do alvo. Pode aplicar em você." },
+    { name: "Magia Restauradora", lvl: "Básica", kind: "restauradora", needs: "condicao", alvoOuVoce: true,
+      desc: "Neutraliza uma condição negativa do alvo (escolhida na criação). Pode aplicar em você." },
   ],
 };
 
@@ -249,6 +271,39 @@ const BONUS_TARGETS = {
 };
 export const ATTRS = { forca: "Força", agilidade: "Agilidade", vigor: "Vigor",
                 mente: "Mente", percepcao: "Percepção" };
+
+/** Condições negativas que a Magia Restauradora pode neutralizar (ids do sistema). */
+export const CONDICOES_NEGATIVAS = {
+  dano_continuo: "Dano Contínuo", enfraquecido: "Enfraquecido", exausto: "Exausto", lento: "Lento",
+  imobilizado: "Imobilizado", cego: "Cego", surdo: "Surdo", abalado: "Abalado", pasmo: "Pasmo",
+  atordoado: "Atordoado", paralisado: "Paralisado", dominado: "Dominado", enfeiticado: "Enfeitiçado",
+  agarrado: "Agarrado", caido: "Caído", indefeso: "Indefeso", inconsciente: "Inconsciente",
+  telecinese: "Telecinese",
+};
+const ROTULO_COND = { ...CONDICOES_NEGATIVAS, intangivel: "Intangível", invisivel: "Invisível", oculto: "Oculto" };
+
+/**
+ * Quando um efeito de metamagia em cadeia dispara, depois da ação principal
+ * (condições de disparo do sistema: chainActions[].when).
+ */
+export const QUANDO = {
+  always: "Sempre (ao conjurar)", hit: "Se acertar", damage: "Se causar dano", crit: "Se for crítico",
+};
+
+/** Metamagias que viram uma ação em cadeia (e por isso têm "Quando"). */
+export function encadeia(meta, escolha = {}) {
+  if (!meta) return false;
+  if (["buff", "selfcond", "planar", "eterea", "restauradora"].includes(meta.kind)) return true;
+  return meta.kind === "marcador" && escolha.quem === "voce";
+}
+
+/** Em quem a metamagia vale ("alvo" ou "voce") e quando dispara, com os padrões do livro. */
+export function comoAplicar(meta, escolha = {}) {
+  const quem = meta?.alvoOuVoce && escolha.quem === "voce" ? "voce"
+    : meta?.kind === "selfcond" ? "voce" : "alvo";
+  const quando = QUANDO[escolha.quando] ? escolha.quando : (quem === "voce" ? "always" : "hit");
+  return { quem, quando };
+}
 
 /* ------------------------------------------------------------------ */
 /*  Utilidades                                                         */
@@ -438,9 +493,42 @@ function causaDanoDeVida(a) {
   return d !== "0" || !!a.scalingDamage;
 }
 
+/**
+ * Ação que uma metamagia criou como efeito à parte (a "↳ ..."), que as
+ * outras metamagias não devem mexer. A ação-âncora (o ataque que uma
+ * metamagia de condição ou dano ganha quando a magia não tem alvo) conta como
+ * ação da magia: recebe área, alcance, dano e condições das outras.
+ */
+const deMetamagia = (a) => !!a._interna && !a._ancora;
+
 function acoesOfensivas(data) {
-  return data.system.actions.filter((a) =>
+  return data.system.actions.filter((a) => !deMetamagia(a) &&
     ["target", "area", "aura", "line", "cone", "lineCustom"].includes(a.targetMode));
+}
+
+/**
+ * As ações que o jogador usa — as que cobram a mana da magia. É nelas que as
+ * metamagias penduram o que disparam antes (ativações prévias) e depois (ações
+ * em cadeia); as que as metamagias criam não cobram nada.
+ */
+function acoesIniciais(data) {
+  return data.system.actions.filter((a) => !a._interna && Number(a.costMp || 0) > 0);
+}
+
+/** Ação interna de uma metamagia: disparada pela principal, sem custo de PM. */
+function subAcao(label, extra = {}) {
+  return Object.assign(novaAcao(`↳ ${label}`, { canRoll: false, includeSelf: false, ...extra, costMp: "0" }),
+    { _interna: true });
+}
+
+/** `sub` dispara DEPOIS de cada ação de `de` (ação em cadeia; a ref é feita em construirMagia). */
+function encadear(de, sub, when, targets) {
+  for (const a of de) (a._cadeia ??= []).push({ alvo: sub, when, targets });
+}
+
+/** `sub` roda ANTES da rolagem de cada ação de `de` (ativação prévia). */
+function antesDe(de, sub) {
+  for (const a of de) (a._antes ??= []).push(sub);
 }
 
 export function novoApplies(label, extra = {}) {
@@ -464,6 +552,9 @@ export function novaAcao(label, extra = {}) {
     damage: "", damageType: "", damageResource: "hp", scalingDamage: false,
     heal: "", healResource: "hp", scalingHeal: false, tempStack: false,
     skipRollDialog: true, extraDamage: [], preActivations: [],
+    // Sistema build 27: dreno, efeitos removidos do alvo e ações em cadeia.
+    drain: { enabled: false, resource: "mp", from: "both", ratio: "1" },
+    removesEffects: [], chainActions: [],
     movement: { enabled: false, kind: "push", who: "targets", distance: "0",
                 lateralSide: "right", ignoreWalls: false, snap: true },
     appliesEffects: [], lineWidth: "1.5", coneAngle: "45",
@@ -478,21 +569,122 @@ export function novaAcao(label, extra = {}) {
   }, extra);
 }
 
-/** Aplica UMA metamagia sobre os dados do item (mutação in-place). */
-export function aplicarMetamagia(data, meta, circ, escolha) {
+/** Rótulo de um efeito de aprimoramento, pelo tipo do buff. */
+function efeitoDoBuff(meta, circ, escolha) {
+  switch (meta.buff) {
+    case "cura": return { rotulo: `cura ${circ} PV`, extra: { heal: String(circ), healResource: "hp" } };
+    case "regen":
+      // "restore" é instantâneo no sistema; a regeneração precisa de um
+      // efeito duradouro (valor 0) carregando o tickHeal.
+      return { rotulo: "regeneração até o fim da cena", extra: { appliesEffects: [novoApplies("Regeneração (1 PV/rodada)", {
+        fxType: "bonus", fxTarget: "all", fxValue: "0", tickHealAmount: "1", tickHealResource: "hp",
+      })] } };
+    case "sobrevida":
+      // "1 de sobrevida por 2 pontos da Conjuração acima de 10": rola
+      // Conjuração contra CD 10 (sem defesa do alvo) e a sobrevida escala.
+      return { rotulo: "sobrevida (1 por 2 acima de 10 na Conjuração)", extra: {
+        vsDifficulty: true, fixedDifficulty: "10", rollAttr: "conjuracao", defenseAttr: "",
+        heal: "0", healResource: "hpTemp", scalingHeal: true,
+      } };
+    case "rd": {
+      const tipo = escolha?.damageType || "fogo";
+      const v = circ >= 3 ? 3 : 2;
+      return { rotulo: `Proteção ${v} contra ${DTYPES[tipo]} (cena)`, extra: { appliesEffects: [novoApplies(`Proteção ${v} (${DTYPES[tipo]})`, {
+        fxType: "rd", fxTarget: tipo, fxValue: String(v),
+      })] } };
+    }
+    case "dice": {
+      const attr = escolha?.attr || "forca";
+      return { rotulo: `1D em ${ATTRS[attr]} (cena)`, extra: { appliesEffects: [novoApplies(`1D em ${ATTRS[attr]} (cena)`, {
+        fxType: "dice", fxTarget: attr, fxValue: "1",
+      })] } };
+    }
+    case "bloqueio":
+      return { rotulo: "+1 Bloqueio (cena)", extra: { appliesEffects: [novoApplies("+1 Bloqueio (cena)", {
+        fxType: "bonus", fxTarget: "bloqueio", fxValue: "1",
+      })] } };
+    case "bonus": {
+      const alvo = escolha?.bonusTarget || "attack";
+      return { rotulo: `+1 ${BONUS_TARGETS[alvo]} (cena)`, extra: { appliesEffects: [novoApplies(`+1 ${BONUS_TARGETS[alvo]} (cena)`, {
+        fxType: alvo === "deslocamento" ? "stat" : "bonus", fxTarget: alvo, fxValue: "1",
+      })] } };
+    }
+    default: return null;
+  }
+}
+
+/** Rótulo dos efeitos-lembrete e da remoção da Magia Invisível. */
+const ROTULO_INVISIVEL = "Indefeso (Magia Invisível)";
+
+/**
+ * Aplica UMA metamagia sobre os dados do item (mutação in-place).
+ *
+ * O que a metamagia acrescenta como efeito à parte (cura, proteção,
+ * teleporte...) vira uma AÇÃO EM CADEIA da ação principal: ela dispara sozinha
+ * depois que a principal se resolve, sem cobrar PM — a mana sai uma vez só, na
+ * ação que o jogador usa. A Magia Invisível usa uma ATIVAÇÃO PRÉVIA: deixa os
+ * alvos Indefesos antes da rolagem e, em cadeia, tira o efeito depois.
+ *
+ * @param {object} escolha  o que o jogador decidiu na criação: quem (alvo /
+ *   voce), quando (always / hit / damage / crit), damageType, attr,
+ *   bonusTarget, condicao
+ * @returns {string|null} aviso quando a metamagia não se aplica a esta magia
+ */
+export function aplicarMetamagia(data, meta, circ, escolha = {}) {
   const sys = data.system;
   const ofensivas = acoesOfensivas(data);
-  // Ação ofensiva para ancorar o efeito; sem nenhuma, cria uma nova.
+  const iniciais = acoesIniciais(data);
+  // Magia só descritiva (sem ações): ganha a ação de conjurar, que cobra a
+  // mana do círculo e dispara o que a metamagia acrescentar.
+  const garantirInicial = () => {
+    if (iniciais.length) return;
+    const conj = novaAcao(`Conjurar ${data.name} (rolagem de Conjuração)`, {
+      canRoll: true, rollAttr: "conjuracao", targetMode: "none", includeSelf: false, costMp: String(circ),
+    });
+    sys.actions.push(conj);
+    sys.costs = []; // a mana sai da ação; ligar a magia na ficha não cobra de novo
+    iniciais.push(conj);
+  };
+  // Ação ofensiva para ancorar o efeito. Sem nenhuma, a metamagia ganha a
+  // dela: se a magia já tem a ação que se usa (só em você, por exemplo), o
+  // ataque dispara em cadeia ao conjurar, sem custo extra; se não tem nenhuma,
+  // o ataque é a própria conjuração e cobra a mana.
   const ancora = () => {
     if (ofensivas[0]) return ofensivas[0];
-    const nova = novaAcao(`Efeito de ${meta.name} (Conjuração vs Esquiva)`, {
-      canRoll: true, rollAttr: "conjuracao", targetMode: "target",
-      includeSelf: false, defenseAttr: "esquiva",
-    });
+    const rotulo = `Efeito de ${meta.name} (Conjuração vs Esquiva)`;
+    const def = { canRoll: true, rollAttr: "conjuracao", targetMode: "target", includeSelf: false, defenseAttr: "esquiva" };
+    let nova;
+    if (iniciais.length) {
+      nova = Object.assign(subAcao(rotulo, def), { _ancora: true });
+      encadear(iniciais, nova, "always", "own");
+    } else {
+      nova = novaAcao(rotulo, { ...def, costMp: String(circ) });
+      sys.costs = [];
+      iniciais.push(nova);
+    }
     sys.actions.push(nova);
     ofensivas.push(nova);
     return nova;
   };
+  const { quem, quando } = comoAplicar(meta, escolha);
+  // Efeito à parte, em cadeia: em você (sub-ação "em si") ou em quem a magia
+  // atingiu. Magia sem alvos (só em você) e efeito "no alvo": vale para os
+  // alvos marcados na hora de conjurar.
+  const encadearEfeito = (rotulo, extra = {}) => {
+    garantirInicial();
+    const deAlvo = iniciais.filter((a) => !["self", "none"].includes(a.targetMode));
+    const emVoce = quem === "voce";
+    const sub = subAcao(`${meta.name}${emVoce ? " (você)" : ""}: ${rotulo}`, {
+      targetMode: emVoce ? "self" : "target", includeSelf: emVoce, ...extra,
+    });
+    sys.actions.push(sub);
+    if (emVoce) encadear(iniciais, sub, quando, "own");
+    else if (deAlvo.length) encadear(deAlvo, sub, quando, "hitOnly");
+    else encadear(iniciais, sub, quando, "own");
+    return sub;
+  };
+  const danosas = () => sys.actions.filter((a) => !deMetamagia(a) && causaDanoDeVida(a));
+
   switch (meta.kind) {
     case "damage": {
       // A base já causa dano? Troca só o TIPO — e o dano continua como era:
@@ -500,6 +692,7 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
       // final continua final (ignora a Proteção); só o elemento é outro.
       let alguma = false;
       for (const a of sys.actions) {
+        if (deMetamagia(a)) continue;
         if (causaDanoDeVida(a)) {
           if (a.damageType !== "final") a.damageType = meta.dtype;
           alguma = true;
@@ -537,19 +730,22 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
       }));
       break;
     }
-    case "selfcond":
-      sys.actions.push(novaAcao(`${meta.name} (você)`, {
-        targetMode: "self",
-        appliesEffects: [novoApplies(meta.name, {
-          fxType: "condition", fxTarget: meta.cond, durationMode: "scene",
-        })],
-      }));
+    case "selfcond": {
+      garantirInicial();
+      const sub = subAcao(`${meta.name} (você): fica ${ROTULO_COND[meta.cond] ?? meta.cond} até o fim da cena`, {
+        targetMode: "self", includeSelf: true,
+        appliesEffects: [novoApplies(meta.name, { fxType: "condition", fxTarget: meta.cond, durationMode: "scene" })],
+      });
+      sys.actions.push(sub);
+      encadear(iniciais, sub, quando, "own");
       break;
+    }
     case "area2x":
       // Aplicada mais de uma vez (palavra repetida: majesto + majesto), soma
       // a área da base em vez de dobrar o já dobrado — a regra que o livro dá
       // para a Magia Múltipla: 2× na primeira, 3× na segunda.
       for (const a of sys.actions) {
+        if (deMetamagia(a)) continue;
         const regiao = ["area", "aura", "cone", "line", "lineCustom"].includes(a.targetMode);
         if (regiao && a.area && a.area !== "0") {
           a._areaBase ??= a.area;
@@ -568,7 +764,7 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
     case "range2x":
       // Emanação, aura e magias no próprio conjurador não são afetadas.
       for (const a of sys.actions) {
-        if (a.targetMode === "self" || a.targetMode === "aura") continue;
+        if (deMetamagia(a) || a.targetMode === "self" || a.targetMode === "aura") continue;
         if (a.isMelee) {
           // Toque passa a ter alcance de 3m x Círculo x Nível.
           a.isMelee = false;
@@ -595,59 +791,118 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
       break;
     }
     case "buff": {
-      if (meta.buff === "cura") {
-        sys.actions.push(novaAcao(`${meta.name} (cura ${circ} PV)`, {
-          heal: String(circ), healResource: "hp",
+      const ef = efeitoDoBuff(meta, circ, escolha);
+      if (ef) encadearEfeito(ef.rotulo, ef.extra);
+      break;
+    }
+    case "planar":
+      encadearEfeito(`teleporta ${quem === "voce" ? "você" : "o alvo"} até Mente metros (terra firme)`, {
+        movement: { enabled: true, kind: "teleport", who: quem === "voce" ? "self" : "targets",
+                    distance: "@mente", lateralSide: "right", ignoreWalls: true, snap: true },
+      });
+      break;
+    case "eterea":
+      encadearEfeito("fica intangível até o fim da cena", {
+        appliesEffects: [novoApplies("Intangível (Magia Etérea)", { fxType: "condition", fxTarget: "intangivel", durationMode: "scene" })],
+      });
+      break;
+    case "restauradora": {
+      const cond = CONDICOES_NEGATIVAS[escolha?.condicao] ? escolha.condicao : "dano_continuo";
+      encadearEfeito(`neutraliza ${CONDICOES_NEGATIVAS[cond]}`, {
+        removesEffects: [{ mode: "condition", value: cond, count: "1", enabled: true }],
+      });
+      break;
+    }
+    case "marcador": {
+      // Lembrete na aba de efeitos (a forma ou o traço novo é com a mesa),
+      // com a duração da cena. No alvo, Vigor oposto à Conjuração anula —
+      // fica na ação principal, que é quem rola.
+      if (quem === "voce") {
+        encadearEfeito("efeito até o fim da cena", {
+          appliesEffects: [novoApplies(meta.marcador, { fxType: "bonus", fxTarget: "all", fxValue: "0", durationMode: "scene" })],
+        });
+      } else {
+        const alvo1 = ancora();
+        alvo1.appliesEffects ??= [];
+        alvo1.appliesEffects.push(novoApplies(meta.marcador, {
+          fxType: "bonus", fxTarget: "all", fxValue: "0", durationMode: "scene",
+          resist: true, resistAttr: meta.resist || "vigor",
         }));
-      } else if (meta.buff === "regen") {
-        sys.actions.push(novaAcao(`${meta.name} (regeneração na cena)`, {
-          // "restore" é instantâneo no sistema; a regeneração precisa de um
-          // efeito duradouro (valor 0) carregando o tickHeal.
-          appliesEffects: [novoApplies("Regeneração (1 PV/rodada)", {
-            fxType: "bonus", fxTarget: "all", fxValue: "0",
-            tickHealAmount: "1", tickHealResource: "hp",
-          })],
-        }));
-      } else if (meta.buff === "sobrevida") {
-        sys.actions.push(novaAcao(`${meta.name} (sobrevida: 1 por 2 acima de 10)`, {
-          canRoll: true, rollAttr: "conjuracao", vsDifficulty: true,
-          fixedDifficulty: "10", heal: "0", healResource: "hpTemp",
-          scalingHeal: true,
-        }));
-      } else if (meta.buff === "rd") {
-        const tipo = escolha?.damageType || "fogo";
-        sys.actions.push(novaAcao(`${meta.name} (RD ${circ >= 3 ? 3 : 2} de ${DTYPES[tipo]})`, {
-          appliesEffects: [novoApplies(`Proteção ${circ >= 3 ? 3 : 2} (${DTYPES[tipo]})`, {
-            fxType: "rd", fxTarget: tipo, fxValue: String(circ >= 3 ? 3 : 2),
-          })],
-        }));
-      } else if (meta.buff === "dice") {
-        const attr = escolha?.attr || "forca";
-        sys.actions.push(novaAcao(`${meta.name} (1D em ${ATTRS[attr]})`, {
-          appliesEffects: [novoApplies(`1D em ${ATTRS[attr]} (cena)`, {
-            fxType: "dice", fxTarget: attr, fxValue: "1",
-          })],
-        }));
-      } else if (meta.buff === "bloqueio") {
-        sys.actions.push(novaAcao(`${meta.name} (+1 Bloqueio, cena)`, {
-          appliesEffects: [novoApplies("+1 Bloqueio (cena)", {
-            fxType: "bonus", fxTarget: "bloqueio", fxValue: "1",
-          })],
-        }));
-      } else if (meta.buff === "bonus") {
-        const alvo = escolha?.bonusTarget || "attack";
-        sys.actions.push(novaAcao(`${meta.name} (+1 ${BONUS_TARGETS[alvo]}, cena)`, {
-          appliesEffects: [novoApplies(`+1 ${BONUS_TARGETS[alvo]} (cena)`, {
-            fxType: alvo === "deslocamento" ? "stat" : "bonus",
-            fxTarget: alvo, fxValue: "1",
-          })],
-        }));
+      }
+      break;
+    }
+    case "telecinetica": {
+      const alvo1 = ancora();
+      alvo1.appliesEffects ??= [];
+      alvo1.appliesEffects.push(novoApplies(`${meta.name}: ${ROTULO_COND[meta.cond] ?? meta.cond}`, {
+        fxType: "condition", fxTarget: meta.cond, durationMode: "scene",
+        resist: true, resistAttr: meta.resist || "forca",
+      }));
+      // Nas rodadas seguintes, com a sua ação: não dispara sozinha.
+      sys.actions.push(Object.assign(novaAcao(`${meta.name}: mover um alvo até 5m (sua ação)`, {
+        canRoll: false, targetMode: "target", includeSelf: false, costMp: "0",
+        movement: { enabled: true, kind: "place", who: "targets", distance: "5",
+                    lateralSide: "right", ignoreWalls: false, snap: true },
+      }), { _interna: true }));
+      break;
+    }
+    case "invisivel": {
+      // "Os alvos são considerados indefesos para se defender desta magia":
+      // antes da rolagem (ativação prévia, sem rolagem nem CD) eles ficam
+      // Indefesos — −3 na Esquiva e sem Bloqueio —, a ação rola, e depois, em
+      // cadeia, o efeito é removido pelo nome. Dura 1 rodada por segurança, se
+      // a conjuração for cancelada no meio.
+      const atacam = sys.actions.filter((a) => !deMetamagia(a) && a.canRoll
+        && !["self", "none"].includes(a.targetMode) && (Number(a.costMp || 0) > 0 || a._ancora));
+      if (!atacam.length) return `${meta.name}: a magia não rola contra a defesa de um alvo — registrada na receita.`;
+      const antes = subAcao(`${meta.name}: alvos indefesos contra esta magia (antes da rolagem)`, {
+        targetMode: "target",
+        appliesEffects: [novoApplies(ROTULO_INVISIVEL, {
+          fxType: "condition", fxTarget: "indefeso", durationMode: "rounds", durationRounds: "1",
+        })],
+      });
+      const depois = subAcao(`${meta.name}: fim do efeito (depois da rolagem)`, {
+        targetMode: "target",
+        removesEffects: [{ mode: "label", value: ROTULO_INVISIVEL, count: "", enabled: true }],
+      });
+      antes._semVisual = true;
+      depois._semVisual = true;
+      sys.actions.push(antes, depois);
+      antesDe(atacam, antes);
+      encadear(atacam, depois, "always", "same");
+      break;
+    }
+    case "vampirica": {
+      const lista = danosas();
+      if (!lista.length) return `${meta.name}: a magia não causa dano — não se aplica.`;
+      for (const a of lista) a.drain = { enabled: true, resource: "hp", from: "scaling", ratio: "1" };
+      break;
+    }
+    case "potencializada": {
+      const lista = danosas();
+      if (!lista.length) return `${meta.name}: a magia não causa dano — não se aplica.`;
+      for (const a of lista) {
+        const base = String(a.damage).trim();
+        a.damage = /^\d+$/.test(base) ? String(2 * Number(base)) : `2*(${base})`;
+        const sub = subAcao(`${meta.name} (você): sofre ${formulaCurta(base)} de dano final`, {
+          targetMode: "self", includeSelf: true,
+          damage: base, damageType: "final", damageResource: "hp", scalingDamage: false,
+        });
+        sys.actions.push(sub);
+        encadear([a], sub, "always", "own");
       }
       break;
     }
     default:
       break; // "other": registrada na receita
   }
+  if (meta.semDano && danosas().length) return `${meta.name}: não funciona em magia que causa dano (registrada na receita).`;
+  return null;
+}
+
+/** "2*@nivel" → "2 × Nível", para os rótulos. */
+function formulaCurta(f) {
+  return String(f).replace(/\*/g, " × ").replace(/@nivel/g, "Nível").replace(/@(\w+)/g, (_, v) => ATTRS[v] ?? v);
 }
 
 /* ------------------------------------------------------------------ */
@@ -664,9 +919,12 @@ export function aplicarMetamagia(data, meta, circ, escolha) {
  */
 export async function construirMagia(state, { animar = true, existe = null } = {}) {
   const { base, tier, nome, palavra1, palavra2, palavra3,
-          pecs, ajuste, meta2, meta3, escolha2, escolha3 } = state;
+          pecs, ajuste, meta2, meta3 } = state;
+  const escolha2 = state.escolha2 ?? {};
+  const escolha3 = state.escolha3 ?? {};
   const { circ, pm } = TIERS[tier];
   const data = base.toObject();
+  const idDaBase = data._id ?? base.id ?? "";
   delete data._id;
   data.name = nome || `${base.name} (${tier})`;
   data.system.tier = tier;
@@ -719,23 +977,59 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   // Metamagias — a da 3ª palavra é aplicada DEPOIS (prevalece em conflito).
   // Palavras podem se repetir (ignis + majesto + majesto). A mesma metamagia
   // duas vezes vale o que o livro diz para a Magia Múltipla: área/alcance
-  // triplicam (não dobram o dobrado); condições e o efeito em você não se
-  // aplicam duas vezes.
+  // triplicam (não dobram o dobrado); condições, efeitos em cadeia e o efeito
+  // em você não se aplicam duas vezes.
   const repetida = circ >= 3 && meta2 && meta3 && meta2.name === meta3.name;
+  const UMA_VEZ = ["condition", "selfcond", "buff", "planar", "eterea", "restauradora", "marcador",
+                   "telecinetica", "invisivel", "vampirica", "potencializada"];
+  const avisos = [];
   // As ações que uma metamagia cria levam a palavra dela (para a animação
   // seguir o tema certo: Magia Furtiva de iluzio numa magia de ignis).
   const aplicar = (meta, palavra, escolha) => {
     const antes = new Set(data.system.actions);
-    aplicarMetamagia(data, meta, circ, escolha);
+    const aviso = aplicarMetamagia(data, meta, circ, escolha);
+    if (aviso) avisos.push(aviso);
     for (const a of data.system.actions) if (!antes.has(a)) a._palavra = palavra;
   };
-  if (circ >= 2 && meta2) aplicar(meta2, palavra2, escolha2);
-  if (circ >= 3 && meta3 && !(repetida && ["condition", "selfcond"].includes(meta3.kind))) {
-    aplicar(meta3, palavra3, escolha3);
-  }
+  const fila = [];
+  if (circ >= 2 && meta2) fila.push([meta2, palavra2, escolha2]);
+  if (circ >= 3 && meta3 && !(repetida && UMA_VEZ.includes(meta3.kind))) fila.push([meta3, palavra3, escolha3]);
+  // Ordem de aplicação: primeiro as de dano (entre elas, a da 3ª palavra
+  // continua prevalecendo), depois as que dão à magia um ataque contra alvos,
+  // por fim as demais — assim a Vampírica e a Potencializada já encontram o
+  // dano, e a Invisível, a rolagem contra a defesa.
+  const prioridade = (m) => (m.kind === "damage" ? 0 : ["condition", "mpdrain", "telecinetica", "marcador"].includes(m.kind) ? 1 : 2);
+  fila.sort((x, y) => prioridade(x[0]) - prioridade(y[0]));
+  for (const [m, p, e] of fila) aplicar(m, p, e);
   for (const a of data.system.actions) {
     delete a._areaBase; delete a._ampliada; delete a._alcanceBase; delete a._dimensional;
   }
+
+  // Peculiaridade do Toque Vampírico: "o dano escalonado recupera seus pontos
+  // de magia, em vez dos pontos de vida" — o dreno passa a devolver PM.
+  if (pecsValidas.some((p) => /recupera seus pontos de magia, em vez dos pontos de vida/.test(semAcento(p.texto)))) {
+    for (const a of data.system.actions) if (a.drain?.enabled) a.drain.resource = "mp";
+  }
+
+  // Referências entre as ações: a magia nasce com id próprio (criada com
+  // keepId), então as ativações prévias e as ações em cadeia já apontam para
+  // o id e o nome definitivos — iguais às opções da ficha do item, que só as
+  // mantém marcadas assim.
+  data._id = state.id || novoIdDocumento();
+  const acoes = data.system.actions;
+  for (const a of acoes) {
+    a.preActivations = Array.isArray(a.preActivations) ? a.preActivations : [];
+    a.chainActions = Array.isArray(a.chainActions) ? a.chainActions : [];
+    for (const sub of a._antes ?? []) {
+      a.preActivations.push({ ref: refAcao(data._id, acoes.indexOf(sub), data.name), enabled: true });
+    }
+    for (const elo of a._cadeia ?? []) {
+      a.chainActions.push({ ref: refAcao(data._id, acoes.indexOf(elo.alvo), data.name),
+                            when: elo.when, targets: elo.targets, enabled: true });
+    }
+  }
+  // Uma base que já dispare as próprias ações passa a apontar para a magia nova.
+  normalizarAutoRefs(data, { id: data._id, nome: data.name, ids: [idDaBase], nomes: [base.name] });
 
   // Receita na descrição
   const linhasPec = pecsValidas.map((p) => `<li>${esc(p.texto)} (${p.mod >= 0 ? "+" : ""}${p.mod})</li>`).join("");
@@ -758,13 +1052,20 @@ export async function construirMagia(state, { animar = true, existe = null } = {
       linhaDano = principal.scalingDamage ? `${tipo} +${valor} (escalonado)` : `${tipo} ${valor} (fixo, não escalonável)`;
     }
   }
+  const comoFunciona = descreverCadeias(data);
+  const escolhas = [[meta2, escolha2, circ >= 2], [meta3, escolha3, circ >= 3]]
+    .filter(([m, , vale]) => m && vale)
+    .map(([m, e]) => ({ metamagia: m.name, ...escolhaLegivel(m, e) }));
   data.system.description = (data.system.description || "") + `
 <hr><p><strong>Magia criada — Círculo ${esc(tier)}</strong> (custo ${pm} PM; bônus de peculiaridades: ${delta >= 0 ? "+" : ""}${delta})</p>
 <p>Palavras: ${esc(palavras.join(", "))}. Base: ${esc(base.name)}.</p>
 ${linhaDano ? `<p>Dano: ${linhaDano}.</p>` : ""}
 ${linhasApr ? `<p>Aprimoramentos do círculo (gratuitos):</p><ul>${linhasApr}</ul>` : ""}
 ${linhasPec ? `<p>Peculiaridades escolhidas:</p><ul>${linhasPec}</ul>` : ""}
-${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}`;
+${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}
+${escolhas.some((e) => e.texto) ? `<p>Como as metamagias foram escolhidas: ${escolhas.filter((e) => e.texto).map((e) => `<strong>${esc(e.metamagia)}</strong> — ${esc(e.texto)}`).join("; ")}.</p>` : ""}
+${comoFunciona}
+${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
 
   // Receita estruturada (para consulta ou reconstrução futura)
   data.flags ??= {};
@@ -773,17 +1074,117 @@ ${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}`;
       tier, palavras, base: base.name, bonus: delta,
       peculiaridades: pecsValidas.map((p) => ({ texto: p.texto, mod: p.mod })),
       metamagias: data.system.metamagics.map((m) => m.name),
+      escolhas: escolhas.map(({ texto, ...resto }) => resto),
     },
   };
 
   // Animações que combinem com o que a magia ficou fazendo. As automáticas
   // que vieram da base são refeitas (a forma pode ter mudado: alvo → área);
-  // as que você puxou ou digitou ficam como estão.
+  // as que você puxou ou digitou ficam como estão. As ações que só deixam os
+  // alvos indefesos por um instante e as que tiram o efeito depois não têm o
+  // que mostrar.
   if (animar) animarMagia(data, { existe: existe ?? criarVerificador() });
   else limparAnimacoesAutomaticas(data);
-  for (const a of data.system.actions) delete a._palavra;
+  for (const a of data.system.actions) {
+    if (a._semVisual) {
+      if (a.aaConfig?.metaData?.origem === MODULE_ID) { a.aaConfig = null; a.aaName = ""; }
+      for (const e of a.appliesEffects ?? []) {
+        if (e.fxAaConfig?.metaData?.origem === MODULE_ID) { e.fxAaConfig = null; e.fxAaName = ""; }
+      }
+    }
+    delete a._palavra; delete a._antes; delete a._cadeia; delete a._interna; delete a._semVisual; delete a._ancora;
+  }
 
   return data;
+}
+
+/** O que o jogador escolheu numa metamagia, legível e estruturado. */
+function escolhaLegivel(meta, escolha = {}) {
+  const out = {};
+  const partes = [];
+  if (meta.alvoOuVoce || meta.kind === "selfcond") {
+    const { quem } = comoAplicar(meta, escolha);
+    out.quem = quem;
+    partes.push(quem === "voce" ? "em você" : "no alvo");
+  }
+  if (encadeia(meta, comoAplicar(meta, escolha))) {
+    const { quando } = comoAplicar(meta, escolha);
+    out.quando = quando;
+    partes.push(`dispara: ${QUANDO[quando].toLowerCase()}`);
+  }
+  if (meta.needs === "condicao") {
+    out.condicao = CONDICOES_NEGATIVAS[escolha.condicao] ? escolha.condicao : "dano_continuo";
+    partes.push(`neutraliza ${CONDICOES_NEGATIVAS[out.condicao]}`);
+  }
+  if (meta.needs === "damageType") { out.damageType = escolha.damageType || "fogo"; partes.push(`contra ${DTYPES[out.damageType]}`); }
+  if (meta.needs === "attr") { out.attr = escolha.attr || "forca"; partes.push(`em ${ATTRS[out.attr]}`); }
+  if (meta.needs === "bonusTarget") { out.bonusTarget = escolha.bonusTarget || "attack"; partes.push(`em ${BONUS_TARGETS[out.bonusTarget]}`); }
+  return { ...out, texto: partes.join(", ") };
+}
+
+const ROTULO_ALVOS_CADEIA = { same: "nos mesmos alvos", hitOnly: "em quem foi atingido", own: "" };
+const QUANDO_CURTO = { always: "sempre", hit: "se acertar", damage: "se causar dano", crit: "se for crítico", miss: "se errar", heal: "se curar" };
+
+/**
+ * "Como a magia funciona": o que cada ação usada dispara antes da rolagem e
+ * em cadeia, depois dela — vai na descrição da magia criada.
+ */
+export function descreverCadeias(data) {
+  const acoes = data?.system?.actions ?? [];
+  const id = data?._id ?? "";
+  const linhas = [];
+  acoes.forEach((a) => {
+    const pre = (a.preActivations ?? []).map((p) => lerRef(p.ref)).filter((r) => r.tipo === "action" && r.id === id);
+    const cad = (a.chainActions ?? []).filter((c) => lerRef(c.ref).id === id);
+    if (!pre.length && !cad.length) return;
+    const custo = Number(a.costMp || 0) ? ` (cobra ${a.costMp} PM)` : "";
+    const partes = [];
+    if (pre.length) partes.push(`antes da rolagem: ${pre.map((r) => esc(acoes[r.indice]?.label?.replace(/^↳\s*/, "") ?? "?")).join("; ")}`);
+    if (cad.length) {
+      partes.push(`depois, em cadeia: ${cad.map((c) => {
+        const alvo = acoes[lerRef(c.ref).indice];
+        const quando = QUANDO_CURTO[c.when] ?? c.when ?? "";
+        const onde = ROTULO_ALVOS_CADEIA[c.targets] ? `, ${ROTULO_ALVOS_CADEIA[c.targets]}` : "";
+        return `${esc(alvo?.label?.replace(/^↳\s*/, "") ?? "?")} (${quando}${onde})`;
+      }).join("; ")}`);
+    }
+    linhas.push(`<li><strong>${esc(a.label)}</strong>${custo} — ${partes.join("; ")}.</li>`);
+  });
+  if (!linhas.length) return "";
+  return `<p><strong>Como a magia funciona:</strong> use a ação principal; o que as metamagias acrescentam dispara sozinho, sem custo extra de PM (as ações marcadas com ↳ não se usam à parte).</p><ul>${linhas.join("")}</ul>`;
+}
+
+/** Uma linha explicando o que a metamagia faz na magia criada (janela). */
+const EXPLICACAO = {
+  buff: (m, c) => `Dispara em cadeia depois da ação principal (${QUANDO[c.quando].toLowerCase()}), ${c.quem === "voce" ? "em você" : "em quem a magia atingiu"} — sem custo extra de PM.`,
+  selfcond: (m, c) => `Em você, em cadeia depois da ação principal (${QUANDO[c.quando].toLowerCase()}) — sem custo extra de PM.`,
+  planar: (m, c) => `Teleporte em cadeia (${QUANDO[c.quando].toLowerCase()}): ${c.quem === "voce" ? "você escolhe para onde vai" : "você escolhe para onde vai cada alvo atingido"}, até Mente metros — sem custo extra de PM.`,
+  eterea: (m, c) => `Intangível até o fim da cena, em cadeia (${QUANDO[c.quando].toLowerCase()}) — sem custo extra de PM.`,
+  restauradora: (m, c) => `Em cadeia (${QUANDO[c.quando].toLowerCase()}): tira da aba de efeitos ${c.quem === "voce" ? "sua" : "do alvo"} um efeito com a condição escolhida.`,
+  marcador: (m, c) => (c.quem === "voce"
+    ? `Em você, em cadeia (${QUANDO[c.quando].toLowerCase()}): um lembrete na aba de efeitos até o fim da cena; a mudança em si é com a mesa.`
+    : "No alvo, com Vigor oposto à Conjuração (anula): um lembrete na aba de efeitos até o fim da cena; a mudança em si é com a mesa."),
+  telecinetica: () => "Imobiliza (Força anula) e a magia ganha a ação de mover um alvo até 5m, para usar com a sua ação enquanto durar.",
+  invisivel: () => "Antes da rolagem, os alvos ficam Indefesos (−3 na Esquiva, sem Bloqueio), sem rolagem nem CD; depois do ataque, o efeito sai sozinho.",
+  vampirica: () => "A ação ganha dreno: você recupera PV igual ao dano escalonado que de fato passar.",
+  potencializada: () => "Dobra o dano base; em cadeia, ao conjurar, você sofre o dano base como dano final.",
+};
+
+/** Metamagias que dão à magia um ataque contra alvos, quando ela não tem. */
+const CRIAM_ATAQUE = ["damage", "condition", "mpdrain", "telecinetica"];
+
+/** Aviso da janela: a metamagia escolhida não tem efeito nesta magia? */
+function avisoDaMetamagia(meta, { base = null, outra = null } = {}) {
+  if (!base) return "";
+  const acoes = base.system?.actions ?? [];
+  const danoDepois = acoes.some((a) => causaDanoDeVida(a)) || outra?.kind === "damage";
+  if (meta.comDano && !danoDepois) return "esta magia não causa dano: a metamagia não terá efeito (combine com uma metamagia de dano).";
+  if (meta.semDano && danoDepois) return "esta metamagia não funciona em magia que causa dano.";
+  if (meta.kind === "invisivel") {
+    const rola = acoes.some((a) => a.canRoll && !["self", "none"].includes(a.targetMode)) || CRIAM_ATAQUE.includes(outra?.kind);
+    if (!rola) return "esta magia não rola contra a defesa de um alvo: não há de quem a Magia Invisível esconder o efeito.";
+  }
+  return "";
 }
 
 /* ------------------------------------------------------------------ */
@@ -828,7 +1229,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     return o.join("");
   }
 
-  #metamagiaBloco(n, palavra, metaIdx, escolha) {
+  #metamagiaBloco(n, palavra, metaIdx, escolha, contexto = {}) {
     if (!palavra) return `<p class="dica">Escolha a ${n}ª palavra arcana para ver as metamagias dela.</p>`;
     const lista = METAMAGIAS[palavra] ?? [];
     if (!lista.length) return `<p class="dica">Sem metamagias catalogadas para <b>${esc(palavra)}</b>.</p>`;
@@ -836,18 +1237,35 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     const radios = lista.map((m, i) => `
       <label class="meta-opt"><input type="radio" name="meta${n}" value="${i}" ${i === metaIdx ? "checked" : ""}>
         <b>${esc(m.name)}</b> <em>(${esc(m.lvl)})</em><br><span>${esc(m.desc)}</span></label>`).join("");
-    let extra = "";
+    const extra = [];
     if (sel?.needs === "damageType") {
-      extra = `<label>Tipo de dano protegido: <select name="escolha${n}-damageType">${
-        this.#opcoes(Object.entries(DTYPES), escolha.damageType || "fogo", "—")}</select></label>`;
+      extra.push(`<label>Tipo de dano protegido: <select name="escolha${n}-damageType">${
+        this.#opcoes(Object.entries(DTYPES), escolha.damageType || "fogo", "—")}</select></label>`);
     } else if (sel?.needs === "attr") {
-      extra = `<label>Atributo: <select name="escolha${n}-attr">${
-        this.#opcoes(Object.entries(ATTRS), escolha.attr || "forca", "—")}</select></label>`;
+      extra.push(`<label>Atributo: <select name="escolha${n}-attr">${
+        this.#opcoes(Object.entries(ATTRS), escolha.attr || "forca", "—")}</select></label>`);
     } else if (sel?.needs === "bonusTarget") {
-      extra = `<label>Bônus em: <select name="escolha${n}-bonusTarget">${
-        this.#opcoes(Object.entries(BONUS_TARGETS), escolha.bonusTarget || "attack", "—")}</select></label>`;
+      extra.push(`<label>Bônus em: <select name="escolha${n}-bonusTarget">${
+        this.#opcoes(Object.entries(BONUS_TARGETS), escolha.bonusTarget || "attack", "—")}</select></label>`);
+    } else if (sel?.needs === "condicao") {
+      extra.push(`<label>Condição neutralizada: <select name="escolha${n}-condicao">${
+        this.#opcoes(Object.entries(CONDICOES_NEGATIVAS), escolha.condicao || "dano_continuo", "—")}</select></label>`);
     }
-    return radios + (extra ? `<div class="meta-extra">${extra}</div>` : "");
+    const como = comoAplicar(sel, escolha);
+    if (sel?.alvoOuVoce) {
+      extra.push(`<label>Em quem: <select name="escolha${n}-quem">${
+        this.#opcoes([["alvo", "No alvo da magia"], ["voce", "Em você"]], como.quem, "—")}</select></label>`);
+    }
+    if (encadeia(sel, como)) {
+      extra.push(`<label>Quando dispara: <select name="escolha${n}-quando">${
+        this.#opcoes(Object.entries(QUANDO), como.quando, "—")}</select></label>`);
+    }
+    const explica = sel ? EXPLICACAO[sel.kind]?.(sel, como) : "";
+    const aviso = sel ? avisoDaMetamagia(sel, contexto) : "";
+    return radios
+      + (extra.length ? `<div class="meta-extra">${extra.join("")}</div>` : "")
+      + (explica ? `<p class="dica">${esc(explica)}</p>` : "")
+      + (aviso ? `<p class="aviso">⚠ ${esc(aviso)}</p>` : "");
   }
 
   async _renderHTML() {
@@ -889,6 +1307,9 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         .ligeia-spellforge .meta-opt { display: block; margin: 4px 0; font-size: 0.92em; }
         .ligeia-spellforge .meta-opt span { opacity: 0.85; }
         .ligeia-spellforge .dica { opacity: 0.75; font-style: italic; }
+        .ligeia-spellforge .aviso { color: var(--color-level-warning, #c80); font-size: 0.92em; margin: 2px 0; }
+        .ligeia-spellforge .meta-extra { display: flex; gap: 10px; flex-wrap: wrap; margin: 4px 0; }
+        .ligeia-spellforge .meta-extra > label { flex: 1 1 170px; }
         .ligeia-spellforge .resumo { background: rgba(120,120,160,0.12); border-radius: 6px;
           padding: 6px 10px; margin: 6px 0; }
         .ligeia-spellforge footer { display: flex; gap: 8px; justify-content: flex-end; margin: 8px 0 4px; }
@@ -929,13 +1350,13 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         <p class="dica">As palavras podem se repetir (ex.: ignis + majesto + majesto).</p>
         <label>Segunda palavra arcana
           <select name="palavra2">${optPal(s.palavra2)}</select></label>
-        ${this.#metamagiaBloco(2, s.palavra2, s.meta2i, s.escolha2)}
+        ${this.#metamagiaBloco(2, s.palavra2, s.meta2i, s.escolha2, { base, outra: circ >= 3 ? (METAMAGIAS[s.palavra3] ?? [])[s.meta3i] : null })}
       </fieldset>` : ""}
       ${circ >= 3 ? `
       <fieldset><legend>4 · Terceira palavra e metamagia (prevalece em conflito)</legend>
         <label>Terceira palavra arcana
           <select name="palavra3">${optPal(s.palavra3)}</select></label>
-        ${this.#metamagiaBloco(3, s.palavra3, s.meta3i, s.escolha3)}
+        ${this.#metamagiaBloco(3, s.palavra3, s.meta3i, s.escolha3, { base, outra: (METAMAGIAS[s.palavra2] ?? [])[s.meta2i] })}
       </fieldset>` : ""}
       <fieldset><legend>Nome e resumo</legend>
         <label>Nome da nova magia
@@ -980,14 +1401,21 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       this.render();
     });
     on('select[name=palavra3]', "change", (e) => { s.palavra3 = e.target.value; s.meta3i = -1; s.escolha3 = {}; this.render(); });
-    on('input[name=meta2]', "change", (e) => { s.meta2i = Number(e.target.value); this.render(); });
-    on('input[name=meta3]', "change", (e) => { s.meta3i = Number(e.target.value); this.render(); });
+    on('input[name=meta2]', "change", (e) => { s.meta2i = Number(e.target.value); s.escolha2 = {}; this.render(); });
+    on('input[name=meta3]', "change", (e) => { s.meta3i = Number(e.target.value); s.escolha3 = {}; this.render(); });
     for (const n of [2, 3]) {
-      for (const campo of ["damageType", "attr", "bonusTarget"]) {
+      for (const campo of ["damageType", "attr", "bonusTarget", "condicao", "quando"]) {
         on(`select[name=escolha${n}-${campo}]`, "change", (e) => {
           (n === 2 ? s.escolha2 : s.escolha3)[campo] = e.target.value;
         });
       }
+      // Trocar em quem muda o padrão de quando dispara (você: sempre; alvo: se acertar).
+      on(`select[name=escolha${n}-quem]`, "change", (e) => {
+        const esc2 = n === 2 ? s.escolha2 : s.escolha3;
+        esc2.quem = e.target.value;
+        delete esc2.quando;
+        this.render();
+      });
     }
     on('input[name=nome]', "input", (e) => { s.nome = e.target.value; });
     on('[data-action=cancelar]', "click", () => this.close());
@@ -1013,7 +1441,8 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       palavra2: s.palavra2, palavra3: s.palavra3, pecs, ajuste: s.ajuste,
       meta2, meta3, escolha2: s.escolha2, escolha3: s.escolha3,
     }, { animar: animacoesLigadas() });
-    const [item] = await this.actor.createEmbeddedDocuments("Item", [data]);
+    // keepId: as ações em cadeia já apontam para o id que a magia vai ter.
+    const [item] = await this.actor.createEmbeddedDocuments("Item", [data], { keepId: true });
     const nAnim = contarAnimacoesAutomaticas(data);
     ui.notifications.info(`Magia criada: ${item.name} (${s.tier}, ${TIERS[s.tier].pm} PM)${
       nAnim ? ` — com ${nAnim} animaç${nAnim > 1 ? "ões" : "ão"} automática${nAnim > 1 ? "s" : ""} (remova pelo ✕ na ficha do item, se quiser)` : ""}.`);

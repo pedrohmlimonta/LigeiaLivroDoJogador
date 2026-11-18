@@ -98,6 +98,14 @@
                 "snap": true
               },
               "preActivations": [],
+              "drain": {
+                "enabled": false,
+                "resource": "mp",
+                "from": "both",
+                "ratio": "1"
+              },
+              "removesEffects": [],
+              "chainActions": [],
               "appliesEffects": [
                 {
                   "label": "Aura do Juramento: +1 dado nas defesas",
@@ -273,6 +281,14 @@
                 "snap": true
               },
               "preActivations": [],
+              "drain": {
+                "enabled": false,
+                "resource": "mp",
+                "from": "both",
+                "ratio": "1"
+              },
+              "removesEffects": [],
+              "chainActions": [],
               "appliesEffects": [
                 {
                   "label": "Aura do Juramento: +1 dado nas defesas",

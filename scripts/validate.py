@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Validação dos documentos gerados contra o schema do sistema ligeia-rpg
-(build 23): choices de todos os campos enumerados, tipos string/número/bool,
-fórmulas e @variáveis, condições e alvos de efeito.
+(build 27): choices de todos os campos enumerados, tipos string/número/bool,
+fórmulas e @variáveis, condições e alvos de efeito, dreno, efeitos removidos,
+ações em cadeia e as referências entre ações.
 
 Rodado pelo generate.py ao final; também pode rodar sozinho:
     python3 scripts/validate.py
@@ -55,6 +56,23 @@ SIZES = {"minusculo", "diminuto", "miudo", "pequeno", "medio", "grande", "enorme
          "imenso", "colossal", "continental"}
 MODULO = "ligeia-livro-do-jogador"
 PLAY_ON = {"source", "target", "default", "both"}
+DRAIN_FROM = {"base", "scaling", "both"}
+REMOVE_MODES = {"label", "condition", "mine", "all"}
+CHAIN_WHEN = {"always", "hit", "miss", "crit", "damage", "heal"}
+CHAIN_TARGETS = {"same", "hitOnly", "own"}
+REF_KINDS = {"item", "effect", "action"}
+
+
+def ler_ref(ref):
+    """"tipo|id|índice|nome" (parsePreActivation do sistema)."""
+    partes = str(ref or "").split("|")
+    if len(partes) < 4:
+        return None
+    try:
+        indice = int(partes[2] or 0)
+    except ValueError:
+        return None
+    return {"tipo": partes[0], "id": partes[1], "indice": indice, "nome": "|".join(partes[3:])}
 
 
 def _chaves_jb2a():
@@ -228,6 +246,34 @@ def validar_acao(v, onde, a):
     for ex in a.get("extraDamage", []):
         v.choice(onde, "extraDamage.resource", ex.get("resource", "hp"), RES3)
         v.formula(onde, "extraDamage.formula", ex.get("formula", ""))
+    dr = a.get("drain")
+    if dr is not None:
+        if not isinstance(dr, dict):
+            v.err(onde, "drain deveria ser objeto")
+        else:
+            v.choice(onde, "drain.resource", dr.get("resource", "mp"), COST_RES)
+            v.choice(onde, "drain.from", dr.get("from", "both"), DRAIN_FROM)
+            v.formula(onde, "drain.ratio", dr.get("ratio", "1"))
+            if dr.get("enabled") and str(a.get("damage", "")).strip() == "" and not a.get("extraDamage"):
+                v.err(onde, "dreno ligado numa ação que não causa dano: não há o que drenar")
+    for i, rm in enumerate(a.get("removesEffects", [])):
+        modo = rm.get("mode", "label")
+        v.choice(onde, f"removesEffects[{i}].mode", modo, REMOVE_MODES)
+        v.formula(onde, f"removesEffects[{i}].count", rm.get("count", ""))
+        if modo == "condition" and rm.get("value") not in CONDS:
+            v.err(onde, f"removesEffects[{i}] pela condição {rm.get('value')!r} (inexistente)")
+        if modo == "label" and not str(rm.get("value", "")).strip():
+            v.err(onde, f"removesEffects[{i}] pelo nome, mas sem nome: não removeria nada")
+    for i, elo in enumerate(a.get("chainActions", [])):
+        v.choice(onde, f"chainActions[{i}].when", elo.get("when", "hit"), CHAIN_WHEN)
+        v.choice(onde, f"chainActions[{i}].targets", elo.get("targets", "own"), CHAIN_TARGETS)
+        r = ler_ref(elo.get("ref"))
+        if r is None or r["tipo"] != "action":
+            v.err(onde, f"chainActions[{i}] com referência {elo.get('ref')!r}: a cadeia só encadeia ações (\"action|id|índice|nome\")")
+    for i, pre in enumerate(a.get("preActivations", [])):
+        r = ler_ref(pre.get("ref"))
+        if r is None or r["tipo"] not in REF_KINDS:
+            v.err(onde, f"preActivations[{i}] com referência {pre.get('ref')!r} fora do formato \"tipo|id|índice|nome\"")
     if a.get("aaConfig"):
         validar_animacao(v, f"{onde} › animação", a["aaConfig"], False)
         if a.get("aaEnabled") is not True or not a.get("aaName"):
@@ -270,6 +316,40 @@ def validar_escalonamento(v, onde, tipo, s):
                          f"{'escalonado' if esc else 'fixo'} na ação")
         if _ROTULO_ESCALONADO.search(a.get("label", "")) and not esc:
             v.err(lugar, "o rótulo diz \"Tipo +N\" mas o dano não está escalonado")
+
+
+def validar_auto_refs(v, onde, doc):
+    """As ações que o item dispara nele mesmo (antes da rolagem ou em cadeia):
+    a referência leva o id do PRÓPRIO item — senão o select da ficha não marca a
+    opção e a primeira edição da ficha a apaga —, aponta para uma ação que
+    existe, não para a própria, e a ação disparada não cobra mana (a principal
+    já cobrou)."""
+    s = doc.get("system") or {}
+    acoes = s.get("actions", [])
+    nome = str(doc.get("name", "")).replace("|", "/")
+    meu_id = doc.get("_id", "")
+    for i, a in enumerate(acoes):
+        elos = [("preActivations", e) for e in a.get("preActivations", [])] + \
+               [("chainActions", e) for e in a.get("chainActions", [])]
+        for campo, elo in elos:
+            r = ler_ref(elo.get("ref"))
+            if r is None or r["tipo"] != "action":
+                continue
+            if r["nome"] != nome and r["id"] != meu_id:
+                continue
+            lugar = f"{onde} › ação[{i}] › {campo}"
+            if meu_id and r["id"] != meu_id:
+                v.err(lugar, f"referência à própria ação sem o id do item ({r['id']!r} em vez de {meu_id!r})")
+            if r["nome"] != nome:
+                v.err(lugar, f"referência à própria ação com o nome {r['nome']!r} em vez de {nome!r}")
+            if not 0 <= r["indice"] < len(acoes):
+                v.err(lugar, f"referência à ação {r['indice']}, que não existe (o item tem {len(acoes)})")
+                continue
+            if r["indice"] == i:
+                v.err(lugar, "a ação dispara a si mesma")
+            alvo = acoes[r["indice"]]
+            if str(alvo.get("costMp", "0")) not in ("0", ""):
+                v.err(lugar, f"a ação disparada {alvo.get('label', '')[:30]!r} cobra {alvo.get('costMp')} PM: a mana sai só na ação que se usa")
 
 
 def validar_sistema(v, onde, tipo, s):
@@ -323,6 +403,7 @@ def main(root=ROOT):
             docs.append((pack, d))
             por_uuid[f"Compendium.ligeia-livro-do-jogador.{pack}.Item.{d['_id']}"] = d
             validar_sistema(v, f"{pack}/{d['name']}", d["type"], d["system"])
+            validar_auto_refs(v, f"{pack}/{d['name']}", d)
             # A animação fica nas ações: uma animação no ITEM tocaria como
             # reserva e voltaria depois de removida da ação.
             if (d.get("flags") or {}).get("autoanimations"):

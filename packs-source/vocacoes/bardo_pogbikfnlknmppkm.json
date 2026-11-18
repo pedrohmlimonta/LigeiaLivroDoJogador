@@ -98,6 +98,14 @@
                 "snap": true
               },
               "preActivations": [],
+              "drain": {
+                "enabled": false,
+                "resource": "mp",
+                "from": "both",
+                "ratio": "1"
+              },
+              "removesEffects": [],
+              "chainActions": [],
               "appliesEffects": [
                 {
                   "label": "Inspirado: 1D em uma rolagem",
@@ -273,6 +281,14 @@
                 "snap": true
               },
               "preActivations": [],
+              "drain": {
+                "enabled": false,
+                "resource": "mp",
+                "from": "both",
+                "ratio": "1"
+              },
+              "removesEffects": [],
+              "chainActions": [],
               "appliesEffects": [
                 {
                   "label": "Inspirado: +2 dados (use em uma ou mais rolagens)",
