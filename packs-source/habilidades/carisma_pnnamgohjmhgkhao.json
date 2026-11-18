@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [],
         "lineWidth": "1.5",
         "coneAngle": "45",
@@ -133,6 +134,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Carisma: +1 em todas as rolagens",
@@ -316,6 +318,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Carisma: -1 em todas as rolagens",

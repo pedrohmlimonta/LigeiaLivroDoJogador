@@ -150,7 +150,7 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
            persist_reroll_attack=False, persist_trigger="both",
            pre_activations=None, skip_roll_dialog=True, drain=None,
            removes_effects=None, chain_actions=None):
-    """Uma ação de item (schema do sistema, build 27).
+    """Uma ação de item (schema do sistema, build 28).
 
     - level: "all"/"B"/"A"/"E" — nível em que a ação existe (habilidades).
     - roll_bonus/roll_dice/rng/area/custos/damage/heal aceitam fórmulas
@@ -203,6 +203,7 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
         "drain": dr,
         "removesEffects": removes_effects or [],
         "chainActions": chain_actions or [],
+        "showInSheet": False,
         "appliesEffects": applies_effects or [],
         "lineWidth": _s(line_width, "1.5"),
         "coneAngle": _s(cone_angle, "45"),

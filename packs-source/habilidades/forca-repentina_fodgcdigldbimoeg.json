@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Força Repentina: +1 dado(s) em Força",
@@ -246,6 +247,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Força Repentina: +1 dado(s) em Agilidade",
@@ -429,6 +431,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Força Repentina: +2 dado(s) em Força",
@@ -612,6 +615,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Força Repentina: +2 dado(s) em Agilidade",

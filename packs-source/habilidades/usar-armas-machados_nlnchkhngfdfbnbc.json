@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Arauto do Terror: +dano com a arma",
@@ -160,6 +161,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Abalado (Mente anula)",

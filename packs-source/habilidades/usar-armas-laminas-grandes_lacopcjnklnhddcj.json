@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Corte Cruel: +dano com a arma",

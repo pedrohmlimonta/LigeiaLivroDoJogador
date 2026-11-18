@@ -97,6 +97,7 @@
               },
               "removesEffects": [],
               "chainActions": [],
+              "showInSheet": false,
               "appliesEffects": [],
               "lineWidth": "1.5",
               "coneAngle": "45",
@@ -167,6 +168,7 @@
               },
               "removesEffects": [],
               "chainActions": [],
+              "showInSheet": false,
               "appliesEffects": [
                 {
                   "label": "Indefeso (Zona de Ameaça)",

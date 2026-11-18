@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Espírito do Falcão: 1D em rolagens de Percepção.",
@@ -246,6 +247,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Espírito do Falcão: 1D em rolagens de Percepção.",

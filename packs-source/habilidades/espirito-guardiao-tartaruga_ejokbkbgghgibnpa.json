@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Espírito do Tartaruga: Proteção igual a metade do Nível. (corte)",
@@ -298,6 +299,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Espírito do Tartaruga: Proteção igual a metade do Nível. (corte)",

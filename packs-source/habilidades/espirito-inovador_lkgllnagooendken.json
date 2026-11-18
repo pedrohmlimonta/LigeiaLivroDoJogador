@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Ajuste inovador: +1 nas rolagens do item (soma dos 2 maiores dados ≤ 6: o item sofre dano na Dureza)",
@@ -160,6 +161,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Ajuste inovador: +2 nas rolagens do item (soma dos 2 maiores dados ≤ 4: o item sofre dano na Dureza)",

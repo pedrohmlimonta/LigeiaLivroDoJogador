@@ -91,6 +91,7 @@
               },
               "removesEffects": [],
               "chainActions": [],
+              "showInSheet": false,
               "appliesEffects": [],
               "lineWidth": "1.5",
               "coneAngle": "45",

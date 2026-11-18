@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Espírito do Lobo: +2 no dano bruto com armas se adjacente a um aliado.",
@@ -246,6 +247,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Espírito do Lobo: +2 no dano bruto com armas se adjacente a um aliado.",

@@ -340,7 +340,77 @@ if (app) {
   ok(app2.element.filho.innerHTML.includes('class="aviso"'), 'Magia Vampírica numa magia sem dano: a janela avisa');
 }
 
-console.log('15) Todas as metamagias, no alvo e em você, em magias diferentes, passam no validador');
+console.log('15) Magia Múltipla e Replicante (build 28: o alvo da cadeia é escolhido na hora)');
+const mult = MM('pluribus', 'Magia Múltipla');
+const repl = MM('pluribus', 'Magia Replicante');
+const elos = (x) => x.chainActions.map((c) => ({ ...lerRef(c.ref), when: c.when, targets: c.targets }));
+d = await com('missil-magico', 'exitium', 'pluribus', mult);
+a = d.system.actions[0];
+let copia = d.system.actions[elos(a).find((e) => e.targets === 'pick')?.indice];
+ok(d.system.actions.length === 2 && a.costMp === '2' && copia?.costMp === '0' && copia.label.endsWith('— 2º alvo')
+   && elos(a)[0].when === 'always' && copia.damage === a.damage && copia.targetMode === 'target' && refsOk(d),
+   'Míssil Mágico + Magia Múltipla: a principal cobra 2 PM e, em cadeia, a cópia vai no 2º alvo, escolhido na hora');
+d = await com('missil-magico', 'exitium', 'pluribus', mult, {}, 'Maior', { p3: 'pluribus', meta3: mult });
+ok(elos(d.system.actions[0]).filter((e) => e.targets === 'pick').length === 2 && d.system.actions.some((x) => x.label.endsWith('— 3º alvo')),
+   'aplicada duas vezes: o triplo de alvos (2º e 3º, cada um escolhido na hora)');
+d = await com('raio-arcano', 'energio', 'ignis', flam, {}, 'Maior', { p3: 'pluribus', meta3: mult });
+copia = d.system.actions[elos(d.system.actions[0]).find((e) => e.targets === 'pick').indice];
+ok(copia.damageType === 'fogo' && copia.damage === d.system.actions[0].damage, 'a cópia sai depois das outras metamagias: leva o dano de fogo da Flamejante');
+d = await com('esfera-ignea', 'ignis', 'iluzio', MM('iluzio', 'Magia Invisível'), {}, 'Maior', { p3: 'pluribus', meta3: mult });
+a = d.system.actions[0];
+copia = d.system.actions[elos(a).find((e) => e.targets === 'pick').indice];
+const preCopia = (copia.preActivations ?? []).map((x) => lerRef(x.ref).indice);
+const cadCopia = elos(copia).map((e) => e.indice);
+ok(preCopia.length === 1 && cadCopia.length === 1 && !preCopia.includes(lerRef(a.preActivations[0].ref).indice)
+   && !cadCopia.includes(elos(a)[0].indice) && d.system.actions[preCopia[0]].appliesEffects[0].fxTarget === 'indefeso'
+   && d.system.actions[cadCopia[0]].removesEffects[0].value === 'Indefeso (Magia Invisível)',
+   'com a Invisível, o 2º alvo tem o próprio "indefesos antes" e o próprio "fim do efeito" (a cadeia do sistema não repete uma ação)');
+d = await com('esfera-ignea', 'ignis', 'exitium', MM('exitium', 'Magia Potencializada'), {}, 'Maior', { p3: 'pluribus', meta3: mult });
+copia = d.system.actions[elos(d.system.actions[0]).find((e) => e.targets === 'pick').indice];
+ok(copia.damage === d.system.actions[0].damage && !copia.chainActions.length,
+   'com a Potencializada, o dano final em você fica só na primeira (é por conjuração, não por alvo)');
+d = await com('nuvem-toxica', 'noxia', 'pluribus', repl);
+a = d.system.actions[0];
+copia = d.system.actions[elos(a).find((e) => e.targets === 'pick')?.indice];
+ok(copia?.targetMode === a.targetMode && copia.area === a.area && copia.label.endsWith('— 2ª área') && copia.costMp === '0',
+   'Nuvem Tóxica + Magia Replicante: uma 2ª área, reposicionada na hora, sem custo');
+d = await com('missil-magico', 'exitium', 'pluribus', repl);
+ok(d.system.actions.length === 1 && /não tem área/.test(d.system.description), 'Replicante numa magia sem área: fica registrada para a mesa');
+d = await com('escudo-arcano', 'forjuri', 'pluribus', mult);
+ok(d.system.actions.length === 1 && /não é de alvo/.test(d.system.description), 'Múltipla numa magia só em você: não se aplica (e a receita avisa)');
+ok(d.system.actions.every((x) => x.showInSheet === false), 'as ações levam showInSheet desligado: as que vêm em cadeia ficam sem botão na ficha');
+
+console.log('16) Magia Dimensional (regra da mesa): tudo o que tem alcance dobra; toque, você e emanação viram alvo');
+const dimen = MM('majesto', 'Magia Dimensional');
+d = await com('teletransporte', 'krucigon', 'iluzio', MM('iluzio', 'Magia Ilusória'));
+ok(d.system.actions[0].movement.distance === '20*@nivel', 'Teletransporte Intermediário: "10m x Círculo x Nível" escala com o círculo (20m × Nível)');
+d = await com('teletransporte', 'krucigon', 'majesto', dimen);
+a = d.system.actions[0];
+ok(a.targetMode === 'target' && a.range === '6*@nivel' && a.movement.who === 'targets' && a.movement.distance === '2*(20*@nivel)'
+   && a.label.endsWith('no alvo, alcance 6m × Nível'),
+   'krucigon + majesto Dimensional: o teleporte pessoal vira de alvo (3m × Círculo × Nível) e teleporta o dobro');
+d = await com('teletransporte', 'krucigon', 'majesto', dim, {}, 'Maior', { p3: 'majesto', meta3: dimen });
+a = d.system.actions[0];
+ok(a.range === '2*(9*@nivel)' && a.movement.distance === '3*(30*@nivel)' && a.label.endsWith('alcance 2 × 9m × Nível'),
+   'Dimensional duas vezes: o alcance dobra o que ela deu e a distância triplica (não dobra o dobrado)');
+d = await com('causar-medo', 'carmo', 'majesto', dimen);
+a = d.system.actions[0];
+ok(a.targetMode === 'area' && a.range === '6*@nivel' && a.area === '@nivel' && a.label.includes('emanando do alvo'),
+   'emanação (Causar Medo): passa a sair do alvo — uma área do mesmo raio, posta a até 3m × Círculo × Nível');
+d = await com('empurrao-cinetico', 'menso', 'majesto', dimen);
+ok(d.system.actions[0].targetMode === 'area' && d.system.actions[0].movement.distance === '4', 'Empurrão Cinético: a área sai do alvo e o empurrão dobra (2 → 4m)');
+d = await com('escudo-arcano', 'forjuri', 'majesto', dimen);
+ok(d.system.actions[0].targetMode === 'target' && d.system.actions[0].range === '6*@nivel', 'magia em você (Escudo Arcano): vira de alvo, a 3m × Círculo × Nível');
+d = await com('telecinesia', 'menso', 'majesto', dimen);
+ok(d.system.actions[0].range === '2*(6*@nivel)' && d.system.actions[0].movement.distance === '10', 'Telecinésia: alcance dobrado e o arrasto também (5 → 10m)');
+d = await com('esfera-ignea', 'ignis', 'krucigon', MM('krucigon', 'Magia Planar'), { quem: 'voce' }, 'Maior', { p3: 'majesto', meta3: dimen });
+sub = d.system.actions.find((x) => x.movement?.kind === 'teleport');
+ok(sub?.movement.distance === '2*(@mente)' && sub.label.includes('até 2 × Mente metros'), 'Magia Planar + Dimensional: teleporta até o dobro de Mente metros');
+d = await com('esfera-ignea', 'ignis', 'menso', MM('menso', 'Magia Telecinética'), {}, 'Maior', { p3: 'majesto', meta3: dimen });
+ok(d.system.actions.find((x) => x.movement?.kind === 'place')?.movement.distance === '10', 'Magia Telecinética + Dimensional: move o alvo até 10m');
+ok(!JSON.stringify(d).includes('_distBase') && !JSON.stringify(d).includes('_rotuloDim'), 'sem campos auxiliares no item salvo');
+
+console.log('17) Todas as metamagias, no alvo e em você, em magias diferentes, passam no validador');
 const os = await import('os');
 const path = await import('path');
 const { execFileSync } = await import('child_process');

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Validação dos documentos gerados contra o schema do sistema ligeia-rpg
-(build 27): choices de todos os campos enumerados, tipos string/número/bool,
+(build 28): choices de todos os campos enumerados, tipos string/número/bool,
 fórmulas e @variáveis, condições e alvos de efeito, dreno, efeitos removidos,
-ações em cadeia e as referências entre ações.
+ações em cadeia (inclusive o alvo escolhido na hora) e as referências entre ações.
 
 Rodado pelo generate.py ao final; também pode rodar sozinho:
     python3 scripts/validate.py
@@ -59,7 +59,7 @@ PLAY_ON = {"source", "target", "default", "both"}
 DRAIN_FROM = {"base", "scaling", "both"}
 REMOVE_MODES = {"label", "condition", "mine", "all"}
 CHAIN_WHEN = {"always", "hit", "miss", "crit", "damage", "heal"}
-CHAIN_TARGETS = {"same", "hitOnly", "own"}
+CHAIN_TARGETS = {"same", "hitOnly", "own", "pick"}
 REF_KINDS = {"item", "effect", "action"}
 
 
@@ -264,6 +264,8 @@ def validar_acao(v, onde, a):
             v.err(onde, f"removesEffects[{i}] pela condição {rm.get('value')!r} (inexistente)")
         if modo == "label" and not str(rm.get("value", "")).strip():
             v.err(onde, f"removesEffects[{i}] pelo nome, mas sem nome: não removeria nada")
+    if "showInSheet" in a and not isinstance(a.get("showInSheet"), bool):
+        v.err(onde, "action.showInSheet deveria ser bool")
     for i, elo in enumerate(a.get("chainActions", [])):
         v.choice(onde, f"chainActions[{i}].when", elo.get("when", "hit"), CHAIN_WHEN)
         v.choice(onde, f"chainActions[{i}].targets", elo.get("targets", "own"), CHAIN_TARGETS)

@@ -50,6 +50,9 @@ const PACK_MAGIAS = `${MODULE_ID}.magias`;
 /*   invisivel        alvos indefesos antes da rolagem; depois, sai    */
 /*   vampirica        dreno: o dano escalonado volta como PV           */
 /*   potencializada   dobra o dano base; você sofre o base (final)     */
+/*   multipla         cópia da ação em cadeia, com o alvo escolhido na  */
+/*                    hora (o dobro de alvos; duas vezes, o triplo)     */
+/*   replicante       idem para a área: ela é reposicionada na hora     */
 /*   other            registrada na receita (resolução manual)         */
 /*                                                                    */
 /*  alvoOuVoce: o livro deixa escolher, na criação, se a metamagia    */
@@ -159,7 +162,7 @@ export const METAMAGIAS = {
     { name: "Magia Ampliada", lvl: "Básica", kind: "area2x",
       desc: "Dobra a área; magia de alvo vira Área (1m x Círculo x Nível)." },
     { name: "Magia Dimensional", lvl: "Básica", kind: "range2x",
-      desc: "Dobra o alcance; toque vira 3m x Círculo x Nível. Não afeta emanação/aura/conjurador." },
+      desc: "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese). Toque, o próprio conjurador e emanação passam a ter alcance de 3m x Círculo x Nível e alvo: o toque e o \"em você\" viram um alvo; a emanação passa a sair do alvo." },
     { name: "Magia Majestosa", lvl: "Básica", kind: "other",
       desc: "Invocações/criações saem uma categoria de tamanho maior (duas no Círculo Maior)." },
   ],
@@ -184,10 +187,10 @@ export const METAMAGIAS = {
       desc: "Vigor oposto à Conjuração ou dano contínuo de veneno até o fim da cena (Vigor anula)." },
   ],
   pluribus: [
-    { name: "Magia Múltipla", lvl: "Básica", kind: "other",
-      desc: "Atinge o dobro de alvos da base (aplicada duas vezes: o triplo)." },
-    { name: "Magia Replicante", lvl: "Avançada", kind: "other",
-      desc: "Tudo o que a magia cria ou invoca é duplicado (sem sobreposição)." },
+    { name: "Magia Múltipla", lvl: "Básica", kind: "multipla",
+      desc: "Atinge o dobro de alvos da base (aplicada duas vezes: o triplo). Depois do primeiro alvo, o jogo pede o próximo." },
+    { name: "Magia Replicante", lvl: "Avançada", kind: "replicante",
+      desc: "Tudo o que a magia cria ou invoca é duplicado, inclusive a área de efeito (sem sobrepor a primeira): a área é reposicionada na hora." },
   ],
   saeculorum: [
     { name: "Magia Duradoura", lvl: "Básica", kind: "other",
@@ -453,6 +456,37 @@ function escalarCirculo(data, circ) {
       if (String(a[campo] ?? "") === menor) a[campo] = novo;
     }
   }
+  // Distâncias de movimento que o texto dá "x Círculo" (o Teletransporte:
+  // "até uma distância igual a 10m x Círculo x Nível") — o compêndio grava a
+  // do Círculo Menor.
+  const texto = String(sys.description ?? "").replace(/<[^>]+>/g, " ");
+  const slots = texto.match(/\d+\s*m\s*x\s*C[íi]rculo\s*x\s*N[íi]vel/gi) ?? [];
+  for (const slot of slots) {
+    const menor = slotFormula(slot, 1);
+    const novo = slotFormula(slot, circ);
+    if (!menor || !novo || menor === novo) continue;
+    for (const a of sys.actions) {
+      if (a.movement?.enabled && String(a.movement.distance ?? "") === menor) a.movement.distance = novo;
+    }
+  }
+}
+
+/** Dobra (ou triplica, na segunda vez) uma distância pela Magia Dimensional. */
+function dobrarDistancia(mv) {
+  if (!mv?.enabled) return;
+  const d = String(mv.distance ?? "").trim();
+  if (!d || d === "0") return; // "0" = à vontade
+  mv._distBase ??= d;
+  mv._dimensional = (mv._dimensional ?? 0) + 1;
+  mv.distance = /^\d+$/.test(mv._distBase) ? String((mv._dimensional + 1) * Number(mv._distBase))
+    : `${mv._dimensional + 1}*(${mv._distBase})`;
+}
+
+/** Distância de uma ação que uma metamagia cria, já com a Magia Dimensional da magia. */
+function distanciaDaMagia(data, base) {
+  const n = data._dimensional ?? 0;
+  if (!n) return base;
+  return /^\d+$/.test(base) ? String((n + 1) * Number(base)) : `${n + 1}*(${base})`;
 }
 
 /** Magias Menores disponíveis de uma palavra (compêndio + mundo), em cache. */
@@ -555,6 +589,9 @@ export function novaAcao(label, extra = {}) {
     // Sistema build 27: dreno, efeitos removidos do alvo e ações em cadeia.
     drain: { enabled: false, resource: "mp", from: "both", ratio: "1" },
     removesEffects: [], chainActions: [],
+    // Build 28: ação que é alvo de cadeia não ganha botão na ficha (dispara
+    // sozinha), a menos que isto esteja marcado.
+    showInSheet: false,
     movement: { enabled: false, kind: "push", who: "targets", distance: "0",
                 lateralSide: "right", ignoreWalls: false, snap: true },
     appliesEffects: [], lineWidth: "1.5", coneAngle: "45",
@@ -761,23 +798,52 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
         }
       }
       break;
-    case "range2x":
-      // Emanação, aura e magias no próprio conjurador não são afetadas.
+    case "range2x": {
+      // Regra da mesa (no lugar do "emanação, aura ou conjurador não são
+      // afetadas" do livro): tudo o que tem alcance dobra — inclusive as
+      // distâncias de teleporte, empurrão e telecinese —, e uma magia de
+      // TOQUE, no PRÓPRIO CONJURADOR ou de EMANAÇÃO passa a ter alcance de
+      // 3m x Círculo x Nível e alvo: o toque e o "em você" viram um alvo (o
+      // teleporte que levava você leva o alvo), e a emanação sai do alvo —
+      // vira uma área posta nele. Aplicada duas vezes, triplica.
+      data._dimensional = (data._dimensional ?? 0) + 1;
+      const alcance = `${3 * circ}*@nivel`;
+      const sufixo = (txt) => `${txt}, alcance ${metrosLegiveis(alcance)}`;
       for (const a of sys.actions) {
-        if (deMetamagia(a) || a.targetMode === "self" || a.targetMode === "aura") continue;
-        if (a.isMelee) {
+        if (deMetamagia(a)) continue; // efeitos das metamagias: só as distâncias (distanciaDaMagia)
+        if (a.targetMode === "self") {
+          a.targetMode = "target";
+          a.includeSelf = false;
+          a.isMelee = false;
+          a.range = a._alcanceBase = alcance;
+          a._dimensional = 0;
+          if (a.movement?.enabled && a.movement.who === "self") a.movement.who = "targets";
+          a._rotuloDim = { base: a.label, txt: "no alvo" };
+          a.label = `${a.label} — ${sufixo("no alvo")}`;
+        } else if (a.targetMode === "aura") {
+          a.targetMode = "area";
+          a.includeSelf = false;
+          a.range = a._alcanceBase = alcance;
+          a._dimensional = 0;
+          a._rotuloDim = { base: a.label, txt: "emanando do alvo" };
+          a.label = `${a.label} — ${sufixo("emanando do alvo")}`;
+        } else if (a.isMelee) {
           // Toque passa a ter alcance de 3m x Círculo x Nível.
           a.isMelee = false;
-          a._alcanceBase = `${3 * circ}*@nivel`;
+          a._alcanceBase = alcance;
           a._dimensional = 0;
           a.range = a._alcanceBase;
         } else if (a.range && a.range !== "0") {
           a._alcanceBase ??= a.range;
           a._dimensional = (a._dimensional ?? 0) + 1;
           a.range = `${a._dimensional + 1}*(${a._alcanceBase})`;
+          // A que já tinha virado alvo nesta magia: o rótulo acompanha o alcance.
+          if (a._rotuloDim) a.label = `${a._rotuloDim.base} — ${a._rotuloDim.txt}, alcance ${metrosLegiveis(a.range)}`;
         }
+        dobrarDistancia(a.movement);
       }
       break;
+    }
     case "aura":
       for (const a of ofensivas) {
         a.targetMode = "aura"; a.range = ""; a.area = `${circ}*@nivel`;
@@ -795,12 +861,14 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
       if (ef) encadearEfeito(ef.rotulo, ef.extra);
       break;
     }
-    case "planar":
-      encadearEfeito(`teleporta ${quem === "voce" ? "você" : "o alvo"} até Mente metros (terra firme)`, {
+    case "planar": {
+      const dist = distanciaDaMagia(data, "@mente");
+      encadearEfeito(`teleporta ${quem === "voce" ? "você" : "o alvo"} até ${metrosLegiveis(dist)} (terra firme)`, {
         movement: { enabled: true, kind: "teleport", who: quem === "voce" ? "self" : "targets",
-                    distance: "@mente", lateralSide: "right", ignoreWalls: true, snap: true },
+                    distance: dist, lateralSide: "right", ignoreWalls: true, snap: true },
       });
       break;
+    }
     case "eterea":
       encadearEfeito("fica intangível até o fim da cena", {
         appliesEffects: [novoApplies("Intangível (Magia Etérea)", { fxType: "condition", fxTarget: "intangivel", durationMode: "scene" })],
@@ -839,9 +907,10 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
         resist: true, resistAttr: meta.resist || "forca",
       }));
       // Nas rodadas seguintes, com a sua ação: não dispara sozinha.
-      sys.actions.push(Object.assign(novaAcao(`${meta.name}: mover um alvo até 5m (sua ação)`, {
+      const dist = distanciaDaMagia(data, "5");
+      sys.actions.push(Object.assign(novaAcao(`${meta.name}: mover um alvo até ${metrosLegiveis(dist)} (sua ação)`, {
         canRoll: false, targetMode: "target", includeSelf: false, costMp: "0",
-        movement: { enabled: true, kind: "place", who: "targets", distance: "5",
+        movement: { enabled: true, kind: "place", who: "targets", distance: dist,
                     lateralSide: "right", ignoreWalls: false, snap: true },
       }), { _interna: true }));
       break;
@@ -893,11 +962,74 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
       }
       break;
     }
+    case "multipla":
+    case "replicante": {
+      // "Sua magia atinge o dobro de alvos da magia base" (Múltipla, efeito
+      // Alvo) / "tudo o que sua magia cria ou invoca é duplicado, [...] ou
+      // uma área de efeito; uma área não pode ocupar o mesmo espaço que a
+      // primeira" (Replicante): uma CÓPIA da ação que se usa, disparada em
+      // cadeia logo depois dela com o alvo escolhido na hora — o jogo pede
+      // que se mire outro alvo, ou que a área seja reposicionada. Não cobra
+      // PM e rola por si. O que a ação faz nos alvos dela (cadeias nos
+      // atingidos, ativações prévias) ganha uma versão para a cópia; o que
+      // vale uma vez por conjuração (em você) fica só na primeira — a
+      // cadeia do sistema não roda a mesma ação duas vezes.
+      const deArea = (a) => ["area", "line", "cone", "lineCustom"].includes(a.targetMode);
+      const servem = iniciais.filter((a) => (meta.kind === "multipla" ? a.targetMode === "target" : deArea(a)));
+      if (!servem.length) {
+        return meta.kind === "multipla"
+          ? `${meta.name}: a magia não é de alvo — não se aplica (registrada na receita).`
+          : `${meta.name}: a magia não tem área — o que ela cria ou invoca fica duplicado pela mesa (registrada na receita).`;
+      }
+      for (const a of servem) {
+        a._copias = (a._copias ?? 0) + 1;
+        const n = a._copias + 1;
+        const qual = meta.kind === "multipla" ? `${n}º alvo` : `${n}ª área`;
+        const copia = copiarAcao(a);
+        copia.label = `↳ ${meta.name}: ${a.label} — ${qual}`;
+        sys.actions.push(copia);
+        for (const sub of a._antes ?? []) {
+          const s2 = copiarAcao(sub);
+          s2.label = `${sub.label} (${qual})`;
+          sys.actions.push(s2);
+          (copia._antes ??= []).push(s2);
+        }
+        for (const elo of a._cadeia ?? []) {
+          if (elo.targets === "own" || elo.targets === "pick") continue; // por conjuração / outras cópias
+          const s2 = copiarAcao(elo.alvo);
+          s2.label = `${elo.alvo.label} (${qual})`;
+          sys.actions.push(s2);
+          (copia._cadeia ??= []).push({ alvo: s2, when: elo.when, targets: elo.targets });
+        }
+        encadear([a], copia, "always", "pick");
+      }
+      break;
+    }
     default:
       break; // "other": registrada na receita
   }
   if (meta.semDano && danosas().length) return `${meta.name}: não funciona em magia que causa dano (registrada na receita).`;
   return null;
+}
+
+/** Cópia de uma ação para a Múltipla / Replicante: sem custo, interna, sem as ligações. */
+function copiarAcao(a) {
+  const { _antes, _cadeia, _copias, ...resto } = a;
+  const c = JSON.parse(JSON.stringify(resto));
+  c.costMp = "0";
+  c._interna = true;
+  return c;
+}
+
+/** Distância/alcance em texto: "6*@nivel" → "6m × Nível", "2*(@mente)" → "2 × Mente metros", "10" → "10m". */
+function metrosLegiveis(f) {
+  const s = String(f ?? "").trim();
+  let m;
+  if ((m = s.match(/^(\d+)\*@nivel$/))) return `${m[1]}m × Nível`;
+  if ((m = s.match(/^(\d+)$/))) return `${m[1]}m`;
+  if (s === "@mente") return "Mente metros";
+  if ((m = s.match(/^(\d+)\*\((.+)\)$/))) return `${m[1]} × ${metrosLegiveis(m[2])}`;
+  return `${formulaCurta(s)} m`;
 }
 
 /** "2*@nivel" → "2 × Nível", para os rótulos. */
@@ -980,8 +1112,9 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   // triplicam (não dobram o dobrado); condições, efeitos em cadeia e o efeito
   // em você não se aplicam duas vezes.
   const repetida = circ >= 3 && meta2 && meta3 && meta2.name === meta3.name;
+  // (A Múltipla duas vezes vale: o triplo de alvos.)
   const UMA_VEZ = ["condition", "selfcond", "buff", "planar", "eterea", "restauradora", "marcador",
-                   "telecinetica", "invisivel", "vampirica", "potencializada"];
+                   "telecinetica", "invisivel", "vampirica", "potencializada", "replicante"];
   const avisos = [];
   // As ações que uma metamagia cria levam a palavra dela (para a animação
   // seguir o tema certo: Magia Furtiva de iluzio numa magia de ignis).
@@ -996,13 +1129,21 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   if (circ >= 3 && meta3 && !(repetida && UMA_VEZ.includes(meta3.kind))) fila.push([meta3, palavra3, escolha3]);
   // Ordem de aplicação: primeiro as de dano (entre elas, a da 3ª palavra
   // continua prevalecendo), depois as que dão à magia um ataque contra alvos,
-  // por fim as demais — assim a Vampírica e a Potencializada já encontram o
-  // dano, e a Invisível, a rolagem contra a defesa.
-  const prioridade = (m) => (m.kind === "damage" ? 0 : ["condition", "mpdrain", "telecinetica", "marcador"].includes(m.kind) ? 1 : 2);
+  // depois as demais e por fim as que copiam a ação (Múltipla, Replicante) —
+  // assim a Vampírica e a Potencializada já encontram o dano, a Invisível a
+  // rolagem contra a defesa, e a cópia leva tudo o que a ação ficou fazendo.
+  // A Múltipla e a Replicante copiam a ação pronta, então vêm por último.
+  // A forma e o alcance (Ampliada, Dimensional, Vórtica — entre elas, na
+  // ordem das palavras) vêm logo depois do dano: os efeitos das outras já
+  // nascem com o alcance certo, no alvo certo.
+  const prioridade = (m) => (m.kind === "damage" ? 0
+    : ["area2x", "range2x", "aura"].includes(m.kind) ? 0.5
+      : ["condition", "mpdrain", "telecinetica", "marcador"].includes(m.kind) ? 1
+        : ["multipla", "replicante"].includes(m.kind) ? 3 : 2);
   fila.sort((x, y) => prioridade(x[0]) - prioridade(y[0]));
   for (const [m, p, e] of fila) aplicar(m, p, e);
   for (const a of data.system.actions) {
-    delete a._areaBase; delete a._ampliada; delete a._alcanceBase; delete a._dimensional;
+    delete a._areaBase; delete a._ampliada; delete a._alcanceBase; delete a._dimensional; delete a._rotuloDim;
   }
 
   // Peculiaridade do Toque Vampírico: "o dano escalonado recupera seus pontos
@@ -1010,6 +1151,8 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   if (pecsValidas.some((p) => /recupera seus pontos de magia, em vez dos pontos de vida/.test(semAcento(p.texto)))) {
     for (const a of data.system.actions) if (a.drain?.enabled) a.drain.resource = "mp";
   }
+
+  delete data._dimensional;
 
   // Referências entre as ações: a magia nasce com id próprio (criada com
   // keepId), então as ativações prévias e as ações em cadeia já apontam para
@@ -1093,6 +1236,8 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
       }
     }
     delete a._palavra; delete a._antes; delete a._cadeia; delete a._interna; delete a._semVisual; delete a._ancora;
+    delete a._copias;
+    if (a.movement) { delete a.movement._distBase; delete a.movement._dimensional; }
   }
 
   return data;
@@ -1122,7 +1267,7 @@ function escolhaLegivel(meta, escolha = {}) {
   return { ...out, texto: partes.join(", ") };
 }
 
-const ROTULO_ALVOS_CADEIA = { same: "nos mesmos alvos", hitOnly: "em quem foi atingido", own: "" };
+const ROTULO_ALVOS_CADEIA = { same: "nos mesmos alvos", hitOnly: "em quem foi atingido", own: "", pick: "com o alvo escolhido na hora" };
 const QUANDO_CURTO = { always: "sempre", hit: "se acertar", damage: "se causar dano", crit: "se for crítico", miss: "se errar", heal: "se curar" };
 
 /**
@@ -1151,7 +1296,7 @@ export function descreverCadeias(data) {
     linhas.push(`<li><strong>${esc(a.label)}</strong>${custo} — ${partes.join("; ")}.</li>`);
   });
   if (!linhas.length) return "";
-  return `<p><strong>Como a magia funciona:</strong> use a ação principal; o que as metamagias acrescentam dispara sozinho, sem custo extra de PM (as ações marcadas com ↳ não se usam à parte).</p><ul>${linhas.join("")}</ul>`;
+  return `<p><strong>Como a magia funciona:</strong> use a ação principal; o que as metamagias acrescentam dispara sozinho, sem custo extra de PM (as ações marcadas com ↳ não se usam à parte — as que vêm em cadeia nem aparecem com botão na ficha).</p><ul>${linhas.join("")}</ul>`;
 }
 
 /** Uma linha explicando o que a metamagia faz na magia criada (janela). */
@@ -1168,6 +1313,9 @@ const EXPLICACAO = {
   invisivel: () => "Antes da rolagem, os alvos ficam Indefesos (−3 na Esquiva, sem Bloqueio), sem rolagem nem CD; depois do ataque, o efeito sai sozinho.",
   vampirica: () => "A ação ganha dreno: você recupera PV igual ao dano escalonado que de fato passar.",
   potencializada: () => "Dobra o dano base; em cadeia, ao conjurar, você sofre o dano base como dano final.",
+  range2x: () => "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese). Toque, \"em você\" e emanação viram alvo a 3m × Círculo × Nível; a emanação sai do alvo (posicione a área nele).",
+  multipla: () => "Depois do primeiro alvo, o jogo pede o próximo: mire outro alvo e confirme (ou pule). Sem custo extra de PM; cada alvo tem a sua rolagem e recebe os efeitos da magia.",
+  replicante: () => "Numa magia de área, depois da primeira o jogo pede a segunda: reposicione a área sem sobrepor a primeira. Sem custo extra de PM. Criações e invocações duplicadas ficam com a mesa.",
 };
 
 /** Metamagias que dão à magia um ataque contra alvos, quando ela não tem. */
@@ -1180,6 +1328,10 @@ function avisoDaMetamagia(meta, { base = null, outra = null } = {}) {
   const danoDepois = acoes.some((a) => causaDanoDeVida(a)) || outra?.kind === "damage";
   if (meta.comDano && !danoDepois) return "esta magia não causa dano: a metamagia não terá efeito (combine com uma metamagia de dano).";
   if (meta.semDano && danoDepois) return "esta metamagia não funciona em magia que causa dano.";
+  const viraArea = ["area2x", "aura"].includes(outra?.kind);
+  if (meta.kind === "multipla" && (viraArea || !acoes.some((a) => a.targetMode === "target"))) {
+    return "a Magia Múltipla vale para magias de alvo: esta não tem uma ação contra um alvo.";
+  }
   if (meta.kind === "invisivel") {
     const rola = acoes.some((a) => a.canRoll && !["self", "none"].includes(a.targetMode)) || CRIAM_ATAQUE.includes(outra?.kind);
     if (!rola) return "esta magia não rola contra a defesa de um alvo: não há de quem a Magia Invisível esconder o efeito.";

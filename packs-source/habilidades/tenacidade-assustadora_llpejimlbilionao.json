@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [],
         "lineWidth": "1.5",
         "coneAngle": "45",
@@ -133,6 +134,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Tenacidade: +1 acumulativo",
@@ -230,6 +232,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [],
         "lineWidth": "1.5",
         "coneAngle": "45",
@@ -386,6 +389,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [],
         "lineWidth": "1.5",
         "coneAngle": "45",

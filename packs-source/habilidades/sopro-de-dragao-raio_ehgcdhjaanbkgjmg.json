@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [],
         "lineWidth": "1.5",
         "coneAngle": "45",
@@ -213,6 +214,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Dano contínuo de raio (Vigor anula)",

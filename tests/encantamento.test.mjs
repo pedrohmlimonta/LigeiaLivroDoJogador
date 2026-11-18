@@ -692,6 +692,17 @@ const lam = encantar(eq('Espada Longa'), 'Intermediário', ['mortis-lamina-vampi
 const lamAtq = lam.system.actions.filter((x) => String(x.label).startsWith('✦'));
 ok(lamAtq.length === 2 && lamAtq.every((x) => x.drain?.enabled && x.drain.resource === 'hp' && x.drain.from === 'scaling'),
    'propriedade Lâmina Vampírica: os ataques encantados drenam o dano escalonado como PV (dreno do sistema)');
+const missil2 = await sf.construirMagia({ base: baseDe('Míssil Mágico'), tier: 'Intermediária', nome: '', palavra1: 'exitium', palavra2: 'pluribus',
+  palavra3: '', pecs: [], ajuste: 0, meta2: meta('pluribus', 'Magia Múltipla'), meta3: null, escolha2: {}, escolha3: {} });
+const jade = new AtorFalso('Jade');
+const varM = jade._pôr({ ...construirItemConjurador(eq('Varinha'), { magia: missil2 }), id: 'varM' });
+await sincronizarMagiasDoItem(varM);
+const compM = vinc(jade, 'varM')[0];
+const eloM = compM.system.actions[0].chainActions[0];
+ok(varM.system.actions.filter((x) => String(x.label).startsWith('✦')).length === 1 && eloM?.targets === 'pick'
+   && lr(eloM.ref).id === compM.id && opcoesDaFicha(jade).includes(eloM.ref),
+   'Míssil Mágico com Magia Múltipla numa varinha: uma ✦ só, e a magia vinculada leva a cópia do 2º alvo (escolhido na hora), apontando para ela');
+ok(varM.system.description.includes('com o alvo escolhido na hora'), 'a descrição da varinha conta que o 2º alvo é escolhido na hora');
 // Ganchos das referências: a magia chega numa ficha com outro id (cópia, compêndio) ou muda de nome.
 const ivy = new AtorFalso('Ivy');
 const copiaMagia = ivy._pôr({ ...JSON.parse(JSON.stringify(invisivel)), _id: undefined, id: 'outroIdQualquer1' });
@@ -716,7 +727,8 @@ const combos = [['Esfera Ígnea', 'ignis', 'krucigon', 'Magia Planar', {}], ['Es
   ['Esfera Ígnea', 'ignis', 'exitium', 'Magia Potencializada', {}], ['Esfera Ígnea', 'ignis', 'mortis', 'Magia Vampírica', {}],
   ['Curar', 'vitae', 'vitae', 'Magia Restauradora', { quem: 'voce', condicao: 'lento' }], ['Imagem Ilusória', 'iluzio', 'vitae', 'Magia Curativa', { quem: 'voce' }],
   ['Raio Arcano', 'energio', 'krucigon', 'Magia Etérea', {}], ['Escudo Arcano', 'forjuri', 'ignis', 'Magia Ardente', {}],
-  ['Esfera Ígnea', 'ignis', 'menso', 'Magia Telecinética', {}], ['Causar Medo', 'carmo', 'sorcdiron', 'Magia Revigorante', { quem: 'voce' }]];
+  ['Esfera Ígnea', 'ignis', 'menso', 'Magia Telecinética', {}], ['Causar Medo', 'carmo', 'sorcdiron', 'Magia Revigorante', { quem: 'voce' }],
+  ['Míssil Mágico', 'exitium', 'pluribus', 'Magia Múltipla', {}], ['Nuvem Tóxica', 'noxia', 'pluribus', 'Magia Replicante', {}]];
 for (const [b0, p1, p2, mn, e2] of combos) {
   const sp = await sf.construirMagia({ base: baseDe(b0), tier: 'Intermediária', nome: '', palavra1: p1, palavra2: p2, palavra3: '',
     pecs: [], ajuste: 0, meta2: meta(p2, mn), meta3: null, escolha2: e2, escolha3: {} });

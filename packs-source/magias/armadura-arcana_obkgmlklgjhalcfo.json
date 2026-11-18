@@ -61,6 +61,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Armadura Arcana: RD 1 corte",

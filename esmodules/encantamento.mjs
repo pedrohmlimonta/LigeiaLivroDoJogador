@@ -1122,7 +1122,7 @@ function encadeamentoDaAcao(m, a) {
   const nomeDe = (r) => String(acoes[r.indice]?.label ?? "?").replace(/^↳\s*/, "");
   const antes = (a.preActivations ?? []).map((x) => lerRef(x.ref)).filter(minha).map(nomeDe);
   const depois = (a.chainActions ?? []).filter((c) => minha(lerRef(c.ref)))
-    .map((c) => `${nomeDe(lerRef(c.ref))} (${ROTULO_QUANDO[c.when] ?? c.when})`);
+    .map((c) => `${nomeDe(lerRef(c.ref))} (${ROTULO_QUANDO[c.when] ?? c.when}${c.targets === "pick" ? ", com o alvo escolhido na hora" : ""})`);
   const partes = [];
   if (antes.length) partes.push(`antes da rolagem: ${antes.join("; ")}`);
   if (depois.length) partes.push(`depois, em cadeia: ${depois.join("; ")}`);

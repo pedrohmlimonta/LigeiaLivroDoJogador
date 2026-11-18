@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Autoridade Divina (E): re-rola os 1 em interação social (ligue quando valer)",

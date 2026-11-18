@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Reação Furiosa: +metade do Nível vs quem te feriu (ligue quando valer)",
@@ -246,6 +247,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Reação Furiosa: +metade do Nível vs quem te feriu (ligue quando valer)",

@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Provocado: deve escolher quem provocou como alvo dos ataques (Percepção anula)",
@@ -246,6 +247,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Provocado: deve escolher quem provocou como alvo dos ataques (Percepção anula)",

@@ -61,6 +61,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Melhoria Arcana: 1D no atributo (edite o alvo)",

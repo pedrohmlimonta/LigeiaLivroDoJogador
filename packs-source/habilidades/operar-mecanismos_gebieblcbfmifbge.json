@@ -63,6 +63,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Operar Mecanismos: +1 para ativar itens arcanomecânicos (ligue quando valer)",
@@ -160,6 +161,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Operar Mecanismos: +1 para ativar itens arcanomecânicos (ligue quando valer)",

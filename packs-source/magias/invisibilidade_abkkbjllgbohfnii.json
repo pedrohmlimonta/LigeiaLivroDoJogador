@@ -61,6 +61,7 @@
         },
         "removesEffects": [],
         "chainActions": [],
+        "showInSheet": false,
         "appliesEffects": [
           {
             "label": "Invisível (cancela ao atacar ou mover)",
