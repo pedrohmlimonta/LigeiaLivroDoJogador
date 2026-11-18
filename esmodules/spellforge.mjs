@@ -162,7 +162,7 @@ export const METAMAGIAS = {
     { name: "Magia Ampliada", lvl: "Básica", kind: "area2x",
       desc: "Dobra a área; magia de alvo vira Área (1m x Círculo x Nível)." },
     { name: "Magia Dimensional", lvl: "Básica", kind: "range2x",
-      desc: "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese). Toque, o próprio conjurador e emanação passam a ter alcance de 3m x Círculo x Nível e alvo: o toque e o \"em você\" viram um alvo; a emanação passa a sair do alvo." },
+      desc: "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese); toque passa a ter alcance de 3m x Círculo x Nível. Numa magia em você ou de emanação, escolha na criação: continua em você e dobra a distância (o teleporte vai o dobro), ou vira alvo a 3m x Círculo x Nível (a emanação sai do alvo)." },
     { name: "Magia Majestosa", lvl: "Básica", kind: "other",
       desc: "Invocações/criações saem uma categoria de tamanho maior (duas no Círculo Maior)." },
   ],
@@ -800,47 +800,61 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
       break;
     case "range2x": {
       // Regra da mesa (no lugar do "emanação, aura ou conjurador não são
-      // afetadas" do livro): tudo o que tem alcance dobra — inclusive as
-      // distâncias de teleporte, empurrão e telecinese —, e uma magia de
-      // TOQUE, no PRÓPRIO CONJURADOR ou de EMANAÇÃO passa a ter alcance de
-      // 3m x Círculo x Nível e alvo: o toque e o "em você" viram um alvo (o
-      // teleporte que levava você leva o alvo), e a emanação sai do alvo —
-      // vira uma área posta nele. Aplicada duas vezes, triplica.
+      // afetadas" do livro). O que tem alcance dobra — o alcance e as
+      // distâncias de teleporte, empurrão e telecinese —, e o TOQUE passa a
+      // ter alcance de 3m x Círculo x Nível. Numa ação no PRÓPRIO
+      // CONJURADOR ou de EMANAÇÃO, o jogador escolhe na criação
+      // (escolha.dimensional):
+      //   "voce" (padrão) — continua em você / em volta de você, e o que
+      //                    dobra é a distância dela (o teleporte vai o dobro);
+      //   "alvo"          — vira alvo a 3m x Círculo x Nível (o teleporte
+      //                    leva o alvo, na distância normal) e a emanação sai
+      //                    do alvo (uma área do mesmo raio posta nele).
+      // Aplicada duas vezes, triplica.
       data._dimensional = (data._dimensional ?? 0) + 1;
+      const vira = escolha?.dimensional === "alvo";
       const alcance = `${3 * circ}*@nivel`;
-      const sufixo = (txt) => `${txt}, alcance ${metrosLegiveis(alcance)}`;
       for (const a of sys.actions) {
         if (deMetamagia(a)) continue; // efeitos das metamagias: só as distâncias (distanciaDaMagia)
-        if (a.targetMode === "self") {
-          a.targetMode = "target";
-          a.includeSelf = false;
-          a.isMelee = false;
-          a.range = a._alcanceBase = alcance;
-          a._dimensional = 0;
-          if (a.movement?.enabled && a.movement.who === "self") a.movement.who = "targets";
-          a._rotuloDim = { base: a.label, txt: "no alvo" };
-          a.label = `${a.label} — ${sufixo("no alvo")}`;
-        } else if (a.targetMode === "aura") {
-          a.targetMode = "area";
-          a.includeSelf = false;
-          a.range = a._alcanceBase = alcance;
-          a._dimensional = 0;
-          a._rotuloDim = { base: a.label, txt: "emanando do alvo" };
-          a.label = `${a.label} — ${sufixo("emanando do alvo")}`;
+        a._rotuloDim ??= { base: a.label, alvo: "", dist: false };
+        let distancia = true;
+        if (a.targetMode === "self" || a.targetMode === "aura") {
+          if (vira) {
+            if (a.targetMode === "self") {
+              a.targetMode = "target";
+              a.isMelee = false;
+              if (a.movement?.enabled && a.movement.who === "self") a.movement.who = "targets";
+              a._rotuloDim.alvo = "no alvo";
+            } else {
+              a.targetMode = "area";
+              a._rotuloDim.alvo = "emanando do alvo";
+            }
+            a.includeSelf = false;
+            a.range = a._alcanceBase = alcance;
+            a._dimensional = 0;
+            distancia = false; // o que aumentou foi o alcance até o alvo
+          }
         } else if (a.isMelee) {
           // Toque passa a ter alcance de 3m x Círculo x Nível.
           a.isMelee = false;
           a._alcanceBase = alcance;
           a._dimensional = 0;
           a.range = a._alcanceBase;
+          distancia = false;
         } else if (a.range && a.range !== "0") {
           a._alcanceBase ??= a.range;
           a._dimensional = (a._dimensional ?? 0) + 1;
           a.range = `${a._dimensional + 1}*(${a._alcanceBase})`;
-          // A que já tinha virado alvo nesta magia: o rótulo acompanha o alcance.
-          if (a._rotuloDim) a.label = `${a._rotuloDim.base} — ${a._rotuloDim.txt}, alcance ${metrosLegiveis(a.range)}`;
         }
-        dobrarDistancia(a.movement);
+        if (distancia && a.movement?.enabled && String(a.movement.distance ?? "").trim() && a.movement.distance !== "0") {
+          dobrarDistancia(a.movement);
+          a._rotuloDim.dist = true;
+        }
+        // O rótulo diz o que a Dimensional fez: o alvo e o alcance, a distância.
+        const partes = [];
+        if (a._rotuloDim.alvo) partes.push(`${a._rotuloDim.alvo}, alcance ${metrosLegiveis(a.range)}`);
+        if (a._rotuloDim.dist) partes.push(`${VERBO_MOVIMENTO[a.movement.kind] ?? "move"} até ${metrosLegiveis(a.movement.distance)}`);
+        a.label = partes.length ? `${a._rotuloDim.base} — ${partes.join("; ")}` : a._rotuloDim.base;
       }
       break;
     }
@@ -1011,6 +1025,20 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
   if (meta.semDano && danosas().length) return `${meta.name}: não funciona em magia que causa dano (registrada na receita).`;
   return null;
 }
+
+const VERBO_MOVIMENTO = { teleport: "teleporte", push: "empurra", pull: "puxa", lateral: "desloca", place: "move" };
+
+/** A magia tem ações em você ou de emanação (onde a Dimensional pede a escolha)? */
+export function temAcaoPessoal(base, outra = null) {
+  return (base?.system?.actions ?? []).some((a) => a.targetMode === "self" || a.targetMode === "aura")
+    || outra?.kind === "aura";
+}
+
+/** Opções da Dimensional nas ações em você / de emanação. */
+export const DIMENSIONAL = {
+  voce: "Continuam em você — dobra a distância delas (o teleporte vai o dobro)",
+  alvo: "Viram alvo — alcance de 3m × Círculo × Nível (teleporta o alvo; a emanação sai dele)",
+};
 
 /** Cópia de uma ação para a Múltipla / Replicante: sem custo, interna, sem as ligações. */
 function copiarAcao(a) {
@@ -1198,7 +1226,9 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   const comoFunciona = descreverCadeias(data);
   const escolhas = [[meta2, escolha2, circ >= 2], [meta3, escolha3, circ >= 3]]
     .filter(([m, , vale]) => m && vale)
-    .map(([m, e]) => ({ metamagia: m.name, ...escolhaLegivel(m, e) }));
+    .map(([m, e]) => ({ metamagia: m.name, ...escolhaLegivel(m, e, {
+      pessoal: temAcaoPessoal(base) || [meta2, meta3].some((x) => x?.kind === "aura"),
+    }) }));
   data.system.description = (data.system.description || "") + `
 <hr><p><strong>Magia criada — Círculo ${esc(tier)}</strong> (custo ${pm} PM; bônus de peculiaridades: ${delta >= 0 ? "+" : ""}${delta})</p>
 <p>Palavras: ${esc(palavras.join(", "))}. Base: ${esc(base.name)}.</p>
@@ -1244,9 +1274,15 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
 }
 
 /** O que o jogador escolheu numa metamagia, legível e estruturado. */
-function escolhaLegivel(meta, escolha = {}) {
+function escolhaLegivel(meta, escolha = {}, { pessoal = false } = {}) {
   const out = {};
   const partes = [];
+  if (meta.kind === "range2x" && pessoal) {
+    out.dimensional = escolha.dimensional === "alvo" ? "alvo" : "voce";
+    partes.push(out.dimensional === "alvo"
+      ? "nas ações em você/emanação: viram alvo (alcance 3m × Círculo × Nível)"
+      : "nas ações em você/emanação: continuam em você (dobra a distância)");
+  }
   if (meta.alvoOuVoce || meta.kind === "selfcond") {
     const { quem } = comoAplicar(meta, escolha);
     out.quem = quem;
@@ -1313,7 +1349,7 @@ const EXPLICACAO = {
   invisivel: () => "Antes da rolagem, os alvos ficam Indefesos (−3 na Esquiva, sem Bloqueio), sem rolagem nem CD; depois do ataque, o efeito sai sozinho.",
   vampirica: () => "A ação ganha dreno: você recupera PV igual ao dano escalonado que de fato passar.",
   potencializada: () => "Dobra o dano base; em cadeia, ao conjurar, você sofre o dano base como dano final.",
-  range2x: () => "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese). Toque, \"em você\" e emanação viram alvo a 3m × Círculo × Nível; a emanação sai do alvo (posicione a área nele).",
+  range2x: () => "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese); o toque passa a ter alcance de 3m × Círculo × Nível. Nas ações em você ou de emanação, escolha abaixo se continuam em você (dobra a distância) ou viram alvo.",
   multipla: () => "Depois do primeiro alvo, o jogo pede o próximo: mire outro alvo e confirme (ou pule). Sem custo extra de PM; cada alvo tem a sua rolagem e recebe os efeitos da magia.",
   replicante: () => "Numa magia de área, depois da primeira o jogo pede a segunda: reposicione a área sem sobrepor a primeira. Sem custo extra de PM. Criações e invocações duplicadas ficam com a mesa.",
 };
@@ -1322,12 +1358,19 @@ const EXPLICACAO = {
 const CRIAM_ATAQUE = ["damage", "condition", "mpdrain", "telecinetica"];
 
 /** Aviso da janela: a metamagia escolhida não tem efeito nesta magia? */
-function avisoDaMetamagia(meta, { base = null, outra = null } = {}) {
+function avisoDaMetamagia(meta, { base = null, outra = null, escolha = {} } = {}) {
   if (!base) return "";
   const acoes = base.system?.actions ?? [];
   const danoDepois = acoes.some((a) => causaDanoDeVida(a)) || outra?.kind === "damage";
   if (meta.comDano && !danoDepois) return "esta magia não causa dano: a metamagia não terá efeito (combine com uma metamagia de dano).";
   if (meta.semDano && danoDepois) return "esta metamagia não funciona em magia que causa dano.";
+  if (meta.kind === "range2x" && escolha.dimensional !== "alvo") {
+    const pessoais = acoes.filter((a) => a.targetMode === "self" || a.targetMode === "aura");
+    const comAlcance = acoes.some((a) => (a.range && a.range !== "0") || a.isMelee || a.movement?.enabled);
+    if (pessoais.length && !comAlcance) {
+      return "continuando em você, a Dimensional não muda nada nesta magia (ela não tem alcance nem distância para dobrar): escolha \"Viram alvo\" ou outra metamagia.";
+    }
+  }
   const viraArea = ["area2x", "aura"].includes(outra?.kind);
   if (meta.kind === "multipla" && (viraArea || !acoes.some((a) => a.targetMode === "target"))) {
     return "a Magia Múltipla vale para magias de alvo: esta não tem uma ação contra um alvo.";
@@ -1404,6 +1447,12 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         this.#opcoes(Object.entries(CONDICOES_NEGATIVAS), escolha.condicao || "dano_continuo", "—")}</select></label>`);
     }
     const como = comoAplicar(sel, escolha);
+    if (sel?.kind === "range2x" && temAcaoPessoal(contexto.base, contexto.outra)) {
+      const pessoais = (contexto.base?.system?.actions ?? []).filter((a) => a.targetMode === "self" || a.targetMode === "aura");
+      const modo = escolha.dimensional === "alvo" ? "alvo" : "voce";
+      extra.push(`<label class="meta-dimensional">Nas ações em você / emanação${pessoais.length ? ` (${esc(pessoais.map((a) => a.label).join("; "))})` : ""}:
+        <select name="escolha${n}-dimensional">${this.#opcoes(Object.entries(DIMENSIONAL), modo, "—").replace('<option value="">—</option>', "")}</select></label>`);
+    }
     if (sel?.alvoOuVoce) {
       extra.push(`<label>Em quem: <select name="escolha${n}-quem">${
         this.#opcoes([["alvo", "No alvo da magia"], ["voce", "Em você"]], como.quem, "—")}</select></label>`);
@@ -1413,7 +1462,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         this.#opcoes(Object.entries(QUANDO), como.quando, "—")}</select></label>`);
     }
     const explica = sel ? EXPLICACAO[sel.kind]?.(sel, como) : "";
-    const aviso = sel ? avisoDaMetamagia(sel, contexto) : "";
+    const aviso = sel ? avisoDaMetamagia(sel, { ...contexto, escolha }) : "";
     return radios
       + (extra.length ? `<div class="meta-extra">${extra.join("")}</div>` : "")
       + (explica ? `<p class="dica">${esc(explica)}</p>` : "")
@@ -1556,6 +1605,11 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     on('input[name=meta2]', "change", (e) => { s.meta2i = Number(e.target.value); s.escolha2 = {}; this.render(); });
     on('input[name=meta3]', "change", (e) => { s.meta3i = Number(e.target.value); s.escolha3 = {}; this.render(); });
     for (const n of [2, 3]) {
+      // A da Dimensional muda o aviso da janela: redesenha.
+      on(`select[name=escolha${n}-dimensional]`, "change", (e) => {
+        (n === 2 ? s.escolha2 : s.escolha3).dimensional = e.target.value;
+        this.render();
+      });
       for (const campo of ["damageType", "attr", "bonusTarget", "condicao", "quando"]) {
         on(`select[name=escolha${n}-${campo}]`, "change", (e) => {
           (n === 2 ? s.escolha2 : s.escolha3)[campo] = e.target.value;

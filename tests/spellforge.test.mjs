@@ -380,37 +380,76 @@ d = await com('escudo-arcano', 'forjuri', 'pluribus', mult);
 ok(d.system.actions.length === 1 && /não é de alvo/.test(d.system.description), 'Múltipla numa magia só em você: não se aplica (e a receita avisa)');
 ok(d.system.actions.every((x) => x.showInSheet === false), 'as ações levam showInSheet desligado: as que vêm em cadeia ficam sem botão na ficha');
 
-console.log('16) Magia Dimensional (regra da mesa): tudo o que tem alcance dobra; toque, você e emanação viram alvo');
+console.log('16) Magia Dimensional (regra da mesa): alcance e distâncias dobram; em você/emanação, o jogador escolhe');
 const dimen = MM('majesto', 'Magia Dimensional');
 d = await com('teletransporte', 'krucigon', 'iluzio', MM('iluzio', 'Magia Ilusória'));
 ok(d.system.actions[0].movement.distance === '20*@nivel', 'Teletransporte Intermediário: "10m x Círculo x Nível" escala com o círculo (20m × Nível)');
 d = await com('teletransporte', 'krucigon', 'majesto', dimen);
 a = d.system.actions[0];
-ok(a.targetMode === 'target' && a.range === '6*@nivel' && a.movement.who === 'targets' && a.movement.distance === '2*(20*@nivel)'
-   && a.label.endsWith('no alvo, alcance 6m × Nível'),
-   'krucigon + majesto Dimensional: o teleporte pessoal vira de alvo (3m × Círculo × Nível) e teleporta o dobro');
-d = await com('teletransporte', 'krucigon', 'majesto', dim, {}, 'Maior', { p3: 'majesto', meta3: dimen });
+ok(a.targetMode === 'self' && a.movement.who === 'self' && a.movement.distance === '2*(20*@nivel)' && a.label.endsWith('teleporte até 2 × 20m × Nível')
+   && /continuam em você \(dobra a distância\)/.test(d.system.description),
+   'krucigon + majesto, "continuam em você" (padrão): você se teleporta o dobro da distância');
+d = await com('teletransporte', 'krucigon', 'majesto', dimen, { dimensional: 'alvo' });
 a = d.system.actions[0];
-ok(a.range === '2*(9*@nivel)' && a.movement.distance === '3*(30*@nivel)' && a.label.endsWith('alcance 2 × 9m × Nível'),
-   'Dimensional duas vezes: o alcance dobra o que ela deu e a distância triplica (não dobra o dobrado)');
-d = await com('causar-medo', 'carmo', 'majesto', dimen);
+ok(a.targetMode === 'target' && a.range === '6*@nivel' && a.movement.who === 'targets' && a.movement.distance === '20*@nivel'
+   && a.label.endsWith('no alvo, alcance 6m × Nível') && /viram alvo/.test(d.system.description),
+   '"viram alvo": o teleporte passa a levar o alvo, a 3m × Círculo × Nível — na distância normal (o que aumentou foi o alcance)');
+d = await com('teletransporte', 'krucigon', 'majesto', dimen, {}, 'Maior', { p3: 'majesto', meta3: dimen });
+ok(d.system.actions[0].targetMode === 'self' && d.system.actions[0].movement.distance === '3*(30*@nivel)',
+   'Dimensional duas vezes em você: a distância triplica (não dobra o dobrado)');
+d = await com('teletransporte', 'krucigon', 'majesto', dimen, {}, 'Maior', { p3: 'majesto', meta3: dimen, escolha3: { dimensional: 'alvo' } });
+a = d.system.actions[0];
+ok(a.targetMode === 'target' && a.range === '9*@nivel' && a.movement.distance === '2*(30*@nivel)',
+   'cada aplicação com a sua escolha: a 1ª dobra o teleporte em você, a 2ª o torna de alvo');
+d = await com('causar-medo', 'carmo', 'majesto', dimen, { dimensional: 'alvo' });
 a = d.system.actions[0];
 ok(a.targetMode === 'area' && a.range === '6*@nivel' && a.area === '@nivel' && a.label.includes('emanando do alvo'),
-   'emanação (Causar Medo): passa a sair do alvo — uma área do mesmo raio, posta a até 3m × Círculo × Nível');
+   'emanação "viram alvo" (Causar Medo): passa a sair do alvo — área do mesmo raio, posta a até 3m × Círculo × Nível');
+d = await com('causar-medo', 'carmo', 'majesto', dimen);
+ok(d.system.actions[0].targetMode === 'aura' && d.system.actions[0].label === load('causar-medo').system.actions[0].label,
+   'emanação "continuam em você": fica em volta de você (sem distância para dobrar, não muda)');
 d = await com('empurrao-cinetico', 'menso', 'majesto', dimen);
-ok(d.system.actions[0].targetMode === 'area' && d.system.actions[0].movement.distance === '4', 'Empurrão Cinético: a área sai do alvo e o empurrão dobra (2 → 4m)');
-d = await com('escudo-arcano', 'forjuri', 'majesto', dimen);
-ok(d.system.actions[0].targetMode === 'target' && d.system.actions[0].range === '6*@nivel', 'magia em você (Escudo Arcano): vira de alvo, a 3m × Círculo × Nível');
+ok(d.system.actions[0].targetMode === 'aura' && d.system.actions[0].movement.distance === '4', 'Empurrão Cinético em você: o empurrão dobra (2 → 4m)');
+d = await com('empurrao-cinetico', 'menso', 'majesto', dimen, { dimensional: 'alvo' });
+ok(d.system.actions[0].targetMode === 'area' && d.system.actions[0].movement.distance === '2', 'Empurrão Cinético "viram alvo": a área sai do alvo; o empurrão fica o normal');
+d = await com('escudo-arcano', 'forjuri', 'majesto', dimen, { dimensional: 'alvo' });
+ok(d.system.actions[0].targetMode === 'target' && d.system.actions[0].range === '6*@nivel', 'magia em você (Escudo Arcano) "viram alvo": vai para um alvo a 3m × Círculo × Nível');
 d = await com('telecinesia', 'menso', 'majesto', dimen);
-ok(d.system.actions[0].range === '2*(6*@nivel)' && d.system.actions[0].movement.distance === '10', 'Telecinésia: alcance dobrado e o arrasto também (5 → 10m)');
+ok(d.system.actions[0].range === '2*(6*@nivel)' && d.system.actions[0].movement.distance === '10', 'magia de alvo (Telecinésia): alcance dobrado e o arrasto também (5 → 10m)');
+d = await com('toque-vampirico', 'mortis', 'majesto', dimen);
+ok(d.system.actions[0].range === '6*@nivel' && !d.system.actions[0].isMelee, 'toque: passa a ter alcance de 3m × Círculo × Nível (como no livro)');
 d = await com('esfera-ignea', 'ignis', 'krucigon', MM('krucigon', 'Magia Planar'), { quem: 'voce' }, 'Maior', { p3: 'majesto', meta3: dimen });
 sub = d.system.actions.find((x) => x.movement?.kind === 'teleport');
 ok(sub?.movement.distance === '2*(@mente)' && sub.label.includes('até 2 × Mente metros'), 'Magia Planar + Dimensional: teleporta até o dobro de Mente metros');
 d = await com('esfera-ignea', 'ignis', 'menso', MM('menso', 'Magia Telecinética'), {}, 'Maior', { p3: 'majesto', meta3: dimen });
 ok(d.system.actions.find((x) => x.movement?.kind === 'place')?.movement.distance === '10', 'Magia Telecinética + Dimensional: move o alvo até 10m');
 ok(!JSON.stringify(d).includes('_distBase') && !JSON.stringify(d).includes('_rotuloDim'), 'sem campos auxiliares no item salvo');
+if (app) {
+  const app3 = mod.abrirCriacaoDeMagia({ ...ator, items: [...ator.items,
+    { type: 'habilidade', name: 'Palavra Arcana [krucigon]', system: { level: 'B' } },
+    { type: 'habilidade', name: 'Palavra Arcana [majesto]', system: { level: 'B' } },
+    { type: 'habilidade', name: 'Palavra Arcana [carmo]', system: { level: 'B' } }] });
+  app3.forja.palavra1 = 'krucigon'; await app3.render();
+  Object.assign(app3.forja, { tier: 'Intermediária', baseId: app3.bases.find((x) => x.name === 'Teletransporte')?.id, palavra2: 'majesto',
+    meta2i: M.majesto.findIndex((m) => m.name === 'Magia Dimensional') });
+  await app3.render();
+  let h3 = app3.element.filho.innerHTML;
+  ok(h3.includes('name="escolha2-dimensional"') && h3.includes('value="voce" selected') && h3.includes('Teletransporte (10m x Círculo x Nível)'),
+     'janela: numa magia em você, a Dimensional pergunta se continua em você ou vira alvo (e mostra qual ação)');
+  app3.forja.palavra1 = 'carmo'; await app3.render();
+  Object.assign(app3.forja, { baseId: app3.bases.find((x) => x.name === 'Causar Medo')?.id, escolha2: {} });
+  await app3.render();
+  h3 = app3.element.filho.innerHTML;
+  ok(h3.includes('class="aviso"') && /não muda nada/.test(h3), 'emanação "continuam em você" sem nada para dobrar: a janela avisa');
+  app3.forja.escolha2.dimensional = 'alvo'; await app3.render();
+  ok(!/não muda nada/.test(app3.element.filho.innerHTML), '…e escolhendo "viram alvo", o aviso sai');
+  app3.forja.palavra1 = 'ignis'; await app3.render();
+  Object.assign(app3.forja, { baseId: app3.bases.find((x) => x.name === 'Esfera Ígnea')?.id, escolha2: {} });
+  await app3.render();
+  ok(!app3.element.filho.innerHTML.includes('escolha2-dimensional'), 'numa magia de alvo (Esfera Ígnea), não há o que escolher');
+}
 
-console.log('17) Todas as metamagias, no alvo e em você, em magias diferentes, passam no validador');
+console.log('17) Todas as metamagias, com cada escolha (no alvo / em você; Dimensional em você / no alvo), em magias diferentes, passam no validador');
 const os = await import('os');
 const path = await import('path');
 const { execFileSync } = await import('child_process');
@@ -421,10 +460,12 @@ let refsTodos = true;
 const bases = [['esfera-ignea', 'ignis'], ['curar', 'vitae'], ['escudo-arcano', 'forjuri'], ['imagem-ilusoria', 'iluzio'], ['causar-medo', 'carmo']];
 for (const [palavra, lista] of Object.entries(M)) {
   for (const m of lista) {
-    for (const quem of m.alvoOuVoce ? ['alvo', 'voce'] : ['alvo']) {
+    const variantes = m.alvoOuVoce ? [{ quem: 'alvo' }, { quem: 'voce' }]
+      : m.kind === 'range2x' ? [{ dimensional: 'voce' }, { dimensional: 'alvo' }] : [{}];
+    for (const escolha of variantes) {
       for (const [slug, p1] of bases) {
-        const doc = await com(slug, p1, palavra, m, { quem });
-        if (!refsOk(doc)) { refsTodos = false; console.log('    referência errada:', doc.name, m.name, quem); }
+        const doc = await com(slug, p1, palavra, m, escolha);
+        if (!refsOk(doc)) { refsTodos = false; console.log('    referência errada:', doc.name, m.name, JSON.stringify(escolha)); }
         fs.writeFileSync(`${tmpd}/packs-source/criadas/${String(nDocs++).padStart(4, '0')}.json`, JSON.stringify(doc));
       }
     }
