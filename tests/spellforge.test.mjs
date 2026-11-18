@@ -340,7 +340,7 @@ if (app) {
   ok(app2.element.filho.innerHTML.includes('class="aviso"'), 'Magia Vampírica numa magia sem dano: a janela avisa');
 }
 
-console.log('15) Magia Múltipla e Replicante (build 28: o alvo da cadeia é escolhido na hora)');
+console.log('15) Magia Múltipla (alvo escolhido na hora) e Replicante (o dobro no mesmo alvo), com a mesma animação');
 const mult = MM('pluribus', 'Magia Múltipla');
 const repl = MM('pluribus', 'Magia Replicante');
 const elos = (x) => x.chainActions.map((c) => ({ ...lerRef(c.ref), when: c.when, targets: c.targets }));
@@ -374,8 +374,36 @@ a = d.system.actions[0];
 copia = d.system.actions[elos(a).find((e) => e.targets === 'pick')?.indice];
 ok(copia?.targetMode === a.targetMode && copia.area === a.area && copia.label.endsWith('— 2ª área') && copia.costMp === '0',
    'Nuvem Tóxica + Magia Replicante: uma 2ª área, reposicionada na hora, sem custo');
+const animDe = (x) => JSON.stringify([x.aaConfig, x.aaName, (x.appliesEffects ?? []).map((e) => e.fxAaConfig)]);
 d = await com('missil-magico', 'exitium', 'pluribus', repl);
-ok(d.system.actions.length === 1 && /não tem área/.test(d.system.description), 'Replicante numa magia sem área: fica registrada para a mesa');
+a = d.system.actions[0];
+copia = d.system.actions[elos(a)[0]?.indice];
+ok(d.system.actions.length === 2 && elos(a)[0].targets === 'same' && elos(a)[0].when === 'always' && copia.costMp === '0'
+   && copia.damage === a.damage && copia.label.endsWith('— 2º efeito, no mesmo alvo') && a.costMp === '2',
+   'Míssil Mágico + Magia Replicante: dois mísseis — o 2º sai sozinho, em cadeia, no mesmo alvo, e só causa o dano (0 PM)');
+ok(!!a.aaConfig && animDe(copia) === animDe(a), 'o 2º míssil repete a animação do 1º');
+d = await com('esfera-ignea', 'ignis', 'pluribus', repl);
+a = d.system.actions[0];
+copia = d.system.actions[elos(a)[0]?.indice];
+ok(copia?.canRoll && copia.defenseAttr === a.defenseAttr && elos(a)[0].targets === 'same' && animDe(copia) === animDe(a)
+   && copia.appliesEffects.length === a.appliesEffects.length,
+   'duas Esferas Ígneas: cada uma rola separado, no mesmo alvo, com a mesma animação (e os mesmos efeitos)');
+d = await com('escudo-arcano', 'forjuri', 'pluribus', repl);
+ok(d.system.actions.length === 1 && /não é de alvo nem de área/.test(d.system.description), 'Replicante numa magia só em você: fica registrada para a mesa');
+d = await com('missil-magico', 'exitium', 'pluribus', mult);
+ok(animDe(d.system.actions[1]) === animDe(d.system.actions[0]) && !!d.system.actions[0].aaConfig,
+   'Magia Múltipla: a cópia do 2º alvo também repete a animação da 1ª (no alvo clicado)');
+d = await com('missil-magico', 'exitium', 'pluribus', mult, {}, 'Maior', { p3: 'pluribus', meta3: repl });
+a = d.system.actions[0];
+const lista = elos(a);
+const copiaM = d.system.actions[lista.find((e) => e.targets === 'pick')?.indice];
+ok(lista.map((e) => e.targets).join() === 'same,pick' && elos(copiaM).some((e) => e.targets === 'same')
+   && d.system.actions.every((x) => animDe(x) === animDe(a)),
+   'Múltipla + Replicante (Maior): dois mísseis no 1º alvo e, no alvo clicado, mais dois — todos com a mesma animação');
+d = await com('missil-magico', 'exitium', 'pluribus', repl, {}, 'Maior', { p3: 'pluribus', meta3: mult });
+a = d.system.actions[0];
+ok(elos(a).map((e) => e.targets).join() === 'same,pick' && elos(d.system.actions[elos(a)[1].indice]).some((e) => e.targets === 'same'),
+   'na outra ordem das palavras, o mesmo resultado');
 d = await com('escudo-arcano', 'forjuri', 'pluribus', mult);
 ok(d.system.actions.length === 1 && /não é de alvo/.test(d.system.description), 'Múltipla numa magia só em você: não se aplica (e a receita avisa)');
 ok(d.system.actions.every((x) => x.showInSheet === false), 'as ações levam showInSheet desligado: as que vêm em cadeia ficam sem botão na ficha');

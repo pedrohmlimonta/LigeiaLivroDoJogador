@@ -703,6 +703,8 @@ ok(varM.system.actions.filter((x) => String(x.label).startsWith('✦')).length =
    && lr(eloM.ref).id === compM.id && opcoesDaFicha(jade).includes(eloM.ref),
    'Míssil Mágico com Magia Múltipla numa varinha: uma ✦ só, e a magia vinculada leva a cópia do 2º alvo (escolhido na hora), apontando para ela');
 ok(varM.system.description.includes('com o alvo escolhido na hora'), 'a descrição da varinha conta que o 2º alvo é escolhido na hora');
+ok(JSON.stringify(compM.system.actions[1].aaConfig) === JSON.stringify(compM.system.actions[0].aaConfig) && !!compM.system.actions[0].aaConfig,
+   'na magia vinculada, a cópia do 2º alvo continua com a mesma animação da principal');
 // Ganchos das referências: a magia chega numa ficha com outro id (cópia, compêndio) ou muda de nome.
 const ivy = new AtorFalso('Ivy');
 const copiaMagia = ivy._pôr({ ...JSON.parse(JSON.stringify(invisivel)), _id: undefined, id: 'outroIdQualquer1' });
@@ -728,7 +730,8 @@ const combos = [['Esfera Ígnea', 'ignis', 'krucigon', 'Magia Planar', {}], ['Es
   ['Curar', 'vitae', 'vitae', 'Magia Restauradora', { quem: 'voce', condicao: 'lento' }], ['Imagem Ilusória', 'iluzio', 'vitae', 'Magia Curativa', { quem: 'voce' }],
   ['Raio Arcano', 'energio', 'krucigon', 'Magia Etérea', {}], ['Escudo Arcano', 'forjuri', 'ignis', 'Magia Ardente', {}],
   ['Esfera Ígnea', 'ignis', 'menso', 'Magia Telecinética', {}], ['Causar Medo', 'carmo', 'sorcdiron', 'Magia Revigorante', { quem: 'voce' }],
-  ['Míssil Mágico', 'exitium', 'pluribus', 'Magia Múltipla', {}], ['Nuvem Tóxica', 'noxia', 'pluribus', 'Magia Replicante', {}]];
+  ['Míssil Mágico', 'exitium', 'pluribus', 'Magia Múltipla', {}], ['Nuvem Tóxica', 'noxia', 'pluribus', 'Magia Replicante', {}],
+  ['Míssil Mágico', 'exitium', 'pluribus', 'Magia Replicante', {}]];
 for (const [b0, p1, p2, mn, e2] of combos) {
   const sp = await sf.construirMagia({ base: baseDe(b0), tier: 'Intermediária', nome: '', palavra1: p1, palavra2: p2, palavra3: '',
     pecs: [], ajuste: 0, meta2: meta(p2, mn), meta3: null, escolha2: e2, escolha3: {} });

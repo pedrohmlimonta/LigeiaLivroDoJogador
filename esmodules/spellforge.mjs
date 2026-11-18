@@ -52,7 +52,8 @@ const PACK_MAGIAS = `${MODULE_ID}.magias`;
 /*   potencializada   dobra o dano base; você sofre o base (final)     */
 /*   multipla         cópia da ação em cadeia, com o alvo escolhido na  */
 /*                    hora (o dobro de alvos; duas vezes, o triplo)     */
-/*   replicante       idem para a área: ela é reposicionada na hora     */
+/*   replicante       cópia em cadeia no MESMO alvo (o dobro do efeito);*/
+/*                    numa área, a 2ª é reposicionada na hora           */
 /*   other            registrada na receita (resolução manual)         */
 /*                                                                    */
 /*  alvoOuVoce: o livro deixa escolher, na criação, se a metamagia    */
@@ -188,9 +189,9 @@ export const METAMAGIAS = {
   ],
   pluribus: [
     { name: "Magia Múltipla", lvl: "Básica", kind: "multipla",
-      desc: "Atinge o dobro de alvos da base (aplicada duas vezes: o triplo). Depois do primeiro alvo, o jogo pede o próximo." },
+      desc: "Atinge o dobro de alvos da base (aplicada duas vezes: o triplo). Depois do primeiro alvo, clique no próximo (pode ser o mesmo)." },
     { name: "Magia Replicante", lvl: "Avançada", kind: "replicante",
-      desc: "Tudo o que a magia cria ou invoca é duplicado, inclusive a área de efeito (sem sobrepor a primeira): a área é reposicionada na hora." },
+      desc: "Tudo o que a magia cria é duplicado: numa magia de alvo, o efeito sai duas vezes no mesmo alvo (dois Mísseis Mágicos); numa de área, uma 2ª área, reposicionada sem sobrepor a primeira." },
   ],
   saeculorum: [
     { name: "Magia Duradoura", lvl: "Básica", kind: "other",
@@ -978,29 +979,44 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
     }
     case "multipla":
     case "replicante": {
-      // "Sua magia atinge o dobro de alvos da magia base" (Múltipla, efeito
-      // Alvo) / "tudo o que sua magia cria ou invoca é duplicado, [...] ou
-      // uma área de efeito; uma área não pode ocupar o mesmo espaço que a
-      // primeira" (Replicante): uma CÓPIA da ação que se usa, disparada em
-      // cadeia logo depois dela com o alvo escolhido na hora — o jogo pede
-      // que se mire outro alvo, ou que a área seja reposicionada. Não cobra
-      // PM e rola por si. O que a ação faz nos alvos dela (cadeias nos
-      // atingidos, ativações prévias) ganha uma versão para a cópia; o que
-      // vale uma vez por conjuração (em você) fica só na primeira — a
-      // cadeia do sistema não roda a mesma ação duas vezes.
+      // Uma CÓPIA da ação que se usa, disparada em cadeia logo depois dela,
+      // sem cobrar PM e rolando por si:
+      //   Múltipla ("atinge o dobro de alvos", magias de alvo) — o alvo é
+      //     escolhido na hora: o jogo espera o clique no próximo alvo (pode
+      //     ser o mesmo); aplicada duas vezes, o triplo.
+      //   Replicante ("tudo o que sua magia cria é duplicado") — numa magia
+      //     de ALVO o efeito sai de novo no MESMO alvo, sozinho (dois
+      //     Mísseis Mágicos, duas Esferas Ígneas, cada uma com a sua
+      //     rolagem); numa de ÁREA, uma 2ª área reposicionada na hora ("não
+      //     pode ocupar o mesmo espaço que a primeira").
+      // O que a ação faz nos alvos dela (cadeias nos atingidos, ativações
+      // prévias) ganha uma versão para a cópia; o que vale uma vez por
+      // conjuração (em você) fica só na primeira — a cadeia do sistema não
+      // roda a mesma ação duas vezes. A cópia tem a mesma animação da
+      // original (acertado depois das animações, em construirMagia).
       const deArea = (a) => ["area", "line", "cone", "lineCustom"].includes(a.targetMode);
-      const servem = iniciais.filter((a) => (meta.kind === "multipla" ? a.targetMode === "target" : deArea(a)));
+      const multipla = meta.kind === "multipla";
+      const servem = multipla
+        ? iniciais.filter((a) => a.targetMode === "target")
+        : [...iniciais.filter((a) => a.targetMode === "target" || deArea(a)),
+           ...sys.actions.filter((a) => a._copiaMultipla)]; // cada alvo da Múltipla também em dobro
       if (!servem.length) {
-        return meta.kind === "multipla"
+        return multipla
           ? `${meta.name}: a magia não é de alvo — não se aplica (registrada na receita).`
-          : `${meta.name}: a magia não tem área — o que ela cria ou invoca fica duplicado pela mesa (registrada na receita).`;
+          : `${meta.name}: a magia não é de alvo nem de área — o que ela cria ou invoca fica duplicado pela mesa (registrada na receita).`;
       }
       for (const a of servem) {
-        a._copias = (a._copias ?? 0) + 1;
-        const n = a._copias + 1;
-        const qual = meta.kind === "multipla" ? `${n}º alvo` : `${n}ª área`;
+        const mesmoAlvo = !multipla && a.targetMode === "target";
+        let qual;
+        if (multipla) {
+          a._copias = (a._copias ?? 0) + 1;
+          qual = `${a._copias + 1}º alvo`;
+        } else {
+          qual = mesmoAlvo ? "2º efeito, no mesmo alvo" : "2ª área";
+        }
         const copia = copiarAcao(a);
-        copia.label = `↳ ${meta.name}: ${a.label} — ${qual}`;
+        copia.label = `↳ ${meta.name}: ${a.label.replace(/^↳\s*/, "")} — ${qual}`;
+        if (multipla) copia._copiaMultipla = true;
         sys.actions.push(copia);
         for (const sub of a._antes ?? []) {
           const s2 = copiarAcao(sub);
@@ -1015,7 +1031,14 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
           sys.actions.push(s2);
           (copia._cadeia ??= []).push({ alvo: s2, when: elo.when, targets: elo.targets });
         }
-        encadear([a], copia, "always", "pick");
+        if (mesmoAlvo) {
+          // No mesmo alvo, antes de qualquer cópia que peça um alvo novo.
+          (a._cadeia ??= []);
+          const k = a._cadeia.findIndex((e) => e.targets === "pick");
+          a._cadeia.splice(k < 0 ? a._cadeia.length : k, 0, { alvo: copia, when: "always", targets: "same" });
+        } else {
+          encadear([a], copia, "always", "pick");
+        }
       }
       break;
     }
@@ -1042,11 +1065,26 @@ export const DIMENSIONAL = {
 
 /** Cópia de uma ação para a Múltipla / Replicante: sem custo, interna, sem as ligações. */
 function copiarAcao(a) {
-  const { _antes, _cadeia, _copias, ...resto } = a;
+  const { _antes, _cadeia, _copias, _copiaDe, _copiaMultipla, ...resto } = a;
   const c = JSON.parse(JSON.stringify(resto));
   c.costMp = "0";
   c._interna = true;
+  c._copiaDe = a; // a animação da cópia é a da original (construirMagia)
   return c;
+}
+
+/** A cópia toca exatamente a animação da original — no alvo dela. */
+function espelharAnimacao(copia, original) {
+  for (const k of ["aaConfig", "aaName", "aaEnabled", "animFile", "animPlacement", "animScale", "animEnabled", "animAttach"]) {
+    copia[k] = original[k] === undefined ? copia[k] : JSON.parse(JSON.stringify(original[k]));
+  }
+  (copia.appliesEffects ?? []).forEach((e, i) => {
+    const o = original.appliesEffects?.[i];
+    if (!o) return;
+    for (const k of ["fxAaConfig", "fxAaName", "fxAaPersist", "fxFile", "fxScale"]) {
+      if (o[k] !== undefined) e[k] = JSON.parse(JSON.stringify(o[k]));
+    }
+  });
 }
 
 /** Distância/alcance em texto: "6*@nivel" → "6m × Nível", "2*(@mente)" → "2 × Mente metros", "10" → "10m". */
@@ -1258,6 +1296,13 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
   // que mostrar.
   if (animar) animarMagia(data, { existe: existe ?? criarVerificador() });
   else limparAnimacoesAutomaticas(data);
+  // As cópias da Múltipla e da Replicante repetem a animação da original.
+  for (const a of data.system.actions) {
+    if (!a._copiaDe) continue;
+    let o = a._copiaDe;
+    while (o._copiaDe) o = o._copiaDe;
+    espelharAnimacao(a, o);
+  }
   for (const a of data.system.actions) {
     if (a._semVisual) {
       if (a.aaConfig?.metaData?.origem === MODULE_ID) { a.aaConfig = null; a.aaName = ""; }
@@ -1266,7 +1311,7 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
       }
     }
     delete a._palavra; delete a._antes; delete a._cadeia; delete a._interna; delete a._semVisual; delete a._ancora;
-    delete a._copias;
+    delete a._copias; delete a._copiaDe; delete a._copiaMultipla;
     if (a.movement) { delete a.movement._distBase; delete a.movement._dimensional; }
   }
 
@@ -1350,8 +1395,8 @@ const EXPLICACAO = {
   vampirica: () => "A ação ganha dreno: você recupera PV igual ao dano escalonado que de fato passar.",
   potencializada: () => "Dobra o dano base; em cadeia, ao conjurar, você sofre o dano base como dano final.",
   range2x: () => "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese); o toque passa a ter alcance de 3m × Círculo × Nível. Nas ações em você ou de emanação, escolha abaixo se continuam em você (dobra a distância) ou viram alvo.",
-  multipla: () => "Depois do primeiro alvo, o jogo pede o próximo: mire outro alvo e confirme (ou pule). Sem custo extra de PM; cada alvo tem a sua rolagem e recebe os efeitos da magia.",
-  replicante: () => "Numa magia de área, depois da primeira o jogo pede a segunda: reposicione a área sem sobrepor a primeira. Sem custo extra de PM. Criações e invocações duplicadas ficam com a mesa.",
+  multipla: () => "Depois do primeiro alvo, clique no próximo (pode ser o mesmo; botão direito ou Esc pula). Sem custo extra de PM; cada alvo tem a sua rolagem, recebe os efeitos da magia e vê a mesma animação.",
+  replicante: () => "Numa magia de alvo, o efeito sai de novo no mesmo alvo, sozinho (dois Mísseis Mágicos; duas Esferas Ígneas, cada uma com a sua rolagem). Numa de área, depois da primeira posicione a segunda, sem sobrepor. Sem custo extra de PM; a 2ª repete a animação da 1ª.",
 };
 
 /** Metamagias que dão à magia um ataque contra alvos, quando ela não tem. */
