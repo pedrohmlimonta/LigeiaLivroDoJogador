@@ -1,0 +1,1190 @@
+{
+  "_id": "dehkjemohfejhinp",
+  "_key": "!items!dehkjemohfejhinp",
+  "name": "Machado de Batalha de Marca Luminosa (Maior)",
+  "type": "equipamento",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "category": "Arma (Machados)",
+    "tags": [
+      "machados",
+      "militar",
+      "versatil",
+      "corpo_a_corpo"
+    ],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "400.024 Vo",
+    "notes": "Militar, Versátil, Corpo a Corpo",
+    "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Maior (lumo + lumo + lumo)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Marca Luminosa</b> (lumo · Constante · +400.000 Vo)<br>Quando você acerta um ataque com uma arma com essa propriedade, o alvo emite uma luz fraca, porém suficiente para que ele seja facilmente mirado. Este alvo falha automaticamente em tentar se esconder e ataques contra ele recebem 1D.</li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "Ataque — Machado de Batalha",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "3",
+        "damageType": "corte",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "NxHItrPHFZ4bMTrx",
+          "label": "Machado de Batalha de Marca Luminosa (Maior)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.handaxe.01.white",
+            "nome": "Machado de Batalha de Marca Luminosa (Maior)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "handaxe",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Machado de Batalha de Marca Luminosa (Maior) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      },
+      {
+        "label": "Ataque — Machado de Batalha (duas mãos, +1 dano)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "4",
+        "damageType": "corte",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "YfmGdiFWnY0JvSob",
+          "label": "Machado de Batalha de Marca Luminosa (Maior)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.handaxe.01.white",
+            "nome": "Machado de Batalha de Marca Luminosa (Maior)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "handaxe",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Machado de Batalha de Marca Luminosa (Maior) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      },
+      {
+        "label": "✦ Ataque — Machado de Batalha — Marca Luminosa (3 PM)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "3",
+        "damageType": "corte",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [
+          {
+            "label": "Marca Luminosa: não consegue se esconder; ataques contra ele recebem 1D",
+            "fxType": "bonus",
+            "fxTarget": "all",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "akW8O7hfKZdZgsQt",
+          "label": "Machado de Batalha de Marca Luminosa (Maior)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.handaxe.01.white",
+            "nome": "Machado de Batalha de Marca Luminosa (Maior)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "handaxe",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Machado de Batalha de Marca Luminosa (Maior) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "3",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      },
+      {
+        "label": "✦ Ataque — Machado de Batalha (duas mãos, +1 dano) — Marca Luminosa (3 PM)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "4",
+        "damageType": "corte",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [
+          {
+            "label": "Marca Luminosa: não consegue se esconder; ataques contra ele recebem 1D",
+            "fxType": "bonus",
+            "fxTarget": "all",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "pFTEHhPUQxyLzlBH",
+          "label": "Machado de Batalha de Marca Luminosa (Maior)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.handaxe.01.white",
+            "nome": "Machado de Batalha de Marca Luminosa (Maior)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "handaxe",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Machado de Batalha de Marca Luminosa (Maior) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "3",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "fbpenclobmebecdm",
+  "sort": 40100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "FWbIsHhX5yIBtCA0",
+          "nivel": "Maior",
+          "pm": 3,
+          "lendario": false,
+          "palavras": [
+            "lumo",
+            "lumo",
+            "lumo"
+          ],
+          "slots": [
+            {
+              "palavra": "lumo",
+              "id": "lumo-marca-luminosa"
+            },
+            {
+              "palavra": "lumo",
+              "id": "lumo-marca-luminosa"
+            },
+            {
+              "palavra": "lumo",
+              "id": "lumo-marca-luminosa"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "lumo-marca-luminosa",
+              "nome": "Marca Luminosa",
+              "palavra": "lumo",
+              "variante": "",
+              "preco": 400000,
+              "indice": 0
+            }
+          ],
+          "preco": 400000,
+          "antes": {
+            "name": "Machado de Batalha",
+            "system": {
+              "actions": [
+                {
+                  "label": "Ataque — Machado de Batalha",
+                  "level": "all",
+                  "canRoll": true,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "target",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "bloqueio",
+                  "damage": "3",
+                  "damageType": "corte",
+                  "damageResource": "hp",
+                  "scalingDamage": true,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": true,
+                  "isMelee": true,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": {
+                    "id": "1fzAsNTVsmjLzaRM",
+                    "label": "Machado de Batalha",
+                    "menu": "melee",
+                    "macro": {
+                      "enable": false,
+                      "name": "",
+                      "args": "",
+                      "playWhen": "0"
+                    },
+                    "soundOnly": {
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      }
+                    },
+                    "metaData": {
+                      "origem": "ligeia-livro-do-jogador",
+                      "automatica": true,
+                      "chave": "melee.weapon.greataxe.01.white",
+                      "nome": "Machado de Batalha"
+                    },
+                    "isEnabled": true,
+                    "isCustomized": true,
+                    "fromAmmo": false,
+                    "version": 5,
+                    "primary": {
+                      "video": {
+                        "dbSection": "melee",
+                        "menuType": "weapon",
+                        "animation": "greataxe",
+                        "variant": "01",
+                        "color": "white",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "contrast": 0,
+                        "hue": 0,
+                        "saturate": 0,
+                        "tint": false,
+                        "tintColor": "#FFFFFF",
+                        "delay": 0,
+                        "elevation": 1000,
+                        "isWait": false,
+                        "opacity": 1,
+                        "playbackRate": 1,
+                        "repeat": 1,
+                        "repeatDelay": 1,
+                        "zIndex": 1,
+                        "size": 1
+                      }
+                    },
+                    "source": {
+                      "enable": false
+                    },
+                    "secondary": {
+                      "enable": false
+                    },
+                    "target": {
+                      "enable": false
+                    },
+                    "meleeSwitch": {
+                      "video": {
+                        "dbSection": "range",
+                        "menuType": "weapon",
+                        "animation": "arrow",
+                        "variant": "regular",
+                        "color": "regular",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "detect": "automatic",
+                        "range": 2,
+                        "isReturning": false,
+                        "switchType": "off"
+                      }
+                    }
+                  },
+                  "aaName": "Machado de Batalha (automática)",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both"
+                },
+                {
+                  "label": "Ataque — Machado de Batalha (duas mãos, +1 dano)",
+                  "level": "all",
+                  "canRoll": true,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "target",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "bloqueio",
+                  "damage": "4",
+                  "damageType": "corte",
+                  "damageResource": "hp",
+                  "scalingDamage": true,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": true,
+                  "isMelee": true,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": {
+                    "id": "ENnDfE4jymSMiXs1",
+                    "label": "Machado de Batalha",
+                    "menu": "melee",
+                    "macro": {
+                      "enable": false,
+                      "name": "",
+                      "args": "",
+                      "playWhen": "0"
+                    },
+                    "soundOnly": {
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      }
+                    },
+                    "metaData": {
+                      "origem": "ligeia-livro-do-jogador",
+                      "automatica": true,
+                      "chave": "melee.weapon.greataxe.01.white",
+                      "nome": "Machado de Batalha"
+                    },
+                    "isEnabled": true,
+                    "isCustomized": true,
+                    "fromAmmo": false,
+                    "version": 5,
+                    "primary": {
+                      "video": {
+                        "dbSection": "melee",
+                        "menuType": "weapon",
+                        "animation": "greataxe",
+                        "variant": "01",
+                        "color": "white",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "contrast": 0,
+                        "hue": 0,
+                        "saturate": 0,
+                        "tint": false,
+                        "tintColor": "#FFFFFF",
+                        "delay": 0,
+                        "elevation": 1000,
+                        "isWait": false,
+                        "opacity": 1,
+                        "playbackRate": 1,
+                        "repeat": 1,
+                        "repeatDelay": 1,
+                        "zIndex": 1,
+                        "size": 1
+                      }
+                    },
+                    "source": {
+                      "enable": false
+                    },
+                    "secondary": {
+                      "enable": false
+                    },
+                    "target": {
+                      "enable": false
+                    },
+                    "meleeSwitch": {
+                      "video": {
+                        "dbSection": "range",
+                        "menuType": "weapon",
+                        "animation": "arrow",
+                        "variant": "regular",
+                        "color": "regular",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "detect": "automatic",
+                        "range": 2,
+                        "isReturning": false,
+                        "switchType": "off"
+                      }
+                    }
+                  },
+                  "aaName": "Machado de Batalha (automática)",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both"
+                }
+              ],
+              "effects": [],
+              "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p>",
+              "price": "24 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

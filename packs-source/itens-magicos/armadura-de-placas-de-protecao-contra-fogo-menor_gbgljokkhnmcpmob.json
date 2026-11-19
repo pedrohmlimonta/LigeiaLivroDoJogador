@@ -1,0 +1,388 @@
+{
+  "_id": "gbgljokkhnmcpmob",
+  "_key": "!items!gbgljokkhnmcpmob",
+  "name": "Armadura de Placas de Proteção Contra Fogo (Menor)",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Armadura Pesada",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 3,
+    "price": "475 Vo",
+    "notes": "Penalidade -4",
+    "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p><hr><h3>✦ Encantamento — Item Menor (ignis)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Proteção Contra Fogo</b> (ignis · Constante · Proteção 1 · +400 Vo)<br>Enquanto estiver vestindo um item com essa propriedade, você recebe Proteção 1, 2 ou 3 contra dano de fogo.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Ativar Proteção Contra Fogo (1 PM, até o fim da cena)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "conjuracao",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "✦ Proteção Contra Fogo: Proteção 1 (Fogo)",
+            "fxType": "rd",
+            "fxTarget": "fogo",
+            "fxValue": "1",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "ucHf5GGqhU8K8cjf",
+          "label": "Armadura de Placas de Proteção Contra Fogo (Menor)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.shieldspell.complete.01.blue",
+            "nome": "Proteção"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "shieldspell",
+              "animation": "complete",
+              "variant": "01",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Armadura de Placas de Proteção Contra Fogo (Menor) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "3",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Placas: Proteção 3 (corte)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "3",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Placas: Proteção 3 (perfuração)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "3",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Placas: Proteção 3 (concussão)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "concussao"
+      },
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": "-4",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Placas: penalidade -4 Esquiva",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": "-4",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Placas: penalidade -4 Conjuração",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "ignlpkaaidlofila",
+  "sort": 5900,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "JuCcXiyh00zoucHv",
+          "nivel": "Menor",
+          "pm": 1,
+          "lendario": false,
+          "palavras": [
+            "ignis"
+          ],
+          "slots": [
+            {
+              "palavra": "ignis",
+              "id": "ignis-protecao-contra-fogo"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "ignis-protecao-contra-fogo",
+              "nome": "Proteção Contra Fogo",
+              "palavra": "ignis",
+              "variante": "Proteção 1",
+              "preco": 400,
+              "indice": 0
+            }
+          ],
+          "preco": 400,
+          "antes": {
+            "name": "Armadura de Placas",
+            "system": {
+              "actions": [],
+              "effects": [
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "3",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Placas: Proteção 3 (corte)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "corte"
+                },
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "3",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Placas: Proteção 3 (perfuração)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "perfuracao"
+                },
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "3",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Placas: Proteção 3 (concussão)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "concussao"
+                },
+                {
+                  "type": "bonus",
+                  "target": "esquiva",
+                  "value": "-4",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Placas: penalidade -4 Esquiva",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": ""
+                },
+                {
+                  "type": "bonus",
+                  "target": "conjuracao",
+                  "value": "-4",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Placas: penalidade -4 Conjuração",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": ""
+                }
+              ],
+              "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p>",
+              "price": "75 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

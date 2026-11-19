@@ -1,0 +1,244 @@
+{
+  "_id": "hnedkbdoejhfbfjm",
+  "_key": "!items!hnedkbdoejhfbfjm",
+  "name": "Sinete de Contramágica (Intermediário)",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Sinete",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "21.000 Vo",
+    "notes": "",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri + forjuri)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Contramágica</b> (forjuri · Reação · 2 Palavras, Difícil · +21.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Esse sinete possui o entalhe de até três palavras arcanas dependendo do seu valor. Se você for alvo de uma magia composta por uma dessas palavras arcanas enquanto estiver empunhando esse sinete com uma das mãos, você pode usar sua reação para ativá-lo. Caso o faça, o conjurador da magia precisa que sua rolagem de Conjuração supere uma dificuldade, que depende do valor do item, ou ele próprio se tornará alvo da magia em seu lugar.</li></ul><p>Preço das propriedades: +21.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 9 (21.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Contramágica — devolve a magia (Conjuração 12) (2 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "YaCHRc271AJbkLLV",
+          "label": "Sinete de Contramágica (Intermediário)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.shieldspell.complete.01.blue",
+            "nome": "Proteção"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "shieldspell",
+              "animation": "complete",
+              "variant": "01",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Sinete de Contramágica (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "2",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "lmkfadnlbolahgec",
+  "sort": 53600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "Y4mHPPhLGfkncqDm",
+          "nivel": "Intermediário",
+          "pm": 2,
+          "lendario": false,
+          "palavras": [
+            "forjuri",
+            "forjuri"
+          ],
+          "slots": [
+            {
+              "palavra": "forjuri",
+              "id": "forjuri-contramagica"
+            },
+            {
+              "palavra": "forjuri",
+              "id": "forjuri-contramagica"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "forjuri-contramagica",
+              "nome": "Contramágica",
+              "palavra": "forjuri",
+              "variante": "2 Palavras, Difícil",
+              "preco": 21000,
+              "indice": 1
+            }
+          ],
+          "preco": 21000,
+          "antes": {
+            "name": "Sinete",
+            "system": {
+              "actions": [],
+              "effects": [],
+              "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p>",
+              "price": ""
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

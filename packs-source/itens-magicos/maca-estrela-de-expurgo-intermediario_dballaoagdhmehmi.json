@@ -1,0 +1,725 @@
+{
+  "_id": "dballaoagdhmehmi",
+  "_key": "!items!dballaoagdhmehmi",
+  "name": "Maça Estrela de Expurgo (Intermediário)",
+  "type": "equipamento",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "category": "Arma (Maças)",
+    "tags": [
+      "macas",
+      "militar",
+      "uma_mao",
+      "corpo_a_corpo"
+    ],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "30.017 Vo",
+    "notes": "Militar, Uma Mão, Corpo a Corpo",
+    "description": "<p>Grupo: Maças. Ataque: Força. Dano Base: Concussão +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Intermediário (sankta + sankta)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Expurgo</b> (sankta · Constante · Armas · +30.000 Vo)<br>Quando atacar com uma arma ou munição, ou enquanto estiver usando uma braçadeira, com essa propriedade, alvos atingidos por você, que sofrerem dano, deverão realizar uma rolagem de Mente (Normal). Caso falhem, sofrerão dano contínuo sagrado até o fim da cena (Mente anula).</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "Ataque — Maça Estrela",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "3",
+        "damageType": "concussao",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "4PS2NkGqi6IU4F7j",
+          "label": "Maça Estrela de Expurgo (Intermediário)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.mace.01.white",
+            "nome": "Maça Estrela de Expurgo (Intermediário)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "mace",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Maça Estrela de Expurgo (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      },
+      {
+        "label": "✦ Ataque — Maça Estrela — Expurgo (2 PM)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "3",
+        "damageType": "concussao",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [
+          {
+            "label": "Dano contínuo de Radiante",
+            "fxType": "condition",
+            "fxTarget": "dano_continuo",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": true,
+            "resistAttr": "mente",
+            "resistVsCast": false,
+            "resistDc": "10",
+            "resistReroll": false,
+            "tickAmount": "1",
+            "tickType": "radiante",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": {
+              "id": "P07gNDro0lFLDeVa",
+              "label": "Maça Estrela de Expurgo (Intermediário)",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.conditions.light.pulse.blue",
+                "nome": "Luz radiante"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "conditions",
+                  "animation": "light",
+                  "variant": "pulse",
+                  "color": "blue",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Luz radiante (automática)",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "FsVXF2ahITev8Gqq",
+          "label": "Maça Estrela de Expurgo (Intermediário)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.mace.01.white",
+            "nome": "Maça Estrela de Expurgo (Intermediário)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "mace",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Maça Estrela de Expurgo (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "2",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "ahdnccaefeeiippb",
+  "sort": 39600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "HoRR3DOHsI1OzQBD",
+          "nivel": "Intermediário",
+          "pm": 2,
+          "lendario": false,
+          "palavras": [
+            "sankta",
+            "sankta"
+          ],
+          "slots": [
+            {
+              "palavra": "sankta",
+              "id": "sankta-expurgo"
+            },
+            {
+              "palavra": "sankta",
+              "id": "sankta-expurgo"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "sankta-expurgo",
+              "nome": "Expurgo",
+              "palavra": "sankta",
+              "variante": "Armas",
+              "preco": 30000,
+              "indice": 1
+            }
+          ],
+          "preco": 30000,
+          "antes": {
+            "name": "Maça Estrela",
+            "system": {
+              "actions": [
+                {
+                  "label": "Ataque — Maça Estrela",
+                  "level": "all",
+                  "canRoll": true,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "target",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "bloqueio",
+                  "damage": "3",
+                  "damageType": "concussao",
+                  "damageResource": "hp",
+                  "scalingDamage": true,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": true,
+                  "isMelee": true,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": {
+                    "id": "zgnUNg019dQAVcH3",
+                    "label": "Maça Estrela",
+                    "menu": "melee",
+                    "macro": {
+                      "enable": false,
+                      "name": "",
+                      "args": "",
+                      "playWhen": "0"
+                    },
+                    "soundOnly": {
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      }
+                    },
+                    "metaData": {
+                      "origem": "ligeia-livro-do-jogador",
+                      "automatica": true,
+                      "chave": "melee.weapon.mace.02.white",
+                      "nome": "Maça Estrela"
+                    },
+                    "isEnabled": true,
+                    "isCustomized": true,
+                    "fromAmmo": false,
+                    "version": 5,
+                    "primary": {
+                      "video": {
+                        "dbSection": "melee",
+                        "menuType": "weapon",
+                        "animation": "mace",
+                        "variant": "02",
+                        "color": "white",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "contrast": 0,
+                        "hue": 0,
+                        "saturate": 0,
+                        "tint": false,
+                        "tintColor": "#FFFFFF",
+                        "delay": 0,
+                        "elevation": 1000,
+                        "isWait": false,
+                        "opacity": 1,
+                        "playbackRate": 1,
+                        "repeat": 1,
+                        "repeatDelay": 1,
+                        "zIndex": 1,
+                        "size": 1
+                      }
+                    },
+                    "source": {
+                      "enable": false
+                    },
+                    "secondary": {
+                      "enable": false
+                    },
+                    "target": {
+                      "enable": false
+                    },
+                    "meleeSwitch": {
+                      "video": {
+                        "dbSection": "range",
+                        "menuType": "weapon",
+                        "animation": "arrow",
+                        "variant": "regular",
+                        "color": "regular",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "detect": "automatic",
+                        "range": 2,
+                        "isReturning": false,
+                        "switchType": "off"
+                      }
+                    }
+                  },
+                  "aaName": "Maça Estrela (automática)",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both"
+                }
+              ],
+              "effects": [],
+              "description": "<p>Grupo: Maças. Ataque: Força. Dano Base: Concussão +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p>",
+              "price": "17 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

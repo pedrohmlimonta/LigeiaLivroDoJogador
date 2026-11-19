@@ -1,0 +1,479 @@
+{
+  "_id": "pgpmfnkbobkpnajg",
+  "_key": "!items!pgpmfnkbobkpnajg",
+  "name": "Armadura de Couro de Cores Cintilantes (Intermediário)",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Armadura Leve",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 1,
+    "price": "21.025 Vo",
+    "notes": "Penalidade -1",
+    "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Intermediário (lumo + lumo)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Cores Cintilantes</b> (lumo · Ação Rápida · Difícil · +21.000 Vo)<br>Enquanto estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para que o item brilhe até o fim da cena. Enquanto brilha, o item ilumina uma área de 3m ao redor dele. Quando a luz é ativada, todas as criaturas dentro da área devem ser bem sucedidas em uma rolagem de Percepção, cuja dificuldade depende do valor do item, ou ficarão atordoadas até o fim da cena (Percepção anula).</li></ul><p>Preço das propriedades: +21.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 9 (21.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Cores Cintilantes — luz de 3m: Percepção 12 ou Atordoado (2 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Atordoado",
+            "fxType": "condition",
+            "fxTarget": "atordoado",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": true,
+            "resistAttr": "percepcao",
+            "resistVsCast": false,
+            "resistDc": "12",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": {
+              "id": "cbnJeDvBrZzHSfCp",
+              "label": "Armadura de Couro de Cores Cintilantes (Intermediário)",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.conditions.stun.02.purple",
+                "nome": "Atordoado"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "conditions",
+                  "animation": "stun",
+                  "variant": "02",
+                  "color": "purple",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Atordoado (automática)",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "3",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "Lj5As3m9SzdgWYZu",
+          "label": "Armadura de Couro de Cores Cintilantes (Intermediário)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.generic.outpulse.01.whiteblue",
+            "nome": "Luz"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "generic",
+              "animation": "outpulse",
+              "variant": "01",
+              "color": "whiteblue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 2.5,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Armadura de Couro de Cores Cintilantes (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "2",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Couro: Proteção 1 (corte)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Couro: Proteção 1 (perfuração)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Couro: Proteção 1 (concussão)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "concussao"
+      },
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": "-1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Couro: penalidade -1 Esquiva",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": "-1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Armadura de Couro: penalidade -1 Conjuração",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "ifknlafjgcapnocl",
+  "sort": 4600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "VMzTi4ue2gUb8y3a",
+          "nivel": "Intermediário",
+          "pm": 2,
+          "lendario": false,
+          "palavras": [
+            "lumo",
+            "lumo"
+          ],
+          "slots": [
+            {
+              "palavra": "lumo",
+              "id": "lumo-cores-cintilantes"
+            },
+            {
+              "palavra": "lumo",
+              "id": "lumo-cores-cintilantes"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "lumo-cores-cintilantes",
+              "nome": "Cores Cintilantes",
+              "palavra": "lumo",
+              "variante": "Difícil",
+              "preco": 21000,
+              "indice": 1
+            }
+          ],
+          "preco": 21000,
+          "antes": {
+            "name": "Armadura de Couro",
+            "system": {
+              "actions": [],
+              "effects": [
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "1",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Couro: Proteção 1 (corte)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "corte"
+                },
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "1",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Couro: Proteção 1 (perfuração)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "perfuracao"
+                },
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "1",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Couro: Proteção 1 (concussão)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "concussao"
+                },
+                {
+                  "type": "bonus",
+                  "target": "esquiva",
+                  "value": "-1",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Couro: penalidade -1 Esquiva",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": ""
+                },
+                {
+                  "type": "bonus",
+                  "target": "conjuracao",
+                  "value": "-1",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Armadura de Couro: penalidade -1 Conjuração",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": ""
+                }
+              ],
+              "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p>",
+              "price": "25 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "_id": "khiomlkjhoimpjan",
+  "_key": "!items!khiomlkjhoimpjan",
+  "name": "Cubo do Tormento (Menor)",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Cubo",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "1.500 Vo",
+    "notes": "",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (traumato)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Tormento</b> (traumato · Ação · 1 de Dano, 5m · +1.500 Vo)<br>Você pode ativar este cubo pagando 1 ponto de magia e colocando-o sobre uma superfície sólida. O cubo libera uma aura que atormenta as mentes de todas as criaturas dentro dela, sempre que se movem. Qualquer criatura que se deslocar dentro da aura, seja para entrar ou sair, sofre 1/2/3 pontos de dano bruto psíquico (exceto o portador do cubo). O cubo permanece ativo até o fim da cena. O alcance da aura depende do valor do item.<br><em>Causa o dano a quem se deslocar dentro da aura (entrar ou sair), exceto o portador.</em></li></ul><p>Preço das propriedades: +1.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 4 (1.500 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Tormento — aura de 5m (1 psíquico ao se deslocar) (1 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "1",
+        "damageType": "psiquico",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "5",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "pjpfzFsWbYstZkH6",
+          "label": "Cubo do Tormento (Menor)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.conditions.horror.01.purple",
+            "nome": "Psíquico"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "conditions",
+              "animation": "horror",
+              "variant": "01",
+              "color": "purple",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 2.5,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Cubo do Tormento (Menor) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": true,
+        "persistRounds": "0",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "enter"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "dcchdcfjcpanmaka",
+  "sort": 25700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "RY5rWjSPVRc1R65b",
+          "nivel": "Menor",
+          "pm": 1,
+          "lendario": false,
+          "palavras": [
+            "traumato"
+          ],
+          "slots": [
+            {
+              "palavra": "traumato",
+              "id": "traumato-tormento"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "traumato-tormento",
+              "nome": "Tormento",
+              "palavra": "traumato",
+              "variante": "1 de Dano, 5m",
+              "preco": 1500,
+              "indice": 0
+            }
+          ],
+          "preco": 1500,
+          "antes": {
+            "name": "Cubo",
+            "system": {
+              "actions": [],
+              "effects": [],
+              "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p>",
+              "price": ""
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

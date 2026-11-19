@@ -1,0 +1,553 @@
+{
+  "_id": "epkenickjpdfdhmf",
+  "_key": "!items!epkenickjpdfdhmf",
+  "name": "Arco Longo Veloz (Intermediário)",
+  "type": "equipamento",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "category": "Arma (Arcos)",
+    "tags": [
+      "arcos",
+      "militar",
+      "duas_maos",
+      "artilharia",
+      "alcance"
+    ],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "30.060 Vo",
+    "notes": "Militar, Duas Mãos, Artilharia, Alcance 45m",
+    "description": "<p>Grupo: Arcos. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Duas Mãos, Artilharia, Alcance 45m.</p><hr><h3>✦ Encantamento — Item Intermediário (saeculorum + saeculorum)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Veloz</b> (saeculorum · Ação Livre · +30.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 2 pontos de magia para fazer um ataque adicional com essa arma sem sofrer nenhuma penalidade. Você só pode usar essa propriedade uma vez por rodada.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "Ataque — Arco Longo",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "3",
+        "damageType": "perfuracao",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": false,
+        "range": "45",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "lIW1kbt3VyP2IiXM",
+          "label": "Arco Longo Veloz (Intermediário)",
+          "menu": "range",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "range.weapon.arrow.regular.regular",
+            "nome": "Arco Longo Veloz (Intermediário)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "animationSource": false,
+              "isReturning": false,
+              "onlyX": false,
+              "randomOffset": false,
+              "reverse": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Arco Longo Veloz (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      },
+      {
+        "label": "✦ Veloz — ataque adicional com a arma (uma vez por rodada) (2 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "XVwOBByQAWLE59mc",
+          "label": "Arco Longo Veloz (Intermediário)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.generic.vortex.loop.blue",
+            "nome": "Tempo"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "generic",
+              "animation": "vortex",
+              "variant": "loop",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Arco Longo Veloz (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "2",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "ahdnccaefeeiippb",
+  "sort": 4400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "9RjB3maO6I9b6ne1",
+          "nivel": "Intermediário",
+          "pm": 2,
+          "lendario": false,
+          "palavras": [
+            "saeculorum",
+            "saeculorum"
+          ],
+          "slots": [
+            {
+              "palavra": "saeculorum",
+              "id": "saeculorum-veloz"
+            },
+            {
+              "palavra": "saeculorum",
+              "id": "saeculorum-veloz"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "saeculorum-veloz",
+              "nome": "Veloz",
+              "palavra": "saeculorum",
+              "variante": "",
+              "preco": 30000,
+              "indice": 0
+            }
+          ],
+          "preco": 30000,
+          "antes": {
+            "name": "Arco Longo",
+            "system": {
+              "actions": [
+                {
+                  "label": "Ataque — Arco Longo",
+                  "level": "all",
+                  "canRoll": true,
+                  "rollAttr": "agilidade",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "target",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "bloqueio",
+                  "damage": "3",
+                  "damageType": "perfuracao",
+                  "damageResource": "hp",
+                  "scalingDamage": true,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": true,
+                  "isMelee": false,
+                  "range": "45",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": {
+                    "id": "esx3iCPnBOJPtjYb",
+                    "label": "Arco Longo",
+                    "menu": "range",
+                    "macro": {
+                      "enable": false,
+                      "name": "",
+                      "args": "",
+                      "playWhen": "0"
+                    },
+                    "soundOnly": {
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      }
+                    },
+                    "metaData": {
+                      "origem": "ligeia-livro-do-jogador",
+                      "automatica": true,
+                      "chave": "range.weapon.arrow.regular.regular",
+                      "nome": "Arco Longo"
+                    },
+                    "isEnabled": true,
+                    "isCustomized": true,
+                    "fromAmmo": false,
+                    "version": 5,
+                    "primary": {
+                      "video": {
+                        "dbSection": "range",
+                        "menuType": "weapon",
+                        "animation": "arrow",
+                        "variant": "regular",
+                        "color": "regular",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "contrast": 0,
+                        "hue": 0,
+                        "saturate": 0,
+                        "tint": false,
+                        "tintColor": "#FFFFFF",
+                        "delay": 0,
+                        "elevation": 1000,
+                        "isWait": false,
+                        "opacity": 1,
+                        "playbackRate": 1,
+                        "repeat": 1,
+                        "repeatDelay": 1,
+                        "zIndex": 1,
+                        "animationSource": false,
+                        "isReturning": false,
+                        "onlyX": false,
+                        "randomOffset": false,
+                        "reverse": false
+                      }
+                    },
+                    "source": {
+                      "enable": false
+                    },
+                    "secondary": {
+                      "enable": false
+                    },
+                    "target": {
+                      "enable": false
+                    }
+                  },
+                  "aaName": "Arco Longo (automática)",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both"
+                }
+              ],
+              "effects": [],
+              "description": "<p>Grupo: Arcos. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Duas Mãos, Artilharia, Alcance 45m.</p>",
+              "price": "60 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

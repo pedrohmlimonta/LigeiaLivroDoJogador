@@ -1,0 +1,249 @@
+{
+  "_id": "kdkhhkcbbojoghmn",
+  "_key": "!items!kdkhhkcbbojoghmn",
+  "name": "Capa de Conflagração (Maior)",
+  "type": "equipamento",
+  "img": "icons/svg/cowled.svg",
+  "system": {
+    "category": "Capa",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "1.000.000 Vo",
+    "notes": "",
+    "description": "<p><b>Capas</b>: São itens que podem ser equipados nos ombros.</p><hr><h3>✦ Encantamento — Item Maior (ignis + ignis + ignis)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Conflagração</b> (ignis · Ação Rápida · Dano 3 · +1.000.000 Vo)<br>Enquanto estiver vestindo um item com essa propriedade, você pode gastar 1 ponto de magia, para criar uma aura de chamas de 1m de raio (2 para 2m de raio e 3 para 3m de raio) que causa a todos dentro dela 1, 2 ou 3 pontos de dano bruto de fogo por rodada (dependendo do preço do item). A aura dura uma cena.</li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Conflagração — aura de chamas (3m, 3 de fogo por rodada) (3 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "3",
+        "damageType": "fogo",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "3",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "SWAqkmVpWxJm9aNJ",
+          "label": "Capa de Conflagração (Maior)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.fire.groundcrack.01.orange",
+            "nome": "Fogo"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "fire",
+              "animation": "groundcrack",
+              "variant": "01",
+              "color": "orange",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 2.5,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Capa de Conflagração (Maior) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "3",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": true,
+        "persistRounds": "0",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "turn"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "ejnieofgbdghljko",
+  "sort": 18300,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "h9eUPAA3AWWPaYgj",
+          "nivel": "Maior",
+          "pm": 3,
+          "lendario": false,
+          "palavras": [
+            "ignis",
+            "ignis",
+            "ignis"
+          ],
+          "slots": [
+            {
+              "palavra": "ignis",
+              "id": "ignis-conflagracao"
+            },
+            {
+              "palavra": "ignis",
+              "id": "ignis-conflagracao"
+            },
+            {
+              "palavra": "ignis",
+              "id": "ignis-conflagracao"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "ignis-conflagracao",
+              "nome": "Conflagração",
+              "palavra": "ignis",
+              "variante": "Dano 3",
+              "preco": 1000000,
+              "indice": 2
+            }
+          ],
+          "preco": 1000000,
+          "antes": {
+            "name": "Capa",
+            "system": {
+              "actions": [],
+              "effects": [],
+              "description": "<p><b>Capas</b>: São itens que podem ser equipados nos ombros.</p>",
+              "price": ""
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

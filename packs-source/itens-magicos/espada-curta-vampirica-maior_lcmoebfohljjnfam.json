@@ -1,0 +1,618 @@
+{
+  "_id": "lcmoebfohljjnfam",
+  "_key": "!items!lcmoebfohljjnfam",
+  "name": "Espada Curta Vampírica (Maior)",
+  "type": "equipamento",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "category": "Arma (Lâminas Pequenas)",
+    "tags": [
+      "laminas_pequenas",
+      "militar",
+      "uma_mao",
+      "corpo_a_corpo",
+      "leve"
+    ],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "2.000.019 Vo",
+    "notes": "Militar, Uma Mão, Corpo a Corpo, Leve",
+    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p><hr><h3>✦ Encantamento — Item Maior (mortis + mortis + mortis)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Lâmina Vampírica</b> (mortis · Constante · +2.000.000 Vo)<br>Quando atacar com esta arma e causar dano escalonado, você recupera pontos de vida igual ao dano escalonado causado.<br><em>Ao causar dano escalonado com esta arma, você recupera PV igual ao dano escalonado.</em><br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "Ataque — Espada Curta",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "2",
+        "damageType": "corte",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "YjYuKie7DdiYPjMs",
+          "label": "Espada Curta Vampírica (Maior)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.shortsword.01.white",
+            "nome": "Espada Curta Vampírica (Maior)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "shortsword",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Espada Curta Vampírica (Maior) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      },
+      {
+        "label": "✦ Ataque — Espada Curta — Lâmina Vampírica: cura o dano escalonado causado (3 PM)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "2",
+        "damageType": "corte",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": true,
+          "resource": "hp",
+          "from": "scaling",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "gBRXtFD64cZeXHUb",
+          "label": "Espada Curta Vampírica (Maior)",
+          "menu": "melee",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "melee.weapon.shortsword.01.white",
+            "nome": "Espada Curta Vampírica (Maior)"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "melee",
+              "menuType": "weapon",
+              "animation": "shortsword",
+              "variant": "01",
+              "color": "white",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "size": 1
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          },
+          "meleeSwitch": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "arrow",
+              "variant": "regular",
+              "color": "regular",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "detect": "automatic",
+              "range": 2,
+              "isReturning": false,
+              "switchType": "off"
+            }
+          }
+        },
+        "aaName": "Espada Curta Vampírica (Maior) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "3",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "fbpenclobmebecdm",
+  "sort": 29100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "Y0c7EaD7LcovEWzC",
+          "nivel": "Maior",
+          "pm": 3,
+          "lendario": false,
+          "palavras": [
+            "mortis",
+            "mortis",
+            "mortis"
+          ],
+          "slots": [
+            {
+              "palavra": "mortis",
+              "id": "mortis-lamina-vampirica"
+            },
+            {
+              "palavra": "mortis",
+              "id": "mortis-lamina-vampirica"
+            },
+            {
+              "palavra": "mortis",
+              "id": "mortis-lamina-vampirica"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "mortis-lamina-vampirica",
+              "nome": "Lâmina Vampírica",
+              "palavra": "mortis",
+              "variante": "",
+              "preco": 2000000,
+              "indice": 0
+            }
+          ],
+          "preco": 2000000,
+          "antes": {
+            "name": "Espada Curta",
+            "system": {
+              "actions": [
+                {
+                  "label": "Ataque — Espada Curta",
+                  "level": "all",
+                  "canRoll": true,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "target",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "bloqueio",
+                  "damage": "2",
+                  "damageType": "corte",
+                  "damageResource": "hp",
+                  "scalingDamage": true,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": true,
+                  "isMelee": true,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": {
+                    "id": "fsHBR7BKEv0XgsuT",
+                    "label": "Espada Curta",
+                    "menu": "melee",
+                    "macro": {
+                      "enable": false,
+                      "name": "",
+                      "args": "",
+                      "playWhen": "0"
+                    },
+                    "soundOnly": {
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      }
+                    },
+                    "metaData": {
+                      "origem": "ligeia-livro-do-jogador",
+                      "automatica": true,
+                      "chave": "melee.weapon.shortsword.01.white",
+                      "nome": "Espada Curta"
+                    },
+                    "isEnabled": true,
+                    "isCustomized": true,
+                    "fromAmmo": false,
+                    "version": 5,
+                    "primary": {
+                      "video": {
+                        "dbSection": "melee",
+                        "menuType": "weapon",
+                        "animation": "shortsword",
+                        "variant": "01",
+                        "color": "white",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "contrast": 0,
+                        "hue": 0,
+                        "saturate": 0,
+                        "tint": false,
+                        "tintColor": "#FFFFFF",
+                        "delay": 0,
+                        "elevation": 1000,
+                        "isWait": false,
+                        "opacity": 1,
+                        "playbackRate": 1,
+                        "repeat": 1,
+                        "repeatDelay": 1,
+                        "zIndex": 1,
+                        "size": 1
+                      }
+                    },
+                    "source": {
+                      "enable": false
+                    },
+                    "secondary": {
+                      "enable": false
+                    },
+                    "target": {
+                      "enable": false
+                    },
+                    "meleeSwitch": {
+                      "video": {
+                        "dbSection": "range",
+                        "menuType": "weapon",
+                        "animation": "arrow",
+                        "variant": "regular",
+                        "color": "regular",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "detect": "automatic",
+                        "range": 2,
+                        "isReturning": false,
+                        "switchType": "off"
+                      }
+                    }
+                  },
+                  "aaName": "Espada Curta (automática)",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both"
+                }
+              ],
+              "effects": [],
+              "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p>",
+              "price": "19 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

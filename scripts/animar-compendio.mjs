@@ -27,6 +27,9 @@ const docs = [];
 for (const pack of fs.readdirSync(fonte).sort()) {
   const dir = path.join(fonte, pack);
   if (!fs.statSync(dir).isDirectory()) continue;
+  // Os itens mágicos são gerados depois (scripts/itens-magicos.mjs), já
+  // animados pelo Encantamento de Itens.
+  if (pack === "itens-magicos") continue;
   for (const nome of fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort()) {
     const arquivo = path.join(dir, nome);
     docs.push({ pack, arquivo, doc: JSON.parse(fs.readFileSync(arquivo, "utf8")) });

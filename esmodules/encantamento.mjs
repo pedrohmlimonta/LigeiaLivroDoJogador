@@ -239,7 +239,7 @@ const marcador = (label, extra = {}) => ap(label, { fxType: "bonus", fxTarget: "
 const acaoInfo = (rotulo = "") => ({ acao: { rotulo } });
 /** Bomba alquímica: arremessa até 10m (Agilidade), 2m de raio, Esquiva. */
 const bomba = (...aplica) => ({ acao: {
-  rotulo: "arremessar (10m, 2m de raio)", targetMode: "area", range: "10", area: "2",
+  rotulo: "10m, 2m de raio", targetMode: "area", range: "10", area: "2",
   canRoll: true, rollAttr: "agilidade", defenseAttr: "esquiva", includeSelf: false, aplica,
 } });
 
@@ -707,6 +707,12 @@ function acaoDaRegra(label, s, custo) {
   return novaAcao(label, extra);
 }
 
+/** O verbo da ação de um consumível, pelo tipo do item: a poção se bebe, a bomba se arremessa... */
+const VERBO_DO_CONSUMIVEL = [["pocao", "Beber"], ["bomba", "Arremessar"], ["oleo", "Aplicar"], ["pedra", "Usar"]];
+export function verboDoConsumivel(tipos) {
+  return VERBO_DO_CONSUMIVEL.find(([t]) => tipos?.has?.(t))?.[1] ?? "Usar";
+}
+
 /** "24 Vo" + 7.000 → "7.024 Vo"; preço em outra moeda (ou "—") vira só o das propriedades. */
 export function somarPreco(preco, total) {
   const m = String(preco ?? "").trim().match(/^([\d.]+)\s*Vo$/i);
@@ -834,12 +840,16 @@ export function construirEncantamento(dados, { nivel, escolhas, lendario = false
     }
   }
 
-  // 3) Ativadas: uma ação cada (consumível não cobra mana: é gasto).
+  // 3) Ativadas: uma ação cada (consumível não cobra mana: é gasto — e a
+  //    ação diz o que se faz com ele: a poção se bebe, a bomba se arremessa).
   for (const r of ativadas) {
     const s = r.regra.acao;
     const custo = r.prop.consumivel ? 0 : pm;
-    const sufixo = r.prop.consumivel ? "consumível" : custoTxt;
-    const a = acaoDaRegra(`✦ ${r.prop.nome}${s.rotulo ? ` — ${s.rotulo}` : ""} (${sufixo})`, s, custo);
+    const detalhe = s.rotulo ? ` — ${s.rotulo}` : "";
+    const label = r.prop.consumivel
+      ? `✦ ${verboDoConsumivel(tipos)}: ${r.prop.nome}${detalhe} (consumível)`
+      : `✦ ${r.prop.nome}${detalhe} (${custoTxt})`;
+    const a = acaoDaRegra(label, s, custo);
     a._palavra = r.prop.palavra;
     novas.push(a);
   }
@@ -871,9 +881,13 @@ export function construirEncantamento(dados, { nivel, escolhas, lendario = false
 
 /** Bloco da descrição: o que foi encantado, a mana e o texto do livro. */
 function descricaoDoEncantamento({ nivel, pm, lendario, palavras, lista, total }) {
+  const consumiveis = lista.filter((r) => r.prop.consumivel).length;
   const mana = lendario
     ? "Item <b>lendário</b>: ativa as propriedades sem gastar mana."
-    : `Ativar as propriedades custa <b>${pm} PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.`;
+    : consumiveis && consumiveis === lista.length
+      ? "Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados)."
+      : `Ativar as propriedades custa <b>${pm} PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.`
+        + (consumiveis ? " As consumíveis não gastam mana: são gastas ao usar." : "");
   const itens = lista.map((r) => {
     const v = r.variante?.rotulo ? ` · ${esc(r.variante.rotulo)}` : "";
     const auto = automatizada(r.regra) ? "" : " <em>(sem automação: aplique pela descrição)</em>";

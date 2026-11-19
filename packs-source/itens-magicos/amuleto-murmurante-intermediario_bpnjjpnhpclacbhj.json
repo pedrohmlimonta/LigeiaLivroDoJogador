@@ -1,0 +1,271 @@
+{
+  "_id": "bpnjjpnhpclacbhj",
+  "_key": "!items!bpnjjpnhpclacbhj",
+  "name": "Amuleto Murmurante (Intermediário)",
+  "type": "equipamento",
+  "img": "icons/svg/aura.svg",
+  "system": {
+    "category": "Amuleto",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "7.000 Vo",
+    "notes": "",
+    "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p><hr><h3>✦ Encantamento — Item Intermediário (sonigu + sonigu)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Murmurante</b> (sonigu · Ação Rápida · 5m · +7.000 Vo)<br>Enquanto estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para ativá-lo. O item emite um som que pode ser ouvido dentro de um alcance, que depende do valor do item. Criaturas que puderem ouvir o som, devem realizar uma rolagem de Percepção (Normal), ou sofrerão -1/-2/-3 (dependendo do valor do item) em suas rolagens de Mente, até o fim da cena (Percepção anula). O portador do item não é afetado.</li></ul><p>Preço das propriedades: +7.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 7 (7.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Murmurante — 5m: Percepção 10 ou −2 em Mente (2 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "aura",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "Murmurante: −2 em Mente",
+            "fxType": "bonus",
+            "fxTarget": "mente",
+            "fxValue": "-2",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": true,
+            "resistAttr": "percepcao",
+            "resistVsCast": false,
+            "resistDc": "10",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "5",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "1mXJMv6S8zZ34Zdy",
+          "label": "Amuleto Murmurante (Intermediário)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.thunderwave.center.blue",
+            "nome": "Sônico"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "thunderwave",
+              "variant": "center",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 2.5,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Amuleto Murmurante (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "2",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "ojgnghkgmcignpag",
+  "sort": 1400,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "F2hhtQqTuRAHVwCM",
+          "nivel": "Intermediário",
+          "pm": 2,
+          "lendario": false,
+          "palavras": [
+            "sonigu",
+            "sonigu"
+          ],
+          "slots": [
+            {
+              "palavra": "sonigu",
+              "id": "sonigu-murmurante"
+            },
+            {
+              "palavra": "sonigu",
+              "id": "sonigu-murmurante"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "sonigu-murmurante",
+              "nome": "Murmurante",
+              "palavra": "sonigu",
+              "variante": "5m",
+              "preco": 7000,
+              "indice": 1
+            }
+          ],
+          "preco": 7000,
+          "antes": {
+            "name": "Amuleto",
+            "system": {
+              "actions": [],
+              "effects": [],
+              "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p>",
+              "price": ""
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

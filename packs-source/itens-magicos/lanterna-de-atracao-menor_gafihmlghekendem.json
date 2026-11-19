@@ -1,0 +1,239 @@
+{
+  "_id": "gafihmlghekendem",
+  "_key": "!items!gafihmlghekendem",
+  "name": "Lanterna de Atração (Menor)",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Dispositivo",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "705 Vo",
+    "notes": "",
+    "description": "<p>Uma lanterna coberta que queima óleo para produzir luz.</p><p>Propriedade: este item ilumina num raio de 10m. Um frasco de óleo dura 1 hora. Ela pode ser empunhada com uma das mãos, apoiada em uma superfície sólida ou ser mantida suspensa por alguma corda ou gancho.</p><hr><h3>✦ Encantamento — Item Menor (carmo)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Atração</b> (carmo · Ação · Normal · +700 Vo) <em>(sem automação: aplique pela descrição)</em><br>Essa lanterna, quando acesa, atrai criaturas que percebam sua luz, caso elas não sejam bem sucedidas em uma rolagem de Mente, cuja dificuldade depende do valor do item. O usuário pode escolher quem não é afetado por ela. As criaturas atraídas irão tentar se apoderar da lanterna e lutarão por ela até a morte ou até que o efeito cesse. O efeito dura até o fim da cena (Mente anula).</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Atração — atrai quem vê a luz (Mente 10) (1 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "H9OJuuABCkY6YYkJ",
+          "label": "Lanterna de Atração (Menor)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.magicsign.enchantment.02.pink",
+            "nome": "Encantamento"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "magicsign",
+              "animation": "enchantment",
+              "variant": "02",
+              "color": "pink",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Lanterna de Atração (Menor) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "dcchdcfjcpanmaka",
+  "sort": 36000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "oZoQYszHNtMdKZJ0",
+          "nivel": "Menor",
+          "pm": 1,
+          "lendario": false,
+          "palavras": [
+            "carmo"
+          ],
+          "slots": [
+            {
+              "palavra": "carmo",
+              "id": "carmo-atracao"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "carmo-atracao",
+              "nome": "Atração",
+              "palavra": "carmo",
+              "variante": "Normal",
+              "preco": 700,
+              "indice": 0
+            }
+          ],
+          "preco": 700,
+          "antes": {
+            "name": "Lanterna",
+            "system": {
+              "actions": [],
+              "effects": [],
+              "description": "<p>Uma lanterna coberta que queima óleo para produzir luz.</p><p>Propriedade: este item ilumina num raio de 10m. Um frasco de óleo dura 1 hora. Ela pode ser empunhada com uma das mãos, apoiada em uma superfície sólida ou ser mantida suspensa por alguma corda ou gancho.</p>",
+              "price": "5 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

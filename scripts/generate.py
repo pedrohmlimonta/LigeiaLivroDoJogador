@@ -148,6 +148,20 @@ def animar_magias():
     subprocess.run([node, os.path.join(ROOT, "scripts", "animar-compendio.mjs")], check=True)
 
 
+def gerar_itens_magicos():
+    """Compêndio Itens Mágicos: cada grau de cada propriedade do livro,
+    encantado pelo Encantamento de Itens (Node; depois das animações, porque
+    as armas e armaduras de base já vêm animadas)."""
+    import shutil
+    import subprocess
+    node = shutil.which("node")
+    if not node:
+        print("AVISO — Node.js não encontrado: o compêndio Itens Mágicos não foi gerado "
+              "(scripts/itens-magicos.mjs).")
+        return
+    subprocess.run([node, os.path.join(ROOT, "scripts", "itens-magicos.mjs")], check=True)
+
+
 def main():
     total = 0
     # Catálogo de nomes de habilidade (já com colchetes) para expandir e
@@ -206,6 +220,8 @@ def main():
     # Animações automáticas das magias: as mesmas regras da Criação de Magias
     # (esmodules/animacoes.mjs), rodadas pelo Node para não haver duas cópias.
     animar_magias()
+    # Itens mágicos prontos (um por grau de cada propriedade do livro).
+    gerar_itens_magicos()
     # Confere cada documento contra o schema do sistema (choices, tipos,
     # fórmulas) — o build falha se algo seria recusado pelo Foundry.
     import validate

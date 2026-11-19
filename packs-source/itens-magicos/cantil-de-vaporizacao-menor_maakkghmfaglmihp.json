@@ -1,0 +1,239 @@
+{
+  "_id": "maakkghmfaglmihp",
+  "_key": "!items!maakkghmfaglmihp",
+  "name": "Cantil de Vaporização (Menor)",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Compartimento",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "1.500 Vo",
+    "notes": "",
+    "description": "<p>Bolsa de couro impermeável contendo um bico anelado e uma tampa para o mesmo.</p><p>Propriedade: permite carregar água suficiente para uma aventura.</p><hr><h3>✦ Encantamento — Item Menor (ignis)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Vaporização</b> (ignis · Ação Rápida · 2m · +1.500 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando você armazena qualquer líquido ingerível nesse cantil por uma hora, ele ferve magicamente o líquido, tornando-o em vapores. Usando uma ação rápida, você pode abrir o cantil. Quando aberto, o cantil dispersa os vapores, ficando vazio e cria uma emanação em torno de si, cujo raio depende do valor do item em metros. Todas as criaturas dentro da emanação recebem os benefícios, como se tivessem ingerido o líquido armazenado nele.</li></ul><p>Preço das propriedades: +1.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 4 (1.500 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Vaporização — emanação de 2m com o líquido guardado (1 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "oGTikSXRAGHQMg2Y",
+          "label": "Cantil de Vaporização (Menor)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.fire.eruption.01.orange",
+            "nome": "Fogo"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "fire",
+              "animation": "eruption",
+              "variant": "01",
+              "color": "orange",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Cantil de Vaporização (Menor) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "dcchdcfjcpanmaka",
+  "sort": 17700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "QUhDVb9y4waM0hDB",
+          "nivel": "Menor",
+          "pm": 1,
+          "lendario": false,
+          "palavras": [
+            "ignis"
+          ],
+          "slots": [
+            {
+              "palavra": "ignis",
+              "id": "ignis-vaporizacao"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "ignis-vaporizacao",
+              "nome": "Vaporização",
+              "palavra": "ignis",
+              "variante": "2m",
+              "preco": 1500,
+              "indice": 0
+            }
+          ],
+          "preco": 1500,
+          "antes": {
+            "name": "Cantil",
+            "system": {
+              "actions": [],
+              "effects": [],
+              "description": "<p>Bolsa de couro impermeável contendo um bico anelado e uma tampa para o mesmo.</p><p>Propriedade: permite carregar água suficiente para uma aventura.</p>",
+              "price": "2 Va"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

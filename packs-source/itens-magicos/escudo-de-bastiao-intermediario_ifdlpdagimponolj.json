@@ -1,0 +1,244 @@
+{
+  "_id": "ifdlpdagimponolj",
+  "_key": "!items!ifdlpdagimponolj",
+  "name": "Escudo de Bastião (Intermediário)",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Escudo",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 1,
+    "price": "21.015 Vo",
+    "notes": "Deflexão",
+    "description": "<p>Uma base metálica cuja parte traseira possui tiras de couro ou elos de aço usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p><hr><h3>✦ Encantamento — Item Intermediário (vitae + vitae)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Bastião</b> (vitae · Ação · 2 Pontos de Vida · +21.000 Vo)<br>Quando você é acertado por um golpe crítico e está empunhando esse escudo, você pode usar sua reação para recuperar uma quantidade de pontos de vida, dependendo do preço do item.</li></ul><p>Preço das propriedades: +21.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 9 (21.000 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Bastião — recupera 2 PV ao sofrer crítico (2 PM)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "2",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "R9pz2Ckwu7OZXZcI",
+          "label": "Escudo de Bastião (Intermediário)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.curewounds.01.blue",
+            "nome": "Cura"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "curewounds",
+              "variant": "01",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Escudo de Bastião (Intermediário) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "2",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "active",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "dmpdblnmfhckefcn",
+  "sort": 27700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "d2hrAgO0nmmPt93A",
+          "nivel": "Intermediário",
+          "pm": 2,
+          "lendario": false,
+          "palavras": [
+            "vitae",
+            "vitae"
+          ],
+          "slots": [
+            {
+              "palavra": "vitae",
+              "id": "vitae-bastiao"
+            },
+            {
+              "palavra": "vitae",
+              "id": "vitae-bastiao"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "vitae-bastiao",
+              "nome": "Bastião",
+              "palavra": "vitae",
+              "variante": "2 Pontos de Vida",
+              "preco": 21000,
+              "indice": 1
+            }
+          ],
+          "preco": 21000,
+          "antes": {
+            "name": "Escudo de Metal",
+            "system": {
+              "actions": [],
+              "effects": [],
+              "description": "<p>Uma base metálica cuja parte traseira possui tiras de couro ou elos de aço usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p>",
+              "price": "15 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

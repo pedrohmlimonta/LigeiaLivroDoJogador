@@ -24,12 +24,13 @@ jobs:
       - name: Gerar documentos dos packs
         run: python3 scripts/generate.py
 
-      - name: Testes (Criação de Magias, Encantamento de Itens, animações e dano escalonado)
+      - name: Testes (Criação de Magias, Encantamento de Itens, Itens Mágicos, animações e dano escalonado)
         run: |
           node tests/animacoes.test.mjs
           node tests/spellforge.test.mjs
           node tests/dano.test.mjs
           node tests/encantamento.test.mjs
+          node tests/itens-magicos.test.mjs
 
       - name: Compilar packs (LevelDB)
         run: |

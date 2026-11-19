@@ -1,0 +1,388 @@
+{
+  "_id": "maoejcgdappfolng",
+  "_key": "!items!maoejcgdappfolng",
+  "name": "Cota de Malha de Absorção Material (Menor)",
+  "type": "equipamento",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "category": "Armadura Pesada",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 2,
+    "price": "3.550 Vo",
+    "notes": "Penalidade -2",
+    "description": "<p>Armadura feita de anéis metálicos entrelaçados em um tecido de aço.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -2 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Menor (kreo)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Absorção Material</b> (kreo · Constante · 1 de Dano · +3.500 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com essa propriedade, sempre que você sofrer dano proveniente de uma arma. A arma deve ter sua dureza testada. Numa falha, a arma perderá uma quantidade de pontos de Dureza dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
+    "actions": [
+      {
+        "label": "✦ Ativar Absorção Material (1 PM, até o fim da cena)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "conjuracao",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "appliesEffects": [
+          {
+            "label": "✦ Absorção Material: arma que o ferir testa Dureza ou perde 1",
+            "fxType": "bonus",
+            "fxTarget": "all",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "",
+        "area": "",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "Bm1OVy6I9afG7kPV",
+          "label": "Cota de Malha de Absorção Material (Menor)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.bless.intro.yellow",
+            "nome": "Bênção"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "bless",
+              "variant": "intro",
+              "color": "yellow",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Cota de Malha de Absorção Material (Menor) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "active",
+    "active": false,
+    "effects": [
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "2",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Cota de Malha: Proteção 2 (corte)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "corte"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "2",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Cota de Malha: Proteção 2 (perfuração)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "perfuracao"
+      },
+      {
+        "type": "rd",
+        "target": "all",
+        "value": "2",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Cota de Malha: Proteção 2 (concussão)",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": "concussao"
+      },
+      {
+        "type": "bonus",
+        "target": "esquiva",
+        "value": "-2",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Cota de Malha: penalidade -2 Esquiva",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "conjuracao",
+        "value": "-2",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Cota de Malha: penalidade -2 Conjuração",
+        "enabled": true,
+        "enchant": false,
+        "level": "all",
+        "damageType": ""
+      }
+    ],
+    "costs": []
+  },
+  "effects": [],
+  "folder": "ignlpkaaidlofila",
+  "sort": 23700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "encantamentos": [
+        {
+          "id": "IG1fPcWMnsQrTLHf",
+          "nivel": "Menor",
+          "pm": 1,
+          "lendario": false,
+          "palavras": [
+            "kreo"
+          ],
+          "slots": [
+            {
+              "palavra": "kreo",
+              "id": "kreo-absorcao-material"
+            }
+          ],
+          "propriedades": [
+            {
+              "id": "kreo-absorcao-material",
+              "nome": "Absorção Material",
+              "palavra": "kreo",
+              "variante": "1 de Dano",
+              "preco": 3500,
+              "indice": 0
+            }
+          ],
+          "preco": 3500,
+          "antes": {
+            "name": "Cota de Malha",
+            "system": {
+              "actions": [],
+              "effects": [
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "2",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Cota de Malha: Proteção 2 (corte)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "corte"
+                },
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "2",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Cota de Malha: Proteção 2 (perfuração)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "perfuracao"
+                },
+                {
+                  "type": "rd",
+                  "target": "all",
+                  "value": "2",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Cota de Malha: Proteção 2 (concussão)",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": "concussao"
+                },
+                {
+                  "type": "bonus",
+                  "target": "esquiva",
+                  "value": "-2",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Cota de Malha: penalidade -2 Esquiva",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": ""
+                },
+                {
+                  "type": "bonus",
+                  "target": "conjuracao",
+                  "value": "-2",
+                  "rerollAll": false,
+                  "vulnPercent": false,
+                  "label": "Cota de Malha: penalidade -2 Conjuração",
+                  "enabled": true,
+                  "enchant": false,
+                  "level": "all",
+                  "damageType": ""
+                }
+              ],
+              "description": "<p>Armadura feita de anéis metálicos entrelaçados em um tecido de aço.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -2 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p>",
+              "price": "50 Vo"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "13"
+  }
+}
