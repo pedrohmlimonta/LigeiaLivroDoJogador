@@ -1,0 +1,41 @@
+{
+  "_id": "hofgbpiahknebiin",
+  "_key": "!items!hofgbpiahknebiin",
+  "name": "Balas de Chumbo",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Munição",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "10 Vo",
+    "notes": "",
+    "description": "<p>Balas esféricas e pesadas, feitas em chumbo.</p><p>Propriedade: munição para uma arma de fogo, suficiente para uma aventura. (Diário do Oráculo — Obras-primas: Itens Mecânicos)</p>",
+    "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

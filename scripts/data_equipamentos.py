@@ -45,17 +45,27 @@ _TAG_IDS = {
     "uma mão": "uma_mao", "versátil": "versatil",
 }
 
+# Grupos e propriedades que não estão na lista do sistema (vêm de suplementos).
+# O sistema aceita tipagens inventadas: guarda o texto como foi escrito e
+# compara pela forma normalizada ("Armas de Fogo" → armas_de_fogo), que é a
+# mesma que Usar Armas [Armas de Fogo] mira (arma:armas_de_fogo).
+_TAG_LIVRES = {
+    "armas de fogo": "Armas de Fogo",
+    "mecânica": "Mecânica",
+    "penetrante": "Penetrante",
+}
+
 
 def _weapon_tags(grupo, props):
     """Converte grupo + string de propriedades do livro em tags do sistema."""
     tags = []
-    gid = _TAG_IDS.get(grupo.lower())
+    gid = _TAG_IDS.get(grupo.lower()) or _TAG_LIVRES.get(grupo.lower())
     if gid:
         tags.append(gid)
     for raw in props.split(","):
         nome = raw.strip().lower()
         nome = re.sub(r"\s+\d+m$", "", nome)  # "alcance 5m" -> "alcance"
-        tid = _TAG_IDS.get(nome)
+        tid = _TAG_IDS.get(nome) or _TAG_LIVRES.get(nome)
         if tid and tid not in tags:
             tags.append(tid)
     return tags

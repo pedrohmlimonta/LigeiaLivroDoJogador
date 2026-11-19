@@ -1,0 +1,352 @@
+{
+  "_id": "enfojinalbpknkfn",
+  "_key": "!items!enfojinalbpknkfn",
+  "name": "Bacamarte",
+  "type": "equipamento",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "category": "Arma (Armas de Fogo)",
+    "tags": [
+      "Armas de Fogo",
+      "Mecânica",
+      "versatil",
+      "artilharia",
+      "alcance",
+      "Penetrante",
+      "recarga"
+    ],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 1,
+    "price": "450 Vo",
+    "notes": "Mecânica, Versátil, Artilharia, Alcance 120m, Penetrante, Recarga",
+    "description": "<p>Armas de Fogo: são armas que usam balas de chumbo como munição e necessitam da pólvora para funcionar.</p><p>Mecânica: itens mecânicos são itens poderosos, mas que apresentam muitas vezes um certo nível de mau funcionamento. Sempre que um usuário rola uma falha crítica em uma ação usando o item, ele deve realizar uma rolagem de Dureza do item. Numa falha, o item perde 1 ponto de Dureza.</p><p>Penetrante: estas armas ignoram a Proteção de armaduras de couro e de peles. (Diário do Oráculo — Obras-primas: Itens Mecânicos)</p><p>Grupo: Armas de Fogo. Ataque: Agilidade. Dano Base: Perfuração +4. Propriedades: Mecânica, Versátil, Artilharia, Alcance 120m, Penetrante, Recarga.</p>",
+    "actions": [
+      {
+        "label": "Ataque — Bacamarte",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "4",
+        "damageType": "perfuracao",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": false,
+        "range": "120",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "aEXRbwctrYi3EmmK",
+          "label": "Bacamarte",
+          "menu": "range",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "range.weapon.bullet.1.orange",
+            "nome": "Bacamarte"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "bullet",
+              "variant": "1",
+              "color": "orange",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "animationSource": false,
+              "isReturning": false,
+              "onlyX": false,
+              "randomOffset": false,
+              "reverse": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Bacamarte (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      },
+      {
+        "label": "Ataque — Bacamarte (duas mãos, +1 dano)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "agilidade",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "bloqueio",
+        "damage": "5",
+        "damageType": "perfuracao",
+        "damageResource": "hp",
+        "scalingDamage": true,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": true,
+        "isMelee": false,
+        "range": "120",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "98YG7wG4CuT1u3Jz",
+          "label": "Bacamarte",
+          "menu": "range",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "range.weapon.bullet.1.orange",
+            "nome": "Bacamarte"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "range",
+              "menuType": "weapon",
+              "animation": "bullet",
+              "variant": "1",
+              "color": "orange",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 0,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "animationSource": false,
+              "isReturning": false,
+              "onlyX": false,
+              "randomOffset": false,
+              "reverse": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Bacamarte (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both"
+      }
+    ],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

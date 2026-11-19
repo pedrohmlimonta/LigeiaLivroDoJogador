@@ -83,6 +83,8 @@ ok(!tiposDoItem(eq('Cota de Malha')).has('arma') && tiposDoItem(eq('Cota de Malh
    'Cota de Malha: armadura (e não arma)');
 ok(tiposDoItem(eq('Cajado')).has('cajado') && tiposDoItem(eq('Cajado')).has('arma_concussao'), 'Cajado: foco e arma de concussão');
 ok(tiposDoItem(eq('Flechas')).has('municao'), 'Flechas: munição');
+ok(tiposDoItem(eq('Balas de Chumbo')).has('municao') && [...tiposDoItem(eq('Pistola'))].join() === 'arma,arma_perfuracao',
+   'armas de fogo: Balas de Chumbo é munição; a Pistola é arma de perfuração (as propriedades só de arcos e bestas não valem)');
 ok(compativel(pcf, tiposDoItem(eq('Cota de Malha'))) && !compativel(pcf, tiposDoItem(eq('Espada Longa'))),
    'Proteção Contra Fogo é para armaduras, não para espadas');
 const T = tiposDoItem(eq('Espada Longa'));

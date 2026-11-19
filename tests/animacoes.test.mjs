@@ -146,6 +146,18 @@ ok(a.aaConfig.meleeSwitch.options.switchType === 'custom' && a.aaConfig.meleeSwi
    'Adaga: golpe de perto, adaga arremessada de longe');
 ok(chave(doPack('equipamentos', 'Arco Longo').system.actions[0].aaConfig) === 'range.weapon.arrow.regular.regular', 'Arco Longo: flecha');
 ok(chave(doPack('equipamentos', 'Besta Pesada').system.actions[0].aaConfig) === 'range.weapon.bolt.physical.orange', 'Besta Pesada: virote');
+for (const nome of ['Bacamarte', 'Pistola', 'Rifle', 'Rifle de Cano Duplo']) {
+  const acoes = doPack('equipamentos', nome).system.actions;
+  ok(acoes.length > 0 && acoes.every((x) => x.aaConfig?.menu === 'range' && chave(x.aaConfig) === 'range.weapon.bullet.1.orange'),
+     `${nome}: tiro de bala em ${acoes.length === 1 ? 'seu ataque' : `todos os ${acoes.length} ataques`}`);
+}
+d = clone(doPack('equipamentos', 'Pistola'));
+d.name = 'Mosquete do Capitão';
+d.system.tags = ['Armas de Fogo', 'Duas Mãos'];
+for (const x of d.system.actions) x.aaConfig = null;
+mod.animarItem(d, { existe: mod.chaveSegura });
+ok(chave(d.system.actions[0].aaConfig) === 'range.weapon.bullet.1.orange',
+   'arma de fogo fora da tabela: pela tipagem digitada "Armas de Fogo" (o id que o sistema compara, armas_de_fogo)');
 ok(chave(doPack('equipamentos', 'Mordida').system.actions[0].aaConfig) === 'melee.creature.bite.01.red', 'Mordida: mordida');
 d = doPack('equipamentos', 'Soco');
 ok(chave(acao(d, /^Ataque/).aaConfig) === 'melee.weapon.unarmedstrike.physical.blue'

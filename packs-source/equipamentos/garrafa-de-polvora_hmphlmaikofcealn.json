@@ -1,0 +1,41 @@
+{
+  "_id": "hmphlmaikofcealn",
+  "_key": "!items!hmphlmaikofcealn",
+  "name": "Garrafa de Pólvora",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Material",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "50 Vo",
+    "notes": "",
+    "description": "<p>Uma garrafa afunilada de metal contendo pólvora dentro.</p><p>Propriedade: contém pólvora para manter uma arma por uma aventura inteira. (Diário do Oráculo — Obras-primas: Itens Mecânicos)</p>",
+    "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11600,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

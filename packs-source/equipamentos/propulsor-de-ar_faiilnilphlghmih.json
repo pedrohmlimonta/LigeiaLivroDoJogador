@@ -1,0 +1,41 @@
+{
+  "_id": "faiilnilphlghmih",
+  "_key": "!items!faiilnilphlghmih",
+  "name": "Propulsor de Ar",
+  "type": "equipamento",
+  "img": "icons/svg/anchor.svg",
+  "system": {
+    "category": "Utensílio (Item Mecânico)",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "450 Vo",
+    "notes": "",
+    "description": "<p>Uma pesada mochila mecânica, com duas cavidades em seu inferior. Nela podem ser ligadas duas cápsulas de gás que, quando liberados, escapam através das cavidades da mochila.</p><p>Propriedade: quando utilizado para saltar, adiciona 10m à distância do salto. Necessita de duas cápsulas de gás para funcionar.</p><p>Mecânica: itens mecânicos são itens poderosos, mas que apresentam muitas vezes um certo nível de mau funcionamento. Sempre que um usuário rola uma falha crítica em uma ação usando o item, ele deve realizar uma rolagem de Dureza do item. Numa falha, o item perde 1 ponto de Dureza. (Diário do Oráculo — Obras-primas: Itens Mecânicos)</p>",
+    "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11700,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

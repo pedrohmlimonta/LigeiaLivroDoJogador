@@ -1,0 +1,41 @@
+{
+  "_id": "hllfhofomgdgpopa",
+  "_key": "!items!hllfhofomgdgpopa",
+  "name": "Cápsula de Gás",
+  "type": "equipamento",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "category": "Material",
+    "tags": [],
+    "tagsExtra": "",
+    "qty": 1,
+    "weight": 0,
+    "price": "15 Vo",
+    "notes": "",
+    "description": "<p>Cápsulas do tamanho de uma tocha, mecanicamente trancadas e contendo uma válvula em uma de suas extremidades, que podem ser anexadas a um propulsor de ar.</p><p>Propriedade: contém gás suficiente para uma aventura. (Diário do Oráculo — Obras-primas: Itens Mecânicos)</p>",
+    "actions": [],
+    "enchantments": [],
+    "costsCumulative": false,
+    "noEnchant": false,
+    "fxFile": "",
+    "fxScale": "1",
+    "fxAaConfig": null,
+    "fxAaName": "",
+    "fxAaPersist": true,
+    "animOnActivate": true,
+    "mode": "passive",
+    "active": false,
+    "effects": [],
+    "costs": []
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 11800,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "13"
+  }
+}

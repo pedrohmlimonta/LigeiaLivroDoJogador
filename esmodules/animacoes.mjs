@@ -334,7 +334,7 @@ export const SEGURAS = new Set([
   "range.spell.rayoffrost.01.blue", "range.spell.scorchingray.01.orange",
   "range.spell.witchbolt.01.blue", "range.weapon.arrow.physical.blue",
   "range.weapon.arrow.regular.regular", "range.weapon.bolt.physical.orange",
-  "range.weapon.bullet.1.orange", "range.weapon.dagger.01.white",
+  "range.weapon.bullet.1.orange", "range.weapon.bullet.2.orange", "range.weapon.dagger.01.white",
   "static.chains.standard.loop.red", "static.conditions.crackedshield.02.purple",
   "static.conditions.dizzystars.01.blueorange", "static.conditions.drop.02.red",
   "static.conditions.fear.01.darkpurple", "static.conditions.heart.01.pink",
@@ -705,6 +705,7 @@ const escolher = (lista, existe) => (lista ?? []).find((k) => existe(k)) ?? null
 
 const FLECHA = ["range.weapon.arrow.physical.white", "range.weapon.arrow.regular.regular"];
 const VIROTE = ["range.weapon.bolt.physical.white", "range.weapon.bolt.physical.orange"];
+const BALA = ["range.weapon.bullet.1.orange", "range.weapon.bullet.2.orange"];
 const SOCO = ["melee.weapon.unarmedstrike.physical.blue"];
 const MARCIAL = ["melee.weapon.flurryofblows.physical.blue"];
 const CAJADO = ["melee.weapon.quarterstaff.01.white", "melee.weapon.club.01.white"];
@@ -726,6 +727,7 @@ export const ARMAS = {
   "arco longo": { tiro: FLECHA },
   "ataque desarmado": { golpe: SOCO },
   "azagaia": { tiro: ["range.weapon.javelin.01.white", "range.weapon.arrow.regular.regular"] },
+  "bacamarte": { tiro: BALA },
   "besta de mao": { tiro: VIROTE },
   "besta leve": { tiro: VIROTE },
   "besta pesada": { tiro: VIROTE },
@@ -761,17 +763,25 @@ export const ARMAS = {
   "mordida": { golpe: ["melee.creature.bite.01.red"] },
   "picareta": { golpe: ["melee.weapon.warhammer.01.white"] },
   "pique": { golpe: LANCA },
+  "pistola": { tiro: BALA },
   "presas": { golpe: ["melee.creature.bite.01.red"] },
+  "rifle": { tiro: BALA },
+  "rifle de cano duplo": { tiro: BALA },
   "soco": { golpe: SOCO, marcial: MARCIAL },
   "tridente": { golpe: LANCA, arremesso: LANCA_ARREMESSO },
 };
 
-/** Arma fora da tabela: pela tipagem (a primeira que bater). */
+/**
+ * Arma fora da tabela: pela tipagem (a primeira que bater), no id que o
+ * sistema compara — uma tipagem digitada ("Armas de Fogo") vale como
+ * armas_de_fogo.
+ */
 const POR_TIPAGEM = [
   ["arcos", { tiro: FLECHA }],
   ["bestas", { tiro: VIROTE }],
   ["fundas", { tiro: ["range.weapon.sling.01.white", "range.weapon.bullet.1.orange"] }],
   ["dardos", { tiro: ["range.weapon.dart.01.white", "range.weapon.dagger.01.white"] }],
+  ["armas_de_fogo", { tiro: BALA }],
   ["laminas_pequenas", { golpe: ["melee.weapon.shortsword.01.white"] }],
   ["laminas_grandes", { golpe: ["melee.weapon.sword.01.white"] }],
   ["machados", { golpe: ["melee.weapon.handaxe.01.white"] }],
@@ -932,7 +942,7 @@ function visualDeArma(a, data) {
   if (!(a.isWeapon || /^ataque\b/i.test(a.label ?? ""))) return null;
   if (!ataqueDeArma(a) && !causaDano(a)) return null;
   const nome = semAcento(data.name);
-  const tags = (data.system?.tags ?? []).map((t) => semAcento(t));
+  const tags = (data.system?.tags ?? []).map((t) => semAcento(t).replace(/\s+/g, "_"));
   const A = ARMAS[nome] ?? POR_TIPAGEM.find(([t]) => tags.includes(t))?.[1] ?? POR_DANO[a.damageType] ?? null;
   if (!A) return null;
   const marcial = A.marcial && /artes marciais/i.test(a.label ?? "");

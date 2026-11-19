@@ -55,5 +55,26 @@ const finaisEscalonados = todos.flatMap((x) => [x.doc, ...(x.doc.system.keySkill
   .flatMap((d) => comDano(d)).filter((a) => a.damageType === 'final' && a.scalingDamage);
 ok(finaisEscalonados.length === 0, 'nenhum dano final escalonado em todo o compêndio');
 
+console.log('5) Armas de fogo (Diário do Oráculo — Itens Mecânicos)');
+// weaponTagId do sistema: é por essa forma que ele compara as tipagens.
+const tagId = (t) => String(t ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').trim().toLowerCase().replace(/\s+/g, '_');
+const usarFogo = item('habilidades', 'Usar Armas [Armas de Fogo]').system.effects.map((e) => e.target.replace(/^arma:/, ''));
+const FOGO = { Bacamarte: [4, 120, 1], Pistola: [3, 60, 0], Rifle: [5, 120, 1], 'Rifle de Cano Duplo': [6, 120, 2] };
+for (const [nome, [base, alcance, peso]] of Object.entries(FOGO)) {
+  const d = item('equipamentos', nome);
+  const atk = comDano(d);
+  const ids = d.system.tags.map(tagId);
+  ok(atk.length === (nome === 'Bacamarte' ? 2 : 1) && atk[0].damage === String(base) && d.system.weight === peso
+     && atk.every((a) => a.scalingDamage && a.damageType === 'perfuracao' && a.rollAttr === 'agilidade'
+       && String(a.range) === String(alcance) && a.isWeapon && !a.isMelee),
+     `${nome}: Perfuração +${base} escalonado, Agilidade, alcance ${alcance}m, peso ${peso}`);
+  ok(['armas_de_fogo', 'mecanica', 'artilharia', 'penetrante', 'recarga'].every((t) => ids.includes(t))
+     && usarFogo.length === 2 && usarFogo.every((t) => ids.includes(t)),
+     `${nome}: tipagens ${d.system.tags.join(', ')} — Usar Armas [Armas de Fogo] vale nela`);
+}
+ok(comDano(item('equipamentos', 'Bacamarte'))[1].damage === '5', 'Bacamarte (Versátil): com as duas mãos, +1 de dano');
+ok(['Balas de Chumbo', 'Garrafa de Pólvora', 'Propulsor de Ar', 'Cápsula de Gás'].every((n) => item('equipamentos', n)),
+   'munição, pólvora, propulsor de ar e cápsula de gás no compêndio');
+
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

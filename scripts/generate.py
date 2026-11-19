@@ -18,6 +18,7 @@ from data_magias_1 import MAGIAS_1
 from data_magias_2 import MAGIAS_2
 from data_equipamentos import EQUIPAMENTOS
 from data_equipamentos_2 import EQUIPAMENTOS_2
+from data_itens_mecanicos import ITENS_MECANICOS
 from data_tracos import TRACOS
 from data_tracos_2 import TRACOS_2
 from data_racas_herancas import RACAS, HERANCAS
@@ -123,7 +124,7 @@ PACKS = {
                           key=lambda d: d["name"].lower()),
     "magias": sorted(MAGIAS_1 + MAGIAS_2,
                      key=lambda d: (d["system"]["wordId"], d["name"].lower())),
-    "equipamentos": EQUIPAMENTOS + EQUIPAMENTOS_2,
+    "equipamentos": EQUIPAMENTOS + EQUIPAMENTOS_2 + ITENS_MECANICOS,
     "tracos": sorted(TRACOS + TRACOS_2,
                      key=lambda d: (d["system"]["source"], d["name"].lower())),
     "racas": RACAS,
