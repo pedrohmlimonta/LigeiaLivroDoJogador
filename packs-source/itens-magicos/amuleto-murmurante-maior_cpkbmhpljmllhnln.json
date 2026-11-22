@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "200.000 Vo",
     "notes": "",
-    "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p><hr><h3>✦ Encantamento — Item Maior (sonigu + sonigu + sonigu)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Murmurante</b> (sonigu · Ação Rápida · 10m · +200.000 Vo)<br>Enquanto estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para ativá-lo. O item emite um som que pode ser ouvido dentro de um alcance, que depende do valor do item. Criaturas que puderem ouvir o som, devem realizar uma rolagem de Percepção (Normal), ou sofrerão -1/-2/-3 (dependendo do valor do item) em suas rolagens de Mente, até o fim da cena (Percepção anula). O portador do item não é afetado.</li></ul><p>Preço das propriedades: +200.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 13 (200.000 Vo).</p>",
+    "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p><hr><h3>✦ Encantamento — Item Maior (sonigu)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Murmurante</b> (sonigu · Ação Rápida · 10m · +200.000 Vo · <b>3 PM por uso</b>)<br>Enquanto estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para ativá-lo. O item emite um som que pode ser ouvido dentro de um alcance, que depende do valor do item. Criaturas que puderem ouvir o som, devem realizar uma rolagem de Percepção (Normal), ou sofrerão -1/-2/-3 (dependendo do valor do item) em suas rolagens de Mente, até o fim da cena (Percepção anula). O portador do item não é afetado.</li></ul><p>Preço das propriedades: +200.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 13 (200.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Murmurante — 10m: Percepção 10 ou −3 em Mente (3 PM)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,19 +241,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "sonigu",
-            "sonigu",
             "sonigu"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "sonigu",
-              "id": "sonigu-murmurante"
-            },
-            {
-              "palavra": "sonigu",
-              "id": "sonigu-murmurante"
-            },
             {
               "palavra": "sonigu",
               "id": "sonigu-murmurante"
@@ -253,6 +257,8 @@
               "palavra": "sonigu",
               "variante": "10m",
               "preco": 200000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "30.024 Vo",
     "notes": "Militar, Versátil, Corpo a Corpo",
-    "description": "<p>Grupo: Lâminas Grandes. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Intermediário (acida + acida)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Corrosiva</b> (acida · Constante · Armas · +30.000 Vo)<br>Quando atacar com arma, munição ou enquanto estiver usando braçadeiras com essa propriedade, alvos atingidos por você, que sofrerem dano, deverão ser bem sucedidos em uma rolagem de Vigor (Normal). Caso falhem, sofrerão dano contínuo de ácido pelo resto da cena (Vigor anula).</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Grandes. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Intermediário (acida)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Corrosiva</b> (acida · Constante · Armas · +30.000 Vo · <b>2 PM por uso</b>)<br>Quando atacar com arma, munição ou enquanto estiver usando braçadeiras com essa propriedade, alvos atingidos por você, que sofrerem dano, deverão ser bem sucedidos em uma rolagem de Vigor (Normal). Caso falhem, sofrerão dano contínuo de ácido pelo resto da cena (Vigor anula).</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Espada Longa",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -363,7 +376,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Espada Longa — Corrosiva (2 PM)",
@@ -649,7 +675,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Espada Longa (duas mãos, +1 dano) — Corrosiva (2 PM)",
@@ -935,7 +974,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -967,14 +1019,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "acida",
             "acida"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "acida",
-              "id": "acida-corrosiva"
-            },
             {
               "palavra": "acida",
               "id": "acida-corrosiva"
@@ -987,6 +1035,8 @@
               "palavra": "acida",
               "variante": "Armas",
               "preco": 30000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],
@@ -1166,7 +1216,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 },
                 {
                   "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -1339,7 +1402,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

@@ -19,7 +19,7 @@
     "weight": 0,
     "price": "600.017 Vo",
     "notes": "Simples, Duas Mãos, Artilharia, Alcance 15m, Recarga",
-    "description": "<p>Grupo: Bestas. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Simples, Duas Mãos, Artilharia, Alcance 15m, Recarga.</p><hr><h3>✦ Encantamento — Item Maior (sankta + sankta + sankta)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Dano Radiante</b> (sankta · Constante · Armas — 3 de dano · +600.000 Vo)<br>Quando atacar com arma, munição, ou enquanto estiver usando braçadeiras com essa propriedade, seus ataques causarão 1/2/3 de dano bruto radiante adicional, de acordo com o valor do item.</li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
+    "description": "<p>Grupo: Bestas. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Simples, Duas Mãos, Artilharia, Alcance 15m, Recarga.</p><hr><h3>✦ Encantamento — Item Maior (sankta)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Dano Radiante</b> (sankta · Constante · Armas — 3 de dano · +600.000 Vo · <b>3 PM por uso</b>)<br>Quando atacar com arma, munição, ou enquanto estiver usando braçadeiras com essa propriedade, seus ataques causarão 1/2/3 de dano bruto radiante adicional, de acordo com o valor do item.</li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Besta Leve",
@@ -170,7 +170,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Besta Leve — Dano Radiante (3 PM)",
@@ -328,7 +341,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -360,19 +386,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "sankta",
-            "sankta",
             "sankta"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "sankta",
-              "id": "sankta-dano-radiante"
-            },
-            {
-              "palavra": "sankta",
-              "id": "sankta-dano-radiante"
-            },
             {
               "palavra": "sankta",
               "id": "sankta-dano-radiante"
@@ -385,6 +402,8 @@
               "palavra": "sankta",
               "variante": "Armas — 3 de dano",
               "preco": 600000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],
@@ -542,7 +561,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

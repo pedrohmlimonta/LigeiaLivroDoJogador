@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "60.020 Vo",
     "notes": "",
-    "description": "<p>Uma curta e fina haste feita em madeira, metal ou outro tipo de material rígido.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma mão.</p><hr><h3>✦ Encantamento — Item Intermediário (energio + energio)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Fonte Arcana</b> (energio · Cena · 2 Pontos de Magia · +60.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Este item armazena 1/2/3 pontos de magia (dependendo do preço do item) dos seus pontos excedentes de magia, durante o seu descanso. Você pode usá-los normalmente em suas conjurações, como se contassem como seus pontos de magia normais.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
+    "description": "<p>Uma curta e fina haste feita em madeira, metal ou outro tipo de material rígido.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma mão.</p><hr><h3>✦ Encantamento — Item Intermediário (energio)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Fonte Arcana</b> (energio · Cena · 2 Pontos de Magia · +60.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Este item armazena 1/2/3 pontos de magia (dependendo do preço do item) dos seus pontos excedentes de magia, durante o seu descanso. Você pode usá-los normalmente em suas conjurações, como se contassem como seus pontos de magia normais.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Fonte Arcana (2 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +241,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "energio",
             "energio"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "energio",
-              "id": "energio-fonte-arcana"
-            },
             {
               "palavra": "energio",
               "id": "energio-fonte-arcana"
@@ -248,6 +257,8 @@
               "palavra": "energio",
               "variante": "2 Pontos de Magia",
               "preco": 60000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

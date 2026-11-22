@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "500 Vo",
     "notes": "",
-    "description": "<p><b>Bombas Alquímicas</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (sonigu)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Explosão Sônica</b> (sonigu · Ação · +500 Vo)<br>Você pode arremessar este item num espaço até 10m de distância, usando uma ação, rolando Agilidade. Quando atinge o espaço alvo, cria uma área com 2m de raio centrada no espaço. Todas as criaturas dentro da área devem ser bem sucedidos em uma rolagem de Esquiva oposta a sua Agilidade, ou sofrerão dano sônico contínuo e ficarão surdos até o fim da cena (Percepção anula).</li></ul><p>Preço das propriedades: +500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 5 (500 Vo).</p>",
+    "description": "<p><b>Bombas Alquímicas</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (sonigu)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Explosão Sônica</b> (sonigu · Ação · +500 Vo · <b>consumível</b>)<br>Você pode arremessar este item num espaço até 10m de distância, usando uma ação, rolando Agilidade. Quando atinge o espaço alvo, cria uma área com 2m de raio centrada no espaço. Todas as criaturas dentro da área devem ser bem sucedidos em uma rolagem de Esquiva oposta a sua Agilidade, ou sofrerão dano sônico contínuo e ficarão surdos até o fim da cena (Percepção anula).</li></ul><p>Preço das propriedades: +500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 5 (500 Vo).</p>",
     "actions": [
       {
         "label": "✦ Arremessar: Explosão Sônica — 10m, 2m de raio (consumível)",
@@ -308,7 +308,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -337,11 +350,12 @@
         {
           "id": "9j863v1HO1Eq9Au2",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "sonigu"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "sonigu",
@@ -355,6 +369,8 @@
               "palavra": "sonigu",
               "variante": "",
               "preco": 500,
+              "nivel": 1,
+              "pm": 0,
               "indice": 0
             }
           ],

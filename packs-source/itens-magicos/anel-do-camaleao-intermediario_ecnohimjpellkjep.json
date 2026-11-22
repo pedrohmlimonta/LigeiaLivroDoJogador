@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "7.000 Vo",
     "notes": "",
-    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Intermediário (iluzio + iluzio)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Camaleão</b> (iluzio · Ação Rápida · +7.000 Vo)<br>Enquanto você estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para assumir a aparência de um humanóide pequeno, médio ou grande, que você já tenha visto. Você recebe 1D para tentar se passar por essa criatura. O efeito dura até o fim da cena.</li></ul><p>Preço das propriedades: +7.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 7 (7.000 Vo).</p>",
+    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Intermediário (iluzio)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Camaleão</b> (iluzio · Ação Rápida · +7.000 Vo · <b>2 PM por uso</b>)<br>Enquanto você estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para assumir a aparência de um humanóide pequeno, médio ou grande, que você já tenha visto. Você recebe 1D para tentar se passar por essa criatura. O efeito dura até o fim da cena.</li></ul><p>Preço das propriedades: +7.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 7 (7.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Camaleão — aparência de outro humanóide (cena) (2 PM)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +241,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "iluzio",
             "iluzio"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "iluzio",
-              "id": "iluzio-camaleao"
-            },
             {
               "palavra": "iluzio",
               "id": "iluzio-camaleao"
@@ -248,6 +257,8 @@
               "palavra": "iluzio",
               "variante": "",
               "preco": 7000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

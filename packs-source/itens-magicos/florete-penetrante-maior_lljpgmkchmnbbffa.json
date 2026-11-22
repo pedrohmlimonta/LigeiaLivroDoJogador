@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "600.027 Vo",
     "notes": "Militar, Uma Mão, Corpo a Corpo",
-    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Maior (exitium + exitium + exitium)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Penetrante</b> (exitium · Constante · +600.000 Vo)<br>Quando você ataca usando uma arma com essa propriedade, todo o dano base da arma é considerado dano final. Adicionalmente, todos os acertos críticos conseguidos com essa arma causam dano contínuo de Sangramento.<br><em>Os acertos críticos com esta arma causam dano contínuo de Sangramento.</em></li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Maior (exitium)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Penetrante</b> (exitium · Constante · +600.000 Vo · <b>3 PM por uso</b>)<br>Quando você ataca usando uma arma com essa propriedade, todo o dano base da arma é considerado dano final. Adicionalmente, todos os acertos críticos conseguidos com essa arma causam dano contínuo de Sangramento.<br><em>Os acertos críticos com esta arma causam dano contínuo de Sangramento.</em></li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Florete",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Florete — Penetrante (3 PM)",
@@ -370,7 +383,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -402,19 +428,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "exitium",
-            "exitium",
             "exitium"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "exitium",
-              "id": "exitium-penetrante"
-            },
-            {
-              "palavra": "exitium",
-              "id": "exitium-penetrante"
-            },
             {
               "palavra": "exitium",
               "id": "exitium-penetrante"
@@ -427,6 +444,8 @@
               "palavra": "exitium",
               "variante": "",
               "preco": 600000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],
@@ -606,7 +625,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

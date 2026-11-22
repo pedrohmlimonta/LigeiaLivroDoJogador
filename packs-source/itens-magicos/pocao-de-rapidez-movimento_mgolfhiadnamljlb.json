@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "300 Vo",
     "notes": "",
-    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (saeculorum)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Rapidez</b> (saeculorum · Ação Rápida · Movimento · +300 Vo)<br>Quando você usa um item com essa propriedade, você recebe um tipo de ação adicional por turno, dependendo do valor do item, até o fim da cena.</li></ul><p>Preço das propriedades: +300 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 4 (300 Vo).</p>",
+    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (saeculorum)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Rapidez</b> (saeculorum · Ação Rápida · Movimento · +300 Vo · <b>consumível</b>)<br>Quando você usa um item com essa propriedade, você recebe um tipo de ação adicional por turno, dependendo do valor do item, até o fim da cena.</li></ul><p>Preço das propriedades: +300 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 4 (300 Vo).</p>",
     "actions": [
       {
         "label": "✦ Beber: Rapidez — +1 Movimento por turno (cena) (consumível)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -225,11 +238,12 @@
         {
           "id": "jW00K4CegEsCaYUi",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "saeculorum"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "saeculorum",
@@ -243,6 +257,8 @@
               "palavra": "saeculorum",
               "variante": "Movimento",
               "preco": 300,
+              "nivel": 1,
+              "pm": 0,
               "indice": 1
             }
           ],

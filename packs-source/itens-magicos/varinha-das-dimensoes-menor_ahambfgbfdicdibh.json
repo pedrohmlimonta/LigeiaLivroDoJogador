@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "420 Vo",
     "notes": "",
-    "description": "<p>Uma curta e fina haste feita em madeira, metal ou outro tipo de material rígido.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma mão.</p><hr><h3>✦ Encantamento — Item Menor (majesto)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Dimensões</b> (majesto · Constante · 5m · +400 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando você conjura uma magia de alcance maior que toque, usando esse foco, o alcance da magia aumenta uma quantidade de metros, dependendo do preço do item.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p>Uma curta e fina haste feita em madeira, metal ou outro tipo de material rígido.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma mão.</p><hr><h3>✦ Encantamento — Item Menor (majesto)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Dimensões</b> (majesto · Constante · 5m · +400 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Quando você conjura uma magia de alcance maior que toque, usando esse foco, o alcance da magia aumenta uma quantidade de metros, dependendo do preço do item.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Dimensões (1 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "majesto"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "majesto",
@@ -243,6 +257,8 @@
               "palavra": "majesto",
               "variante": "5m",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

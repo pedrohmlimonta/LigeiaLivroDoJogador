@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "400.000 Vo",
     "notes": "",
-    "description": "<p><b>Capas</b>: São itens que podem ser equipados nos ombros.</p><hr><h3>✦ Encantamento — Item Maior (iluzio + iluzio + iluzio)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Invisibilidade</b> (iluzio · Ação Rápida · +400.000 Vo)<br>Enquanto você estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para ficar invisível. Esse efeito dura até que você ataque uma criatura ou até o fim da cena.</li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
+    "description": "<p><b>Capas</b>: São itens que podem ser equipados nos ombros.</p><hr><h3>✦ Encantamento — Item Maior (iluzio)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Invisibilidade</b> (iluzio · Ação Rápida · +400.000 Vo · <b>3 PM por uso</b>)<br>Enquanto você estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para ficar invisível. Esse efeito dura até que você ataque uma criatura ou até o fim da cena.</li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Invisibilidade — fica invisível (até atacar) (3 PM)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,19 +241,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "iluzio",
-            "iluzio",
             "iluzio"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "iluzio",
-              "id": "iluzio-invisibilidade"
-            },
-            {
-              "palavra": "iluzio",
-              "id": "iluzio-invisibilidade"
-            },
             {
               "palavra": "iluzio",
               "id": "iluzio-invisibilidade"
@@ -253,6 +257,8 @@
               "palavra": "iluzio",
               "variante": "",
               "preco": 400000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],

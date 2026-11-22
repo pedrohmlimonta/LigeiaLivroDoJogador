@@ -10,7 +10,7 @@
     "isWeapon": false,
     "actions": [
       {
-        "label": "Sangue Aagn — 2 PM recuperam 1 PV",
+        "label": "Sangue Aagn — cada 2 PM recuperam 1 PV",
         "level": "all",
         "canRoll": false,
         "rollAttr": "forca",
@@ -28,7 +28,7 @@
         "damageType": "",
         "damageResource": "hp",
         "scalingDamage": false,
-        "heal": "1",
+        "heal": "",
         "healResource": "hp",
         "scalingHeal": false,
         "tempStack": false,
@@ -64,7 +64,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "9V4ZgAAXQWH83JY1",
+          "id": "OGSgna4FkLih91KE",
           "label": "Sangue Aagn",
           "menu": "ontoken",
           "macro": {
@@ -157,14 +157,27 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "2",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "2",
+          "max": "",
+          "label": "Sangue Aagn: a cada 2 PM gastos, você recupera 1 PV.",
+          "damageBonus": "",
+          "healBonus": "floor(@gasto/2)",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],

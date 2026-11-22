@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "30.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (sonigu + sonigu)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Abertura</b> (sonigu · Ação · +30.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando você soa esse pequeno sino de mão, travas, trancas, portas, válvulas, cancelas, algemas, correntes e ferrolhos se abrem automaticamente. Ele não funciona contra dispositivos trancados magicamente.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (sonigu)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Abertura</b> (sonigu · Ação · +30.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Quando você soa esse pequeno sino de mão, travas, trancas, portas, válvulas, cancelas, algemas, correntes e ferrolhos se abrem automaticamente. Ele não funciona contra dispositivos trancados magicamente.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Abertura — abre trancas, portas e correntes (2 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,14 +214,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "sonigu",
             "sonigu"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "sonigu",
-              "id": "sonigu-abertura"
-            },
             {
               "palavra": "sonigu",
               "id": "sonigu-abertura"
@@ -221,6 +230,8 @@
               "palavra": "sonigu",
               "variante": "",
               "preco": 30000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

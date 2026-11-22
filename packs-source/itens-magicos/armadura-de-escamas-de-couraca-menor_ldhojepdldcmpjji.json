@@ -12,7 +12,7 @@
     "weight": 2,
     "price": "3.540 Vo",
     "notes": "Penalidade -3",
-    "description": "<p>Armadura composta de peças sobrepostas de material extremamente durável, como aço ou mesmo escamas de dragão.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -3 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p><hr><h3>✦ Encantamento — Item Menor (forjuri)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Couraça</b> (forjuri · Ação Rápida · Proteção +1 · +3.500 Vo)<br>Enquanto você estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para que uma couraça rígida surja em torno de você, aumentando uma quantidade de pontos de todos os seus valores de Proteção, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
+    "description": "<p>Armadura composta de peças sobrepostas de material extremamente durável, como aço ou mesmo escamas de dragão.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -3 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p><hr><h3>✦ Encantamento — Item Menor (forjuri)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Couraça</b> (forjuri · Ação Rápida · Proteção +1 · +3.500 Vo · <b>1 PM por uso</b>)<br>Enquanto você estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para que uma couraça rígida surja em torno de você, aumentando uma quantidade de pontos de todos os seus valores de Proteção, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
     "actions": [
       {
         "label": "✦ Couraça — +1 em todas as Proteções (1 PM)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -291,6 +304,7 @@
           "palavras": [
             "forjuri"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "forjuri",
@@ -304,6 +318,8 @@
               "palavra": "forjuri",
               "variante": "Proteção +1",
               "preco": 3500,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

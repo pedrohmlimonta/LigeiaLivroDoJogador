@@ -5,36 +5,43 @@
  * permanente, PROPRIEDADES PARA ITENS MÁGICOS (Sessão 11 do livro) num
  * equipamento da ficha.
  *
- *   1. Escolha o item e o NÍVEL: Menor (1 palavra arcana), Intermediário (2)
- *      ou Maior (3). As palavras podem se repetir (ignis + ignis + glacios).
- *   2. Para cada palavra, uma propriedade dela. Nas propriedades com três
- *      preços (Proteção 1/2/3, Conjuração +1/+2/+3...), o nível do item diz
- *      até onde ela vai — como o círculo nas magias. Os preços do livro
- *      seguem a escala dos círculos (até 3.500 Vo Menor, até 120.000 Vo
- *      Intermediário, acima disso Maior), e uma propriedade de preço Maior
- *      só cabe num item Maior. Repetir a MESMA propriedade não soma: serve
- *      para levar um item de uma só propriedade a um nível mais alto.
- *   3. MANA: como as magias, o item gasta pontos de magia para ativar as
- *      propriedades — 1 PM por palavra (Menor 1, Intermediário 2, Maior 3).
+ *   1. Escolha o item e quantas PALAVRAS arcanas ele leva (1, 2 ou 3) — uma
+ *      propriedade por palavra. As palavras podem se repetir (ignis + ignis
+ *      + glacios).
+ *   2. Para cada palavra, uma propriedade dela e o GRAU: nas propriedades
+ *      com mais de um preço (Proteção 1/2/3, Dano Flamejante +1/+2/+3...),
+ *      qualquer um, já com uma palavra só. O nível da propriedade é o do
+ *      preço, na escala dos círculos (até 3.500 Vo Menor, até 120.000 Vo
+ *      Intermediário, acima disso Maior).
+ *   3. MANA: cada propriedade gasta, A CADA USO, PM igual ao nível dela —
+ *      Menor 1, Intermediário 2, Maior 3 (Dano Flamejante +3: 3 PM). Cada uma
+ *      tem a sua ação (a sua versão ✦ do ataque), e usadas juntas os PM
+ *      somam: Dano Flamejante +3 e Dano Congelante +3 no mesmo golpe, 6 PM.
  *      Item LENDÁRIO não gasta mana. Poções, bombas, óleos e pedras são
  *      consumidos ao usar e por isso também não cobram mana.
  *
  * O que o item recebe:
  *   - propriedades constantes (Proteção, bônus, dados, atributos...): uma ação
- *     "✦ Ativar ..." que cobra a mana e aplica tudo em você até o fim da cena.
- *     No item lendário viram efeitos do próprio item, sempre ligados.
+ *     "✦ Ativar ..." para cada uma, que cobra a mana dela e aplica o efeito
+ *     em você até o fim da cena — e, com mais de uma, "✦ Ativar todas", com
+ *     a soma. No item lendário viram efeitos do próprio item, sempre ligados.
  *   - propriedades de arma (Dano Flamejante, Corrosiva, Ferida Arcana...):
- *     uma versão "✦" de cada ataque do item, com o dano extra/condição e a
- *     mana no custo — o ataque comum continua lá. No lendário, o próprio
- *     ataque passa a carregá-las.
- *   - propriedades ativadas (Ação, Ação Rápida, Reação...): uma ação cada.
+ *     versões "✦" de cada ataque do item — uma por propriedade e uma por
+ *     combinação delas, com o dano extra/condição e a soma da mana no custo;
+ *     o ataque comum continua lá. No lendário, o próprio ataque passa a
+ *     carregá-las.
+ *   - propriedades ativadas (Ação, Ação Rápida, Reação...): uma ação cada,
+ *     com a mana dela.
  *   - o texto do livro de cada propriedade, na descrição; o preço somado no
  *     preço do item; a receita guardada para "Desfazer último encantamento".
  *
- * O que o sistema não tem como fazer sozinho (imunidades, absorção, dano
- * extra nas magias de um foco, bônus em perícias...) fica marcado: um
- * lembrete com o nome da propriedade entra nos efeitos ativos ao ativar, e o
- * texto completo fica na descrição.
+ * O que o sistema não tem como fazer sozinho (absorção, dano extra nas
+ * magias de um foco, bônus em perícias...) fica marcado: um lembrete com o
+ * nome da propriedade entra nos efeitos ativos ao ativar, e o texto completo
+ * fica na descrição. Desde o build 30 do sistema, as imunidades a condições
+ * viram imunidade de verdade, a estatueta de Invocação Animal invoca a fera
+ * (arraste a ficha dela para a ação) e as propriedades em que se escolhe
+ * quanto gastar (Emanação, Pragas) perguntam o gasto na hora.
  *
  * ITEM CONJURADOR (o outro tipo de encantamento): em vez de propriedades, o
  * item guarda uma magia que quem estiver com ele pode conjurar, pagando os PM
@@ -44,7 +51,7 @@
 
 import { PROPRIEDADES } from "./propriedades.mjs";
 import { animarItemEncantado, criarVerificador, contarAnimacoesAutomaticas } from "./animacoes.mjs";
-import { novaAcao, novoApplies, DTYPES, ATTRS, TRACOS_COM_PALAVRA } from "./spellforge.mjs";
+import { novaAcao, novoApplies, novaInvocacao, custoEscolhido, DTYPES, ATTRS, TRACOS_COM_PALAVRA } from "./spellforge.mjs";
 import { acoesDisparadas, normalizarAutoRefs, novoIdDocumento, lerRef } from "./referencias.mjs";
 
 const MODULE_ID = "ligeia-livro-do-jogador";
@@ -155,7 +162,8 @@ export function compativel(prop, tipos) {
 /**
  * As variantes que valem para este item: as do tipo dele quando o preço
  * depende do tipo (Munições / Armas / Braçadeiras); todas, senão. Cada uma
- * vem com `permitida` (o nível do preço cabe no nível do item?).
+ * vem com `permitida` (o nível do preço cabe no teto pedido? A janela pede 3:
+ * qualquer grau cabe numa palavra só — o que sobe é a mana).
  */
 export function variantesDoItem(prop, nivelN, tipos) {
   let vs = prop.variantes.map((v, i) => ({ ...v, indice: i }));
@@ -170,9 +178,9 @@ export function variantesDoItem(prop, nivelN, tipos) {
 const ORDEM_DO_TIPO = { arma: 0, municao: 1, bracadeira: 2 };
 
 /**
- * A variante mais alta que cabe no nível do item (ou null). Empate no
- * nível: arma antes de munição e braçadeira; depois, a mais cara (a poção
- * de 3 PV, não a de 1).
+ * A variante mais alta até o nível pedido (ou null). Empate no nível: arma
+ * antes de munição e braçadeira; depois, a mais cara (a poção de 3 PV, não a
+ * de 1).
  */
 export function variantePadrao(prop, nivelN, tipos) {
   const ok = variantesDoItem(prop, nivelN, tipos).filter((v) => v.permitida);
@@ -185,9 +193,35 @@ export function variantePadrao(prop, nivelN, tipos) {
   }, ok[0]);
 }
 
-/** Nível mínimo do item para a propriedade caber (pelo preço mais barato). */
+/** Nível mínimo da propriedade (pelo preço mais barato). */
 export function nivelMinimo(prop, tipos) {
   return Math.min(...variantesDoItem(prop, 3, tipos).map((v) => v.nivel));
+}
+
+/**
+ * O grau com que a propriedade começa na janela (e na construção sem grau
+ * escolhido): o melhor do nível mais baixo dela — a Poção de Cura de 3 PV
+ * (todas são Menores), o Dano Flamejante +1, a única da Invisibilidade.
+ */
+export function varianteInicial(prop, tipos) {
+  return variantePadrao(prop, nivelMinimo(prop, tipos), tipos);
+}
+
+/**
+ * Mana de UMA propriedade a cada uso: o nível dela, o do preço — Menor 1,
+ * Intermediário 2, Maior 3. Uma palavra só alcança qualquer grau; o que
+ * sobe é a mana (Dano Flamejante +3: 3 PM). Lendário e consumível: 0.
+ */
+export function manaDaPropriedade(prop, variante, { lendario = false } = {}) {
+  if (lendario || prop?.consumivel) return 0;
+  return Math.min(3, Math.max(1, Number(variante?.nivel) || 1));
+}
+
+/** Todas as combinações (não vazias) da lista, das menores para as maiores, na ordem dela. */
+export function combinacoes(lista) {
+  const out = [];
+  for (let m = 1; m < (1 << lista.length); m++) out.push(lista.filter((_, i) => m & (1 << i)));
+  return out.sort((a, b) => a.length - b.length);
 }
 
 /* ------------------------------------------------------------------ */
@@ -205,7 +239,10 @@ export function nivelMinimo(prop, tipos) {
  *   arma     mudanças nos ataques: extra [{formula,type,resource}],
  *            aplica [...], final (dano base vira final), base (+N no dano
  *            base, numa versão à parte: "contra a presa")
- *   acao     uma ação própria (alvo, área, cura, dano, aplica, movimento...)
+ *   acao     uma ação própria (alvo, área, cura, dano, aplica, movimento...;
+ *            custoEscolhido: gasto à escolha na ativação, com @gasto nas
+ *            fórmulas — substitui a mana do item; invoca: criaturas que a
+ *            ação conjura, cada uma um marcador onde se arrasta a ficha)
  *   obs      observação que só vai para a descrição
  */
 
@@ -236,6 +273,17 @@ const continuo = (dt, attr, dc) => ap(`Dano contínuo de ${DTYPES[dt] ?? dt}`, {
   fxType: "condition", fxTarget: "dano_continuo", tickAmount: "1", tickType: dt, ...resiste(attr, dc),
 });
 const marcador = (label, extra = {}) => ap(label, { fxType: "bonus", fxTarget: "all", fxValue: "0", ...extra });
+/** Imunidade a condições (sistema build 30): o efeito é recusado no alvo. */
+const imuneA = (...conds) => conds.map((c) => ef("immune", `condicao:${c}`, 1));
+// O dano contínuo de um tipo não é condição à parte: a imunidade vai pelo nome
+// do efeito ("Dano contínuo de Fogo", "Dano contínuo necrótico"...).
+const ADJETIVO_CONTINUO = { necrotico: "necrótico", psiquico: "psíquico", sonico: "sônico" };
+/** Imunidade ao dano contínuo de um tipo, pelo nome do efeito. */
+export function imunidadeAoContinuo(elem) {
+  const alvos = [`efeito:dano contínuo de ${DTYPES[elem] ?? elem}`];
+  if (ADJETIVO_CONTINUO[elem]) alvos.push(`efeito:dano contínuo ${ADJETIVO_CONTINUO[elem]}`);
+  return alvos.map((t) => ef("immune", t, 1));
+}
 const acaoInfo = (rotulo = "") => ({ acao: { rotulo } });
 /** Bomba alquímica: arremessa até 10m (Agilidade), 2m de raio, Esquiva. */
 const bomba = (...aplica) => ({ acao: {
@@ -277,7 +325,9 @@ const REGRAS = {
       fxType: "rd", fxTarget: t, fxValue: String(c.V) })) } }),
   "devena-face-feral": () => ({ info: "1D para lidar com feras", acao: { rotulo: "falar com animais (cena)",
     aplica: [marcador("Face Feral: fala com animais")] } }),
-  "devena-invocacao-animal": (c) => acaoInfo(`vira uma fera de Desafio até ${c.V} por 1 hora`),
+  "devena-invocacao-animal": (c) => ({ acao: { rotulo: `vira uma fera de Desafio até ${c.V} (1 hora)`, targetMode: "none",
+    includeSelf: false, invoca: [{ nome: `Fera, Desafio até ${c.V} — arraste a ficha abaixo` }] },
+    obs: "Arraste a ficha da fera (a forma da estatueta) para a ação, no item; ao usar, escolha no mapa onde ela aparece. Some se perder todos os PV ou quando a palavra de comando for dita de novo." }),
   "devena-pele-de-arvore": (c) => ({ acao: { rotulo: `Proteção ${c.V}; vulnerável ${c.V} a Fogo`,
     aplica: [...["corte", "perfuracao", "concussao", "veneno"].map((t) => ap(`Pele de Árvore: Proteção ${c.V} (${DTYPES[t]})`, {
       fxType: "rd", fxTarget: t, fxValue: String(c.V) })),
@@ -285,10 +335,14 @@ const REGRAS = {
   "devena-peregrino": () => ({ info: "terreno escolhido: sem lentidão e 1D para mover-se em silêncio" }),
   "devena-predador": (c) => ({ arma: { base: c.V, condicional: `contra a presa (+${c.V} no dano base)` },
     obs: "Escolha o tipo de criatura (ou raça) ao criar o item e anote no nome ou na descrição." }),
-  "devena-raizes": () => ({ info: "não pode ser derrubado" }),
+  "devena-raizes": () => ({ efeitos: imuneA("caido") }),
   "devena-sobrevivente": () => acaoInfo("acha comida e água (300m)"),
   // energio
-  "energio-emanacao": () => acaoInfo("aura de energia (1 de dano; raio = PM extras gastos)"),
+  "energio-emanacao": () => ({ acao: { rotulo: "aura de energia (raio = PM gastos; 1 de dano)", targetMode: "aura",
+    area: "0", includeSelf: false, damage: "1", damageType: "energia",
+    persistArea: true, persistRounds: "0", persistTrigger: "both",
+    custoEscolhido: { min: "1", areaBonus: "@gasto",
+      label: "Emanação: o raio da aura, em metros, é igual aos PM gastos. Quem entrar nela ou começar o turno dentro sofre 1 de dano de energia, até o fim da cena." } } }),
   "energio-fonte-arcana": (c) => ({ info: `guarda ${c.V} PM excedentes no descanso` }),
   "energio-mana": (c) => ({ acao: { rotulo: `recupera ${c.V} PM`, heal: String(c.V), healResource: "mp" } }),
   "energio-regeneracao-arcana": () => ({ info: "recupera 1 PM no turno em que não se mover" }),
@@ -305,17 +359,17 @@ const REGRAS = {
     obs: `O alvo atingido à distância rola Agilidade (CD ${c.CD}); se passar, desfaça os ${c.V} pontos de dano de energia.` }),
   "exitium-potencializador": () => ({ info: "o dano base das magias com este foco é final; críticos causam dano contínuo" }),
   // forjuri
-  "forjuri-atencao": () => ({ info: "imune a Indefeso, Cego e Surdo" }),
+  "forjuri-atencao": () => ({ efeitos: imuneA("indefeso", "cego", "surdo") }),
   "forjuri-couraca": (c) => ({ acao: { rotulo: `+${c.V} em todas as Proteções`,
     aplica: [ap(`Couraça: +${c.V} em todas as Proteções`, { fxType: "rd", fxTarget: "all", fxValue: String(c.V) })] } }),
-  "forjuri-determinacao": () => ({ info: "imune a Abalado, Pasmo, Dominado, Atordoado e Enfeitiçado" }),
+  "forjuri-determinacao": () => ({ efeitos: imuneA("abalado", "pasmo", "dominado", "atordoado", "enfeiticado") }),
   "forjuri-egide": (c) => ({ efeitos: [ef("set", "bloqueio", "@mente", { label: "Bloqueio com Mente" }), ef("bonus", "bloqueio", c.V)] }),
   "forjuri-espelho": () => ({ info: "dano defletido no Bloqueio volta para o atacante" }),
   "forjuri-fortificacao": () => ({ info: "imune a dano final que não venha do dano bruto acima da Proteção" }),
-  "forjuri-obstinacao": () => ({ info: "imune a Lento, Imobilizado e Paralisado" }),
+  "forjuri-obstinacao": () => ({ efeitos: imuneA("lento", "imobilizado", "paralisado") }),
   "forjuri-contramagica": (c) => acaoInfo(`devolve a magia (Conjuração ${c.CD})`),
-  "forjuri-rigidez": () => ({ info: "não pode ser derrubado nem agarrado" }),
-  "forjuri-tenacidade": () => ({ info: "imune a Exausto e Enfraquecido" }),
+  "forjuri-rigidez": () => ({ efeitos: imuneA("caido", "agarrado") }),
+  "forjuri-tenacidade": () => ({ efeitos: imuneA("exausto", "enfraquecido") }),
   // fulgur
   "fulgur-explosao-eletrica": () => bomba(continuo("raio", "vigor", null), cond("paralisado", "vigor", null)),
   "fulgur-receptor": (c) => ({ acao: { rotulo: `raio de ${c.V} em quem estiver até 4m`, targetMode: "area",
@@ -404,7 +458,10 @@ const REGRAS = {
     persistArea: true, persistRounds: "0", persistTrigger: "turn" },
     obs: "Só afeta criaturas com Corrupção 4 ou menor." }),
   "mortis-perversao": () => acaoInfo("estatueta corrupta (1 necrótico por rodada; Corrupção)"),
-  "mortis-pragas": (c) => acaoInfo(`praga de Desafio ${c.V} (100m por PM)`),
+  "mortis-pragas": (c) => ({ acao: { rotulo: `praga de Desafio ${c.V} (100m por PM gasto)`, targetMode: "none",
+    includeSelf: false,
+    custoEscolhido: { min: "1", rangeBonus: "100*@gasto",
+      label: `Pragas: a praga alcança 100m por PM gasto; todas as criaturas no alcance, menos você, são testadas contra uma doença de Desafio ${c.V}.` } } }),
   // noxia
   "noxia-apotecarios": () => ({ info: "1D para identificar itens de noxia e manipular venenos" }),
   "noxia-explosao-toxica": () => bomba(continuo("veneno", "vigor", null)),
@@ -560,7 +617,11 @@ function regraDaFamilia(prop, c) {
     if (attr) return { efeitos: [ef("attr", attr, c.V)] };
   }
   if (/^Imunidade/.test(nome) && elem) {
-    return { info: `ignora dano final${/contínuo/.test(txt) ? " e contínuo" : ""} de ${DTYPES[elem]}` };
+    // O dano contínuo do tipo é recusado de verdade (imunidade pelo nome do
+    // efeito, build 30); o dano final do tipo fica como lembrete — o sistema
+    // só tem imunidade ao tipo inteiro, e o dano bruto ainda passa.
+    const continuo = /contínuo/.test(txt);
+    return { efeitos: continuo ? imunidadeAoContinuo(elem) : [], info: `ignora dano final de ${DTYPES[elem]}` };
   }
   if (/^Absorção/.test(nome)) {
     return { info: `dano final de ${elem ? DTYPES[elem] : "arma"} vira ${/pontos de magia/.test(txt) ? "PM" : "PV"}` };
@@ -603,7 +664,7 @@ export function automatizada(regra) {
   const a = regra.arma;
   if (a && (a.extra?.length || a.aplica?.length || a.final || a.base || a.dreno)) return true;
   const x = regra.acao;
-  return !!(x && (x.aplica?.length || x.heal || x.damage || x.movement));
+  return !!(x && (x.aplica?.length || x.heal || x.damage || x.movement || x.invoca?.length || x.custoEscolhido));
 }
 
 /* ------------------------------------------------------------------ */
@@ -619,6 +680,19 @@ const ROTULO_ALVO = {
 const alvoLegivel = (t) => (String(t).startsWith("conjuracao:")
   ? `Conjuração (${String(t).slice(11)})` : (ROTULO_ALVO[t] ?? t));
 
+/** "condicao:cego" → "Cego"; "efeito:dano contínuo de Fogo" → "dano contínuo de Fogo"; "dano:fogo" → "dano de Fogo". */
+function alvoDaImunidade(t) {
+  const s = String(t ?? "").trim();
+  const i = s.indexOf(":");
+  const [tipo, chave] = i > 0 ? [s.slice(0, i), s.slice(i + 1)] : ["dano", s];
+  switch (tipo) {
+    case "condicao": return ROTULO_COND[chave] ?? chave;
+    case "efeito": return chave;
+    case "item": return `efeitos de ${chave}`;
+    default: return `dano de ${DTYPES[chave] ?? chave}`;
+  }
+}
+
 /** Texto curto de um efeito, para rótulos. */
 export function descreverEfeito(e) {
   const v = e.value;
@@ -632,6 +706,8 @@ export function descreverEfeito(e) {
     case "stat": return `+${v} de ${alvoLegivel(e.target)}`;
     case "set": return e.label || `${alvoLegivel(e.target)} = ${v}`;
     case "condition": return ROTULO_COND[e.target] ?? e.target;
+    case "immune": return `imune a ${alvoDaImunidade(e.target)}`;
+    case "autocrit": return `crítico automático em ${alvoLegivel(e.target)}`;
     default: return e.label || e.type;
   }
 }
@@ -704,6 +780,15 @@ function acaoDaRegra(label, s, custo) {
     Object.assign(extra, { persistArea: true, persistRounds: s.persistRounds ?? "0",
       persistTrigger: s.persistTrigger ?? "both", persistAffectsSelf: false });
   }
+  // Gasto à escolha (sistema build 30): é ele que ativa — a mana do item não
+  // se soma a ele.
+  if (s.custoEscolhido) {
+    extra.variableCost = custoEscolhido(s.custoEscolhido);
+    extra.costMp = "0";
+  }
+  if (s.invoca?.length) {
+    extra.summons = s.invoca.map(({ nome, ...resto }) => novaInvocacao(nome, resto));
+  }
   return novaAcao(label, extra);
 }
 
@@ -730,41 +815,51 @@ export function propriedadesGravadas(data) {
  * Grava um encantamento nos dados de um equipamento (cópia; o original não
  * muda). Devolve os dados novos, prontos para `item.update`.
  *
+ * Mana: cada propriedade gasta, a cada uso, o NÍVEL dela (Menor 1 PM,
+ * Intermediário 2, Maior 3), com uma palavra só; cada uma tem a sua ação, e
+ * usadas juntas os PM somam (manaDaPropriedade).
+ *
  * @param {object} dados  item.toObject()
  * @param {object} opcoes
- * @param {"Menor"|"Intermediário"|"Maior"} opcoes.nivel
- * @param {{prop: object, variante?: object, palavra?: string}[]} opcoes.escolhas  uma por palavra
+ * @param {{prop: object, variante?: object, palavra?: string}[]} opcoes.escolhas  uma por palavra (até 3)
  * @param {boolean} [opcoes.lendario]  não gasta mana
  * @param {string} [opcoes.nome]  novo nome (vazio mantém)
+ * @param {"Menor"|"Intermediário"|"Maior"} [opcoes.nivel]  só para a escolha que
+ *   não diz o grau: o mais alto até esse nível (compatibilidade com a regra
+ *   antiga, de nível por palavras). Sem ele, o grau inicial (varianteInicial).
  * @param {object} [cfg]
  * @param {boolean} [cfg.animar]  animações automáticas nas ações novas
  * @param {(k:string)=>boolean} [cfg.existe]  a chave existe no JB2A?
  */
-export function construirEncantamento(dados, { nivel, escolhas, lendario = false, nome = "" }, { animar = true, existe = null } = {}) {
-  const N = NIVEIS_ITEM[nivel];
-  if (!N) throw new Error(`Nível de item desconhecido: ${nivel}`);
+export function construirEncantamento(dados, { nivel = null, escolhas, lendario = false, nome = "" }, { animar = true, existe = null } = {}) {
+  const teto = nivel ? NIVEIS_ITEM[nivel] : null;
+  if (nivel && !teto) throw new Error(`Nível de item desconhecido: ${nivel}`);
   const data = clone(dados);
   data.system ??= {};
   const sys = data.system;
   sys.actions = Array.isArray(sys.actions) ? sys.actions : [];
   sys.effects = Array.isArray(sys.effects) ? sys.effects : [];
-  const pm = lendario ? 0 : N.pm;
   const tipos = tiposDoItem(data);
   const antes = {
     name: data.name,
     system: { actions: clone(sys.actions), effects: clone(sys.effects), description: sys.description ?? "", price: sys.price ?? "" },
   };
 
-  // A mesma propriedade em mais de uma palavra conta uma vez (ela já vem no
-  // nível do item); as palavras continuam contando para o nível e a mana.
+  // A mesma propriedade em mais de uma palavra conta uma vez; as palavras
+  // continuam na receita.
   const vistas = new Set();
   const lista = [];
   for (const e of escolhas ?? []) {
     if (!e?.prop || vistas.has(e.prop.id)) continue;
     vistas.add(e.prop.id);
-    const variante = e.variante ?? variantePadrao(e.prop, N.n, tipos) ?? e.prop.variantes[0];
+    const variante = e.variante
+      ?? (teto ? variantePadrao(e.prop, teto.n, tipos) : null)
+      ?? varianteInicial(e.prop, tipos) ?? e.prop.variantes[0];
     const ctx = contexto(e.prop, variante, tipos);
-    lista.push({ prop: e.prop, variante, ctx, regra: regraDe(e.prop, ctx) });
+    const regra = regraDe(e.prop, ctx);
+    // A mana desta propriedade a cada uso (o gasto à escolha substitui a dela).
+    const pm = regra.acao?.custoEscolhido ? 0 : manaDaPropriedade(e.prop, variante, { lendario });
+    lista.push({ prop: e.prop, variante, ctx, regra, pm });
   }
 
   const ataques = sys.actions.filter(eAtaque);
@@ -782,10 +877,12 @@ export function construirEncantamento(dados, { nivel, escolhas, lendario = false
     if (regra.acao) ativadas.push(r);
   }
 
-  const custoTxt = lendario ? "lendário, sem mana" : `${pm} PM`;
+  const soma = (rs) => rs.reduce((t, r) => t + r.pm, 0);
+  const custoTxt = (n) => (lendario ? "lendário, sem mana" : `${n} PM`);
   const novas = [];
 
-  // 1) Constantes: uma ativação até o fim da cena (ou efeitos fixos, se lendário).
+  // 1) Constantes: uma ativação por propriedade, até o fim da cena (e uma com
+  //    todas, somando a mana) — ou efeitos fixos, se lendário.
   if (constantes.length) {
     if (lendario) {
       for (const r of constantes) {
@@ -793,83 +890,95 @@ export function construirEncantamento(dados, { nivel, escolhas, lendario = false
         if (r.regra.info) sys.effects.push(efeitoDoItem({ type: "info", target: "all", value: "0" }, `✦ ${r.prop.nome}: ${r.regra.info}`));
       }
     } else {
-      const aplica = [];
-      for (const r of constantes) {
-        for (const e of r.regra.efeitos ?? []) aplica.push(efeitoParaAplicavel(e, `✦ ${r.prop.nome}: ${descreverEfeito(e)}`));
-        if (r.regra.info) aplica.push(novoApplies(`✦ ${r.prop.nome}: ${r.regra.info}`, { fxType: "bonus", fxTarget: "all", fxValue: "0" }));
-      }
-      const nomes = constantes.map((r) => r.prop.nome).join(", ");
-      const a = novaAcao(`✦ Ativar ${nomes} (${pm} PM, até o fim da cena)`, {
-        canRoll: false, targetMode: "self", includeSelf: true, costMp: String(pm), appliesEffects: aplica,
-      });
-      a._palavra = constantes[0].prop.palavra;
-      novas.push(a);
+      const aplicaDe = (r) => [
+        ...(r.regra.efeitos ?? []).map((e) => efeitoParaAplicavel(e, `✦ ${r.prop.nome}: ${descreverEfeito(e)}`)),
+        ...(r.regra.info ? [novoApplies(`✦ ${r.prop.nome}: ${r.regra.info}`, { fxType: "bonus", fxTarget: "all", fxValue: "0" })] : []),
+      ];
+      const ativar = (rs) => {
+        const nomes = rs.map((r) => r.prop.nome).join(" + ");
+        const a = novaAcao(`✦ Ativar ${rs.length > 1 ? `todas: ${nomes}` : nomes} (${soma(rs)} PM, até o fim da cena)`, {
+          canRoll: false, targetMode: "self", includeSelf: true, costMp: String(soma(rs)), appliesEffects: rs.flatMap(aplicaDe),
+        });
+        a._palavra = rs[0].prop.palavra;
+        return a;
+      };
+      for (const r of constantes) novas.push(ativar([r]));
+      if (constantes.length > 1) novas.push(ativar(constantes));
     }
   }
 
-  // 2) Arma: versões ✦ dos ataques (ou o próprio ataque, se lendário).
+  // 2) Arma: versões ✦ dos ataques — uma por propriedade e uma por
+  //    combinação, com a soma da mana (ou o próprio ataque, se lendário).
   if (deArma.length) {
+    const rotulo = (rs) => rs.map((r) => (r.regra.arma.base ? `${r.prop.nome} ${r.regra.arma.condicional}`
+      : r.regra.arma.sufixo ? `${r.prop.nome}: ${r.regra.arma.sufixo}` : r.prop.nome)).join(" + ");
+    // As de sempre antes da que só vale contra a presa (Predador).
+    const emOrdem = (rs) => [...rs.filter((r) => !r.regra.arma.base), ...rs.filter((r) => r.regra.arma.base)];
     const sempre = deArma.filter((r) => !r.regra.arma.base);
     const presa = deArma.filter((r) => r.regra.arma.base);
-    const rotulo = (rs) => rs.map((r) => r.regra.arma.sufixo ? `${r.prop.nome}: ${r.regra.arma.sufixo}` : r.prop.nome).join(" + ");
     for (const atk of ataques) {
       const original = atk.label;
-      if (sempre.length) {
-        if (lendario) {
+      if (lendario) {
+        // Sem mana: o próprio ataque carrega tudo; só a da presa fica à parte.
+        if (sempre.length) {
           for (const r of sempre) aplicarNaArma(atk, r.regra.arma);
           atk.label = `${original} ✦ ${rotulo(sempre)}`;
-        } else {
+        }
+        for (const r of presa) {
           const v = clone(atk);
-          for (const r of sempre) aplicarNaArma(v, r.regra.arma);
-          v.label = `✦ ${original} — ${rotulo(sempre)} (${pm} PM)`;
-          v.costMp = somaFormula(atk.costMp || "0", pm);
+          aplicarNaArma(v, r.regra.arma);
+          v.label = `✦ ${original} — ${rotulo([r])}${sempre.length ? ` + ${rotulo(sempre)}` : ""} (${custoTxt(0)})`;
+          v.costMp = somaFormula(atk.costMp || "0", 0);
           novas.push(v);
         }
+        continue;
       }
-      for (const r of presa) {
-        // Só contra a presa escolhida: sempre uma versão à parte (no item
-        // lendário o ataque já carrega as outras propriedades de arma).
+      for (const grupo of combinacoes(deArma)) {
         const v = clone(atk);
-        if (!lendario) for (const s of sempre) aplicarNaArma(v, s.regra.arma);
-        aplicarNaArma(v, r.regra.arma);
-        const outras = sempre.length ? ` + ${rotulo(sempre)}` : "";
-        v.label = `✦ ${original} — ${r.prop.nome} ${r.regra.arma.condicional}${outras} (${custoTxt})`;
-        v.costMp = somaFormula(atk.costMp || "0", pm);
+        const rs = emOrdem(grupo);
+        for (const r of rs) aplicarNaArma(v, r.regra.arma);
+        v.label = `✦ ${original} — ${rotulo(rs)} (${custoTxt(soma(rs))})`;
+        v.costMp = somaFormula(atk.costMp || "0", soma(rs));
         novas.push(v);
       }
     }
   }
 
-  // 3) Ativadas: uma ação cada (consumível não cobra mana: é gasto — e a
-  //    ação diz o que se faz com ele: a poção se bebe, a bomba se arremessa).
+  // 3) Ativadas: uma ação cada, com a mana dela (consumível não cobra: é
+  //    gasto — e a ação diz o que se faz com ele: a poção se bebe, a bomba se
+  //    arremessa; Emanação e Pragas perguntam o gasto).
   for (const r of ativadas) {
     const s = r.regra.acao;
-    const custo = r.prop.consumivel ? 0 : pm;
     const detalhe = s.rotulo ? ` — ${s.rotulo}` : "";
     const label = r.prop.consumivel
       ? `✦ ${verboDoConsumivel(tipos)}: ${r.prop.nome}${detalhe} (consumível)`
-      : `✦ ${r.prop.nome}${detalhe} (${custoTxt})`;
-    const a = acaoDaRegra(label, s, custo);
+      : `✦ ${r.prop.nome}${detalhe} (${s.custoEscolhido ? "PM à escolha" : custoTxt(r.pm)})`;
+    const a = acaoDaRegra(label, s, r.pm);
     a._palavra = r.prop.palavra;
     novas.push(a);
   }
   sys.actions.push(...novas);
 
-  // Preço, descrição e receita.
+  // Preço, descrição e receita. O nível do encantamento é o da propriedade
+  // mais alta; a mana, a de cada uma (a receita guarda a de fora do lendário).
   const total = lista.reduce((t, r) => t + (r.variante?.preco ?? 0), 0);
   const palavras = (escolhas ?? []).map((e) => e?.palavra ?? e?.prop?.palavra).filter(Boolean);
+  const nivelDoItem = NOME_DO_NIVEL[Math.max(1, ...lista.map((r) => Number(r.variante?.nivel) || 1))];
+  const pmDe = (r) => (r.regra.acao?.custoEscolhido ? 0 : manaDaPropriedade(r.prop, r.variante));
   sys.price = somarPreco(sys.price, total);
-  sys.description = (sys.description ?? "") + descricaoDoEncantamento({ nivel, pm, lendario, palavras, lista, total });
+  sys.description = (sys.description ?? "") + descricaoDoEncantamento({ nivel: nivelDoItem, lendario, palavras, lista, total, deArma });
   if (nome && nome.trim()) data.name = nome.trim();
 
   data.flags ??= {};
   data.flags[MODULE_ID] ??= {};
   data.flags[MODULE_ID].encantamentos = [...(data.flags[MODULE_ID].encantamentos ?? []), {
-    id: novoId(), nivel, pm: N.pm, lendario, palavras,
+    id: novoId(), nivel: nivelDoItem, pm: lista.reduce((t, r) => t + pmDe(r), 0), lendario, palavras,
+    // Mana por propriedade (o nível dela), não por palavra.
+    mana: "propriedade",
     // Uma entrada por palavra (com as repetições), para refazer igual.
     slots: (escolhas ?? []).filter((e) => e?.prop).map((e) => ({ palavra: e.palavra ?? e.prop.palavra, id: e.prop.id })),
     propriedades: lista.map((r) => ({ id: r.prop.id, nome: r.prop.nome, palavra: r.prop.palavra,
-      variante: r.variante?.rotulo ?? "", preco: r.variante?.preco ?? 0,
+      variante: r.variante?.rotulo ?? "", preco: r.variante?.preco ?? 0, nivel: Number(r.variante?.nivel) || 1, pm: pmDe(r),
       indice: r.variante?.indice ?? r.prop.variantes.findIndex((v) => v.preco === r.variante?.preco && (v.rotulo ?? "") === (r.variante?.rotulo ?? "")) })),
     preco: total, antes,
   }];
@@ -879,21 +988,35 @@ export function construirEncantamento(dados, { nivel, escolhas, lendario = false
   return data;
 }
 
+/** A mana de uma propriedade, em texto: "3 PM por uso", "consumível", "PM à escolha". */
+function manaEmTexto(r, lendario) {
+  if (lendario) return "";
+  if (r.prop.consumivel) return "consumível";
+  if (r.regra.acao?.custoEscolhido) return "PM à escolha";
+  return `${r.pm} PM por uso`;
+}
+
 /** Bloco da descrição: o que foi encantado, a mana e o texto do livro. */
-function descricaoDoEncantamento({ nivel, pm, lendario, palavras, lista, total }) {
+function descricaoDoEncantamento({ nivel, lendario, palavras, lista, total, deArma = [] }) {
   const consumiveis = lista.filter((r) => r.prop.consumivel).length;
+  const pagas = lista.filter((r) => r.pm > 0);
+  const juntas = pagas.length > 1
+    ? ` Cada uma tem a sua ação${deArma.length ? " (a sua versão ✦ dos ataques)" : ""}; usadas juntas, os PM somam — todas juntas, <b>${pagas.reduce((t, r) => t + r.pm, 0)} PM</b>.`
+    : "";
   const mana = lendario
     ? "Item <b>lendário</b>: ativa as propriedades sem gastar mana."
     : consumiveis && consumiveis === lista.length
       ? "Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados)."
-      : `Ativar as propriedades custa <b>${pm} PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.`
+      : `Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto.`
+        + `${juntas} As constantes valem até o fim da cena.`
         + (consumiveis ? " As consumíveis não gastam mana: são gastas ao usar." : "");
   const itens = lista.map((r) => {
     const v = r.variante?.rotulo ? ` · ${esc(r.variante.rotulo)}` : "";
+    const m = manaEmTexto(r, lendario);
     const auto = automatizada(r.regra) ? "" : " <em>(sem automação: aplique pela descrição)</em>";
     const obs = r.regra.obs ? `<br><em>${esc(r.regra.obs)}</em>` : "";
     const corr = r.prop.corrupcao ? `<br><em>Corrupção: ${esc(r.prop.corrupcao)}</em>` : "";
-    return `<li><b>${esc(r.prop.nome)}</b> (${esc(r.prop.palavra)} · ${esc(r.prop.ativacao)}${v} · +${formatarVo(r.variante?.preco)})${auto}<br>${esc(r.prop.texto)}${obs}${corr}</li>`;
+    return `<li><b>${esc(r.prop.nome)}</b> (${esc(r.prop.palavra)} · ${esc(r.prop.ativacao)}${v} · +${formatarVo(r.variante?.preco)}${m ? ` · <b>${esc(m)}</b>` : ""})${auto}<br>${esc(r.prop.texto)}${obs}${corr}</li>`;
   }).join("");
   return `<hr><h3>✦ Encantamento — Item ${esc(nivel)} (${esc(palavras.join(" + "))})</h3>`
     + `<p>${mana}</p><ul>${itens}</ul><p>Preço das propriedades: +${formatarVo(total)}.</p>`;
@@ -918,12 +1041,14 @@ export function desfazerEncantamento(dados) {
 }
 
 /**
- * Refaz todos os encantamentos deste módulo no item, trocando só o
- * "lendário" (com ou sem mana) — o item volta ao estado de antes do primeiro
- * e cada receita é aplicada de novo, com as mesmas palavras, propriedades e
- * preços. O nome atual fica. Devolve os dados novos, ou null.
+ * Refaz todos os encantamentos deste módulo no item — o item volta ao estado
+ * de antes do primeiro e cada receita é aplicada de novo, com as mesmas
+ * palavras, propriedades e graus, pelas regras atuais (a mana por
+ * propriedade, inclusive nos itens encantados antes dela). `lendario` troca
+ * o "com ou sem mana" de todas; sem ele, cada uma fica como era. O nome
+ * atual fica. Devolve os dados novos, ou null.
  */
-export function refazerEncantamentos(dados, { lendario }, cfg = {}) {
+export function refazerEncantamentos(dados, { lendario } = {}, cfg = {}) {
   const receitas = dados?.flags?.[MODULE_ID]?.encantamentos ?? [];
   if (!receitas.length || !receitas[0]?.antes) return null;
   let atual = clone(dados);
@@ -931,8 +1056,9 @@ export function refazerEncantamentos(dados, { lendario }, cfg = {}) {
   atual.name = receitas[0].antes.name;
   atual.flags[MODULE_ID].encantamentos = [];
   for (const rec of receitas) {
+    const len = lendario ?? !!rec.lendario;
     if (rec.tipo === "magia") {
-      atual = construirItemConjurador(atual, { magia: rec.magia, lendario, pergaminho: !!rec.pergaminho });
+      atual = construirItemConjurador(atual, { magia: rec.magia, lendario: len, pergaminho: !!rec.pergaminho });
       continue;
     }
     const porId = new Map((rec.propriedades ?? []).map((p) => [p.id, p]));
@@ -946,7 +1072,7 @@ export function refazerEncantamentos(dados, { lendario }, cfg = {}) {
       const variante = i >= 0 ? { ...prop.variantes[i], indice: i } : undefined;
       return { prop, variante, palavra: sl.palavra };
     }).filter(Boolean);
-    atual = construirEncantamento(atual, { nivel: rec.nivel, escolhas, lendario }, cfg);
+    atual = construirEncantamento(atual, { nivel: rec.nivel, escolhas, lendario: len }, cfg);
   }
   atual.name = dados.name;
   return atual;
@@ -1014,7 +1140,7 @@ const ROTULO_ATTR = {
   forca: "Força", agilidade: "Agilidade", vigor: "Vigor", mente: "Mente", percepcao: "Percepção",
   conjuracao: "Conjuração", esquiva: "Esquiva", bloqueio: "Bloqueio", iniciativa: "Iniciativa",
 };
-const ROTULO_VAR = { ...ROTULO_ATTR, nivel: "Nível", deslocamento: "Deslocamento" };
+const ROTULO_VAR = { ...ROTULO_ATTR, nivel: "Nível", deslocamento: "Deslocamento", gasto: "o gasto" };
 const ROTULO_RECURSO = { hp: "PV", mp: "PM", heroic: "PH", hpTemp: "de sobrevida" };
 
 /** Fórmula do sistema → texto do livro ("5*@nivel" → "5 × Nível"). */
@@ -1023,6 +1149,7 @@ export function formulaLegivel(f) {
   if (!s) return "";
   s = s.replace(/ceil\(@nivel\/2\)/g, "metade do Nível (para cima)")
     .replace(/floor\(@nivel\/2\)/g, "metade do Nível")
+    .replace(/floor\(@gasto\/2\)/g, "metade do gasto")
     .replace(/@(\w+)/g, (_, v) => ROTULO_VAR[v] ?? v)
     .replace(/\*/g, " × ")
     .replace(/\s+/g, " ");
@@ -1118,8 +1245,28 @@ export function resumoDaAcao(a) {
     }
   });
   if (tira.length) p.push(`tira dos alvos ${tira.join(" e ")}`);
+  const invocadas = (a.summons ?? []).filter((x) => x && x.enabled !== false);
+  if (invocadas.length) {
+    p.push(`invoca ${invocadas.map((x) => {
+      const n = String(x.count ?? "1").trim();
+      const quantas = n && n !== "1" ? `${formulaLegivel(n)} × ` : "";
+      const nome = String(x.actorName || "criatura").replace(/\s+—\s+arraste a ficha.*$/i, "");
+      const r = String(x.rounds ?? "0").trim();
+      return `${quantas}${nome}${r && r !== "0" ? ` por ${formulaLegivel(r)} rodada(s)` : ""}${x.actorUuid ? "" : " (sem a ficha: arraste-a para a ação da magia)"}`;
+    }).join("; ")}`);
+  }
+  const vc = a.variableCost;
   const custo = Number(a.costMp) || 0;
-  p.push(custo ? `${custo} PM` : "sem mana");
+  if (vc?.enabled) {
+    const rec = ROTULO_RECURSO[vc.resource ?? "mp"] ?? "PM";
+    const faixa = [vc.min && String(vc.min) !== "0" ? `mín. ${formulaLegivel(vc.min)}` : "",
+      vc.max && String(vc.max) !== "0" ? `máx. ${formulaLegivel(vc.max)}` : ""].filter(Boolean).join(", ");
+    const amplia = [["damageBonus", "dano"], ["healBonus", "cura"], ["areaBonus", "área"], ["rangeBonus", "alcance"], ["rollBonus", "rolagem"]]
+      .filter(([k]) => String(vc[k] ?? "").trim()).map(([k, r]) => `${r} +${formulaLegivel(vc[k])}`);
+    p.push(`${custo ? `${custo} PM + ` : ""}${rec} à escolha${faixa ? ` (${faixa})` : ""}${amplia.length ? `: ${amplia.join(", ")}` : ""}`);
+  } else {
+    p.push(custo ? `${custo} PM` : "sem mana");
+  }
   return p.join(" · ");
 }
 
@@ -1506,7 +1653,7 @@ export class EncantamentoApp extends ApplicationV2 {
     this.itemFixo = item;
     // Estado da janela (não pode se chamar "state": é getter da ApplicationV2).
     this.forja = {
-      itemId: item?.id ?? "", nivel: "Menor", lendario: false, nome: "", liberarTodas: false,
+      itemId: item?.id ?? "", nPalavras: 1, lendario: false, nome: "", liberarTodas: false,
       tipo: "propriedades", magiaChave: "",
       slots: [0, 1, 2].map(() => ({ palavra: "", propId: "", var: -1, todas: false })),
     };
@@ -1539,18 +1686,25 @@ export class EncantamentoApp extends ApplicationV2 {
     return this.itensEncantaveis.find((i) => i.id === this.forja.itemId) ?? null;
   }
 
-  /** Escolhas (propriedade + variante) das palavras do nível atual. */
+  /** Escolhas (propriedade + grau) das palavras do item. */
   escolhas() {
     const s = this.forja;
-    const N = NIVEIS_ITEM[s.nivel];
     const tipos = this.item ? tiposDoItem(this.item) : new Set();
-    return s.slots.slice(0, N.n).map((sl) => {
+    return s.slots.slice(0, s.nPalavras).map((sl) => {
       const prop = PROPRIEDADES.find((p) => p.id === sl.propId) ?? null;
       if (!prop) return { palavra: sl.palavra, prop: null };
-      const vs = variantesDoItem(prop, N.n, tipos);
-      const variante = vs.find((v) => v.indice === sl.var && v.permitida) ?? variantePadrao(prop, N.n, tipos);
+      const vs = variantesDoItem(prop, 3, tipos);
+      const variante = vs.find((v) => v.indice === sl.var) ?? varianteInicial(prop, tipos);
       return { palavra: sl.palavra, prop, variante };
     });
+  }
+
+  /** A mana de uma propriedade com um grau, para a janela: "3 PM por uso", "consumível", "PM à escolha". */
+  #manaDe(prop, variante, tipos) {
+    if (this.forja.lendario) return "sem mana (lendário)";
+    if (prop.consumivel) return "consumível, sem mana";
+    if (regraDe(prop, contexto(prop, variante, tipos))?.acao?.custoEscolhido) return "PM à escolha";
+    return `${manaDaPropriedade(prop, variante)} PM por uso`;
   }
 
   #opcoes(lista, atual, vazio) {
@@ -1561,7 +1715,7 @@ export class EncantamentoApp extends ApplicationV2 {
     return o.join("");
   }
 
-  #blocoPalavra(i, item, tipos, N) {
+  #blocoPalavra(i, item, tipos) {
     const sl = this.forja.slots[i];
     const optPal = this.#opcoes([...this.palavras.entries()].map(([p, info]) =>
       [p, info.nivel ? `${p} (${NIVEL_TXT[info.nivel]})` : (info.fonte === "Mestre" ? p : `${p} (${info.fonte})`)]),
@@ -1576,24 +1730,24 @@ export class EncantamentoApp extends ApplicationV2 {
       const mostrar = (sl.todas || !comp.length) ? props : props.filter((p) => compativel(p, tipos) || p.id === sl.propId);
       const ordem = [...mostrar].sort((a, b) => (compativel(b, tipos) - compativel(a, tipos)) || a.nome.localeCompare(b.nome, "pt"));
       lista = ordem.map((p) => {
-        const vs = variantesDoItem(p, N.n, tipos);
-        const pad = variantePadrao(p, N.n, tipos);
-        const pode = !!pad;
-        const ok = compativel(p, tipos);
-        const minimo = NOME_DO_NIVEL[nivelMinimo(p, tipos)];
-        const regra = regraDe(p, contexto(p, pad ?? vs[0], tipos));
-        const auto = automatizada(regra) ? `<span class="auto" title="Mexe na ficha sozinha">⚙</span>` : `<span class="manual" title="Fica como lembrete: aplique pela descrição">✎</span>`;
-        const preco = pad ? `+${formatarVo(pad.preco)}${pad.rotulo ? ` (${esc(pad.rotulo)})` : ""}` : `de nível ${minimo}`;
+        const vs = variantesDoItem(p, 3, tipos);
         const sel = p.id === sl.propId;
+        // O grau escolhido (ou o inicial): qualquer um, já com uma palavra.
+        const grau = (sel && vs.find((v) => v.indice === sl.var)) || varianteInicial(p, tipos);
+        const ok = compativel(p, tipos);
+        const regra = regraDe(p, contexto(p, grau, tipos));
+        const auto = automatizada(regra) ? `<span class="auto" title="Mexe na ficha sozinha">⚙</span>` : `<span class="manual" title="Fica como lembrete: aplique pela descrição">✎</span>`;
+        const niveis = [...new Set(vs.map((v) => v.nivel))].sort();
+        const preco = sel || niveis.length < 2
+          ? `+${formatarVo(grau.preco)}${grau.rotulo ? ` (${esc(grau.rotulo)})` : ""} · ${esc(this.#manaDe(p, grau, tipos))}`
+          : `a partir de +${formatarVo(grau.preco)} · ${niveis.map((n) => NOME_DO_NIVEL[n]).join("/")}`;
         let variantes = "";
-        if (sel && vs.filter((v) => v.permitida).length > 1) {
+        if (sel && vs.length > 1) {
           variantes = `<select name="var${i}" class="var">${this.#opcoes(vs.map((v) => [v.indice,
-            `${v.rotulo || "padrão"} — +${formatarVo(v.preco)}${v.permitida ? "" : ` (só em item ${NOME_DO_NIVEL[v.nivel]})`}`,
-            v.permitida ? "" : "disabled"]), (vs.find((v) => v.indice === sl.var && v.permitida) ?? pad)?.indice)}</select>`;
+            `${v.rotulo || "padrão"} — ${NOME_DO_NIVEL[v.nivel]} · ${this.#manaDe(p, v, tipos)} · +${formatarVo(v.preco)}`]), grau.indice)}</select>`;
         }
-        const titulo = pode ? p.texto : `Preço de propriedade ${minimo}: só cabe num item ${minimo}. ${p.texto}`;
-        return `<div class="prop ${ok ? "" : "fora"} ${pode ? "" : "bloq"} ${sel ? "sel" : ""}" title="${esc(titulo)}"><label>
-            <input type="radio" name="prop${i}" value="${esc(p.id)}" ${sel ? "checked" : ""} ${pode ? "" : "disabled"}>
+        return `<div class="prop ${ok ? "" : "fora"} ${sel ? "sel" : ""}" title="${esc(p.texto)}"><label>
+            <input type="radio" name="prop${i}" value="${esc(p.id)}" ${sel ? "checked" : ""}>
             ${auto} <b>${esc(p.nome)}</b> <span class="ativ">${esc(p.ativacao)}${p.consumivel ? " · consumível" : ""}</span>
             <span class="preco">${preco}</span><br>
             <span class="itens">${esc(p.itens)}${ok ? "" : " — não é o tipo deste item"}</span>
@@ -1705,32 +1859,36 @@ export class EncantamentoApp extends ApplicationV2 {
 
   #corpoPropriedades(item) {
     const s = this.forja;
-    const N = NIVEIS_ITEM[s.nivel];
     const tipos = item ? tiposDoItem(item) : new Set();
     const escolhas = this.escolhas();
     const completas = escolhas.filter((e) => e.prop && e.variante);
     const unicas = [...new Map(completas.map((e) => [e.prop.id, e])).values()];
     const total = unicas.reduce((t, e) => t + (e.variante?.preco ?? 0), 0);
     const repetidas = completas.length - unicas.length;
-    const pm = s.lendario ? 0 : N.pm;
+    // Mana: a de cada propriedade (o nível dela); juntas, a soma.
+    const pagas = s.lendario ? [] : unicas.filter((e) => /PM por uso$/.test(this.#manaDe(e.prop, e.variante, tipos)));
+    const mana = s.lendario ? "nenhuma (lendário)"
+      : unicas.length ? unicas.map((e) => `${esc(e.prop.nome)} <b>${esc(this.#manaDe(e.prop, e.variante, tipos))}</b>`).join(" · ")
+        + (pagas.length > 1 ? ` — juntas, <b>${pagas.reduce((t, e) => t + manaDaPropriedade(e.prop, e.variante), 0)} PM</b>` : "")
+        : "escolha as propriedades";
     const html = `
-      ${[0, 1, 2].slice(0, N.n).map((i) => this.#blocoPalavra(i, item, tipos, N)).join("")}
+      ${[0, 1, 2].slice(0, s.nPalavras).map((i) => this.#blocoPalavra(i, item, tipos)).join("")}
       <fieldset><legend>Nome e resumo</legend>
         <label>Nome do item encantado
           <input type="text" name="nome" value="${esc(s.nome)}" placeholder="${esc(item ? `${item.name}${unicas.length ? ` (${unicas.map((e) => e.prop.nome).join(", ")})` : ""}` : "")}"></label>
         <div class="resumo">
-          Item <b>${esc(s.nivel)}</b> · Mana para ativar: <b>${s.lendario ? "nenhuma (lendário)" : `${pm} PM por uso`}</b>
-          · Preço das propriedades: <b>+${formatarVo(total)}</b> (criação: metade, ${formatarVo(Math.ceil(total / 2))}, abatendo 20 Vo por ponto heroico gasto)
-          ${repetidas ? `<br><em>A mesma propriedade em mais de uma palavra conta uma vez — ela já vem no nível do item.</em>` : ""}
+          Mana: ${mana}
+          <br>Preço das propriedades: <b>+${formatarVo(total)}</b> (criação: metade, ${formatarVo(Math.ceil(total / 2))}, abatendo 20 Vo por ponto heroico gasto)
+          <br><em>Cada propriedade gasta PM igual ao nível dela (Menor 1, Intermediário 2, Maior 3) a cada uso — qualquer grau cabe numa palavra só; usadas juntas, os PM somam.</em>
+          ${repetidas ? `<br><em>A mesma propriedade em mais de uma palavra conta uma vez — escolha outra para a palavra (o grau vem da escolha, não das palavras).</em>` : ""}
           ${unicas.some((e) => e.prop.consumivel) ? `<br><em>Poções, bombas, óleos e pedras são consumidos ao usar e não gastam mana.</em>` : ""}
         </div>
       </fieldset>`;
-    return { html, pronto: !!item && completas.length === N.n, rotulo: "Encantar item" };
+    return { html, pronto: !!item && completas.length === s.nPalavras, rotulo: "Encantar item" };
   }
 
   async _renderHTML() {
     const s = this.forja;
-    const N = NIVEIS_ITEM[s.nivel];
     const itens = this.itensEncantaveis;
     if (!s.itemId && itens.length === 1) s.itemId = itens[0].id;
     const item = this.item;
@@ -1763,7 +1921,6 @@ export class EncantamentoApp extends ApplicationV2 {
         .ligeia-encantamento .prop:hover, .ligeia-encantamento .prop.sel { background: rgba(120,120,160,0.12); }
         .ligeia-encantamento .prop label { margin: 0; cursor: pointer; }
         .ligeia-encantamento .prop.fora { opacity: 0.6; }
-        .ligeia-encantamento .prop.bloq { opacity: 0.4; }
         .ligeia-encantamento .prop .ativ, .ligeia-encantamento .prop .itens { opacity: 0.8; font-style: italic; }
         .ligeia-encantamento .prop .preco { float: right; font-weight: bold; }
         .ligeia-encantamento .prop .texto { display: block; opacity: 0.85; }
@@ -1781,7 +1938,7 @@ export class EncantamentoApp extends ApplicationV2 {
         "Palavra Arcana [x]" na ficha — adicione ao menos uma para encantar itens.</p>` : ""}
       ${mestre ? `<label class="dica"><input type="checkbox" name="liberarTodas" ${s.liberarTodas || auto ? "checked" : ""}
         ${auto ? "disabled" : ""}> Mestre: liberar todas as ${conjurador ? "magias (compêndio e mundo)" : "palavras arcanas"}${auto ? ` (a ficha não tem nenhuma)` : ""}</label>` : ""}
-      <fieldset><legend>1 · Item e ${conjurador ? "tipo" : "nível"}</legend>
+      <fieldset><legend>1 · Item e ${conjurador ? "tipo" : "palavras"}</legend>
         <div class="tipos">
           <label><input type="radio" name="tipo" value="propriedades" ${conjurador ? "" : "checked"}> <b>Propriedades mágicas</b> — até 3 palavras arcanas, uma propriedade de cada</label>
           <label><input type="radio" name="tipo" value="magia" ${conjurador ? "checked" : ""}> <b>Item conjurador</b> — o item guarda uma magia, e quem estiver com ele pode conjurá-la</label>
@@ -1792,9 +1949,9 @@ export class EncantamentoApp extends ApplicationV2 {
               [i.id, `${i.name}${i.system?.category ? ` (${i.system.category})` : ""}${propriedadesGravadas(i) ? " ✦" : ""}`]),
               s.itemId, itens.length ? "— escolha —" : "— nenhum equipamento na ficha —")}</select>
           </label>
-          ${conjurador ? "" : `<label>Nível do item
-            <select name="nivel">${this.#opcoes(Object.entries(NIVEIS_ITEM).map(([k, v]) =>
-              [k, `${k} (${v.n} palavra${v.n > 1 ? "s" : ""} · ${v.pm} PM)`]), s.nivel)}</select>
+          ${conjurador ? "" : `<label>Palavras arcanas
+            <select name="nPalavras">${this.#opcoes([1, 2, 3].map((n) =>
+              [n, `${n} palavra${n > 1 ? "s" : ""} (${n} propriedade${n > 1 ? "s" : ""})`]), s.nPalavras)}</select>
           </label>`}
         </div>
         <label><input type="checkbox" name="lendario" ${s.lendario ? "checked" : ""}> <b>Item lendário</b> — ${conjurador ? "conjura a magia sem gastar mana" : "ativa as propriedades sem gastar mana"}</label>
@@ -1804,7 +1961,8 @@ export class EncantamentoApp extends ApplicationV2 {
       ${corpo.html}
       <footer>
         <button type="button" data-action="cancelar">Cancelar</button>
-        ${item && propriedadesGravadas(item) ? `<button type="button" data-action="lendario" title="Refaz os encantamentos deste item ${eLendario(item) ? "voltando a gastar mana" : "como item lendário, sem gastar mana"}"><i class="fa-solid fa-crown"></i> ${eLendario(item) ? "Voltar a gastar mana" : "Tornar lendário"}</button>
+        ${item && propriedadesGravadas(item) ? `<button type="button" data-action="refazer" title="Refaz os encantamentos deste item pela receita, com as regras atuais (a mana de cada propriedade é o nível dela)"><i class="fa-solid fa-arrows-rotate"></i> Refazer pela receita</button>
+          <button type="button" data-action="lendario" title="Refaz os encantamentos deste item ${eLendario(item) ? "voltando a gastar mana" : "como item lendário, sem gastar mana"}"><i class="fa-solid fa-crown"></i> ${eLendario(item) ? "Voltar a gastar mana" : "Tornar lendário"}</button>
           <button type="button" data-action="desfazer"><i class="fa-solid fa-rotate-left"></i> Desfazer último encantamento</button>` : ""}
         <button type="button" data-action="encantar" ${corpo.pronto ? "" : "disabled"}><i class="fa-solid ${conjurador ? "fa-book-sparkles" : "fa-gem"}"></i> ${corpo.rotulo}</button>
       </footer>`;
@@ -1830,7 +1988,7 @@ export class EncantamentoApp extends ApplicationV2 {
     on("select[name=itemId]", "change", (e) => { s.itemId = e.target.value; this.render(); });
     on("input[name=tipo]", "change", (e) => { s.tipo = e.target.value; this.render(); });
     on("select[name=magiaChave]", "change", (e) => { s.magiaChave = e.target.value; this.render(); });
-    on("select[name=nivel]", "change", (e) => { s.nivel = e.target.value; this.render(); });
+    on("select[name=nPalavras]", "change", (e) => { s.nPalavras = Math.min(3, Math.max(1, Number(e.target.value) || 1)); this.render(); });
     on("input[name=lendario]", "change", (e) => { s.lendario = e.target.checked; this.render(); });
     on("input[name=liberarTodas]", "change", (e) => { s.liberarTodas = e.target.checked; this.render(); });
     for (const i of [0, 1, 2]) {
@@ -1847,6 +2005,7 @@ export class EncantamentoApp extends ApplicationV2 {
     on("[data-action=encantar]", "click", () => this.encantar());
     on("[data-action=desfazer]", "click", () => this.desfazer());
     on("[data-action=lendario]", "click", () => this.alternarLendario());
+    on("[data-action=refazer]", "click", () => this.refazer());
   }
 
   async encantar() {
@@ -1854,15 +2013,13 @@ export class EncantamentoApp extends ApplicationV2 {
     if (s.tipo === "magia") return this.gravarMagia();
     const item = this.item;
     if (!item) return ui.notifications.warn("Escolha o item a encantar.");
-    const N = NIVEIS_ITEM[s.nivel];
     const escolhas = this.escolhas();
-    for (let i = 0; i < N.n; i++) {
+    for (let i = 0; i < s.nPalavras; i++) {
       if (!escolhas[i]?.palavra) return ui.notifications.warn(`Escolha a ${i + 1}ª palavra arcana.`);
       if (!escolhas[i]?.prop) return ui.notifications.warn(`Escolha a propriedade da ${i + 1}ª palavra (${escolhas[i].palavra}).`);
-      if (!escolhas[i]?.variante) return ui.notifications.warn(`${escolhas[i].prop.nome} não cabe num item ${s.nivel}.`);
     }
     const data = construirEncantamento(item.toObject(), {
-      nivel: s.nivel, escolhas, lendario: s.lendario, nome: s.nome,
+      escolhas, lendario: s.lendario, nome: s.nome,
     }, { animar: animacoesLigadas() });
     await item.update({
       name: data.name,
@@ -1873,8 +2030,13 @@ export class EncantamentoApp extends ApplicationV2 {
       [`flags.${MODULE_ID}.encantamentos`]: data.flags[MODULE_ID].encantamentos,
     });
     const nAnim = contarAnimacoesAutomaticas(data);
-    const nProps = data.flags[MODULE_ID].encantamentos.at(-1).propriedades.length;
-    ui.notifications.info(`${data.name} encantado (item ${s.nivel}, ${s.lendario ? "lendário, sem mana" : `${N.pm} PM por ativação`}): `
+    const rec = data.flags[MODULE_ID].encantamentos.at(-1);
+    const nProps = rec.propriedades.length;
+    const mana = s.lendario ? "lendário, sem mana"
+      : rec.propriedades.map((p) => `${p.nome} ${p.pm ? `${p.pm} PM`
+        : PROPRIEDADES.find((x) => x.id === p.id)?.consumivel ? "(consumível)" : "(PM à escolha)"}`).join(", ")
+        + (rec.propriedades.filter((p) => p.pm).length > 1 ? `; juntas, ${rec.pm} PM` : "");
+    ui.notifications.info(`${data.name} encantado (item ${rec.nivel}; ${mana}): `
       + `${nProps} propriedade${nProps > 1 ? "s" : ""}${nAnim ? `, ${nAnim} animaç${nAnim > 1 ? "ões" : "ão"} automática${nAnim > 1 ? "s" : ""}` : ""}.`);
     this.close();
     item.sheet?.render(true);
@@ -1949,6 +2111,32 @@ export class EncantamentoApp extends ApplicationV2 {
       [`flags.${MODULE_ID}.encantamentos`]: data.flags[MODULE_ID].encantamentos,
     });
     ui.notifications.info(`${item.name} ${virar ? "agora é lendário (sem mana)" : "voltou a gastar mana"}.`);
+    this.render();
+  }
+
+  /** Refaz os encantamentos do item pela receita, com as regras atuais (cada um com o seu lendário). */
+  async refazer() {
+    const item = this.item;
+    if (!item) return;
+    const data = refazerEncantamentos(item.toObject(), {}, { animar: animacoesLigadas() });
+    if (!data) return ui.notifications.warn("Não há encantamento deste módulo neste item.");
+    const DialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
+    const ok = DialogV2 ? await DialogV2.confirm({
+      window: { title: "Refazer pela receita" },
+      content: `<p>Refazer os encantamentos de <b>${esc(item.name)}</b> pela receita, com as regras atuais — cada propriedade
+        passa a gastar PM igual ao nível dela, com a sua própria ação (e as combinações somando a mana)?
+        Mudanças feitas à mão nas ações, efeitos, descrição ou preço depois dos encantamentos se perdem.</p>`,
+      rejectClose: false,
+    }) : true;
+    if (!ok) return;
+    await item.update({
+      "system.actions": data.system.actions,
+      "system.effects": data.system.effects,
+      "system.description": data.system.description,
+      "system.price": data.system.price,
+      [`flags.${MODULE_ID}.encantamentos`]: data.flags[MODULE_ID].encantamentos,
+    });
+    ui.notifications.info(`${item.name}: encantamentos refeitos pela receita.`);
     this.render();
   }
 

@@ -20,7 +20,7 @@
     "weight": 0,
     "price": "701 Vo",
     "notes": "Simples, Uma Mão, Arremesso, Corpo a Corpo, Leve, Alcance 5m",
-    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Perfuração +1. Propriedades: Simples, Uma Mão, Arremesso, Corpo a Corpo, Leve, Alcance 5m.</p><hr><h3>✦ Encantamento — Item Menor (exitium)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Explosivo</b> (exitium · Constante · 1 de Dano - Normal · +700 Vo)<br>Quando você ataca um alvo à distância com um item com essa propriedade e acerta, o alvo deve realizar uma rolagem de Agilidade para não sofrer dano de energia. A dificuldade na rolagem e a quantidade de dano sofrido variam de acordo com o valor do item.<br><em>O alvo atingido à distância rola Agilidade (CD 10); se passar, desfaça os 1 pontos de dano de energia.</em></li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Perfuração +1. Propriedades: Simples, Uma Mão, Arremesso, Corpo a Corpo, Leve, Alcance 5m.</p><hr><h3>✦ Encantamento — Item Menor (exitium)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Explosivo</b> (exitium · Constante · 1 de Dano - Normal · +700 Vo · <b>1 PM por uso</b>)<br>Quando você ataca um alvo à distância com um item com essa propriedade e acerta, o alvo deve realizar uma rolagem de Agilidade para não sofrer dano de energia. A dificuldade na rolagem e a quantidade de dano sofrido variam de acordo com o valor do item.<br><em>O alvo atingido à distância rola Agilidade (CD 10); se passar, desfaça os 1 pontos de dano de energia.</em></li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Adaga",
@@ -193,7 +193,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Adaga — Explosivo: Agilidade 10 evita os 1 de energia (1 PM)",
@@ -373,7 +386,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -407,6 +433,7 @@
           "palavras": [
             "exitium"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "exitium",
@@ -420,6 +447,8 @@
               "palavra": "exitium",
               "variante": "1 de Dano - Normal",
               "preco": 700,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -600,7 +629,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

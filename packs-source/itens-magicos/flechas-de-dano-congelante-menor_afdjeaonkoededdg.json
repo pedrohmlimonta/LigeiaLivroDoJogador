@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "400 Vo",
     "notes": "",
-    "description": "<p>Pequenas hastes de madeira com pontas de metal pontiagudas. Utilizadas como munição para os arcos.</p><p>Propriedade: uma vez disparada, a flecha se despedaça com o impacto, a menos que tenha uma propriedade mágica. Pagando 1 Va você tem flechas suficientes para uma aventura.</p><hr><h3>✦ Encantamento — Item Menor (glacios)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Dano Congelante</b> (glacios · Constante · Munições — 1 de dano · +400 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando atacar com arma, munição, ou enquanto estiver usando braçadeiras com essa propriedade, seus ataques causarão 1/2/3 de dano bruto adicional de frio, de acordo com o valor do item.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p>Pequenas hastes de madeira com pontas de metal pontiagudas. Utilizadas como munição para os arcos.</p><p>Propriedade: uma vez disparada, a flecha se despedaça com o impacto, a menos que tenha uma propriedade mágica. Pagando 1 Va você tem flechas suficientes para uma aventura.</p><hr><h3>✦ Encantamento — Item Menor (glacios)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Dano Congelante</b> (glacios · Constante · Munições — 1 de dano · +400 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Quando atacar com arma, munição, ou enquanto estiver usando braçadeiras com essa propriedade, seus ataques causarão 1/2/3 de dano bruto adicional de frio, de acordo com o valor do item.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Dano Congelante (1 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "glacios"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "glacios",
@@ -243,6 +257,8 @@
               "palavra": "glacios",
               "variante": "Munições — 1 de dano",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 3
             }
           ],

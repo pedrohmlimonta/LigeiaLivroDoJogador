@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "500 Vo",
     "notes": "",
-    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (majesto)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Aumento</b> (majesto · Constante · +500 Vo)<br>Quando você usa um item com essa propriedade, você tem sua categoria de tamanho aumentada em um, pelo resto da cena.</li></ul><p>Preço das propriedades: +500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 5 (500 Vo).</p>",
+    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (majesto)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Aumento</b> (majesto · Constante · +500 Vo · <b>consumível</b>)<br>Quando você usa um item com essa propriedade, você tem sua categoria de tamanho aumentada em um, pelo resto da cena.</li></ul><p>Preço das propriedades: +500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 5 (500 Vo).</p>",
     "actions": [
       {
         "label": "✦ Beber: Aumento — +1 categoria de tamanho (cena) (consumível)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -225,11 +238,12 @@
         {
           "id": "3PeCEgJelxpBMBeH",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "majesto"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "majesto",
@@ -243,6 +257,8 @@
               "palavra": "majesto",
               "variante": "",
               "preco": 500,
+              "nivel": 1,
+              "pm": 0,
               "indice": 0
             }
           ],

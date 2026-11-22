@@ -12,10 +12,10 @@
     "weight": 0,
     "price": "2.000.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (devena + devena + devena)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Invocação Animal</b> (devena · Ação · Desafio até 6 · +2.000.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Esta estatueta possui a forma de uma criatura do tipo fera cujo Desafio depende do valor do item. Ao dizer a palavra de comando, a estatueta é ativada e se tranforma no animal relacionado a sua forma. Ela permanece ativada por uma hora, até que o animal perca todos os pontos de vida ou até que a palavra de comando seja dita novamente. O animal é amigável a você e seus aliados e hostil a seus inimigos.</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (devena)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Invocação Animal</b> (devena · Ação · Desafio até 6 · +2.000.000 Vo · <b>3 PM por uso</b>)<br>Esta estatueta possui a forma de uma criatura do tipo fera cujo Desafio depende do valor do item. Ao dizer a palavra de comando, a estatueta é ativada e se tranforma no animal relacionado a sua forma. Ela permanece ativada por uma hora, até que o animal perca todos os pontos de vida ou até que a palavra de comando seja dita novamente. O animal é amigável a você e seus aliados e hostil a seus inimigos.<br><em>Arraste a ficha da fera (a forma da estatueta) para a ação, no item; ao usar, escolha no mapa onde ela aparece. Some se perder todos os PV ou quando a palavra de comando for dita de novo.</em></li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
     "actions": [
       {
-        "label": "✦ Invocação Animal — vira uma fera de Desafio até 6 por 1 hora (3 PM)",
+        "label": "✦ Invocação Animal — vira uma fera de Desafio até 6 (1 hora) (3 PM)",
         "level": "all",
         "canRoll": false,
         "rollAttr": "agilidade",
@@ -24,8 +24,8 @@
         "vsDifficulty": false,
         "fixedDifficulty": "8",
         "difficultyAttr": "nenhum",
-        "targetMode": "self",
-        "includeSelf": true,
+        "targetMode": "none",
+        "includeSelf": false,
         "areaFilter": "all",
         "defenseAttr": "esquiva",
         "defenseAttr2": "",
@@ -69,7 +69,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "ho4YSwWEvjaxnHAD",
+          "id": "re9faSBgMMUaIrEg",
           "label": "Estatueta de Invocação Animal (Maior)",
           "menu": "ontoken",
           "macro": {
@@ -92,8 +92,8 @@
           "metaData": {
             "origem": "ligeia-livro-do-jogador",
             "automatica": true,
-            "chave": "static.plants.ring.complete.greenyellow",
-            "nome": "Natureza"
+            "chave": "static.magicsign.conjuration.02.yellow",
+            "nome": "Invocação"
           },
           "isEnabled": true,
           "isCustomized": true,
@@ -102,10 +102,10 @@
           "primary": {
             "video": {
               "dbSection": "static",
-              "menuType": "plants",
-              "animation": "ring",
-              "variant": "complete",
-              "color": "greenyellow",
+              "menuType": "magicsign",
+              "animation": "conjuration",
+              "variant": "02",
+              "color": "yellow",
               "enableCustom": false,
               "customPath": ""
             },
@@ -140,7 +140,7 @@
               "isRadius": false,
               "persistent": false,
               "playOn": "source",
-              "size": 1,
+              "size": 1.5,
               "unbindAlpha": false,
               "unbindVisibility": false
             }
@@ -169,7 +169,31 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [
+          {
+            "actorUuid": "",
+            "actorName": "Fera, Desafio até 6 — arraste a ficha abaixo",
+            "count": "1",
+            "disposition": "same",
+            "rounds": "0",
+            "giveControl": true,
+            "hidden": false,
+            "enabled": true
+          }
+        ]
       }
     ],
     "enchantments": [],
@@ -201,19 +225,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "devena",
-            "devena",
             "devena"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "devena",
-              "id": "devena-invocacao-animal"
-            },
-            {
-              "palavra": "devena",
-              "id": "devena-invocacao-animal"
-            },
             {
               "palavra": "devena",
               "id": "devena-invocacao-animal"
@@ -226,6 +241,8 @@
               "palavra": "devena",
               "variante": "Desafio até 6",
               "preco": 2000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

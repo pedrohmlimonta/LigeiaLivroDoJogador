@@ -41,6 +41,24 @@ def _sit(etype, target, value, level, label, **kw):
     return e
 
 
+# Rótulo das condições nos efeitos de resistência.
+_COND_ROTULO = {"cego": "Cego", "surdo": "Surdo", "agarrado": "Agarrado", "enfraquecido": "Enfraquecido",
+                "exausto": "Exausto", "paralisado": "Paralisado", "lento": "Lento",
+                "imobilizado": "Imobilizado", "inconsciente": "Inconsciente", "abalado": "Abalado",
+                "dominado": "Dominado", "enfeiticado": "Enfeitiçado", "atordoado": "Atordoado",
+                "pasmo": "Pasmo"}
+
+
+def _anular(nome, etype, value, level, conds, quanto):
+    """Bônus para ANULAR condições (sistema build 30, alvo "resistir:<id>"):
+    vale sozinho na rolagem do início do turno para encerrar a condição.
+    A resistência na hora em que a condição chega é a defesa da ação de quem
+    a impôs — para ela fica o efeito situacional (ligue quando valer)."""
+    return [effect(etype, f"resistir:{c}", value, level=level,
+                   label=f"{nome}: {quanto} para anular {_COND_ROTULO[c]} (início do turno)")
+            for c in conds]
+
+
 def _marca(label, duration_mode="scene", rounds=1, **kw):
     """Efeito aplicado só como marcador (bônus 0): registra na ficha do alvo
     algo que o sistema não tem como condição própria, com duração."""
@@ -148,7 +166,8 @@ def _alerta(d):
         _sit("rollDice", "percepcao", 1, "A",
              "Alerta (A): +1 dado para perceber armadilhas e ameaças naturais (ligue quando valer)"),
         _sit("bonus", "all", "ceil(@nivel/2)", "A",
-             "Alerta (A): +metade do Nível para resistir/anular Cego e Surdo (ligue quando valer)"),
+             "Alerta (A): +metade do Nível para resistir a Cego e Surdo (ligue na rolagem de resistência)"),
+        *_anular("Alerta (A)", "bonus", "ceil(@nivel/2)", "A", ["cego", "surdo"], "+metade do Nível"),
     ])
 
 
@@ -159,7 +178,9 @@ def _firmeza_fisica(d):
         effect("stat", "hp", 1, level="B", label="Firmeza Física B: +1 PV"),
         effect("stat", "hp", 2, level="A", label="Firmeza Física A: +2 PV (total +3)"),
         _sit("bonus", "all", "ceil(@nivel/2)", "A",
-             "Firmeza Física (A): +metade do Nível para resistir/anular Agarrado, Enfraquecido, Exausto e Paralisado (ligue quando valer)"),
+             "Firmeza Física (A): +metade do Nível para resistir a Agarrado, Enfraquecido, Exausto e Paralisado (ligue na rolagem de resistência)"),
+        *_anular("Firmeza Física (A)", "bonus", "ceil(@nivel/2)", "A",
+                 ["agarrado", "enfraquecido", "exausto", "paralisado"], "+metade do Nível"),
     ])
     _acoes(d, _gasto("Firmeza Física (A) — reação: evitar a derrubada/o empurrão e atacar quem tentou (1 PH)", "A", ph=1))
 
@@ -225,14 +246,19 @@ def _corredor(d):
     _passivo(d)
     d["system"]["effects"].append(_sit(
         "bonus", "all", "ceil(@nivel/2)", "A",
-        "Corredor (A): +metade do Nível para resistir/anular Lento e Imobilizado (ligue quando valer)"))
+        "Corredor (A): +metade do Nível para resistir a Lento e Imobilizado (ligue na rolagem de resistência)"))
+    d["system"]["effects"] += _anular("Corredor (A)", "bonus", "ceil(@nivel/2)", "A",
+                                      ["lento", "imobilizado"], "+metade do Nível")
 
 
 def _recuperar_o_folego(d):
     _passivo(d)
     d["system"]["effects"].append(_sit(
         "bonus", "all", "ceil(@nivel/2)", "A",
-        "Recuperar o Fôlego (A): +metade do Nível para resistir/anular Inconsciente e Morrendo (ligue quando valer)"))
+        "Recuperar o Fôlego (A): +metade do Nível para resistir a Inconsciente e Morrendo (ligue na rolagem de resistência)"))
+    # "Morrendo" não é condição do sistema: só Inconsciente tem o bônus fixo.
+    d["system"]["effects"] += _anular("Recuperar o Fôlego (A)", "bonus", "ceil(@nivel/2)", "A",
+                                      ["inconsciente"], "+metade do Nível")
 
 
 def _implacavel(d):
@@ -287,11 +313,23 @@ def _operar_mecanismos(d):
     ]
 
 
+_VONTADE = ["abalado", "dominado", "enfeiticado", "atordoado", "pasmo"]
+
+
 def _vontade_de_ferro(d):
-    for e in d["system"]["effects"]:
-        if e["level"] == "A" and e["type"] == "bonus":
-            e["label"] = ("Vontade de Ferro (A): +metade do Nível para resistir/anular Abalado, "
-                          "Dominado, Enfeitiçado, Atordoado, Pasmo ou Dano Contínuo Psíquico (ligue quando valer)")
+    # Passiva: o bônus para ANULAR cada condição vale sozinho (resistir:<id>);
+    # para resistir na hora — e para o Dano Contínuo Psíquico, que o sistema
+    # não separa do contínuo de outros tipos — ficam os interruptores.
+    _passivo(d, [
+        _sit("rollDice", "all", 1, "B",
+             "Vontade de Ferro: +1 dado para resistir a Abalado, Dominado, Enfeitiçado, Atordoado, Pasmo "
+             "ou Dano Contínuo Psíquico (ligue na rolagem de resistência)"),
+        *_anular("Vontade de Ferro", "rollDice", 1, "B", _VONTADE, "+1 dado"),
+        _sit("bonus", "all", "ceil(@nivel/2)", "A",
+             "Vontade de Ferro (A): +metade do Nível para resistir a Abalado, Dominado, Enfeitiçado, Atordoado, "
+             "Pasmo ou Dano Contínuo Psíquico (ligue na rolagem de resistência)"),
+        *_anular("Vontade de Ferro (A)", "bonus", "ceil(@nivel/2)", "A", _VONTADE, "+metade do Nível"),
+    ])
     _acoes(d, _rolagem("Vontade de Ferro (A) — resistir/anular: Mente +1D +metade do Nível",
                        "mente", 1, "ceil(@nivel/2)", level="A"))
 
@@ -308,6 +346,13 @@ def _marca_da_macula(d):
                label="Marca da Mácula: Proteção contra necrótico = metade do Nível"),
         effect("rd", "all", "ceil(@nivel/2)", level="B", damage_type="veneno",
                label="Marca da Mácula: Proteção contra veneno = metade do Nível"),
+        # "Imune a doenças e envenenamento" (sistema build 30): recusa os
+        # efeitos cujo nome cita veneno ou doença — o dano de veneno direto
+        # continua, reduzido pela Proteção acima.
+        effect("immune", "efeito:veneno", 1, level="B",
+               label="Marca da Mácula: imune a envenenamento (efeitos de veneno)"),
+        effect("immune", "efeito:doença", 1, level="B",
+               label="Marca da Mácula: imune a doenças"),
         _sit("rollDice", "mente", 1, "B",
              "Marca da Mácula: +1 dado em intimidação (ligue quando valer)"),
     ])

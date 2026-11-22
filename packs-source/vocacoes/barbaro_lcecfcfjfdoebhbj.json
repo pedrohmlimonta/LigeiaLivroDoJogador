@@ -360,7 +360,20 @@
               "persistRounds": "1",
               "persistAffectsSelf": false,
               "persistRerollAttack": false,
-              "persistTrigger": "both"
+              "persistTrigger": "both",
+              "variableCost": {
+                "enabled": false,
+                "resource": "mp",
+                "min": "1",
+                "max": "",
+                "label": "",
+                "damageBonus": "",
+                "healBonus": "",
+                "areaBonus": "",
+                "rangeBonus": "",
+                "rollBonus": ""
+              },
+              "summons": []
             },
             {
               "label": "Entrar em Fúria (A — até o fim da cena)",
@@ -648,7 +661,20 @@
               "persistRounds": "1",
               "persistAffectsSelf": false,
               "persistRerollAttack": false,
-              "persistTrigger": "both"
+              "persistTrigger": "both",
+              "variableCost": {
+                "enabled": false,
+                "resource": "mp",
+                "min": "1",
+                "max": "",
+                "label": "",
+                "damageBonus": "",
+                "healBonus": "",
+                "areaBonus": "",
+                "rangeBonus": "",
+                "rollBonus": ""
+              },
+              "summons": []
             },
             {
               "label": "Fúria (A) — em fúria: troque um dado do ataque corpo a corpo por 6 (1 PH)",
@@ -719,7 +745,20 @@
               "persistRounds": "1",
               "persistAffectsSelf": false,
               "persistRerollAttack": false,
-              "persistTrigger": "both"
+              "persistTrigger": "both",
+              "variableCost": {
+                "enabled": false,
+                "resource": "mp",
+                "min": "1",
+                "max": "",
+                "label": "",
+                "damageBonus": "",
+                "healBonus": "",
+                "areaBonus": "",
+                "rangeBonus": "",
+                "rollBonus": ""
+              },
+              "summons": []
             }
           ],
           "enchantments": [],

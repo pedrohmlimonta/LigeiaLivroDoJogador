@@ -10,7 +10,9 @@ for (const pack of fs.readdirSync(raiz)) {
   }
 }
 const item = (pack, nome) => todos.find((x) => x.pack === pack && x.doc.name === nome)?.doc;
-const comDano = (doc) => (doc?.system.actions ?? []).filter((a) => String(a.damage ?? '').trim() !== '' && (a.damageResource ?? 'hp') === 'hp');
+// Dano base ou o que o custo escolhido soma (Punição: o dano é o que se gasta, @gasto).
+const temDano = (a) => String(a.damage ?? '').trim() !== '' || (a.variableCost?.enabled && String(a.variableCost.damageBonus ?? '').trim() !== '');
+const comDano = (doc) => (doc?.system.actions ?? []).filter((a) => temDano(a) && (a.damageResource ?? 'hp') === 'hp');
 
 let falhas = 0;
 const ok = (cond, msg) => { console.log((cond ? '  ✓ ' : '  ✗ ') + msg); if (!cond) falhas++; };

@@ -2,7 +2,7 @@
   "id": "ligeia-livro-do-jogador",
   "title": "Ligeia RPG — Livro do Jogador (Compêndios)",
   "description": "Compêndios de Habilidades, Magias, Equipamentos, Itens Mágicos e Traços do Livro de Regras do Ligeia RPG, para o sistema não-oficial ligeia-rpg. Uso pessoal de mesa — requer a posse do Livro de Regras.",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "compatibility": {
     "minimum": "13",
     "verified": "14",
@@ -181,12 +181,13 @@
   "languages": [],
   "url": "https://github.com/pedrohmlimonta/LigeiaLivroDoJogador",
   "manifest": "https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/releases/latest/download/module.json",
-  "download": "https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/releases/download/v0.4.0/ligeia-livro-do-jogador.zip",
+  "download": "https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/releases/download/v0.6.0/ligeia-livro-do-jogador.zip",
   "bugs": "https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/issues",
   "readme": "https://github.com/pedrohmlimonta/LigeiaLivroDoJogador/blob/main/README.md",
   "esmodules": [
     "esmodules/spellforge.mjs",
     "esmodules/encantamento.mjs",
-    "esmodules/consumiveis.mjs"
+    "esmodules/consumiveis.mjs",
+    "esmodules/invocacao.mjs"
   ]
 }

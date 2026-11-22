@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "1.000.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (mortis + mortis + mortis)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Perversão</b> (mortis · Ação · +1.000.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Gastando 1 ponto de magia, você ativa essa estatueta enquanto pronuncia a palavra chave. Ela emana uma energia corrupta enquanto expele sangue e podridão de sua superfície Qualquer criatura em contato com a estatueta quando ativada sofre 1 ponto de dano bruto necrótico por rodada. A cada rodada em que ela estiver ativa, todas as criaturas que tiverem a estatueta ao alcance da visão devem ser bem sucedidas em uma rolagem de Mente, para não receberem 1 ponto de Corrupção obrigatório. A dificuldade depende da Corrupção atual do afetado: Corrupção 0 - 4 (Difícil), Corrupção 5-7 (Normal), Corrupção 8 - 9 (Fácil).</li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (mortis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Perversão</b> (mortis · Ação · +1.000.000 Vo · <b>3 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Gastando 1 ponto de magia, você ativa essa estatueta enquanto pronuncia a palavra chave. Ela emana uma energia corrupta enquanto expele sangue e podridão de sua superfície Qualquer criatura em contato com a estatueta quando ativada sofre 1 ponto de dano bruto necrótico por rodada. A cada rodada em que ela estiver ativa, todas as criaturas que tiverem a estatueta ao alcance da visão devem ser bem sucedidas em uma rolagem de Mente, para não receberem 1 ponto de Corrupção obrigatório. A dificuldade depende da Corrupção atual do afetado: Corrupção 0 - 4 (Difícil), Corrupção 5-7 (Normal), Corrupção 8 - 9 (Fácil).</li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Perversão — estatueta corrupta (1 necrótico por rodada; Corrupção) (3 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,19 +214,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "mortis",
-            "mortis",
             "mortis"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "mortis",
-              "id": "mortis-perversao"
-            },
-            {
-              "palavra": "mortis",
-              "id": "mortis-perversao"
-            },
             {
               "palavra": "mortis",
               "id": "mortis-perversao"
@@ -226,6 +230,8 @@
               "palavra": "mortis",
               "variante": "",
               "preco": 1000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],

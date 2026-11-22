@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "120.020 Vo",
     "notes": "",
-    "description": "<p>Um símbolo de uma divindade entalhado em madeira ou metal.</p><p>Propriedade: um objeto utilizado por clérigos para canalizar os poderes de aspecto de sua divindade e por conjuradores ligados a uma religião, como componente para a conjuração de magias de Círculo Maior. Um símbolo sagrado refere-se a uma divindade boa. Um símbolo profano refere-se a uma divindade maligna. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Intermediário (ignis + ignis)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Incandescente</b> (ignis · Constante · 2 ponto de dano · +120.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando conjura uma magia composta pela palavra arcana ígnis usando esse item como foco. Se esta magia causar dano, ela irá causar dano bruto adicional de fogo, dependendo do valor do item.</li></ul><p>Preço das propriedades: +120.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 12 (120.000 Vo).</p>",
+    "description": "<p>Um símbolo de uma divindade entalhado em madeira ou metal.</p><p>Propriedade: um objeto utilizado por clérigos para canalizar os poderes de aspecto de sua divindade e por conjuradores ligados a uma religião, como componente para a conjuração de magias de Círculo Maior. Um símbolo sagrado refere-se a uma divindade boa. Um símbolo profano refere-se a uma divindade maligna. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Intermediário (ignis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Incandescente</b> (ignis · Constante · 2 ponto de dano · +120.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Quando conjura uma magia composta pela palavra arcana ígnis usando esse item como foco. Se esta magia causar dano, ela irá causar dano bruto adicional de fogo, dependendo do valor do item.</li></ul><p>Preço das propriedades: +120.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 12 (120.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Incandescente (2 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +241,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "ignis",
             "ignis"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "ignis",
-              "id": "ignis-incandescente"
-            },
             {
               "palavra": "ignis",
               "id": "ignis-incandescente"
@@ -248,6 +257,8 @@
               "palavra": "ignis",
               "variante": "2 ponto de dano",
               "preco": 120000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "400 Vo",
     "notes": "",
-    "description": "<p><b>Armaduras e Robes</b>: São itens que podem ser equipados no torso do personagem.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Tentáculos Negros</b> (tenebrae · Ação Rápida · Alcance 1m · +400 Vo)<br>Enquanto estiver usando um item com essa propriedade, você pode gastar 1/2/3 pontos de magia para fazer com que surjam tentáculos de sombras ao seu redor, que duram até o fim da cena. Eles agarram criaturas que entrarem ou iniciarem seus turnos dentro do alcance deles (que varia de acordo com o valor do item), caso eles falhem numa rolagem de Agilidade, cuja dificuldade depende da quantidade de pontos de magia gastos: 1 (Normal), 2 (Difícil) e 3 (Muito Difícil).<br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p><b>Armaduras e Robes</b>: São itens que podem ser equipados no torso do personagem.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Tentáculos Negros</b> (tenebrae · Ação Rápida · Alcance 1m · +400 Vo · <b>1 PM por uso</b>)<br>Enquanto estiver usando um item com essa propriedade, você pode gastar 1/2/3 pontos de magia para fazer com que surjam tentáculos de sombras ao seu redor, que duram até o fim da cena. Eles agarram criaturas que entrarem ou iniciarem seus turnos dentro do alcance deles (que varia de acordo com o valor do item), caso eles falhem numa rolagem de Agilidade, cuja dificuldade depende da quantidade de pontos de magia gastos: 1 (Normal), 2 (Difícil) e 3 (Muito Difícil).<br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "✦ Tentáculos Negros — tentáculos (1m): Agilidade 10 ou Agarrado (1 PM)",
@@ -282,7 +282,20 @@
         "persistRounds": "0",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -316,6 +329,7 @@
           "palavras": [
             "tenebrae"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "tenebrae",
@@ -329,6 +343,8 @@
               "palavra": "tenebrae",
               "variante": "Alcance 1m",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

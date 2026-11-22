@@ -18,7 +18,7 @@
     "weight": 0,
     "price": "1.019 Vo",
     "notes": "Militar, Uma Mão, Corpo a Corpo, Leve",
-    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Macabra</b> (tenebrae · Ação Rápida · 1m, Normal · +1.000 Vo)<br>Enquanto estiver empunhando este item, você pode gastar 1 ponto de magia para ganhar uma aura de escuridão com um raio que depende do valor do item, dentro da qual apenas você e quem for bem sucedido em uma rolagem de Perceção enxergam. A dificuldade na rolagem depende do valor do item. A aura dura até o fim da cena.<br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Macabra</b> (tenebrae · Ação Rápida · 1m, Normal · +1.000 Vo · <b>1 PM por uso</b>)<br>Enquanto estiver empunhando este item, você pode gastar 1 ponto de magia para ganhar uma aura de escuridão com um raio que depende do valor do item, dentro da qual apenas você e quem for bem sucedido em uma rolagem de Perceção enxergam. A dificuldade na rolagem depende do valor do item. A aura dura até o fim da cena.<br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Espada Curta",
@@ -191,7 +191,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Macabra — escuridão de 1m (Percepção 10 para enxergar) (1 PM)",
@@ -461,7 +474,20 @@
         "persistRounds": "0",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -495,6 +521,7 @@
           "palavras": [
             "tenebrae"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "tenebrae",
@@ -508,6 +535,8 @@
               "palavra": "tenebrae",
               "variante": "1m, Normal",
               "preco": 1000,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -687,7 +716,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

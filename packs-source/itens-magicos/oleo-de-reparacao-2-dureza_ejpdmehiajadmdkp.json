@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "100 Vo",
     "notes": "",
-    "description": "<p><b>Óleos e Pedras</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (kreo)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Reparação</b> (kreo · Cena · +2 Dureza · +100 Vo) <em>(sem automação: aplique pela descrição)</em><br>Este item pode ser aplicado sobre um objeto danificado, recuperando pontos da dureza do objeto, dependendo do valor do item.</li></ul><p>Preço das propriedades: +100 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 2 (100 Vo).</p>",
+    "description": "<p><b>Óleos e Pedras</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (kreo)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Reparação</b> (kreo · Cena · +2 Dureza · +100 Vo · <b>consumível</b>) <em>(sem automação: aplique pela descrição)</em><br>Este item pode ser aplicado sobre um objeto danificado, recuperando pontos da dureza do objeto, dependendo do valor do item.</li></ul><p>Preço das propriedades: +100 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 2 (100 Vo).</p>",
     "actions": [
       {
         "label": "✦ Aplicar: Reparação — recupera 2 de Dureza de um objeto (consumível)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -198,11 +211,12 @@
         {
           "id": "LE306RDTmtSKuFPf",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "kreo"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "kreo",
@@ -216,6 +230,8 @@
               "palavra": "kreo",
               "variante": "+2 Dureza",
               "preco": 100,
+              "nivel": 1,
+              "pm": 0,
               "indice": 1
             }
           ],

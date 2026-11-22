@@ -12,7 +12,7 @@
     "weight": 1,
     "price": "1.025 Vo",
     "notes": "Penalidade -1",
-    "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Menor (lumo)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Cores Cintilantes</b> (lumo · Ação Rápida · Normal · +1.000 Vo)<br>Enquanto estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para que o item brilhe até o fim da cena. Enquanto brilha, o item ilumina uma área de 3m ao redor dele. Quando a luz é ativada, todas as criaturas dentro da área devem ser bem sucedidas em uma rolagem de Percepção, cuja dificuldade depende do valor do item, ou ficarão atordoadas até o fim da cena (Percepção anula).</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
+    "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Menor (lumo)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Cores Cintilantes</b> (lumo · Ação Rápida · Normal · +1.000 Vo · <b>1 PM por uso</b>)<br>Enquanto estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para que o item brilhe até o fim da cena. Enquanto brilha, o item ilumina uma área de 3m ao redor dele. Quando a luz é ativada, todas as criaturas dentro da área devem ser bem sucedidas em uma rolagem de Percepção, cuja dificuldade depende do valor do item, ou ficarão atordoadas até o fim da cena (Percepção anula).</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Cores Cintilantes — luz de 3m: Percepção 10 ou Atordoado (1 PM)",
@@ -282,7 +282,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -377,6 +390,7 @@
           "palavras": [
             "lumo"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "lumo",
@@ -390,6 +404,8 @@
               "palavra": "lumo",
               "variante": "Normal",
               "preco": 1000,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

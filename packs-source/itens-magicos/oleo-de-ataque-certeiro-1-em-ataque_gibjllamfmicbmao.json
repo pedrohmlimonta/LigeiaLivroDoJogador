@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "50 Vo",
     "notes": "",
-    "description": "<p><b>Óleos e Pedras</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (sorcdiron)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Ataque Certeiro</b> (sorcdiron · Constante · +1 em Ataque · +50 Vo)<br>Quando aplicado sobre uma arma, este item dá a arma um bônus nos ataques feitos com ela até o fim do próximo combate, dependendo do valor do item.<br><em>Ao usar, escolha a arma que recebe o óleo; o bônus vale até o fim do próximo combate (remova-o da arma depois).</em></li></ul><p>Preço das propriedades: +50 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 1 (50 Vo).</p>",
+    "description": "<p><b>Óleos e Pedras</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (sorcdiron)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Ataque Certeiro</b> (sorcdiron · Constante · +1 em Ataque · +50 Vo · <b>consumível</b>)<br>Quando aplicado sobre uma arma, este item dá a arma um bônus nos ataques feitos com ela até o fim do próximo combate, dependendo do valor do item.<br><em>Ao usar, escolha a arma que recebe o óleo; o bônus vale até o fim do próximo combate (remova-o da arma depois).</em></li></ul><p>Preço das propriedades: +50 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 1 (50 Vo).</p>",
     "actions": [
       {
         "label": "✦ Aplicar: Ataque Certeiro — +1 nos ataques da arma escolhida (consumível)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -225,11 +238,12 @@
         {
           "id": "2cdDuYly06FxpfzG",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "sorcdiron"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "sorcdiron",
@@ -243,6 +257,8 @@
               "palavra": "sorcdiron",
               "variante": "+1 em Ataque",
               "preco": 50,
+              "nivel": 1,
+              "pm": 0,
               "indice": 0
             }
           ],

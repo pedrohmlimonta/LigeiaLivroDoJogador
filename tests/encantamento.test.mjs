@@ -1,5 +1,6 @@
 // Testes do Encantamento de Itens: node tests/encantamento.test.mjs (após python3 scripts/generate.py)
-// Confere o catálogo de propriedades do livro, a mana (1 PM por palavra; lendário e consumível sem
+// Confere o catálogo de propriedades do livro, a mana (cada propriedade gasta o nível dela — Menor 1,
+// Intermediário 2, Maior 3 — a cada uso, com uma palavra só; juntas, somam; lendário e consumível sem
 // mana), o que cada propriedade grava no item e — passando TODAS as propriedades por um item
 // compatível — que o resultado passa no validador do schema do sistema (scripts/validate.py).
 // Também os itens conjuradores: a magia guardada, a descrição do que ela faz, o pergaminho, a
@@ -56,6 +57,12 @@ const encantar = (item, nivel, ids, extra = {}) => construirEncantamento(item, {
   nivel, escolhas: ids.map((id) => ({ prop: P(id), palavra: P(id).palavra })), ...extra,
 }, { animar: true });
 const novas = (antes, depois) => depois.system.actions.filter((a) => String(a.label).startsWith('✦') || !antes.system.actions.some((b) => b.label === a.label));
+// O grau de nível n da propriedade neste item (o mais caro, no empate); sem n, o grau inicial.
+const grau = (id, item, n) => (n ? variantesDoItem(P(id), 3, tiposDoItem(item)).filter((v) => v.nivel === n).at(-1) : undefined);
+// Encanta com uma palavra por propriedade e o grau pedido: [[id, nível], ...].
+const encantarGraus = (item, lista, extra = {}) => construirEncantamento(item, {
+  escolhas: lista.map(([id, n]) => ({ prop: P(id), palavra: P(id).palavra, variante: grau(id, item, n) })), ...extra,
+}, { animar: true });
 
 console.log('1) Catálogo do livro (Sessão 11)');
 ok(PROPRIEDADES.length === 262, `${PROPRIEDADES.length} propriedades`);
@@ -88,33 +95,54 @@ ok(tiposDoItem(eq('Balas de Chumbo')).has('municao') && [...tiposDoItem(eq('Pist
 ok(compativel(pcf, tiposDoItem(eq('Cota de Malha'))) && !compativel(pcf, tiposDoItem(eq('Espada Longa'))),
    'Proteção Contra Fogo é para armaduras, não para espadas');
 const T = tiposDoItem(eq('Espada Longa'));
+const { manaDaPropriedade, varianteInicial, combinacoes } = mod;
+ok(variantesDoItem(df, 3, T).length === 3 && variantesDoItem(df, 3, T).every((v) => v.tipo === 'arma' && v.permitida),
+   'numa arma, os três preços de Armas — qualquer um com uma palavra só');
+ok([1, 2, 3].every((n) => manaDaPropriedade(df, grau('ignis-dano-flamejante', eq('Espada Longa'), n)) === n),
+   'a mana é o nível do grau: Dano Flamejante +1 = 1 PM, +2 = 2 PM, +3 = 3 PM');
+ok(manaDaPropriedade(P('iluzio-invisibilidade'), P('iluzio-invisibilidade').variantes[0]) === 3 && nivelMinimo(P('iluzio-invisibilidade'), new Set(['anel'])) === 3,
+   'Invisibilidade (+400.000, Maior): 3 PM, com uma palavra só');
+ok(manaDaPropriedade(P('acida-corrosiva'), varianteInicial(P('acida-corrosiva'), T)) === 2
+   && manaDaPropriedade(P('acida-corrosiva'), varianteInicial(P('acida-corrosiva'), tiposDoItem(eq('Flechas')))) === 1,
+   'Corrosiva: 2 PM na arma (+30.000), 1 PM na munição (+1.000)');
+ok(manaDaPropriedade(P('vitae-cura'), P('vitae-cura').variantes[2]) === 0 && manaDaPropriedade(df, df.variantes[2], { lendario: true }) === 0,
+   'consumível e lendário: 0');
+ok(varianteInicial(df, T).preco === 1000 && varianteInicial(P('vitae-cura'), new Set(['pocao'])).valor === 3
+   && varianteInicial(P('iluzio-invisibilidade'), new Set(['anel'])).nivel === 3,
+   'grau inicial na janela: o melhor do nível mais baixo (Dano Flamejante +1, a Poção de Cura de 3 PV, a Invisibilidade única)');
 ok(variantePadrao(df, 1, T).preco === 1000 && variantePadrao(df, 2, T).preco === 21000 && variantePadrao(df, 3, T).preco === 600000,
-   'o nível do item escolhe o preço do Dano Flamejante (1/2/3 de dano)');
-ok(variantesDoItem(df, 3, T).every((v) => v.tipo === 'arma'), 'numa arma, só os preços de Armas');
-ok(variantePadrao(P('iluzio-invisibilidade'), 1, new Set(['anel'])) === null && nivelMinimo(P('iluzio-invisibilidade'), new Set(['anel'])) === 3,
-   'Invisibilidade (+400.000) só cabe num item Maior');
-ok(variantePadrao(P('acida-corrosiva'), 1, T) === null && variantePadrao(P('acida-corrosiva'), 2, T)?.preco === 30000,
-   'Corrosiva numa arma (+30.000) pede item Intermediário; em munição (+1.000) cabe no Menor');
-ok(variantePadrao(P('vitae-cura'), 1, new Set(['pocao'])).valor === 3, 'Poção de Cura: a de 3 PV também é preço Menor (+200)');
+   'com um teto de nível (receitas antigas, chamadas que não dizem o grau): o grau mais alto até ele');
+ok(JSON.stringify(combinacoes(['a', 'b', 'c'])) === JSON.stringify([['a'], ['b'], ['c'], ['a', 'b'], ['a', 'c'], ['b', 'c'], ['a', 'b', 'c']]),
+   'combinações das propriedades de arma: cada uma, os pares e todas');
 
-console.log('3) Espada Longa Intermediária: Dano Flamejante + Corrosiva');
+console.log('3) Espada Longa: Dano Flamejante +2 e Corrosiva — cada uma com a sua mana, juntas somam');
 let base = eq('Espada Longa');
-let d = encantar(base, 'Intermediário', ['ignis-dano-flamejante', 'acida-corrosiva']);
+let d = encantarGraus(base, [['ignis-dano-flamejante', 2], ['acida-corrosiva', 2]]);
 let vs = d.system.actions.filter((a) => a.label.startsWith('✦ Ataque'));
+const ataquesDaEspada = base.system.actions.filter(eAtaque).length;
 ok(d.system.actions.filter((a) => !a.label.startsWith('✦')).length === base.system.actions.length,
    'os ataques comuns continuam lá, sem mana');
-ok(vs.length === 2 && vs.every((a) => a.costMp === '2'), 'uma versão ✦ de cada ataque, custando 2 PM (2 palavras)');
-ok(vs.every((a) => a.extraDamage.some((x) => x.formula === '2' && x.type === 'fogo' && !x.scaling)),
-   '+2 de dano bruto de fogo (parcela extra, fixa)');
-ok(vs.every((a) => a.appliesEffects.some((e) => e.fxTarget === 'dano_continuo' && e.tickType === 'acido'
-   && e.resist && e.resistAttr === 'vigor' && !e.resistVsCast && e.resistDc === '10')),
-   'Corrosiva: dano contínuo de ácido, Vigor (Normal = 10) anula');
+const soFogo = vs.filter((a) => /Dano Flamejante/.test(a.label) && !/Corrosiva/.test(a.label));
+const soAcido = vs.filter((a) => /Corrosiva/.test(a.label) && !/Dano Flamejante/.test(a.label));
+const juntas = vs.filter((a) => /Dano Flamejante/.test(a.label) && /Corrosiva/.test(a.label));
+ok(vs.length === 3 * ataquesDaEspada && soFogo.length === ataquesDaEspada && soAcido.length === ataquesDaEspada && juntas.length === ataquesDaEspada,
+   `por ataque, três versões ✦: só Dano Flamejante, só Corrosiva e as duas (${vs.length} no total)`);
+ok(soFogo.every((a) => a.costMp === '2') && soAcido.every((a) => a.costMp === '2') && juntas.every((a) => a.costMp === '4' && /\(4 PM\)$/.test(a.label)),
+   'cada uma custa o nível dela (2 PM); as duas juntas, 4 PM');
+ok([...soFogo, ...juntas].every((a) => a.extraDamage.some((x) => x.formula === '2' && x.type === 'fogo' && !x.scaling))
+   && soAcido.every((a) => !a.extraDamage.some((x) => x.type === 'fogo')),
+   '+2 de dano bruto de fogo (parcela extra, fixa) — só nas versões com o Dano Flamejante');
+ok([...soAcido, ...juntas].every((a) => a.appliesEffects.some((e) => e.fxTarget === 'dano_continuo' && e.tickType === 'acido'
+   && e.resist && e.resistAttr === 'vigor' && !e.resistVsCast && e.resistDc === '10')) && soFogo.every((a) => !a.appliesEffects.length),
+   'Corrosiva: dano contínuo de ácido, Vigor (Normal = 10) anula — só nas versões com ela');
 ok(vs.every((a) => a.scalingDamage && a.damageType === 'corte'), 'o dano da arma continua Corte escalonado');
 ok(d.system.price === '51.024 Vo', `preço: 24 Vo + 21.000 + 30.000 = ${d.system.price}`);
-ok(d.system.description.includes('Corrosiva') && d.system.description.includes('2 PM'), 'texto do livro e mana na descrição');
+ok(d.system.description.includes('Corrosiva') && d.system.description.includes('<b>2 PM por uso</b>')
+   && d.system.description.includes('todas juntas, <b>4 PM</b>'), 'texto do livro e a mana de cada uma (e juntas) na descrição');
 const rec = d.flags[MOD].encantamentos[0];
-ok(rec.nivel === 'Intermediário' && rec.pm === 2 && rec.propriedades.length === 2 && rec.palavras.join() === 'ignis,acida',
-   'receita guardada no item');
+ok(rec.nivel === 'Intermediário' && rec.pm === 4 && rec.mana === 'propriedade' && rec.propriedades.length === 2
+   && rec.propriedades.every((x) => x.pm === 2 && x.nivel === 2) && rec.palavras.join() === 'ignis,acida',
+   'receita guardada no item (a mana de cada propriedade)');
 ok(vs.every((a) => a.aaConfig?.metaData?.origem === MOD), 'as versões ✦ animam como a arma');
 const lend = mod.refazerEncantamentos(d, { lendario: true }, { animar: true });
 ok(lend.system.actions.length === base.system.actions.length && lend.system.actions.every((a) => a.costMp === '0'
@@ -122,17 +150,52 @@ ok(lend.system.actions.length === base.system.actions.length && lend.system.acti
    'tornar lendário depois: refaz pela receita — o ataque carrega as propriedades, sem mana, mesmo preço');
 const volta = mod.refazerEncantamentos(lend, { lendario: false }, { animar: true });
 ok(JSON.stringify(volta.system.actions.map((a) => [a.label, a.costMp])) === JSON.stringify(d.system.actions.map((a) => [a.label, a.costMp])),
-   'e voltar a gastar mana devolve as versões ✦ de 2 PM');
-const desfeito = desfazerEncantamento(d);
+   'e voltar a gastar mana devolve as versões ✦ (2, 2 e 4 PM)');
+d = encantarGraus(eq('Espada Longa'), [['ignis-dano-flamejante', 3]]);
+vs = d.system.actions.filter((a) => a.label.startsWith('✦ Ataque'));
+ok(vs.length === ataquesDaEspada && vs.every((a) => a.costMp === '3' && a.extraDamage.some((x) => x.formula === '3' && x.type === 'fogo'))
+   && d.flags[MOD].encantamentos[0].palavras.length === 1 && d.flags[MOD].encantamentos[0].nivel === 'Maior',
+   'uma palavra só (ignis), Dano Flamejante +3: o grau Maior, 3 PM a cada ataque com ele');
+d = encantarGraus(eq('Espada Longa'), [['ignis-dano-flamejante', 3], ['glacios-dano-congelante', 3]]);
+vs = d.system.actions.filter((a) => a.label.startsWith('✦ Ataque'));
+const ambas = vs.filter((a) => /Dano Flamejante/.test(a.label) && /Dano Congelante/.test(a.label));
+ok(vs.filter((a) => a.costMp === '3').length === 2 * ataquesDaEspada && ambas.length === ataquesDaEspada
+   && ambas.every((a) => a.costMp === '6' && a.extraDamage.some((x) => x.type === 'fogo' && x.formula === '3')
+     && a.extraDamage.some((x) => x.type === 'frio' && x.formula === '3')),
+   'Dano Flamejante +3 e Dano Congelante +3: 3 PM cada; as duas no mesmo golpe, 6 PM (não 3)');
+d = encantarGraus(eq('Espada Longa'), [['ignis-dano-flamejante', 1], ['glacios-dano-congelante', 2], ['fulgur-dano-de-raio', 3]]);
+vs = d.system.actions.filter((a) => a.label.startsWith('✦ Ataque'));
+const custos = vs.slice(0, 7).map((a) => a.costMp).join();
+ok(vs.length === 7 * ataquesDaEspada && custos === '1,2,3,3,4,5,6',
+   `três propriedades de arma: cada uma, os pares e as três, somando a mana (${custos} PM)`);
+// Item encantado antes da mana por propriedade (receita sem "mana", 2 palavras = 2 PM juntas):
+// "Refazer pela receita" põe as regras atuais — mesmas propriedades e graus.
+const antigo = encantarGraus(eq('Espada Longa'), [['ignis-dano-flamejante', 2], ['acida-corrosiva', 2]]);
+const recAntiga = antigo.flags[MOD].encantamentos[0];
+delete recAntiga.mana;
+recAntiga.pm = 2;
+recAntiga.propriedades.forEach((x) => { delete x.pm; delete x.nivel; });
+antigo.system.actions = [...recAntiga.antes.system.actions, ...recAntiga.antes.system.actions.filter(eAtaque)
+  .map((x) => ({ ...JSON.parse(JSON.stringify(x)), label: `✦ ${x.label} — Dano Flamejante + Corrosiva (2 PM)`, costMp: '2' }))];
+const novoPelaReceita = mod.refazerEncantamentos(antigo);
+ok(novoPelaReceita.system.actions.filter((x) => x.label.startsWith('✦ Ataque')).map((x) => x.costMp).sort().join()
+   === Array(ataquesDaEspada).fill(['2', '2', '4']).flat().sort().join() && novoPelaReceita.flags[MOD].encantamentos[0].mana === 'propriedade'
+   && !mod.eLendario(novoPelaReceita), 'um item encantado pela regra antiga, refeito pela receita: 2 + 2 PM, juntas 4 (mesmas propriedades e graus)');
+const desfeito = desfazerEncantamento(encantarGraus(eq('Espada Longa'), [['ignis-dano-flamejante', 2], ['acida-corrosiva', 2]]));
 ok(desfeito && desfeito['system.actions'].length === base.system.actions.length && desfeito['system.price'] === '24 Vo'
    && desfeito[`flags.${MOD}.encantamentos`].length === 0, 'desfazer volta ao item de antes');
 
 console.log('4) Cota de Malha Maior: Proteção Contra Fogo + Proteção Contra Frio + Couraça');
 base = eq('Cota de Malha');
 d = encantar(base, 'Maior', ['ignis-protecao-contra-fogo', 'glacios-protecao-contra-frio', 'forjuri-couraca']);
-const ativar = d.system.actions.find((a) => a.label.startsWith('✦ Ativar'));
-ok(ativar && ativar.costMp === '3' && ativar.targetMode === 'self' && !ativar.canRoll,
-   'ativação das constantes: 3 PM, em você');
+const ativacoes = d.system.actions.filter((a) => a.label.startsWith('✦ Ativar'));
+const ativar = ativacoes.find((a) => a.label.startsWith('✦ Ativar todas'));
+const soFogoA = ativacoes.find((a) => a.label.startsWith('✦ Ativar Proteção Contra Fogo'));
+ok(ativacoes.length === 3 && soFogoA?.costMp === '3' && soFogoA.appliesEffects.length === 1 && soFogoA.appliesEffects[0].fxTarget === 'fogo'
+   && ativacoes.find((a) => a.label.startsWith('✦ Ativar Proteção Contra Frio'))?.costMp === '3',
+   'uma ativação por constante, com a mana dela: Proteção Contra Fogo 3 PM, Contra Frio 3 PM');
+ok(ativar && ativar.costMp === '6' && ativar.targetMode === 'self' && !ativar.canRoll && /\(6 PM, até o fim da cena\)$/.test(ativar.label),
+   'e "✦ Ativar todas", em você, com a soma: 6 PM');
 ok(ativar.appliesEffects.some((e) => e.fxType === 'rd' && e.fxTarget === 'fogo' && e.fxValue === '3' && e.durationMode === 'scene')
    && ativar.appliesEffects.some((e) => e.fxType === 'rd' && e.fxTarget === 'frio' && e.fxValue === '3'),
    'Proteção 3 contra Fogo e Frio até o fim da cena');
@@ -168,6 +231,12 @@ ok(d.system.price === '400.010 Vo', 'preço da propriedade repetida contado uma 
 const refeito = mod.refazerEncantamentos(d, { lendario: true });
 ok(refeito.flags[MOD].encantamentos[0].palavras.join() === 'iluzio,iluzio,iluzio' && refeito.system.actions[0].costMp === '0',
    'refazer mantém as três palavras (item Maior) e o anel lendário não gasta mana');
+const pelaReceita = mod.refazerEncantamentos(refeito);
+ok(pelaReceita.system.actions[0].costMp === '0' && mod.eLendario(pelaReceita)
+   && mod.refazerEncantamentos(d).system.actions[0].costMp === '3', '"refazer pela receita" (sem dizer o lendário) mantém o de cada receita');
+d = encantarGraus(sintetico('Anel de Prata', 'Joia'), [['iluzio-invisibilidade']]);
+ok(d.system.actions.length === 1 && d.system.actions[0].costMp === '3' && d.flags[MOD].encantamentos[0].palavras.join() === 'iluzio'
+   && d.flags[MOD].encantamentos[0].nivel === 'Maior', 'com uma palavra só: o mesmo Anel de Invisibilidade Maior, 3 PM');
 const pocao = sintetico('Poção', 'Suprimento');
 d = encantar(pocao, 'Intermediário', ['vitae-cura', 'energio-mana']);
 ok(d.system.actions.every((a) => a.costMp === '0' && a.label.includes('consumível')), 'poção: consumível, não gasta mana');
@@ -178,9 +247,13 @@ const bomba = d.system.actions[0];
 ok(bomba.targetMode === 'area' && bomba.range === '10' && bomba.area === '2' && bomba.canRoll && bomba.rollAttr === 'agilidade'
    && bomba.defenseAttr === 'esquiva' && bomba.appliesEffects[0].resistVsCast, 'bomba: 10m, 2m de raio, Agilidade × Esquiva');
 d = encantar(eq('Adaga'), 'Intermediário', ['devena-predador', 'inanis-ferida-arcana']);
-const presa = d.system.actions.find((a) => a.label.includes('Predador'));
-ok(presa && presa.damage === '3' && presa.extraDamage.some((x) => x.resource === 'mp' && x.formula === '2'),
-   'Predador: versão "contra a presa" (+2 no dano base) com a Ferida Arcana junto');
+const presa = d.system.actions.find((a) => a.label.includes('Predador') && a.label.includes('Ferida Arcana'));
+const soPresa = d.system.actions.find((a) => a.label.includes('Predador') && !a.label.includes('Ferida Arcana'));
+ok(presa && presa.damage === '3' && presa.extraDamage.some((x) => x.resource === 'mp' && x.formula === '2') && presa.costMp === '4'
+   && /Ferida Arcana \+ Predador contra a presa/.test(presa.label),
+   'Predador: versão "contra a presa" (+2 no dano base) com a Ferida Arcana junto (2 + 2 PM)');
+ok(soPresa && soPresa.damage === '3' && !soPresa.extraDamage.some((x) => x.resource === 'mp') && soPresa.costMp === '2',
+   'e a versão só contra a presa (2 PM)');
 d = encantar(sintetico('Botas'), 'Maior', ['krucigon-teletransporte', 'sorcdiron-agilidade-relampago', 'majesto-passo-dimensional']);
 const tp = d.system.actions.find((a) => a.label.includes('Teletransporte'));
 ok(tp.movement.enabled && tp.movement.kind === 'teleport' && tp.movement.who === 'self' && tp.movement.distance === 'floor(@deslocamento/2)',
@@ -214,17 +287,16 @@ for (const prop of PROPRIEDADES) {
   for (const item of itensPara(prop)) {
   const tipos = tiposDoItem(item);
   if (!compativel(prop, tipos)) semCompat++;
-  const minimo = nivelMinimo(prop, tipos);
   if (automatizada(regraDe(prop, contexto(prop, variantePadrao(prop, 3, tipos), tipos)))) mexe = true;
-  for (const nivel of new Set([NOME_DO_NIVEL[minimo], 'Maior'])) {
-    const N = NIVEIS_ITEM[nivel];
+  // Uma palavra só, no grau inicial e no mais alto (o mais caro).
+  for (const variante of new Set([mod.varianteInicial(prop, tipos), variantePadrao(prop, 3, tipos)])) {
     for (const lendario of [false, true]) {
-      const ids = Array(N.n).fill(prop.id);
-      const out = encantar(item, nivel, ids, { lendario });
+      const out = construirEncantamento(item, { escolhas: [{ prop, variante, palavra: prop.palavra }], lendario }, { animar: true });
       const extras = novas(item, out);
-      const esperado = (a) => (lendario || (prop.consumivel && !a.label.startsWith('✦ Ativar'))) ? '0' : String(N.pm);
+      // Gasto à escolha (Emanação, Pragas): a mana é a que se escolhe gastar — custo fixo 0.
+      const esperado = (a) => (lendario || a.variableCost?.enabled || prop.consumivel) ? '0' : String(variante.nivel);
       for (const a of extras) {
-        if (a.label.startsWith('✦') && a.costMp !== esperado(a)) manaErrada.push(`${prop.id} ${nivel}${lendario ? ' lendário' : ''}: ${a.label} = ${a.costMp}`);
+        if (a.label.startsWith('✦') && a.costMp !== esperado(a)) manaErrada.push(`${prop.id} ${variante.rotulo ?? ''}${lendario ? ' lendário' : ''}: ${a.label} = ${a.costMp}`);
       }
       fs.writeFileSync(`${tmp}/packs-source/encantados/${String(n++).padStart(4, '0')}.json`,
         JSON.stringify({ ...out, _id: `enc${n}` }));
@@ -234,7 +306,7 @@ for (const prop of PROPRIEDADES) {
   if (mexe) auto++;
 }
 ok(semCompat === 0, `cada propriedade achou um item do seu tipo (${semCompat} sem)`);
-ok(manaErrada.length === 0, `mana: 1 PM por palavra; lendário e consumível 0 ${manaErrada.slice(0, 3).join(' | ')}`);
+ok(manaErrada.length === 0, `mana: o nível do grau, com uma palavra só; lendário e consumível 0 ${manaErrada.slice(0, 3).join(' | ')}`);
 ok(auto >= 110, `${auto} de ${PROPRIEDADES.length} propriedades mexem na ficha sozinhas; as demais ficam como lembrete`);
 let saida = '';
 let codigo = 0;
@@ -260,7 +332,7 @@ const ator = {
 const app = new EncantamentoApp(ator);
 ok(app.palavras.size === 2 && app.palavras.get('ignis').nivel === 'B', 'palavras da ficha, com o nível');
 app.forja.itemId = 'e1';
-app.forja.nivel = 'Intermediário';
+app.forja.nPalavras = 2;
 app.forja.slots[0].palavra = 'ignis';
 app.forja.slots[1].palavra = 'glacios';
 let html = (await app._renderHTML()).innerHTML;
@@ -273,15 +345,38 @@ ok(html.includes('data-action="encantar" disabled'), 'botão desligado até esco
 app.forja.slots[0].propId = 'ignis-protecao-contra-fogo';
 app.forja.slots[1].propId = 'glacios-protecao-contra-frio';
 html = (await app._renderHTML()).innerHTML;
-ok(!html.includes('data-action="encantar" disabled') && html.includes('2 PM por uso') && html.includes('+14.000 Vo'),
-   'resumo: 2 PM por uso, +14.000 Vo (Proteção 2 + Proteção 2)');
+ok(!html.includes('data-action="encantar" disabled') && html.includes('+800 Vo') && html.includes('juntas, <b>2 PM</b>'),
+   'escolhidas, começam no grau Menor: 1 PM cada, juntas 2 PM, +800 Vo');
+ok(/<select name="var0"[^>]*>/.test(html) && html.includes('Proteção 3 — Maior · 3 PM por uso · +200.000 Vo') && !/<option[^>]*disabled/.test(html.split('name="var0"')[1].split('</select>')[0]),
+   'o grau: qualquer um, com a mana de cada (Proteção 3 — Maior · 3 PM por uso), nenhum bloqueado');
+app.forja.slots[0].var = P('ignis-protecao-contra-fogo').variantes.findIndex((v) => v.rotulo === 'Proteção 3');
+app.forja.slots[1].var = P('glacios-protecao-contra-frio').variantes.findIndex((v) => v.rotulo === 'Proteção 2');
+html = (await app._renderHTML()).innerHTML;
+ok(html.includes('Proteção Contra Fogo <b>3 PM por uso</b>') && html.includes('Proteção Contra Frio <b>2 PM por uso</b>')
+   && html.includes('juntas, <b>5 PM</b>') && html.includes('+207.000 Vo'),
+   'resumo: Proteção 3 (3 PM) + Proteção 2 (2 PM) — juntas, 5 PM; +207.000 Vo');
 app.forja.lendario = true;
 html = (await app._renderHTML()).innerHTML;
 ok(html.includes('nenhuma (lendário)'), 'lendário: nenhuma mana');
-app.forja.nivel = 'Menor';
+app.forja.lendario = false;
+app.forja.nPalavras = 1;
 app.forja.slots[0] = { palavra: 'ignis', propId: '', var: -1, todas: true };
 html = (await app._renderHTML()).innerHTML;
-ok(/value="ignis-imunidade-a-fogo"\s+disabled/.test(html), 'num item Menor, Imunidade a Fogo (+600.000) fica bloqueada');
+ok(/value="ignis-imunidade-a-fogo"\s*>/.test(html) && !/value="ignis-imunidade-a-fogo"\s+disabled/.test(html)
+   && /Imunidade a Fogo<\/b>[\s\S]*?\+600\.000 Vo · 3 PM por uso/.test(html),
+   'com uma palavra só, Imunidade a Fogo (Maior, +600.000) já pode ser escolhida — 3 PM por uso');
+{
+  // Item já encantado: os botões de refazer (pela receita), tornar lendário e desfazer.
+  const enc = encantarGraus(eq('Espada Longa'), [['ignis-dano-flamejante', 3]]);
+  const ator2 = { name: 'Lyra', type: 'personagem', isOwner: true, items: [
+    { id: 'p1', type: 'habilidade', name: 'Palavra Arcana [ignis]', system: { level: 'A' } },
+    { id: 'x1', type: 'equipamento', name: enc.name, system: enc.system, flags: enc.flags, toObject: () => JSON.parse(JSON.stringify(enc)) }] };
+  const app2 = new EncantamentoApp(ator2);
+  app2.forja.itemId = 'x1';
+  const h2 = (await app2._renderHTML()).innerHTML;
+  ok(h2.includes('data-action="refazer"') && h2.includes('Refazer pela receita') && h2.includes('data-action="lendario"') && h2.includes('data-action="desfazer"'),
+     'item já encantado: "Refazer pela receita" (regras atuais), "Tornar lendário" e "Desfazer"');
+}
 ok(eAtaque({ label: 'Ataque — Adaga', isWeapon: true }) && !eAtaque({ label: '✦ Ataque — Adaga — X', isWeapon: true }),
    'as versões ✦ não viram base de novas versões');
 

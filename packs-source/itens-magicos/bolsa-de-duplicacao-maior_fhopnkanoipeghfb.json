@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "2.000.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (pluribus + pluribus + pluribus)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Duplicação</b> (pluribus · Constante · 30 dias, nível 12 · +2.000.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando você coloca um item nessa bolsa, ela se fecha e permanece fechada por uma quantidade de dias, dependendo do valor da bolsa. Quando a bolsa é aberta depois do prazo, o item colocado nela estará duplicado. Caso o item seja mágico, a cópia só terá as propriedades do original caso sejam de um nível igual ou inferior ao declarado no valor desta bolsa. Caso contrário, a cópia será apenas uma versão comum da original.</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (pluribus)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Duplicação</b> (pluribus · Constante · 30 dias, nível 12 · +2.000.000 Vo · <b>3 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Quando você coloca um item nessa bolsa, ela se fecha e permanece fechada por uma quantidade de dias, dependendo do valor da bolsa. Quando a bolsa é aberta depois do prazo, o item colocado nela estará duplicado. Caso o item seja mágico, a cópia só terá as propriedades do original caso sejam de um nível igual ou inferior ao declarado no valor desta bolsa. Caso contrário, a cópia será apenas uma versão comum da original.</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Duplicação (3 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,19 +241,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "pluribus",
-            "pluribus",
             "pluribus"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "pluribus",
-              "id": "pluribus-duplicacao"
-            },
-            {
-              "palavra": "pluribus",
-              "id": "pluribus-duplicacao"
-            },
             {
               "palavra": "pluribus",
               "id": "pluribus-duplicacao"
@@ -253,6 +257,8 @@
               "palavra": "pluribus",
               "variante": "30 dias, nível 12",
               "preco": 2000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

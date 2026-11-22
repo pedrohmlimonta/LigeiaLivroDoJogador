@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "1.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (forjuri)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Contramágica</b> (forjuri · Reação · 1 Palavra, Normal · +1.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Esse sinete possui o entalhe de até três palavras arcanas dependendo do seu valor. Se você for alvo de uma magia composta por uma dessas palavras arcanas enquanto estiver empunhando esse sinete com uma das mãos, você pode usar sua reação para ativá-lo. Caso o faça, o conjurador da magia precisa que sua rolagem de Conjuração supere uma dificuldade, que depende do valor do item, ou ele próprio se tornará alvo da magia em seu lugar.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (forjuri)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Contramágica</b> (forjuri · Reação · 1 Palavra, Normal · +1.000 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Esse sinete possui o entalhe de até três palavras arcanas dependendo do seu valor. Se você for alvo de uma magia composta por uma dessas palavras arcanas enquanto estiver empunhando esse sinete com uma das mãos, você pode usar sua reação para ativá-lo. Caso o faça, o conjurador da magia precisa que sua rolagem de Conjuração supere uma dificuldade, que depende do valor do item, ou ele próprio se tornará alvo da magia em seu lugar.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Contramágica — devolve a magia (Conjuração 10) (1 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -203,6 +216,7 @@
           "palavras": [
             "forjuri"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "forjuri",
@@ -216,6 +230,8 @@
               "palavra": "forjuri",
               "variante": "1 Palavra, Normal",
               "preco": 1000,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

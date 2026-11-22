@@ -12,7 +12,7 @@
     "weight": 1,
     "price": "1.500.060 Vo",
     "notes": "Penalidade -2",
-    "description": "<p>Armadura feita de peles grossas e pesadas de animais, curtidas e batidas.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -2 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Maior (forjuri + forjuri + forjuri)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Fortificação</b> (forjuri · Constante · +1.500.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto você estiver usando um item com essa propriedade, você fica imune a pontos de danos finais quaisquer que não sejam resultados do dano bruto subtraído da Proteção.</li></ul><p>Preço das propriedades: +1.500.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 17 (1.500.000 Vo).</p>",
+    "description": "<p>Armadura feita de peles grossas e pesadas de animais, curtidas e batidas.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -2 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Maior (forjuri)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Fortificação</b> (forjuri · Constante · +1.500.000 Vo · <b>3 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Enquanto você estiver usando um item com essa propriedade, você fica imune a pontos de danos finais quaisquer que não sejam resultados do dano bruto subtraído da Proteção.</li></ul><p>Preço das propriedades: +1.500.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 17 (1.500.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Fortificação (3 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -289,19 +302,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "forjuri",
-            "forjuri",
             "forjuri"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "forjuri",
-              "id": "forjuri-fortificacao"
-            },
-            {
-              "palavra": "forjuri",
-              "id": "forjuri-fortificacao"
-            },
             {
               "palavra": "forjuri",
               "id": "forjuri-fortificacao"
@@ -314,6 +318,8 @@
               "palavra": "forjuri",
               "variante": "",
               "preco": 1500000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],

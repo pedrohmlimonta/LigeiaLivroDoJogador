@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "700 Vo",
     "notes": "",
-    "description": "<p><b>Botas e Sandálias</b>: São itens que podem ser equipados nos pés.</p><hr><h3>✦ Encantamento — Item Menor (majesto)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Passo Dimensional</b> (majesto · Constante · +1 Deslocamento · +700 Vo)<br>Enquanto você estiver usando esse item, você recebe um bônus no Deslocamento, dependendo do preço do item.</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
+    "description": "<p><b>Botas e Sandálias</b>: São itens que podem ser equipados nos pés.</p><hr><h3>✦ Encantamento — Item Menor (majesto)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Passo Dimensional</b> (majesto · Constante · +1 Deslocamento · +700 Vo · <b>1 PM por uso</b>)<br>Enquanto você estiver usando esse item, você recebe um bônus no Deslocamento, dependendo do preço do item.</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Passo Dimensional (1 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "majesto"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "majesto",
@@ -243,6 +257,8 @@
               "palavra": "majesto",
               "variante": "+1 Deslocamento",
               "preco": 700,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

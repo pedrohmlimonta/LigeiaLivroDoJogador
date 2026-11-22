@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "1.502 Vo",
     "notes": "Simples, Uma Mão, Corpo a Corpo",
-    "description": "<p>Grupo: Maças. Ataque: Força. Dano Base: Concussão +2. Propriedades: Simples, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (sonigu)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Estrondante</b> (sonigu · Constante · +1.500 Vo)<br>Quando atacar com a arma, alvos atingidos por você deverão realizar uma rolagem de Vigor (Normal). Caso falhem, ficarão surdos até o fim da cena (Vigor anula).</li></ul><p>Preço das propriedades: +1.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 4 (1.500 Vo).</p>",
+    "description": "<p>Grupo: Maças. Ataque: Força. Dano Base: Concussão +2. Propriedades: Simples, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (sonigu)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Estrondante</b> (sonigu · Constante · +1.500 Vo · <b>1 PM por uso</b>)<br>Quando atacar com a arma, alvos atingidos por você deverão realizar uma rolagem de Vigor (Normal). Caso falhem, ficarão surdos até o fim da cena (Vigor anula).</li></ul><p>Preço das propriedades: +1.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 4 (1.500 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Maça",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Maça — Estrondante (1 PM)",
@@ -390,7 +403,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -424,6 +450,7 @@
           "palavras": [
             "sonigu"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "sonigu",
@@ -437,6 +464,8 @@
               "palavra": "sonigu",
               "variante": "",
               "preco": 1500,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -616,7 +645,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

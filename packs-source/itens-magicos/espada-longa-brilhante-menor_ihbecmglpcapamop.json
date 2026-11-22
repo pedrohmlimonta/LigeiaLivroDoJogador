@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "1.024 Vo",
     "notes": "Militar, Versátil, Corpo a Corpo",
-    "description": "<p>Grupo: Lâminas Grandes. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (lumo)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Brilhante</b> (lumo · Ação Rápida · +1.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Itens que possuem esse efeito, podem irradiar uma luz ao alcance de 10m com um simples comando do portador, forte o suficiente para que qualquer criatura com visão possa ver dentro do alcance.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Grandes. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (lumo)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Brilhante</b> (lumo · Ação Rápida · +1.000 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Itens que possuem esse efeito, podem irradiar uma luz ao alcance de 10m com um simples comando do portador, forte o suficiente para que qualquer criatura com visão possa ver dentro do alcance.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Espada Longa",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -363,7 +376,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Brilhante — luz de 10m (1 PM)",
@@ -520,7 +546,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -554,6 +593,7 @@
           "palavras": [
             "lumo"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "lumo",
@@ -567,6 +607,8 @@
               "palavra": "lumo",
               "variante": "",
               "preco": 1000,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -746,7 +788,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 },
                 {
                   "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -919,7 +974,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

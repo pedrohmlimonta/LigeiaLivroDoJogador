@@ -59,9 +59,11 @@ TRACOS = [
           img=IMG_RACA),
     traco("Sangue Aagn", "race",
           "Usando sua ação rápida, você pode gastar pontos de magia para recuperar pontos de vida. A cada 2 pontos de magia gastos, você recupera 1 ponto de vida.\n\nRaça: humano.",
-          actions=[action("Sangue Aagn — 2 PM recuperam 1 PV",
+          actions=[action("Sangue Aagn — cada 2 PM recuperam 1 PV",
                           can_roll=False, target_mode="self", include_self=True,
-                          cost_mp=2, heal=1, heal_resource="hp")],
+                          heal_resource="hp",
+                          variable_cost={"min": 2, "healBonus": "floor(@gasto/2)",
+                                         "label": "Sangue Aagn: a cada 2 PM gastos, você recupera 1 PV."})],
           img=IMG_RACA),
     traco("Versatilidade dos Humanos", "race",
           "Você recebe 10 pontos de antecedentes adicionais na criação do personagem. Você pode gastar esses pontos adicionais para comprar habilidades de outras vocações ou raças como se fossem da sua lista (sem ter que pagar o dobro).\n\nRaça: meio-elfo.",
@@ -125,10 +127,16 @@ TRACOS = [
           img=IMG_HERANCA),
     traco("Moldar Energia", "heritage",
           "Você pode usar seu movimento e gastar uma quantidade de pontos de magia para criar um objeto feito com a energia da sua mente, caso você seja bem sucedido em uma rolagem de Mente. A dificuldade para criar itens com peso 0 é Normal. A dificuldade aumenta em um nível a cada ponto de peso que o item a ser criado tiver acima de 0. O custo em pontos de magia é de 1 ponto + 1 ponto adicional por cada ponto de peso. Os itens funcionam normalmente, como qualquer outro, com exceção das armas, cujo dano é sempre de energia. O item dura até o fim da cena.\n\nHerança: psiônico.",
-          mode="active", costs=[cost("mp", 1, "Criar objeto (peso 0; +1 PM por ponto de peso)")],
-          actions=[action("Moldar Energia (Mente vs dificuldade)", roll_attr="mente",
-                          vs_difficulty=True, fixed_difficulty=8, target_mode="none",
-                          cost_mp=1)],
+          # Custo = 1 PM + 1 por ponto de peso; a dificuldade (Normal 10 no
+          # peso 0) sobe um nível por ponto de peso — 12, 14, 17 — o que entra
+          # como redutor na rolagem: −2 por ponto, −7 no peso 3.
+          actions=[action("Moldar Energia (Mente vs Normal; 1 PM + 1 por ponto de peso)", roll_attr="mente",
+                          vs_difficulty=True, fixed_difficulty=10, target_mode="none",
+                          variable_cost={"min": 1, "rollBonus": "-(2*(@gasto-1)+floor((@gasto-1)/3))",
+                                         "label": "Moldar Energia: gaste 1 PM + 1 por ponto de peso do objeto. "
+                                                  "Cada ponto de peso sobe a dificuldade um nível (Normal 10 → "
+                                                  "Difícil 12 → Muito Difícil 14 → Épica 17), aplicado como "
+                                                  "redutor na rolagem."})],
           img=IMG_HERANCA),
     traco("Presença Ardente", "heritage",
           "Você recebe um bônus igual a metade do seu nível em rolagens necessárias para o sucesso das habilidades Presença Aterradora, Provocar e Grito de Guerra.\n\nHerança: psiônico.",

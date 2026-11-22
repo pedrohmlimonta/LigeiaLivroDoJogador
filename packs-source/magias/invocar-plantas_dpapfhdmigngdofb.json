@@ -17,7 +17,189 @@
     "description": "<p>Você pronuncia a palavra devena, fazendo com que cresça uma planta carnívora em um espaço vazio, a qual ao fim da invocação dá frutos.</p><p>Efeito: Você invoca uma criatura do tipo planta, pequena, no espaço alvo, com Desafio igual ao seu nível ou menos. A planta é amigável a você e seus aliados e hostil a seus inimigos, atacando-os, se possível. A planta invocada concede uma quantidade de frutos no final da invocação, igual a seu atributo de Mente. Esses frutos podem ser medicinais ou venenosos (você escolhe quando invocar). Frutos medicinais curam 1 ponto de vida quando ingeridos (e contam como uma refeição); frutos venenosos causam 1 ponto de dano bruto de veneno quando ingeridos.</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
     "peculiarities": "<p>Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Desafio 3 + seu nível, ou menos (apenas Círculo Intermediário ou Maior) (-4). Desafio 6 + seu nível ou menos (apenas Círculo Maior) (-6). Os frutos curam/causam 2 pontos de dano (apenas Círculo Intermediário ou Maior) (-2). Os frutos curam/causam 3 pontos de dano (apenas Círculo Maior) (-4). O conjurador perde 1 ponto de vida quando a conjura (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
-    "actions": [],
+    "actions": [
+      {
+        "label": "Invocar Plantas (planta pequena, Desafio até o Nível)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "@nivel",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "TAdWnzHKIjMZhLfU",
+          "label": "Invocar Plantas",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.magicsign.conjuration.02.yellow",
+            "nome": "Invocação"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "magicsign",
+              "animation": "conjuration",
+              "variant": "02",
+              "color": "yellow",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1.5,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Invocar Plantas (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [
+          {
+            "actorUuid": "",
+            "actorName": "Planta pequena, Desafio até Nível — arraste a ficha abaixo",
+            "count": "1",
+            "disposition": "same",
+            "rounds": "0",
+            "giveControl": true,
+            "hidden": false,
+            "enabled": true
+          }
+        ]
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,

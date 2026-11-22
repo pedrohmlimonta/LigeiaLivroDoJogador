@@ -21,7 +21,7 @@
     "descSpecial": "",
     "actions": [
       {
-        "label": "Sopro de Dragão — Raio (área = PM gastos; ajuste a área)",
+        "label": "Sopro de Dragão — Raio (raio = PM gastos)",
         "level": "B",
         "canRoll": true,
         "rollAttr": "vigor",
@@ -70,12 +70,12 @@
         "isWeapon": false,
         "isMelee": false,
         "range": "2*@vigor",
-        "area": "1",
+        "area": "0",
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "nlwGZLmTfzpEwBG0",
+          "id": "29dNBdaF4ZgSgyZm",
           "label": "Sopro de Dragão [Raio]",
           "menu": "range",
           "macro": {
@@ -162,17 +162,30 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "1",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "Sopro de Dragão: o raio da área, em metros, é igual aos PM gastos (dentro de um alcance de 2 × Vigor).",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "@gasto",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
-        "label": "Sopro de Dragão (A) — Raio com dano contínuo",
+        "label": "Sopro de Dragão (A) — Raio com dano contínuo (raio = PM gastos)",
         "level": "A",
         "canRoll": true,
         "rollAttr": "vigor",
@@ -334,12 +347,12 @@
         "isWeapon": false,
         "isMelee": false,
         "range": "2*@vigor",
-        "area": "1",
+        "area": "0",
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "WVErYCPscsoXDh8l",
+          "id": "TLI1JN2gEmZlnzDo",
           "label": "Sopro de Dragão [Raio]",
           "menu": "range",
           "macro": {
@@ -426,14 +439,27 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "1",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "Sopro de Dragão: o raio da área, em metros, é igual aos PM gastos (dentro de um alcance de 2 × Vigor).",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "@gasto",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],

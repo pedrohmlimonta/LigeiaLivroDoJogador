@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "30.000 Vo",
     "notes": "",
-    "description": "<p><b>Capas</b>: São itens que podem ser equipados nos ombros.</p><hr><h3>✦ Encantamento — Item Intermediário (ignis + ignis)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Conflagração</b> (ignis · Ação Rápida · Dano 2 · +30.000 Vo)<br>Enquanto estiver vestindo um item com essa propriedade, você pode gastar 1 ponto de magia, para criar uma aura de chamas de 1m de raio (2 para 2m de raio e 3 para 3m de raio) que causa a todos dentro dela 1, 2 ou 3 pontos de dano bruto de fogo por rodada (dependendo do preço do item). A aura dura uma cena.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "description": "<p><b>Capas</b>: São itens que podem ser equipados nos ombros.</p><hr><h3>✦ Encantamento — Item Intermediário (ignis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Conflagração</b> (ignis · Ação Rápida · Dano 2 · +30.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver vestindo um item com essa propriedade, você pode gastar 1 ponto de magia, para criar uma aura de chamas de 1m de raio (2 para 2m de raio e 3 para 3m de raio) que causa a todos dentro dela 1, 2 ou 3 pontos de dano bruto de fogo por rodada (dependendo do preço do item). A aura dura uma cena.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Conflagração — aura de chamas (2m, 2 de fogo por rodada) (2 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "0",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "turn"
+        "persistTrigger": "turn",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,14 +214,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "ignis",
             "ignis"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "ignis",
-              "id": "ignis-conflagracao"
-            },
             {
               "palavra": "ignis",
               "id": "ignis-conflagracao"
@@ -221,6 +230,8 @@
               "palavra": "ignis",
               "variante": "Dano 2",
               "preco": 30000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

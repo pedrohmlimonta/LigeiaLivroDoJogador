@@ -165,7 +165,7 @@ export const METAMAGIAS = {
     { name: "Magia Dimensional", lvl: "Básica", kind: "range2x",
       desc: "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese); toque passa a ter alcance de 3m x Círculo x Nível. Numa magia em você ou de emanação, escolha na criação: continua em você e dobra a distância (o teleporte vai o dobro), ou vira alvo a 3m x Círculo x Nível (a emanação sai do alvo)." },
     { name: "Magia Majestosa", lvl: "Básica", kind: "other",
-      desc: "Invocações/criações saem uma categoria de tamanho maior (duas no Círculo Maior)." },
+      desc: "Invocações/criações saem uma categoria de tamanho maior (duas no Círculo Maior). Numa magia que invoca, o marcador da criatura já pede o tamanho novo." },
   ],
   menso: [
     { name: "Magia Impactante", lvl: "Básica", kind: "damage", dtype: "concussao",
@@ -191,7 +191,7 @@ export const METAMAGIAS = {
     { name: "Magia Múltipla", lvl: "Básica", kind: "multipla",
       desc: "Atinge o dobro de alvos da base (aplicada duas vezes: o triplo). Depois do primeiro alvo, clique no próximo (pode ser o mesmo)." },
     { name: "Magia Replicante", lvl: "Avançada", kind: "replicante",
-      desc: "Tudo o que a magia cria é duplicado: numa magia de alvo, o efeito sai duas vezes no mesmo alvo (dois Mísseis Mágicos); numa de área, uma 2ª área, reposicionada sem sobrepor a primeira." },
+      desc: "Tudo o que a magia cria ou invoca é duplicado: numa magia de alvo, o efeito sai duas vezes no mesmo alvo (dois Mísseis Mágicos); numa de área, uma 2ª área, reposicionada sem sobrepor a primeira; numa que invoca, o dobro de criaturas." },
   ],
   saeculorum: [
     { name: "Magia Duradoura", lvl: "Básica", kind: "other",
@@ -578,8 +578,40 @@ export function novoApplies(label, extra = {}) {
   }, extra);
 }
 
+/** Custo escolhido na ativação (sistema build 30), desligado. */
+export const CUSTO_ESCOLHIDO_PADRAO = Object.freeze({
+  enabled: false, resource: "mp", min: "1", max: "", label: "",
+  damageBonus: "", healBonus: "", areaBonus: "", rangeBonus: "", rollBonus: "",
+});
+
+/**
+ * Campo variableCost LIGADO: na ativação, uma caixa pergunta quanto gastar, e
+ * @gasto vale nas fórmulas do que o gasto amplia (dano, cura, área, alcance,
+ * rolagem).
+ */
+export function custoEscolhido(cfg = {}) {
+  const vc = { ...CUSTO_ESCOLHIDO_PADRAO, enabled: true, ...cfg };
+  for (const k of ["min", "max", "damageBonus", "healBonus", "areaBonus", "rangeBonus", "rollBonus"]) {
+    vc[k] = String(vc[k] ?? "");
+  }
+  return vc;
+}
+
+/**
+ * Uma criatura que a ação invoca (sistema build 30). Sem actorUuid é um
+ * MARCADOR: o nome diz qual ficha cabe ali; a ficha arrastada para a ação
+ * ocupa o marcador (invocacao.mjs) e leva a quantidade, a atitude e a duração
+ * dele. Até lá, não invoca nada.
+ */
+export function novaInvocacao(actorName = "", extra = {}) {
+  return {
+    actorUuid: "", actorName, count: "1", disposition: "same", rounds: "0",
+    giveControl: true, hidden: false, enabled: true, ...extra,
+  };
+}
+
 export function novaAcao(label, extra = {}) {
-  return Object.assign({
+  const a = Object.assign({
     label, level: "all", canRoll: false, rollAttr: "conjuracao",
     rollBonus: "0", rollDice: "0", vsDifficulty: false, fixedDifficulty: "8",
     difficultyAttr: "nenhum", targetMode: "target", includeSelf: true,
@@ -604,7 +636,12 @@ export function novaAcao(label, extra = {}) {
     costMp: "0", costHp: "0", costHeroic: "0",
     persistArea: false, persistRounds: "1", persistAffectsSelf: false,
     persistRerollAttack: false, persistTrigger: "both",
+    // Build 30: custo escolhido na ativação (@gasto) e criaturas invocadas.
+    variableCost: { ...CUSTO_ESCOLHIDO_PADRAO }, summons: [],
   }, extra);
+  a.variableCost = { ...CUSTO_ESCOLHIDO_PADRAO, ...(a.variableCost ?? {}) };
+  a.summons = (a.summons ?? []).map((x) => ({ ...novaInvocacao(), ...x }));
+  return a;
 }
 
 /** Rótulo de um efeito de aprimoramento, pelo tipo do buff. */
@@ -996,11 +1033,16 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
       // original (acertado depois das animações, em construirMagia).
       const deArea = (a) => ["area", "line", "cone", "lineCustom"].includes(a.targetMode);
       const multipla = meta.kind === "multipla";
+      // Replicante numa magia que invoca: "tudo o que sua magia cria ou
+      // invoca é duplicado" — a mesma conjuração põe o dobro de criaturas no
+      // mapa (cada uma onde você escolher).
+      const invocou = !multipla && dobrarInvocacoes(iniciais);
       const servem = multipla
         ? iniciais.filter((a) => a.targetMode === "target")
         : [...iniciais.filter((a) => a.targetMode === "target" || deArea(a)),
            ...sys.actions.filter((a) => a._copiaMultipla)]; // cada alvo da Múltipla também em dobro
       if (!servem.length) {
+        if (invocou) break;
         return multipla
           ? `${meta.name}: a magia não é de alvo — não se aplica (registrada na receita).`
           : `${meta.name}: a magia não é de alvo nem de área — o que ela cria ou invoca fica duplicado pela mesa (registrada na receita).`;
@@ -1063,11 +1105,18 @@ export const DIMENSIONAL = {
   alvo: "Viram alvo — alcance de 3m × Círculo × Nível (teleporta o alvo; a emanação sai dele)",
 };
 
-/** Cópia de uma ação para a Múltipla / Replicante: sem custo, interna, sem as ligações. */
+/**
+ * Cópia de uma ação para a Múltipla / Replicante: sem custo, interna, sem as
+ * ligações. Sem custo escolhido também — a cópia dispara em cadeia, e a caixa
+ * do gasto apareceria (e cobraria) de novo — e sem invocar: as criaturas são
+ * da conjuração (a Replicante dobra a quantidade delas na própria ação).
+ */
 function copiarAcao(a) {
   const { _antes, _cadeia, _copias, _copiaDe, _copiaMultipla, ...resto } = a;
   const c = JSON.parse(JSON.stringify(resto));
   c.costMp = "0";
+  c.variableCost = { ...CUSTO_ESCOLHIDO_PADRAO, ...(c.variableCost ?? {}), enabled: false };
+  c.summons = [];
   c._interna = true;
   c._copiaDe = a; // a animação da cópia é a da original (construirMagia)
   return c;
@@ -1101,6 +1150,102 @@ function metrosLegiveis(f) {
 /** "2*@nivel" → "2 × Nível", para os rótulos. */
 function formulaCurta(f) {
   return String(f).replace(/\*/g, " × ").replace(/@nivel/g, "Nível").replace(/@(\w+)/g, (_, v) => ATTRS[v] ?? v);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Criaturas invocadas (sistema build 30)                             */
+/* ------------------------------------------------------------------ */
+
+/** As criaturas (ligadas) que as ações invocam. */
+function invocacoesDe(acoes) {
+  return (acoes ?? []).flatMap((a) => (a.summons ?? []).filter((x) => x && x.enabled !== false));
+}
+
+/** A magia invoca alguma criatura? */
+export function invocaCriatura(item) {
+  return invocacoesDe(item?.system?.actions).length > 0;
+}
+
+/** Dobra a quantidade das criaturas invocadas (Replicante). @returns {boolean} alguma? */
+function dobrarInvocacoes(acoes) {
+  const lista = invocacoesDe(acoes);
+  for (const x of lista) {
+    const n = String(x.count ?? "").trim() || "1";
+    x.count = /^\d+$/.test(n) ? String(2 * Number(n)) : `2*(${n})`;
+  }
+  return lista.length > 0;
+}
+
+/** Tamanhos do livro, do menor ao maior (no feminino: "criatura", "fera", "planta"). */
+const TAMANHOS = ["minúscula", "diminuta", "miúda", "pequena", "média", "grande", "enorme", "imensa", "colossal"];
+const RE_MARCADOR = new RegExp(`^(.+?) (${TAMANHOS.join("|")}), Desafio até (.+?)( — arraste a ficha.*)?$`);
+
+/**
+ * O que as peculiaridades e a Majestosa mudam na criatura invocada:
+ *   tamanho  "Invoca criatura média/grande" (a mais alta marcada)
+ *   majestosa categorias a mais (Magia Majestosa: 1; 2 no Círculo Maior)
+ *   desafio  { soma: N } ("Aumente o Desafio em +N") ou { nivelMais: N }
+ *            ("Desafio N + seu nível, ou menos") — o maior marcado
+ *   hostil   "A criatura não é amigável a ninguém"
+ */
+export function mudancasDaInvocacao(pecs = [], { circ = 1, metas = [] } = {}) {
+  const t = (pecs ?? []).map((p) => semAcento(p.texto ?? p));
+  const out = { tamanho: null, majestosa: 0, desafio: null, hostil: false };
+  if (t.some((x) => /^invoca criatura grande/.test(x))) out.tamanho = "grande";
+  else if (t.some((x) => /^invoca criatura media/.test(x))) out.tamanho = "média";
+  for (const x of t) {
+    let m;
+    if ((m = x.match(/^aumente o desafio em \+(\d+)/))) {
+      if (!out.desafio || Number(m[1]) > (out.desafio.soma ?? 0)) out.desafio = { soma: Number(m[1]) };
+    } else if ((m = x.match(/^desafio (\d+) \+ seu nivel/))) {
+      if (!out.desafio || Number(m[1]) > (out.desafio.nivelMais ?? 0)) out.desafio = { nivelMais: Number(m[1]) };
+    }
+  }
+  out.hostil = t.some((x) => /nao e amigavel a ninguem/.test(x));
+  if ((metas ?? []).some((m) => m?.name === "Magia Majestosa")) out.majestosa = circ >= 3 ? 2 : 1;
+  return out;
+}
+
+/** "Fera pequena, Desafio até 2× Nível — arraste a ficha abaixo" com as mudanças aplicadas. */
+export function nomeDaInvocacao(nome, mud) {
+  const m = String(nome ?? "").match(RE_MARCADOR);
+  if (!m || !mud) return nome;
+  let [, tipo, tamanho, desafio, resto] = m;
+  if (mud.tamanho && TAMANHOS.indexOf(mud.tamanho) > TAMANHOS.indexOf(tamanho)) tamanho = mud.tamanho;
+  if (mud.majestosa) tamanho = TAMANHOS[Math.min(TAMANHOS.length - 1, TAMANHOS.indexOf(tamanho) + mud.majestosa)];
+  if (mud.desafio?.soma) desafio = `${desafio} + ${mud.desafio.soma}`;
+  else if (mud.desafio?.nivelMais) desafio = `Nível + ${mud.desafio.nivelMais}`;
+  return `${tipo} ${tamanho}, Desafio até ${desafio}${resto ?? ""}`;
+}
+
+/**
+ * Ajusta as criaturas que a magia invoca ao que ela ficou sendo — o marcador
+ * diz o tamanho e o Desafio certos; "não é amigável a ninguém" vira atitude
+ * hostil, sem o controle do token — e põe nelas a ficha escolhida na oficina.
+ */
+function ajustarInvocacoes(data, mud, criatura) {
+  const lista = invocacoesDe(data.system.actions);
+  for (const x of lista) {
+    x._requisito = nomeDaInvocacao(x.actorName, mud).replace(/\s+—\s+arraste a ficha.*$/i, "");
+    if (!x.actorUuid) x.actorName = nomeDaInvocacao(x.actorName, mud);
+    if (mud.hostil) { x.disposition = "hostile"; x.giveControl = false; }
+    if (criatura?.uuid && !x.actorUuid) {
+      x.actorUuid = criatura.uuid;
+      x.actorName = criatura.name || x.actorName;
+    }
+  }
+  return lista;
+}
+
+/** Linha da descrição com o que a magia invoca. */
+function descreverInvocacoes(lista) {
+  return lista.map((x) => {
+    const n = String(x.count ?? "1").trim();
+    const quantas = n && n !== "1" ? `${formulaCurta(n)} × ` : "";
+    const ficha = x.actorUuid ? ` — ficha: ${x.actorName}` : " — arraste a ficha da criatura para a ação, no item";
+    const lado = x.disposition === "hostile" ? " (hostil a todos, fora do seu controle)" : "";
+    return `${quantas}${x._requisito || x.actorName}${lado}${ficha}`;
+  }).join("; ");
 }
 
 /* ------------------------------------------------------------------ */
@@ -1212,6 +1357,24 @@ export async function construirMagia(state, { animar = true, existe = null } = {
     delete a._areaBase; delete a._ampliada; delete a._alcanceBase; delete a._dimensional; delete a._rotuloDim;
   }
 
+  // "O conjurador perde 1 ponto de vida quando a conjura": 1 PV a mais no
+  // custo de cada conjuração.
+  if (pecsValidas.some((p) => /perde 1 ponto de vida quando a conjura/.test(semAcento(p.texto)))) {
+    for (const a of acoesIniciais(data)) {
+      const hp = String(a.costHp ?? "0").trim() || "0";
+      a.costHp = /^\d+$/.test(hp) ? String(Number(hp) + 1) : `${hp}+1`;
+    }
+  }
+
+  // Criaturas invocadas: tamanho, Desafio e atitude pelas peculiaridades e
+  // pela Majestosa; a ficha escolhida na oficina, se houver.
+  const mudancas = mudancasDaInvocacao(pecsValidas, {
+    circ, metas: [circ >= 2 ? meta2 : null, circ >= 3 ? meta3 : null],
+  });
+  const invocadas = ajustarInvocacoes(data, mudancas, state.criatura);
+  const linhaInvoca = invocadas.length ? descreverInvocacoes(invocadas) : "";
+  for (const x of invocadas) delete x._requisito;
+
   // Peculiaridade do Toque Vampírico: "o dano escalonado recupera seus pontos
   // de magia, em vez dos pontos de vida" — o dreno passa a devolver PM.
   if (pecsValidas.some((p) => /recupera seus pontos de magia, em vez dos pontos de vida/.test(semAcento(p.texto)))) {
@@ -1271,6 +1434,7 @@ export async function construirMagia(state, { animar = true, existe = null } = {
 <hr><p><strong>Magia criada — Círculo ${esc(tier)}</strong> (custo ${pm} PM; bônus de peculiaridades: ${delta >= 0 ? "+" : ""}${delta})</p>
 <p>Palavras: ${esc(palavras.join(", "))}. Base: ${esc(base.name)}.</p>
 ${linhaDano ? `<p>Dano: ${linhaDano}.</p>` : ""}
+${linhaInvoca ? `<p>Invoca: ${esc(linhaInvoca)}.</p>` : ""}
 ${linhasApr ? `<p>Aprimoramentos do círculo (gratuitos):</p><ul>${linhasApr}</ul>` : ""}
 ${linhasPec ? `<p>Peculiaridades escolhidas:</p><ul>${linhasPec}</ul>` : ""}
 ${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}
@@ -1286,6 +1450,7 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
       peculiaridades: pecsValidas.map((p) => ({ texto: p.texto, mod: p.mod })),
       metamagias: data.system.metamagics.map((m) => m.name),
       escolhas: escolhas.map(({ texto, ...resto }) => resto),
+      ...(state.criatura?.uuid ? { criatura: { uuid: state.criatura.uuid, nome: state.criatura.name ?? "" } } : {}),
     },
   };
 
@@ -1396,7 +1561,7 @@ const EXPLICACAO = {
   potencializada: () => "Dobra o dano base; em cadeia, ao conjurar, você sofre o dano base como dano final.",
   range2x: () => "Dobra o alcance e as distâncias (teleporte, empurrão, telecinese); o toque passa a ter alcance de 3m × Círculo × Nível. Nas ações em você ou de emanação, escolha abaixo se continuam em você (dobra a distância) ou viram alvo.",
   multipla: () => "Depois do primeiro alvo, clique no próximo (pode ser o mesmo; botão direito ou Esc pula). Sem custo extra de PM; cada alvo tem a sua rolagem, recebe os efeitos da magia e vê a mesma animação.",
-  replicante: () => "Numa magia de alvo, o efeito sai de novo no mesmo alvo, sozinho (dois Mísseis Mágicos; duas Esferas Ígneas, cada uma com a sua rolagem). Numa de área, depois da primeira posicione a segunda, sem sobrepor. Sem custo extra de PM; a 2ª repete a animação da 1ª.",
+  replicante: () => "Numa magia de alvo, o efeito sai de novo no mesmo alvo, sozinho (dois Mísseis Mágicos; duas Esferas Ígneas, cada uma com a sua rolagem). Numa de área, depois da primeira posicione a segunda, sem sobrepor. Numa que invoca, a mesma conjuração põe o dobro de criaturas no mapa. Sem custo extra de PM; a 2ª repete a animação da 1ª.",
 };
 
 /** Metamagias que dão à magia um ataque contra alvos, quando ela não tem. */
@@ -1449,6 +1614,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       baseId: "", nome: "", ajuste: 0,
       pecsMarcadas: new Set(), meta2i: -1, meta3i: -1,
       escolha2: {}, escolha3: {},
+      criatura: null, // ficha que a magia invoca: { uuid, name }
     };
     this.palavras = palavrasDoAtor(actor);
     this.bases = [];       // magias da palavra1
@@ -1514,6 +1680,29 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       + (aviso ? `<p class="aviso">⚠ ${esc(aviso)}</p>` : "");
   }
 
+  /** Fieldset da criatura invocada (só nas magias que invocam). */
+  #criaturaBloco(base, mud) {
+    const nomes = invocacoesDe(base?.system?.actions)
+      .map((x) => nomeDaInvocacao(x.actorName, mud).replace(/\s+—\s+arraste a ficha.*$/i, ""));
+    if (!nomes.length) return "";
+    const s = this.forja;
+    const fichas = [...(globalThis.game?.actors ?? [])]
+      .filter((a) => a && a.uuid && a.id !== this.actor?.id)
+      .sort((a, b) => a.name.localeCompare(b.name, "pt"))
+      .map((a) => [a.uuid, a.name]);
+    const escolhida = s.criatura?.uuid ?? "";
+    // Uma ficha arrastada de um compêndio não está na lista do mundo: entra como opção.
+    if (escolhida && !fichas.some(([u]) => u === escolhida)) fichas.unshift([escolhida, s.criatura.name ?? escolhida]);
+    return `
+      <fieldset><legend>Criatura invocada</legend>
+        <p class="dica">A magia invoca: <b>${esc(nomes.join("; "))}</b>${mud?.hostil ? " — hostil a todos (não é amigável a ninguém)" : ""}.
+          Escolha a ficha agora, ou deixe para arrastá-la depois para a ação, na ficha do item.</p>
+        <label>Ficha da criatura
+          <select name="criatura">${this.#opcoes(fichas, escolhida, "— arrastar depois —")}</select></label>
+        <div class="sf-drop" data-sf-drop="criatura">…ou arraste para cá uma ficha (do mundo ou de um compêndio)</div>
+      </fieldset>`;
+  }
+
   async _renderHTML() {
     await this.carregarBases();
     const s = this.forja;
@@ -1524,6 +1713,10 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     const soma = [...s.pecsMarcadas].reduce((t, i) => t + (pecs[i] && valida(pecs[i]) ? pecs[i].mod : 0), 0)
       + (Number(s.ajuste) || 0);
     const aprs = base ? parseAprimoramentos(base).filter((a) => a.circulos.has(s.tier)) : [];
+    const mudancas = mudancasDaInvocacao([...s.pecsMarcadas].map((i) => pecs[i]).filter((p) => p && valida(p)), {
+      circ, metas: [circ >= 2 ? (METAMAGIAS[s.palavra2] ?? [])[s.meta2i] : null,
+                    circ >= 3 ? (METAMAGIAS[s.palavra3] ?? [])[s.meta3i] : null],
+    });
 
     const el = document.createElement("div");
     el.className = "spellforge-form";
@@ -1559,6 +1752,9 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         .ligeia-spellforge .resumo { background: rgba(120,120,160,0.12); border-radius: 6px;
           padding: 6px 10px; margin: 6px 0; }
         .ligeia-spellforge footer { display: flex; gap: 8px; justify-content: flex-end; margin: 8px 0 4px; }
+        .ligeia-spellforge .sf-drop { border: 1px dashed var(--color-border-light-primary, #888); border-radius: 6px;
+          padding: 6px; margin-top: 4px; text-align: center; font-size: 0.9em; opacity: 0.8; }
+        .ligeia-spellforge .sf-drop.sobre { background: rgba(120,160,120,0.2); opacity: 1; }
       </style>
       ${semPalavras ? `<p class="dica">⚠ ${esc(this.actor.name)} não possui nenhuma habilidade
         "Palavra Arcana [x]" na ficha (em qualquer nível) — adicione ao menos uma para criar magias.</p>` : ""}
@@ -1604,6 +1800,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
           <select name="palavra3">${optPal(s.palavra3)}</select></label>
         ${this.#metamagiaBloco(3, s.palavra3, s.meta3i, s.escolha3, { base, outra: (METAMAGIAS[s.palavra2] ?? [])[s.meta2i] })}
       </fieldset>` : ""}
+      ${this.#criaturaBloco(base, mudancas)}
       <fieldset><legend>Nome e resumo</legend>
         <label>Nome da nova magia
           <input type="text" name="nome" value="${esc(s.nome)}" placeholder="${esc(base ? `${base.name} (${s.tier})` : "")}"></label>
@@ -1635,7 +1832,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       s.palavra1 = e.target.value; s.baseId = ""; s.pecsMarcadas.clear();
       this.render();
     });
-    on('select[name=baseId]', "change", (e) => { s.baseId = e.target.value; s.pecsMarcadas.clear(); this.render(); });
+    on('select[name=baseId]', "change", (e) => { s.baseId = e.target.value; s.pecsMarcadas.clear(); s.criatura = null; this.render(); });
     on('input[name=pec]', "change", (e) => {
       const i = Number(e.target.value);
       e.target.checked ? s.pecsMarcadas.add(i) : s.pecsMarcadas.delete(i);
@@ -1669,6 +1866,21 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       });
     }
     on('input[name=nome]', "input", (e) => { s.nome = e.target.value; });
+    on('select[name=criatura]', "change", (e) => {
+      const uuid = e.target.value;
+      const ator = [...(globalThis.game?.actors ?? [])].find((a) => a.uuid === uuid);
+      s.criatura = uuid ? { uuid, name: ator?.name ?? s.criatura?.name ?? "" } : null;
+    });
+    on('[data-sf-drop=criatura]', "dragover", (e) => { e.preventDefault(); e.currentTarget.classList.add("sobre"); });
+    on('[data-sf-drop=criatura]', "dragleave", (e) => e.currentTarget.classList.remove("sobre"));
+    on('[data-sf-drop=criatura]', "drop", async (e) => {
+      e.preventDefault();
+      e.currentTarget.classList.remove("sobre");
+      const ficha = await fichaArrastada(e);
+      if (!ficha) return ui.notifications.warn("Arraste uma ficha (personagem, NPC ou veículo).");
+      s.criatura = { uuid: ficha.uuid, name: ficha.name };
+      this.render();
+    });
     on('[data-action=cancelar]', "click", () => this.close());
     on('[data-action=criar]', "click", () => this.criar());
   }
@@ -1691,6 +1903,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       base, tier: s.tier, nome: s.nome.trim(), palavra1: s.palavra1,
       palavra2: s.palavra2, palavra3: s.palavra3, pecs, ajuste: s.ajuste,
       meta2, meta3, escolha2: s.escolha2, escolha3: s.escolha3,
+      criatura: invocaCriatura(base) ? s.criatura : null,
     }, { animar: animacoesLigadas() });
     // keepId: as ações em cadeia já apontam para o id que a magia vai ter.
     const [item] = await this.actor.createEmbeddedDocuments("Item", [data], { keepId: true });
@@ -1699,6 +1912,19 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       nAnim ? ` — com ${nAnim} animaç${nAnim > 1 ? "ões" : "ão"} automática${nAnim > 1 ? "s" : ""} (remova pelo ✕ na ficha do item, se quiser)` : ""}.`);
     this.close();
     item.sheet?.render(true);
+  }
+}
+
+/** A ficha arrastada (dados de arrasto do Foundry), ou null. */
+async function fichaArrastada(event) {
+  let dados;
+  try { dados = JSON.parse(event.dataTransfer?.getData("text/plain") || "null"); } catch (e) { return null; }
+  if (dados?.type !== "Actor") return null;
+  try {
+    const ficha = await (globalThis.Actor?.implementation?.fromDropData?.(dados) ?? (dados.uuid ? fromUuid(dados.uuid) : null));
+    return ficha?.documentName === "Actor" ? ficha : null;
+  } catch (e) {
+    return null;
   }
 }
 

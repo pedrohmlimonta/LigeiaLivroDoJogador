@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "2.000.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (noxia + noxia + noxia)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Névoa Sufocante</b> (noxia · Ação · 15m, Lento, Pasmo e Enfraquecido, Muito Difícil · +2.000.000 Vo)<br>Você pode gastar 1 ponto de magia para ativar esse incensório, enquanto estiver empunhando ele, fazendo com que ele libere uma aura de névoa. Criaturas dentro da aura, exceto você, sofrem 1 ponto de dano bruto de veneno e uma ou mais condições (Vigor anula cada uma), caso não sejam bem sucedidas em uma rolagem de Vigor. O raio da aura de névoa, as condições e a dificuldade do teste dependendo valor do item.</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (noxia)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Névoa Sufocante</b> (noxia · Ação · 15m, Lento, Pasmo e Enfraquecido, Muito Difícil · +2.000.000 Vo · <b>3 PM por uso</b>)<br>Você pode gastar 1 ponto de magia para ativar esse incensório, enquanto estiver empunhando ele, fazendo com que ele libere uma aura de névoa. Criaturas dentro da aura, exceto você, sofrem 1 ponto de dano bruto de veneno e uma ou mais condições (Vigor anula cada uma), caso não sejam bem sucedidas em uma rolagem de Vigor. O raio da aura de névoa, as condições e a dificuldade do teste dependendo valor do item.</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Névoa Sufocante — névoa de 15m (Vigor 14) (3 PM)",
@@ -506,7 +506,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -538,19 +551,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "noxia",
-            "noxia",
             "noxia"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "noxia",
-              "id": "noxia-nevoa-sufocante"
-            },
-            {
-              "palavra": "noxia",
-              "id": "noxia-nevoa-sufocante"
-            },
             {
               "palavra": "noxia",
               "id": "noxia-nevoa-sufocante"
@@ -563,6 +567,8 @@
               "palavra": "noxia",
               "variante": "15m, Lento, Pasmo e Enfraquecido, Muito Difícil",
               "preco": 2000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

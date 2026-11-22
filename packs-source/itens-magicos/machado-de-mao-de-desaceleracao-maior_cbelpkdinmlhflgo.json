@@ -19,7 +19,7 @@
     "weight": 0,
     "price": "1.000.003 Vo",
     "notes": "Simples, Uma Mão, Corpo a Corpo, Arremesso, Alcance 5m",
-    "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +2. Propriedades: Simples, Uma Mão, Corpo a Corpo, Arremesso, Alcance 5m.</p><hr><h3>✦ Encantamento — Item Maior (saeculorum + saeculorum + saeculorum)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Desaceleração</b> (saeculorum · Ação Livre · +1.000.000 Vo)<br>Quando atacar usando esta arma e o alvo sofrer dano, você pode gastar 1 ponto de magia para deixar seu alvo lento, 2 pontos de magia para deixar o alvo imobilizado ou 3 pontos de magia para deixar o alvo paralisado, até o fim da cena (Força anula), caso o alvo não seja bem sucedido em uma rolagem de Força.<br><em>Gastando 2 PM o alvo fica Imobilizado, e 3 PM, Paralisado — troque a condição na ficha do alvo.</em></li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
+    "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +2. Propriedades: Simples, Uma Mão, Corpo a Corpo, Arremesso, Alcance 5m.</p><hr><h3>✦ Encantamento — Item Maior (saeculorum)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Desaceleração</b> (saeculorum · Ação Livre · +1.000.000 Vo · <b>3 PM por uso</b>)<br>Quando atacar usando esta arma e o alvo sofrer dano, você pode gastar 1 ponto de magia para deixar seu alvo lento, 2 pontos de magia para deixar o alvo imobilizado ou 3 pontos de magia para deixar o alvo paralisado, até o fim da cena (Força anula), caso o alvo não seja bem sucedido em uma rolagem de Força.<br><em>Gastando 2 PM o alvo fica Imobilizado, e 3 PM, Paralisado — troque a condição na ficha do alvo.</em></li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Machado de Mão",
@@ -192,7 +192,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Desaceleração — o alvo atingido fica Lento (Força 10 anula) (3 PM)",
@@ -462,7 +475,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -494,19 +520,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "saeculorum",
-            "saeculorum",
             "saeculorum"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "saeculorum",
-              "id": "saeculorum-desaceleracao"
-            },
-            {
-              "palavra": "saeculorum",
-              "id": "saeculorum-desaceleracao"
-            },
             {
               "palavra": "saeculorum",
               "id": "saeculorum-desaceleracao"
@@ -519,6 +536,8 @@
               "palavra": "saeculorum",
               "variante": "",
               "preco": 1000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],
@@ -698,7 +717,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

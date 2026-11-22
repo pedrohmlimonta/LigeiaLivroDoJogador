@@ -4,16 +4,15 @@
 // Maior... —, encantado pelo próprio Encantamento de Itens do módulo
 // (esmodules/encantamento.mjs). Cada um sai como sairia de um encantamento
 // feito na ficha: as ações ✦ (a poção se bebe, a bomba se arremessa), a mana
-// por palavra, o texto do livro, o preço somado e a receita para desfazer ou
-// tornar lendário.
+// da propriedade (o nível dela), o texto do livro, o preço somado e a receita
+// para desfazer ou tornar lendário.
 //
 //   - Base: o equipamento do livro quando existe (armas, armaduras, escudos,
 //     focos, lanterna, munições...), com os ataques e a animação do golpe; os
 //     demais tipos (anéis, capas, poções...) nascem de um item simples, com a
 //     frase do livro sobre o tipo (Sessão 17, Tipos de Itens Mágicos).
-//   - Nível do item = nível do preço: Menor 1 palavra (1 PM), Intermediário 2,
-//     Maior 3 — a mesma propriedade repetida, como manda o livro para um item
-//     de uma propriedade só num nível mais alto.
+//   - Nível do item = nível do preço (Menor, Intermediário, Maior), com uma
+//     palavra só; a mana de cada uso é a desse nível (1, 2 ou 3 PM).
 //   - A descrição diz também o nível de TESOURO (Sessão 17): o preço da
 //     propriedade é o de uma linha das tabelas de Consumíveis e Equipamentos
 //     Mágicos.
@@ -373,8 +372,9 @@ export function construir(p, ordem) {
   if (!compativel(p.prop, tiposDoItem(dados))) {
     throw new Error(`${p.prop.id} não cabe em ${dados.name} (${[...tiposDoItem(dados)].join(", ")})`);
   }
-  const escolhas = Array.from({ length: p.variante.nivel }, () => ({ prop: p.prop, variante: p.variante, palavra: p.prop.palavra }));
-  const d = construirEncantamento(dados, { nivel, escolhas, nome: p.nome }, { animar: true, existe: chaveSegura });
+  // Uma palavra: o grau não depende das palavras — a mana, sim, é a do nível.
+  const escolhas = [{ prop: p.prop, variante: p.variante, palavra: p.prop.palavra }];
+  const d = construirEncantamento(dados, { escolhas, nome: p.nome }, { animar: true, existe: chaveSegura });
   d.system.description += `<p><b>Tesouro</b> (Sessão 17): ${nivelDeTesouro(p.prop, p.variante.preco)}.</p>`;
   if (VENENOS.has(p.prop.id) && !DO_COMPENDIO[p.tipo]) d.img = GRUPOS.venenos.img;
   const nivelDaPasta = new Set(planoDoGrupo.get(p.grupo) ?? []).size > 1 ? nivel : "";

@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "700 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (iluzio)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Quarto Fantasma</b> (iluzio · Cena · Normal · +700 Vo) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 1 ponto de magia enquanto empunha esta chave, para criar uma área de 12m² coberta de uma ilusão de invisibilidade. Apenas criaturas a sua escolha perceberão que se trata de uma ilusão e poderão se esconder em seu interior. Demais criaturas devem ser bem sucedidas em uma rolagem de Percepção, cuja dificuldade depende do valor do item, ou não perceperão que se trata de uma ilusão. A área é invisível aos olhos de quem a vê de fora, a menos que tenha passado no teste. Quando atravessada, não é possível ver as criaturas dentro dele.</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (iluzio)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Quarto Fantasma</b> (iluzio · Cena · Normal · +700 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 1 ponto de magia enquanto empunha esta chave, para criar uma área de 12m² coberta de uma ilusão de invisibilidade. Apenas criaturas a sua escolha perceberão que se trata de uma ilusão e poderão se esconder em seu interior. Demais criaturas devem ser bem sucedidas em uma rolagem de Percepção, cuja dificuldade depende do valor do item, ou não perceperão que se trata de uma ilusão. A área é invisível aos olhos de quem a vê de fora, a menos que tenha passado no teste. Quando atravessada, não é possível ver as criaturas dentro dele.</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
     "actions": [
       {
         "label": "✦ Quarto Fantasma — área de 12m² invisível (Percepção 10) (1 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -203,6 +216,7 @@
           "palavras": [
             "iluzio"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "iluzio",
@@ -216,6 +230,8 @@
               "palavra": "iluzio",
               "variante": "Normal",
               "preco": 700,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

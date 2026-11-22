@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "600.020 Vo",
     "notes": "",
-    "description": "<p>Uma esfera em material mineral. Pode ser transparente ou opaca.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Maior (mortis + mortis + mortis)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Dreno</b> (mortis · Ação Rápida · 10m · +600.000 Vo)<br>Enquanto estiver empunhando esse foco, você pode gastar 1 ponto de magia e usar sua ação rápida para drenar a força vital de criaturas próximas. Todas as criaturas a uma certa distância (dependendo do valor do item) devem realizar uma rolagem de Vigor (Normal), ou ficarão enfraquecidos até o fim da cena (Vigor anula). Para cada criatura que ficar enfraquecida desta forma, você recupera 1 ponto de vida.<br><em>Você recupera 1 PV por criatura que ficar enfraquecida.</em><br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
+    "description": "<p>Uma esfera em material mineral. Pode ser transparente ou opaca.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Maior (mortis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Dreno</b> (mortis · Ação Rápida · 10m · +600.000 Vo · <b>3 PM por uso</b>)<br>Enquanto estiver empunhando esse foco, você pode gastar 1 ponto de magia e usar sua ação rápida para drenar a força vital de criaturas próximas. Todas as criaturas a uma certa distância (dependendo do valor do item) devem realizar uma rolagem de Vigor (Normal), ou ficarão enfraquecidos até o fim da cena (Vigor anula). Para cada criatura que ficar enfraquecida desta forma, você recupera 1 ponto de vida.<br><em>Você recupera 1 PV por criatura que ficar enfraquecida.</em><br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Dreno — 10m: Vigor 10 ou Enfraquecido (3 PM)",
@@ -282,7 +282,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -314,19 +327,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "mortis",
-            "mortis",
             "mortis"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "mortis",
-              "id": "mortis-dreno"
-            },
-            {
-              "palavra": "mortis",
-              "id": "mortis-dreno"
-            },
             {
               "palavra": "mortis",
               "id": "mortis-dreno"
@@ -339,6 +343,8 @@
               "palavra": "mortis",
               "variante": "10m",
               "preco": 600000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

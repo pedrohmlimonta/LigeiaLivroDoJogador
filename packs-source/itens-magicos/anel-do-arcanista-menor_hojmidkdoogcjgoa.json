@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "3.500 Vo",
     "notes": "",
-    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Menor (sorcdiron)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Arcanista</b> (sorcdiron · Ação Rápida · +1 em Conjuração · +3.500 Vo)<br>Você pode gastar 1 ponto de magia para receber um bônus em suas rolagens de Conjuração até o fim da cena, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
+    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Menor (sorcdiron)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Arcanista</b> (sorcdiron · Ação Rápida · +1 em Conjuração · +3.500 Vo · <b>1 PM por uso</b>)<br>Você pode gastar 1 ponto de magia para receber um bônus em suas rolagens de Conjuração até o fim da cena, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
     "actions": [
       {
         "label": "✦ Arcanista — +1 em Conjuração (cena) (1 PM)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "sorcdiron"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "sorcdiron",
@@ -243,6 +257,8 @@
               "palavra": "sorcdiron",
               "variante": "+1 em Conjuração",
               "preco": 3500,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

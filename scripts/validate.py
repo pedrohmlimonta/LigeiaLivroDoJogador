@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Validação dos documentos gerados contra o schema do sistema ligeia-rpg
-(build 28): choices de todos os campos enumerados, tipos string/número/bool,
-fórmulas e @variáveis, condições e alvos de efeito, dreno, efeitos removidos,
-ações em cadeia (inclusive o alvo escolhido na hora) e as referências entre ações.
+(build 30): choices de todos os campos enumerados, tipos string/número/bool,
+fórmulas e @variáveis, condições e alvos de efeito (imunidade, resistência,
+item), dreno, efeitos removidos, ações em cadeia (inclusive o alvo escolhido na
+hora), custo escolhido na ativação (@gasto), criaturas invocadas e as
+referências entre ações.
 
 Rodado pelo generate.py ao final; também pode rodar sozinho:
     python3 scripts/validate.py
@@ -19,11 +21,11 @@ from enhance_dano import escalonamento_da_magia  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 EFFECT_TYPES = {"dice", "rollDice", "bonus", "attr", "stat", "set", "damage", "rd",
-                "vuln", "reroll1", "reroll6", "crit", "fumble", "tempHp",
-                "areaFilter", "condition", "size", "restore", "info"}
+                "vuln", "reroll1", "reroll6", "crit", "fumble", "autocrit", "immune",
+                "tempHp", "areaFilter", "condition", "size", "restore", "info"}
 APPLIES_TYPES = {"bonus", "dice", "rollDice", "attr", "stat", "set", "damage", "rd",
-                 "vuln", "reroll1", "reroll6", "crit", "fumble", "restore",
-                 "condition", "size"}
+                 "vuln", "reroll1", "reroll6", "crit", "fumble", "autocrit", "immune",
+                 "restore", "condition", "size"}
 LEVELS = {"all", "B", "A", "E"}
 COST_LEVELS = LEVELS | {"A+", "E+"}
 COST_RES = {"mp", "hp", "hpTemp", "heroic"}
@@ -41,7 +43,8 @@ DMG = {"acido", "concussao", "corte", "energia", "fogo", "frio", "necrotico",
 ROLL_TARGETS = {"all", "forca", "agilidade", "vigor", "mente", "percepcao",
                 "conjuracao", "esquiva", "bloqueio", "iniciativa", "attack",
                 "defense", "attackMelee", "attackRanged", "defenseMelee",
-                "defenseRanged"}
+                "defenseRanged", "defenseMagia"} | {
+                    f"{a}{o}" for a in ("esquiva", "bloqueio") for o in ("Melee", "Ranged", "Magia")}
 STAT_TARGETS = {"hp", "mp", "heroic", "deslocamento"}
 SET_TARGETS = {"forca", "agilidade", "vigor", "mente", "percepcao", "bloqueio", "esquiva",
                "conjuracao", "iniciativa", "deslocamento", "percepcao_passiva"}
@@ -61,6 +64,11 @@ REMOVE_MODES = {"label", "condition", "mine", "all"}
 CHAIN_WHEN = {"always", "hit", "miss", "crit", "damage", "heal"}
 CHAIN_TARGETS = {"same", "hitOnly", "own", "pick"}
 REF_KINDS = {"item", "effect", "action"}
+SUMMON_DISPOSITIONS = {"same", "friendly", "neutral", "hostile", "secret"}
+VC_BONUS = ("damageBonus", "healBonus", "areaBonus", "rangeBonus", "rollBonus")
+# Alvos de imunidade: "dano:<tipo>", "condicao:<id>", "efeito:<trecho do nome>",
+# "item:<nome>"; sem prefixo, é tipo de dano.
+IMMUNE_KINDS = {"dano", "condicao", "efeito", "item"}
 
 
 def ler_ref(ref):
@@ -103,19 +111,46 @@ class V:
         if not isinstance(valor, str):
             self.err(onde, f"{campo} deveria ser string (é {type(valor).__name__}: {valor!r})")
 
-    def formula(self, onde, campo, valor):
+    def formula(self, onde, campo, valor, gasto=False):
+        """gasto=True: a fórmula aceita @gasto (o que foi escolhido na
+        ativação) — só nos campos do custo escolhido e das invocações. O
+        sistema troca @gasto pelo número antes do resto, então "@gastod6"
+        vale (vira "3d6")."""
         self.string(onde, campo, valor)
         if not isinstance(valor, str):
             return
         if valor and not FORMULA.match(valor):
             self.err(onde, f"{campo} com fórmula inválida {valor!r}")
-        for var in re.findall(r"@(\w+)", valor):
+        texto = valor.replace("@gasto", "1") if gasto else valor
+        for var in re.findall(r"@(\w+)", texto):
             if var not in VARS:
-                self.err(onde, f"{campo} usa @{var} (inexistente)")
+                self.err(onde, f"{campo} usa @{var} (inexistente"
+                         + ("" if var != "gasto" else "; @gasto só vale no custo escolhido e nas invocações") + ")")
 
 
 def _alvo_rolagem(t):
+    if t.startswith("resistir:"):
+        return t[len("resistir:"):] in CONDS
+    if t.startswith("item:"):
+        return bool(t[len("item:"):].strip())
     return t in ROLL_TARGETS or t.startswith("arma:") or t == "arma" or t.startswith("conjuracao:")
+
+
+def _erro_imunidade(t):
+    """Mensagem de erro para um alvo de imunidade inválido (ou "")."""
+    t = str(t or "").strip()
+    if not t:
+        return "imunidade sem alvo"
+    tipo, _, chave = t.partition(":") if ":" in t else ("dano", "", t)
+    if tipo not in IMMUNE_KINDS:
+        return f"imunidade com prefixo {tipo!r} (use dano:, condicao:, efeito: ou item:)"
+    if not chave.strip():
+        return f"imunidade {t!r} sem o que"
+    if tipo == "dano" and chave not in DMG:
+        return f"imunidade a dano {chave!r} (tipo inexistente)"
+    if tipo == "condicao" and chave not in CONDS:
+        return f"imunidade à condição {chave!r} (inexistente)"
+    return ""
 
 
 def validar_efeito(v, onde, e, leveled):
@@ -123,9 +158,15 @@ def validar_efeito(v, onde, e, leveled):
     v.choice(onde, "effect.level", e.get("level", "all"), LEVELS)
     v.formula(onde, "effect.value", e.get("value"))
     t, tp = e.get("target", "all"), e.get("type")
-    if tp in ("bonus", "dice", "rollDice", "attr", "reroll1", "reroll6", "crit", "fumble"):
+    if tp in ("bonus", "dice", "rollDice", "attr", "reroll1", "reroll6", "crit", "fumble", "autocrit"):
         if not _alvo_rolagem(t):
             v.err(onde, f"efeito {tp} com alvo de rolagem inválido {t!r}")
+        if tp == "autocrit" and str(t).startswith("resistir:"):
+            v.err(onde, "crítico automático numa resistência não faz nada")
+    elif tp == "immune":
+        msg = _erro_imunidade(t)
+        if msg:
+            v.err(onde, msg)
     elif tp == "stat" and t not in STAT_TARGETS:
         v.err(onde, f"efeito stat com alvo {t!r}")
     elif tp in ("rd", "vuln"):
@@ -163,8 +204,12 @@ def validar_aplicavel(v, onde, ap):
         v.err(onde, f"applies damage com alvo {t!r} (use 'arma' ou 'arma:<tag>')")
     if tp == "restore" and (str(ap.get("tickHealAmount", "0")) not in ("0", "")):
         v.err(onde, "applies restore é instantâneo e não gera efeito duradouro: a regeneração (tickHeal) nunca roda")
-    if tp in ("bonus", "dice", "rollDice", "attr", "reroll1", "reroll6", "crit", "fumble") and not _alvo_rolagem(t):
+    if tp in ("bonus", "dice", "rollDice", "attr", "reroll1", "reroll6", "crit", "fumble", "autocrit") and not _alvo_rolagem(t):
         v.err(onde, f"applies {tp} com alvo {t!r}")
+    if tp == "immune":
+        msg = _erro_imunidade(t)
+        if msg:
+            v.err(onde, f"applies: {msg}")
     if tp == "stat" and t not in STAT_TARGETS:
         v.err(onde, f"applies stat com alvo {t!r}")
     if tp == "set" and t not in SET_TARGETS:
@@ -266,6 +311,8 @@ def validar_acao(v, onde, a):
             v.err(onde, f"removesEffects[{i}] pelo nome, mas sem nome: não removeria nada")
     if "showInSheet" in a and not isinstance(a.get("showInSheet"), bool):
         v.err(onde, "action.showInSheet deveria ser bool")
+    validar_custo_escolhido(v, onde, a)
+    validar_invocacoes(v, onde, a)
     for i, elo in enumerate(a.get("chainActions", [])):
         v.choice(onde, f"chainActions[{i}].when", elo.get("when", "hit"), CHAIN_WHEN)
         v.choice(onde, f"chainActions[{i}].targets", elo.get("targets", "own"), CHAIN_TARGETS)
@@ -292,6 +339,61 @@ def validar_acao(v, onde, a):
                 and not a.get("canRoll")):
             v.err(onde, f"aplica {ap.get('label', '')[:30]!r} com resistência contra a rolagem, "
                         "mas a ação não rola: a CD seria 0")
+
+
+def validar_custo_escolhido(v, onde, a):
+    """variableCost (build 30): o recurso que se escolhe gastar na ativação e
+    o que cada ponto amplia (fórmulas com @gasto)."""
+    vc = a.get("variableCost")
+    if vc is None:
+        return
+    if not isinstance(vc, dict):
+        v.err(onde, "variableCost deveria ser objeto")
+        return
+    if not isinstance(vc.get("enabled", False), bool):
+        v.err(onde, "variableCost.enabled deveria ser bool")
+    v.choice(onde, "variableCost.resource", vc.get("resource", "mp"), COST_RES)
+    for f in ("min", "max"):
+        v.formula(onde, f"variableCost.{f}", vc.get(f, ""))
+    v.string(onde, "variableCost.label", vc.get("label", ""))
+    for f in VC_BONUS:
+        v.formula(onde, f"variableCost.{f}", vc.get(f, ""), gasto=True)
+    if not vc.get("enabled"):
+        return
+    bonus = {f: str(vc.get(f, "")).strip() for f in VC_BONUS}
+    if not any(bonus.values()) and not str(vc.get("label", "")).strip():
+        v.err(onde, "custo escolhido ligado que não amplia nada e não explica o gasto")
+    for f in ("areaBonus", "rangeBonus", "rollBonus"):
+        if re.search(r"\d*d\d", bonus[f].replace("@gasto", "1")):
+            v.err(onde, f"variableCost.{f} com dados ({bonus[f]!r}): só dano e cura aceitam dados")
+    if bonus["areaBonus"] and a.get("targetMode") not in ("area", "aura", "line", "cone", "lineCustom"):
+        v.err(onde, f"custo escolhido amplia a área, mas a ação é de alvo {a.get('targetMode')!r}")
+
+
+def validar_invocacoes(v, onde, a):
+    """summons (build 30): as criaturas que a ação invoca. Sem ficha (actorUuid
+    vazio) a entrada é um marcador — tem de dizer, no nome, o que cabe ali."""
+    lista = a.get("summons", [])
+    if not isinstance(lista, list):
+        v.err(onde, "summons deveria ser lista")
+        return
+    for i, sm in enumerate(lista):
+        lugar = f"{onde} › invoca[{i}]"
+        if not isinstance(sm, dict):
+            v.err(lugar, "invocação deveria ser objeto")
+            continue
+        v.string(lugar, "summons.actorUuid", sm.get("actorUuid", ""))
+        v.string(lugar, "summons.actorName", sm.get("actorName", ""))
+        v.choice(lugar, "summons.disposition", sm.get("disposition", "same"), SUMMON_DISPOSITIONS)
+        v.formula(lugar, "summons.count", sm.get("count", "1"), gasto=True)
+        v.formula(lugar, "summons.rounds", sm.get("rounds", "0"), gasto=True)
+        for f in ("giveControl", "hidden", "enabled"):
+            if not isinstance(sm.get(f, True), bool):
+                v.err(lugar, f"summons.{f} deveria ser bool")
+        if not sm.get("actorUuid") and not str(sm.get("actorName", "")).strip():
+            v.err(lugar, "marcador de invocação sem nome: ninguém saberia que ficha arrastar")
+        if sm.get("actorUuid") and not re.match(r"^(Compendium\.|Actor\.)", sm["actorUuid"]):
+            v.err(lugar, f"summons.actorUuid {sm['actorUuid']!r} não parece um UUID de ficha")
 
 
 TIPOS_DANO_ROTULO = ("Corte", "Perfuração", "Concussão", "Ácido", "Fogo", "Frio", "Raio", "Veneno",

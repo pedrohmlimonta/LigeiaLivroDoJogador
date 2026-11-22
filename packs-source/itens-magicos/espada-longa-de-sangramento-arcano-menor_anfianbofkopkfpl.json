@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "2.524 Vo",
     "notes": "Militar, Versátil, Corpo a Corpo",
-    "description": "<p>Grupo: Lâminas Grandes. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (inanis)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Sangramento Arcano</b> (inanis · Constante · Normal · +2.500 Vo)<br>Quando você acerta uma criatura com uma arma com essa propriedade e causa dano a ela, criatura deve ser bem sucedida em uma rolagem de Vigor, cuja dificuldade depende do valor do item, ou perderá 1 ponto de magia por rodada até o fim da cena (Vigor anula).</li></ul><p>Preço das propriedades: +2.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 5 (2.500 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Grandes. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (inanis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Sangramento Arcano</b> (inanis · Constante · Normal · +2.500 Vo · <b>1 PM por uso</b>)<br>Quando você acerta uma criatura com uma arma com essa propriedade e causa dano a ela, criatura deve ser bem sucedida em uma rolagem de Vigor, cuja dificuldade depende do valor do item, ou perderá 1 ponto de magia por rodada até o fim da cena (Vigor anula).</li></ul><p>Preço das propriedades: +2.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 5 (2.500 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Espada Longa",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -363,7 +376,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Espada Longa — Sangramento Arcano (1 PM)",
@@ -563,7 +589,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Espada Longa (duas mãos, +1 dano) — Sangramento Arcano (1 PM)",
@@ -763,7 +802,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -797,6 +849,7 @@
           "palavras": [
             "inanis"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "inanis",
@@ -810,6 +863,8 @@
               "palavra": "inanis",
               "variante": "Normal",
               "preco": 2500,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -989,7 +1044,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 },
                 {
                   "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -1162,7 +1230,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

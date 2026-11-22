@@ -149,8 +149,9 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
            persist_rounds=1, persist_affects_self=False,
            persist_reroll_attack=False, persist_trigger="both",
            pre_activations=None, skip_roll_dialog=True, drain=None,
-           removes_effects=None, chain_actions=None):
-    """Uma ação de item (schema do sistema, build 28).
+           removes_effects=None, chain_actions=None, variable_cost=None,
+           summons=None):
+    """Uma ação de item (schema do sistema, build 30).
 
     - level: "all"/"B"/"A"/"E" — nível em que a ação existe (habilidades).
     - roll_bonus/roll_dice/rng/area/custos/damage/heal aceitam fórmulas
@@ -159,12 +160,17 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
     - drain: dict com resource/from/ratio — parte do dano causado volta como
       recurso para quem conjurou (enabled é ligado aqui).
     - removes_effects / chain_actions: listas no formato do sistema.
+    - variable_cost: dict com min/max/label/resource e as fórmulas de bônus
+      (damageBonus, healBonus, areaBonus, rangeBonus, rollBonus) — o custo
+      escolhido na ativação; @gasto vale nelas (enabled é ligado aqui).
+    - summons: lista de criaturas invocadas (veja summon()).
     """
     dr = {"enabled": False, "resource": "mp", "from": "both", "ratio": "1"}
     if drain:
         dr.update(drain)
         dr["enabled"] = True
         dr["ratio"] = _s(dr.get("ratio", 1), "1")
+    vc = variable_cost_field(variable_cost)
     mv = {"enabled": False, "kind": "push", "who": "targets", "distance": "0",
           "lateralSide": "right", "ignoreWalls": False, "snap": True}
     if movement:
@@ -223,6 +229,44 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
         "persistAffectsSelf": persist_affects_self,
         "persistRerollAttack": persist_reroll_attack,
         "persistTrigger": persist_trigger,
+        "variableCost": vc,
+        "summons": [dict(x) for x in (summons or [])],
+    }
+
+
+VARIABLE_COST_PADRAO = {
+    "enabled": False, "resource": "mp", "min": "1", "max": "", "label": "",
+    "damageBonus": "", "healBonus": "", "areaBonus": "", "rangeBonus": "", "rollBonus": "",
+}
+
+
+def variable_cost_field(cfg=None):
+    """Campo variableCost (sistema build 30): o custo escolhido na ativação.
+
+    Sem cfg, desligado. Com cfg, ligado; números viram texto (o schema guarda
+    fórmulas).
+    """
+    vc = dict(VARIABLE_COST_PADRAO)
+    if cfg:
+        vc.update(cfg)
+        vc["enabled"] = cfg.get("enabled", True)
+        for k in ("min", "max", "damageBonus", "healBonus", "areaBonus", "rangeBonus", "rollBonus"):
+            vc[k] = _s(vc[k], "")
+    return vc
+
+
+def summon(actor_name="", actor_uuid="", count=1, disposition="same", rounds=0,
+           give_control=True, hidden=False, enabled=True):
+    """Uma criatura que a ação invoca (sistema build 30).
+
+    Sem actor_uuid é um MARCADOR: diz qual criatura cabe ali; a ficha
+    arrastada para a ação ocupa o primeiro marcador (gancho do módulo) e leva
+    a quantidade, a atitude e a duração dele. Até lá, não invoca nada.
+    """
+    return {
+        "actorUuid": actor_uuid, "actorName": actor_name, "count": _s(count, "1"),
+        "disposition": disposition, "rounds": _s(rounds, "0"),
+        "giveControl": give_control, "hidden": hidden, "enabled": enabled,
     }
 
 

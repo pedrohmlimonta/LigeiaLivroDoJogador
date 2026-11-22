@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "200 Vo",
     "notes": "",
-    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (vitae)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Cura</b> (vitae · Ação Rápida · 3 Pontos de Vida · +200 Vo)<br>Quando você usa um item com essa propriedade, você recupera uma quantidade de pontos de vida, dependendo do preço do item.</li></ul><p>Preço das propriedades: +200 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 3 (200 Vo).</p>",
+    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (vitae)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Cura</b> (vitae · Ação Rápida · 3 Pontos de Vida · +200 Vo · <b>consumível</b>)<br>Quando você usa um item com essa propriedade, você recupera uma quantidade de pontos de vida, dependendo do preço do item.</li></ul><p>Preço das propriedades: +200 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 3 (200 Vo).</p>",
     "actions": [
       {
         "label": "✦ Beber: Cura — recupera 3 PV (consumível)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -198,11 +211,12 @@
         {
           "id": "Q2DEFcORTtlMV3iD",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "vitae"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "vitae",
@@ -216,6 +230,8 @@
               "palavra": "vitae",
               "variante": "3 Pontos de Vida",
               "preco": 200,
+              "nivel": 1,
+              "pm": 0,
               "indice": 2
             }
           ],

@@ -71,6 +71,10 @@ GRUPOS_ARMAS = {
     "Naturais": "naturais", "Orientais": "orientais", "Leves": "leve",
 }
 
+_SOPRO_GASTO = {"min": 1, "areaBonus": "@gasto",
+                "label": "Sopro de Dragão: o raio da área, em metros, é igual aos PM gastos "
+                         "(dentro de um alcance de 2 × Vigor)."}
+
 SOPROS = [
     ("Fogo", "fogo"), ("Frio", "frio"), ("Raio", "raio"),
     ("Ácido", "acido"), ("Veneno", "veneno"),
@@ -295,12 +299,17 @@ HABILIDADES_3 = [
         20, 40,
         activation="Livre (ao acertar um ataque corpo a corpo)",
         actions=[
-            action("Punição (B — 2 PM: +1 de dano final no alvo)",
-                   can_roll=False, target_mode="target", cost_mp=2,
-                   damage="1", damage_type="final"),
-            action("Punição (A — 1 PM: +1 de dano final no alvo)", level="A",
-                   can_roll=False, target_mode="target", cost_mp=1,
-                   damage="1", damage_type="final"),
+            # Custo escolhido na ativação (sistema build 30): a caixa pergunta
+            # quantos PM gastar e @gasto vira o dano final.
+            action("Punição (B — cada 2 PM: +1 de dano final, até 6)",
+                   can_roll=False, target_mode="target", damage_type="final",
+                   variable_cost={"min": 2, "max": 12, "damageBonus": "floor(@gasto/2)",
+                                  "label": "Punição: a cada 2 PM gastos, o alvo sofre 1 ponto de dano final "
+                                           "(até 6 de dano — 12 PM)."}),
+            action("Punição (A — cada PM: +1 de dano final, até 6)", level="A",
+                   can_roll=False, target_mode="target", damage_type="final",
+                   variable_cost={"min": 1, "max": 6, "damageBonus": "@gasto",
+                                  "label": "Punição (Avançado): cada PM gasto, 1 ponto de dano final no alvo (até 6)."}),
         ],
         img=IMG["combate"],
     ),
@@ -425,17 +434,20 @@ HABILIDADES_3 = [
             20, 40,
             activation="Ação",
             actions=[
+                # O raio é o que se gasta: área 0 + @gasto (custo escolhido).
                 action(
-                    f"Sopro de Dragão — {elem} (área = PM gastos; ajuste a área)",
-                    roll_attr="vigor", target_mode="area", area=1, rng="2*@vigor",
-                    damage="ceil(@nivel/2)", damage_type=dtipo, cost_mp=1,
-                    defense_attr="esquiva", defense_attr2="bloqueio"),
-                action(
-                    f"Sopro de Dragão (A) — {elem} com dano contínuo",
-                    level="A",
-                    roll_attr="vigor", target_mode="area", area=1, rng="2*@vigor",
-                    damage="ceil(@nivel/2)", damage_type=dtipo, cost_mp=1,
+                    f"Sopro de Dragão — {elem} (raio = PM gastos)",
+                    roll_attr="vigor", target_mode="area", area=0, rng="2*@vigor",
+                    damage="ceil(@nivel/2)", damage_type=dtipo,
                     defense_attr="esquiva", defense_attr2="bloqueio",
+                    variable_cost=_SOPRO_GASTO),
+                action(
+                    f"Sopro de Dragão (A) — {elem} com dano contínuo (raio = PM gastos)",
+                    level="A",
+                    roll_attr="vigor", target_mode="area", area=0, rng="2*@vigor",
+                    damage="ceil(@nivel/2)", damage_type=dtipo,
+                    defense_attr="esquiva", defense_attr2="bloqueio",
+                    variable_cost=_SOPRO_GASTO,
                     applies_effects=[applies(f"Dano contínuo de {elem.lower()} (Vigor anula)",
                                              fx_type="condition", fx_target="dano_continuo",
                                              duration_mode="scene", resist=True,

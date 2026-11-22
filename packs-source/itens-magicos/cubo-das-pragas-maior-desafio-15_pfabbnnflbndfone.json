@@ -12,10 +12,10 @@
     "weight": 0,
     "price": "400.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (mortis + mortis + mortis)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Pragas</b> (mortis · Ação · Desafio 15 · +400.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Este cubo do tamanho de um punho possui entalhes de pragas em cada um de seus lados. Você pode gastar uma quantidade de pontos de magia e colocá-lo no chão enquanto pronuncia a palavra ou frase chave para ativá-lo. Quando ativado, o cubo libera uma praga que alcança uma quantidade de metros igual a 100 multiplicado pela quantidade de pontos de magia gastos. Todas as criaturas dentro do alcance, exceto você, são testadas contra uma doença cujo desafio depende do valor do item.<br><em>Corrupção: +1 depois de 3 dias portando.</em></li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (mortis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Pragas</b> (mortis · Ação · Desafio 15 · +400.000 Vo · <b>PM à escolha</b>)<br>Este cubo do tamanho de um punho possui entalhes de pragas em cada um de seus lados. Você pode gastar uma quantidade de pontos de magia e colocá-lo no chão enquanto pronuncia a palavra ou frase chave para ativá-lo. Quando ativado, o cubo libera uma praga que alcança uma quantidade de metros igual a 100 multiplicado pela quantidade de pontos de magia gastos. Todas as criaturas dentro do alcance, exceto você, são testadas contra uma doença cujo desafio depende do valor do item.<br><em>Corrupção: +1 depois de 3 dias portando.</em></li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
     "actions": [
       {
-        "label": "✦ Pragas — praga de Desafio 15 (100m por PM) (3 PM)",
+        "label": "✦ Pragas — praga de Desafio 15 (100m por PM gasto) (PM à escolha)",
         "level": "all",
         "canRoll": false,
         "rollAttr": "agilidade",
@@ -24,8 +24,8 @@
         "vsDifficulty": false,
         "fixedDifficulty": "8",
         "difficultyAttr": "nenhum",
-        "targetMode": "self",
-        "includeSelf": true,
+        "targetMode": "none",
+        "includeSelf": false,
         "areaFilter": "all",
         "defenseAttr": "esquiva",
         "defenseAttr2": "",
@@ -69,7 +69,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "NIl4SlJKlUwMVgDj",
+          "id": "nDoHXeTHPJmp2J1P",
           "label": "Cubo das Pragas (Maior, Desafio 15)",
           "menu": "ontoken",
           "macro": {
@@ -162,14 +162,27 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "3",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "Pragas: a praga alcança 100m por PM gasto; todas as criaturas no alcance, menos você, são testadas contra uma doença de Desafio 15.",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "100*@gasto",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -198,22 +211,13 @@
         {
           "id": "yRvXCnhVxvF1FGNt",
           "nivel": "Maior",
-          "pm": 3,
+          "pm": 0,
           "lendario": false,
           "palavras": [
-            "mortis",
-            "mortis",
             "mortis"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "mortis",
-              "id": "mortis-pragas"
-            },
-            {
-              "palavra": "mortis",
-              "id": "mortis-pragas"
-            },
             {
               "palavra": "mortis",
               "id": "mortis-pragas"
@@ -226,6 +230,8 @@
               "palavra": "mortis",
               "variante": "Desafio 15",
               "preco": 400000,
+              "nivel": 3,
+              "pm": 0,
               "indice": 4
             }
           ],

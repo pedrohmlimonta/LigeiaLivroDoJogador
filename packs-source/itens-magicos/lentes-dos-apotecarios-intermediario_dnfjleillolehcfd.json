@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "14.000 Vo",
     "notes": "",
-    "description": "<p><b>Elmos, Máscaras, Coroas, Lentes, Bandanas e Tiaras</b>: São itens que podem ser equipados na cabeça.</p><hr><h3>✦ Encantamento — Item Intermediário (noxia + noxia)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Apotecários</b> (noxia · Constante · +14.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com essa propriedade, você recebe 1D na identificação de itens que tenham propriedades da palavra noxia e na rolagens de manipulação de venenos.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
+    "description": "<p><b>Elmos, Máscaras, Coroas, Lentes, Bandanas e Tiaras</b>: São itens que podem ser equipados na cabeça.</p><hr><h3>✦ Encantamento — Item Intermediário (noxia)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Apotecários</b> (noxia · Constante · +14.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com essa propriedade, você recebe 1D na identificação de itens que tenham propriedades da palavra noxia e na rolagens de manipulação de venenos.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Apotecários (2 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +241,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "noxia",
             "noxia"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "noxia",
-              "id": "noxia-apotecarios"
-            },
             {
               "palavra": "noxia",
               "id": "noxia-apotecarios"
@@ -248,6 +257,8 @@
               "palavra": "noxia",
               "variante": "",
               "preco": 14000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

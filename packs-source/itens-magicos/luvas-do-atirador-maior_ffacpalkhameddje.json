@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "2.000.000 Vo",
     "notes": "",
-    "description": "<p><b>Luvas e Manoplas</b>: São itens que podem ser equipados nas mãos.</p><hr><h3>✦ Encantamento — Item Maior (sorcdiron + sorcdiron + sorcdiron)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Atirador</b> (sorcdiron · Constante · +3 em Ataque · +2.000.000 Vo)<br>Enquanto estiver usando estas luvas, você recebe 1/2/3 pontos em seus ataques com armas de Alcance (dependendo do preço do item).</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
+    "description": "<p><b>Luvas e Manoplas</b>: São itens que podem ser equipados nas mãos.</p><hr><h3>✦ Encantamento — Item Maior (sorcdiron)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Atirador</b> (sorcdiron · Constante · +3 em Ataque · +2.000.000 Vo · <b>3 PM por uso</b>)<br>Enquanto estiver usando estas luvas, você recebe 1/2/3 pontos em seus ataques com armas de Alcance (dependendo do preço do item).</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Atirador (3 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,19 +241,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "sorcdiron",
-            "sorcdiron",
             "sorcdiron"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "sorcdiron",
-              "id": "sorcdiron-atirador"
-            },
-            {
-              "palavra": "sorcdiron",
-              "id": "sorcdiron-atirador"
-            },
             {
               "palavra": "sorcdiron",
               "id": "sorcdiron-atirador"
@@ -253,6 +257,8 @@
               "palavra": "sorcdiron",
               "variante": "+3 em Ataque",
               "preco": 2000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

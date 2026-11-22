@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "30.000 Vo",
     "notes": "",
-    "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri + forjuri)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Tenacidade</b> (forjuri · Constante · +30.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com esta propriedade, você fica imune a Exaustão e Enfraquecimento.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Tenacidade</b> (forjuri · Constante · +30.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver usando um item com esta propriedade, você fica imune a Exaustão e Enfraquecimento.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Tenacidade (2 PM, até o fim da cena)",
@@ -60,10 +60,36 @@
         },
         "appliesEffects": [
           {
-            "label": "✦ Tenacidade: imune a Exausto e Enfraquecido",
-            "fxType": "bonus",
-            "fxTarget": "all",
-            "fxValue": "0",
+            "label": "✦ Tenacidade: imune a Exausto",
+            "fxType": "immune",
+            "fxTarget": "condicao:exausto",
+            "fxValue": "1",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          },
+          {
+            "label": "✦ Tenacidade: imune a Enfraquecido",
+            "fxType": "immune",
+            "fxTarget": "condicao:enfraquecido",
+            "fxValue": "1",
             "fxAll": false,
             "durationMode": "scene",
             "durationRounds": "1",
@@ -196,7 +222,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +267,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "forjuri",
             "forjuri"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "forjuri",
-              "id": "forjuri-tenacidade"
-            },
             {
               "palavra": "forjuri",
               "id": "forjuri-tenacidade"
@@ -248,6 +283,8 @@
               "palavra": "forjuri",
               "variante": "",
               "preco": 30000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

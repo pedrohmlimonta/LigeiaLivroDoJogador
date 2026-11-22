@@ -18,7 +18,7 @@
     "weight": 0,
     "price": "1.000.019 Vo",
     "notes": "Militar, Uma Mão, Corpo a Corpo, Leve",
-    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p><hr><h3>✦ Encantamento — Item Maior (pluribus + pluribus + pluribus)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Lâminas Espelho</b> (pluribus · Constante · +1.000.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver empunhando um item com essa propriedade, você pode gastar 1 ponto de magia para criar uma cópia de si mesmo. Esta copia compartilha todas as suas características (Ex.: se ela sofrer dano, o dano será descontado dos seus pontos de vida). Quando você faz seu turno, você pode dividir suas ações entre ela e você. A cópia permanece até o fim da cena.</li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p><hr><h3>✦ Encantamento — Item Maior (pluribus)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Lâminas Espelho</b> (pluribus · Constante · +1.000.000 Vo · <b>3 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver empunhando um item com essa propriedade, você pode gastar 1 ponto de magia para criar uma cópia de si mesmo. Esta copia compartilha todas as suas características (Ex.: se ela sofrer dano, o dano será descontado dos seus pontos de vida). Quando você faz seu turno, você pode dividir suas ações entre ela e você. A cópia permanece até o fim da cena.</li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Espada Curta",
@@ -191,7 +191,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Lâminas Espelho — cria uma cópia de você (cena) (3 PM)",
@@ -348,7 +361,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -380,19 +406,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "pluribus",
-            "pluribus",
             "pluribus"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "pluribus",
-              "id": "pluribus-laminas-espelho"
-            },
-            {
-              "palavra": "pluribus",
-              "id": "pluribus-laminas-espelho"
-            },
             {
               "palavra": "pluribus",
               "id": "pluribus-laminas-espelho"
@@ -405,6 +422,8 @@
               "palavra": "pluribus",
               "variante": "",
               "preco": 1000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],
@@ -584,7 +603,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

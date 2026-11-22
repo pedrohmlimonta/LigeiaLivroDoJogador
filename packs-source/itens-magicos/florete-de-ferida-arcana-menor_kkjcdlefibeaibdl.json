@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "427 Vo",
     "notes": "Militar, Uma Mão, Corpo a Corpo",
-    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (inanis)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Ferida Arcana</b> (inanis · Constante · 1 Ponto de Magia · +400 Vo)<br>Quando você acerta um ataque em uma criatura com essa propriedade, a criatura perde uma quantidade de pontos de magia dependendo do valor do item.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (inanis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Ferida Arcana</b> (inanis · Constante · 1 Ponto de Magia · +400 Vo · <b>1 PM por uso</b>)<br>Quando você acerta um ataque em uma criatura com essa propriedade, a criatura perde uma quantidade de pontos de magia dependendo do valor do item.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Florete",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Florete — Ferida Arcana (1 PM)",
@@ -370,7 +383,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -404,6 +430,7 @@
           "palavras": [
             "inanis"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "inanis",
@@ -417,6 +444,8 @@
               "palavra": "inanis",
               "variante": "1 Ponto de Magia",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -596,7 +625,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

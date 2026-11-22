@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "14.000 Vo",
     "notes": "",
-    "description": "<p><b>Cintos e Faixas</b>: São itens que podem ser equipados na cintura.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri + forjuri)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Rigidez</b> (forjuri · Constante · +14.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com esta propriedade, você fica imune a tentativas de derrubá-lo ou agarrá-lo.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
+    "description": "<p><b>Cintos e Faixas</b>: São itens que podem ser equipados na cintura.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Rigidez</b> (forjuri · Constante · +14.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver usando um item com esta propriedade, você fica imune a tentativas de derrubá-lo ou agarrá-lo.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Rigidez (2 PM, até o fim da cena)",
@@ -60,10 +60,36 @@
         },
         "appliesEffects": [
           {
-            "label": "✦ Rigidez: não pode ser derrubado nem agarrado",
-            "fxType": "bonus",
-            "fxTarget": "all",
-            "fxValue": "0",
+            "label": "✦ Rigidez: imune a Caído",
+            "fxType": "immune",
+            "fxTarget": "condicao:caido",
+            "fxValue": "1",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          },
+          {
+            "label": "✦ Rigidez: imune a Agarrado",
+            "fxType": "immune",
+            "fxTarget": "condicao:agarrado",
+            "fxValue": "1",
             "fxAll": false,
             "durationMode": "scene",
             "durationRounds": "1",
@@ -196,7 +222,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +267,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "forjuri",
             "forjuri"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "forjuri",
-              "id": "forjuri-rigidez"
-            },
             {
               "palavra": "forjuri",
               "id": "forjuri-rigidez"
@@ -248,6 +283,8 @@
               "palavra": "forjuri",
               "variante": "",
               "preco": 14000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

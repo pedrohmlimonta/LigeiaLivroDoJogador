@@ -89,7 +89,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "Firmeza Física (A) — reação: evitar a derrubada/o empurrão e atacar quem tentou (1 PH)",
@@ -160,7 +173,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -217,8 +243,56 @@
         "value": "ceil(@nivel/2)",
         "rerollAll": false,
         "vulnPercent": false,
-        "label": "Firmeza Física (A): +metade do Nível para resistir/anular Agarrado, Enfraquecido, Exausto e Paralisado (ligue quando valer)",
+        "label": "Firmeza Física (A): +metade do Nível para resistir a Agarrado, Enfraquecido, Exausto e Paralisado (ligue na rolagem de resistência)",
         "enabled": false,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:agarrado",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Firmeza Física (A): +metade do Nível para anular Agarrado (início do turno)",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:enfraquecido",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Firmeza Física (A): +metade do Nível para anular Enfraquecido (início do turno)",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:exausto",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Firmeza Física (A): +metade do Nível para anular Exausto (início do turno)",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:paralisado",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Firmeza Física (A): +metade do Nível para anular Paralisado (início do turno)",
+        "enabled": true,
         "enchant": false,
         "level": "A",
         "damageType": ""

@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "600.000 Vo",
     "notes": "",
-    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Maior (glacios + glacios + glacios)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Imunidade a Frio</b> (glacios · Constante · +600.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um anel com essa propriedade, você ignora danos finais e danos contínuos de frio. Baixas temperaturas de um ambiente naturalmente frio não o afetam.</li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
+    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Maior (glacios)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Imunidade a Frio</b> (glacios · Constante · +600.000 Vo · <b>3 PM por uso</b>)<br>Enquanto estiver usando um anel com essa propriedade, você ignora danos finais e danos contínuos de frio. Baixas temperaturas de um ambiente naturalmente frio não o afetam.</li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Imunidade a Frio (3 PM, até o fim da cena)",
@@ -60,7 +60,33 @@
         },
         "appliesEffects": [
           {
-            "label": "✦ Imunidade a Frio: ignora dano final e contínuo de Frio",
+            "label": "✦ Imunidade a Frio: imune a dano contínuo de Frio",
+            "fxType": "immune",
+            "fxTarget": "efeito:dano contínuo de Frio",
+            "fxValue": "1",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          },
+          {
+            "label": "✦ Imunidade a Frio: ignora dano final de Frio",
             "fxType": "bonus",
             "fxTarget": "all",
             "fxValue": "0",
@@ -196,7 +222,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,19 +267,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "glacios",
-            "glacios",
             "glacios"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "glacios",
-              "id": "glacios-imunidade-a-frio"
-            },
-            {
-              "palavra": "glacios",
-              "id": "glacios-imunidade-a-frio"
-            },
             {
               "palavra": "glacios",
               "id": "glacios-imunidade-a-frio"
@@ -253,6 +283,8 @@
               "palavra": "glacios",
               "variante": "",
               "preco": 600000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],

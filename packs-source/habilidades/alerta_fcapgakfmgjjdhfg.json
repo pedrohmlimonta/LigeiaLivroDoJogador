@@ -89,7 +89,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -146,8 +159,32 @@
         "value": "ceil(@nivel/2)",
         "rerollAll": false,
         "vulnPercent": false,
-        "label": "Alerta (A): +metade do Nível para resistir/anular Cego e Surdo (ligue quando valer)",
+        "label": "Alerta (A): +metade do Nível para resistir a Cego e Surdo (ligue na rolagem de resistência)",
         "enabled": false,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:cego",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Alerta (A): +metade do Nível para anular Cego (início do turno)",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:surdo",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Alerta (A): +metade do Nível para anular Surdo (início do turno)",
+        "enabled": true,
         "enchant": false,
         "level": "A",
         "damageType": ""

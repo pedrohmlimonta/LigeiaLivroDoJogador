@@ -17,7 +17,7 @@
     "weight": 2,
     "price": "1.028 Vo",
     "notes": "Militar, Duas Mãos, Corpo a Corpo",
-    "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +5. Propriedades: Militar, Duas Mãos, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (ignis)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Dano Flamejante</b> (ignis · Constante · Armas — 1 de dano · +1.000 Vo)<br>Quando atacar com arma, munição, ou enquanto estiver usando braçadeiras com essa propriedade, seus ataques causarão 1/2/3 de dano bruto adicional de fogo, de acordo com o valor do item.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
+    "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +5. Propriedades: Militar, Duas Mãos, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (ignis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Dano Flamejante</b> (ignis · Constante · Armas — 1 de dano · +1.000 Vo · <b>1 PM por uso</b>)<br>Quando atacar com arma, munição, ou enquanto estiver usando braçadeiras com essa propriedade, seus ataques causarão 1/2/3 de dano bruto adicional de fogo, de acordo com o valor do item.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Machado Grande",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Machado Grande — Dano Flamejante (1 PM)",
@@ -370,7 +383,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -404,6 +430,7 @@
           "palavras": [
             "ignis"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "ignis",
@@ -417,6 +444,8 @@
               "palavra": "ignis",
               "variante": "Armas — 1 de dano",
               "preco": 1000,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -596,7 +625,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

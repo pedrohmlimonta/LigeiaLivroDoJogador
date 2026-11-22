@@ -18,7 +18,7 @@
     "weight": 0,
     "price": "14.060 Vo",
     "notes": "Militar, Duas Mãos, Artilharia, Alcance 45m",
-    "description": "<p>Grupo: Arcos. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Duas Mãos, Artilharia, Alcance 45m.</p><hr><h3>✦ Encantamento — Item Intermediário (devena + devena)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Predador</b> (devena · Constante · Dano Base +2 · +14.000 Vo)<br>Esta arma foi encantada para a caça de um tipo de criatura (ou raça de humanóide). Quando você ataca uma criatura do tipo especificado, o dano base causado é aumentado em uma quantidade de pontos, dependendo do valor do item.<br><em>Escolha o tipo de criatura (ou raça) ao criar o item e anote no nome ou na descrição.</em></li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
+    "description": "<p>Grupo: Arcos. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Duas Mãos, Artilharia, Alcance 45m.</p><hr><h3>✦ Encantamento — Item Intermediário (devena)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Predador</b> (devena · Constante · Dano Base +2 · +14.000 Vo · <b>2 PM por uso</b>)<br>Esta arma foi encantada para a caça de um tipo de criatura (ou raça de humanóide). Quando você ataca uma criatura do tipo especificado, o dano base causado é aumentado em uma quantidade de pontos, dependendo do valor do item.<br><em>Escolha o tipo de criatura (ou raça) ao criar o item e anote no nome ou na descrição.</em></li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Arco Longo",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Arco Longo — Predador contra a presa (+2 no dano base) (2 PM)",
@@ -320,7 +333,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -352,14 +378,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "devena",
             "devena"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "devena",
-              "id": "devena-predador"
-            },
             {
               "palavra": "devena",
               "id": "devena-predador"
@@ -372,6 +394,8 @@
               "palavra": "devena",
               "variante": "Dano Base +2",
               "preco": 14000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],
@@ -529,7 +553,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

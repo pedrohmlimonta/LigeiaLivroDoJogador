@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 """Magias de exemplo (Círculo Menor) — parte 1 (acida a lumo). Fonte: Sessão 11."""
-from builders import magia, effect, cost, action, applies
+from builders import magia, effect, cost, action, applies, summon
 
 IMG = "icons/svg/daze.svg"
 IMG_DMG = "icons/svg/explosion.svg"
 IMG_BUFF = "icons/svg/upgrade.svg"
 IMG_HEAL = "icons/svg/heal.svg"
+
+
+def _invocar(rotulo, criatura, rng):
+    """Ação de invocação (sistema build 30). A criatura entra por um MARCADOR:
+    arraste a ficha dela para a ação, no item (o marcador diz qual cabe ali), e
+    ao usar a ação escolha no mapa, dentro do alcance, onde ela aparece. A
+    Criação de Magias ajusta o marcador (tamanho, Desafio, Replicante...)."""
+    return action(rotulo, can_roll=False, target_mode="none", include_self=False,
+                  rng=rng, cost_mp=1,
+                  summons=[summon(f"{criatura} — arraste a ficha abaixo")])
 
 
 def _m(name, word, casting, target, area, rng, duration, desc, pecs,
@@ -109,11 +119,15 @@ MAGIAS_1 = [
     _m("Invocar Animais", "devena", "Ação", "Um espaço vazio", "", "Nível x Círculo",
        "Sustentável — Ação Rápida",
        "Você pronuncia a palavra arcana devena enquanto mentaliza uma fera se materializando no lugar onde você está focando sua visão, trazendo um animal de um lugar distante para auxiliá-lo.\n\nEfeito: Você invoca uma criatura do tipo fera pequena, com Desafio igual ao dobro do seu Nível ou menos, no espaço alvo. A criatura é amigável a você e seus aliados, e hostil a seus inimigos, atacando-os em seu turno.\n\nConhecimento (Natureza) concede +1 em Conjuração para esta conjuração.",
-       "Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Desafio 3 + seu nível, ou menos (apenas Círculo Intermediário ou Maior) (-4). Desafio 6 + seu nível ou menos (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1)."),
+       "Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Aumente o Desafio em +1 (apenas Círculo Intermediário ou Maior) (-4). Aumente o Desafio em +3 (apenas Círculo Maior) (-6). O conjurador perde 1 ponto de vida quando a conjura (+2). A criatura não é amigável a ninguém (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
+       actions=[_invocar("Invocar Animais (fera pequena, Desafio até 2× Nível)",
+                         "Fera pequena, Desafio até 2× Nível", "@nivel")]),
     _m("Invocar Plantas", "devena", "Ação", "Um espaço vazio", "", "Nível x Círculo",
        "Sustentável — Ação Rápida",
        "Você pronuncia a palavra devena, fazendo com que cresça uma planta carnívora em um espaço vazio, a qual ao fim da invocação dá frutos.\n\nEfeito: Você invoca uma criatura do tipo planta, pequena, no espaço alvo, com Desafio igual ao seu nível ou menos. A planta é amigável a você e seus aliados e hostil a seus inimigos, atacando-os, se possível. A planta invocada concede uma quantidade de frutos no final da invocação, igual a seu atributo de Mente. Esses frutos podem ser medicinais ou venenosos (você escolhe quando invocar). Frutos medicinais curam 1 ponto de vida quando ingeridos (e contam como uma refeição); frutos venenosos causam 1 ponto de dano bruto de veneno quando ingeridos.\n\nConhecimento (Natureza) concede +1 em Conjuração para esta conjuração.",
-       "Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Desafio 3 + seu nível, ou menos (apenas Círculo Intermediário ou Maior) (-4). Desafio 6 + seu nível ou menos (apenas Círculo Maior) (-6). Os frutos curam/causam 2 pontos de dano (apenas Círculo Intermediário ou Maior) (-2). Os frutos curam/causam 3 pontos de dano (apenas Círculo Maior) (-4). O conjurador perde 1 ponto de vida quando a conjura (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1)."),
+       "Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Desafio 3 + seu nível, ou menos (apenas Círculo Intermediário ou Maior) (-4). Desafio 6 + seu nível ou menos (apenas Círculo Maior) (-6). Os frutos curam/causam 2 pontos de dano (apenas Círculo Intermediário ou Maior) (-2). Os frutos curam/causam 3 pontos de dano (apenas Círculo Maior) (-4). O conjurador perde 1 ponto de vida quando a conjura (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
+       actions=[_invocar("Invocar Plantas (planta pequena, Desafio até o Nível)",
+                         "Planta pequena, Desafio até Nível", "@nivel")]),
     # ------------------------------- ENERGIO ----------------------------
     _m("Aura Arcana", "energio", "Ação", "", "Nível x Círculo", "Aura",
        "Sustentação — Ação Rápida",
@@ -321,7 +335,14 @@ MAGIAS_1 = [
     _m("Invocar", "krucigon", "Ação", "Espaço vazio", "", "Adjacente",
        "Sustentável — Movimento",
        "Você pronuncia a palavra krucigon, trazendo de outro plano uma criatura ou um objeto que você mentalizar.\n\nEfeitos: Você invoca uma criatura pequena com Desafio igual ao dobro do seu nível ou um objeto encantado que lhe dá +1 para um tipo de rolagem relacionada ao objeto. A criatura é amigável a você e a seus aliados e lutará para defendê-los. Você pode usar esta magia para invocar algum pertence que esteja fora do seu alcance, direto para sua mão, que tenha sido vinculado à magia previamente. Você só pode ter um item vinculado por vez.\n\nConhecimento (Religião) concede +1 em Conjuração para esta conjuração.",
-       "Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Aumente o Desafio em +1 ponto (apenas Círculo Intermediário ou Maior) (-4). Aumente o Desafio em +3 pontos (apenas Círculo Maior) (-6). O objeto encantado te dá +2 para rolagens relacionadas ao objeto (apenas Círculo Intermediário ou Maior) (-4). O objeto encantado te dá +3 para rolagens relacionadas ao objeto (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1)."),
+       "Invoca criatura média (apenas Círculo Intermediário ou Maior) (-1). Invoca criatura grande (apenas Círculo Maior) (-3). Aumente o Desafio em +1 ponto (apenas Círculo Intermediário ou Maior) (-4). Aumente o Desafio em +3 pontos (apenas Círculo Maior) (-6). O objeto encantado te dá +2 para rolagens relacionadas ao objeto (apenas Círculo Intermediário ou Maior) (-4). O objeto encantado te dá +3 para rolagens relacionadas ao objeto (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
+       actions=[_invocar("Invocar (criatura pequena, Desafio até 2× Nível)",
+                         "Criatura pequena, Desafio até 2× Nível", "1.5"),
+                action("Invocar um objeto encantado (+1 nas rolagens com ele)",
+                       can_roll=False, target_mode="self", include_self=True, cost_mp=1,
+                       applies_effects=[applies("Objeto invocado (krucigon): +1 nas rolagens relacionadas a ele",
+                                                fx_type="bonus", fx_target="all", fx_value=0,
+                                                duration_mode="scene")])]),
     # --------------------------------- LUMO -----------------------------
     _m("Luz", "lumo", "Ação", "Um objeto", "", "Toque", "Uma hora",
        "Você pronuncia a palavra lumo enquanto toca um objeto, fazendo com que o mesmo irradie uma luz intensa o suficiente para que todos possam enxergar.\n\nEfeitos: O alvo emite uma luz brilhante que ilumina uma área de 10m multiplicado pelo seu nível, centrada nele.\n\nConhecimento (Arcano) concede +1 em Conjuração para esta conjuração.",

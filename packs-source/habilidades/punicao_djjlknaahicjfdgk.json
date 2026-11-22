@@ -21,7 +21,7 @@
     "descSpecial": "",
     "actions": [
       {
-        "label": "Punição (B — 2 PM: +1 de dano final no alvo)",
+        "label": "Punição (B — cada 2 PM: +1 de dano final, até 6)",
         "level": "B",
         "canRoll": false,
         "rollAttr": "forca",
@@ -35,7 +35,7 @@
         "areaFilter": "all",
         "defenseAttr": "esquiva",
         "defenseAttr2": "",
-        "damage": "1",
+        "damage": "",
         "damageType": "final",
         "damageResource": "hp",
         "scalingDamage": false,
@@ -75,7 +75,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "HRhxOoGPkyJyiePZ",
+          "id": "bniq7WToYropPnic",
           "label": "Punição",
           "menu": "ontoken",
           "macro": {
@@ -168,17 +168,30 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "2",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "2",
+          "max": "12",
+          "label": "Punição: a cada 2 PM gastos, o alvo sofre 1 ponto de dano final (até 6 de dano — 12 PM).",
+          "damageBonus": "floor(@gasto/2)",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
-        "label": "Punição (A — 1 PM: +1 de dano final no alvo)",
+        "label": "Punição (A — cada PM: +1 de dano final, até 6)",
         "level": "A",
         "canRoll": false,
         "rollAttr": "forca",
@@ -192,7 +205,7 @@
         "areaFilter": "all",
         "defenseAttr": "esquiva",
         "defenseAttr2": "",
-        "damage": "1",
+        "damage": "",
         "damageType": "final",
         "damageResource": "hp",
         "scalingDamage": false,
@@ -232,7 +245,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "CSaWGthyWsmtTQtS",
+          "id": "Jook9PAm7R1qq4GB",
           "label": "Punição",
           "menu": "ontoken",
           "macro": {
@@ -325,14 +338,27 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "1",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "1",
+          "max": "6",
+          "label": "Punição (Avançado): cada PM gasto, 1 ponto de dano final no alvo (até 6).",
+          "damageBonus": "@gasto",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],

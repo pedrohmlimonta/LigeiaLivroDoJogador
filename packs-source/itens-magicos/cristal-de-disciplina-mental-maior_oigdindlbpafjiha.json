@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "2.000.000 Vo",
     "notes": "",
-    "description": "<p><b>Focos</b>: São itens que podem ser empunhados com uma das mãos, exceto o instrumento musical.</p><hr><h3>✦ Encantamento — Item Maior (menso + menso + menso)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Disciplina Mental</b> (menso · Constante · Conjuração +3 · +2.000.000 Vo)<br>Quando conjura uma magia composta pela palavra arcana menso usando esse item como foco, você recebe um bônus para a rolagem de conjuração, dependendo do valor do item.</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
+    "description": "<p><b>Focos</b>: São itens que podem ser empunhados com uma das mãos, exceto o instrumento musical.</p><hr><h3>✦ Encantamento — Item Maior (menso)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Disciplina Mental</b> (menso · Constante · Conjuração +3 · +2.000.000 Vo · <b>3 PM por uso</b>)<br>Quando conjura uma magia composta pela palavra arcana menso usando esse item como foco, você recebe um bônus para a rolagem de conjuração, dependendo do valor do item.</li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Disciplina Mental (3 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,19 +241,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "menso",
-            "menso",
             "menso"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "menso",
-              "id": "menso-disciplina-mental"
-            },
-            {
-              "palavra": "menso",
-              "id": "menso-disciplina-mental"
-            },
             {
               "palavra": "menso",
               "id": "menso-disciplina-mental"
@@ -253,6 +257,8 @@
               "palavra": "menso",
               "variante": "Conjuração +3",
               "preco": 2000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

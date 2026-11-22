@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "14.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (fulgur + fulgur)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Receptor</b> (fulgur · Ação · 2 de dano / magia · +14.000 Vo)<br>Este cubo de cobre do tamanho de um punho pode ser acionado através de um botão contido em um de seus lados e arremessado em seguida (alcance de 5m). Se isso ocorrer enquanto houver núvens no céu, as mesmas ficarão carregadas e um raio será atraído das núvens para o cubo, quebrando tetos (se houver) e causando 1/2/3 de dano bruto de raio (dependendo do valor do item) a todas as criaturas até 4m e carregando o cubo com energia. Enquanto ele estiver carregado, ele funciona como um foco para magias compostas por fulgur e concede 1/2/3 pontos de magia para a conjuração das mesmas, dependendo do valor do item. Quando o último ponto de magia do cubo é gasto, ele descarrega e não pode mais ser usado como foco até ser carregado novamente.<br><em>Carregado, o cubo serve de foco para magias de fulgur e concede 2 PM para conjurá-las.</em></li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (fulgur)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Receptor</b> (fulgur · Ação · 2 de dano / magia · +14.000 Vo · <b>2 PM por uso</b>)<br>Este cubo de cobre do tamanho de um punho pode ser acionado através de um botão contido em um de seus lados e arremessado em seguida (alcance de 5m). Se isso ocorrer enquanto houver núvens no céu, as mesmas ficarão carregadas e um raio será atraído das núvens para o cubo, quebrando tetos (se houver) e causando 1/2/3 de dano bruto de raio (dependendo do valor do item) a todas as criaturas até 4m e carregando o cubo com energia. Enquanto ele estiver carregado, ele funciona como um foco para magias compostas por fulgur e concede 1/2/3 pontos de magia para a conjuração das mesmas, dependendo do valor do item. Quando o último ponto de magia do cubo é gasto, ele descarrega e não pode mais ser usado como foco até ser carregado novamente.<br><em>Carregado, o cubo serve de foco para magias de fulgur e concede 2 PM para conjurá-las.</em></li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Receptor — raio de 2 em quem estiver até 4m (2 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,14 +214,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "fulgur",
             "fulgur"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "fulgur",
-              "id": "fulgur-receptor"
-            },
             {
               "palavra": "fulgur",
               "id": "fulgur-receptor"
@@ -221,6 +230,8 @@
               "palavra": "fulgur",
               "variante": "2 de dano / magia",
               "preco": 14000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

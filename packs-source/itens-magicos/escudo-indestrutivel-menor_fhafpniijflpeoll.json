@@ -12,7 +12,7 @@
     "weight": 1,
     "price": "415 Vo",
     "notes": "Deflexão",
-    "description": "<p>Uma base metálica cuja parte traseira possui tiras de couro ou elos de aço usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p><hr><h3>✦ Encantamento — Item Menor (kreo)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Indestrutível</b> (kreo · Constante · Dureza +1 · +400 Vo) <em>(sem automação: aplique pela descrição)</em><br>Um item com esta propriedade possui pontos de Dureza além do normal, dependendo do valor do item. Quando quebrado, seu portador pode trazê-lo de volta em um dia gastando 1 ponto de magia, em uma hora gastando 2 pontos heróicos, ou em uma rodada gastando 3 pontos heróicos.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p>Uma base metálica cuja parte traseira possui tiras de couro ou elos de aço usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p><hr><h3>✦ Encantamento — Item Menor (kreo)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Indestrutível</b> (kreo · Constante · Dureza +1 · +400 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Um item com esta propriedade possui pontos de Dureza além do normal, dependendo do valor do item. Quando quebrado, seu portador pode trazê-lo de volta em um dia gastando 1 ponto de magia, em uma hora gastando 2 pontos heróicos, ou em uma rodada gastando 3 pontos heróicos.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Indestrutível (1 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "kreo"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "kreo",
@@ -243,6 +257,8 @@
               "palavra": "kreo",
               "variante": "Dureza +1",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

@@ -62,8 +62,32 @@
         "value": "ceil(@nivel/2)",
         "rerollAll": false,
         "vulnPercent": false,
-        "label": "Corredor (A): +metade do Nível para resistir/anular Lento e Imobilizado (ligue quando valer)",
+        "label": "Corredor (A): +metade do Nível para resistir a Lento e Imobilizado (ligue na rolagem de resistência)",
         "enabled": false,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:lento",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Corredor (A): +metade do Nível para anular Lento (início do turno)",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "resistir:imobilizado",
+        "value": "ceil(@nivel/2)",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Corredor (A): +metade do Nível para anular Imobilizado (início do turno)",
+        "enabled": true,
         "enchant": false,
         "level": "A",
         "damageType": ""

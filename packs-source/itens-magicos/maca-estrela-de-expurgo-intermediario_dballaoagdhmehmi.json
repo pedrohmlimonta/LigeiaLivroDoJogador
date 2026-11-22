@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "30.017 Vo",
     "notes": "Militar, Uma Mão, Corpo a Corpo",
-    "description": "<p>Grupo: Maças. Ataque: Força. Dano Base: Concussão +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Intermediário (sankta + sankta)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Expurgo</b> (sankta · Constante · Armas · +30.000 Vo)<br>Quando atacar com uma arma ou munição, ou enquanto estiver usando uma braçadeira, com essa propriedade, alvos atingidos por você, que sofrerem dano, deverão realizar uma rolagem de Mente (Normal). Caso falhem, sofrerão dano contínuo sagrado até o fim da cena (Mente anula).</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "description": "<p>Grupo: Maças. Ataque: Força. Dano Base: Concussão +3. Propriedades: Militar, Uma Mão, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Intermediário (sankta)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Expurgo</b> (sankta · Constante · Armas · +30.000 Vo · <b>2 PM por uso</b>)<br>Quando atacar com uma arma ou munição, ou enquanto estiver usando uma braçadeira, com essa propriedade, alvos atingidos por você, que sofrerem dano, deverão realizar uma rolagem de Mente (Normal). Caso falhem, sofrerão dano contínuo sagrado até o fim da cena (Mente anula).</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Maça Estrela",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Maça Estrela — Expurgo (2 PM)",
@@ -476,7 +489,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -508,14 +534,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "sankta",
             "sankta"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "sankta",
-              "id": "sankta-expurgo"
-            },
             {
               "palavra": "sankta",
               "id": "sankta-expurgo"
@@ -528,6 +550,8 @@
               "palavra": "sankta",
               "variante": "Armas",
               "preco": 30000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],
@@ -707,7 +731,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

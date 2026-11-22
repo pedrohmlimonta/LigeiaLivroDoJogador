@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "60.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (majesto + majesto)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Atalho</b> (majesto · Ação · +60.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando o mapa é aberto, uma ou mais criaturas podem apontar um destino no mapa e pagar 1 ponto de magia. Quando a criatura viaja para o destino apontado, a distância até o destino é reduzida à metade. Cada criatura pode apontar um destino diferente ou o mesmo destino. Depois de decididos os destinos, o mapa pode ser fechado e guardado. A distância permanece reduzida enquanto a criatura viajar na direção apontada. Quando o destino é alcançado, o efeito cessa.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (majesto)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Atalho</b> (majesto · Ação · +60.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Quando o mapa é aberto, uma ou mais criaturas podem apontar um destino no mapa e pagar 1 ponto de magia. Quando a criatura viaja para o destino apontado, a distância até o destino é reduzida à metade. Cada criatura pode apontar um destino diferente ou o mesmo destino. Depois de decididos os destinos, o mapa pode ser fechado e guardado. A distância permanece reduzida enquanto a criatura viajar na direção apontada. Quando o destino é alcançado, o efeito cessa.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Atalho — corta pela metade a distância até o destino (2 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,14 +214,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "majesto",
             "majesto"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "majesto",
-              "id": "majesto-atalho"
-            },
             {
               "palavra": "majesto",
               "id": "majesto-atalho"
@@ -221,6 +230,8 @@
               "palavra": "majesto",
               "variante": "",
               "preco": 60000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

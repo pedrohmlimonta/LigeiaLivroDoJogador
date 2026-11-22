@@ -18,7 +18,7 @@
     "weight": 0,
     "price": "30.060 Vo",
     "notes": "Militar, Duas Mãos, Artilharia, Alcance 45m",
-    "description": "<p>Grupo: Arcos. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Duas Mãos, Artilharia, Alcance 45m.</p><hr><h3>✦ Encantamento — Item Intermediário (saeculorum + saeculorum)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Veloz</b> (saeculorum · Ação Livre · +30.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 2 pontos de magia para fazer um ataque adicional com essa arma sem sofrer nenhuma penalidade. Você só pode usar essa propriedade uma vez por rodada.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "description": "<p>Grupo: Arcos. Ataque: Agilidade. Dano Base: Perfuração +3. Propriedades: Militar, Duas Mãos, Artilharia, Alcance 45m.</p><hr><h3>✦ Encantamento — Item Intermediário (saeculorum)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Veloz</b> (saeculorum · Ação Livre · +30.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 2 pontos de magia para fazer um ataque adicional com essa arma sem sofrer nenhuma penalidade. Você só pode usar essa propriedade uma vez por rodada.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Arco Longo",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Veloz — ataque adicional com a arma (uma vez por rodada) (2 PM)",
@@ -326,7 +339,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -358,14 +384,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "saeculorum",
             "saeculorum"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "saeculorum",
-              "id": "saeculorum-veloz"
-            },
             {
               "palavra": "saeculorum",
               "id": "saeculorum-veloz"
@@ -378,6 +400,8 @@
               "palavra": "saeculorum",
               "variante": "",
               "preco": 30000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],
@@ -535,7 +559,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

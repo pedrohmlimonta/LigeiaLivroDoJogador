@@ -288,7 +288,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "Marca da Mácula (A) — dano contínuo necrótico até uma magia cancelar",
@@ -558,7 +571,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -596,6 +622,30 @@
         "enchant": false,
         "level": "B",
         "damageType": "veneno"
+      },
+      {
+        "type": "immune",
+        "target": "efeito:veneno",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Marca da Mácula: imune a envenenamento (efeitos de veneno)",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "immune",
+        "target": "efeito:doença",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Marca da Mácula: imune a doenças",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
       },
       {
         "type": "rollDice",

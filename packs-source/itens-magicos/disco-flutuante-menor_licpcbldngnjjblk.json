@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "400 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (menso)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Flutuante</b> (menso · Constante · Carga 5 · +400 Vo) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 1 ponto de magia para ativar este item por 1 dia. Enquanto ativado, o item flutua a 1m acima do chão e se move junto com você, se mantendo sempre adjacente. O total de carga suportado pelo item depende do valor do mesmo.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (menso)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Flutuante</b> (menso · Constante · Carga 5 · +400 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 1 ponto de magia para ativar este item por 1 dia. Enquanto ativado, o item flutua a 1m acima do chão e se move junto com você, se mantendo sempre adjacente. O total de carga suportado pelo item depende do valor do mesmo.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "✦ Flutuante — flutua junto de você por 1 dia (carga 5) (1 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -203,6 +216,7 @@
           "palavras": [
             "menso"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "menso",
@@ -216,6 +230,8 @@
               "palavra": "menso",
               "variante": "Carga 5",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

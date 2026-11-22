@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "1.019 Vo",
     "notes": "Militar, Versátil, Corpo a Corpo",
-    "description": "<p>Grupo: Martelos. Ataque: Força. Dano Base: Concussão +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (sangon)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Jóia</b> (sangon · Ação Rápida · +1.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Pronunciando uma palavra secreta, você pode transformar um item com essa propriedade em uma jóia que caiba na palma da mão e vice-versa, usando uma ação simples. A palavra secreta é definida quando este item é criado.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
+    "description": "<p>Grupo: Martelos. Ataque: Força. Dano Base: Concussão +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Menor (sangon)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Jóia</b> (sangon · Ação Rápida · +1.000 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Pronunciando uma palavra secreta, você pode transformar um item com essa propriedade em uma jóia que caiba na palma da mão e vice-versa, usando uma ação simples. A palavra secreta é definida quando este item é criado.</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Martelo de Guerra",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "Ataque — Martelo de Guerra (duas mãos, +1 dano)",
@@ -363,7 +376,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Jóia — vira joia (e volta) (1 PM)",
@@ -520,7 +546,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -554,6 +593,7 @@
           "palavras": [
             "sangon"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "sangon",
@@ -567,6 +607,8 @@
               "palavra": "sangon",
               "variante": "",
               "preco": 1000,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],
@@ -746,7 +788,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 },
                 {
                   "label": "Ataque — Martelo de Guerra (duas mãos, +1 dano)",
@@ -919,7 +974,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

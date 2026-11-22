@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "705 Vo",
     "notes": "",
-    "description": "<p>Uma lanterna coberta que queima óleo para produzir luz.</p><p>Propriedade: este item ilumina num raio de 10m. Um frasco de óleo dura 1 hora. Ela pode ser empunhada com uma das mãos, apoiada em uma superfície sólida ou ser mantida suspensa por alguma corda ou gancho.</p><hr><h3>✦ Encantamento — Item Menor (glacios)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Proteção Invernal</b> (glacios · Ação Rápida · Proteção 1 · +700 Vo)<br>Empunhando essa lanterna com uma das mãos, você pode ativá-la com uma palavra chave, fazendo com que uma luz fraca azulada emane num raio de 10m. Dentro desse alcance, todos as criaturas recebem Proteção contra dano de frio dependendo do valor do item.</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
+    "description": "<p>Uma lanterna coberta que queima óleo para produzir luz.</p><p>Propriedade: este item ilumina num raio de 10m. Um frasco de óleo dura 1 hora. Ela pode ser empunhada com uma das mãos, apoiada em uma superfície sólida ou ser mantida suspensa por alguma corda ou gancho.</p><hr><h3>✦ Encantamento — Item Menor (glacios)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Proteção Invernal</b> (glacios · Ação Rápida · Proteção 1 · +700 Vo · <b>1 PM por uso</b>)<br>Empunhando essa lanterna com uma das mãos, você pode ativá-la com uma palavra chave, fazendo com que uma luz fraca azulada emane num raio de 10m. Dentro desse alcance, todos as criaturas recebem Proteção contra dano de frio dependendo do valor do item.</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
     "actions": [
       {
         "label": "✦ Proteção Invernal — Proteção 1 contra Frio a todos em 10m (1 PM)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "glacios"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "glacios",
@@ -243,6 +257,8 @@
               "palavra": "glacios",
               "variante": "Proteção 1",
               "preco": 700,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

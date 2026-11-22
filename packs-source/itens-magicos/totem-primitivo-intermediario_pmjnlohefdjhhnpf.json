@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "120.020 Vo",
     "notes": "",
-    "description": "<p>Pequeno tronco de madeira entalhado em imagens comumente relacionadas aos espíritos da natureza.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Intermediário (devena + devena)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Primitivo</b> (devena · Constante · Conjuração +2 · +120.000 Vo)<br>Quando conjura uma magia composta pela palavra arcana devena usando esse item como foco, você recebe um bônus para a rolagem de conjuração, dependendo do valor do item.</li></ul><p>Preço das propriedades: +120.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 12 (120.000 Vo).</p>",
+    "description": "<p>Pequeno tronco de madeira entalhado em imagens comumente relacionadas aos espíritos da natureza.</p><p>Propriedade: um objeto utilizado por conjuradores como componente para a conjuração de magias de Círculo Maior. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Intermediário (devena)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Primitivo</b> (devena · Constante · Conjuração +2 · +120.000 Vo · <b>2 PM por uso</b>)<br>Quando conjura uma magia composta pela palavra arcana devena usando esse item como foco, você recebe um bônus para a rolagem de conjuração, dependendo do valor do item.</li></ul><p>Preço das propriedades: +120.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 12 (120.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Primitivo (2 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +241,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "devena",
             "devena"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "devena",
-              "id": "devena-primitivo"
-            },
             {
               "palavra": "devena",
               "id": "devena-primitivo"
@@ -248,6 +257,8 @@
               "palavra": "devena",
               "variante": "Conjuração +2",
               "preco": 120000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

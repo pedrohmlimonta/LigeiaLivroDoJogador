@@ -10,14 +10,14 @@
     "isWeapon": false,
     "actions": [
       {
-        "label": "Moldar Energia (Mente vs dificuldade)",
+        "label": "Moldar Energia (Mente vs Normal; 1 PM + 1 por ponto de peso)",
         "level": "all",
         "canRoll": true,
         "rollAttr": "mente",
         "rollBonus": "0",
         "rollDice": "0",
         "vsDifficulty": true,
-        "fixedDifficulty": "8",
+        "fixedDifficulty": "10",
         "difficultyAttr": "nenhum",
         "targetMode": "none",
         "includeSelf": false,
@@ -64,7 +64,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "0uk3O0syaDZIbXnJ",
+          "id": "BIFeLkjR9Em92JVf",
           "label": "Moldar Energia",
           "menu": "ontoken",
           "macro": {
@@ -157,14 +157,27 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "1",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "Moldar Energia: gaste 1 PM + 1 por ponto de peso do objeto. Cada ponto de peso sobe a dificuldade um nível (Normal 10 → Difícil 12 → Muito Difícil 14 → Épica 17), aplicado como redutor na rolagem.",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": "-(2*(@gasto-1)+floor((@gasto-1)/3))"
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -176,17 +189,10 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": [
-      {
-        "resource": "mp",
-        "value": "1",
-        "label": "Criar objeto (peso 0; +1 PM por ponto de peso)",
-        "level": "all"
-      }
-    ]
+    "costs": []
   },
   "effects": [],
   "folder": null,

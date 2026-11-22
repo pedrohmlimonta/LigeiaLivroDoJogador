@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "1.000.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (traumato + traumato + traumato)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Tormento</b> (traumato · Ação · 3 de Dano, 15m · +1.000.000 Vo)<br>Você pode ativar este cubo pagando 1 ponto de magia e colocando-o sobre uma superfície sólida. O cubo libera uma aura que atormenta as mentes de todas as criaturas dentro dela, sempre que se movem. Qualquer criatura que se deslocar dentro da aura, seja para entrar ou sair, sofre 1/2/3 pontos de dano bruto psíquico (exceto o portador do cubo). O cubo permanece ativo até o fim da cena. O alcance da aura depende do valor do item.<br><em>Causa o dano a quem se deslocar dentro da aura (entrar ou sair), exceto o portador.</em></li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Maior (traumato)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Tormento</b> (traumato · Ação · 3 de Dano, 15m · +1.000.000 Vo · <b>3 PM por uso</b>)<br>Você pode ativar este cubo pagando 1 ponto de magia e colocando-o sobre uma superfície sólida. O cubo libera uma aura que atormenta as mentes de todas as criaturas dentro dela, sempre que se movem. Qualquer criatura que se deslocar dentro da aura, seja para entrar ou sair, sofre 1/2/3 pontos de dano bruto psíquico (exceto o portador do cubo). O cubo permanece ativo até o fim da cena. O alcance da aura depende do valor do item.<br><em>Causa o dano a quem se deslocar dentro da aura (entrar ou sair), exceto o portador.</em></li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Tormento — aura de 15m (3 psíquico ao se deslocar) (3 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "0",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "enter"
+        "persistTrigger": "enter",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,19 +214,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "traumato",
-            "traumato",
             "traumato"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "traumato",
-              "id": "traumato-tormento"
-            },
-            {
-              "palavra": "traumato",
-              "id": "traumato-tormento"
-            },
             {
               "palavra": "traumato",
               "id": "traumato-tormento"
@@ -226,6 +230,8 @@
               "palavra": "traumato",
               "variante": "3 de Dano, 15m",
               "preco": 1000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

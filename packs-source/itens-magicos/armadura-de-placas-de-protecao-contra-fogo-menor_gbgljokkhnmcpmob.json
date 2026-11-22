@@ -12,7 +12,7 @@
     "weight": 3,
     "price": "475 Vo",
     "notes": "Penalidade -4",
-    "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p><hr><h3>✦ Encantamento — Item Menor (ignis)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Proteção Contra Fogo</b> (ignis · Constante · Proteção 1 · +400 Vo)<br>Enquanto estiver vestindo um item com essa propriedade, você recebe Proteção 1, 2 ou 3 contra dano de fogo.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p><hr><h3>✦ Encantamento — Item Menor (ignis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Proteção Contra Fogo</b> (ignis · Constante · Proteção 1 · +400 Vo · <b>1 PM por uso</b>)<br>Enquanto estiver vestindo um item com essa propriedade, você recebe Proteção 1, 2 ou 3 contra dano de fogo.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Proteção Contra Fogo (1 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -291,6 +304,7 @@
           "palavras": [
             "ignis"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "ignis",
@@ -304,6 +318,8 @@
               "palavra": "ignis",
               "variante": "Proteção 1",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

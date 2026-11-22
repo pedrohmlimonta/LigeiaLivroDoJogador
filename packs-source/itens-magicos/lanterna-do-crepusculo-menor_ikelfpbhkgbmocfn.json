@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "405 Vo",
     "notes": "",
-    "description": "<p>Uma lanterna coberta que queima óleo para produzir luz.</p><p>Propriedade: este item ilumina num raio de 10m. Um frasco de óleo dura 1 hora. Ela pode ser empunhada com uma das mãos, apoiada em uma superfície sólida ou ser mantida suspensa por alguma corda ou gancho.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Crepúsculo</b> (tenebrae · Constante · 5m · +400 Vo)<br>Você pode ativar essa lanterna gastando 1 ponto de magia e pronunciando a palavra chave. Enquanto ativada, a lanterna emite uma aura de escuridão. Todas as criaturas dentro da aura ficam cegas enquanto estiverem dentro dela. Nenhuma fonte de luz não mágica funciona dentro da aura. Fontes de luz mágicas vindas de itens, devem ser de um nível superior ao da lanterna. Fontes de luz mágicas vinda de magias devem ser bem sucedidas em uma rolagem de Conjuração (Difícil) para superarem a escuridão da lanterna. O alcance da aura depende do valor do item.<br><em>Luz não mágica não funciona na aura; a de itens precisa ser de nível superior ao da lanterna, e a de magias, Conjuração 12 (Difícil).</em><br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
+    "description": "<p>Uma lanterna coberta que queima óleo para produzir luz.</p><p>Propriedade: este item ilumina num raio de 10m. Um frasco de óleo dura 1 hora. Ela pode ser empunhada com uma das mãos, apoiada em uma superfície sólida ou ser mantida suspensa por alguma corda ou gancho.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Crepúsculo</b> (tenebrae · Constante · 5m · +400 Vo · <b>1 PM por uso</b>)<br>Você pode ativar essa lanterna gastando 1 ponto de magia e pronunciando a palavra chave. Enquanto ativada, a lanterna emite uma aura de escuridão. Todas as criaturas dentro da aura ficam cegas enquanto estiverem dentro dela. Nenhuma fonte de luz não mágica funciona dentro da aura. Fontes de luz mágicas vindas de itens, devem ser de um nível superior ao da lanterna. Fontes de luz mágicas vinda de magias devem ser bem sucedidas em uma rolagem de Conjuração (Difícil) para superarem a escuridão da lanterna. O alcance da aura depende do valor do item.<br><em>Luz não mágica não funciona na aura; a de itens precisa ser de nível superior ao da lanterna, e a de magias, Conjuração 12 (Difícil).</em><br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
         "label": "✦ Crepúsculo — aura de escuridão (5m): Cego dentro dela (1 PM)",
@@ -282,7 +282,20 @@
         "persistRounds": "0",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -316,6 +329,7 @@
           "palavras": [
             "tenebrae"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "tenebrae",
@@ -329,6 +343,8 @@
               "palavra": "tenebrae",
               "variante": "5m",
               "preco": 400,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

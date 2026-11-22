@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "3.520 Vo",
     "notes": "",
-    "description": "<p>Aparato utilizado para se produzir sons, seja um alaúde, flauta, oboé, tambor, etc.</p><p>Propriedade: utilizado em performances musicais. Também pode ser utilizado como foco na conjuração de magias de Círculo Maior, quando empunhado com as duas mãos e tocado, substituindo também o componente gestual.</p><hr><h3>✦ Encantamento — Item Menor (sonigu)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Ecoante</b> (sonigu · Constante · 1 ponto de dano · +3.500 Vo) <em>(sem automação: aplique pela descrição)</em><br>Quando conjura uma magia composta pela palavra arcana sonigu usando esse item como foco. Se esta magia causar dano, ela irá causar dano bruto sônico adicional, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
+    "description": "<p>Aparato utilizado para se produzir sons, seja um alaúde, flauta, oboé, tambor, etc.</p><p>Propriedade: utilizado em performances musicais. Também pode ser utilizado como foco na conjuração de magias de Círculo Maior, quando empunhado com as duas mãos e tocado, substituindo também o componente gestual.</p><hr><h3>✦ Encantamento — Item Menor (sonigu)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Ecoante</b> (sonigu · Constante · 1 ponto de dano · +3.500 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Quando conjura uma magia composta pela palavra arcana sonigu usando esse item como foco. Se esta magia causar dano, ela irá causar dano bruto sônico adicional, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Ecoante (1 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "sonigu"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "sonigu",
@@ -243,6 +257,8 @@
               "palavra": "sonigu",
               "variante": "1 ponto de dano",
               "preco": 3500,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

@@ -18,7 +18,7 @@
     "weight": 0,
     "price": "2.000.019 Vo",
     "notes": "Militar, Uma Mão, Corpo a Corpo, Leve",
-    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p><hr><h3>✦ Encantamento — Item Maior (mortis + mortis + mortis)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Lâmina Vampírica</b> (mortis · Constante · +2.000.000 Vo)<br>Quando atacar com esta arma e causar dano escalonado, você recupera pontos de vida igual ao dano escalonado causado.<br><em>Ao causar dano escalonado com esta arma, você recupera PV igual ao dano escalonado.</em><br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
+    "description": "<p>Grupo: Lâminas Pequenas. Ataque: Força ou Agilidade. Dano Base: Corte +2. Propriedades: Militar, Uma Mão, Corpo a Corpo, Leve.</p><hr><h3>✦ Encantamento — Item Maior (mortis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Lâmina Vampírica</b> (mortis · Constante · +2.000.000 Vo · <b>3 PM por uso</b>)<br>Quando atacar com esta arma e causar dano escalonado, você recupera pontos de vida igual ao dano escalonado causado.<br><em>Ao causar dano escalonado com esta arma, você recupera PV igual ao dano escalonado.</em><br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +2.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 18 (2.000.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Espada Curta",
@@ -191,7 +191,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Espada Curta — Lâmina Vampírica: cura o dano escalonado causado (3 PM)",
@@ -364,7 +377,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -396,19 +422,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "mortis",
-            "mortis",
             "mortis"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "mortis",
-              "id": "mortis-lamina-vampirica"
-            },
-            {
-              "palavra": "mortis",
-              "id": "mortis-lamina-vampirica"
-            },
             {
               "palavra": "mortis",
               "id": "mortis-lamina-vampirica"
@@ -421,6 +438,8 @@
               "palavra": "mortis",
               "variante": "",
               "preco": 2000000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],
@@ -600,7 +619,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

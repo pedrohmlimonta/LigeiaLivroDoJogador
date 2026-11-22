@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "30.000 Vo",
     "notes": "",
-    "description": "<p><b>Elmos, Máscaras, Coroas, Lentes, Bandanas e Tiaras</b>: São itens que podem ser equipados na cabeça.</p><hr><h3>✦ Encantamento — Item Intermediário (augurado + augurado)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Visão do Perigo</b> (augurado · Constante · +30.000 Vo)<br>Enquanto estiver equipado com este item, você recebe +1 em Esquiva e Bloqueio.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
+    "description": "<p><b>Elmos, Máscaras, Coroas, Lentes, Bandanas e Tiaras</b>: São itens que podem ser equipados na cabeça.</p><hr><h3>✦ Encantamento — Item Intermediário (augurado)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Visão do Perigo</b> (augurado · Constante · +30.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver equipado com este item, você recebe +1 em Esquiva e Bloqueio.</li></ul><p>Preço das propriedades: +30.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 10 (30.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Visão do Perigo (2 PM, até o fim da cena)",
@@ -222,7 +222,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -254,14 +267,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "augurado",
             "augurado"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "augurado",
-              "id": "augurado-visao-do-perigo"
-            },
             {
               "palavra": "augurado",
               "id": "augurado-visao-do-perigo"
@@ -274,6 +283,8 @@
               "palavra": "augurado",
               "variante": "",
               "preco": 30000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

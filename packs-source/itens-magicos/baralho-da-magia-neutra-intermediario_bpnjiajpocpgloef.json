@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "21.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (inanis + inanis)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Magia Neutra</b> (inanis · Ação · +21.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Esse baralho possui 26 cartas. Quando embaralhado, usando as duas mãos, você pode sacar uma carta desse baralho com uma ação, ativar seu efeito e descartá-la, guardando-a fora do baralho. Cada carta possui o desenho da runa de uma palavra arcana (exceto inanis e menso). Quando uma carta é sacada do baralho, magias compostas pela palavra da carta não funcionam em um raio de até 1km até que a carta seja devolvida ao baralho, ou até o fim da cena (o que vier primeiro). Se o baralho estiver guardado em uma algibeira, é possível sacar uma carta usando apenas uma mão e uma ação rápida. É possível devolver as cartas já sacadas ao baralho, mas isso cancelará seu efeito mágico e ele precisará ser embaralhado de novo. Embaralhar o baralho leva uma rodada e requer o uso das duas mãos.</li></ul><p>Preço das propriedades: +21.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 9 (21.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (inanis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Magia Neutra</b> (inanis · Ação · +21.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Esse baralho possui 26 cartas. Quando embaralhado, usando as duas mãos, você pode sacar uma carta desse baralho com uma ação, ativar seu efeito e descartá-la, guardando-a fora do baralho. Cada carta possui o desenho da runa de uma palavra arcana (exceto inanis e menso). Quando uma carta é sacada do baralho, magias compostas pela palavra da carta não funcionam em um raio de até 1km até que a carta seja devolvida ao baralho, ou até o fim da cena (o que vier primeiro). Se o baralho estiver guardado em uma algibeira, é possível sacar uma carta usando apenas uma mão e uma ação rápida. É possível devolver as cartas já sacadas ao baralho, mas isso cancelará seu efeito mágico e ele precisará ser embaralhado de novo. Embaralhar o baralho leva uma rodada e requer o uso das duas mãos.</li></ul><p>Preço das propriedades: +21.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 9 (21.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Magia Neutra — saca uma carta: anula uma palavra arcana (1km) (2 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,14 +214,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "inanis",
             "inanis"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "inanis",
-              "id": "inanis-magia-neutra"
-            },
             {
               "palavra": "inanis",
               "id": "inanis-magia-neutra"
@@ -221,6 +230,8 @@
               "palavra": "inanis",
               "variante": "",
               "preco": 21000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

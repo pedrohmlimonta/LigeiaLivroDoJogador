@@ -17,7 +17,7 @@
     "weight": 0,
     "price": "400.024 Vo",
     "notes": "Militar, Versátil, Corpo a Corpo",
-    "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Maior (lumo + lumo + lumo)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Marca Luminosa</b> (lumo · Constante · +400.000 Vo)<br>Quando você acerta um ataque com uma arma com essa propriedade, o alvo emite uma luz fraca, porém suficiente para que ele seja facilmente mirado. Este alvo falha automaticamente em tentar se esconder e ataques contra ele recebem 1D.</li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
+    "description": "<p>Grupo: Machados. Ataque: Força. Dano Base: Corte +3. Propriedades: Militar, Versátil, Corpo a Corpo.</p><hr><h3>✦ Encantamento — Item Maior (lumo)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Marca Luminosa</b> (lumo · Constante · +400.000 Vo · <b>3 PM por uso</b>)<br>Quando você acerta um ataque com uma arma com essa propriedade, o alvo emite uma luz fraca, porém suficiente para que ele seja facilmente mirado. Este alvo falha automaticamente em tentar se esconder e ataques contra ele recebem 1D.</li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
     "actions": [
       {
         "label": "Ataque — Machado de Batalha",
@@ -190,7 +190,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "Ataque — Machado de Batalha (duas mãos, +1 dano)",
@@ -363,7 +376,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Machado de Batalha — Marca Luminosa (3 PM)",
@@ -563,7 +589,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       },
       {
         "label": "✦ Ataque — Machado de Batalha (duas mãos, +1 dano) — Marca Luminosa (3 PM)",
@@ -763,7 +802,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -795,19 +847,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "lumo",
-            "lumo",
             "lumo"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "lumo",
-              "id": "lumo-marca-luminosa"
-            },
-            {
-              "palavra": "lumo",
-              "id": "lumo-marca-luminosa"
-            },
             {
               "palavra": "lumo",
               "id": "lumo-marca-luminosa"
@@ -820,6 +863,8 @@
               "palavra": "lumo",
               "variante": "",
               "preco": 400000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 0
             }
           ],
@@ -999,7 +1044,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 },
                 {
                   "label": "Ataque — Machado de Batalha (duas mãos, +1 dano)",
@@ -1172,7 +1230,20 @@
                   "persistRounds": "1",
                   "persistAffectsSelf": false,
                   "persistRerollAttack": false,
-                  "persistTrigger": "both"
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": []
                 }
               ],
               "effects": [],

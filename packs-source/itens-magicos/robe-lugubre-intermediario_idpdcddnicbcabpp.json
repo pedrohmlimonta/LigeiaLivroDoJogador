@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "14.000 Vo",
     "notes": "",
-    "description": "<p><b>Armaduras e Robes</b>: São itens que podem ser equipados no torso do personagem.</p><hr><h3>✦ Encantamento — Item Intermediário (tenebrae + tenebrae)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Lúgubre</b> (tenebrae · Constante · +14.000 Vo)<br>Enquanto você estiver usando um item com essa propriedade, você recebe 1D em rolagens para evitar ser notado e recebe 1 ponto de proteção contra dano radiante.<br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
+    "description": "<p><b>Armaduras e Robes</b>: São itens que podem ser equipados no torso do personagem.</p><hr><h3>✦ Encantamento — Item Intermediário (tenebrae)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Lúgubre</b> (tenebrae · Constante · +14.000 Vo · <b>2 PM por uso</b>)<br>Enquanto você estiver usando um item com essa propriedade, você recebe 1D em rolagens para evitar ser notado e recebe 1 ponto de proteção contra dano radiante.<br><em>Corrupção: +1 depois de 10 dias portando.</em></li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Lúgubre (2 PM, até o fim da cena)",
@@ -222,7 +222,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -254,14 +267,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "tenebrae",
             "tenebrae"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "tenebrae",
-              "id": "tenebrae-lugubre"
-            },
             {
               "palavra": "tenebrae",
               "id": "tenebrae-lugubre"
@@ -274,6 +283,8 @@
               "palavra": "tenebrae",
               "variante": "",
               "preco": 14000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

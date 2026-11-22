@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "3.520 Vo",
     "notes": "",
-    "description": "<p>Um símbolo de uma divindade entalhado em madeira ou metal.</p><p>Propriedade: um objeto utilizado por clérigos para canalizar os poderes de aspecto de sua divindade e por conjuradores ligados a uma religião, como componente para a conjuração de magias de Círculo Maior. Um símbolo sagrado refere-se a uma divindade boa. Um símbolo profano refere-se a uma divindade maligna. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Sombras</b> (tenebrae · Constante · +1 em Conjuração · +3.500 Vo)<br>Quando conjura uma magia composta pela palavra arcana tenebrae usando esse item como foco, você recebe um bônus para a rolagem de conjuração, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
+    "description": "<p>Um símbolo de uma divindade entalhado em madeira ou metal.</p><p>Propriedade: um objeto utilizado por clérigos para canalizar os poderes de aspecto de sua divindade e por conjuradores ligados a uma religião, como componente para a conjuração de magias de Círculo Maior. Um símbolo sagrado refere-se a uma divindade boa. Um símbolo profano refere-se a uma divindade maligna. Deve ser empunhado com uma das mãos.</p><hr><h3>✦ Encantamento — Item Menor (tenebrae)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Sombras</b> (tenebrae · Constante · +1 em Conjuração · +3.500 Vo · <b>1 PM por uso</b>)<br>Quando conjura uma magia composta pela palavra arcana tenebrae usando esse item como foco, você recebe um bônus para a rolagem de conjuração, dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Sombras (1 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -230,6 +243,7 @@
           "palavras": [
             "tenebrae"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "tenebrae",
@@ -243,6 +257,8 @@
               "palavra": "tenebrae",
               "variante": "+1 em Conjuração",
               "preco": 3500,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

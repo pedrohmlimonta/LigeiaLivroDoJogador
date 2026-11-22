@@ -12,10 +12,10 @@
     "weight": 0,
     "price": "600.000 Vo",
     "notes": "",
-    "description": "<p><b>Armaduras e Robes</b>: São itens que podem ser equipados no torso do personagem.</p><hr><h3>✦ Encantamento — Item Maior (energio + energio + energio)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Emanação</b> (energio · Ação Rápida · +600.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar uma quantidade de pontos de magia (definida por você) para ativar uma aura em torno de si mesmo, que dura até o fim da cena. Criaturas que entrarem na aura ou iniciarem seus turnos nela, sofrerão 1 ponto de dano bruto de energia. O tamanho da área da aura é igual a quantidade de pontos de magia gastos, em metros.</li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
+    "description": "<p><b>Armaduras e Robes</b>: São itens que podem ser equipados no torso do personagem.</p><hr><h3>✦ Encantamento — Item Maior (energio)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Emanação</b> (energio · Ação Rápida · +600.000 Vo · <b>PM à escolha</b>)<br>Você pode gastar uma quantidade de pontos de magia (definida por você) para ativar uma aura em torno de si mesmo, que dura até o fim da cena. Criaturas que entrarem na aura ou iniciarem seus turnos nela, sofrerão 1 ponto de dano bruto de energia. O tamanho da área da aura é igual a quantidade de pontos de magia gastos, em metros.</li></ul><p>Preço das propriedades: +600.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 15 (600.000 Vo).</p>",
     "actions": [
       {
-        "label": "✦ Emanação — aura de energia (1 de dano; raio = PM extras gastos) (3 PM)",
+        "label": "✦ Emanação — aura de energia (raio = PM gastos; 1 de dano) (PM à escolha)",
         "level": "all",
         "canRoll": false,
         "rollAttr": "agilidade",
@@ -24,13 +24,13 @@
         "vsDifficulty": false,
         "fixedDifficulty": "8",
         "difficultyAttr": "nenhum",
-        "targetMode": "self",
-        "includeSelf": true,
+        "targetMode": "aura",
+        "includeSelf": false,
         "areaFilter": "all",
         "defenseAttr": "esquiva",
         "defenseAttr2": "",
-        "damage": "",
-        "damageType": "",
+        "damage": "1",
+        "damageType": "energia",
         "damageResource": "hp",
         "scalingDamage": false,
         "heal": "",
@@ -64,12 +64,12 @@
         "isWeapon": false,
         "isMelee": false,
         "range": "",
-        "area": "",
+        "area": "0",
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "cvsA9baABiQJ7fMT",
+          "id": "JW4zDHIjZlUoZXVq",
           "label": "Robe de Emanação (Maior)",
           "menu": "ontoken",
           "macro": {
@@ -92,7 +92,7 @@
           "metaData": {
             "origem": "ligeia-livro-do-jogador",
             "automatica": true,
-            "chave": "static.generic.impact.01.blue",
+            "chave": "static.generic.outpulse.01.whiteblue",
             "nome": "Energia"
           },
           "isEnabled": true,
@@ -103,9 +103,9 @@
             "video": {
               "dbSection": "static",
               "menuType": "generic",
-              "animation": "impact",
+              "animation": "outpulse",
               "variant": "01",
-              "color": "blue",
+              "color": "whiteblue",
               "enableCustom": false,
               "customPath": ""
             },
@@ -140,7 +140,7 @@
               "isRadius": false,
               "persistent": false,
               "playOn": "source",
-              "size": 1,
+              "size": 2.5,
               "unbindAlpha": false,
               "unbindVisibility": false
             }
@@ -162,14 +162,27 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "3",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
-        "persistArea": false,
-        "persistRounds": "1",
+        "persistArea": true,
+        "persistRounds": "0",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "Emanação: o raio da aura, em metros, é igual aos PM gastos. Quem entrar nela ou começar o turno dentro sofre 1 de dano de energia, até o fim da cena.",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "@gasto",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -198,22 +211,13 @@
         {
           "id": "1FsHuSTDyxlXAHsx",
           "nivel": "Maior",
-          "pm": 3,
+          "pm": 0,
           "lendario": false,
           "palavras": [
-            "energio",
-            "energio",
             "energio"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "energio",
-              "id": "energio-emanacao"
-            },
-            {
-              "palavra": "energio",
-              "id": "energio-emanacao"
-            },
             {
               "palavra": "energio",
               "id": "energio-emanacao"
@@ -226,6 +230,8 @@
               "palavra": "energio",
               "variante": "",
               "preco": 600000,
+              "nivel": 3,
+              "pm": 0,
               "indice": 0
             }
           ],

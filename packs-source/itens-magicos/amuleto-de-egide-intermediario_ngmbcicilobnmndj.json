@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "120.000 Vo",
     "notes": "",
-    "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri + forjuri)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Égide</b> (forjuri · Constante · Bloqueio +2 · +120.000 Vo)<br>Enquanto estiver usando um item com esta propriedade, você pode bloquear ataques como se empunhasse um escudo, usando sua Mente, em vez da Força, recebendo um bônus nas rolagens de Bloqueio dependendo do valor do item.</li></ul><p>Preço das propriedades: +120.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 12 (120.000 Vo).</p>",
+    "description": "<p><b>Colares, Periaptos e Amuletos</b>: São itens que podem ser equipados no pescoço.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Égide</b> (forjuri · Constante · Bloqueio +2 · +120.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver usando um item com esta propriedade, você pode bloquear ataques como se empunhasse um escudo, usando sua Mente, em vez da Força, recebendo um bônus nas rolagens de Bloqueio dependendo do valor do item.</li></ul><p>Preço das propriedades: +120.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 12 (120.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Égide (2 PM, até o fim da cena)",
@@ -222,7 +222,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -254,14 +267,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "forjuri",
             "forjuri"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "forjuri",
-              "id": "forjuri-egide"
-            },
             {
               "palavra": "forjuri",
               "id": "forjuri-egide"
@@ -274,6 +283,8 @@
               "palavra": "forjuri",
               "variante": "Bloqueio +2",
               "preco": 120000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

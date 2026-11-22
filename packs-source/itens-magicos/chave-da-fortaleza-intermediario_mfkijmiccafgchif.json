@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "14.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (kreo + kreo)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Fortaleza</b> (kreo · Cena · 20m², 2 Andares · +14.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 1 ponto de magia enquanto empunha esta chave, para criar uma construção de alvenaria, cuja área ocupada e a quantidade de andares depende do preço do item. Essa construção possui portas e janelas à sua escolha e podem ser trancadas e destrancadas usando a própria chave. A construção dura 8 horas. No fim das 8 horas ela desaparece e as criaturas que estiverem em qualquer de seus andares são teleportadas para o chão firme.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (kreo)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Fortaleza</b> (kreo · Cena · 20m², 2 Andares · +14.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Você pode gastar 1 ponto de magia enquanto empunha esta chave, para criar uma construção de alvenaria, cuja área ocupada e a quantidade de andares depende do preço do item. Essa construção possui portas e janelas à sua escolha e podem ser trancadas e destrancadas usando a própria chave. A construção dura 8 horas. No fim das 8 horas ela desaparece e as criaturas que estiverem em qualquer de seus andares são teleportadas para o chão firme.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Fortaleza — ergue uma construção (20m², 2 Andares) (2 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,14 +214,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "kreo",
             "kreo"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "kreo",
-              "id": "kreo-fortaleza"
-            },
             {
               "palavra": "kreo",
               "id": "kreo-fortaleza"
@@ -221,6 +230,8 @@
               "palavra": "kreo",
               "variante": "20m², 2 Andares",
               "preco": 14000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

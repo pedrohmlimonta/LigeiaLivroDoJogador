@@ -12,7 +12,7 @@
     "weight": 1,
     "price": "7.025 Vo",
     "notes": "Penalidade -1",
-    "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Intermediário (energio + energio)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Proteção Contra Energia</b> (energio · Constante · Proteção 2 · +7.000 Vo)<br>Enquanto estiver vestindo um item com essa propriedade, você recebe Proteção 1, 2 ou 3 contra dano de energia.</li></ul><p>Preço das propriedades: +7.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 7 (7.000 Vo).</p>",
+    "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Intermediário (energio)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Proteção Contra Energia</b> (energio · Constante · Proteção 2 · +7.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver vestindo um item com essa propriedade, você recebe Proteção 1, 2 ou 3 contra dano de energia.</li></ul><p>Preço das propriedades: +7.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 7 (7.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Proteção Contra Energia (2 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -289,14 +302,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "energio",
             "energio"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "energio",
-              "id": "energio-protecao-contra-energia"
-            },
             {
               "palavra": "energio",
               "id": "energio-protecao-contra-energia"
@@ -309,6 +318,8 @@
               "palavra": "energio",
               "variante": "Proteção 2",
               "preco": 7000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],

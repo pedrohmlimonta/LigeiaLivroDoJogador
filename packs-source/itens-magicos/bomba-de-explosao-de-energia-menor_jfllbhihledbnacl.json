@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "300 Vo",
     "notes": "",
-    "description": "<p><b>Bombas Alquímicas</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (energio)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Explosão de Energia</b> (energio · Ação · +300 Vo)<br>Você pode arremessar este item num espaço até 10m de distância, usando uma ação e rolando Agilidade. Quando atinge o espaço alvo, cria uma área de 2m de raio centrada no espaço. Todos dentro da área devem ser bem sucedidos em uma rolagem de Esquiva oposta a sua Agilidade, ou sofrerão dano contínuo de energia até o fim da cena (Vigor anula).</li></ul><p>Preço das propriedades: +300 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 4 (300 Vo).</p>",
+    "description": "<p><b>Bombas Alquímicas</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (energio)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Explosão de Energia</b> (energio · Ação · +300 Vo · <b>consumível</b>)<br>Você pode arremessar este item num espaço até 10m de distância, usando uma ação e rolando Agilidade. Quando atinge o espaço alvo, cria uma área de 2m de raio centrada no espaço. Todos dentro da área devem ser bem sucedidos em uma rolagem de Esquiva oposta a sua Agilidade, ou sofrerão dano contínuo de energia até o fim da cena (Vigor anula).</li></ul><p>Preço das propriedades: +300 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 4 (300 Vo).</p>",
     "actions": [
       {
         "label": "✦ Arremessar: Explosão de Energia — 10m, 2m de raio (consumível)",
@@ -282,7 +282,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -311,11 +324,12 @@
         {
           "id": "O83oEcbhIiPTVIqL",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "energio"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "energio",
@@ -329,6 +343,8 @@
               "palavra": "energio",
               "variante": "",
               "preco": 300,
+              "nivel": 1,
+              "pm": 0,
               "indice": 0
             }
           ],

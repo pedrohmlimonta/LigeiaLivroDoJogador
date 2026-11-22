@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "200.000 Vo",
     "notes": "",
-    "description": "<p><b>Elmos, Máscaras, Coroas, Lentes, Bandanas e Tiaras</b>: São itens que podem ser equipados na cabeça.</p><hr><h3>✦ Encantamento — Item Maior (menso + menso + menso)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Mensagem Telepática</b> (menso · Ação · Outro plano · +200.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto você estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para enviar como uma ação rápida uma mensagem mentalmente para uma criatura com a qual já tenha interagido a uma certa distância (dependendo do valor do item).</li></ul><p>Preço das propriedades: +200.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 13 (200.000 Vo).</p>",
+    "description": "<p><b>Elmos, Máscaras, Coroas, Lentes, Bandanas e Tiaras</b>: São itens que podem ser equipados na cabeça.</p><hr><h3>✦ Encantamento — Item Maior (menso)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Mensagem Telepática</b> (menso · Ação · Outro plano · +200.000 Vo · <b>3 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Enquanto você estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para enviar como uma ação rápida uma mensagem mentalmente para uma criatura com a qual já tenha interagido a uma certa distância (dependendo do valor do item).</li></ul><p>Preço das propriedades: +200.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 13 (200.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Mensagem Telepática — mensagem mental (Outro plano) (3 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,19 +214,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "menso",
-            "menso",
             "menso"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "menso",
-              "id": "menso-mensagem-telepatica"
-            },
-            {
-              "palavra": "menso",
-              "id": "menso-mensagem-telepatica"
-            },
             {
               "palavra": "menso",
               "id": "menso-mensagem-telepatica"
@@ -226,6 +230,8 @@
               "palavra": "menso",
               "variante": "Outro plano",
               "preco": 200000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

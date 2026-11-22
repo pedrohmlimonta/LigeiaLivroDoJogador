@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "60.000 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (krucigon + krucigon)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Arrombar Portais</b> (krucigon · Ação · +60.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Usando esse item, você pode abrir portais planares trancados, tornando possível a travessia através dele. O portal permanecerá aberto até ser trancado novamente. Essas chaves são consideradas perigosas e seus usuários normalmente são mal vistos.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Intermediário (krucigon)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Arrombar Portais</b> (krucigon · Ação · +60.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Usando esse item, você pode abrir portais planares trancados, tornando possível a travessia através dele. O portal permanecerá aberto até ser trancado novamente. Essas chaves são consideradas perigosas e seus usuários normalmente são mal vistos.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Arrombar Portais — abre um portal planar trancado (2 PM)",
@@ -169,7 +169,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -201,14 +214,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "krucigon",
             "krucigon"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "krucigon",
-              "id": "krucigon-arrombar-portais"
-            },
             {
               "palavra": "krucigon",
               "id": "krucigon-arrombar-portais"
@@ -221,6 +230,8 @@
               "palavra": "krucigon",
               "variante": "",
               "preco": 60000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

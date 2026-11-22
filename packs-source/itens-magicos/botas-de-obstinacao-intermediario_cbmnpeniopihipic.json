@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "60.000 Vo",
     "notes": "",
-    "description": "<p><b>Botas e Sandálias</b>: São itens que podem ser equipados nos pés.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri + forjuri)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Obstinação</b> (forjuri · Constante · +60.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com esta propriedade, você fica imune a Lentidão, Imobilização e Paralizia.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
+    "description": "<p><b>Botas e Sandálias</b>: São itens que podem ser equipados nos pés.</p><hr><h3>✦ Encantamento — Item Intermediário (forjuri)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Obstinação</b> (forjuri · Constante · +60.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver usando um item com esta propriedade, você fica imune a Lentidão, Imobilização e Paralizia.</li></ul><p>Preço das propriedades: +60.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 11 (60.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Obstinação (2 PM, até o fim da cena)",
@@ -60,10 +60,62 @@
         },
         "appliesEffects": [
           {
-            "label": "✦ Obstinação: imune a Lento, Imobilizado e Paralisado",
-            "fxType": "bonus",
-            "fxTarget": "all",
-            "fxValue": "0",
+            "label": "✦ Obstinação: imune a Lento",
+            "fxType": "immune",
+            "fxTarget": "condicao:lento",
+            "fxValue": "1",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          },
+          {
+            "label": "✦ Obstinação: imune a Imobilizado",
+            "fxType": "immune",
+            "fxTarget": "condicao:imobilizado",
+            "fxValue": "1",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0"
+          },
+          {
+            "label": "✦ Obstinação: imune a Paralisado",
+            "fxType": "immune",
+            "fxTarget": "condicao:paralisado",
+            "fxValue": "1",
             "fxAll": false,
             "durationMode": "scene",
             "durationRounds": "1",
@@ -196,7 +248,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +293,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "forjuri",
             "forjuri"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "forjuri",
-              "id": "forjuri-obstinacao"
-            },
             {
               "palavra": "forjuri",
               "id": "forjuri-obstinacao"
@@ -248,6 +309,8 @@
               "palavra": "forjuri",
               "variante": "",
               "preco": 60000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 0
             }
           ],

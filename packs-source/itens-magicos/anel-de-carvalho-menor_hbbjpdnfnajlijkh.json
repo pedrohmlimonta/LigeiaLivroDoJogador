@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "2.500 Vo",
     "notes": "",
-    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Menor (devena)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Carvalho</b> (devena · Constante · Proteção 1 · +2.500 Vo)<br>Enquanto estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para receber um valor de Proteção (dependendo do valor do item) contra Corte, Perfuração e Concussão até o fim da cena.</li></ul><p>Preço das propriedades: +2.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 5 (2.500 Vo).</p>",
+    "description": "<p><b>Anéis</b>: São itens que podem ser equipados nos dedos, mas apenas um por mão.</p><hr><h3>✦ Encantamento — Item Menor (devena)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Carvalho</b> (devena · Constante · Proteção 1 · +2.500 Vo · <b>1 PM por uso</b>)<br>Enquanto estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para receber um valor de Proteção (dependendo do valor do item) contra Corte, Perfuração e Concussão até o fim da cena.</li></ul><p>Preço das propriedades: +2.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 5 (2.500 Vo).</p>",
     "actions": [
       {
         "label": "✦ Carvalho — Proteção 1 contra Corte, Perfuração e Concussão (1 PM)",
@@ -248,7 +248,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -282,6 +295,7 @@
           "palavras": [
             "devena"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "devena",
@@ -295,6 +309,8 @@
               "palavra": "devena",
               "variante": "Proteção 1",
               "preco": 2500,
+              "nivel": 1,
+              "pm": 1,
               "indice": 0
             }
           ],

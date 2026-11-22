@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "400.002 Vo",
     "notes": "",
-    "description": "<p>Bolsa grande de couro contendo vários compartimentos.</p><p>Propriedade: esta bolsa contém compartimentos usados para guardar itens que não estejam em uso.</p><hr><h3>✦ Encantamento — Item Maior (majesto + majesto + majesto)</h3><p>Ativar as propriedades custa <b>3 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Extradimensional</b> (majesto · Constante · 15 Pontos de Peso · +400.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>As dimensões dentro desse item foram magicamente alteradas para que dentro dele coubesse muito mais que o normal, sem que pesasse nada mais que seu próprio peso. Você pode guardar dentro desse item, uma quantidade de peso que depende do preço do item. Esse peso não é somado a sua carga.</li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
+    "description": "<p>Bolsa grande de couro contendo vários compartimentos.</p><p>Propriedade: esta bolsa contém compartimentos usados para guardar itens que não estejam em uso.</p><hr><h3>✦ Encantamento — Item Maior (majesto)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Extradimensional</b> (majesto · Constante · 15 Pontos de Peso · +400.000 Vo · <b>3 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>As dimensões dentro desse item foram magicamente alteradas para que dentro dele coubesse muito mais que o normal, sem que pesasse nada mais que seu próprio peso. Você pode guardar dentro desse item, uma quantidade de peso que depende do preço do item. Esse peso não é somado a sua carga.</li></ul><p>Preço das propriedades: +400.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 14 (400.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Extradimensional (3 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,19 +241,10 @@
           "pm": 3,
           "lendario": false,
           "palavras": [
-            "majesto",
-            "majesto",
             "majesto"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "majesto",
-              "id": "majesto-extradimensional"
-            },
-            {
-              "palavra": "majesto",
-              "id": "majesto-extradimensional"
-            },
             {
               "palavra": "majesto",
               "id": "majesto-extradimensional"
@@ -253,6 +257,8 @@
               "palavra": "majesto",
               "variante": "15 Pontos de Peso",
               "preco": 400000,
+              "nivel": 3,
+              "pm": 3,
               "indice": 2
             }
           ],

@@ -299,6 +299,8 @@ export const CONDICOES = {
 const CONTINUO_GENERICO = { nome: "Dano contínuo", chaves: ["static.conditions.drop.02.red"] };
 /** Visual da teleportação (no ponto de partida). */
 const TELEPORTE = { nome: "Teleporte", chaves: ["static.spell.mistystep.01.blue"] };
+/** Ação que invoca criaturas (sistema build 30): o círculo de conjuração em quem invoca. */
+const INVOCACAO = { nome: "Invocação", chaves: ["static.magicsign.conjuration.02.yellow"] };
 
 /** Condições que contam como ataque (a animação vai só em quem é atingido). */
 const NEGATIVAS = new Set([...Object.keys(CONDICOES), "caido", "exausto", "surdo", "surpreso", "dano_continuo"]);
@@ -559,13 +561,26 @@ function formaDe(a) {
   return a.isMelee ? "toque" : "distancia";
 }
 
+/**
+ * O que o CUSTO ESCOLHIDO na ativação soma à ação (sistema build 30): a
+ * Punição não tem dano base — o dano é o que se gasta (@gasto) —, o Sangue
+ * Aagn cura o que se gasta. Desligado, nada.
+ */
+const gastoSoma = (a, campo) => !!a?.variableCost?.enabled && naoZero(a.variableCost[campo]);
+/** Dano da ação, contando o que o custo escolhido soma. */
+const danoDe = (a) => (naoZero(a.damage) || gastoSoma(a, "damageBonus"));
+/** A ação cura (base ou pelo custo escolhido)? */
+const curaDe = (a) => preenchido(a.heal) || gastoSoma(a, "healBonus");
+/** A ação invoca criaturas (com a ficha já posta, ou o marcador de qual cabe ali)? */
+const invoca = (a) => (a?.summons ?? []).some((x) => x && x.enabled !== false);
+
 function causaDano(a) {
-  if (a.damageResource !== "mp" && (naoZero(a.damage) || a.scalingDamage)) return true;
+  if (a.damageResource !== "mp" && (danoDe(a) || a.scalingDamage)) return true;
   return (a.extraDamage ?? []).some((x) => x?.resource !== "mp" && naoZero(x?.formula));
 }
 
 function drenaPM(a) {
-  if (a.damageResource === "mp" && naoZero(a.damage)) return true;
+  if (a.damageResource === "mp" && danoDe(a)) return true;
   return (a.extraDamage ?? []).some((x) => x?.resource === "mp" && naoZero(x?.formula));
 }
 
@@ -575,7 +590,7 @@ function temTick(a) {
 
 /** Elemento do dano da ação (direto, extra ou contínuo). */
 function elementoDe(a) {
-  if (ELEMENTOS[a.damageType] && preenchido(a.damage)) return a.damageType;
+  if (ELEMENTOS[a.damageType] && (preenchido(a.damage) || gastoSoma(a, "damageBonus"))) return a.damageType;
   for (const x of a.extraDamage ?? []) if (ELEMENTOS[x?.type] && naoZero(x.formula)) return x.type;
   for (const e of a.appliesEffects ?? []) if (ELEMENTOS[e?.tickType] && naoZero(e.tickAmount)) return e.tickType;
   return null;
@@ -615,7 +630,7 @@ function beneficioDoEfeito(e) {
 function naturezaDe(a, forma) {
   if (forma === "teleporte") return { tipo: "teleporte" };
   if (causaDano(a) || drenaPM(a)) return { tipo: "ofensiva" };
-  if (preenchido(a.heal)) {
+  if (curaDe(a)) {
     const r = a.healResource;
     return { tipo: "beneficio", beneficio: r === "hpTemp" ? "sobrevida" : r === "mp" ? "pm" : "cura" };
   }
@@ -661,6 +676,10 @@ export function visualDaAcao(a, { palavra = "", base = "" } = {}) {
 
   if (nat.tipo === "teleporte") {
     return { lista: TELEPORTE.chaves, nome: TELEPORTE.nome, playOn: "source", size: 1 };
+  }
+  // Só invoca (sem dano nem efeito nos alvos): o círculo de conjuração.
+  if (nat.tipo === "neutra" && invoca(a)) {
+    return { lista: INVOCACAO.chaves, nome: INVOCACAO.nome, playOn: "source", size: 1.5 };
   }
   if (nat.tipo === "beneficio") {
     const B = BENEFICIOS[nat.beneficio] ?? BENEFICIOS.bencao;
@@ -928,7 +947,7 @@ function ataqueDeArma(a) {
 
 /** A ação só rola ou registra algo (perícia, ativação sem efeito). */
 function acaoTrivial(a) {
-  if (causaDano(a) || drenaPM(a) || preenchido(a.heal) || ataqueDeArma(a)) return false;
+  if (causaDano(a) || drenaPM(a) || curaDe(a) || ataqueDeArma(a) || invoca(a)) return false;
   if ((a.appliesEffects ?? []).length || a.movement?.enabled) return false;
   return true;
 }
@@ -1147,7 +1166,7 @@ export function chavesDasTabelas({ comOpcionais = true } = {}) {
   listas.push(GENERICO.projetil, GENERICO.alvo, GENERICO.area, GENERICO.aura);
   for (const B of Object.values(BENEFICIOS)) listas.push(B.chaves);
   for (const C of Object.values(CONDICOES)) listas.push(C.chaves);
-  listas.push(CONTINUO_GENERICO.chaves, TELEPORTE.chaves);
+  listas.push(CONTINUO_GENERICO.chaves, TELEPORTE.chaves, INVOCACAO.chaves);
   for (const porElem of Object.values(POR_MAGIA)) {
     for (const porForma of Object.values(porElem)) listas.push(...Object.values(porForma));
   }

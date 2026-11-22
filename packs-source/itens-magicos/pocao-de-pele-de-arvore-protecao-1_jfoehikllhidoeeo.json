@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "50 Vo",
     "notes": "",
-    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (devena)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Pele de Árvore</b> (devena · Ação Rápida · Proteção 1 · +50 Vo)<br>Quando você usa esse item, você recebe um valor de Proteção (dependendo do valor do item) contra Corte, Perfuração, Concussão e Veneno, mas também recebe Vulnerabilidade de mesmo valor contra Fogo. Os efeitos duram até o fim da cena.</li></ul><p>Preço das propriedades: +50 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 1 (50 Vo).</p>",
+    "description": "<p><b>Poções</b>: São itens alquímicos que são consumidos quando utilizados.</p><hr><h3>✦ Encantamento — Item Menor (devena)</h3><p>Item <b>consumível</b>: não gasta mana — é gasto ao usar (pedras, poções, óleos, elixires e bombas são consumidos quando utilizados).</p><ul><li><b>Pele de Árvore</b> (devena · Ação Rápida · Proteção 1 · +50 Vo · <b>consumível</b>)<br>Quando você usa esse item, você recebe um valor de Proteção (dependendo do valor do item) contra Corte, Perfuração, Concussão e Veneno, mas também recebe Vulnerabilidade de mesmo valor contra Fogo. Os efeitos duram até o fim da cena.</li></ul><p>Preço das propriedades: +50 Vo.</p><p><b>Tesouro</b> (Sessão 17): Consumível Mágico de Nível 1 (50 Vo).</p>",
     "actions": [
       {
         "label": "✦ Beber: Pele de Árvore — Proteção 1; vulnerável 1 a Fogo (consumível)",
@@ -300,7 +300,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -329,11 +342,12 @@
         {
           "id": "Lqz63zvkhEljJqal",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "devena"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "devena",
@@ -347,6 +361,8 @@
               "palavra": "devena",
               "variante": "Proteção 1",
               "preco": 50,
+              "nivel": 1,
+              "pm": 0,
               "indice": 0
             }
           ],

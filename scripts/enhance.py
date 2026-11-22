@@ -182,9 +182,14 @@ def _enhance_magia(doc):
 # ---------------------------------------------------------------------------
 _ALVOS_ESTRUTURAIS = {"iniciativa", "esquiva", "bloqueio", "conjuracao",
                       "attack", "defense", "attackMelee", "attackRanged",
-                      "defenseMelee", "defenseRanged"}
+                      "defenseMelee", "defenseRanged", "defenseMagia"} | {
+                          f"{a}{o}" for a in ("esquiva", "bloqueio") for o in ("Melee", "Ranged", "Magia")}
+# Sistema build 30: imunidade e crítico automático são travas, não situações.
 _TIPOS_INCONDICIONAIS = {"stat", "rd", "crit", "fumble", "attr", "vuln",
-                         "reroll1", "reroll6", "info", "damage"}
+                         "reroll1", "reroll6", "info", "damage", "immune", "autocrit"}
+# Alvos com argumento que já dizem QUANDO valem: "resistir:<condição>" (só ao
+# anular aquela condição), "item:<nome>" (só nas ações daquele item).
+_PREFIXOS_ESTRUTURAIS = ("arma:", "conjuracao:", "resistir:", "item:")
 
 
 def _efeito_incondicional(e):
@@ -196,8 +201,7 @@ def _efeito_incondicional(e):
         return True
     if e["type"] in ("bonus", "dice", "rollDice"):
         t = e.get("target", "")
-        return (t in _ALVOS_ESTRUTURAIS or t.startswith("arma:")
-                or t.startswith("conjuracao:"))
+        return t in _ALVOS_ESTRUTURAIS or t.startswith(_PREFIXOS_ESTRUTURAIS)
     return False
 
 

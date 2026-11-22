@@ -46,15 +46,17 @@ for (const d of itens) {
   const r = receita(d);
   const p = PROPRIEDADES.find((x) => x.id === r.propriedades[0].id);
   const v = p.variantes[r.propriedades[0].indice];
-  if (r.nivel !== NOME_DO_NIVEL[v.nivel] || r.palavras.length !== v.nivel || r.lendario) nivelErrado.push(d.name);
+  if (r.nivel !== NOME_DO_NIVEL[v.nivel] || r.palavras.length !== 1 || r.lendario || r.mana !== 'propriedade') nivelErrado.push(d.name);
   for (const a of d.system.actions.filter((x) => x.label.startsWith('✦'))) {
-    const esperado = p.consumivel ? '0' : String(NIVEIS_ITEM[r.nivel].pm);
+    // A mana é o nível do grau (uma palavra só); gasto à escolha (Emanação, Pragas): o que se escolhe — custo fixo 0.
+    const esperado = (p.consumivel || a.variableCost?.enabled) ? '0' : String(v.nivel);
     if (a.costMp !== esperado) manaErrada.push(`${d.name}: ${a.label} = ${a.costMp}`);
   }
 }
-ok(nivelErrado.length === 0, `nível = nível do preço, uma palavra por nível (Menor 1, Intermediário 2, Maior 3) ${nivelErrado.slice(0, 3).join(', ')}`);
-ok(manaErrada.length === 0, `mana: 1 PM por palavra; consumível 0 ${manaErrada.slice(0, 3).join(' | ')}`);
-ok(receita(item('Anel de Carvalho (Maior)')).palavras.join() === 'devena,devena,devena', 'Anel de Carvalho Maior: devena × 3');
+ok(nivelErrado.length === 0, `nível = nível do preço, com uma palavra só (Menor, Intermediário ou Maior) ${nivelErrado.slice(0, 3).join(', ')}`);
+ok(manaErrada.length === 0, `mana: o nível do grau (Menor 1, Intermediário 2, Maior 3); consumível 0 ${manaErrada.slice(0, 3).join(' | ')}`);
+ok(receita(item('Anel de Carvalho (Maior)')).palavras.join() === 'devena'
+   && acoes(item('Anel de Carvalho (Maior)'), /^✦/).every((a) => a.costMp === '3'), 'Anel de Carvalho Maior: devena (uma palavra), 3 PM por uso');
 
 console.log('3) Poções se bebem; bombas se arremessam; óleos se aplicam; pedras se usam');
 const pocoes = itens.filter((d) => caminho(d) === 'Poções');
@@ -82,8 +84,8 @@ ok(acoes(d, /^Ataque — Espada Longa/).length === 2 && acoes(d, /^✦ Ataque/).
    && acoes(d, /^✦ Ataque/).every((a) => a.appliesEffects.some((e) => e.fxTarget === 'dano_continuo' && e.tickType === 'acido')),
    'Espada Longa Corrosiva: os ataques do livro e as versões ✦ com dano contínuo de ácido');
 const flamejantes = itens.filter((d2) => receita(d2).propriedades[0].id === 'ignis-dano-flamejante' && d2.system.actions.some((a) => a.isWeapon));
-ok(flamejantes.length === 3 && flamejantes.every((d2) => { const n = receita(d2).palavras.length;
-  return acoes(d2, /^✦ Ataque/).every((a) => a.extraDamage.some((x) => x.type === 'fogo' && x.formula === String(n))); }),
+ok(flamejantes.length === 3 && flamejantes.every((d2) => { const n = receita(d2).propriedades[0].nivel;
+  return acoes(d2, /^✦ Ataque/).every((a) => a.extraDamage.some((x) => x.type === 'fogo' && x.formula === String(n)) && a.costMp === String(n)); }),
    `Dano Flamejante na arma (${flamejantes[0]?.name.replace(/ \(.*/, '')}): +1/+2/+3 de fogo nos níveis Menor/Intermediário/Maior`);
 d = item('Armadura de Placas de Proteção Contra Fogo (Menor)');
 ok(d.system.effects.filter((e) => e.type === 'rd').length === 3 && acoes(d, /^✦ Ativar Proteção Contra Fogo/)[0]

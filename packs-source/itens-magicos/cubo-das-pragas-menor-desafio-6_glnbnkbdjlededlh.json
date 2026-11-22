@@ -12,10 +12,10 @@
     "weight": 0,
     "price": "3.500 Vo",
     "notes": "",
-    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (mortis)</h3><p>Ativar as propriedades custa <b>1 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Pragas</b> (mortis · Ação · Desafio 6 · +3.500 Vo) <em>(sem automação: aplique pela descrição)</em><br>Este cubo do tamanho de um punho possui entalhes de pragas em cada um de seus lados. Você pode gastar uma quantidade de pontos de magia e colocá-lo no chão enquanto pronuncia a palavra ou frase chave para ativá-lo. Quando ativado, o cubo libera uma praga que alcança uma quantidade de metros igual a 100 multiplicado pela quantidade de pontos de magia gastos. Todas as criaturas dentro do alcance, exceto você, são testadas contra uma doença cujo desafio depende do valor do item.<br><em>Corrupção: +1 depois de 3 dias portando.</em></li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
+    "description": "<p><b>Itens Maravilhosos</b>: Quaisquer itens que não pertençam as categorias acima são chamados de itens maravilhosos.</p><hr><h3>✦ Encantamento — Item Menor (mortis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Pragas</b> (mortis · Ação · Desafio 6 · +3.500 Vo · <b>PM à escolha</b>)<br>Este cubo do tamanho de um punho possui entalhes de pragas em cada um de seus lados. Você pode gastar uma quantidade de pontos de magia e colocá-lo no chão enquanto pronuncia a palavra ou frase chave para ativá-lo. Quando ativado, o cubo libera uma praga que alcança uma quantidade de metros igual a 100 multiplicado pela quantidade de pontos de magia gastos. Todas as criaturas dentro do alcance, exceto você, são testadas contra uma doença cujo desafio depende do valor do item.<br><em>Corrupção: +1 depois de 3 dias portando.</em></li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
     "actions": [
       {
-        "label": "✦ Pragas — praga de Desafio 6 (100m por PM) (1 PM)",
+        "label": "✦ Pragas — praga de Desafio 6 (100m por PM gasto) (PM à escolha)",
         "level": "all",
         "canRoll": false,
         "rollAttr": "agilidade",
@@ -24,8 +24,8 @@
         "vsDifficulty": false,
         "fixedDifficulty": "8",
         "difficultyAttr": "nenhum",
-        "targetMode": "self",
-        "includeSelf": true,
+        "targetMode": "none",
+        "includeSelf": false,
         "areaFilter": "all",
         "defenseAttr": "esquiva",
         "defenseAttr2": "",
@@ -69,7 +69,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "G8GcLDRd4WCkDHAX",
+          "id": "GOap2sHvkKLeY4Yf",
           "label": "Cubo das Pragas (Menor, Desafio 6)",
           "menu": "ontoken",
           "macro": {
@@ -162,14 +162,27 @@
         "animScale": "1",
         "animEnabled": true,
         "animAttach": false,
-        "costMp": "1",
+        "costMp": "0",
         "costHp": "0",
         "costHeroic": "0",
         "persistArea": false,
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": true,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "Pragas: a praga alcança 100m por PM gasto; todas as criaturas no alcance, menos você, são testadas contra uma doença de Desafio 6.",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "100*@gasto",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -198,11 +211,12 @@
         {
           "id": "Uq82WACHhdgqW7NM",
           "nivel": "Menor",
-          "pm": 1,
+          "pm": 0,
           "lendario": false,
           "palavras": [
             "mortis"
           ],
+          "mana": "propriedade",
           "slots": [
             {
               "palavra": "mortis",
@@ -216,6 +230,8 @@
               "palavra": "mortis",
               "variante": "Desafio 6",
               "preco": 3500,
+              "nivel": 1,
+              "pm": 0,
               "indice": 1
             }
           ],

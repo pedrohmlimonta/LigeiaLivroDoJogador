@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "14.000 Vo",
     "notes": "",
-    "description": "<p>Espinhos de metal em forma triangular.</p><p>Propriedade: Alcance 5m. Você pode arremessá-los de forma a cobrir até 6 espaços, adjacentes entre eles. Qualquer criatura que adentrar essa área deve ser bem sucedida em uma rolagem de Agilidade (Difícil) para não ficar lenta até sair da área. Os estrepes podem ser recuperados após o combate; no entanto, cada novo uso terá a dificuldade da rolagem de Agilidade reduzida em 2 pontos e cobrirá 1 espaço a menos. Quando a quantidade de espaços cobertos chegar a 0, eles acabam.</p><hr><h3>✦ Encantamento — Item Intermediário (sorcdiron + sorcdiron)</h3><p>Ativar as propriedades custa <b>2 PM</b> (1 por palavra arcana) a cada uso; as constantes valem até o fim da cena.</p><ul><li><b>Saltitantes</b> (sorcdiron · Constante · 2m · +14.000 Vo) <em>(sem automação: aplique pela descrição)</em><br>Esses estrepes possuem todas as propriedades de estrepes comuns, exceto que a área que cobrem quando arremessados nunca diminui quando recuperados após o combate. Quando uma criatura falha em uma rolagem de Agilidade a entrar uma área ocupada por eles, além da lentidão que o item causa, a criatura sofrerá 1 ponto de dano perfurante final. Adicionalmente, uma vez por rodada, os estrepes que estejam em espaços desocupados se movem até alcançar espaços ocupados por criaturas. A quantidade de metros que eles se movem por rodada depende do valor do item.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
+    "description": "<p>Espinhos de metal em forma triangular.</p><p>Propriedade: Alcance 5m. Você pode arremessá-los de forma a cobrir até 6 espaços, adjacentes entre eles. Qualquer criatura que adentrar essa área deve ser bem sucedida em uma rolagem de Agilidade (Difícil) para não ficar lenta até sair da área. Os estrepes podem ser recuperados após o combate; no entanto, cada novo uso terá a dificuldade da rolagem de Agilidade reduzida em 2 pontos e cobrirá 1 espaço a menos. Quando a quantidade de espaços cobertos chegar a 0, eles acabam.</p><hr><h3>✦ Encantamento — Item Intermediário (sorcdiron)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Saltitantes</b> (sorcdiron · Constante · 2m · +14.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Esses estrepes possuem todas as propriedades de estrepes comuns, exceto que a área que cobrem quando arremessados nunca diminui quando recuperados após o combate. Quando uma criatura falha em uma rolagem de Agilidade a entrar uma área ocupada por eles, além da lentidão que o item causa, a criatura sofrerá 1 ponto de dano perfurante final. Adicionalmente, uma vez por rodada, os estrepes que estejam em espaços desocupados se movem até alcançar espaços ocupados por criaturas. A quantidade de metros que eles se movem por rodada depende do valor do item.</li></ul><p>Preço das propriedades: +14.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 8 (14.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Ativar Saltitantes (2 PM, até o fim da cena)",
@@ -196,7 +196,20 @@
         "persistRounds": "1",
         "persistAffectsSelf": false,
         "persistRerollAttack": false,
-        "persistTrigger": "both"
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": []
       }
     ],
     "enchantments": [],
@@ -228,14 +241,10 @@
           "pm": 2,
           "lendario": false,
           "palavras": [
-            "sorcdiron",
             "sorcdiron"
           ],
+          "mana": "propriedade",
           "slots": [
-            {
-              "palavra": "sorcdiron",
-              "id": "sorcdiron-saltitantes"
-            },
             {
               "palavra": "sorcdiron",
               "id": "sorcdiron-saltitantes"
@@ -248,6 +257,8 @@
               "palavra": "sorcdiron",
               "variante": "2m",
               "preco": 14000,
+              "nivel": 2,
+              "pm": 2,
               "indice": 1
             }
           ],
