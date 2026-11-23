@@ -132,7 +132,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -258,7 +259,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "standard"
             },
             {
               "label": "Inspirar (A — 2D aos aliados, próximo turno)",
@@ -329,7 +333,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -455,7 +460,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "standard"
             }
           ],
           "enchantments": [],
@@ -470,7 +478,12 @@
           "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": []
+          "costs": [],
+          "actionCost": "none",
+          "sustain": {
+            "enabled": false,
+            "action": "simple"
+          }
         },
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.habilidades.Item.lfojdhonaifokcpj"
       }

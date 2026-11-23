@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Acumular tenacidade (+1 nas rolagens, cena)",
@@ -173,7 +176,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -213,7 +217,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "free"
       },
       {
         "label": "Converter bônus em sobrevida (remova os acúmulos)",
@@ -383,7 +390,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Converter bônus em sobrevida (A — o dobro: 2 de sobrevida por acúmulo, usando o movimento)",
@@ -553,7 +563,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "movement"
       }
     ],
     "enchantments": [],
@@ -581,7 +594,12 @@
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

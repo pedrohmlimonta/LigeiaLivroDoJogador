@@ -13,7 +13,181 @@
     "price": "1 Va",
     "notes": "",
     "description": "<p>Ataduras, unguentos, bandagens, pinças, lâminas devidamente higienizadas e frascos alquímicos que aceleram a cicatrização.</p><p>Propriedade: quando você realiza uma rolagem de cuidados médicos para cuidar de um aliado usando esse kit, você recebe +1 nessa rolagem. Este item é consumido quando utilizado.</p>",
-    "actions": [],
+    "actions": [
+      {
+        "label": "Cuidados médicos com o kit (Mente +1 — cura 1 PV) (consumível)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "mente",
+        "rollBonus": "1",
+        "rollDice": "0",
+        "vsDifficulty": true,
+        "fixedDifficulty": "10",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "1",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": true,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "RknkRoIgend4YFlY",
+          "label": "Kit de Primeiros Socorros",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.generichealing.01.green",
+            "nome": "Cura"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "generichealing",
+              "variant": "01",
+              "color": "green",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "default",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Kit de Primeiros Socorros (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,
@@ -26,7 +200,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,
@@ -34,7 +213,11 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "ligeia-livro-do-jogador": {
+      "consumivel": true
+    }
+  },
   "_stats": {
     "coreVersion": "13"
   }

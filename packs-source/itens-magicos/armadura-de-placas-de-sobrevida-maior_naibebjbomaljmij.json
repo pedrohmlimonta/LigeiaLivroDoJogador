@@ -15,6 +15,98 @@
     "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p><hr><h3>✦ Encantamento — Item Maior (sorcdiron)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Sobrevida</b> (sorcdiron · Constante · +5 de Sobrevida · +1.500.000 Vo · <b>3 PM por uso</b>)<br>Enquanto estiver usando esta armadura, você pode gastar 1 ponto de magia para receber 2/3/5 pontos de sobrevida (dependendo do preço do item).</li></ul><p>Preço das propriedades: +1.500.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 17 (1.500.000 Vo).</p>",
     "actions": [
       {
+        "label": "Vestir Armadura de Placas (liga o item)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [
+          {
+            "ref": "item|ijdamblichdaeocm|0|Armadura de Placas",
+            "enabled": true
+          }
+        ],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
+      },
+      {
         "label": "✦ Sobrevida — 5 de sobrevida (3 PM)",
         "level": "all",
         "canRoll": false,
@@ -69,7 +161,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "OKgEKuycsoMYcGTe",
+          "id": "t4hFBv4hsSVeP2Mt",
           "label": "Armadura de Placas de Sobrevida (Maior)",
           "menu": "ontoken",
           "macro": {
@@ -182,7 +274,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "none",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -258,7 +353,12 @@
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "hchncokhmjjobiaj",
@@ -300,7 +400,100 @@
           "antes": {
             "name": "Armadura de Placas",
             "system": {
-              "actions": [],
+              "actions": [
+                {
+                  "label": "Vestir Armadura de Placas (liga o item)",
+                  "level": "all",
+                  "canRoll": false,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "none",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "",
+                  "damage": "",
+                  "damageType": "",
+                  "damageResource": "hp",
+                  "scalingDamage": false,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [
+                    {
+                      "ref": "item|ijdamblichdaeocm|0|Armadura de Placas",
+                      "enabled": true
+                    }
+                  ],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": false,
+                  "isMelee": false,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": null,
+                  "aaName": "",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "none"
+                }
+              ],
               "effects": [
                 {
                   "type": "rd",

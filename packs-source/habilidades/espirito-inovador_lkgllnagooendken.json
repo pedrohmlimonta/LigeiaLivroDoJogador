@@ -89,7 +89,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": true,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -129,7 +130,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Espírito Inovador (A) — uma cena ajustando um equipamento: +2 nas rolagens de uso (escolha o item)",
@@ -200,7 +204,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": true,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -240,7 +245,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -255,7 +263,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

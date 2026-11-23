@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Finta (A): Agilidade vs Percepção — alvo indefeso",
@@ -259,7 +262,8 @@
             "fxAaName": "Indefeso (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -385,7 +389,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "movement"
       }
     ],
     "enchantments": [],
@@ -397,7 +404,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -407,13 +414,30 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Furtividade: +1 dado em rolagens de Agilidade aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Invisibilidade",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Furtividade: +1 em Conjuração de Invisibilidade",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

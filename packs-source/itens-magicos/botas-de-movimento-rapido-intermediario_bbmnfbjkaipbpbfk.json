@@ -12,7 +12,7 @@
     "weight": 0,
     "price": "7.000 Vo",
     "notes": "",
-    "description": "<p><b>Botas e Sandálias</b>: São itens que podem ser equipados nos pés.</p><hr><h3>✦ Encantamento — Item Intermediário (saeculorum)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Movimento Rápido</b> (saeculorum · Ação Livre · +7.000 Vo · <b>2 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para fazer um movimento adicional. Você só pode usar essa propriedade uma vez por rodada.</li></ul><p>Preço das propriedades: +7.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 7 (7.000 Vo).</p>",
+    "description": "<p><b>Botas e Sandálias</b>: São itens que podem ser equipados nos pés.</p><hr><h3>✦ Encantamento — Item Intermediário (saeculorum)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Movimento Rápido</b> (saeculorum · Ação Livre · +7.000 Vo · <b>2 PM por uso</b>)<br>Enquanto estiver usando um item com essa propriedade, você pode gastar 1 ponto de magia para fazer um movimento adicional. Você só pode usar essa propriedade uma vez por rodada.</li></ul><p>Preço das propriedades: +7.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 7 (7.000 Vo).</p>",
     "actions": [
       {
         "label": "✦ Movimento Rápido — movimento adicional (uma vez por rodada) (2 PM)",
@@ -58,7 +58,35 @@
           "ignoreWalls": false,
           "snap": true
         },
-        "appliesEffects": [],
+        "appliesEffects": [
+          {
+            "label": "Movimento Rápido: +1 ação de movimento nesta rodada",
+            "fxType": "action",
+            "fxTarget": "acao:movement",
+            "fxValue": "1",
+            "fxAll": false,
+            "durationMode": "rounds",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0",
+            "fxSustain": "none"
+          }
+        ],
         "lineWidth": "1.5",
         "coneAngle": "45",
         "isWeapon": false,
@@ -69,7 +97,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "6kOsRgQQGnSb28WS",
+          "id": "2Mn6vtCXPgGHCvoU",
           "label": "Botas de Movimento Rápido (Intermediário)",
           "menu": "ontoken",
           "macro": {
@@ -92,8 +120,8 @@
           "metaData": {
             "origem": "ligeia-livro-do-jogador",
             "automatica": true,
-            "chave": "static.generic.vortex.loop.blue",
-            "nome": "Tempo"
+            "chave": "static.spell.bless.intro.yellow",
+            "nome": "Bênção"
           },
           "isEnabled": true,
           "isCustomized": true,
@@ -102,10 +130,10 @@
           "primary": {
             "video": {
               "dbSection": "static",
-              "menuType": "generic",
-              "animation": "vortex",
-              "variant": "loop",
-              "color": "blue",
+              "menuType": "spell",
+              "animation": "bless",
+              "variant": "intro",
+              "color": "yellow",
               "enableCustom": false,
               "customPath": ""
             },
@@ -182,7 +210,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

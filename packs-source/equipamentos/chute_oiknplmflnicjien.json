@@ -202,7 +202,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Chute — Artes Marciais B (Agilidade, metade do Nível)",
@@ -388,7 +391,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Chute — Artes Marciais A (Agilidade, dano = Nível)",
@@ -574,7 +580,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       }
     ],
     "enchantments": [],
@@ -589,7 +598,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

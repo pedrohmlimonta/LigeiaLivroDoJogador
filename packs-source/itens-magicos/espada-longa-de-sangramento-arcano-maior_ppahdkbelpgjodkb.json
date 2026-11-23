@@ -203,7 +203,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -389,7 +392,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Ataque — Espada Longa — Sangramento Arcano (3 PM)",
@@ -460,7 +466,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -602,7 +609,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Ataque — Espada Longa (duas mãos, +1 dano) — Sangramento Arcano (3 PM)",
@@ -673,7 +683,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -815,7 +826,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       }
     ],
     "enchantments": [],
@@ -830,7 +844,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "fbpenclobmebecdm",
@@ -1057,7 +1076,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 },
                 {
                   "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -1243,7 +1265,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 }
               ],
               "effects": [],

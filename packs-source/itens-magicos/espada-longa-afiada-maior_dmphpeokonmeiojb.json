@@ -203,7 +203,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -389,7 +392,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Ataque — Espada Longa — Lâmina Afiada (3 PM)",
@@ -582,7 +588,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Ataque — Espada Longa (duas mãos, +1 dano) — Lâmina Afiada (3 PM)",
@@ -775,7 +784,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       }
     ],
     "enchantments": [],
@@ -790,7 +802,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "fbpenclobmebecdm",
@@ -1017,7 +1034,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 },
                 {
                   "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -1203,7 +1223,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 }
               ],
               "effects": [],

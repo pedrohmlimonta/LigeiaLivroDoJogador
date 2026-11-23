@@ -89,7 +89,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Sem armadura: +1 Bloqueio",
@@ -115,7 +116,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -241,7 +243,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Ativar Combater sem Armadura (Avançado — até o fim da cena)",
@@ -312,7 +317,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Sem armadura: +1 Bloqueio",
@@ -338,7 +344,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Sem armadura (A): RD corte = metade do Vigor",
@@ -364,7 +371,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Sem armadura (A): RD perfuração = metade do Vigor",
@@ -390,7 +398,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Sem armadura (A): RD concussão = metade do Vigor",
@@ -416,7 +425,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -542,7 +552,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -618,7 +631,12 @@
         "damageType": "concussao"
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

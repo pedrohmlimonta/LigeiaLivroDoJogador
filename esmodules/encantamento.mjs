@@ -51,7 +51,8 @@
 
 import { PROPRIEDADES } from "./propriedades.mjs";
 import { animarItemEncantado, criarVerificador, contarAnimacoesAutomaticas } from "./animacoes.mjs";
-import { novaAcao, novoApplies, novaInvocacao, custoEscolhido, DTYPES, ATTRS, TRACOS_COM_PALAVRA } from "./spellforge.mjs";
+import { novaAcao, novoApplies, novaInvocacao, custoEscolhido, DTYPES, ATTRS, TRACOS_COM_PALAVRA,
+         custoDaConjuracao } from "./spellforge.mjs";
 import { acoesDisparadas, normalizarAutoRefs, novoIdDocumento, lerRef } from "./referencias.mjs";
 
 const MODULE_ID = "ligeia-livro-do-jogador";
@@ -273,6 +274,32 @@ const continuo = (dt, attr, dc) => ap(`Dano contínuo de ${DTYPES[dt] ?? dt}`, {
   fxType: "condition", fxTarget: "dano_continuo", tickAmount: "1", tickType: dt, ...resiste(attr, dc),
 });
 const marcador = (label, extra = {}) => ap(label, { fxType: "bonus", fxTarget: "all", fxValue: "0", ...extra });
+/**
+ * Ações a mais na rodada (sistema build 31, efeito "Ações por rodada"). Na
+ * rodada, o efeito aumenta o máximo e o módulo devolve a ação na hora
+ * (esmodules/economia.mjs); na cena, vale a cada turno.
+ */
+const ROTULO_TIPO = { standard: "ação padrão", movement: "ação de movimento", simple: "ação rápida", reaction: "reação" };
+const acaoAMais = (tipo, rotulo, { cena = false } = {}) => ap(`${rotulo}: +1 ${ROTULO_TIPO[tipo]}${cena ? " por turno" : " nesta rodada"}`, {
+  fxType: "action", fxTarget: `acao:${tipo}`, fxValue: "1",
+  durationMode: cena ? "scene" : "rounds", durationRounds: "1",
+});
+
+/**
+ * A ação da rodada que a ATIVAÇÃO de uma propriedade gasta: "Ação" → padrão,
+ * "Ação Rápida" → simples, "Movimento", "Reação", "Ação Livre" → livre;
+ * "Constante" e "Cena" → nenhuma (a constante, quando paga por cena, é ligada
+ * com uma ação livre — ver construirEncantamento).
+ */
+export function custoDaAtivacao(ativacao) {
+  const t = semAcento(ativacao);
+  if (/acao rapida|acao simples/.test(t)) return "simple";
+  if (/^reacao/.test(t)) return "reaction";
+  if (/^movimento/.test(t)) return "movement";
+  if (/^acao livre/.test(t)) return "free";
+  if (/^acao/.test(t)) return "standard";
+  return "none";
+}
 /** Imunidade a condições (sistema build 30): o efeito é recusado no alvo. */
 const imuneA = (...conds) => conds.map((c) => ef("immune", `condicao:${c}`, 1));
 // O dano contínuo de um tipo não é condição à parte: a imunidade vai pelo nome
@@ -476,19 +503,24 @@ const REGRAS = {
   "pluribus-recuperacao-replicada": () => ({ info: "ao recuperar PV, a criatura mais próxima (3m) recupera o mesmo" }),
   "pluribus-seta-fantasma": () => acaoInfo("segundo ataque contra outro alvo a até 3m"),
   // saeculorum
-  "saeculorum-aceleracao": () => acaoInfo("turno adicional (uma vez por rodada)"),
+  "saeculorum-aceleracao": () => ({ acao: { rotulo: "turno adicional (uma vez por rodada)",
+    aplica: [acaoAMais("standard", "Aceleração"), acaoAMais("movement", "Aceleração"), acaoAMais("simple", "Aceleração")] } }),
   "saeculorum-corrida": (c) => ({ info: `a montaria recebe +${c.V}m de Deslocamento` }),
   "saeculorum-desaceleracao": () => ({ acao: { rotulo: "o alvo atingido fica Lento (Força 10 anula)",
     targetMode: "target", aplica: [cond("lento", "forca", 10)] },
     obs: "Gastando 2 PM o alvo fica Imobilizado, e 3 PM, Paralisado — troque a condição na ficha do alvo." }),
   "saeculorum-letargia-temporal": () => bomba(cond("lento", "forca", null),
     marcador("Letargia Temporal: sem reações", resiste("forca", null))),
-  "saeculorum-movimento-rapido": () => acaoInfo("movimento adicional (uma vez por rodada)"),
+  "saeculorum-movimento-rapido": () => ({ acao: { rotulo: "movimento adicional (uma vez por rodada)",
+    aplica: [acaoAMais("movement", "Movimento Rápido")] } }),
   "saeculorum-preservacao": () => ({ info: "o corpo envolto conta 10 dias como 1 para Reviver" }),
   "saeculorum-rapidez": (c) => ({ acao: { rotulo: `+1 ${c.v.rotulo || "ação"} por turno (cena)`,
-    aplica: [marcador(`Rapidez: +1 ${c.v.rotulo || "ação"} por turno`)] } }),
-  "saeculorum-reflexos-rapidos": () => acaoInfo("reação adicional (uma vez por rodada)"),
-  "saeculorum-veloz": () => acaoInfo("ataque adicional com a arma (uma vez por rodada)"),
+    aplica: [acaoAMais({ "acao rapida": "simple", "movimento": "movement", "acao": "standard" }[semAcento(c.v.rotulo)] ?? "standard",
+      "Rapidez", { cena: true })] } }),
+  "saeculorum-reflexos-rapidos": () => ({ acao: { rotulo: "reação adicional (uma vez por rodada)",
+    aplica: [acaoAMais("reaction", "Reflexos Rápidos")] } }),
+  "saeculorum-veloz": () => ({ acao: { rotulo: "ataque adicional com a arma (uma vez por rodada)",
+    aplica: [acaoAMais("standard", "Veloz")] } }),
   // sangon
   "sangon-alado": () => ({ info: "usa a habilidade Asas (Avançado)" }),
   "sangon-anfibia": () => ({ info: "usa Movimento de Natação (Avançado); sem penalidade de armadura na água" }),
@@ -898,6 +930,8 @@ export function construirEncantamento(dados, { nivel = null, escolhas, lendario 
         const nomes = rs.map((r) => r.prop.nome).join(" + ");
         const a = novaAcao(`✦ Ativar ${rs.length > 1 ? `todas: ${nomes}` : nomes} (${soma(rs)} PM, até o fim da cena)`, {
           canRoll: false, targetMode: "self", includeSelf: true, costMp: String(soma(rs)), appliesEffects: rs.flatMap(aplicaDe),
+          // Propriedade constante, paga por cena: ligar é uma ação livre.
+          actionCost: "free",
         });
         a._palavra = rs[0].prop.palavra;
         return a;
@@ -954,10 +988,20 @@ export function construirEncantamento(dados, { nivel = null, escolhas, lendario 
       ? `✦ ${verboDoConsumivel(tipos)}: ${r.prop.nome}${detalhe} (consumível)`
       : `✦ ${r.prop.nome}${detalhe} (${s.custoEscolhido ? "PM à escolha" : custoTxt(r.pm)})`;
     const a = acaoDaRegra(label, s, r.pm);
+    // A ação da rodada que a ativação da propriedade pede ("Ação Rápida" →
+    // simples; a poção se bebe com a ação rápida, a bomba sai com a ação).
+    a.actionCost = custoDaAtivacao(r.prop.ativacao);
     a._palavra = r.prop.palavra;
     novas.push(a);
   }
   sys.actions.push(...novas);
+  // Todo item tem ação (a economia de ações pede o que cada uma gasta): o
+  // lendário só com propriedades constantes ganha a que as anuncia.
+  if (!sys.actions.length && lendario && constantes.length) {
+    sys.actions.push(novaAcao(`✦ ${constantes.map((r) => r.prop.nome).join(" + ")} — constante${constantes.length > 1 ? "s" : ""} (lendário)`, {
+      canRoll: false, targetMode: "none", includeSelf: false, actionCost: "none",
+    }));
+  }
 
   // Preço, descrição e receita. O nível do encantamento é o da propriedade
   // mais alta; a mana, a de cada uma (a receita guarda a de fora do lendário).
@@ -1302,6 +1346,7 @@ function magiaAjustada(retrato, { lendario = false, pergaminho = false } = {}) {
     const pm = { "Menor": 1, "Intermediária": 2, "Maior": 3 }[s.tier] ?? 1;
     s.actions.push(novaAcao(`Conjurar ${m.name} (rolagem de Conjuração)`, {
       canRoll: true, rollAttr: "conjuracao", targetMode: "none", includeSelf: false, costMp: String(pm),
+      actionCost: custoDaConjuracao(s.casting),
     }));
     s.costs = [];
   }
@@ -1315,7 +1360,12 @@ function magiaAjustada(retrato, { lendario = false, pergaminho = false } = {}) {
     // usam: as que a magia dispara sozinha (↳) fazem parte da mesma conjuração.
     s.casting = "Rodada completa (pergaminho)";
     const internas = internasDaMagia(m);
-    s.actions.forEach((a, i) => { if (!internas.has(i)) a.label = `${a.label} — queima o pergaminho`; });
+    s.actions.forEach((a, i) => {
+      if (internas.has(i)) return;
+      a.label = `${a.label} — queima o pergaminho`;
+      // A rodada completa: a ação padrão (o sistema cobra um tipo por ação).
+      a.actionCost = "standard";
+    });
   }
   return m;
 }
@@ -1328,7 +1378,9 @@ function internasDaMagia(m) {
 /** Bloco da descrição do item: a magia guardada e o que ela faz. */
 function descricaoDoItemConjurador({ magia, nivel, pm, lendario, pergaminho, palavras, preco, tempo, itemNome }) {
   const s = magia.system ?? {};
-  const circulo = s.tier || "Menor";
+  // Magia lendária (4 ou 5 palavras): no sistema ela é de Círculo Maior.
+  const lendaria = Number(magia.flags?.[MODULE_ID]?.receita?.lendaria) || 0;
+  const circulo = lendaria ? `Maior — lendária de ${lendaria} palavras` : (s.tier || "Menor");
   const uso = lendario
     ? "sem gastar mana (item <b>lendário</b>)"
     : `pagando <b>${pm} PM</b> (Círculo ${esc(circulo)}) a cada conjuração`;
@@ -1386,6 +1438,8 @@ export function construirItemConjurador(dados, { magia, lendario = false, pergam
   const ehPergaminho = pergaminho ?? ePergaminho(data);
   const palavras = palavrasDaMagia(retrato);
   const { preco, tempo } = ehPergaminho ? { preco: 0, tempo: "1 hora" } : CRIACAO_DA_MAGIA[nivel];
+  // A lendária (4/5 palavras) custa os PM dela; o item fica Maior (o teto do livro).
+  const pmDaMagia = Number(retrato.flags?.[MODULE_ID]?.receita?.lendaria) || N.pm;
   const antes = {
     name: data.name,
     system: { actions: clone(sys.actions ?? []), effects: clone(sys.effects ?? []), description: sys.description ?? "", price: sys.price ?? "" },
@@ -1396,13 +1450,13 @@ export function construirItemConjurador(dados, { magia, lendario = false, pergam
   sys.actions = Array.isArray(sys.actions) ? sys.actions : [];
   sys.actions.push(...gatilhosDaMagia(ajustada, data.name, lendario));
   sys.description = (sys.description ?? "") + descricaoDoItemConjurador({
-    magia: ajustada, nivel, pm: lendario ? 0 : N.pm, lendario, pergaminho: ehPergaminho, palavras, preco, tempo, itemNome: data.name,
+    magia: ajustada, nivel, pm: lendario ? 0 : pmDaMagia, lendario, pergaminho: ehPergaminho, palavras, preco, tempo, itemNome: data.name,
   });
   if (preco) sys.price = somarPreco(sys.price, preco);
   data.flags ??= {};
   data.flags[MODULE_ID] ??= {};
   data.flags[MODULE_ID].encantamentos = [...(data.flags[MODULE_ID].encantamentos ?? []), {
-    id: novoId(), tipo: "magia", nivel, pm: N.pm, lendario, pergaminho: ehPergaminho, palavras,
+    id: novoId(), tipo: "magia", nivel, pm: pmDaMagia, lendario, pergaminho: ehPergaminho, palavras,
     magia: retrato, propriedades: [], preco, antes, gatilhos: true,
   }];
   return data;
@@ -1441,6 +1495,8 @@ function gatilhosDaMagia(ajustada, itemNome, lendario) {
     novaAcao(`✦ ${a.label} — ${custoDaAcao(a, lendario)}`, {
       canRoll: false, targetMode: "none", includeSelf: false, costMp: "0",
       preActivations: [{ ref: refDaMagia(i, vinculada), enabled: true }],
+      // Quem gasta a ação da rodada é a ação da magia vinculada, que ele dispara.
+      actionCost: "none",
     }),
   ]));
 }

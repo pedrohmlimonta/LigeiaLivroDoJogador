@@ -203,7 +203,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Ataque — Martelo de Guerra (duas mãos, +1 dano)",
@@ -389,7 +392,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Ataque — Martelo de Guerra — Chocante (2 PM)",
@@ -546,7 +552,8 @@
             "fxAaName": "Imobilizado (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -688,7 +695,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Ataque — Martelo de Guerra (duas mãos, +1 dano) — Chocante (2 PM)",
@@ -845,7 +855,8 @@
             "fxAaName": "Imobilizado (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -987,7 +998,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       }
     ],
     "enchantments": [],
@@ -1002,7 +1016,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "ahdnccaefeeiippb",
@@ -1229,7 +1248,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 },
                 {
                   "label": "Ataque — Martelo de Guerra (duas mãos, +1 dano)",
@@ -1415,7 +1437,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 }
               ],
               "effects": [],

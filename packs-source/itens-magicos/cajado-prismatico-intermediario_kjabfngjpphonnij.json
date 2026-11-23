@@ -198,7 +198,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Ativar Prismático (2 PM, até o fim da cena)",
@@ -269,7 +272,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -395,7 +399,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -410,7 +417,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "iikjabadbnidnjko",
@@ -637,7 +649,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 }
               ],
               "effects": [],

@@ -191,13 +191,19 @@
             "actorUuid": "",
             "actorName": "Planta pequena, Desafio até Nível — arraste a ficha abaixo",
             "count": "1",
+            "useGlobalCount": true,
+            "ownSheet": true,
+            "sustain": "simple",
             "disposition": "same",
             "rounds": "0",
             "giveControl": true,
             "hidden": false,
             "enabled": true
           }
-        ]
+        ],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       }
     ],
     "enchantments": [],
@@ -219,7 +225,12 @@
         "label": "Círculo Menor",
         "level": "all"
       }
-    ]
+    ],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

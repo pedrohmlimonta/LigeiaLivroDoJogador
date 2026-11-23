@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Vontade de Ferro (A) — resistir/anular: Mente +1D +metade do Nível",
@@ -186,7 +189,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -344,9 +350,50 @@
         "enchant": false,
         "level": "A",
         "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Telecinésia",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Vontade de Ferro: +1 em Conjuração de Telecinésia",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Telepatia",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Vontade de Ferro: +1 em Conjuração de Telepatia",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Empurrão Cinético",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Vontade de Ferro: +1 em Conjuração de Empurrão Cinético",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

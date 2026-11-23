@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Mestre do Conhecimento — rolar Mente +2D (A)",
@@ -186,7 +189,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -198,7 +204,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -208,13 +214,162 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Mestre do Conhecimento: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Arcano]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento: 1D em Conhecimento [Arcano]",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Arcano]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento (A): 2D em Conhecimento [Arcano]",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Guerra]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento: 1D em Conhecimento [Guerra]",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Guerra]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento (A): 2D em Conhecimento [Guerra]",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [História]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento: 1D em Conhecimento [História]",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [História]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento (A): 2D em Conhecimento [História]",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Natureza]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento: 1D em Conhecimento [Natureza]",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Natureza]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento (A): 2D em Conhecimento [Natureza]",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Ocultismo]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento: 1D em Conhecimento [Ocultismo]",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Ocultismo]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento (A): 2D em Conhecimento [Ocultismo]",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Religião]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento: 1D em Conhecimento [Religião]",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "rollDice",
+        "target": "item:Conhecimento [Religião]",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Mestre do Conhecimento (A): 2D em Conhecimento [Religião]",
+        "enabled": true,
+        "enchant": false,
+        "level": "A",
+        "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

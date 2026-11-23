@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Criar um “fato” (A — 1 PH)",
@@ -186,7 +189,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -198,7 +204,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -208,13 +214,54 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Conhecimento [Guerra]: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Armadura Arcana",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Guerra]: +1 em Conjuração de Armadura Arcana",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Escudo Arcano",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Guerra]: +1 em Conjuração de Escudo Arcano",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Barreira Arcana",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Guerra]: +1 em Conjuração de Barreira Arcana",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

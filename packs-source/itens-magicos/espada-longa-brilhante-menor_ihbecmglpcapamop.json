@@ -203,7 +203,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -389,7 +392,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "✦ Brilhante — luz de 10m (1 PM)",
@@ -559,7 +565,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "simple",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -574,7 +583,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "pfjbbdnnllibjnik",
@@ -801,7 +815,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 },
                 {
                   "label": "Ataque — Espada Longa (duas mãos, +1 dano)",
@@ -987,7 +1004,10 @@
                     "rangeBonus": "",
                     "rollBonus": ""
                   },
-                  "summons": []
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
                 }
               ],
               "effects": [],

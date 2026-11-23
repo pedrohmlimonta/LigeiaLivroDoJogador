@@ -188,7 +188,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Cuidados médicos (A — cura 2 PV)",
@@ -358,7 +361,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       }
     ],
     "enchantments": [],
@@ -370,7 +376,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -380,13 +386,90 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Medicina: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Raio Necrótico",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Medicina: +1 em Conjuração de Raio Necrótico",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Invocar os Mortos",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Medicina: +1 em Conjuração de Invocar os Mortos",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Toque Vampírico",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Medicina: +1 em Conjuração de Toque Vampírico",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Curar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Medicina: +1 em Conjuração de Curar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Restaurar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Medicina: +1 em Conjuração de Restaurar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Reviver",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Medicina: +1 em Conjuração de Reviver",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

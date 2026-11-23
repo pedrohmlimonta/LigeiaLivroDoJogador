@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -114,7 +117,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -124,13 +127,90 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Ofícios: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Armadura Arcana",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Ofícios: +1 em Conjuração de Armadura Arcana",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Escudo Arcano",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Ofícios: +1 em Conjuração de Escudo Arcano",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Criar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Ofícios: +1 em Conjuração de Criar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Reparar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Ofícios: +1 em Conjuração de Reparar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Nuvem Tóxica",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Ofícios: +1 em Conjuração de Nuvem Tóxica",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Toque Venenoso",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Ofícios: +1 em Conjuração de Toque Venenoso",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

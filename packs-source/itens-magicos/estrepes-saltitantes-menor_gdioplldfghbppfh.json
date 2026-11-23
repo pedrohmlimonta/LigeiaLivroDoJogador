@@ -15,6 +15,293 @@
     "description": "<p>Espinhos de metal em forma triangular.</p><p>Propriedade: Alcance 5m. Você pode arremessá-los de forma a cobrir até 6 espaços, adjacentes entre eles. Qualquer criatura que adentrar essa área deve ser bem sucedida em uma rolagem de Agilidade (Difícil) para não ficar lenta até sair da área. Os estrepes podem ser recuperados após o combate; no entanto, cada novo uso terá a dificuldade da rolagem de Agilidade reduzida em 2 pontos e cobrirá 1 espaço a menos. Quando a quantidade de espaços cobertos chegar a 0, eles acabam.</p><hr><h3>✦ Encantamento — Item Menor (sorcdiron)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Saltitantes</b> (sorcdiron · Constante · 1m · +700 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Esses estrepes possuem todas as propriedades de estrepes comuns, exceto que a área que cobrem quando arremessados nunca diminui quando recuperados após o combate. Quando uma criatura falha em uma rolagem de Agilidade a entrar uma área ocupada por eles, além da lentidão que o item causa, a criatura sofrerá 1 ponto de dano perfurante final. Adicionalmente, uma vez por rodada, os estrepes que estejam em espaços desocupados se movem até alcançar espaços ocupados por criaturas. A quantidade de metros que eles se movem por rodada depende do valor do item.</li></ul><p>Preço das propriedades: +700 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 2 (700 Vo).</p>",
     "actions": [
       {
+        "label": "Espalhar os estrepes (até 6 espaços — quem entrar rola Agilidade Difícil ou fica Lento)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [
+          {
+            "label": "Lento (estrepes — Agilidade Difícil anula)",
+            "fxType": "condition",
+            "fxTarget": "lento",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "rounds",
+            "durationRounds": "1",
+            "resist": true,
+            "resistAttr": "agilidade",
+            "resistVsCast": false,
+            "resistDc": "12",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": {
+              "id": "KchbC6peUiWhzWCr",
+              "label": "Estrepes Saltitantes (Menor)",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.conditions.snowflakes.02.blue",
+                "nome": "Lento"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "conditions",
+                  "animation": "snowflakes",
+                  "variant": "02",
+                  "color": "blue",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Lento (automática)",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0",
+            "fxSustain": "none"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "5",
+        "area": "1.5",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "AzWftjqNHAiwy0TW",
+          "label": "Estrepes Saltitantes (Menor)",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.generic.ui.snowflake.blue",
+            "nome": "Lento"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "generic",
+              "animation": "ui",
+              "variant": "snowflake",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "target",
+              "size": 1.25,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Estrepes Saltitantes (Menor) (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": true,
+        "persistRounds": "0",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "enter",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
+      },
+      {
         "label": "✦ Ativar Saltitantes (1 PM, até o fim da cena)",
         "level": "all",
         "canRoll": false,
@@ -83,7 +370,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -96,7 +384,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "82pWWClJ5LtnsCCp",
+          "id": "VoTbsBH17Ksz7xEm",
           "label": "Estrepes Saltitantes (Menor)",
           "menu": "ontoken",
           "macro": {
@@ -209,7 +497,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -224,7 +515,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "dcchdcfjcpanmaka",
@@ -266,7 +562,295 @@
           "antes": {
             "name": "Estrepes",
             "system": {
-              "actions": [],
+              "actions": [
+                {
+                  "label": "Espalhar os estrepes (até 6 espaços — quem entrar rola Agilidade Difícil ou fica Lento)",
+                  "level": "all",
+                  "canRoll": false,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "area",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "",
+                  "damage": "",
+                  "damageType": "",
+                  "damageResource": "hp",
+                  "scalingDamage": false,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [
+                    {
+                      "label": "Lento (estrepes — Agilidade Difícil anula)",
+                      "fxType": "condition",
+                      "fxTarget": "lento",
+                      "fxValue": "0",
+                      "fxAll": false,
+                      "durationMode": "rounds",
+                      "durationRounds": "1",
+                      "resist": true,
+                      "resistAttr": "agilidade",
+                      "resistVsCast": false,
+                      "resistDc": "12",
+                      "resistReroll": false,
+                      "tickAmount": "0",
+                      "tickType": "",
+                      "tickResource": "hp",
+                      "tickHealAmount": "0",
+                      "tickHealResource": "hp",
+                      "fxFile": "",
+                      "fxScale": "1",
+                      "fxAaConfig": {
+                        "id": "gzQMjJt68xRKcFhu",
+                        "label": "Estrepes",
+                        "menu": "ontoken",
+                        "macro": {
+                          "enable": false,
+                          "name": "",
+                          "args": "",
+                          "playWhen": "0"
+                        },
+                        "soundOnly": {
+                          "sound": {
+                            "enable": false,
+                            "file": "",
+                            "delay": 0,
+                            "startTime": 0,
+                            "volume": 0.75,
+                            "repeat": 1,
+                            "repeatDelay": 250
+                          }
+                        },
+                        "metaData": {
+                          "origem": "ligeia-livro-do-jogador",
+                          "automatica": true,
+                          "chave": "static.conditions.snowflakes.02.blue",
+                          "nome": "Lento"
+                        },
+                        "isEnabled": true,
+                        "isCustomized": true,
+                        "fromAmmo": false,
+                        "version": 5,
+                        "primary": {
+                          "video": {
+                            "dbSection": "static",
+                            "menuType": "conditions",
+                            "animation": "snowflakes",
+                            "variant": "02",
+                            "color": "blue",
+                            "enableCustom": false,
+                            "customPath": ""
+                          },
+                          "sound": {
+                            "enable": false,
+                            "file": "",
+                            "delay": 0,
+                            "startTime": 0,
+                            "volume": 0.75,
+                            "repeat": 1,
+                            "repeatDelay": 250
+                          },
+                          "options": {
+                            "contrast": 0,
+                            "hue": 0,
+                            "saturate": 0,
+                            "tint": false,
+                            "tintColor": "#FFFFFF",
+                            "delay": 1,
+                            "elevation": 1000,
+                            "isWait": false,
+                            "opacity": 1,
+                            "playbackRate": 1,
+                            "repeat": 1,
+                            "repeatDelay": 1,
+                            "zIndex": 1,
+                            "addTokenWidth": false,
+                            "anchor": "0.5",
+                            "fadeIn": 250,
+                            "fadeOut": 500,
+                            "isMasked": false,
+                            "isRadius": false,
+                            "persistent": true,
+                            "playOn": "default",
+                            "size": 1,
+                            "unbindAlpha": false,
+                            "unbindVisibility": false
+                          }
+                        },
+                        "source": {
+                          "enable": false
+                        },
+                        "secondary": {
+                          "enable": false
+                        },
+                        "target": {
+                          "enable": false
+                        }
+                      },
+                      "fxAaName": "Lento (automática)",
+                      "fxAaPersist": true,
+                      "fxEnchant": false,
+                      "grantTempHp": "0",
+                      "fxSustain": "none"
+                    }
+                  ],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": false,
+                  "isMelee": false,
+                  "range": "5",
+                  "area": "1.5",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": {
+                    "id": "mj2Ca7UlRRZlsYG4",
+                    "label": "Estrepes",
+                    "menu": "ontoken",
+                    "macro": {
+                      "enable": false,
+                      "name": "",
+                      "args": "",
+                      "playWhen": "0"
+                    },
+                    "soundOnly": {
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      }
+                    },
+                    "metaData": {
+                      "origem": "ligeia-livro-do-jogador",
+                      "automatica": true,
+                      "chave": "static.generic.ui.snowflake.blue",
+                      "nome": "Lento"
+                    },
+                    "isEnabled": true,
+                    "isCustomized": true,
+                    "fromAmmo": false,
+                    "version": 5,
+                    "primary": {
+                      "video": {
+                        "dbSection": "static",
+                        "menuType": "generic",
+                        "animation": "ui",
+                        "variant": "snowflake",
+                        "color": "blue",
+                        "enableCustom": false,
+                        "customPath": ""
+                      },
+                      "sound": {
+                        "enable": false,
+                        "file": "",
+                        "delay": 0,
+                        "startTime": 0,
+                        "volume": 0.75,
+                        "repeat": 1,
+                        "repeatDelay": 250
+                      },
+                      "options": {
+                        "contrast": 0,
+                        "hue": 0,
+                        "saturate": 0,
+                        "tint": false,
+                        "tintColor": "#FFFFFF",
+                        "delay": 1,
+                        "elevation": 1000,
+                        "isWait": false,
+                        "opacity": 1,
+                        "playbackRate": 1,
+                        "repeat": 1,
+                        "repeatDelay": 1,
+                        "zIndex": 1,
+                        "addTokenWidth": false,
+                        "anchor": "0.5",
+                        "fadeIn": 250,
+                        "fadeOut": 500,
+                        "isMasked": false,
+                        "isRadius": false,
+                        "persistent": false,
+                        "playOn": "target",
+                        "size": 1.25,
+                        "unbindAlpha": false,
+                        "unbindVisibility": false
+                      }
+                    },
+                    "source": {
+                      "enable": false
+                    },
+                    "secondary": {
+                      "enable": false
+                    },
+                    "target": {
+                      "enable": false
+                    }
+                  },
+                  "aaName": "Estrepes (automática)",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": true,
+                  "persistRounds": "0",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "enter",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
+                }
+              ],
               "effects": [],
               "description": "<p>Espinhos de metal em forma triangular.</p><p>Propriedade: Alcance 5m. Você pode arremessá-los de forma a cobrir até 6 espaços, adjacentes entre eles. Qualquer criatura que adentrar essa área deve ser bem sucedida em uma rolagem de Agilidade (Difícil) para não ficar lenta até sair da área. Os estrepes podem ser recuperados após o combate; no entanto, cada novo uso terá a dificuldade da rolagem de Agilidade reduzida em 2 pontos e cobrirá 1 espaço a menos. Quando a quantidade de espaços cobertos chegar a 0, eles acabam.</p>",
               "price": "6 Va"

@@ -169,7 +169,8 @@
             "fxAaName": "Energia (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -295,7 +296,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "standard",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

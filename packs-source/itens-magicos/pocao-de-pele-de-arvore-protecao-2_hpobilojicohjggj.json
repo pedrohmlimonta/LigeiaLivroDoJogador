@@ -83,7 +83,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Pele de Árvore: Proteção 2 (Perfuração)",
@@ -109,7 +110,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Pele de Árvore: Proteção 2 (Concussão)",
@@ -135,7 +137,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Pele de Árvore: Proteção 2 (Veneno)",
@@ -161,7 +164,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "Pele de Árvore: vulnerável 2 a Fogo",
@@ -187,7 +191,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -313,7 +318,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "simple",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """Validação dos documentos gerados contra o schema do sistema ligeia-rpg
-(build 30): choices de todos os campos enumerados, tipos string/número/bool,
+(build 31): choices de todos os campos enumerados, tipos string/número/bool,
 fórmulas e @variáveis, condições e alvos de efeito (imunidade, resistência,
 item), dreno, efeitos removidos, ações em cadeia (inclusive o alvo escolhido na
-hora), custo escolhido na ativação (@gasto), criaturas invocadas e as
-referências entre ações.
+hora), custo escolhido na ativação (@gasto), criaturas invocadas (cardápio),
+economia de ações (a ação que cada ação gasta, a sustentação de efeitos,
+áreas, criaturas e itens, efeitos que dão ações ou criam emanações), que todo
+item de jogo tem ação e as referências entre ações.
 
 Rodado pelo generate.py ao final; também pode rodar sozinho:
     python3 scripts/validate.py
@@ -22,10 +24,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 EFFECT_TYPES = {"dice", "rollDice", "bonus", "attr", "stat", "set", "damage", "rd",
                 "vuln", "reroll1", "reroll6", "crit", "fumble", "autocrit", "immune",
-                "tempHp", "areaFilter", "condition", "size", "restore", "info"}
+                "action", "emanation", "tempHp", "areaFilter", "condition", "size",
+                "restore", "info"}
 APPLIES_TYPES = {"bonus", "dice", "rollDice", "attr", "stat", "set", "damage", "rd",
                  "vuln", "reroll1", "reroll6", "crit", "fumble", "autocrit", "immune",
-                 "restore", "condition", "size"}
+                 "action", "emanation", "restore", "condition", "size"}
 LEVELS = {"all", "B", "A", "E"}
 COST_LEVELS = LEVELS | {"A+", "E+"}
 COST_RES = {"mp", "hp", "hpTemp", "heroic"}
@@ -65,6 +68,14 @@ CHAIN_WHEN = {"always", "hit", "miss", "crit", "damage", "heal"}
 CHAIN_TARGETS = {"same", "hitOnly", "own", "pick"}
 REF_KINDS = {"item", "effect", "action"}
 SUMMON_DISPOSITIONS = {"same", "friendly", "neutral", "hostile", "secret"}
+# Economia de ações (build 31): o que uma ação gasta, o que sustenta.
+ACTION_COSTS = {"none", "standard", "movement", "simple", "reaction", "free"}
+ACTION_EFFECT_TARGETS = {"acao:standard", "acao:movement", "acao:simple", "acao:reaction",
+                         "standard", "movement", "simple", "reaction", "corrida"}
+# Os itens de jogo que têm de ter ao menos uma ação (para executar o efeito ou
+# fazer a rolagem); raças, heranças, vocações, carreiras e organizações são
+# conjuntos — os traços e habilidades delas é que têm.
+TIPOS_COM_ACAO = {"habilidade", "magia", "equipamento", "traco", "complicacao"}
 VC_BONUS = ("damageBonus", "healBonus", "areaBonus", "rangeBonus", "rollBonus")
 # Alvos de imunidade: "dano:<tipo>", "condicao:<id>", "efeito:<trecho do nome>",
 # "item:<nome>"; sem prefixo, é tipo de dano.
@@ -167,6 +178,10 @@ def validar_efeito(v, onde, e, leveled):
         msg = _erro_imunidade(t)
         if msg:
             v.err(onde, msg)
+    elif tp == "action" and t not in ACTION_EFFECT_TARGETS:
+        v.err(onde, f"efeito de ações com alvo {t!r} (acao:standard/movement/simple/reaction ou corrida)")
+    elif tp == "emanation" and not str(t).startswith("emanacao:"):
+        v.err(onde, f"emanação com alvo {t!r} (emanacao:<ação que a aura dispara>)")
     elif tp == "stat" and t not in STAT_TARGETS:
         v.err(onde, f"efeito stat com alvo {t!r}")
     elif tp in ("rd", "vuln"):
@@ -210,6 +225,11 @@ def validar_aplicavel(v, onde, ap):
         msg = _erro_imunidade(t)
         if msg:
             v.err(onde, f"applies: {msg}")
+    if tp == "action" and t not in ACTION_EFFECT_TARGETS:
+        v.err(onde, f"applies de ações com alvo {t!r}")
+    if tp == "emanation" and not str(t).startswith("emanacao:"):
+        v.err(onde, f"applies de emanação com alvo {t!r}")
+    v.choice(onde, "applies.fxSustain", ap.get("fxSustain", "none"), ACTION_COSTS)
     if tp == "stat" and t not in STAT_TARGETS:
         v.err(onde, f"applies stat com alvo {t!r}")
     if tp == "set" and t not in SET_TARGETS:
@@ -313,6 +333,13 @@ def validar_acao(v, onde, a):
         v.err(onde, "action.showInSheet deveria ser bool")
     validar_custo_escolhido(v, onde, a)
     validar_invocacoes(v, onde, a)
+    if "actionCost" not in a:
+        v.err(onde, "ação sem actionCost (a ação da rodada que ela gasta — none, se nenhuma)")
+    v.choice(onde, "action.actionCost", a.get("actionCost", "none"), ACTION_COSTS)
+    v.choice(onde, "action.persistSustain", a.get("persistSustain", "none"), ACTION_COSTS)
+    if a.get("persistSustain", "none") != "none" and not a.get("persistArea"):
+        v.err(onde, "sustentação de emanação numa ação sem área persistente")
+    v.formula(onde, "action.summonCount", a.get("summonCount", "1"), gasto=True)
     for i, elo in enumerate(a.get("chainActions", [])):
         v.choice(onde, f"chainActions[{i}].when", elo.get("when", "hit"), CHAIN_WHEN)
         v.choice(onde, f"chainActions[{i}].targets", elo.get("targets", "own"), CHAIN_TARGETS)
@@ -387,9 +414,10 @@ def validar_invocacoes(v, onde, a):
         v.choice(lugar, "summons.disposition", sm.get("disposition", "same"), SUMMON_DISPOSITIONS)
         v.formula(lugar, "summons.count", sm.get("count", "1"), gasto=True)
         v.formula(lugar, "summons.rounds", sm.get("rounds", "0"), gasto=True)
-        for f in ("giveControl", "hidden", "enabled"):
+        for f in ("giveControl", "hidden", "enabled", "useGlobalCount", "ownSheet"):
             if not isinstance(sm.get(f, True), bool):
                 v.err(lugar, f"summons.{f} deveria ser bool")
+        v.choice(lugar, "summons.sustain", sm.get("sustain", "none"), ACTION_COSTS)
         if not sm.get("actorUuid") and not str(sm.get("actorName", "")).strip():
             v.err(lugar, "marcador de invocação sem nome: ninguém saberia que ficha arrastar")
         if sm.get("actorUuid") and not re.match(r"^(Compendium\.|Actor\.)", sm["actorUuid"]):
@@ -471,6 +499,14 @@ def validar_sistema(v, onde, tipo, s):
         v.choice(onde, "mode", s.get("mode"), {"passive", "active"})
         if not isinstance(s.get("active"), bool):
             v.err(onde, "active deveria ser bool")
+        v.choice(onde, "actionCost (ligar o item)", s.get("actionCost", "none"), ACTION_COSTS)
+        sus = s.get("sustain") or {}
+        if not isinstance(sus, dict) or not isinstance(sus.get("enabled", False), bool):
+            v.err(onde, "sustain do item deveria ser {enabled, action}")
+        else:
+            v.choice(onde, "sustain.action", sus.get("action", "simple"), ACTION_COSTS)
+    if tipo in TIPOS_COM_ACAO and not s.get("actions"):
+        v.err(onde, "item sem nenhuma ação (todo item de jogo tem a dele: executar o efeito ou rolar)")
     for e in s.get("effects", []):
         validar_efeito(v, f"{onde} › efeito {e.get('label', '')[:30]}", e, leveled)
     for c in s.get("costs", []):

@@ -100,7 +100,7 @@ def applies(label, fx_type="condition", fx_target="", fx_value=0, fx_all=False,
             resist_attr="vigor", resist_vs_cast=True, resist_dc=0,
             resist_reroll=False, tick_amount=0, tick_type="",
             tick_resource="hp", tick_heal_amount=0, tick_heal_resource="hp",
-            fx_enchant=False, grant_temp_hp=0):
+            fx_enchant=False, grant_temp_hp=0, fx_sustain="none"):
     """Efeito aplicado ao alvo quando a ação acerta (vira efeito ativo com
     duração). fx_value aceita fórmula com @variáveis do CONJURADOR."""
     return {
@@ -128,6 +128,9 @@ def applies(label, fx_type="condition", fx_target="", fx_value=0, fx_all=False,
         "fxAaPersist": True,
         "fxEnchant": fx_enchant,
         "grantTempHp": _s(grant_temp_hp),
+        # Sistema build 31: ação que quem conjurou paga a cada turno para o
+        # efeito continuar no alvo ("none" = não precisa sustentar).
+        "fxSustain": fx_sustain,
     }
 
 
@@ -150,7 +153,8 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
            persist_reroll_attack=False, persist_trigger="both",
            pre_activations=None, skip_roll_dialog=True, drain=None,
            removes_effects=None, chain_actions=None, variable_cost=None,
-           summons=None):
+           summons=None, action_cost=None, persist_sustain="none",
+           summon_count=1):
     """Uma ação de item (schema do sistema, build 30).
 
     - level: "all"/"B"/"A"/"E" — nível em que a ação existe (habilidades).
@@ -163,7 +167,12 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
     - variable_cost: dict com min/max/label/resource e as fórmulas de bônus
       (damageBonus, healBonus, areaBonus, rangeBonus, rollBonus) — o custo
       escolhido na ativação; @gasto vale nelas (enabled é ligado aqui).
-    - summons: lista de criaturas invocadas (veja summon()).
+    - summons: CARDÁPIO de criaturas (veja summon()): a ação conjura UMA delas,
+      escolhida na hora, na quantidade summon_count (as que seguem o geral).
+    - action_cost: ação da rodada que a ação gasta (sistema build 31:
+      standard/movement/simple/reaction/free/none). Sem ele, o
+      enhance_acoes.py decide pelo livro (ativação, texto, tipo da ação).
+    - persist_sustain: ação por turno para a emanação continuar de pé.
     """
     dr = {"enabled": False, "resource": "mp", "from": "both", "ratio": "1"}
     if drain:
@@ -231,6 +240,9 @@ def action(label, level="all", can_roll=True, roll_attr="forca", roll_bonus=0,
         "persistTrigger": persist_trigger,
         "variableCost": vc,
         "summons": [dict(x) for x in (summons or [])],
+        "summonCount": _s(summon_count, "1"),
+        "persistSustain": persist_sustain,
+        **({"actionCost": action_cost} if action_cost else {}),
     }
 
 
@@ -256,7 +268,8 @@ def variable_cost_field(cfg=None):
 
 
 def summon(actor_name="", actor_uuid="", count=1, disposition="same", rounds=0,
-           give_control=True, hidden=False, enabled=True):
+           give_control=True, hidden=False, enabled=True, use_global_count=True,
+           own_sheet=True, sustain="none"):
     """Uma criatura que a ação invoca (sistema build 30).
 
     Sem actor_uuid é um MARCADOR: diz qual criatura cabe ali; a ficha
@@ -265,6 +278,9 @@ def summon(actor_name="", actor_uuid="", count=1, disposition="same", rounds=0,
     """
     return {
         "actorUuid": actor_uuid, "actorName": actor_name, "count": _s(count, "1"),
+        # Build 31: segue o número geral da ação (summonCount), ganha ficha
+        # própria ao aparecer e pode pedir uma ação por rodada para ficar.
+        "useGlobalCount": use_global_count, "ownSheet": own_sheet, "sustain": sustain,
         "disposition": disposition, "rounds": _s(rounds, "0"),
         "giveControl": give_control, "hidden": hidden, "enabled": enabled,
     }
@@ -287,6 +303,10 @@ def _activatable(mode, effects, costs):
         "active": False,
         "effects": effects or [],
         "costs": costs or [],
+        # Sistema build 31: ação que LIGAR o item consome, e a sustentação do
+        # item ligado (uma ação por turno para continuar ligado).
+        "actionCost": "none",
+        "sustain": {"enabled": False, "action": "simple"},
     }
 
 

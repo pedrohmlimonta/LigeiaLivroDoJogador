@@ -19,7 +19,209 @@
     "descBasic": "<p>Quando você conjura magias compostas por uma determinada palavra arcana, ela sempre foge ao seu controle e produz um efeito prejudicial a você e/ou pessoas próximas.</p><p>Quando você conjura magias compostas pela palavra arcana tenebrae e o resultado da Conjuração é 12 ou menor, a magia produz um efeito colateral, independente dela funcionar ou não.</p><p>Efeito Colateral — Olhos Sem Vida: Você fica cego até o fim da cena (Percepção anula).</p><p>Regra: cada jogador pode escolher apenas uma complicação, durante a criação do personagem. Para se livrar dela: pague pontos de experiência iguais aos pontos de antecedentes concedidos, ou cumpra uma missão específica para isso (Avulso 09).</p>",
     "descAdvanced": "",
     "descSpecial": "",
-    "actions": [],
+    "actions": [
+      {
+        "label": "Efeito Colateral: Olhos Sem Vida — Você fica cego até o fim da cena (Percepção anula)",
+        "level": "B",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "self",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [
+          {
+            "label": "Cego até o fim da cena (Percepção anula)",
+            "fxType": "condition",
+            "fxTarget": "cego",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": true,
+            "resistAttr": "percepcao",
+            "resistVsCast": false,
+            "resistDc": "10",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": {
+              "id": "N67FKjpzUDWj7Uml",
+              "label": "Efeito Colateral [tenebrae]",
+              "menu": "ontoken",
+              "macro": {
+                "enable": false,
+                "name": "",
+                "args": "",
+                "playWhen": "0"
+              },
+              "soundOnly": {
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                }
+              },
+              "metaData": {
+                "origem": "ligeia-livro-do-jogador",
+                "automatica": true,
+                "chave": "static.generic.smoke.01.grey",
+                "nome": "Cegueira"
+              },
+              "isEnabled": true,
+              "isCustomized": true,
+              "fromAmmo": false,
+              "version": 5,
+              "primary": {
+                "video": {
+                  "dbSection": "static",
+                  "menuType": "generic",
+                  "animation": "smoke",
+                  "variant": "01",
+                  "color": "grey",
+                  "enableCustom": false,
+                  "customPath": ""
+                },
+                "sound": {
+                  "enable": false,
+                  "file": "",
+                  "delay": 0,
+                  "startTime": 0,
+                  "volume": 0.75,
+                  "repeat": 1,
+                  "repeatDelay": 250
+                },
+                "options": {
+                  "contrast": 0,
+                  "hue": 0,
+                  "saturate": 0,
+                  "tint": false,
+                  "tintColor": "#FFFFFF",
+                  "delay": 1,
+                  "elevation": 1000,
+                  "isWait": false,
+                  "opacity": 1,
+                  "playbackRate": 1,
+                  "repeat": 1,
+                  "repeatDelay": 1,
+                  "zIndex": 1,
+                  "addTokenWidth": false,
+                  "anchor": "0.5",
+                  "fadeIn": 250,
+                  "fadeOut": 500,
+                  "isMasked": false,
+                  "isRadius": false,
+                  "persistent": true,
+                  "playOn": "default",
+                  "size": 1,
+                  "unbindAlpha": false,
+                  "unbindVisibility": false
+                }
+              },
+              "source": {
+                "enable": false
+              },
+              "secondary": {
+                "enable": false
+              },
+              "target": {
+                "enable": false
+              }
+            },
+            "fxAaName": "Cegueira (automática)",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0",
+            "fxSustain": "none"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,
@@ -45,7 +247,12 @@
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

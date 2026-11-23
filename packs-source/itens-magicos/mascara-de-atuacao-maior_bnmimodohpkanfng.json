@@ -83,7 +83,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -209,7 +210,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       },
       {
         "label": "✦ Atuação — aliados a até 10m: 1D na próxima rolagem (3 PM)",
@@ -280,7 +284,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -406,7 +411,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "simple",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

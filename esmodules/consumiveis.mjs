@@ -5,7 +5,8 @@
  * consumidos quando utilizados" (Sessão 17). O sistema não tem como gastar a
  * quantidade de um item numa ação, então o módulo faz isso nas ações
  * "(consumível)" que o Encantamento de Itens grava — ✦ Beber, ✦ Arremessar,
- * ✦ Aplicar, ✦ Usar —, as do compêndio Itens Mágicos incluídas:
+ * ✦ Aplicar, ✦ Usar —, as do compêndio Itens Mágicos incluídas, e nas do
+ * próprio livro marcadas como consumíveis (Remédio, Kit de Primeiros Socorros):
  *
  *   1. o clique no botão da ação, na ficha, marca o item;
  *   2. quando a ação chega ao chat — o sinal de que foi usada: cancelar a área
@@ -27,7 +28,9 @@ export const CONSUMO = { prazo: 120000, sossego: 1500 };
 export function acaoConsumivel(item, acao) {
   if (!item || item.type !== "equipamento" || !acao) return false;
   const receitas = item.flags?.[MODULE_ID]?.encantamentos ?? [];
-  if (!receitas.some((r) => r?.tipo !== "magia")) return false;
+  // Encantado como consumível, ou consumível do próprio livro (Remédio, Kit de
+  // Primeiros Socorros — "consumido quando utilizado").
+  if (!receitas.some((r) => r?.tipo !== "magia") && !item.flags?.[MODULE_ID]?.consumivel) return false;
   return /\(consumível\)\s*$/.test(String(acao.label ?? ""));
 }
 

@@ -89,7 +89,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "2"
+            "grantTempHp": "2",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -215,7 +216,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Força Repentina (B) — PV = Nível: 1D em Agilidade + 2 de sobrevida (cena)",
@@ -286,7 +290,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "2"
+            "grantTempHp": "2",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -412,7 +417,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Força Repentina (A) — PV = Nível: 2D em Força + 4 de sobrevida (cena)",
@@ -483,7 +491,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "4"
+            "grantTempHp": "4",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -609,7 +618,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Força Repentina (A) — PV = Nível: 2D em Agilidade + 4 de sobrevida (cena)",
@@ -680,7 +692,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "4"
+            "grantTempHp": "4",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -806,7 +819,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -821,7 +837,12 @@
     "mode": "passive",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

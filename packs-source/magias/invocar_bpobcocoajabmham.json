@@ -191,13 +191,19 @@
             "actorUuid": "",
             "actorName": "Criatura pequena, Desafio até 2× Nível — arraste a ficha abaixo",
             "count": "1",
+            "useGlobalCount": true,
+            "ownSheet": true,
+            "sustain": "movement",
             "disposition": "same",
             "rounds": "0",
             "giveControl": true,
             "hidden": false,
             "enabled": true
           }
-        ]
+        ],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       },
       {
         "label": "Invocar um objeto encantado (+1 nas rolagens com ele)",
@@ -268,7 +274,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "movement"
           }
         ],
         "lineWidth": "1.5",
@@ -394,7 +401,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
       }
     ],
     "enchantments": [],
@@ -416,7 +426,12 @@
         "label": "Círculo Menor",
         "level": "all"
       }
-    ]
+    ],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

@@ -17,7 +17,181 @@
     "description": "<p>Quando você nota uma ação que favoreça você e seu grupo, você sussurra rapidamente a palavra pluribus, distorcendo o espaço-tempo e fazendo com que a ação se repita.</p><p>Efeitos: Quando uma criatura dentro do alcance faz uma ação, você pode conjurar esta magia sobre ela, fazendo com que ela repita a ação que engatilhou esta magia. Caso a ação tenha algum custo, como pontos de magia, vida ou heróicos, você deve pagar por ela.</p><p>Conhecimento (Arcano) concede +1 em Conjuração para esta conjuração.</p>",
     "peculiarities": "<p>A criatura recebe +1 para rolagens da ação repetida (-2). A criatura recebe +2 para rolagens da ação repetida (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
-    "actions": [],
+    "actions": [
+      {
+        "label": "Replicar (reação — a criatura repete a ação que engatilhou a magia; você paga os custos dela)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "target",
+        "includeSelf": true,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "3*@nivel",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "5Ynz7HMx0dYV4JQN",
+          "label": "Replicar",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.magicsign.conjuration.02.yellow",
+            "nome": "Multiplicação"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "magicsign",
+              "animation": "conjuration",
+              "variant": "02",
+              "color": "yellow",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "default",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Replicar (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "reaction"
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,
@@ -37,7 +211,12 @@
         "label": "Círculo Menor",
         "level": "all"
       }
-    ]
+    ],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

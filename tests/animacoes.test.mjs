@@ -67,7 +67,7 @@ for (const f of arquivos) {
 }
 ok(total > 70 && foraDasSeguras.length === 0, `${total} animações no compêndio, todas do JB2A gratuito e do Patreon`);
 ok(comFlag.length === 0, 'nenhuma magia com flags.autoanimations');
-ok(semAcao > 0, `${semAcao} magias sem ações ficam sem animação (não há onde tocar)`);
+ok(semAcao === 0, `toda magia tem ação (${semAcao} sem): a economia de ações pede o que cada uma gasta`);
 
 console.log('3) O que você configurou fica');
 d = clone(carregar('raio-arcano'));
@@ -147,7 +147,7 @@ ok(a.aaConfig.meleeSwitch.options.switchType === 'custom' && a.aaConfig.meleeSwi
 ok(chave(doPack('equipamentos', 'Arco Longo').system.actions[0].aaConfig) === 'range.weapon.arrow.regular.regular', 'Arco Longo: flecha');
 ok(chave(doPack('equipamentos', 'Besta Pesada').system.actions[0].aaConfig) === 'range.weapon.bolt.physical.orange', 'Besta Pesada: virote');
 for (const nome of ['Bacamarte', 'Pistola', 'Rifle', 'Rifle de Cano Duplo']) {
-  const acoes = doPack('equipamentos', nome).system.actions;
+  const acoes = doPack('equipamentos', nome).system.actions.filter((x) => x.isWeapon);
   ok(acoes.length > 0 && acoes.every((x) => x.aaConfig?.menu === 'range' && chave(x.aaConfig) === 'range.weapon.bullet.1.orange'),
      `${nome}: tiro de bala em ${acoes.length === 1 ? 'seu ataque' : `todos os ${acoes.length} ataques`}`);
 }
@@ -171,7 +171,7 @@ ok(d.system.actions[0].aaConfig.meleeSwitch.options.switchType === 'custom'
 let semArma = [];
 for (const f of fs.readdirSync(`${raiz}/equipamentos`)) {
   const x = JSON.parse(fs.readFileSync(`${raiz}/equipamentos/${f}`, 'utf8'));
-  for (const y of x.system.actions ?? []) if (!y.aaConfig) semArma.push(`${x.name}: ${y.label}`);
+  for (const y of x.system.actions ?? []) if (y.isWeapon && !y.aaConfig) semArma.push(`${x.name}: ${y.label}`);
 }
 ok(semArma.length === 0, `toda ação de arma tem animação (${semArma.join('; ') || 'ok'})`);
 
@@ -225,12 +225,15 @@ const barb = doPack('vocacoes', 'Bárbaro').system.keySkills.find((k) => k.name 
 ok(chave(barb.system.actions[0].aaConfig) === 'static.energy.circle.complete.orange', 'a Fúria do Bárbaro já vem animada');
 const bruxo = doPack('vocacoes', 'Bruxo').system.keySkills.find((k) => /^Pacto/.test(k.name));
 ok(bruxo.system.actions.every((x) => x.aaConfig), 'chave genérica (Pacto [Único]) também animada');
-let compl = 0;
+let complSem = [];
 for (const f of fs.readdirSync(`${raiz}/complicacoes`)) {
   const x = JSON.parse(fs.readFileSync(`${raiz}/complicacoes/${f}`, 'utf8'));
-  compl += (x.system.actions ?? []).length;
+  if (!(x.system.actions ?? []).length) complSem.push(x.name);
 }
-ok(compl === 0, 'complicações não têm ações (efeitos permanentes): nada a animar');
+ok(complSem.length === 0, `toda complicação tem ação (rolagem, efeito colateral, aviso no chat)${complSem.length ? `: faltam ${complSem.join(', ')}` : ''}`);
+d = doPack('complicacoes', 'Efeito Colateral [ignis]');
+ok(d.system.actions[0].damageType === 'final' && d.system.actions[0].targetMode === 'self',
+   'Efeito Colateral [ignis]: 1 de dano final em você');
 
 console.log(falhas ? `\n${falhas} FALHA(S)` : '\nTodos os testes passaram.');
 process.exit(falhas ? 1 : 0);

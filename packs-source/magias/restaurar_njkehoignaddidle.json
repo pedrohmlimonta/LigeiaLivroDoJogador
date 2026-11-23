@@ -17,7 +17,181 @@
     "description": "<p>Enquanto pronuncia a palavra vitae, você toca o solo em direção aos seus aliados, entrando em conexão com os mesmos e fazendo com que sua magia restaure suas condições físicas ou mentais.</p><p>Efeitos: Você determina um tipo de condição física ou mental que esteja afetando um ou mais dos alvos. Essa condição é finalizada imediatamente.</p><p>Medicina concede +1 em Conjuração para esta conjuração.</p>",
     "peculiarities": "<p>Determine dois tipos de condições diferentes (apenas Círculo Intermediário ou Maior) (-4). Finaliza todas as condições negativas (apenas Círculo Maior) (-8). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
-    "actions": [],
+    "actions": [
+      {
+        "label": "Restaurar (aliados na área — encerre uma condição física ou mental à sua escolha)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": true,
+        "areaFilter": "allies",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "3*@nivel",
+        "area": "@nivel",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "EEE1UOucrxuOmObz",
+          "label": "Restaurar",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.curewounds.01.blue",
+            "nome": "Vida"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "curewounds",
+              "variant": "01",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "default",
+              "size": 1.25,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Restaurar (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,
@@ -37,7 +211,12 @@
         "label": "Círculo Menor",
         "level": "all"
       }
-    ]
+    ],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

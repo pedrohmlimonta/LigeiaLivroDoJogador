@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -188,9 +191,26 @@
         "enchant": false,
         "level": "A",
         "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Detectar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Alerta: +1 em Conjuração de Detectar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

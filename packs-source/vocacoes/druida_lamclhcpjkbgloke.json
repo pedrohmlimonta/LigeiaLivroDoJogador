@@ -152,7 +152,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -278,7 +279,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "simple"
             },
             {
               "label": "Forma Animal (1 PM, cena) — forma com 1D em Agilidade",
@@ -349,7 +353,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -475,7 +480,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "simple"
             },
             {
               "label": "Benefício (A): 1D em Percepção",
@@ -546,7 +554,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -586,7 +595,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Benefício (A): +3m de Deslocamento",
@@ -657,7 +669,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -697,7 +710,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Benefício (A): Proteção 2 (corte/perfuração/concussão)",
@@ -768,7 +784,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Forma Animal (A): RD 2 perfuracao",
@@ -794,7 +811,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Forma Animal (A): RD 2 concussao",
@@ -820,7 +838,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -860,7 +879,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Benefício (A): +2 nos ataques",
@@ -931,7 +953,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -971,7 +994,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             }
           ],
           "enchantments": [],
@@ -986,7 +1012,12 @@
           "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": []
+          "costs": [],
+          "actionCost": "none",
+          "sustain": {
+            "enabled": false,
+            "action": "simple"
+          }
         },
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.habilidades.Item.fnbogacnanjffbjp"
       }

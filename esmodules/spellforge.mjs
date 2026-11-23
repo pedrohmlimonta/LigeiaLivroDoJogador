@@ -78,7 +78,7 @@ export const METAMAGIAS = {
       desc: "Mente oposta à Conjuração ou Abalado até o fim da cena (Mente anula)." },
     { name: "Magia Atordoante", lvl: "Avançada", kind: "condition", cond: "atordoado", resist: "mente",
       desc: "Mente oposta à Conjuração ou Atordoado até o fim da cena (Mente anula)." },
-    { name: "Magia Dominadora", lvl: "Avançada", kind: "condition", cond: "dominado", resist: "mente",
+    { name: "Magia Dominadora", lvl: "Avançada", kind: "condition", cond: "dominado", resist: "mente", sustenta: "simple",
       desc: "Mente oposta à Conjuração ou Dominado enquanto sustentado por ação rápida (Mente anula)." },
     { name: "Magia Estonteante", lvl: "Básica", kind: "condition", cond: "pasmo", resist: "mente",
       desc: "Mente oposta à Conjuração ou Pasmo até o fim da cena (Mente anula)." },
@@ -196,8 +196,8 @@ export const METAMAGIAS = {
   saeculorum: [
     { name: "Magia Duradoura", lvl: "Básica", kind: "other",
       desc: "Prolonga a duração (turno→rodada; rodada→cena; cena→hora; hora→dia...)." },
-    { name: "Magia Acelerada", lvl: "Básica", kind: "other",
-      desc: "Reduz o tempo de conjuração (hora→cena; cena→rodada; rodada→ação; ação→rápida...)." },
+    { name: "Magia Acelerada", lvl: "Básica", kind: "acelerada",
+      desc: "Reduz o tempo de conjuração (hora→cena; cena→rodada; rodada→ação; ação→rápida...). Saindo em ação rápida, você pode escolher conjurá-la como reação." },
   ],
   sangon: [
     { name: "Magia Alquímica", lvl: "Básica", kind: "other",
@@ -257,11 +257,98 @@ export const METAMAGIAS = {
   ],
 };
 
-const TIERS = {
-  "Menor": { circ: 1, pm: 1 },
-  "Intermediária": { circ: 2, pm: 2 },
-  "Maior": { circ: 3, pm: 3 },
+/**
+ * Círculos da magia. As LENDÁRIAS têm 4 ou 5 palavras arcanas (4 ou 5 PM) e
+ * aplicam metamagias como as Intermediárias e Maiores — uma por palavra
+ * além da primeira. No sistema elas ficam como Círculo Maior (o schema só
+ * conhece três círculos e três palavras); as palavras 4 e 5 e o nível
+ * lendário ficam na receita (flags) e na descrição. `efetivo` é o círculo
+ * do livro que vale para as peculiaridades e os aprimoramentos "(apenas
+ * Círculo Maior)".
+ */
+export const TIERS = {
+  "Menor": { circ: 1, pm: 1, efetivo: "Menor" },
+  "Intermediária": { circ: 2, pm: 2, efetivo: "Intermediária" },
+  "Maior": { circ: 3, pm: 3, efetivo: "Maior" },
+  "Lendária (4 palavras)": { circ: 4, pm: 4, efetivo: "Maior", lendaria: 4 },
+  "Lendária (5 palavras)": { circ: 5, pm: 5, efetivo: "Maior", lendaria: 5 },
 };
+
+/** O círculo do livro que vale para um círculo da oficina (Lendária → Maior). */
+export const tierEfetivo = (tier) => TIERS[tier]?.efetivo ?? tier;
+
+/** Mais palavras do que isso, nenhuma magia aguenta. */
+export const MAX_PALAVRAS = 5;
+
+/* ------------------------------------------------------------------ */
+/*  Tempo de conjuração e economia de ações (sistema build 31)         */
+/* ------------------------------------------------------------------ */
+
+const normal = (t) => semAcento(String(t ?? "")).trim();
+
+/** A ação da rodada que o tempo de conjuração gasta ("Ação Rápida" → simples). */
+export function custoDaConjuracao(casting) {
+  const t = normal(casting);
+  if (/^acao (rapida|simples)/.test(t)) return "simple";
+  if (/^reacao/.test(t)) return "reaction";
+  if (/^movimento/.test(t)) return "movement";
+  if (/^acao livre/.test(t)) return "free";
+  if (/^acao/.test(t)) return "standard";
+  if (/^rodada/.test(t)) return "standard";
+  return "none"; // cena, hora, ritual
+}
+
+/**
+ * Magia Acelerada: um passo a menos no tempo de conjuração (hora → cena;
+ * cena → rodada; rodada → ação; ação/movimento → ação rápida). A ação
+ * rápida é o mínimo.
+ */
+export function acelerar(casting) {
+  const t = normal(casting);
+  if (/^(uma )?hora/.test(t)) return "Cena";
+  if (/^cena/.test(t)) return "Rodada completa";
+  if (/^rodada/.test(t)) return "Ação";
+  if (/^acao (rapida|simples)/.test(t) || /^reacao/.test(t)) return casting;
+  if (/^(acao|movimento)/.test(t)) return "Ação Rápida";
+  return casting;
+}
+
+/** Sustentável/Sustentação — X: a ação por turno para a magia ficar ("none" se não é). */
+export function custoDeSustentar(duracao) {
+  const m = normal(duracao).match(/^sustent(?:avel|acao)\s*[—-]\s*(.+)$/);
+  if (!m) return "none";
+  return custoDaConjuracao(m[1]);
+}
+
+/**
+ * Marca o que as ações deixam de pé como sustentado por `custo`:
+ *   área/aura persistente → a área (até o fim da cena, enquanto sustentada);
+ *   criaturas → as criaturas;
+ *   senão, os efeitos postos nos alvos — os de uma mesma ação com o MESMO
+ *   rótulo, porque o sistema faz um vínculo por rótulo (dois rótulos seriam
+ *   duas ações por turno para sustentar uma magia só).
+ */
+export function sustentarAcoes(acoes, custo) {
+  if (!custo || custo === "none") return;
+  for (const a of acoes ?? []) {
+    if (a.persistArea) {
+      a.persistSustain = custo;
+      a.persistRounds = "0";
+      continue;
+    }
+    if (a.summons?.length) {
+      for (const x of a.summons) { x.sustain = custo; x.rounds = "0"; }
+      continue;
+    }
+    const aps = a.appliesEffects ?? [];
+    if (!aps.length) continue;
+    if (aps.length > 1) {
+      const junto = [...new Set(aps.map((e) => e.label).filter(Boolean))].join(" · ");
+      for (const e of aps) e.label = junto;
+    }
+    for (const e of aps) { e.fxSustain = custo; e.durationMode = "scene"; }
+  }
+}
 
 export const DTYPES = {
   acido: "Ácido", concussao: "Concussão", corte: "Corte", energia: "Energia",
@@ -575,6 +662,8 @@ export function novoApplies(label, extra = {}) {
     tickHealAmount: "0", tickHealResource: "hp",
     fxFile: "", fxScale: "1", fxAaConfig: null, fxAaName: "", fxAaPersist: true,
     fxEnchant: false, grantTempHp: "0",
+    // Build 31: ação que quem conjurou paga por turno para o efeito ficar.
+    fxSustain: "none",
   }, extra);
 }
 
@@ -606,7 +695,10 @@ export function custoEscolhido(cfg = {}) {
 export function novaInvocacao(actorName = "", extra = {}) {
   return {
     actorUuid: "", actorName, count: "1", disposition: "same", rounds: "0",
-    giveControl: true, hidden: false, enabled: true, ...extra,
+    giveControl: true, hidden: false, enabled: true,
+    // Build 31: segue o número geral da ação, ganha ficha própria e pode
+    // pedir uma ação por turno para ficar.
+    useGlobalCount: true, ownSheet: true, sustain: "none", ...extra,
   };
 }
 
@@ -638,6 +730,9 @@ export function novaAcao(label, extra = {}) {
     persistRerollAttack: false, persistTrigger: "both",
     // Build 30: custo escolhido na ativação (@gasto) e criaturas invocadas.
     variableCost: { ...CUSTO_ESCOLHIDO_PADRAO }, summons: [],
+    // Build 31: a ação da rodada que ela gasta, quantas criaturas o cardápio
+    // conjura e a sustentação da emanação.
+    actionCost: "none", summonCount: "1", persistSustain: "none",
   }, extra);
   a.variableCost = { ...CUSTO_ESCOLHIDO_PADRAO, ...(a.variableCost ?? {}) };
   a.summons = (a.summons ?? []).map((x) => ({ ...novaInvocacao(), ...x }));
@@ -802,9 +897,15 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
         durationRounds: String(meta.rounds ?? 1),
         resist: true, resistAttr: meta.resist || "vigor",
         tickAmount: meta.tickType ? "1" : "0", tickType: meta.tickType ?? "",
+        // Dominadora: "enquanto sustentado por ação rápida".
+        fxSustain: meta.sustenta ?? "none",
       }));
       break;
     }
+    case "acelerada":
+      // O tempo de conjuração é refeito no fim (construirMagia), um passo por aplicação.
+      data._aceleradas = (data._aceleradas ?? 0) + 1;
+      break;
     case "selfcond": {
       garantirInicial();
       const sub = subAcao(`${meta.name} (você): fica ${ROTULO_COND[meta.cond] ?? meta.cond} até o fim da cena`, {
@@ -1036,7 +1137,10 @@ export function aplicarMetamagia(data, meta, circ, escolha = {}) {
       // Replicante numa magia que invoca: "tudo o que sua magia cria ou
       // invoca é duplicado" — a mesma conjuração põe o dobro de criaturas no
       // mapa (cada uma onde você escolher).
-      const invocou = !multipla && dobrarInvocacoes(iniciais);
+      // A Múltipla numa magia que invoca: o dobro de criaturas (aplicada
+      // duas vezes, o triplo) — o número geral do cardápio cresce.
+      const invocou = multipla ? multiplicarInvocacoes(iniciais) : dobrarInvocacoes(iniciais);
+      if (multipla && invocou && !iniciais.some((a) => a.targetMode === "target")) break;
       const servem = multipla
         ? iniciais.filter((a) => a.targetMode === "target")
         : [...iniciais.filter((a) => a.targetMode === "target" || deArea(a)),
@@ -1117,6 +1221,10 @@ function copiarAcao(a) {
   c.costMp = "0";
   c.variableCost = { ...CUSTO_ESCOLHIDO_PADRAO, ...(c.variableCost ?? {}), enabled: false };
   c.summons = [];
+  // Dispara em cadeia: a ação da rodada e a sustentação são da original.
+  c.actionCost = "none";
+  c.persistSustain = "none";
+  for (const e of c.appliesEffects ?? []) e.fxSustain = "none";
   c._interna = true;
   c._copiaDe = a; // a animação da cópia é a da original (construirMagia)
   return c;
@@ -1166,14 +1274,46 @@ export function invocaCriatura(item) {
   return invocacoesDe(item?.system?.actions).length > 0;
 }
 
-/** Dobra a quantidade das criaturas invocadas (Replicante). @returns {boolean} alguma? */
+const dobro = (f) => { const n = String(f ?? "").trim() || "1"; return /^\d+$/.test(n) ? String(2 * Number(n)) : `2*(${n})`; };
+
+/**
+ * Dobra a quantidade das criaturas invocadas (Replicante): o número geral da
+ * ação e o próprio das que não o seguem. @returns {boolean} alguma?
+ */
 function dobrarInvocacoes(acoes) {
-  const lista = invocacoesDe(acoes);
-  for (const x of lista) {
-    const n = String(x.count ?? "").trim() || "1";
-    x.count = /^\d+$/.test(n) ? String(2 * Number(n)) : `2*(${n})`;
+  let alguma = false;
+  for (const a of acoes ?? []) {
+    const lista = (a.summons ?? []).filter((x) => x && x.enabled !== false);
+    if (!lista.length) continue;
+    alguma = true;
+    a.summonCount = dobro(a.summonCount);
+    for (const x of lista) if (x.useGlobalCount === false) x.count = dobro(x.count);
   }
-  return lista.length > 0;
+  return alguma;
+}
+
+/**
+ * Múltipla nas invocações: o dobro de criaturas por conjuração (duas vezes,
+ * o triplo — soma a base, não dobra o dobrado). @returns {boolean} alguma?
+ */
+function multiplicarInvocacoes(acoes) {
+  let alguma = false;
+  for (const a of acoes ?? []) {
+    const lista = (a.summons ?? []).filter((x) => x && x.enabled !== false);
+    if (!lista.length) continue;
+    alguma = true;
+    a._contagemBase ??= String(a.summonCount ?? "1").trim() || "1";
+    a._multiplas = (a._multiplas ?? 1) + 1;
+    a.summonCount = /^\d+$/.test(a._contagemBase) ? String(a._multiplas * Number(a._contagemBase))
+      : `${a._multiplas}*(${a._contagemBase})`;
+    for (const x of lista) {
+      if (x.useGlobalCount !== false) continue;
+      x._contagemBase ??= String(x.count ?? "1").trim() || "1";
+      x.count = /^\d+$/.test(x._contagemBase) ? String(a._multiplas * Number(x._contagemBase))
+        : `${a._multiplas}*(${x._contagemBase})`;
+    }
+  }
+  return alguma;
 }
 
 /** Tamanhos do livro, do menor ao maior (no feminino: "criatura", "fera", "planta"). */
@@ -1221,36 +1361,79 @@ export function nomeDaInvocacao(nome, mud) {
 /**
  * Ajusta as criaturas que a magia invoca ao que ela ficou sendo — o marcador
  * diz o tamanho e o Desafio certos; "não é amigável a ninguém" vira atitude
- * hostil, sem o controle do token — e põe nelas a ficha escolhida na oficina.
+ * hostil, sem o controle do token — e monta o CARDÁPIO com as fichas
+ * escolhidas na oficina: cada uma vira uma entrada no lugar do marcador (com a
+ * atitude, a duração e a sustentação dele) e segue o número geral da ação.
+ * Ao usar a ação o sistema pergunta qual delas conjurar.
+ *
+ * @param {object[]} criaturas  [{ uuid, name }] (aceita uma só, como objeto)
  */
-function ajustarInvocacoes(data, mud, criatura) {
-  const lista = invocacoesDe(data.system.actions);
-  for (const x of lista) {
-    x._requisito = nomeDaInvocacao(x.actorName, mud).replace(/\s+—\s+arraste a ficha.*$/i, "");
-    if (!x.actorUuid) x.actorName = nomeDaInvocacao(x.actorName, mud);
-    if (mud.hostil) { x.disposition = "hostile"; x.giveControl = false; }
-    if (criatura?.uuid && !x.actorUuid) {
-      x.actorUuid = criatura.uuid;
-      x.actorName = criatura.name || x.actorName;
+function ajustarInvocacoes(data, mud, criaturas) {
+  const fichas = (Array.isArray(criaturas) ? criaturas : criaturas ? [criaturas] : [])
+    .filter((c) => c?.uuid)
+    .filter((c, i, l) => l.findIndex((o) => o.uuid === c.uuid) === i);
+  for (const a of data.system.actions) {
+    const lista = (a.summons ?? []).filter((x) => x && x.enabled !== false);
+    if (!lista.length) continue;
+    for (const x of lista) {
+      x._requisito = nomeDaInvocacao(x.actorName, mud).replace(/\s+—\s+arraste a ficha.*$/i, "");
+      if (!x.actorUuid) x.actorName = nomeDaInvocacao(x.actorName, mud);
+      if (mud.hostil) { x.disposition = "hostile"; x.giveControl = false; }
     }
+    if (!fichas.length) continue;
+    // O primeiro marcador ligado é o molde das entradas do cardápio.
+    const k = a.summons.findIndex((x) => x && x.enabled !== false && !x.actorUuid);
+    if (k < 0) continue;
+    const molde = a.summons[k];
+    const entradas = fichas.map((c) => ({ ...molde, actorUuid: c.uuid, actorName: c.name || molde.actorName,
+      useGlobalCount: true }));
+    a.summons.splice(k, 1, ...entradas);
   }
-  return lista;
+  return invocacoesDe(data.system.actions);
 }
 
-/** Linha da descrição com o que a magia invoca. */
-function descreverInvocacoes(lista) {
-  return lista.map((x) => {
-    const n = String(x.count ?? "1").trim();
-    const quantas = n && n !== "1" ? `${formulaCurta(n)} × ` : "";
-    const ficha = x.actorUuid ? ` — ficha: ${x.actorName}` : " — arraste a ficha da criatura para a ação, no item";
-    const lado = x.disposition === "hostile" ? " (hostil a todos, fora do seu controle)" : "";
-    return `${quantas}${x._requisito || x.actorName}${lado}${ficha}`;
-  }).join("; ");
+/** Linha da descrição com o que a magia invoca: o cardápio e quantas por conjuração. */
+function descreverInvocacoes(lista, acoes = []) {
+  const geral = acoes.find((a) => (a.summons ?? []).length)?.summonCount ?? "1";
+  const fichas = lista.filter((x) => x.actorUuid);
+  const marcadores = lista.filter((x) => !x.actorUuid);
+  const quantas = (x) => {
+    const n = String(x.useGlobalCount === false ? x.count : geral ?? "1").trim();
+    return n && n !== "1" ? `${formulaCurta(n)} × ` : "";
+  };
+  const lado = (x) => (x.disposition === "hostile" ? " (hostil a todos, fora do seu controle)" : "");
+  const partes = [];
+  if (fichas.length) {
+    const req = fichas[0]._requisito ? ` (${fichas[0]._requisito})` : "";
+    partes.push(`${fichas.length > 1 ? "cardápio — escolha na hora qual conjurar" : "ficha"}: ${
+      fichas.map((x) => `${quantas(x)}${x.actorName}${lado(x)}`).join(", ")}${req}`);
+  }
+  for (const x of marcadores) {
+    partes.push(`${quantas(x)}${x._requisito || x.actorName}${lado(x)} — arraste a ficha da criatura para a ação, no item`);
+  }
+  return partes.join("; ");
 }
 
 /* ------------------------------------------------------------------ */
 /*  Construção do item final                                           */
 /* ------------------------------------------------------------------ */
+
+/**
+ * As palavras, metamagias e escolhas da oficina em listas (índice 0 = 1ª
+ * palavra). Aceita o formato antigo (palavra1..3, meta2/meta3, escolha2/3) e
+ * o das lendárias (até palavra5/meta5/escolha5).
+ */
+export function palavrasDaReceita(state, circ) {
+  const palavras = [];
+  const metas = [];
+  const escolhas = [];
+  for (let n = 1; n <= Math.min(MAX_PALAVRAS, circ); n++) {
+    palavras.push(state[`palavra${n}`] || "");
+    metas.push(n >= 2 ? (state[`meta${n}`] ?? null) : null);
+    escolhas.push(n >= 2 ? (state[`escolha${n}`] ?? {}) : {});
+  }
+  return { palavras, metas, escolhas };
+}
 
 /**
  * Monta os dados do item da magia criada.
@@ -1261,50 +1444,61 @@ function descreverInvocacoes(lista) {
  *   instalado? (padrão: consulta a base do Sequencer)
  */
 export async function construirMagia(state, { animar = true, existe = null } = {}) {
-  const { base, tier, nome, palavra1, palavra2, palavra3,
-          pecs, ajuste, meta2, meta3 } = state;
-  const escolha2 = state.escolha2 ?? {};
-  const escolha3 = state.escolha3 ?? {};
-  const { circ, pm } = TIERS[tier];
+  const { base, tier, nome, pecs, ajuste } = state;
+  const T = TIERS[tier];
+  if (!T) throw new Error(`Círculo desconhecido: ${tier}`);
+  const { circ, pm } = T;
+  const efetivo = T.efetivo;
+  const { palavras: W, metas: M, escolhas: E } = palavrasDaReceita(state, circ);
+  const palavra1 = W[0];
   const data = base.toObject();
   const idDaBase = data._id ?? base.id ?? "";
   delete data._id;
   data.name = nome || `${base.name} (${tier})`;
-  data.system.tier = tier;
+  // O schema só conhece três círculos e três palavras: a lendária fica Maior.
+  data.system.tier = efetivo;
   data.system.wordId = palavra1;
-  data.system.wordId2 = circ >= 2 ? (palavra2 || "") : "";
-  data.system.wordId3 = circ >= 3 ? (palavra3 || "") : "";
+  data.system.wordId2 = circ >= 2 ? (W[1] || "") : "";
+  data.system.wordId3 = circ >= 3 ? (W[2] || "") : "";
   data.system.metamagics = [];
-  if (circ >= 2 && meta2) data.system.metamagics.push({
-    name: meta2.name, wordId: palavra2, description: meta2.desc });
-  if (circ >= 3 && meta3) data.system.metamagics.push({
-    name: meta3.name, wordId: palavra3, description: meta3.desc });
+  for (let k = 1; k < W.length; k++) {
+    if (M[k]) data.system.metamagics.push({ name: M[k].name, wordId: W[k], description: M[k].desc });
+  }
 
   // 1) Alcance/área acompanham o círculo ("5m x Círculo x Nível").
   escalarCirculo(data, circ);
   // 2) Aprimoramentos gratuitos "(-)" do círculo (dano +2/+3, cura, RD...).
-  const aprimorados = aplicarAprimoramentos(data, parseAprimoramentos(base), tier);
+  const aprimorados = aplicarAprimoramentos(data, parseAprimoramentos(base), efetivo);
   // 3) Só valem as peculiaridades permitidas no círculo escolhido.
-  const pecsValidas = pecs.filter((p) => !p.circulos || p.circulos.has(tier));
+  const pecsValidas = pecs.filter((p) => !p.circulos || p.circulos.has(efetivo));
 
   // Peculiaridade "Alcance (Toque)": a magia passa a ser de toque.
   if (pecsValidas.some((p) => /^alcance \(toque\)/.test(semAcento(p.texto)))) {
     for (const a of acoesOfensivas(data)) { a.range = ""; a.isMelee = true; }
   }
 
-  // Peculiaridades: soma entra como bônus fixo nas rolagens das ações
+  // Peculiaridades: soma entra como bônus fixo nas rolagens das ações. As
+  // habilidades que a base cita ("Carisma concede +1 em Conjuração para esta
+  // conjuração") e o conjurador tem também: no compêndio esse +1 mora na
+  // habilidade, mirado no nome da magia — a criada tem outro nome.
   const delta = pecsValidas.reduce((s, p) => s + p.mod, 0) + (Number(ajuste) || 0);
+  // Com o mesmo nome da base, o efeito da habilidade ("item:<magia>") já
+  // casa com ela — somar aqui contaria duas vezes.
+  const mesmoNome = semAcento(data.name) === semAcento(base.name);
+  const bonusHab = mesmoNome ? [] : (state.bonusHabilidades ?? []).filter((b) => b?.nome);
+  const deltaHab = bonusHab.reduce((t, b) => t + (Number(b.bonus) || 0), 0);
+  const somaRolagem = delta + deltaHab;
   let temRolagem = false;
   for (const a of data.system.actions) {
     if (a.canRoll) {
       temRolagem = true;
       const atual = Number(a.rollBonus || 0);
-      a.rollBonus = Number.isFinite(atual) ? String(atual + delta)
-                                           : `${a.rollBonus}+${delta}`;
+      a.rollBonus = Number.isFinite(atual) ? String(atual + somaRolagem)
+                                           : `${a.rollBonus}+${somaRolagem}`;
     }
   }
-  if (delta !== 0 && !temRolagem && data.system.actions[0]) {
-    data.system.actions[0].rollBonus = String(delta);
+  if (somaRolagem !== 0 && !temRolagem && data.system.actions[0]) {
+    data.system.actions[0].rollBonus = String(somaRolagem);
   }
 
   // Custo de PM do círculo
@@ -1317,13 +1511,12 @@ export async function construirMagia(state, { animar = true, existe = null } = {
     if (alvo) alvo.costMp = String(pm);
   }
 
-  // Metamagias — a da 3ª palavra é aplicada DEPOIS (prevalece em conflito).
-  // Palavras podem se repetir (ignis + majesto + majesto). A mesma metamagia
-  // duas vezes vale o que o livro diz para a Magia Múltipla: área/alcance
-  // triplicam (não dobram o dobrado); condições, efeitos em cadeia e o efeito
-  // em você não se aplicam duas vezes.
-  const repetida = circ >= 3 && meta2 && meta3 && meta2.name === meta3.name;
-  // (A Múltipla duas vezes vale: o triplo de alvos.)
+  // Metamagias — a da última palavra é aplicada DEPOIS (prevalece em
+  // conflito). Palavras podem se repetir (ignis + majesto + majesto). A mesma
+  // metamagia mais de uma vez vale o que o livro diz para a Magia Múltipla:
+  // área/alcance/alvos somam a base (duas vezes, o triplo; três, o quádruplo),
+  // não dobram o dobrado; condições, efeitos em cadeia e o efeito em você não
+  // se aplicam de novo.
   const UMA_VEZ = ["condition", "selfcond", "buff", "planar", "eterea", "restauradora", "marcador",
                    "telecinetica", "invisivel", "vampirica", "potencializada", "replicante"];
   const avisos = [];
@@ -1336,14 +1529,20 @@ export async function construirMagia(state, { animar = true, existe = null } = {
     for (const a of data.system.actions) if (!antes.has(a)) a._palavra = palavra;
   };
   const fila = [];
-  if (circ >= 2 && meta2) fila.push([meta2, palavra2, escolha2]);
-  if (circ >= 3 && meta3 && !(repetida && UMA_VEZ.includes(meta3.kind))) fila.push([meta3, palavra3, escolha3]);
-  // Ordem de aplicação: primeiro as de dano (entre elas, a da 3ª palavra
+  const vezes = new Map();
+  for (let k = 1; k < W.length; k++) {
+    const meta = M[k];
+    if (!meta) continue;
+    const n = (vezes.get(meta.name) ?? 0) + 1;
+    vezes.set(meta.name, n);
+    if (n > 1 && UMA_VEZ.includes(meta.kind)) continue;
+    fila.push([meta, W[k], E[k]]);
+  }
+  // Ordem de aplicação: primeiro as de dano (entre elas, a da última palavra
   // continua prevalecendo), depois as que dão à magia um ataque contra alvos,
   // depois as demais e por fim as que copiam a ação (Múltipla, Replicante) —
   // assim a Vampírica e a Potencializada já encontram o dano, a Invisível a
   // rolagem contra a defesa, e a cópia leva tudo o que a ação ficou fazendo.
-  // A Múltipla e a Replicante copiam a ação pronta, então vêm por último.
   // A forma e o alcance (Ampliada, Dimensional, Vórtica — entre elas, na
   // ordem das palavras) vêm logo depois do dano: os efeitos das outras já
   // nascem com o alcance certo, no alvo certo.
@@ -1355,6 +1554,8 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   for (const [m, p, e] of fila) aplicar(m, p, e);
   for (const a of data.system.actions) {
     delete a._areaBase; delete a._ampliada; delete a._alcanceBase; delete a._dimensional; delete a._rotuloDim;
+    delete a._contagemBase; delete a._multiplas;
+    for (const x of a.summons ?? []) delete x._contagemBase;
   }
 
   // "O conjurador perde 1 ponto de vida quando a conjura": 1 PV a mais no
@@ -1367,18 +1568,63 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   }
 
   // Criaturas invocadas: tamanho, Desafio e atitude pelas peculiaridades e
-  // pela Majestosa; a ficha escolhida na oficina, se houver.
-  const mudancas = mudancasDaInvocacao(pecsValidas, {
-    circ, metas: [circ >= 2 ? meta2 : null, circ >= 3 ? meta3 : null],
-  });
-  const invocadas = ajustarInvocacoes(data, mudancas, state.criatura);
-  const linhaInvoca = invocadas.length ? descreverInvocacoes(invocadas) : "";
+  // pela Majestosa; o cardápio com as fichas escolhidas na oficina.
+  const mudancas = mudancasDaInvocacao(pecsValidas, { circ, metas: M.filter(Boolean) });
+  const invocadas = ajustarInvocacoes(data, mudancas, state.criaturas ?? state.criatura);
+  const linhaInvoca = invocadas.length ? descreverInvocacoes(invocadas, data.system.actions) : "";
   for (const x of invocadas) delete x._requisito;
 
   // Peculiaridade do Toque Vampírico: "o dano escalonado recupera seus pontos
   // de magia, em vez dos pontos de vida" — o dreno passa a devolver PM.
   if (pecsValidas.some((p) => /recupera seus pontos de magia, em vez dos pontos de vida/.test(semAcento(p.texto)))) {
     for (const a of data.system.actions) if (a.drain?.enabled) a.drain.resource = "mp";
+  }
+
+  // ECONOMIA DE AÇÕES (sistema build 31). O tempo de conjuração — a Magia
+  // Acelerada tira um passo a cada aplicação; saindo em ação rápida, a magia
+  // pode ser conjurada como reação, se o jogador quis — vira a ação que cada
+  // conjuração gasta. O que ela dispara sozinha (↳, cópias) não gasta de novo.
+  const castingBase = data.system.casting || "Ação";
+  let casting = castingBase;
+  for (let i = 0; i < (data._aceleradas ?? 0); i++) casting = acelerar(casting);
+  const rapida = custoDaConjuracao(casting) === "simple";
+  const comoReacao = !!state.reacao && rapida;
+  if (comoReacao) casting = "Reação";
+  data.system.casting = casting;
+  const custoAcao = custoDaConjuracao(casting);
+  // Internas: as que a magia dispara sozinha — sub-ações e cópias das
+  // metamagias e as que a própria base já dispara (em cadeia ou antes).
+  const disparadas = new Set();
+  for (const a of data.system.actions) {
+    for (const sub of a._antes ?? []) disparadas.add(sub);
+    for (const elo of a._cadeia ?? []) disparadas.add(elo.alvo);
+    for (const r of [...(a.chainActions ?? []), ...(a.preActivations ?? [])]) {
+      const partes = String(r?.ref ?? "").split("|");
+      if (partes[0] === "action" && data.system.actions[Number(partes[2])]) disparadas.add(data.system.actions[Number(partes[2])]);
+    }
+  }
+  const internas = new Set(data.system.actions.filter((a) => a._interna || a._copiaDe || disparadas.has(a)));
+  for (const a of data.system.actions) a.actionCost = internas.has(a) ? "none" : custoAcao;
+  delete data._aceleradas;
+
+  // SUSTENTAÇÃO: a da base ("Sustentável — Ação Rápida") ou a de uma
+  // peculiaridade escolhida ("Sustentável — Movimento (apenas Círculo
+  // Intermediário ou Maior)"); o que a magia deixa de pé passa a cobrar a
+  // ação a cada turno de quem conjurou.
+  let custoSustentar = custoDeSustentar(data.system.duration);
+  const pecSustenta = pecsValidas.map((p) => semAcento(p.texto).match(/^sustentavel\s*[—-]\s*([a-z ]+?)(?:\s*\(|$)/))
+    .filter(Boolean).map((m) => custoDaConjuracao(m[1])).filter((c) => c !== "none");
+  if (pecSustenta.length) {
+    const ordem = ["free", "simple", "movement", "standard"];
+    custoSustentar = pecSustenta.sort((a, b) => ordem.indexOf(a) - ordem.indexOf(b))[0];
+    data.system.duration = `Sustentável — ${{ simple: "Ação Rápida", movement: "Movimento", standard: "Ação", free: "Ação Livre" }[custoSustentar]}`;
+  }
+  if (custoSustentar !== "none") {
+    sustentarAcoes(data.system.actions.filter((a) => !internas.has(a)), custoSustentar);
+  }
+  for (const a of internas) {
+    a.persistSustain = "none";
+    for (const e of a.appliesEffects ?? []) e.fxSustain = "none";
   }
 
   delete data._dimensional;
@@ -1404,17 +1650,25 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   normalizarAutoRefs(data, { id: data._id, nome: data.name, ids: [idDaBase], nomes: [base.name] });
 
   // Receita na descrição
+  const metasUsadas = W.map((p, k) => (k >= 1 && M[k] ? { meta: M[k], palavra: p, escolha: E[k], k } : null)).filter(Boolean);
   const linhasPec = pecsValidas.map((p) => `<li>${esc(p.texto)} (${p.mod >= 0 ? "+" : ""}${p.mod})</li>`).join("");
   const linhasApr = aprimorados.map((a) => `<li>${esc(a.texto)}${a.tipo ? "" : " <em>(aplique manualmente)</em>"}</li>`).join("");
-  const metas = data.system.metamagics.map((m, i) =>
-    `<li><strong>${esc(m.name)}</strong> (${esc(m.wordId)}): ${esc(m.description)}${
-      repetida && i === 1 ? " <em>— aplicada pela segunda vez (área/alcance/alvos triplicam; não dobram o dobrado)</em>" : ""}</li>`).join("");
-  const palavras = [palavra1, circ >= 2 ? palavra2 : null, circ >= 3 ? palavra3 : null].filter(Boolean);
+  const contagem = new Map();
+  const metas = metasUsadas.map(({ meta, palavra }) => {
+    const n = (contagem.get(meta.name) ?? 0) + 1;
+    contagem.set(meta.name, n);
+    const nota = n > 1
+      ? (UMA_VEZ.includes(meta.kind) ? ` <em>— de novo: não se aplica duas vezes</em>`
+        : ` <em>— aplicada pela ${n}ª vez (área/alcance/alvos somam a base: ${n + 1}×)</em>`)
+      : "";
+    return `<li><strong>${esc(meta.name)}</strong> (${esc(palavra)}): ${esc(meta.desc)}${nota}</li>`;
+  }).join("");
+  const palavras = W.filter(Boolean);
   // Dano no formato do livro: "+N" é escalonado; sem o "+", fixo.
   const principal = data.system.actions.find((a) => causaDanoDeVida(a));
   let linhaDano = "";
   if (principal) {
-    const metaDano = [circ >= 3 ? meta3 : null, circ >= 2 ? meta2 : null].find((m) => m?.kind === "damage");
+    const metaDano = [...metasUsadas].reverse().map((x) => x.meta).find((m) => m?.kind === "damage");
     const valor = esc(principal.damage);
     if (principal.damageType === "final") {
       const elem = metaDano ? ` de ${DTYPES[metaDano.dtype]}` : "";
@@ -1425,14 +1679,23 @@ export async function construirMagia(state, { animar = true, existe = null } = {
     }
   }
   const comoFunciona = descreverCadeias(data);
-  const escolhas = [[meta2, escolha2, circ >= 2], [meta3, escolha3, circ >= 3]]
-    .filter(([m, , vale]) => m && vale)
-    .map(([m, e]) => ({ metamagia: m.name, ...escolhaLegivel(m, e, {
-      pessoal: temAcaoPessoal(base) || [meta2, meta3].some((x) => x?.kind === "aura"),
-    }) }));
+  const pessoal = temAcaoPessoal(base) || metasUsadas.some((x) => x.meta.kind === "aura");
+  const escolhas = metasUsadas.map(({ meta, escolha }) => ({ metamagia: meta.name, ...escolhaLegivel(meta, escolha, { pessoal }) }));
+  const lendaria = T.lendaria ?? 0;
+  const titulo = lendaria
+    ? `Magia Lendária — ${lendaria} palavras arcanas (no sistema: Círculo Maior)`
+    : `Magia criada — Círculo ${esc(tier)}`;
+  const linhaTempo = casting !== castingBase || comoReacao
+    ? `<p>Tempo de conjuração: ${esc(castingBase)} → <b>${esc(casting)}</b>${comoReacao ? " (escolhida a reação no lugar da ação rápida)" : ""}.</p>`
+    : "";
+  const linhaSustenta = custoSustentar !== "none"
+    ? `<p>Sustentável: ${esc(ROTULO_ACAO[custoSustentar])} por turno (com a economia de ações ligada, o vínculo na sua ficha cobra; sem a ação, a magia cai).</p>`
+    : "";
   data.system.description = (data.system.description || "") + `
-<hr><p><strong>Magia criada — Círculo ${esc(tier)}</strong> (custo ${pm} PM; bônus de peculiaridades: ${delta >= 0 ? "+" : ""}${delta})</p>
-<p>Palavras: ${esc(palavras.join(", "))}. Base: ${esc(base.name)}.</p>
+<hr><p><strong>${titulo}</strong> (custo ${pm} PM; ${esc(ROTULO_ACAO[custoAcao])}; bônus de peculiaridades: ${delta >= 0 ? "+" : ""}${delta})</p>
+${bonusHab.length ? `<p>Bônus de habilidades da ficha (na Conjuração): ${bonusHab.map((b) => `${esc(b.nome)} +${b.bonus}`).join(", ")}.</p>` : ""}
+<p>Palavras: ${esc(palavras.join(", "))}. Base: ${esc(base.name)}.${lendaria > 3 ? ` <em>O sistema guarda só as três primeiras palavras (os bônus de palavra da 4ª${lendaria > 4 ? " e da 5ª" : ""} não entram sozinhos na rolagem).</em>` : ""}</p>
+${linhaTempo}${linhaSustenta}
 ${linhaDano ? `<p>Dano: ${linhaDano}.</p>` : ""}
 ${linhaInvoca ? `<p>Invoca: ${esc(linhaInvoca)}.</p>` : ""}
 ${linhasApr ? `<p>Aprimoramentos do círculo (gratuitos):</p><ul>${linhasApr}</ul>` : ""}
@@ -1443,14 +1706,19 @@ ${comoFunciona}
 ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
 
   // Receita estruturada (para consulta ou reconstrução futura)
+  const criaturas = (Array.isArray(state.criaturas) ? state.criaturas : state.criatura ? [state.criatura] : [])
+    .filter((c) => c?.uuid).map((c) => ({ uuid: c.uuid, nome: c.name ?? "" }));
   data.flags ??= {};
   data.flags[MODULE_ID] = {
     receita: {
       tier, palavras, base: base.name, bonus: delta,
+      ...(bonusHab.length ? { habilidades: bonusHab.map((b) => ({ nome: b.nome, bonus: b.bonus })) } : {}),
+      ...(lendaria ? { lendaria } : {}),
       peculiaridades: pecsValidas.map((p) => ({ texto: p.texto, mod: p.mod })),
       metamagias: data.system.metamagics.map((m) => m.name),
       escolhas: escolhas.map(({ texto, ...resto }) => resto),
-      ...(state.criatura?.uuid ? { criatura: { uuid: state.criatura.uuid, nome: state.criatura.name ?? "" } } : {}),
+      conjuracao: casting, ...(comoReacao ? { reacao: true } : {}),
+      ...(criaturas.length ? { criatura: criaturas[0], criaturas } : {}),
     },
   };
 
@@ -1482,6 +1750,30 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
 
   return data;
 }
+
+const RE_CONCEDE = /([A-ZÁ-Ú][\wÀ-ú]*(?: (?:de|do|da|com|\([^)]*\)|[A-ZÁ-Ú][\wÀ-ú]*))*) concede \+1 em Conjuração para esta conjuração/g;
+const chaveDeHabilidade = (n) => semAcento(n).replace(/[[\]()]/g, "").replace(/\s+/g, " ").trim();
+
+/**
+ * "Carisma concede +1 em Conjuração para esta conjuração": as habilidades que
+ * a magia de base cita E que o conjurador tem na ficha.
+ * @returns {{nome:string, bonus:number}[]}
+ */
+export function bonusDeHabilidades(base, actor) {
+  const texto = String(base?.system?.description ?? "").replace(/<[^>]+>/g, " ");
+  const tem = new Set([...(actor?.items ?? [])].filter((i) => i.type === "habilidade").map((i) => chaveDeHabilidade(i.name)));
+  const out = [];
+  for (const m of texto.matchAll(RE_CONCEDE)) {
+    if (tem.has(chaveDeHabilidade(m[1])) && !out.some((b) => b.nome === m[1])) out.push({ nome: m[1], bonus: 1 });
+  }
+  return out;
+}
+
+/** Rótulos das ações da rodada (sistema build 31). */
+export const ROTULO_ACAO = {
+  none: "não gasta ação", standard: "ação padrão", movement: "ação de movimento",
+  simple: "ação simples (rápida)", reaction: "reação", free: "ação livre",
+};
 
 /** O que o jogador escolheu numa metamagia, legível e estruturado. */
 function escolhaLegivel(meta, escolha = {}, { pessoal = false } = {}) {
@@ -1610,11 +1902,14 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     // Estado da oficina. Não pode se chamar "state": em ApplicationV2 esse
     // nome é um getter (estado de renderização) e atribuir a ele quebra.
     this.forja = {
-      tier: "Menor", palavra1: "", palavra2: "", palavra3: "",
+      tier: "Menor", palavra1: "", palavra2: "", palavra3: "", palavra4: "", palavra5: "",
       baseId: "", nome: "", ajuste: 0,
-      pecsMarcadas: new Set(), meta2i: -1, meta3i: -1,
-      escolha2: {}, escolha3: {},
-      criatura: null, // ficha que a magia invoca: { uuid, name }
+      pecsMarcadas: new Set(), meta2i: -1, meta3i: -1, meta4i: -1, meta5i: -1,
+      escolha2: {}, escolha3: {}, escolha4: {}, escolha5: {},
+      // Fichas do cardápio de criaturas que a magia invoca: [{ uuid, name }].
+      criaturas: [],
+      // Saindo em ação rápida, conjurar como reação.
+      reacao: false,
     };
     this.palavras = palavrasDoAtor(actor);
     this.bases = [];       // magias da palavra1
@@ -1680,25 +1975,31 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       + (aviso ? `<p class="aviso">⚠ ${esc(aviso)}</p>` : "");
   }
 
-  /** Fieldset da criatura invocada (só nas magias que invocam). */
-  #criaturaBloco(base, mud) {
+  /**
+   * Fieldset do cardápio de criaturas (só nas magias que invocam): as fichas
+   * que você possui e as marcadas como "conjuráveis" pelo Narrador (botão 🐾
+   * na ficha da criatura) — marque quantas quiser; ao usar a magia, o sistema
+   * pergunta qual delas conjurar. Uma ficha arrastada (de um compêndio, por
+   * exemplo) também entra.
+   */
+  #criaturaBloco(base, mud, contagem = "1") {
     const nomes = invocacoesDe(base?.system?.actions)
       .map((x) => nomeDaInvocacao(x.actorName, mud).replace(/\s+—\s+arraste a ficha.*$/i, ""));
     if (!nomes.length) return "";
     const s = this.forja;
-    const fichas = [...(globalThis.game?.actors ?? [])]
-      .filter((a) => a && a.uuid && a.id !== this.actor?.id)
-      .sort((a, b) => a.name.localeCompare(b.name, "pt"))
-      .map((a) => [a.uuid, a.name]);
-    const escolhida = s.criatura?.uuid ?? "";
-    // Uma ficha arrastada de um compêndio não está na lista do mundo: entra como opção.
-    if (escolhida && !fichas.some(([u]) => u === escolhida)) fichas.unshift([escolhida, s.criatura.name ?? escolhida]);
+    const marcadas = new Set(s.criaturas.map((c) => c.uuid));
+    const { suas, conjuraveis } = fichasParaInvocar(this.actor);
+    const linha = (a) => `<label class="pec"><input type="checkbox" name="criatura" value="${esc(a.uuid)}" ${marcadas.has(a.uuid) ? "checked" : ""}> ${esc(a.name)}</label>`;
+    const avulsas = s.criaturas.filter((c) => ![...suas, ...conjuraveis].some((a) => a.uuid === c.uuid));
+    const n = String(contagem ?? "1");
     return `
-      <fieldset><legend>Criatura invocada</legend>
+      <fieldset><legend>Criaturas que a magia invoca</legend>
         <p class="dica">A magia invoca: <b>${esc(nomes.join("; "))}</b>${mud?.hostil ? " — hostil a todos (não é amigável a ninguém)" : ""}.
-          Escolha a ficha agora, ou deixe para arrastá-la depois para a ação, na ficha do item.</p>
-        <label>Ficha da criatura
-          <select name="criatura">${this.#opcoes(fichas, escolhida, "— arrastar depois —")}</select></label>
+          Marque as fichas do cardápio — ao usar a magia, escolhe-se na hora qual delas conjurar${n !== "1" ? ` (<b>${esc(formulaCurta(n))}</b> por conjuração)` : ""}. Sem nenhuma, arraste a ficha depois para a ação, na ficha do item.</p>
+        ${suas.length ? `<div class="sf-criaturas"><b>Suas fichas</b>${suas.map(linha).join("")}</div>` : ""}
+        ${conjuraveis.length ? `<div class="sf-criaturas"><b>Conjuráveis</b> <em>(marcadas pelo Narrador)</em>${conjuraveis.map(linha).join("")}</div>` : ""}
+        ${avulsas.length ? `<div class="sf-criaturas"><b>Arrastadas</b>${avulsas.map(linha).join("")}</div>` : ""}
+        ${!suas.length && !conjuraveis.length && !avulsas.length ? `<p class="dica">Nenhuma ficha sua nem conjurável — arraste uma abaixo.</p>` : ""}
         <div class="sf-drop" data-sf-drop="criatura">…ou arraste para cá uma ficha (do mundo ou de um compêndio)</div>
       </fieldset>`;
   }
@@ -1709,14 +2010,31 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     const { circ, pm } = TIERS[s.tier];
     const base = this.bases.find((b) => b.id === s.baseId) ?? null;
     const pecs = base ? parsePeculiaridades(base) : [];
-    const valida = (p) => !p.circulos || p.circulos.has(s.tier);
+    const efetivo = tierEfetivo(s.tier);
+    const valida = (p) => !p.circulos || p.circulos.has(efetivo);
     const soma = [...s.pecsMarcadas].reduce((t, i) => t + (pecs[i] && valida(pecs[i]) ? pecs[i].mod : 0), 0)
       + (Number(s.ajuste) || 0);
-    const aprs = base ? parseAprimoramentos(base).filter((a) => a.circulos.has(s.tier)) : [];
+    const aprs = base ? parseAprimoramentos(base).filter((a) => a.circulos.has(efetivo)) : [];
+    const metaDe = (n) => (circ >= n ? (METAMAGIAS[s[`palavra${n}`]] ?? [])[s[`meta${n}i`]] ?? null : null);
+    const metasEscolhidas = [2, 3, 4, 5].map(metaDe).filter(Boolean);
     const mudancas = mudancasDaInvocacao([...s.pecsMarcadas].map((i) => pecs[i]).filter((p) => p && valida(p)), {
-      circ, metas: [circ >= 2 ? (METAMAGIAS[s.palavra2] ?? [])[s.meta2i] : null,
-                    circ >= 3 ? (METAMAGIAS[s.palavra3] ?? [])[s.meta3i] : null],
+      circ, metas: metasEscolhidas,
     });
+    // Tempo de conjuração depois da Magia Acelerada; saindo em ação rápida,
+    // a escolha de conjurar como reação.
+    const castingBase = base?.system?.casting || "Ação";
+    let casting = castingBase;
+    for (const m of metasEscolhidas) if (m.kind === "acelerada") casting = acelerar(casting);
+    const podeReacao = custoDaConjuracao(casting) === "simple";
+    if (!podeReacao) s.reacao = false;
+    const castingFinal = podeReacao && s.reacao ? "Reação" : casting;
+    // Quantas criaturas por conjuração (Múltipla soma a base; Replicante dobra).
+    let contagem = 1;
+    let multiplas = 1;
+    for (const m of metasEscolhidas) {
+      if (m.kind === "multipla") multiplas++;
+    }
+    contagem = multiplas * (metasEscolhidas.some((m) => m.kind === "replicante") ? 2 : 1);
 
     const el = document.createElement("div");
     el.className = "spellforge-form";
@@ -1755,13 +2073,16 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         .ligeia-spellforge .sf-drop { border: 1px dashed var(--color-border-light-primary, #888); border-radius: 6px;
           padding: 6px; margin-top: 4px; text-align: center; font-size: 0.9em; opacity: 0.8; }
         .ligeia-spellforge .sf-drop.sobre { background: rgba(120,160,120,0.2); opacity: 1; }
+        .ligeia-spellforge .sf-criaturas { display: flex; flex-wrap: wrap; gap: 2px 14px; margin: 4px 0; }
+        .ligeia-spellforge .sf-criaturas > b { flex: 1 0 100%; }
+        .ligeia-spellforge .sf-criaturas .pec { flex: 0 1 auto; }
       </style>
       ${semPalavras ? `<p class="dica">⚠ ${esc(this.actor.name)} não possui nenhuma habilidade
         "Palavra Arcana [x]" na ficha (em qualquer nível) — adicione ao menos uma para criar magias.</p>` : ""}
       <fieldset><legend>1 · Círculo e palavra principal</legend>
         <div class="linha">
           <label>Círculo
-            <select name="tier">${this.#opcoes(Object.keys(TIERS).map((t) => [t, `${t} (${TIERS[t].pm} PM)`]), s.tier, "—").replace('<option value="">—</option>', "")}</select>
+            <select name="tier">${this.#opcoes(Object.keys(TIERS).map((t) => [t, `${t.replace(/ \((\d) palavras\)$/, " — $1 palavras")} (${TIERS[t].pm} PM)`]), s.tier, "—").replace('<option value="">—</option>', "")}</select>
           </label>
           <label>Palavra principal
             <select name="palavra1" ${semPalavras ? "disabled" : ""}>${optPal(s.palavra1)}</select>
@@ -1787,30 +2108,27 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
           <input type="number" name="ajuste" value="${Number(s.ajuste) || 0}" step="1" style="max-width:90px">
         </label>
       </fieldset>
-      ${circ >= 2 ? `
-      <fieldset><legend>3 · Segunda palavra e metamagia</legend>
-        <p class="dica">As palavras podem se repetir (ex.: ignis + majesto + majesto).</p>
-        <label>Segunda palavra arcana
-          <select name="palavra2">${optPal(s.palavra2)}</select></label>
-        ${this.#metamagiaBloco(2, s.palavra2, s.meta2i, s.escolha2, { base, outra: circ >= 3 ? (METAMAGIAS[s.palavra3] ?? [])[s.meta3i] : null })}
-      </fieldset>` : ""}
-      ${circ >= 3 ? `
-      <fieldset><legend>4 · Terceira palavra e metamagia (prevalece em conflito)</legend>
-        <label>Terceira palavra arcana
-          <select name="palavra3">${optPal(s.palavra3)}</select></label>
-        ${this.#metamagiaBloco(3, s.palavra3, s.meta3i, s.escolha3, { base, outra: (METAMAGIAS[s.palavra2] ?? [])[s.meta2i] })}
-      </fieldset>` : ""}
-      ${this.#criaturaBloco(base, mudancas)}
+      ${[2, 3, 4, 5].filter((n) => circ >= n).map((n) => `
+      <fieldset><legend>${n + 1} · ${ORDINAL[n]} palavra e metamagia${n === circ && n >= 3 ? " (prevalece em conflito)" : ""}</legend>
+        ${n === 2 ? `<p class="dica">As palavras podem se repetir (ex.: ignis + majesto + majesto).${circ >= 4 ? " Magia lendária: até cinco palavras, uma metamagia por palavra além da primeira." : ""}</p>` : ""}
+        <label>${ORDINAL[n]} palavra arcana
+          <select name="palavra${n}">${optPal(s[`palavra${n}`])}</select></label>
+        ${this.#metamagiaBloco(n, s[`palavra${n}`], s[`meta${n}i`], s[`escolha${n}`], { base, outra: metasEscolhidas.find((m) => m !== metaDe(n)) ?? null })}
+      </fieldset>`).join("")}
+      ${this.#criaturaBloco(base, mudancas, String(contagem))}
       <fieldset><legend>Nome e resumo</legend>
         <label>Nome da nova magia
           <input type="text" name="nome" value="${esc(s.nome)}" placeholder="${esc(base ? `${base.name} (${s.tier})` : "")}"></label>
         <div class="resumo">
           Custo: <b>${pm} PM</b> · Bônus de Conjuração: <b>${soma >= 0 ? "+" : ""}${soma}</b>
-          ${circ >= 2 ? ` · Metamagia 2: <b>${esc((METAMAGIAS[s.palavra2] ?? [])[s.meta2i]?.name ?? "—")}</b>` : ""}
-          ${circ >= 3 ? ` · Metamagia 3: <b>${esc((METAMAGIAS[s.palavra3] ?? [])[s.meta3i]?.name ?? "—")}</b>` : ""}
-          ${circ >= 3 && s.palavra2 && s.palavra2 === s.palavra3 && s.meta2i >= 0 && s.meta2i === s.meta3i
-            ? `<br><em>A mesma metamagia duas vezes: área/alcance/alvos triplicam (não dobram o dobrado).</em>` : ""}
+          ${[2, 3, 4, 5].filter((n) => circ >= n).map((n) => ` · Metamagia ${n}: <b>${esc(metaDe(n)?.name ?? "—")}</b>`).join("")}
+          ${metasEscolhidas.length > new Set(metasEscolhidas.map((m) => m.name)).size
+            ? `<br><em>A mesma metamagia mais de uma vez: área/alcance/alvos somam a base (duas vezes, o triplo; três, o quádruplo).</em>` : ""}
+          ${base ? `<br>Conjuração: <b>${esc(castingFinal)}</b> (${esc(ROTULO_ACAO[custoDaConjuracao(castingFinal)])})${casting !== castingBase ? ` — era ${esc(castingBase)}` : ""}` : ""}
+          ${circ >= 4 ? `<br><em>Lendária: no sistema ela fica como Círculo Maior (com ${pm} PM); as palavras além da 3ª ficam na receita e na descrição.</em>` : ""}
         </div>
+        ${podeReacao ? `<label class="pec"><input type="checkbox" name="reacao" ${s.reacao ? "checked" : ""}>
+          Conjurar como <b>reação</b>, em vez da ação rápida${metasEscolhidas.some((m) => m.kind === "acelerada") ? " (Magia Acelerada)" : ""}</label>` : ""}
       </fieldset>
       <footer>
         <button type="button" data-action="cancelar">Cancelar</button>
@@ -1832,44 +2150,47 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       s.palavra1 = e.target.value; s.baseId = ""; s.pecsMarcadas.clear();
       this.render();
     });
-    on('select[name=baseId]', "change", (e) => { s.baseId = e.target.value; s.pecsMarcadas.clear(); s.criatura = null; this.render(); });
+    on('select[name=baseId]', "change", (e) => { s.baseId = e.target.value; s.pecsMarcadas.clear(); s.criaturas = []; this.render(); });
     on('input[name=pec]', "change", (e) => {
       const i = Number(e.target.value);
       e.target.checked ? s.pecsMarcadas.add(i) : s.pecsMarcadas.delete(i);
       this.render();
     });
     on('input[name=ajuste]', "change", (e) => { s.ajuste = Number(e.target.value) || 0; this.render(); });
-    on('select[name=palavra2]', "change", (e) => {
-      s.palavra2 = e.target.value; s.meta2i = -1; s.escolha2 = {};
-      this.render();
-    });
-    on('select[name=palavra3]', "change", (e) => { s.palavra3 = e.target.value; s.meta3i = -1; s.escolha3 = {}; this.render(); });
-    on('input[name=meta2]', "change", (e) => { s.meta2i = Number(e.target.value); s.escolha2 = {}; this.render(); });
-    on('input[name=meta3]', "change", (e) => { s.meta3i = Number(e.target.value); s.escolha3 = {}; this.render(); });
-    for (const n of [2, 3]) {
+    for (const n of [2, 3, 4, 5]) {
+      on(`select[name=palavra${n}]`, "change", (e) => {
+        s[`palavra${n}`] = e.target.value; s[`meta${n}i`] = -1; s[`escolha${n}`] = {};
+        this.render();
+      });
+      on(`input[name=meta${n}]`, "change", (e) => { s[`meta${n}i`] = Number(e.target.value); s[`escolha${n}`] = {}; this.render(); });
       // A da Dimensional muda o aviso da janela: redesenha.
       on(`select[name=escolha${n}-dimensional]`, "change", (e) => {
-        (n === 2 ? s.escolha2 : s.escolha3).dimensional = e.target.value;
+        s[`escolha${n}`].dimensional = e.target.value;
         this.render();
       });
       for (const campo of ["damageType", "attr", "bonusTarget", "condicao", "quando"]) {
         on(`select[name=escolha${n}-${campo}]`, "change", (e) => {
-          (n === 2 ? s.escolha2 : s.escolha3)[campo] = e.target.value;
+          s[`escolha${n}`][campo] = e.target.value;
         });
       }
       // Trocar em quem muda o padrão de quando dispara (você: sempre; alvo: se acertar).
       on(`select[name=escolha${n}-quem]`, "change", (e) => {
-        const esc2 = n === 2 ? s.escolha2 : s.escolha3;
+        const esc2 = s[`escolha${n}`];
         esc2.quem = e.target.value;
         delete esc2.quando;
         this.render();
       });
     }
+    on('input[name=reacao]', "change", (e) => { s.reacao = e.target.checked; this.render(); });
     on('input[name=nome]', "input", (e) => { s.nome = e.target.value; });
-    on('select[name=criatura]', "change", (e) => {
+    on('input[name=criatura]', "change", (e) => {
       const uuid = e.target.value;
-      const ator = [...(globalThis.game?.actors ?? [])].find((a) => a.uuid === uuid);
-      s.criatura = uuid ? { uuid, name: ator?.name ?? s.criatura?.name ?? "" } : null;
+      if (e.target.checked) {
+        const ator = [...(globalThis.game?.actors ?? [])].find((a) => a.uuid === uuid);
+        if (!s.criaturas.some((c) => c.uuid === uuid)) s.criaturas.push({ uuid, name: ator?.name ?? uuid });
+      } else {
+        s.criaturas = s.criaturas.filter((c) => c.uuid !== uuid);
+      }
     });
     on('[data-sf-drop=criatura]', "dragover", (e) => { e.preventDefault(); e.currentTarget.classList.add("sobre"); });
     on('[data-sf-drop=criatura]', "dragleave", (e) => e.currentTarget.classList.remove("sobre"));
@@ -1878,7 +2199,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
       e.currentTarget.classList.remove("sobre");
       const ficha = await fichaArrastada(e);
       if (!ficha) return ui.notifications.warn("Arraste uma ficha (personagem, NPC ou veículo).");
-      s.criatura = { uuid: ficha.uuid, name: ficha.name };
+      if (!s.criaturas.some((c) => c.uuid === ficha.uuid)) s.criaturas.push({ uuid: ficha.uuid, name: ficha.name });
       this.render();
     });
     on('[data-action=cancelar]', "click", () => this.close());
@@ -1890,21 +2211,22 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     const base = this.bases.find((b) => b.id === s.baseId);
     if (!base) return ui.notifications.warn("Escolha a magia de base.");
     const { circ } = TIERS[s.tier];
-    if (circ >= 2 && !s.palavra2) return ui.notifications.warn("Escolha a segunda palavra arcana.");
-    if (circ >= 3 && !s.palavra3) return ui.notifications.warn("Escolha a terceira palavra arcana.");
-    const meta2 = circ >= 2 ? (METAMAGIAS[s.palavra2] ?? [])[s.meta2i] : null;
-    const meta3 = circ >= 3 ? (METAMAGIAS[s.palavra3] ?? [])[s.meta3i] : null;
-    if (circ >= 2 && !meta2) return ui.notifications.warn("Escolha a metamagia da segunda palavra.");
-    if (circ >= 3 && !meta3) return ui.notifications.warn("Escolha a metamagia da terceira palavra.");
+    const estado = {
+      base, tier: s.tier, nome: s.nome.trim(), palavra1: s.palavra1, pecs: [], ajuste: s.ajuste,
+      criaturas: invocaCriatura(base) ? s.criaturas : [], reacao: s.reacao,
+      bonusHabilidades: bonusDeHabilidades(base, this.actor),
+    };
+    for (let n = 2; n <= circ; n++) {
+      const palavra = s[`palavra${n}`];
+      if (!palavra) return ui.notifications.warn(`Escolha a ${ORDINAL[n].toLowerCase()} palavra arcana.`);
+      const meta = (METAMAGIAS[palavra] ?? [])[s[`meta${n}i`]];
+      if (!meta) return ui.notifications.warn(`Escolha a metamagia da ${ORDINAL[n].toLowerCase()} palavra.`);
+      Object.assign(estado, { [`palavra${n}`]: palavra, [`meta${n}`]: meta, [`escolha${n}`]: s[`escolha${n}`] });
+    }
 
     const pecsAll = parsePeculiaridades(base);
-    const pecs = [...s.pecsMarcadas].sort((a, b) => a - b).map((i) => pecsAll[i]).filter(Boolean);
-    const data = await construirMagia({
-      base, tier: s.tier, nome: s.nome.trim(), palavra1: s.palavra1,
-      palavra2: s.palavra2, palavra3: s.palavra3, pecs, ajuste: s.ajuste,
-      meta2, meta3, escolha2: s.escolha2, escolha3: s.escolha3,
-      criatura: invocaCriatura(base) ? s.criatura : null,
-    }, { animar: animacoesLigadas() });
+    estado.pecs = [...s.pecsMarcadas].sort((a, b) => a - b).map((i) => pecsAll[i]).filter(Boolean);
+    const data = await construirMagia(estado, { animar: animacoesLigadas() });
     // keepId: as ações em cadeia já apontam para o id que a magia vai ter.
     const [item] = await this.actor.createEmbeddedDocuments("Item", [data], { keepId: true });
     const nAnim = contarAnimacoesAutomaticas(data);
@@ -1913,6 +2235,31 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     this.close();
     item.sheet?.render(true);
   }
+}
+
+const ORDINAL = { 2: "Segunda", 3: "Terceira", 4: "Quarta", 5: "Quinta" };
+
+/** A ficha é uma criatura conjurada (cópia feita pelo sistema)? Não entra no cardápio. */
+export const ehConjurada = (a) => !!(a?.getFlag?.("ligeia-rpg", "summoned") ?? a?.flags?.["ligeia-rpg"]?.summoned);
+
+/** A ficha foi marcada como "conjurável" (qualquer conjurador pode invocá-la)? */
+export const ehConjuravel = (a) => !!(a?.getFlag?.(MODULE_ID, "conjuravel") ?? a?.flags?.[MODULE_ID]?.conjuravel);
+
+/**
+ * As fichas que um conjurador pode pôr no cardápio de uma magia de invocação:
+ * as dele (dono) e as conjuráveis — nunca ele mesmo nem as cópias conjuradas.
+ * @returns {{ suas: Actor[], conjuraveis: Actor[] }}
+ */
+export function fichasParaInvocar(actor, atores = globalThis.game?.actors ?? [], usuarios = globalThis.game?.users ?? null) {
+  const todas = [...atores].filter((a) => a?.uuid && a.id !== actor?.id && !ehConjurada(a))
+    .sort((a, b) => String(a.name).localeCompare(String(b.name), "pt"));
+  const conjuraveis = todas.filter(ehConjuravel);
+  // "Suas": as dos jogadores donos do conjurador (o Narrador é dono de tudo —
+  // para um NPC, use as conjuráveis ou arraste a ficha).
+  const donos = usuarios ? [...usuarios].filter((u) => !u.isGM && actor?.testUserPermission?.(u, "OWNER")) : null;
+  const deDono = (a) => (donos ? donos.some((u) => a.testUserPermission?.(u, "OWNER")) : !!a.isOwner);
+  const suas = todas.filter((a) => !ehConjuravel(a) && deDono(a));
+  return { suas, conjuraveis };
 }
 
 /** A ficha arrastada (dados de arrasto do Foundry), ou null. */

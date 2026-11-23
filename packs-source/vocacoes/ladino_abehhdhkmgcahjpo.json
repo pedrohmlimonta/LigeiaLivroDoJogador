@@ -222,7 +222,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Letalidade (A) — dano final +Nível (alvo indefeso/surpreso)",
@@ -392,7 +395,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             }
           ],
           "enchantments": [],
@@ -407,7 +413,12 @@
           "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": []
+          "costs": [],
+          "actionCost": "none",
+          "sustain": {
+            "enabled": false,
+            "action": "simple"
+          }
         },
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.habilidades.Item.gikglccknckadcbl"
       }

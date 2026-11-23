@@ -83,7 +83,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "✦ Determinação: imune a Pasmo",
@@ -109,7 +110,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "✦ Determinação: imune a Dominado",
@@ -135,7 +137,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "✦ Determinação: imune a Atordoado",
@@ -161,7 +164,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           },
           {
             "label": "✦ Determinação: imune a Enfeitiçado",
@@ -187,7 +191,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -313,7 +318,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

@@ -191,9 +191,15 @@
             "rounds": "0",
             "giveControl": true,
             "hidden": false,
-            "enabled": true
+            "enabled": true,
+            "useGlobalCount": true,
+            "ownSheet": true,
+            "sustain": "none"
           }
-        ]
+        ],
+        "actionCost": "standard",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

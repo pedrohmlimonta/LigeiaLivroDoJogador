@@ -223,7 +223,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Ritual com majesto/exitium (A — 2 PV)",
@@ -393,7 +396,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             }
           ],
           "enchantments": [],
@@ -408,7 +414,12 @@
           "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": []
+          "costs": [],
+          "actionCost": "none",
+          "sustain": {
+            "enabled": false,
+            "action": "simple"
+          }
         },
         "sourceUuid": ""
       }

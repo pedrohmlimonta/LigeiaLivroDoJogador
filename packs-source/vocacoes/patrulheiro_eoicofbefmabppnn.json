@@ -172,7 +172,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Presa de Caça (A) — crítico contra o tipo: sangramento (Vigor anula)",
@@ -329,7 +332,8 @@
                   "fxAaName": "Sangramento (automática)",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -455,7 +459,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Presa de Caça (A) — acerto com arma em alvo sangrando: Lento (Vigor anula)",
@@ -612,7 +619,8 @@
                   "fxAaName": "Lento (automática)",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -738,7 +746,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Presa de Caça (A) — segundo acerto em alvo sangrando: Imobilizado (Vigor anula)",
@@ -895,7 +906,8 @@
                   "fxAaName": "Imobilizado (automática)",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -1021,7 +1033,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             }
           ],
           "enchantments": [],
@@ -1049,7 +1064,12 @@
               "damageType": ""
             }
           ],
-          "costs": []
+          "costs": [],
+          "actionCost": "none",
+          "sustain": {
+            "enabled": false,
+            "action": "simple"
+          }
         },
         "sourceUuid": ""
       }

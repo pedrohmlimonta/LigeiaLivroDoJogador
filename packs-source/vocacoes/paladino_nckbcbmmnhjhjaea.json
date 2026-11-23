@@ -132,7 +132,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -258,7 +259,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             },
             {
               "label": "Aura do Juramento (A — 5+ Pontos): 1D nas defesas e nos ataques (raio = Pontos)",
@@ -329,7 +333,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Aura do Juramento: +1 dado nos ataques",
@@ -355,7 +360,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -481,7 +487,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             }
           ],
           "enchantments": [],
@@ -496,7 +505,12 @@
           "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": []
+          "costs": [],
+          "actionCost": "none",
+          "sustain": {
+            "enabled": false,
+            "action": "simple"
+          }
         },
         "sourceUuid": ""
       }

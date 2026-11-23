@@ -396,7 +396,7 @@ d = construirItemConjurador(eq('Varinha'), { magia: esfera });
 let rc = receita(d);
 ok(rc.tipo === 'magia' && rc.nivel === 'Menor' && rc.pm === 1 && rc.palavras.join() === 'ignis' && rc.magia.name === 'Esfera Ígnea',
    'Varinha + Esfera Ígnea: item conjurador Menor, 1 PM, palavra ignis, magia guardada no item');
-const gat = d.system.actions;
+const gat = d.system.actions.filter((a) => String(a.label).startsWith('✦'));
 ok(gat.length === 1 && gat[0].label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — 1 PM' && gat[0].costMp === '0' && !gat[0].canRoll
    && gat[0].targetMode === 'none' && gat[0].preActivations[0]?.ref === 'action||0|Esfera Ígnea (Varinha)' && gat[0].preActivations[0]?.enabled,
    'o item ganha a ação da magia: "✦ Esfera Ígnea (Conjuração vs Esquiva) — 1 PM", que dispara a ação da magia vinculada');
@@ -424,7 +424,7 @@ ok(dadosDaMagiaDoItem({ id: 'c1', name: d.name }, rc).system.actions.every((a) =
 d = construirItemConjurador(eq('Varinha'), { magia: esfera, lendario: true });
 comp = dadosDaMagiaDoItem({ id: 'v1', name: d.name }, receita(d));
 ok(comp.system.actions.every((a) => a.costMp === '0') && comp.system.costs.length === 0 && d.system.description.includes('lendário')
-   && d.system.actions[0].label.endsWith('— sem mana (lendário)'), 'lendário: conjura sem mana');
+   && d.system.actions.find((a) => String(a.label).startsWith('✦')).label.endsWith('— sem mana (lendário)'), 'lendário: conjura sem mana');
 const pergaminho = eq('Pergaminho (em branco)');
 d = construirItemConjurador(pergaminho, { magia: esfera });
 rc = receita(d);
@@ -434,13 +434,18 @@ ok(d.name === 'Pergaminho de Esfera Ígnea' && rc.pergaminho && d.system.price =
 ok(comp.system.casting === 'Rodada completa (pergaminho)' && comp.system.actions.every((a) => a.costMp === '1' && a.label.includes('queima o pergaminho')),
    'conjurar do pergaminho também custa 1 PM, leva uma rodada completa e queima o pergaminho');
 ok(d.system.description.includes('queima o pergaminho') && d.system.description.includes('também custa 1 PM')
-   && d.system.actions[0].label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — queima o pergaminho — 1 PM'
-   && d.system.actions[0].preActivations[0].ref === 'action||0|Esfera Ígnea (Pergaminho de Esfera Ígnea)', 'e a descrição e a ação do pergaminho explicam isso');
-d = construirItemConjurador(eq('Varinha'), { magia: magia('Imagem Ilusória') });
+   && d.system.actions.find((a) => String(a.label).startsWith('✦')).label === '✦ Esfera Ígnea (Conjuração vs Esquiva) — queima o pergaminho — 1 PM'
+   && d.system.actions.find((a) => String(a.label).startsWith('✦')).preActivations[0].ref === 'action||0|Esfera Ígnea (Pergaminho de Esfera Ígnea)', 'e a descrição e a ação do pergaminho explicam isso');
+ok(comp.system.actions.every((a) => a.actionCost === 'standard') && d.system.actions.find((a) => String(a.label).startsWith('✦')).actionCost === 'none',
+   'economia de ações: do pergaminho, a rodada completa (ação padrão); o ✦ não gasta — quem gasta é a magia vinculada');
+const ilusao = magia('Imagem Ilusória');
+ilusao.system.actions = []; // magia só descritiva (as de um mundo podem não ter ação)
+d = construirItemConjurador(eq('Varinha'), { magia: ilusao });
 comp = dadosDaMagiaDoItem({ id: 'v2', name: d.name }, receita(d));
 ok(comp.system.actions.length === 1 && comp.system.actions[0].label === 'Conjurar Imagem Ilusória (rolagem de Conjuração)'
    && comp.system.actions[0].canRoll && comp.system.actions[0].rollAttr === 'conjuracao' && comp.system.actions[0].costMp === '1'
-   && comp.system.costs.length === 0 && d.system.actions[0].label === '✦ Conjurar Imagem Ilusória (rolagem de Conjuração) — 1 PM',
+   && comp.system.costs.length === 0 && d.system.actions.find((a) => String(a.label).startsWith('✦')).label === '✦ Conjurar Imagem Ilusória (rolagem de Conjuração) — 1 PM'
+   && comp.system.actions[0].actionCost === 'standard',
    'magia só descritiva: ganha "Conjurar" (rolagem de Conjuração, 1 PM) e o item a dispara');
 // propriedades + magia no mesmo item; lendário depois; desfazer
 let duplo = encantar(eq('Cajado'), 'Menor', ['forjuri-abjuracao']);
@@ -508,12 +513,13 @@ const resolver = (ator, ref) => {
 // próxima edição da ficha, que é salva a cada mudança — se for IGUAL a uma delas.
 const opcoesDaFicha = (ator) => [...ator.items].flatMap((it) => (it.system?.actions ?? [])
   .map((_a, idx) => ['action', it.id, idx, String(it.name ?? '').replace(/\|/g, '/')].join('|')));
-let disparo = resolver(lyra, varinha.system.actions[0].preActivations[0].ref);
+const gatilhoDe = (it) => it.system.actions.find((a) => String(a.label).startsWith('✦'));
+let disparo = resolver(lyra, gatilhoDe(varinha).preActivations[0].ref);
 ok(disparo?.item.type === 'magia' && disparo.item.flags[MOD].doItem === 'var1' && disparo.acao.label === 'Esfera Ígnea (Conjuração vs Esquiva)',
    'a ação ✦ do item acha a ação da magia vinculada (é ela que rola, com os bônus de palavra)');
 varinha.name = 'Varinha do Fogo';
 r = await sincronizarMagiasDoItem(varinha);
-disparo = resolver(lyra, varinha.system.actions[0].preActivations[0].ref);
+disparo = resolver(lyra, gatilhoDe(varinha).preActivations[0].ref);
 ok(r.renomeadas === 1 && r.referencias === 1 && vinc(lyra, 'var1')[0].name === 'Esfera Ígnea (Varinha do Fogo)' && disparo?.item.flags[MOD].doItem === 'var1',
    'renomeou o item: a magia acompanha e a ação ✦ continua achando ela');
 const ana = new AtorFalso('Ana');
@@ -688,7 +694,9 @@ const desfeitoAla = desfazerEncantamento(ala3.toObject());
 ok(desfeitoAla['system.actions'].some((a) => String(a.label).startsWith('✦ Esfera Ígnea')) && desfeitoAla[`flags.${MOD}.encantamentos`].length === 1,
    'desfazer um encantamento feito depois da magia não leva a ação ✦ junto');
 const hugo = new AtorFalso('Hugo');
-const varI = hugo._pôr({ ...como028(construirItemConjurador(eq('Varinha'), { magia: magia('Imagem Ilusória') })), id: 'varI' });
+const ilusao028 = magia('Imagem Ilusória');
+ilusao028.system.actions = []; // como era na 0.2.8: só descritiva
+const varI = hugo._pôr({ ...como028(construirItemConjurador(eq('Varinha'), { magia: ilusao028 })), id: 'varI' });
 const comp028 = dadosDaMagiaDoItem(varI, receita(varI));
 comp028.system.actions = [];
 hugo._pôr(comp028);

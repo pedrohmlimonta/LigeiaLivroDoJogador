@@ -15,6 +15,98 @@
     "description": "<p>Armadura feita de anéis metálicos entrelaçados em um tecido de aço.</p><p>Proteção: Corte, Perfuração e Concussão 2. Penalidade: -2 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Menor (kreo)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Absorção Material</b> (kreo · Constante · 1 de Dano · +3.500 Vo · <b>1 PM por uso</b>) <em>(sem automação: aplique pela descrição)</em><br>Enquanto estiver usando um item com essa propriedade, sempre que você sofrer dano proveniente de uma arma. A arma deve ter sua dureza testada. Numa falha, a arma perderá uma quantidade de pontos de Dureza dependendo do valor do item.</li></ul><p>Preço das propriedades: +3.500 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 6 (3.500 Vo).</p>",
     "actions": [
       {
+        "label": "Vestir Cota de Malha (liga o item)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [
+          {
+            "ref": "item|ehkckjjcddpipkmf|0|Cota de Malha",
+            "enabled": true
+          }
+        ],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
+      },
+      {
         "label": "✦ Ativar Absorção Material (1 PM, até o fim da cena)",
         "level": "all",
         "canRoll": false,
@@ -83,7 +175,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -96,7 +189,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "Bm1OVy6I9afG7kPV",
+          "id": "8374peXnsToEZ3pt",
           "label": "Cota de Malha de Absorção Material (Menor)",
           "menu": "ontoken",
           "macro": {
@@ -209,7 +302,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -285,7 +381,12 @@
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "ignlpkaaidlofila",
@@ -327,7 +428,100 @@
           "antes": {
             "name": "Cota de Malha",
             "system": {
-              "actions": [],
+              "actions": [
+                {
+                  "label": "Vestir Cota de Malha (liga o item)",
+                  "level": "all",
+                  "canRoll": false,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "none",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "",
+                  "damage": "",
+                  "damageType": "",
+                  "damageResource": "hp",
+                  "scalingDamage": false,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [
+                    {
+                      "ref": "item|ehkckjjcddpipkmf|0|Cota de Malha",
+                      "enabled": true
+                    }
+                  ],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": false,
+                  "isMelee": false,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": null,
+                  "aaName": "",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "none"
+                }
+              ],
               "effects": [
                 {
                   "type": "rd",

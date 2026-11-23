@@ -143,7 +143,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "ceil(@nivel/2)"
+                  "grantTempHp": "ceil(@nivel/2)",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: -1D Mente",
@@ -169,7 +170,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: RD corte (metade do Nível)",
@@ -195,7 +197,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: RD perfuração (metade do Nível)",
@@ -221,7 +224,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: RD concussão (metade do Nível)",
@@ -247,7 +251,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -373,7 +378,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "free"
             },
             {
               "label": "Entrar em Fúria (A — até o fim da cena)",
@@ -444,7 +452,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "@nivel"
+                  "grantTempHp": "@nivel",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: -1D Mente",
@@ -470,7 +479,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: RD corte (Nível)",
@@ -496,7 +506,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: RD perfuração (Nível)",
@@ -522,7 +533,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 },
                 {
                   "label": "Fúria: RD concussão (Nível)",
@@ -548,7 +560,8 @@
                   "fxAaName": "",
                   "fxAaPersist": true,
                   "fxEnchant": false,
-                  "grantTempHp": "0"
+                  "grantTempHp": "0",
+                  "fxSustain": "none"
                 }
               ],
               "lineWidth": "1.5",
@@ -674,7 +687,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "free"
             },
             {
               "label": "Fúria (A) — em fúria: troque um dado do ataque corpo a corpo por 6 (1 PH)",
@@ -758,7 +774,10 @@
                 "rangeBonus": "",
                 "rollBonus": ""
               },
-              "summons": []
+              "summons": [],
+              "summonCount": "1",
+              "persistSustain": "none",
+              "actionCost": "none"
             }
           ],
           "enchantments": [],
@@ -773,7 +792,12 @@
           "mode": "passive",
           "active": false,
           "effects": [],
-          "costs": []
+          "costs": [],
+          "actionCost": "none",
+          "sustain": {
+            "enabled": false,
+            "action": "simple"
+          }
         },
         "sourceUuid": "Compendium.ligeia-livro-do-jogador.habilidades.Item.nhhlhdolopebcfpi"
       }

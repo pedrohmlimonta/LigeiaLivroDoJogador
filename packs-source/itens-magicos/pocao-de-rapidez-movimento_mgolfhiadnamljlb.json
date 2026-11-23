@@ -60,10 +60,10 @@
         },
         "appliesEffects": [
           {
-            "label": "Rapidez: +1 Movimento por turno",
-            "fxType": "bonus",
-            "fxTarget": "all",
-            "fxValue": "0",
+            "label": "Rapidez: +1 ação de movimento por turno",
+            "fxType": "action",
+            "fxTarget": "acao:movement",
+            "fxValue": "1",
             "fxAll": false,
             "durationMode": "scene",
             "durationRounds": "1",
@@ -83,7 +83,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -209,7 +210,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "simple",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

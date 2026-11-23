@@ -17,7 +17,181 @@
     "description": "<p>Você sussurra a palavra sonigu, manipulando o vento de forma a criar sons e vozes.</p><p>Efeitos: Cria um som que o conjurador já conheça. Todos os que puderem ouvir o som devem ser bem sucedidos em uma rolagem de Percepção oposta a Conjuração, para notar que se trata de um som falso.</p><p>Carisma concede +1 em Conjuração para esta conjuração. Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
     "peculiarities": "<p>Se usado para imitar a voz de alguém, você recebe 1D em rolagens para interagir socialmente para quem ouve o som (apenas Círculo Intermediário ou Maior) (-2). Se usado para imitar a voz de alguém, resultados 1 nos dados são considerados 3 para interagir socialmente com quem ouve a voz (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
-    "actions": [],
+    "actions": [
+      {
+        "label": "Imitar Sons (Conjuração — quem ouvir rola Percepção contra o resultado para notar o som falso)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "3*@nivel",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "ATxoAWMClzFnOmAN",
+          "label": "Imitar Sons",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.shatter.01.blue",
+            "nome": "Sônico"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "shatter",
+              "variant": "01",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "source",
+              "size": 1,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Imitar Sons (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,
@@ -37,7 +211,12 @@
         "label": "Círculo Menor",
         "level": "all"
       }
-    ]
+    ],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

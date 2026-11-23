@@ -52,9 +52,13 @@ export function* elosDoItem(sys) {
   }
 }
 
-/** O elo aponta para o próprio item? (pelo id ou pelo nome dele, atuais ou antigos) */
-function ehAutoRef(r, ids, nomes) {
-  return r.tipo === "action" && (ids.has(r.id) || nomes.has(limparNome(r.nome)));
+/**
+ * O elo aponta para o próprio item? (pelo id ou pelo nome dele, atuais ou
+ * antigos). `tipos`: "action" (uma ação do item) e, para acertar o id,
+ * também "item" — o "Vestir" das armaduras liga o próprio item.
+ */
+function ehAutoRef(r, ids, nomes, tipos = ["action"]) {
+  return tipos.includes(r.tipo) && (ids.has(r.id) || nomes.has(limparNome(r.nome)));
 }
 
 const conjuntos = ({ id, nome, ids = [], nomes = [] }) => ({
@@ -74,8 +78,10 @@ export function normalizarAutoRefs(data, quem) {
   let n = 0;
   for (const { elo } of elosDoItem(data?.system)) {
     const r = lerRef(elo.ref);
-    if (!ehAutoRef(r, ids, nomes)) continue;
-    const certa = refAcao(quem.id, r.indice, quem.nome);
+    if (!ehAutoRef(r, ids, nomes, ["action", "item"])) continue;
+    const certa = r.tipo === "item"
+      ? ["item", quem.id ?? "", 0, limparNome(quem.nome)].join("|")
+      : refAcao(quem.id, r.indice, quem.nome);
     if (elo.ref !== certa) { elo.ref = certa; n++; }
   }
   return n;

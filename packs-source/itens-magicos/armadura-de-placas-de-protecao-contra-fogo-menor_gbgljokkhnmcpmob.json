@@ -15,6 +15,98 @@
     "description": "<p>Armadura feita de placas pesadas moldadas de metal ou outro material igualmente resistente.</p><p>Proteção: Corte, Perfuração e Concussão 3. Penalidade: -4 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: Barulhenta (a penalidade também é aplicada em rolagens para caminhar silenciosamente).</p><hr><h3>✦ Encantamento — Item Menor (ignis)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Proteção Contra Fogo</b> (ignis · Constante · Proteção 1 · +400 Vo · <b>1 PM por uso</b>)<br>Enquanto estiver vestindo um item com essa propriedade, você recebe Proteção 1, 2 ou 3 contra dano de fogo.</li></ul><p>Preço das propriedades: +400 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 1 (400 Vo).</p>",
     "actions": [
       {
+        "label": "Vestir Armadura de Placas (liga o item)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [
+          {
+            "ref": "item|ijdamblichdaeocm|0|Armadura de Placas",
+            "enabled": true
+          }
+        ],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
+      },
+      {
         "label": "✦ Ativar Proteção Contra Fogo (1 PM, até o fim da cena)",
         "level": "all",
         "canRoll": false,
@@ -83,7 +175,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -96,7 +189,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "ucHf5GGqhU8K8cjf",
+          "id": "pJBhWcU6igKxUulT",
           "label": "Armadura de Placas de Proteção Contra Fogo (Menor)",
           "menu": "ontoken",
           "macro": {
@@ -209,7 +302,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -285,7 +381,12 @@
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "ignlpkaaidlofila",
@@ -327,7 +428,100 @@
           "antes": {
             "name": "Armadura de Placas",
             "system": {
-              "actions": [],
+              "actions": [
+                {
+                  "label": "Vestir Armadura de Placas (liga o item)",
+                  "level": "all",
+                  "canRoll": false,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "none",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "",
+                  "damage": "",
+                  "damageType": "",
+                  "damageResource": "hp",
+                  "scalingDamage": false,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [
+                    {
+                      "ref": "item|ijdamblichdaeocm|0|Armadura de Placas",
+                      "enabled": true
+                    }
+                  ],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": false,
+                  "isMelee": false,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": null,
+                  "aaName": "",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "none"
+                }
+              ],
               "effects": [
                 {
                   "type": "rd",

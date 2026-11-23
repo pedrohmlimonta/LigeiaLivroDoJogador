@@ -49,7 +49,14 @@ const magias = todos.filter((x) => x.pack === 'magias').map((x) => x.doc)
   .map((raw) => ({ id: raw._id, name: raw.name, type: 'magia', system: raw.system,
     toObject() { return JSON.parse(JSON.stringify({ _id: raw._id, name: raw.name, type: 'magia', img: raw.img, system: raw.system, flags: {} })); } }));
 globalThis.game = { user: { isGM: false, id: 'u1' }, packs: new Map([['ligeia-livro-do-jogador.magias', { getDocuments: async () => magias }]]),
-  items: [], actors: [{ uuid: 'Actor.lobo00000000001', id: 'lobo00000000001', name: 'Lobo' }, { uuid: 'Actor.urso0000000002', id: 'urso0000000002', name: 'Urso' }] };
+  items: [], actors: [{ uuid: 'Actor.lobo00000000001', id: 'lobo00000000001', name: 'Lobo', isOwner: true },
+    { uuid: 'Actor.urso0000000002', id: 'urso0000000002', name: 'Urso', isOwner: true },
+    // Do Narrador, marcado como conjurável: entra no cardápio de qualquer um.
+    { uuid: 'Actor.grifo000000003', id: 'grifo000000003', name: 'Grifo', isOwner: false, flags: { 'ligeia-livro-do-jogador': { conjuravel: true } } },
+    // Cópia conjurada pelo sistema: nunca entra.
+    { uuid: 'Actor.lobo2000000004', id: 'lobo2000000004', name: 'Lobo (conjurado)', isOwner: true, flags: { 'ligeia-rpg': { summoned: { by: 'x' } } } },
+    // De outro jogador, sem marcador: não entra.
+    { uuid: 'Actor.alheio00000005', id: 'alheio00000005', name: 'Corvo Alheio', isOwner: false }] };
 
 const sf = await import(new URL('../esmodules/spellforge.mjs', import.meta.url).href);
 const enc = await import(new URL('../esmodules/encantamento.mjs', import.meta.url).href);
@@ -153,7 +160,9 @@ const pecsDe = (nome, ...textos) => sf.parsePeculiaridades(load(nome)).filter((p
 const MM = (p, n) => sf.METAMAGIAS[p].find((m) => m.name === n);
 const criar = (nome, tier, extra = {}) => sf.construirMagia({ base: load(nome), tier, nome: '', palavra1: load(nome).system.wordId,
   palavra2: extra.p2 ?? '', palavra3: extra.p3 ?? '', pecs: extra.pecs ?? [], ajuste: 0, meta2: extra.meta2 ?? null,
-  meta3: extra.meta3 ?? null, escolha2: {}, escolha3: {}, criatura: extra.criatura ?? null }, { animar: false });
+  meta3: extra.meta3 ?? null, escolha2: {}, escolha3: {}, criatura: extra.criatura ?? null, criaturas: extra.criaturas,
+  palavra4: extra.p4 ?? '', meta4: extra.meta4 ?? null, palavra5: extra.p5 ?? '', meta5: extra.meta5 ?? null,
+  reacao: extra.reacao }, { animar: false });
 d = await criar('Invocar Animais', 'Menor');
 let x = d.system.actions[0].summons[0];
 ok(x.actorName === 'Fera pequena, Desafio até 2× Nível — arraste a ficha abaixo' && x.count === '1' && d.system.actions[0].costMp === '1'
@@ -171,24 +180,47 @@ ok(x.disposition === 'hostile' && x.giveControl === false && d.system.actions[0]
    '"não é amigável a ninguém": hostil e sem o controle; "perde 1 PV": +1 PV no custo (+4 na Conjuração)');
 d = await criar('Invocar Animais', 'Intermediária', { p2: 'pluribus', meta2: MM('pluribus', 'Magia Replicante') });
 x = d.system.actions[0].summons[0];
-ok(x.count === '2' && d.system.actions.length === 1 && !/não é de alvo nem de área/.test(d.system.description)
+ok(d.system.actions[0].summonCount === '2' && x.useGlobalCount && d.system.actions.length === 1 && !/não é de alvo nem de área/.test(d.system.description)
    && /Invoca: 2 × Fera pequena/.test(d.system.description),
-   'Replicante: invoca o dobro (2), sem ação copiada nem aviso de "registrada para a mesa"');
+   'Replicante: o número geral do cardápio dobra (2), sem ação copiada nem aviso de "registrada para a mesa"');
 d = await criar('Invocar Animais', 'Intermediária', { p2: 'majesto', meta2: MM('majesto', 'Magia Majestosa') });
 ok(d.system.actions[0].summons[0].actorName.startsWith('Fera média,'), 'Majestosa (Intermediária): uma categoria acima — média');
 d = await criar('Invocar Animais', 'Maior', { p2: 'majesto', meta2: MM('majesto', 'Magia Majestosa'), p3: 'pluribus',
   meta3: MM('pluribus', 'Magia Replicante'), pecs: pecsDe('Invocar Animais', 'Invoca criatura grande') });
 x = d.system.actions[0].summons[0];
-ok(x.actorName.startsWith('Fera imensa,') && x.count === '2', 'Maior: criatura grande + Majestosa (duas categorias) = imensa, e a Replicante dobra');
+ok(x.actorName.startsWith('Fera imensa,') && d.system.actions[0].summonCount === '2', 'Maior: criatura grande + Majestosa (duas categorias) = imensa, e a Replicante dobra');
 d = await criar('Invocar Plantas', 'Intermediária', { p2: 'pluribus', meta2: MM('pluribus', 'Magia Múltipla'),
   pecs: pecsDe('Invocar Plantas', 'Desafio 3 + seu nível') });
 ok(d.system.actions[0].summons[0].actorName.startsWith('Planta pequena, Desafio até Nível + 3'), 'Invocar Plantas: "Desafio 3 + seu nível" → até Nível + 3');
 d = await criar('Invocar', 'Menor', { criatura: { uuid: 'Compendium.x.y.Actor.abc', name: 'Diabrete' } });
 x = d.system.actions[0].summons[0];
-ok(x.actorUuid === 'Compendium.x.y.Actor.abc' && x.actorName === 'Diabrete'
-   && /Criatura pequena, Desafio até 2× Nível — ficha: Diabrete/.test(d.system.description)
+ok(x.actorUuid === 'Compendium.x.y.Actor.abc' && x.actorName === 'Diabrete' && x.useGlobalCount
+   && /ficha: Diabrete \(Criatura pequena, Desafio até 2× Nível\)/.test(d.system.description)
    && d.flags['ligeia-livro-do-jogador'].receita.criatura?.nome === 'Diabrete',
    'a ficha escolhida na oficina já vem na ação (e na receita)');
+
+console.log('4b) Cardápio de criaturas, Múltipla e sustentação (sistema build 31)');
+d = await criar('Invocar Animais', 'Menor', { criaturas: [{ uuid: 'Actor.lobo00000000001', name: 'Lobo' }, { uuid: 'Actor.urso0000000002', name: 'Urso' }] });
+let lista = d.system.actions[0].summons;
+ok(lista.length === 2 && lista.map((y) => y.actorName).join() === 'Lobo,Urso' && lista.every((y) => y.useGlobalCount && y.ownSheet)
+   && lista.every((y) => y.sustain === 'simple' && y.rounds === '0') && /cardápio — escolha na hora qual conjurar: Lobo, Urso/.test(d.system.description)
+   && d.flags['ligeia-livro-do-jogador'].receita.criaturas.length === 2,
+   'duas fichas marcadas: o cardápio tem as duas (a escolha é na hora), seguem o número geral e sustentam com a ação rápida');
+d = await criar('Invocar Animais', 'Intermediária', { p2: 'pluribus', meta2: MM('pluribus', 'Magia Múltipla'),
+  criaturas: [{ uuid: 'Actor.lobo00000000001', name: 'Lobo' }] });
+ok(d.system.actions[0].summonCount === '2' && d.system.actions.length === 1 && /2 × Lobo/.test(d.system.description),
+   'Múltipla (pluribus) numa magia que invoca: duas criaturas por conjuração');
+d = await criar('Invocar Animais', 'Maior', { p2: 'pluribus', meta2: MM('pluribus', 'Magia Múltipla'), p3: 'pluribus', meta3: MM('pluribus', 'Magia Múltipla') });
+ok(d.system.actions[0].summonCount === '3', `Múltipla duas vezes: o triplo (${d.system.actions[0].summonCount})`);
+d = await criar('Invocar Animais', 'Lendária (5 palavras)', { p2: 'pluribus', meta2: MM('pluribus', 'Magia Múltipla'), p3: 'pluribus',
+  meta3: MM('pluribus', 'Magia Múltipla'), p4: 'pluribus', meta4: MM('pluribus', 'Magia Múltipla'), p5: 'pluribus', meta5: MM('pluribus', 'Magia Replicante') });
+ok(d.system.actions[0].summonCount === '8' && d.system.actions[0].costMp === '5' && d.system.tier === 'Maior',
+   `lendária de 5 palavras: Múltipla ×3 (4) e Replicante (×2) = ${d.system.actions[0].summonCount} criaturas, 5 PM, Círculo Maior no sistema`);
+ok(load('Invocar Animais').system.actions[0].summons[0].sustain === 'simple' && load('Invocar').system.actions[0].summons[0].sustain === 'movement',
+   'compêndio: Invocar Animais sustenta com a ação rápida; Invocar (krucigon), com o movimento');
+const { suas, conjuraveis } = sf.fichasParaInvocar({ id: 'eu' }, game.actors);
+ok(suas.map((y) => y.name).join() === 'Lobo,Urso' && conjuraveis.map((y) => y.name).join() === 'Grifo',
+   'oficina: suas fichas (Lobo, Urso) e as conjuráveis do Narrador (Grifo) — sem a cópia conjurada nem a ficha alheia');
 d = await criar('Míssil Mágico', 'Intermediária', { p2: 'pluribus', meta2: MM('pluribus', 'Magia Replicante') });
 const copia = d.system.actions.find((y) => /Magia Replicante/.test(y.label));
 ok(copia && copia.variableCost.enabled === false && copia.summons.length === 0, 'as cópias (Múltipla/Replicante) não perguntam o gasto de novo nem invocam');
@@ -207,11 +239,13 @@ await app.render();
 app.forja.baseId = app.bases.find((y) => y.name === 'Invocar Animais')?.id;
 await app.render();
 let html = app.element.filho.innerHTML;
-ok(html.includes('Criatura invocada') && html.includes('value="Actor.lobo00000000001"') && html.includes('— arrastar depois —')
-   && html.includes('Fera pequena, Desafio até 2× Nível'), 'magia que invoca: fieldset com as fichas do mundo e o "arrastar depois"');
-app.forja.criatura = { uuid: 'Actor.lobo00000000001', name: 'Lobo' };
+ok(html.includes('Criaturas que a magia invoca') && html.includes('value="Actor.lobo00000000001"') && html.includes('value="Actor.grifo000000003"')
+   && html.includes('Conjuráveis') && !html.includes('Actor.lobo2000000004') && !html.includes('Corvo Alheio')
+   && html.includes('Fera pequena, Desafio até 2× Nível'), 'magia que invoca: cardápio com as suas fichas e as conjuráveis (marque várias)');
+app.forja.criaturas = [{ uuid: 'Actor.lobo00000000001', name: 'Lobo' }, { uuid: 'Actor.grifo000000003', name: 'Grifo' }];
 await app.criar();
-ok(ator.criadas[0]?.system.actions[0].summons[0].actorUuid === 'Actor.lobo00000000001', 'criar: a ficha escolhida entra na ação');
+ok(ator.criadas[0]?.system.actions[0].summons.map((y) => y.actorUuid).join() === 'Actor.lobo00000000001,Actor.grifo000000003',
+   'criar: as fichas marcadas entram no cardápio da ação');
 const app2 = sf.abrirCriacaoDeMagia(ator);
 app2.forja.palavra1 = 'ignis';
 await app2.render();

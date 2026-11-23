@@ -17,7 +17,181 @@
     "description": "<p>Pronunciando a palavra iluzio, você se concentra em manipular a luz, moldando sua ideia de imagem em algo visível.</p><p>Efeitos: Cria uma imagem média de uma criatura ou objeto no espaço alvo. A imagem não se move, não tem cheiro, não emite nenhum tipo de som e é intangível. Todos que interagirem com a ilusão (conversar, tocar, atacar...) deverão ser bem sucedidos em uma rolagem de Percepção oposta a Conjuração, para notar que se trata de uma ilusão.</p><p>Carisma concede +1 em Conjuração para esta conjuração.</p>",
     "peculiarities": "<p>A imagem tem cheiro (-4). A imagem se movimenta (-4). A imagem possui tangibilidade (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
-    "actions": [],
+    "actions": [
+      {
+        "label": "Imagem Ilusória (a imagem no espaço — quem interagir rola Percepção contra a Conjuração)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "percepcao",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "5*@nivel",
+        "area": "1",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "oY4ngcjtqQPzEGXD",
+          "label": "Imagem Ilusória",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.magicsign.illusion.02.purple",
+            "nome": "Ilusão"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "magicsign",
+              "animation": "illusion",
+              "variant": "02",
+              "color": "purple",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "target",
+              "size": 1.25,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Imagem Ilusória (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": true,
+        "persistRounds": "0",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "enter",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "simple",
+        "actionCost": "standard"
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,
@@ -37,7 +211,12 @@
         "label": "Círculo Menor",
         "level": "all"
       }
-    ]
+    ],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

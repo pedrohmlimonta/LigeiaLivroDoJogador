@@ -32,6 +32,7 @@ jobs:
           node tests/encantamento.test.mjs
           node tests/itens-magicos.test.mjs
           node tests/invocacao.test.mjs
+          node tests/acoes.test.mjs
 
       - name: Compilar packs (LevelDB)
         run: |

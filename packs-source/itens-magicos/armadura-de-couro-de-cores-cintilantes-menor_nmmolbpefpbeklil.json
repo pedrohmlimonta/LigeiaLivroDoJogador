@@ -15,6 +15,98 @@
     "description": "<p>Armadura feita de peças de couro firmemente costuradas com cânhamo ou outro tipo de costura durável.</p><p>Proteção: Corte, Perfuração e Concussão 1. Penalidade: -1 (atividades atléticas, acrobáticas, Conjuração e Esquiva). Propriedade: -</p><hr><h3>✦ Encantamento — Item Menor (lumo)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Cores Cintilantes</b> (lumo · Ação Rápida · Normal · +1.000 Vo · <b>1 PM por uso</b>)<br>Enquanto estiver usando um item com esta propriedade, você pode gastar 1 ponto de magia para que o item brilhe até o fim da cena. Enquanto brilha, o item ilumina uma área de 3m ao redor dele. Quando a luz é ativada, todas as criaturas dentro da área devem ser bem sucedidas em uma rolagem de Percepção, cuja dificuldade depende do valor do item, ou ficarão atordoadas até o fim da cena (Percepção anula).</li></ul><p>Preço das propriedades: +1.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 3 (1.000 Vo).</p>",
     "actions": [
       {
+        "label": "Vestir Armadura de Couro (liga o item)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [
+          {
+            "ref": "item|bnohalijaoaffkpg|0|Armadura de Couro",
+            "enabled": true
+          }
+        ],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
+      },
+      {
         "label": "✦ Cores Cintilantes — luz de 3m: Percepção 10 ou Atordoado (1 PM)",
         "level": "all",
         "canRoll": false,
@@ -80,7 +172,7 @@
             "fxFile": "",
             "fxScale": "1",
             "fxAaConfig": {
-              "id": "XGz9J8IC2ygDhDnO",
+              "id": "wwyendPBD0VD2mqM",
               "label": "Armadura de Couro de Cores Cintilantes (Menor)",
               "menu": "ontoken",
               "macro": {
@@ -169,7 +261,8 @@
             "fxAaName": "Atordoado (automática)",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -182,7 +275,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "bO3euTEGaQV27NAX",
+          "id": "uKK83gHf5ZtiYEiA",
           "label": "Armadura de Couro de Cores Cintilantes (Menor)",
           "menu": "ontoken",
           "macro": {
@@ -295,7 +388,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "simple",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -371,7 +467,12 @@
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "ignlpkaaidlofila",
@@ -413,7 +514,100 @@
           "antes": {
             "name": "Armadura de Couro",
             "system": {
-              "actions": [],
+              "actions": [
+                {
+                  "label": "Vestir Armadura de Couro (liga o item)",
+                  "level": "all",
+                  "canRoll": false,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "none",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "",
+                  "damage": "",
+                  "damageType": "",
+                  "damageResource": "hp",
+                  "scalingDamage": false,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [
+                    {
+                      "ref": "item|bnohalijaoaffkpg|0|Armadura de Couro",
+                      "enabled": true
+                    }
+                  ],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": false,
+                  "isMelee": false,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": null,
+                  "aaName": "",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "none"
+                }
+              ],
               "effects": [
                 {
                   "type": "rd",

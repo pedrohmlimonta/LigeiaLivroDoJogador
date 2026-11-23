@@ -15,6 +15,98 @@
     "description": "<p>Uma base metálica cuja parte traseira possui tiras de couro ou elos de aço usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p><hr><h3>✦ Encantamento — Item Maior (sorcdiron)</h3><p>Cada propriedade gasta, a cada uso, <b>PM igual ao nível dela</b> (Menor 1, Intermediário 2, Maior 3) — uma palavra só já alcança o grau mais alto. As constantes valem até o fim da cena.</p><ul><li><b>Bloqueio Absoluto</b> (sorcdiron · Constante · +3 em Bloqueio · +1.000.000 Vo · <b>3 PM por uso</b>)<br>Enquanto estiver usando este escudo, você recebe 1/2/3 pontos em Bloqueio (dependendo do preço do item).</li></ul><p>Preço das propriedades: +1.000.000 Vo.</p><p><b>Tesouro</b> (Sessão 17): Equipamento Mágico de Nível 16 (1.000.000 Vo).</p>",
     "actions": [
       {
+        "label": "Empunhar Escudo de Metal (liga o item)",
+        "level": "all",
+        "canRoll": false,
+        "rollAttr": "forca",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "none",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "esquiva",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [
+          {
+            "ref": "item|hihgbbmffdlnehgo|0|Escudo de Metal",
+            "enabled": true
+          }
+        ],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "0",
+        "area": "0",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": null,
+        "aaName": "",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "0",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": false,
+        "persistRounds": "1",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "standard"
+      },
+      {
         "label": "✦ Ativar Bloqueio Absoluto (3 PM, até o fim da cena)",
         "level": "all",
         "canRoll": false,
@@ -83,7 +175,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -96,7 +189,7 @@
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "27qJx2kHz6ECZyi0",
+          "id": "lspa0hHqiy9EJ5mc",
           "label": "Escudo de Bloqueio Absoluto (Maior)",
           "menu": "ontoken",
           "macro": {
@@ -209,7 +302,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "free",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],
@@ -224,7 +320,12 @@
     "mode": "active",
     "active": false,
     "effects": [],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": "ecedfijlibodgmkc",
@@ -266,7 +367,100 @@
           "antes": {
             "name": "Escudo de Metal",
             "system": {
-              "actions": [],
+              "actions": [
+                {
+                  "label": "Empunhar Escudo de Metal (liga o item)",
+                  "level": "all",
+                  "canRoll": false,
+                  "rollAttr": "forca",
+                  "rollBonus": "0",
+                  "rollDice": "0",
+                  "vsDifficulty": false,
+                  "fixedDifficulty": "8",
+                  "difficultyAttr": "nenhum",
+                  "targetMode": "none",
+                  "includeSelf": false,
+                  "areaFilter": "all",
+                  "defenseAttr": "esquiva",
+                  "defenseAttr2": "",
+                  "damage": "",
+                  "damageType": "",
+                  "damageResource": "hp",
+                  "scalingDamage": false,
+                  "heal": "",
+                  "healResource": "hp",
+                  "scalingHeal": false,
+                  "tempStack": false,
+                  "skipRollDialog": true,
+                  "extraDamage": [],
+                  "movement": {
+                    "enabled": false,
+                    "kind": "push",
+                    "who": "targets",
+                    "distance": "0",
+                    "lateralSide": "right",
+                    "ignoreWalls": false,
+                    "snap": true
+                  },
+                  "preActivations": [
+                    {
+                      "ref": "item|hihgbbmffdlnehgo|0|Escudo de Metal",
+                      "enabled": true
+                    }
+                  ],
+                  "drain": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "from": "both",
+                    "ratio": "1"
+                  },
+                  "removesEffects": [],
+                  "chainActions": [],
+                  "showInSheet": false,
+                  "appliesEffects": [],
+                  "lineWidth": "1.5",
+                  "coneAngle": "45",
+                  "isWeapon": false,
+                  "isMelee": false,
+                  "range": "0",
+                  "area": "0",
+                  "macroUuid": "",
+                  "macroName": "",
+                  "macroEnabled": true,
+                  "aaConfig": null,
+                  "aaName": "",
+                  "aaEnabled": true,
+                  "animFile": "",
+                  "animPlacement": "target",
+                  "animScale": "1",
+                  "animEnabled": true,
+                  "animAttach": false,
+                  "costMp": "0",
+                  "costHp": "0",
+                  "costHeroic": "0",
+                  "persistArea": false,
+                  "persistRounds": "1",
+                  "persistAffectsSelf": false,
+                  "persistRerollAttack": false,
+                  "persistTrigger": "both",
+                  "variableCost": {
+                    "enabled": false,
+                    "resource": "mp",
+                    "min": "1",
+                    "max": "",
+                    "label": "",
+                    "damageBonus": "",
+                    "healBonus": "",
+                    "areaBonus": "",
+                    "rangeBonus": "",
+                    "rollBonus": ""
+                  },
+                  "summons": [],
+                  "summonCount": "1",
+                  "persistSustain": "none",
+                  "actionCost": "standard"
+                }
+              ],
               "effects": [],
               "description": "<p>Uma base metálica cuja parte traseira possui tiras de couro ou elos de aço usadas para prendê-lo ao braço.</p><p>Propriedade: Deflexão (resultados iguais em uma rolagem de Bloqueio reduzem 1 ponto no dano bruto sofrido).</p>",
               "price": "15 Vo"

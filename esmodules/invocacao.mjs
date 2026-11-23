@@ -18,7 +18,17 @@
  *      com quantidade 1 e atitude padrão, e o marcador ficaria sobrando);
  *   2. ao usar, na ficha do personagem, uma ação que só tem marcadores, avisa
  *      que falta arrastar a ficha da criatura (sem ela o sistema não invoca
- *      nada).
+ *      nada);
+ *   3. CONJURÁVEL: o botão 🐾 no cabeçalho da ficha de uma criatura (para o
+ *      Narrador ou o dono) a marca como conjurável — ela passa a aparecer no
+ *      cardápio da Criação de Magias de qualquer conjurador, junto das fichas
+ *      que o jogador já possui.
+ *
+ * Desde o build 31 a lista de criaturas de uma ação é um CARDÁPIO: a ação
+ * conjura UMA delas (escolhida na hora), na quantidade do número geral da
+ * ação (summonCount) — Múltipla e Replicante aumentam esse número. Cada
+ * criatura ganha ficha própria na pasta "Conjurados" e, se a magia é
+ * sustentável, todas entram num vínculo só.
  */
 
 const MODULE_ID = "ligeia-livro-do-jogador";
@@ -61,6 +71,8 @@ export function encaixarNosMarcadores(antes, depois) {
     // Só um marcador ligado: o desligado (○) foi posto de lado de propósito.
     const k = novas.slice(0, -1).findIndex((x) => ehMarcador(x) && x.enabled !== false);
     if (k < 0) return;
+    // O marcador fica com o que é dele (quantidade, "segue o geral", ficha
+    // própria, sustentação, atitude, duração); a ficha arrastada entra nele.
     novas[k] = { ...novas[k], actorUuid: nova.actorUuid, actorName: nova.actorName || novas[k].actorName };
     novas.pop();
     encaixadas.push(nova.actorName || "criatura");
@@ -103,10 +115,61 @@ export function ligarNaFicha(app, html) {
   }, true);
 }
 
+/* ------------------------------------------------------------------ */
+/*  Conjurável: marcador nas fichas das criaturas                      */
+/* ------------------------------------------------------------------ */
+
+/** A ficha está marcada como conjurável? */
+export const ehConjuravel = (actor) => !!(actor?.getFlag?.(MODULE_ID, "conjuravel") ?? actor?.flags?.[MODULE_ID]?.conjuravel);
+
+/** Liga/desliga o marcador de conjurável. @returns {Promise<boolean>} o novo estado */
+export async function alternarConjuravel(actor) {
+  const novo = !ehConjuravel(actor);
+  if (novo) await actor.setFlag(MODULE_ID, "conjuravel", true);
+  else await actor.unsetFlag(MODULE_ID, "conjuravel");
+  return novo;
+}
+
+/** Botão 🐾 no cabeçalho da ficha (Narrador ou dono; nunca nas cópias conjuradas). */
+export function botaoConjuravel(app, html) {
+  const actor = app?.actor ?? app?.document;
+  if (!actor || actor.documentName !== "Actor") return;
+  if (!(globalThis.game?.user?.isGM || actor.isOwner)) return;
+  if (actor.getFlag?.("ligeia-rpg", "summoned")) return;
+  const HE = globalThis.HTMLElement;
+  const el = HE && html instanceof HE ? html : html?.[0];
+  const header = el?.closest?.(".app, .application")?.querySelector(".window-header")
+    ?? el?.querySelector?.(".window-header") ?? app.element?.querySelector?.(".window-header");
+  if (!header) return;
+  let btn = header.querySelector(".ligeia-conjuravel-btn");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "header-control ligeia-conjuravel-btn";
+    btn.innerHTML = '<i class="fa-solid fa-paw"></i>';
+    btn.style.cssText = "flex:0; min-width:24px;";
+    btn.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const ligado = await alternarConjuravel(actor);
+      globalThis.ui?.notifications?.info(ligado
+        ? `${actor.name} agora é conjurável: aparece no cardápio da Criação de Magias de qualquer conjurador.`
+        : `${actor.name} deixou de ser conjurável.`);
+    });
+    const fechar = header.querySelector('[data-action="close"], .close');
+    fechar ? header.insertBefore(btn, fechar) : header.appendChild(btn);
+  }
+  const ligado = ehConjuravel(actor);
+  btn.title = ligado ? "Conjurável (clique para desmarcar)" : "Marcar como conjurável (Criação de Magias)";
+  btn.style.opacity = ligado ? "1" : "0.45";
+  btn.classList.toggle("ativo", ligado);
+}
+
 globalThis.Hooks?.on?.("preUpdateItem", (item, mudancas) => aoAtualizarItem(item, mudancas));
+globalThis.Hooks?.on?.("renderActorSheetV2", botaoConjuravel);
+globalThis.Hooks?.on?.("renderActorSheet", botaoConjuravel);
 globalThis.Hooks?.on?.("renderActorSheetV2", ligarNaFicha);
 globalThis.Hooks?.on?.("renderActorSheet", ligarNaFicha);
 globalThis.Hooks?.once?.("ready", () => {
   const mod = globalThis.game?.modules?.get(MODULE_ID);
-  if (mod) mod.api = Object.assign(mod.api ?? {}, { encaixarNosMarcadores, faltaFicha });
+  if (mod) mod.api = Object.assign(mod.api ?? {}, { encaixarNosMarcadores, faltaFicha, ehConjuravel, alternarConjuravel });
 });

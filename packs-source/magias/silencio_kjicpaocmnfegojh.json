@@ -17,7 +17,209 @@
     "description": "<p>Você sussurra a palavra sonigu, anulando todas as ondas sonoras em uma determinada área.</p><p>Efeitos: Nenhum som pode ser emitido dentro da área. Criaturas que tentem emitir qualquer som dentro da área da magia devem ser bem sucedidas em uma rolagem de Força oposta a Conjuração. Magias que sejam compostas pela palavra sonigu não têm efeito nesta área, além desta já conjurada, a menos que o conjurador da outra magia seja bem sucedido em uma rolagem de Conjuração oposta a Conjuração.</p><p>Conhecimento (Natureza) concede +1 em Conjuração para esta conjuração.</p>",
     "peculiarities": "<p>Magias compostas pela palavra sonigu têm efeito na área (-2). Magias compostas pela palavra sonigu têm efeito na área, mas somente as que você conjurar (apenas Círculo Intermediário ou Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).</p>",
     "metamagics": [],
-    "actions": [],
+    "actions": [
+      {
+        "label": "Silêncio (área persistente — quem estiver nela não emite som: Força vs Conjuração)",
+        "level": "all",
+        "canRoll": true,
+        "rollAttr": "conjuracao",
+        "rollBonus": "0",
+        "rollDice": "0",
+        "vsDifficulty": false,
+        "fixedDifficulty": "8",
+        "difficultyAttr": "nenhum",
+        "targetMode": "area",
+        "includeSelf": false,
+        "areaFilter": "all",
+        "defenseAttr": "forca",
+        "defenseAttr2": "",
+        "damage": "",
+        "damageType": "",
+        "damageResource": "hp",
+        "scalingDamage": false,
+        "heal": "",
+        "healResource": "hp",
+        "scalingHeal": false,
+        "tempStack": false,
+        "skipRollDialog": true,
+        "extraDamage": [],
+        "movement": {
+          "enabled": false,
+          "kind": "push",
+          "who": "targets",
+          "distance": "0",
+          "lateralSide": "right",
+          "ignoreWalls": false,
+          "snap": true
+        },
+        "preActivations": [],
+        "drain": {
+          "enabled": false,
+          "resource": "mp",
+          "from": "both",
+          "ratio": "1"
+        },
+        "removesEffects": [],
+        "chainActions": [],
+        "showInSheet": false,
+        "appliesEffects": [
+          {
+            "label": "Silenciado — sem som na área (Surdo; Força anula)",
+            "fxType": "condition",
+            "fxTarget": "surdo",
+            "fxValue": "0",
+            "fxAll": false,
+            "durationMode": "rounds",
+            "durationRounds": "1",
+            "resist": false,
+            "resistAttr": "vigor",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0",
+            "fxSustain": "none"
+          }
+        ],
+        "lineWidth": "1.5",
+        "coneAngle": "45",
+        "isWeapon": false,
+        "isMelee": false,
+        "range": "3*@nivel",
+        "area": "@nivel",
+        "macroUuid": "",
+        "macroName": "",
+        "macroEnabled": true,
+        "aaConfig": {
+          "id": "QHLURR9pxC4J5Zyo",
+          "label": "Silêncio",
+          "menu": "ontoken",
+          "macro": {
+            "enable": false,
+            "name": "",
+            "args": "",
+            "playWhen": "0"
+          },
+          "soundOnly": {
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            }
+          },
+          "metaData": {
+            "origem": "ligeia-livro-do-jogador",
+            "automatica": true,
+            "chave": "static.spell.thunderwave.mid.blue",
+            "nome": "Sônico"
+          },
+          "isEnabled": true,
+          "isCustomized": true,
+          "fromAmmo": false,
+          "version": 5,
+          "primary": {
+            "video": {
+              "dbSection": "static",
+              "menuType": "spell",
+              "animation": "thunderwave",
+              "variant": "mid",
+              "color": "blue",
+              "enableCustom": false,
+              "customPath": ""
+            },
+            "sound": {
+              "enable": false,
+              "file": "",
+              "delay": 0,
+              "startTime": 0,
+              "volume": 0.75,
+              "repeat": 1,
+              "repeatDelay": 250
+            },
+            "options": {
+              "contrast": 0,
+              "hue": 0,
+              "saturate": 0,
+              "tint": false,
+              "tintColor": "#FFFFFF",
+              "delay": 1,
+              "elevation": 1000,
+              "isWait": false,
+              "opacity": 1,
+              "playbackRate": 1,
+              "repeat": 1,
+              "repeatDelay": 1,
+              "zIndex": 1,
+              "addTokenWidth": false,
+              "anchor": "0.5",
+              "fadeIn": 250,
+              "fadeOut": 500,
+              "isMasked": false,
+              "isRadius": false,
+              "persistent": false,
+              "playOn": "target",
+              "size": 1.25,
+              "unbindAlpha": false,
+              "unbindVisibility": false
+            }
+          },
+          "source": {
+            "enable": false
+          },
+          "secondary": {
+            "enable": false
+          },
+          "target": {
+            "enable": false
+          }
+        },
+        "aaName": "Silêncio (automática)",
+        "aaEnabled": true,
+        "animFile": "",
+        "animPlacement": "target",
+        "animScale": "1",
+        "animEnabled": true,
+        "animAttach": false,
+        "costMp": "1",
+        "costHp": "0",
+        "costHeroic": "0",
+        "persistArea": true,
+        "persistRounds": "0",
+        "persistAffectsSelf": false,
+        "persistRerollAttack": false,
+        "persistTrigger": "both",
+        "variableCost": {
+          "enabled": false,
+          "resource": "mp",
+          "min": "1",
+          "max": "",
+          "label": "",
+          "damageBonus": "",
+          "healBonus": "",
+          "areaBonus": "",
+          "rangeBonus": "",
+          "rollBonus": ""
+        },
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "simple",
+        "actionCost": "standard"
+      }
+    ],
     "enchantments": [],
     "costsCumulative": false,
     "noEnchant": false,
@@ -37,7 +239,12 @@
         "label": "Círculo Menor",
         "level": "all"
       }
-    ]
+    ],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

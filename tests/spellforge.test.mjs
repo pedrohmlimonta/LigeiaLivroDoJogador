@@ -107,7 +107,7 @@ d = await criar(load('combustao'), 'Maior', 'ignis', 'majesto', 'majesto', amp, 
 ok(d.system.actions[0].area === '3*(@nivel)', `área da base (Nível) x3 = ${d.system.actions[0].area}`);
 d = await criar(load('esfera-ignea'), 'Maior', 'ignis', 'majesto', 'majesto', amp, amp);
 ok(d.system.actions[0].area === '2*(3*@nivel)', `alvo → área (1ª) e área dobrada (2ª) = ${d.system.actions[0].area}`);
-ok(/segunda vez/.test(d.system.description), 'a receita registra a metamagia aplicada duas vezes');
+ok(/2ª vez/.test(d.system.description), 'a receita registra a metamagia aplicada duas vezes');
 const ard = M.ignis.find((m) => m.name === 'Magia Ardente');
 d = await criar(load('esfera-ignea'), 'Maior', 'ignis', 'ignis', 'ignis', ard, ard);
 ok(d.system.actions[0].appliesEffects.filter((x) => x.label.startsWith('Magia Ardente')).length === 1,
@@ -157,6 +157,40 @@ if (app) {
   const anim = nova?.system.actions[0].aaConfig;
   ok(anim?.metaData?.origem === 'ligeia-livro-do-jogador' && anim.primary.video.animation === 'chainlightning',
      'a magia criada pela janela já vem com animação (raio, pela metamagia da 3ª palavra)');
+
+  // Lendárias: até cinco palavras, uma metamagia por palavra além da primeira.
+  const app2 = mod.abrirCriacaoDeMagia(ator);
+  Object.assign(app2.forja, { palavra1: 'energio' });
+  await app2.render();
+  const raio2 = app2.bases.find((x) => x.name === 'Raio Arcano');
+  Object.assign(app2.forja, { tier: 'Lendária (5 palavras)', baseId: raio2?.id, palavra2: 'ignis', palavra3: 'fulgur', palavra4: 'ignis', palavra5: 'fulgur',
+    meta2i: M.ignis.findIndex((m) => m.name === 'Magia Flamejante'), meta3i: M.fulgur.findIndex((m) => m.name === 'Magia Eletrizante'),
+    meta4i: M.ignis.findIndex((m) => m.name === 'Magia Flamejante'), meta5i: M.fulgur.findIndex((m) => m.name === 'Magia Eletrizante') });
+  await app2.render();
+  html = app2.element.filho.innerHTML;
+  ok(html.includes('value="Lendária (5 palavras)" selected') && html.includes('name="palavra4"') && html.includes('name="palavra5"')
+     && html.includes('Quinta palavra e metamagia (prevalece em conflito)') && html.includes('<b>5 PM</b>') && html.includes('Metamagia 5'),
+     'janela: Lendária (5 palavras) mostra a 4ª e a 5ª palavra (com metamagia) e custa 5 PM');
+  ok(!html.includes('name="reacao"'), 'Raio Arcano (Ação), sem Acelerada: nada de "conjurar como reação"');
+  await app2.criar();
+  const lend = criadas.at(-1);
+  ok(lend?.system.tier === 'Maior' && lend.flags['ligeia-livro-do-jogador'].receita.lendaria === 5 && lend.system.metamagics.length === 4
+     && lend.system.actions[0].costMp === '5', 'criou a lendária: Círculo Maior no sistema, 5 palavras na receita, 4 metamagias, 5 PM');
+  const telepata = { name: 'Telepata', items: [{ type: 'habilidade', name: 'Palavra Arcana [menso]', system: { level: 'B' } }],
+    async createEmbeddedDocuments(tipo, lista) { criadas.push(...lista); return lista.map((x) => ({ ...x, sheet: null })); } };
+  const app3 = mod.abrirCriacaoDeMagia(telepata);
+  Object.assign(app3.forja, { palavra1: 'menso' });
+  await app3.render();
+  app3.forja.baseId = app3.bases.find((x) => x.name === 'Telepatia')?.id;
+  await app3.render();
+  html = app3.element.filho.innerHTML;
+  ok(!!app3.forja.baseId && html.includes('name="reacao"') && html.includes('Conjuração: <b>Ação Rápida</b>'),
+     'Telepatia (Ação Rápida): a janela oferece conjurá-la como reação');
+  app3.forja.reacao = true;
+  await app3.render();
+  ok(app3.element.filho.innerHTML.includes('Conjuração: <b>Reação</b>'), '…e, marcada, o resumo diz Reação');
+  await app3.criar();
+  ok(criadas.at(-1)?.system.actions[0].actionCost === 'reaction' && criadas.at(-1).system.casting === 'Reação', 'a Telepatia criada gasta a reação');
 }
 
 console.log('10) Animações da magia criada acompanham o que ela ficou fazendo');
@@ -239,7 +273,10 @@ ok(d.system.actions[0].appliesEffects.some((x) => x.fxType === 'set' && x.fxValu
 console.log('13) Metamagias em cadeia (sistema build 27): a principal cobra a mana, o resto dispara sozinho');
 const MM = (p, n) => M[p].find((m) => m.name === n);
 const lerRef = (ref) => { const [tipo, id, i, ...nome] = String(ref).split('|'); return { tipo, id, indice: Number(i), nome: nome.join('|') }; };
-const com = (slug, p1, p2, meta, escolha = {}, tier = 'Intermediária', extra = {}) => mod.construirMagia({ base: load(slug), tier, nome: '',
+// Magia só descritiva (o compêndio inteiro tem ações agora — a de um mundo pode não ter).
+const descritiva = (slug) => { const b = load(slug); const sys = { ...JSON.parse(JSON.stringify(b.system)), actions: [] };
+  return { name: b.name, system: sys, toObject() { return JSON.parse(JSON.stringify({ name: b.name, type: 'magia', system: sys, flags: {} })); } }; };
+const com = (slug, p1, p2, meta, escolha = {}, tier = 'Intermediária', extra = {}) => mod.construirMagia({ base: typeof slug === 'string' ? load(slug) : slug, tier, nome: '',
   palavra1: p1, palavra2: p2, palavra3: extra.p3 ?? '', pecs: extra.pecs ?? [], ajuste: 0, meta2: meta, meta3: extra.meta3 ?? null,
   escolha2: escolha, escolha3: extra.escolha3 ?? {} });
 // Cada referência entre as ações: "action|<id da magia>|<índice>|<nome da magia>" (o formato que a ficha marca).
@@ -291,7 +328,7 @@ d = await com('curar', 'vitae', 'vitae', MM('vitae', 'Magia Restauradora'), { co
 sub = d.system.actions[1];
 ok(JSON.stringify(sub.removesEffects) === JSON.stringify([{ mode: 'condition', value: 'enfraquecido', count: '1', enabled: true }]),
    'Magia Restauradora: tira um efeito da condição escolhida na criação (Enfraquecido)');
-d = await com('imagem-ilusoria', 'iluzio', 'vitae', MM('vitae', 'Magia Curativa'), { quem: 'voce' });
+d = await com(descritiva('imagem-ilusoria'), 'iluzio', 'vitae', MM('vitae', 'Magia Curativa'), { quem: 'voce' });
 a = d.system.actions[0];
 ok(/^Conjurar /.test(a.label) && a.costMp === '2' && a.canRoll && d.system.costs.length === 0 && d.system.actions[1].heal === '2'
    && d.system.actions[1].targetMode === 'self', 'magia só descritiva ganha "Conjurar" (cobra os 2 PM) e dispara a cura em você');
@@ -299,7 +336,7 @@ d = await com('escudo-arcano', 'forjuri', 'ignis', ard);
 const ataque = d.system.actions.find((x) => x.label.includes('Efeito de Magia Ardente'));
 ok(ataque?.costMp === '0' && ataque.label.startsWith('↳') && d.system.actions[0].chainActions.some((c) => c.when === 'always' && d.system.actions[lerRef(c.ref).indice] === ataque),
    'Escudo Arcano (em você) + Magia Ardente: o ataque da metamagia dispara junto ao conjurar, sem cobrar de novo');
-d = await com('imagem-ilusoria', 'iluzio', 'ignis', flam);
+d = await com(descritiva('imagem-ilusoria'), 'iluzio', 'ignis', flam);
 ok(d.system.actions.length === 1 && d.system.actions[0].costMp === '2' && d.system.actions[0].damageType === 'fogo',
    'magia sem ações + Flamejante: o ataque criado é a própria conjuração e cobra a mana');
 d = await com('esfera-ignea', 'ignis', 'menso', MM('menso', 'Magia Telecinética'));

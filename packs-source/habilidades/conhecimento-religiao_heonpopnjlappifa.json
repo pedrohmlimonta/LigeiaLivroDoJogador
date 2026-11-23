@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Criar um “fato” (A — 1 PH)",
@@ -186,7 +189,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -198,7 +204,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -208,13 +214,138 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Conhecimento [Religião]: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Visão Futura",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Visão Futura",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Barreira Arcana",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Barreira Arcana",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Forma Etérea",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Forma Etérea",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Teletransporte",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Teletransporte",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Invocar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Invocar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Chama Sagrada",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Chama Sagrada",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Consagrar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Consagrar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Aumento Arcano",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Aumento Arcano",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Encantar Objeto",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Encantar Objeto",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Melhoria Arcana",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Religião]: +1 em Conjuração de Melhoria Arcana",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

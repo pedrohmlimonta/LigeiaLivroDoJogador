@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Criar um “fato” (A — 1 PH)",
@@ -186,7 +189,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -198,7 +204,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -208,13 +214,186 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Conhecimento [Natureza]: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Rajada Ácida",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Rajada Ácida",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Corrosão",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Corrosão",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Controlar a Terra",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Controlar a Terra",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Força da Natureza",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Força da Natureza",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Invocar Animais",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Invocar Animais",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Invocar Plantas",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Invocar Plantas",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Relâmpago",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Relâmpago",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Área Congelada",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Área Congelada",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Transmutar Matéria",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Transmutar Matéria",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Transmutar Criatura",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Transmutar Criatura",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Ensurdecer",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Ensurdecer",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Imitar Sons",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Imitar Sons",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Rajada Sônica",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Rajada Sônica",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Silêncio",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Natureza]: +1 em Conjuração de Silêncio",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

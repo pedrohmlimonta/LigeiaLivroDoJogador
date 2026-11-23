@@ -182,7 +182,10 @@
           "rangeBonus": "100*@gasto",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "standard",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

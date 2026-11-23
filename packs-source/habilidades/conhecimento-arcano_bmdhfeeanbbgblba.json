@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Criar um “fato” (A — 1 PH)",
@@ -186,7 +189,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       }
     ],
     "enchantments": [],
@@ -198,7 +204,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -208,13 +214,234 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Conhecimento [Arcano]: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Aura Arcana",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Aura Arcana",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Raio Arcano",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Raio Arcano",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Explodir",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Explodir",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Míssil Mágico",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Míssil Mágico",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Toque Chocante",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Toque Chocante",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Raio de Gelo",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Raio de Gelo",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Esfera Ígnea",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Esfera Ígnea",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Combustão",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Combustão",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Cancelar Magia",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Cancelar Magia",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Queimar Magia",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Queimar Magia",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Luz",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Luz",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Rajada Cromática",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Rajada Cromática",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Aumentar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Aumentar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Diminuir",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Diminuir",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Replicar",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Replicar",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Simular",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Simular",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Lentidão",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Lentidão",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Velocidade",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Conhecimento [Arcano]: +1 em Conjuração de Velocidade",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,

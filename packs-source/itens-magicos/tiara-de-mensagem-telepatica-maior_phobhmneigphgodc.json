@@ -182,7 +182,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "actionCost": "standard",
+        "summonCount": "1",
+        "persistSustain": "none"
       }
     ],
     "enchantments": [],

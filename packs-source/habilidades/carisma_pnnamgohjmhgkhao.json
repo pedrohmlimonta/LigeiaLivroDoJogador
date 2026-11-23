@@ -102,7 +102,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "none"
       },
       {
         "label": "Presença Carismática (A): +1 aliados que possam ouvi-lo",
@@ -173,7 +176,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -299,7 +303,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "free"
       },
       {
         "label": "Presença Carismática (A): -1 inimigos que possam ouvi-lo",
@@ -370,7 +377,8 @@
             "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
-            "grantTempHp": "0"
+            "grantTempHp": "0",
+            "fxSustain": "none"
           }
         ],
         "lineWidth": "1.5",
@@ -496,7 +504,10 @@
           "rangeBonus": "",
           "rollBonus": ""
         },
-        "summons": []
+        "summons": [],
+        "summonCount": "1",
+        "persistSustain": "none",
+        "actionCost": "free"
       }
     ],
     "enchantments": [],
@@ -508,7 +519,7 @@
     "fxAaName": "",
     "fxAaPersist": true,
     "animOnActivate": true,
-    "mode": "active",
+    "mode": "passive",
     "active": false,
     "effects": [
       {
@@ -518,13 +529,126 @@
         "rerollAll": false,
         "vulnPercent": false,
         "label": "Carisma: +1 dado em rolagens de Mente aplicáveis (ligue quando valer)",
+        "enabled": false,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Causar Medo",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Causar Medo",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Esvaziar a Mente",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Esvaziar a Mente",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Controlar Criatura",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Controlar Criatura",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Imagem Ilusória",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Imagem Ilusória",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Visão Aterradora",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Visão Aterradora",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Telepatia",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Telepatia",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Imitar Sons",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Imitar Sons",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Rajada Psíquica",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Rajada Psíquica",
+        "enabled": true,
+        "enchant": false,
+        "level": "B",
+        "damageType": ""
+      },
+      {
+        "type": "bonus",
+        "target": "item:Tempestade Mental",
+        "value": "1",
+        "rerollAll": false,
+        "vulnPercent": false,
+        "label": "Carisma: +1 em Conjuração de Tempestade Mental",
         "enabled": true,
         "enchant": false,
         "level": "B",
         "damageType": ""
       }
     ],
-    "costs": []
+    "costs": [],
+    "actionCost": "none",
+    "sustain": {
+      "enabled": false,
+      "action": "simple"
+    }
   },
   "effects": [],
   "folder": null,
