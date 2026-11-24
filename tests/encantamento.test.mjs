@@ -556,7 +556,9 @@ for (const m of magias) {
     const it = construirItemConjurador(base, { magia: m, lendario });
     const c = dadosDaMagiaDoItem({ id: 'x', name: it.name }, receita(it));
     for (const doc of [it, c]) {
-      fs.writeFileSync(`${tmp2}/packs-source/conjuradores/${String(n2++).padStart(4, '0')}.json`, JSON.stringify({ ...doc, _id: `cj${n2}` }));
+      // A magia vinculada já nasce com id próprio (e as ações que ela dispara
+      // nela mesma — a Revelar Passado — apontam para ele): fica o dela.
+      fs.writeFileSync(`${tmp2}/packs-source/conjuradores/${String(n2++).padStart(4, '0')}.json`, JSON.stringify({ ...doc, _id: doc._id ?? `cj${n2}` }));
     }
   }
 }

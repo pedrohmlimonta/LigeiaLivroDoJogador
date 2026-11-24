@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Magias de exemplo (Círculo Menor) — parte 1 (acida a lumo). Fonte: Sessão 11."""
-from builders import magia, effect, cost, action, applies, summon
+from builders import magia, effect, cost, action, applies, summon, make_id
 
 IMG = "icons/svg/daze.svg"
 IMG_DMG = "icons/svg/explosion.svg"
@@ -16,6 +16,13 @@ def _invocar(rotulo, criatura, rng):
     return action(rotulo, can_roll=False, target_mode="none", include_self=False,
                   rng=rng, cost_mp=1,
                   summons=[summon(f"{criatura} — arraste a ficha abaixo")])
+
+
+def _cadeia_propria(magia, indice, when="always", targets="own"):
+    """Ação em cadeia para OUTRA ação da própria magia: a referência leva o id
+    do item (o mesmo que o gerador dá a ele), senão a ficha não a reconhece."""
+    return {"ref": f"action|{make_id('magia', magia)}|{indice}|{magia}",
+            "when": when, "targets": targets, "enabled": True}
 
 
 def _m(name, word, casting, target, area, rng, duration, desc, pecs,
@@ -62,11 +69,20 @@ MAGIAS_1 = [
     _m("Revelar Passado", "augurado", "Ação", "Uma criatura ou objeto", "", "Toque", "",
        "Você toca o seu alvo e pronuncia a palavra augurado, mergulhando na mente dele e viajando através de suas memórias. Durante essas visões, você e seu alvo ficam em transe, vivenciando o passado.\n\nEfeito: Permite que o conjurador veja cenas do passado do alvo ao tocá-lo, caso o alvo falhe em uma rolagem de Mente oposta a Conjuração. É possível acessar memórias de uma quantidade de dias atrás igual ao seu atributo de Conjuração. O conjurador e o alvo ficam atordoados por uma rodada.\n\nConhecimento (História) concede +1 em Conjuração para esta conjuração.",
        "Meses, em vez de dias (apenas Círculo Intermediário ou Maior) (-2). Anos, em vez de dias (apenas Círculo Maior) (-4). O conjurador sofre 1 ponto de dano quando conjura (+1). O conjurador não fica atordoado (-2). O alvo não fica atordoado (+1). O alvo sabe o que o conjurador está vendo (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
+       # "O conjurador e o alvo ficam atordoados por uma rodada": o alvo pela
+       # ação de toque; você, em cadeia, se a visão acontecer (o alvo falhou).
+       # As peculiaridades "O conjurador/O alvo não fica atordoado" tiram cada um.
        actions=[action("Revelar Passado (Conjuração vs Mente — toque)",
                        roll_attr="conjuracao", defense_attr="mente", cost_mp=1,
                        applies_effects=[applies("Atordoado (1 rodada)", fx_type="condition",
                                                 fx_target="atordoado", duration_mode="rounds",
-                                                duration_rounds=1)])]),
+                                                duration_rounds=1)],
+                       chain_actions=[_cadeia_propria("Revelar Passado", 1, when="hit")]),
+                action("↳ Revelar Passado (você): atordoado por 1 rodada, no transe",
+                       can_roll=False, target_mode="self", include_self=True,
+                       applies_effects=[applies("Atordoado (1 rodada — transe do Revelar Passado)",
+                                                fx_type="condition", fx_target="atordoado",
+                                                duration_mode="rounds", duration_rounds=1)])]),
     _m("Visão Futura", "augurado", "Ação", "Conjurador", "", "", "",
        "Você sussurra a palavra augurado para si mesmo, fazendo com que sua consciência viaje através do tempo, mostrando a você turvas imagens das ameaças que irão prejudicá-lo, auxiliando-o a tomar um melhor caminho.\n\nEfeito: Você pode re-rolar apenas uma vez todos os dados das suas próximas três rolagens. Você ainda pode gastar pontos heróicos para re-rolar qualquer uma delas normalmente. Você deve ficar com o segundo resultado, caso o faça.\n\nConhecimento (Religião) concede +1 em Conjuração para esta conjuração.",
        "Cinco rolagens, em vez de três (apenas Círculo Intermediário ou Maior) (-6). Sete rolagens, em vez de três (apenas Círculo Maior) (-8). O conjurador sofre 1 ponto de dano quando conjura (+1). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
@@ -116,8 +132,10 @@ MAGIAS_1 = [
        "Sustentável — Ação Rápida",
        "Conforme você pronuncia a palavra arcana devena e toca o chão, a natureza à sua volta responde ao seu comando, criando uma área de ameaça aos seus inimigos.\n\nEfeito: Você cria um efeito diferente dentro da área, de acordo com o terreno natural em que se encontra. O conjurador é imune ao efeito da magia.\n\nPlanícies (Ventania) — 1 dano bruto sônico e Lento até deixar a área. Montanhas (Terremoto) — 1 dano bruto de concussão e Caído. Colinas (Tempestade) — 1 dano bruto de raio e Surdo até deixar a área. Florestas (Nevoeiro) — 1 dano bruto de ácido e Cego até deixar a área. Pântanos (Vinhas) — 1 dano bruto de veneno e Lento até deixar a área. Desertos (Ondas de Calor) — 1 dano bruto de fogo e Enfraquecido até deixar a área. Glacial (Nevasca) — 1 dano bruto de frio e Lento até deixar a área. Subterrâneos (Vácuo) — 1 dano final e Emudecido até deixar a área. (Criaturas que entrarem ou iniciarem seus turnos dentro da área sofrem o efeito.)\n\nConhecimento (Natureza) concede +1 em Conjuração para esta conjuração.",
        "Adiciona um segundo efeito, de outro terreno (apenas Círculo Intermediário ou Maior) (-4). Adiciona dois efeitos de outros terrenos (apenas Círculo Maior) (-6). O terreno afeta você (+2). Só funciona em um tipo de terreno (+2). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
-       actions=[action("Força da Natureza (área persistente, dano por terreno)",
-                       roll_attr="conjuracao", target_mode="area", area=4, cost_mp=1,
+       # Emanação em volta de você (alcance 1m: a área no seu espaço — sem ele
+       # o sistema deixaria pôr a área em qualquer lugar do mapa).
+       actions=[action("Força da Natureza (área persistente em volta de você, dano por terreno)",
+                       roll_attr="conjuracao", target_mode="area", area=4, rng=1, cost_mp=1,
                        damage="1", damage_type="concussao",
                        persist_area=True, persist_rounds=0, persist_trigger="both")],
        img=IMG_DMG),
@@ -200,9 +218,12 @@ MAGIAS_1 = [
        "Sustentável — Ação",
        "Pronunciando a palavra forjuri, você cria em torno de si uma barreira que repele seus inimigos e os mantém afastados, protegendo você e seus aliados.\n\nEfeitos: Você conjura uma barreira do tamanho da área, em torno de si. Todos os seus inimigos dentro da barreira devem ser bem sucedidos em uma rolagem de Mente oposta a Conjuração, a cada rodada no começo do seu turno, ou serão empurrados para fora da barreira. Inimigos fora da barreira que tentem entrar deverão ser bem sucedidos em uma rolagem de Mente oposta a Conjuração, ou terão seu movimento finalizado adjacente à barreira. Ataques e magias que tenham você ou seus aliados dentro da barreira como alvos devem superar sua rolagem de Conjuração. Magias que afetem áreas devem superar sua rolagem de Conjuração para que afetem espaços dentro da barreira. Caso contrário, o ataque falha. Caso supere, o alvo do ataque deve se defender normalmente. Metamagias acrescentadas a esta magia base que afetarem você também afetam seus aliados dentro da barreira; as que afetariam alvos da magia afetam os inimigos dentro da barreira.\n\nConhecimento (Religião) concede +1 em Conjuração para esta conjuração. Conhecimento (Guerra) concede +1 em Conjuração para esta conjuração.",
        "Inimigos que falharem na rolagem de Mente oposta a Conjuração ficam pasmos até o fim da cena (Mente anula) (apenas Círculo Intermediário ou Maior) (-4). Inimigos que falharem na rolagem de Mente oposta a Conjuração ficam atordoados até o fim da cena (Mente anula) (apenas Círculo Maior) (-6). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1). Sustentável — Movimento (apenas Círculo Intermediário ou Maior) (-2). Sustentável — Ação Rápida (apenas Círculo Maior) (-4). Alcance (Aura) (apenas Círculo Maior) (-4).",
-       actions=[action("Barreira Arcana (Conjuração vs Mente — emanação)",
-                       roll_attr="conjuracao", target_mode="aura", area=2,
-                       defense_attr="mente", cost_mp=1,
+       # Emanação: a barreira nasce em volta de você e fica onde foi erguida
+       # (ponha a área no seu espaço — alcance 1m). A peculiaridade "Alcance
+       # (Aura)" a faz acompanhar você. Só os inimigos rolam.
+       actions=[action("Barreira Arcana (Conjuração vs Mente — emanação: ponha a área no seu espaço)",
+                       roll_attr="conjuracao", target_mode="area", area=2, rng=1,
+                       area_filter="enemies", defense_attr="mente", cost_mp=1,
                        persist_area=True, persist_rounds=0, persist_trigger="turn")],
        img=IMG_BUFF),
     # ------------------------------- FULGUR -----------------------------

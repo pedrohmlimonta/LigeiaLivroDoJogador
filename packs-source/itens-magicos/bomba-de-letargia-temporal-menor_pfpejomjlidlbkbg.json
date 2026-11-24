@@ -174,9 +174,9 @@
           },
           {
             "label": "Letargia Temporal: sem reações",
-            "fxType": "bonus",
-            "fxTarget": "all",
-            "fxValue": "0",
+            "fxType": "action",
+            "fxTarget": "acao:reaction",
+            "fxValue": "-1",
             "fxAll": false,
             "durationMode": "scene",
             "durationRounds": "1",

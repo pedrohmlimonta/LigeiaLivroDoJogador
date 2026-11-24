@@ -275,11 +275,13 @@ const continuo = (dt, attr, dc) => ap(`Dano contínuo de ${DTYPES[dt] ?? dt}`, {
 });
 const marcador = (label, extra = {}) => ap(label, { fxType: "bonus", fxTarget: "all", fxValue: "0", ...extra });
 /**
- * Ações a mais na rodada (sistema build 31, efeito "Ações por rodada"). Na
- * rodada, o efeito aumenta o máximo e o módulo devolve a ação na hora
- * (esmodules/economia.mjs); na cena, vale a cada turno.
+ * Ações a mais na rodada (efeito "Ações por rodada"). A ficha guarda o que já
+ * foi gasto (sistema build 32), então a ação concedida no meio do turno já
+ * vale na hora; na cena, vale a cada turno. "turno" é um turno inteiro a
+ * mais: +1 de cada ação (padrão, movimento, simples e reação).
  */
-const ROTULO_TIPO = { standard: "ação padrão", movement: "ação de movimento", simple: "ação rápida", reaction: "reação" };
+const ROTULO_TIPO = { standard: "ação padrão", movement: "ação de movimento", simple: "ação rápida", reaction: "reação",
+  turno: "turno (+1 de cada ação)" };
 const acaoAMais = (tipo, rotulo, { cena = false } = {}) => ap(`${rotulo}: +1 ${ROTULO_TIPO[tipo]}${cena ? " por turno" : " nesta rodada"}`, {
   fxType: "action", fxTarget: `acao:${tipo}`, fxValue: "1",
   durationMode: cena ? "scene" : "rounds", durationRounds: "1",
@@ -504,13 +506,13 @@ const REGRAS = {
   "pluribus-seta-fantasma": () => acaoInfo("segundo ataque contra outro alvo a até 3m"),
   // saeculorum
   "saeculorum-aceleracao": () => ({ acao: { rotulo: "turno adicional (uma vez por rodada)",
-    aplica: [acaoAMais("standard", "Aceleração"), acaoAMais("movement", "Aceleração"), acaoAMais("simple", "Aceleração")] } }),
+    aplica: [acaoAMais("turno", "Aceleração")] } }),
   "saeculorum-corrida": (c) => ({ info: `a montaria recebe +${c.V}m de Deslocamento` }),
   "saeculorum-desaceleracao": () => ({ acao: { rotulo: "o alvo atingido fica Lento (Força 10 anula)",
     targetMode: "target", aplica: [cond("lento", "forca", 10)] },
     obs: "Gastando 2 PM o alvo fica Imobilizado, e 3 PM, Paralisado — troque a condição na ficha do alvo." }),
   "saeculorum-letargia-temporal": () => bomba(cond("lento", "forca", null),
-    marcador("Letargia Temporal: sem reações", resiste("forca", null))),
+    ap("Letargia Temporal: sem reações", { fxType: "action", fxTarget: "acao:reaction", fxValue: "-1", ...resiste("forca", null) })),
   "saeculorum-movimento-rapido": () => ({ acao: { rotulo: "movimento adicional (uma vez por rodada)",
     aplica: [acaoAMais("movement", "Movimento Rápido")] } }),
   "saeculorum-preservacao": () => ({ info: "o corpo envolto conta 10 dias como 1 para Reviver" }),

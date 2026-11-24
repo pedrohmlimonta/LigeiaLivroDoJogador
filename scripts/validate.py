@@ -70,8 +70,9 @@ REF_KINDS = {"item", "effect", "action"}
 SUMMON_DISPOSITIONS = {"same", "friendly", "neutral", "hostile", "secret"}
 # Economia de ações (build 31): o que uma ação gasta, o que sustenta.
 ACTION_COSTS = {"none", "standard", "movement", "simple", "reaction", "free"}
-ACTION_EFFECT_TARGETS = {"acao:standard", "acao:movement", "acao:simple", "acao:reaction",
-                         "standard", "movement", "simple", "reaction", "corrida"}
+# Build 32: "acao:turno" — um turno inteiro a mais (soma em todos os tipos).
+ACTION_EFFECT_TARGETS = {"acao:standard", "acao:movement", "acao:simple", "acao:reaction", "acao:turno",
+                         "standard", "movement", "simple", "reaction", "turno", "corrida"}
 # Os itens de jogo que têm de ter ao menos uma ação (para executar o efeito ou
 # fazer a rolagem); raças, heranças, vocações, carreiras e organizações são
 # conjuntos — os traços e habilidades delas é que têm.
@@ -179,7 +180,7 @@ def validar_efeito(v, onde, e, leveled):
         if msg:
             v.err(onde, msg)
     elif tp == "action" and t not in ACTION_EFFECT_TARGETS:
-        v.err(onde, f"efeito de ações com alvo {t!r} (acao:standard/movement/simple/reaction ou corrida)")
+        v.err(onde, f"efeito de ações com alvo {t!r} (acao:standard/movement/simple/reaction/turno ou corrida)")
     elif tp == "emanation" and not str(t).startswith("emanacao:"):
         v.err(onde, f"emanação com alvo {t!r} (emanacao:<ação que a aura dispara>)")
     elif tp == "stat" and t not in STAT_TARGETS:

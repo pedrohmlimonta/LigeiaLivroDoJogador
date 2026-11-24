@@ -64,7 +64,7 @@
         "showInSheet": false,
         "appliesEffects": [
           {
-            "label": "Lento, sem reações (Agilidade anula)",
+            "label": "Lento (Agilidade anula)",
             "fxType": "condition",
             "fxTarget": "lento",
             "fxValue": "0",
@@ -84,7 +84,7 @@
             "fxFile": "",
             "fxScale": "1",
             "fxAaConfig": {
-              "id": "RSIqdqZoBZiy5HBY",
+              "id": "IWzbLZ2HCMkDjKD1",
               "label": "Lentidão",
               "menu": "ontoken",
               "macro": {
@@ -171,6 +171,33 @@
               }
             },
             "fxAaName": "Lento (automática)",
+            "fxAaPersist": true,
+            "fxEnchant": false,
+            "grantTempHp": "0",
+            "fxSustain": "none"
+          },
+          {
+            "label": "Sem reações (Agilidade anula)",
+            "fxType": "action",
+            "fxTarget": "acao:reaction",
+            "fxValue": "-1",
+            "fxAll": false,
+            "durationMode": "scene",
+            "durationRounds": "1",
+            "resist": true,
+            "resistAttr": "agilidade",
+            "resistVsCast": true,
+            "resistDc": "0",
+            "resistReroll": false,
+            "tickAmount": "0",
+            "tickType": "",
+            "tickResource": "hp",
+            "tickHealAmount": "0",
+            "tickHealResource": "hp",
+            "fxFile": "",
+            "fxScale": "1",
+            "fxAaConfig": null,
+            "fxAaName": "",
             "fxAaPersist": true,
             "fxEnchant": false,
             "grantTempHp": "0",

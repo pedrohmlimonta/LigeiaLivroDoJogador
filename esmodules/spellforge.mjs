@@ -474,7 +474,10 @@ export function parsePeculiaridades(item) {
   while ((m = re.exec(texto)) !== null) {
     const rot = m[1].replace(/^[\s\-–•]+/, "").trim();
     if (rot.length < 6) continue;
-    out.push({ texto: rot, mod: Number(m[2]), circulos: circulosDe(rot + ")") });
+    const r = regraDaPeculiaridade(rot, item?.name ?? "");
+    out.push({ texto: rot, mod: Number(m[2]), circulos: circulosDe(rot + ")"),
+      // Alternativas (só uma vale), se muda a magia criada e o que se escolhe ao marcar.
+      grupo: r?.grupo ?? null, muda: !!(r?.regra.aplicar || r?.regra.resumo), pede: r?.regra.escolha ?? null });
   }
   return out;
 }
@@ -1324,8 +1327,9 @@ const RE_MARCADOR = new RegExp(`^(.+?) (${TAMANHOS.join("|")}), Desafio até (.+
  * O que as peculiaridades e a Majestosa mudam na criatura invocada:
  *   tamanho  "Invoca criatura média/grande" (a mais alta marcada)
  *   majestosa categorias a mais (Magia Majestosa: 1; 2 no Círculo Maior)
- *   desafio  { soma: N } ("Aumente o Desafio em +N") ou { nivelMais: N }
- *            ("Desafio N + seu nível, ou menos") — o maior marcado
+ *   desafio  { soma: N } ("Aumente o Desafio em +N"), { nivelMais: N }
+ *            ("Desafio N + seu nível, ou menos") ou { vezes: N } ("Desafio
+ *            igual a três vezes o seu nível") — o maior marcado
  *   hostil   "A criatura não é amigável a ninguém"
  */
 export function mudancasDaInvocacao(pecs = [], { circ = 1, metas = [] } = {}) {
@@ -1339,6 +1343,10 @@ export function mudancasDaInvocacao(pecs = [], { circ = 1, metas = [] } = {}) {
       if (!out.desafio || Number(m[1]) > (out.desafio.soma ?? 0)) out.desafio = { soma: Number(m[1]) };
     } else if ((m = x.match(/^desafio (\d+) \+ seu nivel/))) {
       if (!out.desafio || Number(m[1]) > (out.desafio.nivelMais ?? 0)) out.desafio = { nivelMais: Number(m[1]) };
+    } else if ((m = x.match(/^uma criatura de desafio igual a (tres|quatro) vezes o seu nivel/))) {
+      // Invocar os Mortos: "Desafio igual a três (quatro) vezes o seu nível".
+      const n = m[1] === "tres" ? 3 : 4;
+      if (!out.desafio || n > (out.desafio.vezes ?? 0)) out.desafio = { vezes: n };
     }
   }
   out.hostil = t.some((x) => /nao e amigavel a ninguem/.test(x));
@@ -1348,14 +1356,23 @@ export function mudancasDaInvocacao(pecs = [], { circ = 1, metas = [] } = {}) {
 
 /** "Fera pequena, Desafio até 2× Nível — arraste a ficha abaixo" com as mudanças aplicadas. */
 export function nomeDaInvocacao(nome, mud) {
+  if (!mud) return nome;
+  const novoDesafio = (desafio) => {
+    if (mud.desafio?.soma) return `${desafio} + ${mud.desafio.soma}`;
+    if (mud.desafio?.nivelMais) return `Nível + ${mud.desafio.nivelMais}`;
+    if (mud.desafio?.vezes) return `${mud.desafio.vezes}× Nível`;
+    return desafio;
+  };
   const m = String(nome ?? "").match(RE_MARCADOR);
-  if (!m || !mud) return nome;
+  if (!m) {
+    // Marcador sem tamanho (o cadáver do Invocar os Mortos): só o Desafio muda.
+    const d = String(nome ?? "").match(/^(.+?), Desafio até (.+?)( — arraste a ficha.*)?$/);
+    return d && mud.desafio ? `${d[1]}, Desafio até ${novoDesafio(d[2])}${d[3] ?? ""}` : nome;
+  }
   let [, tipo, tamanho, desafio, resto] = m;
   if (mud.tamanho && TAMANHOS.indexOf(mud.tamanho) > TAMANHOS.indexOf(tamanho)) tamanho = mud.tamanho;
   if (mud.majestosa) tamanho = TAMANHOS[Math.min(TAMANHOS.length - 1, TAMANHOS.indexOf(tamanho) + mud.majestosa)];
-  if (mud.desafio?.soma) desafio = `${desafio} + ${mud.desafio.soma}`;
-  else if (mud.desafio?.nivelMais) desafio = `Nível + ${mud.desafio.nivelMais}`;
-  return `${tipo} ${tamanho}, Desafio até ${desafio}${resto ?? ""}`;
+  return `${tipo} ${tamanho}, Desafio até ${novoDesafio(desafio)}${resto ?? ""}`;
 }
 
 /**
@@ -1415,6 +1432,719 @@ function descreverInvocacoes(lista, acoes = []) {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Peculiaridades: o que cada uma muda na magia criada                */
+/* ------------------------------------------------------------------ */
+/*
+ * Toda peculiaridade soma o seu ± na Conjuração. As que o livro diz que mudam
+ * a magia — o tipo de ação que a Velocidade dá, a condição da Lentidão, o
+ * alcance, uma condição ou um dano contínuo a mais, o custo em PV... — mudam
+ * também as ações do item criado. As demais (restrições de alvo e terreno,
+ * componentes, o que o Mestre arbitra) ficam registradas na receita, com o
+ * que fazem. REGRAS_PECULIARIDADES classifica cada uma; o teste confere que
+ * nenhuma das 70 magias do livro ficou sem regra.
+ */
+
+/** Palavras do livro → id da condição no sistema. */
+const CONDICAO_DA_PALAVRA = [
+  [/^imobilizad[oa]s?$/, "imobilizado"], [/^paralisad[oa]s?$/, "paralisado"],
+  [/^atordoad[oa]s?$/, "atordoado"], [/^pasm[oa]s?$/, "pasmo"], [/^ceg[oa]s?$/, "cego"],
+  [/^enfraquecid[oa]s?$/, "enfraquecido"], [/^exaust[oa]s?$/, "exausto"],
+  [/^abalad[oa]s?$/, "abalado"], [/^inconscientes?$/, "inconsciente"], [/^lent[oa]s?$/, "lento"],
+];
+const condicaoDaPalavra = (w) => CONDICAO_DA_PALAVRA.find(([re]) => re.test(w))?.[1] ?? null;
+
+/**
+ * Condições da mesma ESCADA (a de cima já faz o que a de baixo faz): numa
+ * magia, duas peculiaridades da mesma escada são alternativas — o Atordoado
+ * toma o lugar do Pasmo, o Paralisado o do Imobilizado.
+ */
+const ESCADA = { pasmo: "atordoamento", atordoado: "atordoamento", imobilizado: "imobilizacao", paralisado: "imobilizacao" };
+
+/** "(Vigor anula)" → "vigor": o atributo da rolagem que encerra o efeito. */
+function anulaCom(t) {
+  const m = String(t).match(/\((forca|agilidade|vigor|mente|percepcao) anula\)/);
+  return m ? m[1] : null;
+}
+
+/** A condição que o texto põe nos alvos ("o alvo também fica cego", "ficará exausto"...). */
+function condicaoDoTexto(t) {
+  if (/\bvoce fica\b|em vez de|nao fica|nao pode fazer reacoes/.test(t)) return null;
+  const m = t.match(/\bfica(?:m|ra)?(?: tambem)? ([a-z]+)/);
+  const cond = m ? condicaoDaPalavra(m[1]) : null;
+  return cond ? [t, cond] : null;
+}
+
+/** O dano contínuo que o texto acrescenta ("dano contínuo de frio", "dano sônico contínuo"). */
+function danoContinuoDoTexto(t) {
+  const m = t.match(/dano continuo (?:de )?([a-z]+)|dano ([a-z]+) continuo/);
+  const tipo = m?.[1] ?? m?.[2];
+  return tipo && DTYPES[tipo] ? [t, tipo] : null;
+}
+
+/** As ações da própria magia (sem as que as metamagias e as peculiaridades acrescentam). */
+const acoesDaMagia = (data) => data.system.actions.filter((a) => !a._interna);
+
+/** [ação, efeito] dos efeitos aplicados das ações da magia que passam no filtro. */
+function efeitosDe(data, filtro) {
+  return acoesDaMagia(data).flatMap((a) => (a.appliesEffects ?? []).filter((e) => filtro(e, a)).map((e) => [a, e]));
+}
+
+/** Tira os efeitos aplicados que passam no filtro. @returns {number} quantos */
+function removerEfeitos(data, filtro) {
+  let n = 0;
+  for (const a of acoesDaMagia(data)) {
+    const antes = (a.appliesEffects ?? []).length;
+    a.appliesEffects = (a.appliesEffects ?? []).filter((e) => !filtro(e, a));
+    n += antes - a.appliesEffects.length;
+  }
+  return n;
+}
+
+/**
+ * Tira uma ação da magia. As referências da magia às próprias ações são por
+ * índice: a da removida sai e as de depois dela descem uma posição.
+ */
+function removerAcao(data, alvo, { id = "", nome = "" } = {}) {
+  const acoes = data.system.actions;
+  const k = acoes.indexOf(alvo);
+  if (k < 0) return false;
+  acoes.splice(k, 1);
+  const propria = (r) => r.tipo === "action" && ((id && r.id === id) || r.nome === String(nome).replace(/\|/g, "/"));
+  for (const a of acoes) {
+    for (const campo of ["chainActions", "preActivations"]) {
+      a[campo] = (a[campo] ?? []).filter((elo) => {
+        const r = lerRef(elo?.ref);
+        if (!propria(r)) return true;
+        if (r.indice === k) return false;
+        if (r.indice > k) elo.ref = refAcao(r.id, r.indice - 1, r.nome);
+        return true;
+      });
+    }
+  }
+  return true;
+}
+
+/** Troca a condição que a magia aplica (e o nome do efeito). @returns {number} quantas */
+function trocarCondicao(data, de, para) {
+  const efs = efeitosDe(data, (e) => e.fxType === "condition" && e.fxTarget === de);
+  for (const [, e] of efs) {
+    e.fxTarget = para;
+    e.label = String(e.label ?? "").includes(ROTULO_COND[de])
+      ? e.label.replace(ROTULO_COND[de], ROTULO_COND[para]) : ROTULO_COND[para];
+  }
+  return efs.length;
+}
+
+/**
+ * Mais uma condição nas ações que atingem, resistida como o texto diz ("(Vigor
+ * anula)": o alvo rola Vigor contra a Conjuração no começo de cada turno).
+ */
+function somarCondicao(data, cond, { resist = null, rotulo = null, rodadas = 0 } = {}) {
+  const lista = acoesOfensivas(data);
+  if (!lista.length) return null;
+  const nome = rotulo ?? `${ROTULO_COND[cond] ?? cond}${resist ? ` (${ATTRS[resist]} anula)` : ""}`;
+  for (const a of lista) {
+    (a.appliesEffects ??= []).push(novoApplies(nome, {
+      fxType: "condition", fxTarget: cond,
+      durationMode: rodadas ? "rounds" : "scene", durationRounds: String(rodadas || 1),
+      resist: !!resist, resistAttr: resist || "vigor",
+      // Sem rolagem na ação, a "CD da conjuração" seria 0: CD fixa 10.
+      resistVsCast: !!a.canRoll, resistDc: a.canRoll ? "0" : "10",
+    }));
+  }
+  return nome;
+}
+
+/** Um lembrete na aba de efeitos do alvo (o que o sistema não conta sozinho). */
+function somarLembrete(data, rotulo, { resist = null } = {}) {
+  const lista = acoesOfensivas(data);
+  for (const a of lista) {
+    (a.appliesEffects ??= []).push(novoApplies(rotulo, {
+      fxType: "bonus", fxTarget: "all", fxValue: "0", durationMode: "scene",
+      resist: !!resist, resistAttr: resist || "vigor", resistVsCast: !!a.canRoll, resistDc: a.canRoll ? "0" : "10",
+    }));
+  }
+  return lista.length ? rotulo : null;
+}
+
+/** Troca um trecho nos nomes das ações e dos efeitos da magia. @returns {number} quantos */
+function trocarTexto(data, de, para) {
+  let n = 0;
+  const troca = (s) => { const novo = String(s ?? "").replace(de, para); if (novo !== s) n++; return novo; };
+  for (const a of acoesDaMagia(data)) {
+    a.label = troca(a.label);
+    for (const e of a.appliesEffects ?? []) e.label = troca(e.label);
+  }
+  return n;
+}
+
+/** Acrescenta um trecho ao nome das ações da magia (as que se usam). */
+function anotarAcoes(data, trecho, filtro = () => true) {
+  const lista = acoesDaMagia(data).filter((a) => !/^↳/.test(a.label ?? "") && filtro(a));
+  for (const a of lista) {
+    a.label = /\)$/.test(a.label) ? a.label.replace(/\)$/, ` — ${trecho})`) : `${a.label} (${trecho})`;
+  }
+  return lista.length ? trecho : null;
+}
+
+/** +n PV no custo de cada conjuração. */
+function somarCustoPV(data, n = 1) {
+  const lista = acoesIniciais(data);
+  for (const a of lista) {
+    const hp = String(a.costHp ?? "0").trim() || "0";
+    a.costHp = /^\d+$/.test(hp) ? String(Number(hp) + n) : `${hp}+${n}`;
+  }
+  return lista.length ? `+${n} PV no custo de cada conjuração` : null;
+}
+
+/** "Alcance (Toque)": as ações que atingem passam a ser de toque. */
+function deToque(data) {
+  const lista = acoesOfensivas(data);
+  for (const a of lista) { a.range = ""; a.isMelee = true; }
+  return lista.length ? "a magia passa a ser de toque" : null;
+}
+
+/** "Alcance (Emanação)": as ações que atingem saem de você, no raio dado (ou no da área). */
+function deEmanacao(data, raio = null) {
+  const lista = acoesOfensivas(data);
+  for (const a of lista) {
+    a.targetMode = "aura"; a.range = ""; a.isMelee = false; a.includeSelf = false;
+    if (raio) a.area = String(raio);
+    else if (!a.area || a.area === "0") a.area = "@nivel";
+  }
+  return lista.length ? `vira emanação em volta de você${raio ? ` (área de ${raio}m)` : ""}; você não é afetado` : null;
+}
+
+/** "Alvo muda de Conjurador para Criatura": o que era em você passa a ser de toque, em você ou noutra criatura. */
+function paraCriatura(data) {
+  const lista = acoesDaMagia(data).filter((a) => a.targetMode === "self" && !/^↳/.test(a.label ?? ""));
+  for (const a of lista) {
+    a.targetMode = "target"; a.isMelee = true; a.range = ""; a.includeSelf = true;
+    a.label = /\(/.test(a.label) ? a.label.replace("(", "(toque, em você ou numa criatura — ") : `${a.label} (toque, em você ou numa criatura)`;
+  }
+  return lista.length ? "o alvo passa a ser uma criatura tocada (você também pode)" : null;
+}
+
+/** Copia uma ação com o que ela dispara antes e em cadeia nos alvos (Míssil Mágico, efeitos a mais). */
+function duplicarAcao(data, a, rotulo) {
+  const sys = data.system;
+  const copia = copiarAcao(a);
+  copia.label = rotulo;
+  sys.actions.push(copia);
+  for (const sub of a._antes ?? []) {
+    const s2 = copiarAcao(sub);
+    s2.label = `${sub.label} (${rotulo.replace(/^↳\s*/, "")})`;
+    sys.actions.push(s2);
+    (copia._antes ??= []).push(s2);
+  }
+  for (const elo of a._cadeia ?? []) {
+    if (elo.targets === "own" || elo.targets === "pick") continue; // uma vez por conjuração / outras cópias
+    const s2 = copiarAcao(elo.alvo);
+    s2.label = `${elo.alvo.label} (${rotulo.replace(/^↳\s*/, "")})`;
+    sys.actions.push(s2);
+    (copia._cadeia ??= []).push({ alvo: s2, when: elo.when, targets: elo.targets });
+  }
+  return copia;
+}
+
+/** Velocidade: a ação a mais deixa de ser a de movimento. */
+function velocidadeDa(alvo, valor, rotulo) {
+  return (data) => {
+    const efs = efeitosDe(data, (e) => e.fxType === "action" && e.fxTarget === "acao:movement");
+    if (!efs.length) return null;
+    for (const [a, e] of efs) {
+      e.fxTarget = alvo;
+      e.fxValue = String(valor);
+      e.label = String(e.label).replace("+1 ação de movimento por turno", rotulo);
+      a.label = String(a.label).replace("+1 ação de movimento por turno", rotulo);
+    }
+    return `${rotulo}, em vez da ação de movimento a mais`;
+  };
+}
+
+/** "Corte, Perfuração e Concussão". */
+const listaE = (l) => (l.length > 1 ? `${l.slice(0, -1).join(", ")} e ${l[l.length - 1]}` : l[0] ?? "");
+
+/** Armadura Arcana: a Proteção de outro tipo de dano (troca as três ou soma uma). */
+function protecaoDe(modo) {
+  return (data, { escolha }) => {
+    const tipo = DTYPES[escolha?.damageType] ? escolha.damageType : "fogo";
+    const efs = efeitosDe(data, (e) => e.fxType === "rd");
+    if (!efs.length) return null;
+    const valor = String(Math.max(...efs.map(([, e]) => Number(e.fxValue) || 1)));
+    const [acao, molde] = efs[0];
+    const novo = { ...JSON.parse(JSON.stringify(molde)), fxTarget: tipo, fxValue: valor,
+      label: String(molde.label).replace(/RD \d+ [^·]+$/, `RD ${valor} ${DTYPES[tipo].toLowerCase()}`) };
+    let resumo;
+    if (modo === "troca") {
+      removerEfeitos(data, (e) => e.fxType === "rd");
+      acao.appliesEffects.push(novo);
+      resumo = `Proteção ${valor} contra ${DTYPES[tipo]}, no lugar de Corte, Perfuração e Concussão`;
+    } else if (efs.some(([, e]) => e.fxTarget === tipo)) {
+      return `${DTYPES[tipo]} já era protegido`;
+    } else {
+      acao.appliesEffects.push(novo);
+      resumo = `Proteção ${valor} também contra ${DTYPES[tipo]}`;
+    }
+    // O nome da ação diz contra o que a Proteção vale agora.
+    const tipos = acao.appliesEffects.filter((e) => e.fxType === "rd").map((e) => DTYPES[e.fxTarget] ?? e.fxTarget);
+    acao.label = acao.label.replace(/Proteção \d+(?: contra [^—)]+?)?(?= —|\))/, `Proteção ${valor} contra ${listaE(tipos)}`);
+    return resumo;
+  };
+}
+
+/** Aumentar / Diminuir: categorias de tamanho e dados de melhoria. */
+function tamanhoDe(sinal, cat, dados) {
+  return (data) => {
+    const efs = efeitosDe(data, (e) => e.fxType === "size" || e.fxType === "dice");
+    if (!efs.length) return null;
+    for (const [, e] of efs) {
+      if (e.fxType === "size") {
+        e.fxValue = String(sinal * cat);
+        e.label = e.label.replace(/\d+ categorias?/, `${cat} categorias`);
+      } else if (dados[e.fxTarget] != null) {
+        e.fxValue = String(dados[e.fxTarget]);
+        e.label = e.label.replace(/\d+D/, `${dados[e.fxTarget]}D`);
+      }
+    }
+    const resumo = `${Object.entries(dados).map(([k, v]) => `${v}D em ${ATTRS[k]}`).join(", ")}; ${sinal > 0 ? "+" : "−"}${cat} categorias de tamanho`;
+    for (const a of new Set(efs.map(([x]) => x))) a.label = a.label.replace(/\(toque — [^)]*\)/, `(toque — ${resumo})`);
+    return resumo;
+  };
+}
+
+/** Rótulos das restrições e exigências que o sistema não confere sozinho. */
+const NOTA_RESTRICAO = "restrição de alvo ou de lugar — o Mestre confere (o bônus já entra na Conjuração)";
+
+/**
+ * As regras das peculiaridades do livro. Cada uma reconhece o texto (sem
+ * acentos, minúsculo) e diz o que faz na magia criada:
+ *   re      expressão (ou função) que reconhece o texto
+ *   magia   magia de base em que a regra vale (sem acentos); sem ela, todas
+ *   grupo   peculiaridades ALTERNATIVAS (só uma vale): na janela, marcar uma
+ *           desmarca as outras; na criação, fica a de maior desconto
+ *   fase    "antes" das metamagias (o padrão: o que elas copiam e ampliam já
+ *           sai mudado) ou "depois" (custos e cópias da ação final)
+ *   escolha o que o jogador escolhe ao marcar ("dtype": um tipo de dano)
+ *   aplicar (data, ctx) => resumo  muda a magia; null = nada a mudar aqui
+ *   resumo  o que faz, quando quem aplica é outra parte da criação
+ *           (criatura invocada, sustentação)
+ *   nota    só registrada: o efeito é narrativo, o Mestre arbitra
+ * A primeira regra que reconhece o texto vale.
+ */
+export const REGRAS_PECULIARIDADES = [
+  // ---- Exigências e restrições (só o bônus) -------------------------------
+  { re: /^necessita de componentes/, nota: "exigência de conjuração: tenha os componentes (o bônus já entra na Conjuração)" },
+  { re: /^(a magia )?(so|nao) (funciona|afeta)|^afeta apenas|^so (fica invisivel para|um tipo de criatura pode)/, nota: NOTA_RESTRICAO },
+
+  // ---- Saeculorum ---------------------------------------------------------
+  // Lentidão: a condição muda, a reação continua tirada (ou o Paralisado já tira tudo).
+  { magia: "lentidao", re: /fica imobilizado e nao pode fazer reacoes/, grupo: "lentidao",
+    aplicar: (data) => (trocarCondicao(data, "lento", "imobilizado")
+      ? "Imobilizado (Agilidade anula) no lugar do Lento; continua sem reações" : null) },
+  { magia: "lentidao", re: /fica paralisado ate o fim da cena/, grupo: "lentidao",
+    aplicar: (data) => {
+      if (!trocarCondicao(data, "lento", "paralisado")) return null;
+      removerEfeitos(data, (e) => e.fxType === "action" && e.fxTarget === "acao:reaction");
+      return "Paralisado (Agilidade anula) no lugar do Lento — o Paralisado já tira todas as ações, a reação também";
+    } },
+  // Velocidade: a ação a mais é outra ("em vez de movimento").
+  { magia: "velocidade", re: /recebe uma reacao adicional/, grupo: "velocidade",
+    aplicar: velocidadeDa("acao:reaction", 1, "+1 reação por rodada") },
+  { magia: "velocidade", re: /recebe uma acao adicional/, grupo: "velocidade",
+    aplicar: velocidadeDa("acao:standard", 1, "+1 ação padrão por turno") },
+  { magia: "velocidade", re: /recebe um turno adicional/, grupo: "velocidade",
+    aplicar: velocidadeDa("acao:turno", 1, "+1 turno por rodada: +1 de cada ação") },
+  { magia: "velocidade", re: /recebe dois turnos adicionais/, grupo: "velocidade",
+    aplicar: velocidadeDa("acao:turno", 2, "+2 turnos por rodada: +2 de cada ação") },
+  { magia: "velocidade", re: /sofre 1 ponto de dano por rodada/,
+    aplicar: (data) => {
+      const efs = efeitosDe(data, (e) => e.fxType === "action");
+      for (const [, e] of efs) { e.tickAmount = "1"; e.tickType = ""; e.label = `${e.label} · 1 de dano por rodada`; }
+      return efs.length ? "o alvo sofre 1 de dano no começo de cada turno, enquanto a magia durar" : null;
+    } },
+  // Viagem Temporal: quanto tempo viaja e quanto fica.
+  { magia: "viagem temporal", re: /^viajar (uma hora|um dia)/, grupo: "viagem-distancia",
+    aplicar: (data, { m }) => (trocarTexto(data, "uma cena ao passado", `${m[1]} ao passado`) ? `viaja ${m[1]}, em vez de uma cena` : null) },
+  { magia: "viagem temporal", re: /^duracao \((uma cena|uma hora)\)/, grupo: "viagem-duracao",
+    aplicar: (data, { m }) => {
+      const dur = m[1] === "uma hora" ? "Uma hora" : "Uma cena";
+      data.system.duration = dur;
+      anotarAcoes(data, `fica ${m[1]}`);
+      return `duração: ${dur}`;
+    } },
+
+  // ---- Custos ---------------------------------------------------------------
+  { re: /perde 1 ponto de vida quando (?:a )?conjura|sofre 1 ponto de dano (?:quando conjura|ao conjurar)/, fase: "depois",
+    aplicar: (data) => somarCustoPV(data, 1) },
+  { magia: "explodir", re: /dano final sofrido pelo conjurador aumenta para 2/, fase: "depois",
+    aplicar: (data) => {
+      const lista = acoesIniciais(data);
+      for (const a of lista) {
+        a.costHp = String(Math.max(2, Number(a.costHp) || 0));
+        a.label = a.label.replace("você sofre 1 de dano final", "você sofre 2 de dano final");
+      }
+      return lista.length ? "você sofre 2 de dano final ao conjurar (custo de 2 PV)" : null;
+    } },
+
+  // ---- Alcance (alternativas entre si) ------------------------------------
+  { re: /^alcance \(toque\)/, grupo: "alcance", aplicar: (data) => deToque(data) },
+  { re: /^alcance \(emanacao\) e area \((\d+)m\)/, grupo: "alcance", aplicar: (data, { m }) => deEmanacao(data, m[1]) },
+  { re: /^alcance \(emanacao\), o conjurador nao e afetado/, grupo: "alcance", aplicar: (data) => deEmanacao(data) },
+  { magia: "barreira arcana", re: /^alcance \(aura\)/, grupo: "alcance",
+    aplicar: (data) => {
+      const lista = acoesDaMagia(data).filter((a) => a.persistArea);
+      for (const a of lista) {
+        a.targetMode = "aura"; a.range = "";
+        a.label = a.label.replace("emanação: ponha a área no seu espaço", "aura: acompanha você");
+      }
+      return lista.length ? "a barreira vira aura: acompanha você quando você se move" : null;
+    } },
+  { magia: "telepatia", re: /^alcance \(5km x circulo x nivel\)/, grupo: "alcance",
+    aplicar: (data, { circ }) => {
+      for (const a of acoesOfensivas(data)) a.range = `${5000 * circ}*@nivel`;
+      return `alcance de ${5 * circ}km × Nível`;
+    } },
+  { magia: "telepatia", re: /^alcance \(qualquer lugar\)/, grupo: "alcance",
+    aplicar: (data) => {
+      for (const a of acoesOfensivas(data)) a.range = "";
+      return "alcance: qualquer lugar (sem limite)";
+    } },
+
+  // ---- Sustentação e criaturas (aplicadas mais adiante na criação) --------
+  { re: /^sustentavel\s*[—-]\s*([a-z ]+?)(?:\s*\(|$)/, grupo: "sustentavel",
+    resumo: (m) => `passa a ser sustentável: ${ROTULO_ACAO[custoDaConjuracao(m[1])] ?? m[1]} por turno (o vínculo na sua ficha cobra)` },
+  { re: /^invoca criatura (media|grande)/, grupo: "tamanho",
+    resumo: (m) => `a criatura invocada pode ser ${m[1] === "grande" ? "grande" : "média"}` },
+  { re: /^aumente o desafio em \+(\d+)/, grupo: "desafio", resumo: (m) => `Desafio da criatura +${m[1]}` },
+  { re: /^desafio (\d+) \+ seu nivel/, grupo: "desafio", resumo: (m) => `Desafio até ${m[1]} + Nível` },
+  { magia: "invocar os mortos", re: /^uma criatura de desafio igual a (tres|quatro) vezes o seu nivel/, grupo: "desafio",
+    resumo: (m) => `Desafio até ${m[1] === "tres" ? 3 : 4}× Nível` },
+  { re: /nao e amigavel a ninguem/, resumo: "a criatura fica hostil a todos, fora do seu controle" },
+
+  // ---- Por magia ------------------------------------------------------------
+  { magia: "corrosao", re: /objetos dentro da area perdem 1 ponto de dureza/,
+    nota: "os objetos na área perdem 1 de Dureza (o sistema não guarda a Dureza dos objetos)" },
+  { magia: "rajada acida", re: /dano adicional a um tipo de criatura/,
+    nota: "some +1 ao dano quando o alvo for do tipo escolhido (o sistema não conhece o tipo da criatura)" },
+  { magia: "detectar", re: /./, nota: "muda o que a magia detecta — o Mestre revela" },
+  { magia: "revelar passado", re: /^(meses|anos), em vez de dias/, grupo: "revelar-tempo",
+    aplicar: (data, { m }) => anotarAcoes(data, `memórias de até Conjuração ${m[1]} atrás`, (a) => a.targetMode !== "self") },
+  { magia: "revelar passado", re: /^o conjurador nao fica atordoado/,
+    aplicar: (data, ctx) => {
+      const sub = acoesDaMagia(data).find((a) => a.targetMode === "self"
+        && (a.appliesEffects ?? []).some((e) => e.fxType === "condition" && e.fxTarget === "atordoado"));
+      return sub && removerAcao(data, sub, { id: ctx.idBase, nome: ctx.magiaNome }) ? "você não fica atordoado (a ação em cadeia sai)" : null;
+    } },
+  { magia: "revelar passado", re: /^o alvo nao fica atordoado/,
+    aplicar: (data) => (removerEfeitos(data, (e, a) => a.targetMode !== "self" && e.fxType === "condition" && e.fxTarget === "atordoado")
+      ? "o alvo não fica atordoado" : null) },
+  { magia: "revelar passado", re: /^o alvo sabe o que o conjurador esta vendo/, nota: "o alvo vê as mesmas memórias" },
+  { magia: "visao futura", re: /^(cinco|sete) rolagens, em vez de tres/, grupo: "visao-futura",
+    aplicar: (data, { m }) => (trocarTexto(data, /três/g, m[1]) ? `as próximas ${m[1]} rolagens` : null) },
+  { magia: "esvaziar a mente", re: /fica atordoado, em vez de pasmo/,
+    aplicar: (data) => (trocarCondicao(data, "pasmo", "atordoado") ? "Atordoado (Mente anula) no lugar do Pasmo" : null) },
+  { magia: "controlar a terra", re: /^pode move-la depois de criada/, fase: "depois",
+    aplicar: (data) => {
+      const a = acoesIniciais(data).find((x) => x.targetMode !== "self");
+      if (!a) return null;
+      const c = copiarAcao(a);
+      c.label = `${String(a.label).replace(/\s*\(.*$/, "")}: mover a terra criada (sua ação, até o alcance; Conjuração vs Agilidade de quem estiver no novo espaço)`;
+      c._custoFixo = "standard";
+      data.system.actions.push(c);
+      return "ganha a ação de mover a terra criada (gasta a sua ação padrão, sem PM)";
+    } },
+  { magia: "forca da natureza", re: /^adiciona (um segundo efeito|dois efeitos)/, grupo: "terrenos",
+    nota: "acrescente o dano e a condição do outro terreno à mão (a ação traz o dano de 1)" },
+  { magia: "forca da natureza", re: /^o terreno afeta voce/,
+    aplicar: (data) => {
+      const lista = acoesDaMagia(data).filter((a) => a.persistArea);
+      for (const a of lista) { a.persistAffectsSelf = true; a.includeSelf = true; }
+      return lista.length ? "a área também afeta você" : null;
+    } },
+  { magia: "invocar plantas", re: /^os frutos curam\/causam (\d+)/, grupo: "frutos",
+    nota: "os frutos curam ou causam esse dano, em vez de 1 (registre na ficha dos frutos)" },
+  { magia: "missil magico", re: /^(1|2) (?:missil|misseis) adiciona(?:l|is)/, grupo: "misseis", fase: "depois",
+    aplicar: (data, { m }) => {
+      const n = Number(m[1]);
+      const principais = acoesIniciais(data).filter((a) => a.targetMode === "target" && causaDanoDeVida(a));
+      if (!principais.length) return null;
+      for (const a of principais) {
+        for (let k = 1; k <= n; k++) {
+          const c = duplicarAcao(data, a, `↳ ${a.label.replace(/^↳\s*/, "")} — ${k + 1}º míssil`);
+          encadear([a], c, "always", "pick");
+        }
+      }
+      return `${n + 1} mísseis por conjuração: ao conjurar, escolha o alvo de cada um a mais (pode ser o mesmo)`;
+    } },
+  { magia: "armadura arcana", re: /^outro tipo de dano/, escolha: "dtype", aplicar: protecaoDe("troca") },
+  { magia: "armadura arcana", re: /^um tipo de dano adicional/, escolha: "dtype", aplicar: protecaoDe("soma") },
+  { re: /^alvo muda de conjurador para criatura/, aplicar: (data) => paraCriatura(data) },
+  { magia: "escudo arcano", re: /^bloqueia magias esquivaveis/,
+    nota: "o escudo bloqueia também as magias que só se esquivam (escolha Bloqueio na defesa)" },
+  { magia: "relampago", re: /^aumentar a distancia entre os alvos secundarios/,
+    nota: "os alvos secundários podem estar 1m mais longe do primário" },
+  { magia: "combustao", re: /perdem todos os dados de melhoria em acoes fisicas/,
+    aplicar: (data) => somarLembrete(data, "Sem dados de melhoria em ações físicas (Vigor anula)", { resist: "vigor" }) },
+  { magia: "imagem ilusoria", re: /^a imagem tem cheiro/, nota: "a imagem também tem cheiro" },
+  { magia: "imagem ilusoria", re: /^a imagem se movimenta/, nota: "a imagem se move (arraste a área dela no mapa)" },
+  { magia: "imagem ilusoria", re: /^a imagem possui tangibilidade/, nota: "a imagem pode ser tocada (quem interage ainda rola Percepção contra a Conjuração)" },
+  { magia: "invisibilidade", re: /^o alvo pode se mover (ou atacar )?sem cancelar/, grupo: "invisibilidade",
+    aplicar: (data, { m }) => {
+      const rot = m[1] ? "Invisível (não cancela ao mover nem ao atacar)" : "Invisível (cancela ao atacar; mover não cancela)";
+      const efs = efeitosDe(data, (e) => e.fxType === "condition" && e.fxTarget === "invisivel");
+      for (const [, e] of efs) e.label = rot;
+      return efs.length ? `${m[1] ? "mover e atacar" : "mover"} não cancela a invisibilidade` : null;
+    } },
+  { magia: "criar", re: /^cria ate (\d) objetos/, grupo: "criar", aplicar: (data, { m }) => anotarAcoes(data, `até ${m[1]} objetos`) },
+  { magia: "reparar", re: /^repara (\d+) pontos/, grupo: "reparar",
+    aplicar: (data, { m }) => {
+      const lista = acoesDaMagia(data).filter((a) => (a.heal ?? "") !== "");
+      for (const a of lista) { a.heal = m[1]; a.label = a.label.replace(/recupera 1 de Dureza/, `recupera ${m[1]} de Dureza`); }
+      return lista.length ? `repara ${m[1]} pontos de base (+1 a cada 2 acima de 10)` : null;
+    } },
+  { magia: "forma eterea", re: /^o alvo nao provoca reacoes de ataque/,
+    aplicar: (data) => {
+      const efs = efeitosDe(data, (e) => e.fxTarget === "intangivel");
+      for (const [, e] of efs) e.label = `${e.label} — não provoca reações de ataque ao se mover`;
+      return efs.length ? "o alvo não provoca reações de ataque quando se move" : null;
+    } },
+  { magia: "invocar", re: /^o objeto encantado te da \+(\d)/, grupo: "objeto",
+    aplicar: (data, { m }) => (trocarTexto(data, /\+1 nas rolagens/g, `+${m[1]} nas rolagens`) ? `o objeto invocado dá +${m[1]}` : null) },
+  { magia: "teletransporte", re: /^teleporta o alvo para (qualquer lugar do mesmo plano|outro plano)/, grupo: "teletransporte",
+    aplicar: (data, { m }) => anotarAcoes(data, `ou para ${m[1] === "outro plano" ? "outro plano" : "qualquer lugar do mesmo plano"} que você já visitou: fora do mapa, com o Mestre`) },
+  { magia: "luz", re: /^o alvo pode ser uma criatura/,
+    aplicar: (data) => (trocarTexto(data, "toque — o alvo ilumina", "toque — o alvo, objeto ou criatura, ilumina") ? "o alvo pode ser uma criatura" : null) },
+  { magia: "luz", re: /^(revela criaturas escondidas|criaturas invisiveis se tornam visiveis)/,
+    nota: "o Mestre revela as criaturas na luz (o sistema não tira o Oculto/Invisível sozinho)" },
+  { magia: "rajada cromatica", re: /^a rolagem no dado, para cada criatura, aumenta (\d)/, grupo: "cromatica",
+    aplicar: (data, { m }) => anotarAcoes(data, `+${m[1]} no dado de cada criatura`) },
+  { magia: "aumentar", re: /^aumenta em 2 categorias/, grupo: "aumentar", aplicar: tamanhoDe(1, 2, { forca: 1, vigor: 2 }) },
+  { magia: "aumentar", re: /^aumenta em 3 categorias/, grupo: "aumentar", aplicar: tamanhoDe(1, 3, { forca: 2, vigor: 2 }) },
+  { magia: "diminuir", re: /^diminui em 2 categorias/, grupo: "diminuir",
+    aplicar: (data) => { const r = tamanhoDe(-1, 2, { agilidade: 1 })(data); trocarTexto(data, /1D Agilidade$/, "1D Agilidade (2D para se esconder)"); return r && `${r}; 2D para se esconder`; } },
+  { magia: "diminuir", re: /^diminui em 3 categorias/, grupo: "diminuir",
+    aplicar: (data) => { const r = tamanhoDe(-1, 3, { agilidade: 2 })(data); trocarTexto(data, /2D Agilidade$/, "2D Agilidade (e para se esconder)"); return r && `${r}; 2D para se esconder`; } },
+  { magia: "empurrao cinetico", re: /^alvos de tamanho medio ou menor sao tambem derrubados/,
+    aplicar: (data) => somarCondicao(data, "caido", { rotulo: "Caído (só quem é Médio ou menor)" }) },
+  { magia: "telecinesia", re: /^voce pode mover o alvo (\d+)m/, grupo: "telecinesia",
+    aplicar: (data, { m }) => {
+      const lista = acoesDaMagia(data).filter((a) => a.movement?.enabled);
+      for (const a of lista) a.movement.distance = m[1];
+      return lista.length ? `move o alvo até ${m[1]}m` : null;
+    } },
+  { magia: "telecinesia", re: /^criaturas no trajeto/, nota: "quem estiver no caminho esquiva da magia ou cai (role à mão)" },
+  { magia: "telepatia", re: /^o alvo nao pode responder/,
+    aplicar: (data) => (trocarTexto(data, "o alvo responde se passar em Mente Normal", "o alvo não pode responder") ? "o alvo não pode responder" : null) },
+  { magia: "telepatia", re: /^voce nao precisa ter tido dialogo/, nota: "não precisa ter falado com o alvo antes" },
+  { magia: "invocar os mortos", re: /^traz o alvo de volta a vida com todos os pontos de vida/,
+    aplicar: (data) => (trocarTexto(data, "com metade dos PV", "com todos os PV") ? "volta com todos os PV" : null) },
+  { magia: "invocar os mortos", re: /^necessita apenas de parte do corpo/, nota: "basta parte do corpo da criatura" },
+  { magia: "toque vampirico", re: /recupera seus pontos de magia, em vez dos pontos de vida/, fase: "depois",
+    aplicar: (data) => {
+      const lista = data.system.actions.filter((a) => a.drain?.enabled);
+      for (const a of lista) a.drain.resource = "mp";
+      return lista.length ? "o dreno devolve PM, em vez de PV" : null;
+    } },
+  { magia: "toque vampirico", re: /^(voce recupera pontos de magia igual|um aliado ate 5m)/,
+    nota: "o sistema drena um recurso só, para quem conjura: acerte os PM (ou os do aliado) à mão" },
+  { magia: "replicar", re: /^a criatura recebe \+(\d) para rolagens da acao repetida/, grupo: "replicar",
+    aplicar: (data, { m }) => {
+      const lista = acoesDaMagia(data).filter((a) => a.targetMode === "target");
+      for (const a of lista) (a.appliesEffects ??= []).push(novoApplies(`+${m[1]} na ação repetida (Replicar)`, {
+        fxType: "bonus", fxTarget: "all", fxValue: m[1], durationMode: "rounds", durationRounds: "1" }));
+      return lista.length ? `a criatura ganha +${m[1]} nas rolagens da ação repetida (1 rodada)` : null;
+    } },
+  { magia: "simular", re: /^voce recebe \+(\d) para a rolagem da acao copiada/, grupo: "simular",
+    aplicar: (data, { m }) => {
+      const lista = acoesDaMagia(data).filter((a) => a.targetMode === "self");
+      for (const a of lista) (a.appliesEffects ??= []).push(novoApplies(`+${m[1]} na ação copiada (Simular)`, {
+        fxType: "bonus", fxTarget: "all", fxValue: m[1], durationMode: "rounds", durationRounds: "1" }));
+      return lista.length ? `você ganha +${m[1]} na rolagem da ação copiada (1 rodada)` : null;
+    } },
+  { magia: "simular", re: /falha critica, voce fica atordoado/,
+    nota: "numa falha crítica nessa reação, você fica Atordoado até o fim da cena (Mente anula): marque à mão" },
+  { magia: "transmutar criatura", re: /./, nota: "muda o que a transmutação permite (Desafio, Pontos de Criação, traço) — o Mestre confere" },
+  { magia: "transmutar materia", re: /^dureza anterior/, grupo: "dureza", nota: "a Dureza muda até esse tanto a cada 2 pontos acima" },
+  { magia: "chama sagrada", re: /^o alvo perde (\d) pontos de corrupcao/, grupo: "corrupcao",
+    nota: "a criatura perde esses pontos de Corrupção, em vez de 1 (à mão)" },
+  { magia: "imitar sons", re: /^se usado para imitar a voz/,
+    nota: "o bônus social vale com quem ouve a voz imitada (some à mão)" },
+  { magia: "silencio", re: /^magias compostas pela palavra sonigu/, grupo: "silencio",
+    nota: "as magias de sonigu também funcionam na área (todas, ou só as suas)" },
+  { magia: "aumento arcano", re: /^o alvo recebe (dois|tres) efeitos/, grupo: "aumento", fase: "depois",
+    aplicar: (data, { m }) => {
+      const lista = acoesIniciais(data);
+      if (lista.length < 2) return null;
+      for (const a of lista) {
+        duplicarAcao(data, a, `↳ ${a.label.replace(/^↳\s*/, "")} — efeito a mais da mesma conjuração (sem PM)`);
+      }
+      const [total, mais] = m[1] === "tres" ? ["três", "dois"] : ["dois", "um"];
+      return `${total} efeitos por conjuração: depois do principal, use ${mais} dos botões "efeito a mais" (sem PM e sem ação)`;
+    } },
+  { magia: "melhoria arcana", re: /^sempre que o alvo rolar (1 ou 2|1) em um dado/, grupo: "melhoria",
+    aplicar: (data, { m }) => {
+      const efs = efeitosDe(data, (e) => e.fxType === "dice");
+      const doisTambem = m[1] === "1 ou 2";
+      for (const [a, e] of efs) {
+        a.appliesEffects.push(novoApplies(`Melhoria Arcana: re-rola os 1${doisTambem ? " e os 2" : ""} desse atributo (edite o alvo)`, {
+          fxType: "reroll1", fxTarget: e.fxTarget, fxValue: "1", fxAll: true, durationMode: e.durationMode,
+        }));
+      }
+      return efs.length ? (doisTambem ? "re-rola os 1 nas rolagens do atributo (o sistema só re-rola o 1; o 2, à mão)"
+        : "re-rola os 1 nas rolagens do atributo") : null;
+    } },
+  { magia: "cegueira", re: /^e necessario ser bem sucedido em uma rolagem de mente( e de vigor)?/, grupo: "cegueira",
+    aplicar: (data, { m }) => {
+      const extra = m[1] ? "Mente e Vigor" : "Mente";
+      const efs = efeitosDe(data, (e) => e.fxTarget === "cego");
+      for (const [, e] of efs) e.label = `Cego (Percepção anula; para anular, também ${extra})`;
+      return efs.length ? `para anular, também ${extra}: o sistema rola a Percepção sozinho — quando ela passar, role ${extra} à mão (se falhar, o Cego volta)` : null;
+    } },
+  { magia: "escuridao", re: /^a area da magia se torna tambem terreno dificil/,
+    aplicar: (data) => {
+      const lista = acoesDaMagia(data).filter((a) => a.persistArea);
+      for (const a of lista) (a.appliesEffects ??= []).push(novoApplies("Lento — terreno difícil (dentro da área)", {
+        fxType: "condition", fxTarget: "lento", durationMode: "rounds", durationRounds: "1" }));
+      return lista.length ? "a área é terreno difícil: quem está nela fica Lento" : null;
+    } },
+  { magia: "tempestade mental", re: /^o alvo cai no chao/, aplicar: (data) => somarCondicao(data, "caido", { rotulo: "Caído" }) },
+  { magia: "curar", re: /^o alvo recebe regeneracao ate o fim da cena/,
+    aplicar: (data) => {
+      const lista = acoesDaMagia(data).filter((a) => (a.heal ?? "") !== "");
+      for (const a of lista) (a.appliesEffects ??= []).push(novoApplies("Regeneração (1 PV/rodada, até o fim da cena)", {
+        fxType: "bonus", fxTarget: "all", fxValue: "0", tickHealAmount: "1", tickHealResource: "hp" }));
+      return lista.length ? "o alvo regenera 1 PV por rodada até o fim da cena" : null;
+    } },
+  { magia: "restaurar", re: /^determine dois tipos de condicoes/, nota: "encerre dois tipos de condição, em vez de um" },
+  { magia: "restaurar", re: /^finaliza todas as condicoes negativas/,
+    aplicar: (data) => {
+      const lista = acoesDaMagia(data).filter((a) => a.targetMode !== "self");
+      for (const a of lista) {
+        a.removesEffects = Object.keys(CONDICOES_NEGATIVAS).map((c) => ({ mode: "condition", value: c, count: "", enabled: true }));
+      }
+      return lista.length ? "tira todas as condições negativas dos aliados na área" : null;
+    } },
+  { magia: "reviver", re: /^traz o alvo de volta a vida com metade dos pontos de vida/, grupo: "reviver-pv",
+    aplicar: (data) => (trocarTexto(data, "volta com 1 PV", "volta com metade dos PV — o sistema cura 1: acerte") ? "volta com metade dos PV (acerte os PV à mão: o sistema cura 1)" : null) },
+  { magia: "reviver", re: /^traz o alvo de volta com todos os pontos de vida/, grupo: "reviver-pv",
+    aplicar: (data) => {
+      const lista = acoesDaMagia(data).filter((a) => (a.heal ?? "") !== "");
+      for (const a of lista) a.heal = "999";
+      trocarTexto(data, "volta com 1 PV", "volta com todos os PV");
+      return lista.length ? "volta com todos os PV" : null;
+    } },
+  { magia: "reviver", re: /^traz de volta um alvo que tenha morrido ha uma quantidade de (semanas|anos)/, grupo: "reviver-tempo",
+    aplicar: (data, { m }) => (trocarTexto(data, "Nível dias", `Nível ${m[1]}`) ? `morto há até Nível ${m[1]}` : null) },
+  { magia: "reviver", re: /^traz o alvo de volta(, mesmo que so haja parte do corpo| necessitando apenas de um objeto pessoal)/, grupo: "reviver-corpo",
+    nota: "basta parte do corpo (ou um objeto pessoal) do alvo" },
+
+  // ---- Genéricas: condição e dano contínuo a mais -------------------------
+  { re: danoContinuoDoTexto,
+    aplicar: (data, { m }) => {
+      const tipo = m[1];
+      const resist = anulaCom(m[0]) ?? "vigor";
+      const adjetivo = ["psiquico", "sonico", "necrotico", "radiante"].includes(tipo);
+      const nome = `Dano contínuo ${adjetivo ? "" : "de "}${DTYPES[tipo].toLowerCase()} (${ATTRS[resist]} anula)`;
+      const lista = acoesOfensivas(data);
+      for (const a of lista) {
+        (a.appliesEffects ??= []).push(novoApplies(nome, {
+          fxType: "condition", fxTarget: "dano_continuo", durationMode: "scene",
+          resist: true, resistAttr: resist, resistVsCast: !!a.canRoll, resistDc: a.canRoll ? "0" : "10",
+          tickAmount: "1", tickType: tipo,
+        }));
+      }
+      return lista.length ? nome : null;
+    } },
+  { re: condicaoDoTexto, grupo: (m) => (ESCADA[m[1]] ? `cond-${ESCADA[m[1]]}` : null),
+    aplicar: (data, { m }) => {
+      const cond = m[1];
+      let resist = anulaCom(m[0]);
+      let rotulo = null;
+      // "enquanto estiver sofrendo dano contínuo": anula-se como o dano contínuo.
+      if (/enquanto estiver sofrendo dano continuo/.test(m[0])) {
+        const dc = efeitosDe(data, (e) => e.fxTarget === "dano_continuo")[0]?.[1];
+        resist = dc?.resist ? dc.resistAttr : (resist ?? "vigor");
+        rotulo = `${ROTULO_COND[cond]} (enquanto sofrer o dano contínuo; ${ATTRS[resist]} anula)`;
+      }
+      return somarCondicao(data, cond, { resist, rotulo });
+    } },
+];
+
+/**
+ * A regra de uma peculiaridade (a primeira que a reconhece), com o que o
+ * texto casou e o grupo de alternativas dela.
+ * @param {string} texto  o texto da peculiaridade
+ * @param {string} magia  o nome da magia de base
+ * @returns {{regra:object, m:Array, grupo:(string|null)}|null}
+ */
+export function regraDaPeculiaridade(texto, magia = "") {
+  const t = semAcento(texto);
+  const nome = semAcento(magia);
+  for (const regra of REGRAS_PECULIARIDADES) {
+    if (regra.magia && regra.magia !== nome) continue;
+    const m = typeof regra.re === "function" ? regra.re(t) : t.match(regra.re);
+    if (!m) continue;
+    if (m.input === undefined) m.input = t;
+    const grupo = typeof regra.grupo === "function" ? regra.grupo(m) : (regra.grupo ?? null);
+    return { regra, m, grupo };
+  }
+  return null;
+}
+
+/** A peculiaridade muda a magia criada (⚙) ou só fica registrada (✎)? */
+export function peculiaridadeMuda(texto, magia = "") {
+  const r = regraDaPeculiaridade(texto, magia)?.regra;
+  return !!(r && (r.aplicar || r.resumo));
+}
+
+/**
+ * Das peculiaridades ALTERNATIVAS (o mesmo grupo), só a de maior desconto
+ * vale — no bônus e no efeito. A ordem do livro se mantém.
+ */
+export function semAlternativasRepetidas(pecs, magia = "") {
+  const grupoDe = (p) => p.grupo ?? regraDaPeculiaridade(p.texto, magia)?.grupo ?? null;
+  const melhor = new Map();
+  for (const p of pecs) {
+    const g = grupoDe(p);
+    if (!g) continue;
+    const atual = melhor.get(g);
+    if (!atual || -p.mod > -atual.mod) melhor.set(g, p);
+  }
+  return pecs.filter((p) => { const g = grupoDe(p); return !g || melhor.get(g) === p; });
+}
+
+/**
+ * Aplica as peculiaridades de uma fase ("antes" ou "depois" das metamagias).
+ * @returns {Map<object,string|null>} peculiaridade → o que fez (null: nada a mudar)
+ */
+function aplicarPeculiaridades(data, pecs, fase, ctx) {
+  const feitas = new Map();
+  for (const p of pecs) {
+    const r = regraDaPeculiaridade(p.texto, ctx.magiaNome);
+    if (!r?.regra.aplicar || (r.regra.fase ?? "antes") !== fase) continue;
+    const escolha = p.escolha && typeof p.escolha === "object" ? p.escolha : {};
+    feitas.set(p, r.regra.aplicar(data, { ...ctx, m: r.m, escolha }) ?? null);
+  }
+  return feitas;
+}
+
+/** O que cada peculiaridade escolhida fez — para a descrição e a receita. */
+function efeitoDasPeculiaridades(pecs, feitas, magia) {
+  return pecs.map((p) => {
+    const r = regraDaPeculiaridade(p.texto, magia);
+    const regra = r?.regra;
+    if (regra?.aplicar) {
+      const resumo = feitas.get(p);
+      if (resumo) return { p, aplicada: true, efeito: resumo };
+      return { p, aplicada: false, efeito: regra.nota ?? "não muda nada nesta magia (registrada)" };
+    }
+    if (regra?.resumo) return { p, aplicada: true, efeito: typeof regra.resumo === "function" ? regra.resumo(r.m) : regra.resumo };
+    return { p, aplicada: false, efeito: regra?.nota ?? "efeito narrativo — o Mestre arbitra" };
+  });
+}
+
+/* ------------------------------------------------------------------ */
 /*  Construção do item final                                           */
 /* ------------------------------------------------------------------ */
 
@@ -1469,13 +2199,14 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   escalarCirculo(data, circ);
   // 2) Aprimoramentos gratuitos "(-)" do círculo (dano +2/+3, cura, RD...).
   const aprimorados = aplicarAprimoramentos(data, parseAprimoramentos(base), efetivo);
-  // 3) Só valem as peculiaridades permitidas no círculo escolhido.
-  const pecsValidas = pecs.filter((p) => !p.circulos || p.circulos.has(efetivo));
-
-  // Peculiaridade "Alcance (Toque)": a magia passa a ser de toque.
-  if (pecsValidas.some((p) => /^alcance \(toque\)/.test(semAcento(p.texto)))) {
-    for (const a of acoesOfensivas(data)) { a.range = ""; a.isMelee = true; }
-  }
+  // 3) Só valem as peculiaridades permitidas no círculo escolhido — e, das
+  //    alternativas (Velocidade: reação, ação ou turno a mais), a mais forte.
+  const pecsValidas = semAlternativasRepetidas(pecs.filter((p) => !p.circulos || p.circulos.has(efetivo)), base.name);
+  // 4) O que elas mudam na magia: a condição, o tipo de ação que a Velocidade
+  //    dá, o alcance... — ANTES das metamagias, que já copiam e ampliam a
+  //    magia mudada. Custos e cópias da ação final vêm depois delas.
+  const ctxPec = { circ, efetivo, magiaNome: base.name, idBase: idDaBase };
+  const feitasPec = aplicarPeculiaridades(data, pecsValidas, "antes", ctxPec);
 
   // Peculiaridades: soma entra como bônus fixo nas rolagens das ações. As
   // habilidades que a base cita ("Carisma concede +1 em Conjuração para esta
@@ -1558,14 +2289,10 @@ export async function construirMagia(state, { animar = true, existe = null } = {
     for (const x of a.summons ?? []) delete x._contagemBase;
   }
 
-  // "O conjurador perde 1 ponto de vida quando a conjura": 1 PV a mais no
-  // custo de cada conjuração.
-  if (pecsValidas.some((p) => /perde 1 ponto de vida quando a conjura/.test(semAcento(p.texto)))) {
-    for (const a of acoesIniciais(data)) {
-      const hp = String(a.costHp ?? "0").trim() || "0";
-      a.costHp = /^\d+$/.test(hp) ? String(Number(hp) + 1) : `${hp}+1`;
-    }
-  }
+  // Peculiaridades que valem para a magia FINAL: o custo em PV ("perde 1
+  // ponto de vida quando a conjura"), o dreno que devolve PM, as cópias da
+  // ação (Míssil Mágico com mísseis a mais, Aumento Arcano com mais efeitos).
+  for (const [p, r] of aplicarPeculiaridades(data, pecsValidas, "depois", ctxPec)) feitasPec.set(p, r);
 
   // Criaturas invocadas: tamanho, Desafio e atitude pelas peculiaridades e
   // pela Majestosa; o cardápio com as fichas escolhidas na oficina.
@@ -1574,11 +2301,6 @@ export async function construirMagia(state, { animar = true, existe = null } = {
   const linhaInvoca = invocadas.length ? descreverInvocacoes(invocadas, data.system.actions) : "";
   for (const x of invocadas) delete x._requisito;
 
-  // Peculiaridade do Toque Vampírico: "o dano escalonado recupera seus pontos
-  // de magia, em vez dos pontos de vida" — o dreno passa a devolver PM.
-  if (pecsValidas.some((p) => /recupera seus pontos de magia, em vez dos pontos de vida/.test(semAcento(p.texto)))) {
-    for (const a of data.system.actions) if (a.drain?.enabled) a.drain.resource = "mp";
-  }
 
   // ECONOMIA DE AÇÕES (sistema build 31). O tempo de conjuração — a Magia
   // Acelerada tira um passo a cada aplicação; saindo em ação rápida, a magia
@@ -1604,7 +2326,9 @@ export async function construirMagia(state, { animar = true, existe = null } = {
     }
   }
   const internas = new Set(data.system.actions.filter((a) => a._interna || a._copiaDe || disparadas.has(a)));
-  for (const a of data.system.actions) a.actionCost = internas.has(a) ? "none" : custoAcao;
+  // Uma ação que a peculiaridade deu com custo próprio ("mover a terra criada,
+  // usando sua ação") gasta o dela, não o da conjuração.
+  for (const a of data.system.actions) a.actionCost = a._custoFixo ?? (internas.has(a) ? "none" : custoAcao);
   delete data._aceleradas;
 
   // SUSTENTAÇÃO: a da base ("Sustentável — Ação Rápida") ou a de uma
@@ -1651,7 +2375,10 @@ export async function construirMagia(state, { animar = true, existe = null } = {
 
   // Receita na descrição
   const metasUsadas = W.map((p, k) => (k >= 1 && M[k] ? { meta: M[k], palavra: p, escolha: E[k], k } : null)).filter(Boolean);
-  const linhasPec = pecsValidas.map((p) => `<li>${esc(p.texto)} (${p.mod >= 0 ? "+" : ""}${p.mod})</li>`).join("");
+  // Cada peculiaridade com o que fez: ⚙ mudou a magia; ✎ só registrada.
+  const efeitosPec = efeitoDasPeculiaridades(pecsValidas, feitasPec, base.name);
+  const linhasPec = efeitosPec.map(({ p, aplicada, efeito }) =>
+    `<li>${aplicada ? "⚙" : "✎"} ${esc(p.texto)} (${p.mod >= 0 ? "+" : ""}${p.mod}) — <em>${aplicada ? "na magia: " : "registrada: "}${esc(efeito)}</em></li>`).join("");
   const linhasApr = aprimorados.map((a) => `<li>${esc(a.texto)}${a.tipo ? "" : " <em>(aplique manualmente)</em>"}</li>`).join("");
   const contagem = new Map();
   const metas = metasUsadas.map(({ meta, palavra }) => {
@@ -1699,7 +2426,7 @@ ${linhaTempo}${linhaSustenta}
 ${linhaDano ? `<p>Dano: ${linhaDano}.</p>` : ""}
 ${linhaInvoca ? `<p>Invoca: ${esc(linhaInvoca)}.</p>` : ""}
 ${linhasApr ? `<p>Aprimoramentos do círculo (gratuitos):</p><ul>${linhasApr}</ul>` : ""}
-${linhasPec ? `<p>Peculiaridades escolhidas:</p><ul>${linhasPec}</ul>` : ""}
+${linhasPec ? `<p>Peculiaridades escolhidas (⚙ mudam a magia; ✎ ficam registradas — o Mestre arbitra):</p><ul>${linhasPec}</ul>` : ""}
 ${metas ? `<p>Metamagias:</p><ul>${metas}</ul>` : ""}
 ${escolhas.some((e) => e.texto) ? `<p>Como as metamagias foram escolhidas: ${escolhas.filter((e) => e.texto).map((e) => `<strong>${esc(e.metamagia)}</strong> — ${esc(e.texto)}`).join("; ")}.</p>` : ""}
 ${comoFunciona}
@@ -1714,7 +2441,8 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
       tier, palavras, base: base.name, bonus: delta,
       ...(bonusHab.length ? { habilidades: bonusHab.map((b) => ({ nome: b.nome, bonus: b.bonus })) } : {}),
       ...(lendaria ? { lendaria } : {}),
-      peculiaridades: pecsValidas.map((p) => ({ texto: p.texto, mod: p.mod })),
+      peculiaridades: efeitosPec.map(({ p, aplicada, efeito }) => ({ texto: p.texto, mod: p.mod, aplicada, efeito,
+        ...(p.escolha && typeof p.escolha === "object" && Object.keys(p.escolha).length ? { escolha: p.escolha } : {}) })),
       metamagias: data.system.metamagics.map((m) => m.name),
       escolhas: escolhas.map(({ texto, ...resto }) => resto),
       conjuracao: casting, ...(comoReacao ? { reacao: true } : {}),
@@ -1744,6 +2472,7 @@ ${avisos.length ? `<p><em>${avisos.map(esc).join(" ")}</em></p>` : ""}`;
       }
     }
     delete a._palavra; delete a._antes; delete a._cadeia; delete a._interna; delete a._semVisual; delete a._ancora;
+    delete a._custoFixo;
     delete a._copias; delete a._copiaDe; delete a._copiaMultipla;
     if (a.movement) { delete a.movement._distBase; delete a.movement._dimensional; }
   }
@@ -2010,6 +2739,7 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     const { circ, pm } = TIERS[s.tier];
     const base = this.bases.find((b) => b.id === s.baseId) ?? null;
     const pecs = base ? parsePeculiaridades(base) : [];
+    this.pecsAtuais = pecs;
     const efetivo = tierEfetivo(s.tier);
     const valida = (p) => !p.circulos || p.circulos.has(efetivo);
     const soma = [...s.pecsMarcadas].reduce((t, i) => t + (pecs[i] && valida(pecs[i]) ? pecs[i].mod : 0), 0)
@@ -2059,6 +2789,10 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         .ligeia-spellforge .pec { display: block; margin: 2px 0; font-size: 0.92em; }
         .ligeia-spellforge .pec b { color: var(--color-text-hyperlink, #46c); }
         .ligeia-spellforge .pec.fora { opacity: 0.45; }
+        .ligeia-spellforge .pec-tipo { display: inline-block; width: 1.1em; text-align: center; opacity: 0.85; }
+        .ligeia-spellforge .pec-alt { opacity: 0.7; }
+        .ligeia-spellforge .pec-escolha { margin: 0 0 4px 2.2em; font-size: 0.9em; }
+        .ligeia-spellforge .pec-escolha select { width: auto; }
         .ligeia-spellforge .aprs { margin-top: 6px; font-size: 0.92em; }
         .ligeia-spellforge .aprs ul { margin: 2px 0 0 18px; }
         .ligeia-spellforge .meta-opt { display: block; margin: 4px 0; font-size: 0.92em; }
@@ -2093,12 +2827,22 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
         </div>
       </fieldset>
       <fieldset><legend>2 · Peculiaridades (a soma vira bônus na Conjuração)</legend>
+        ${base && pecs.length ? `<p class="dica">⚙ muda a magia criada · ✎ só fica registrada (o Mestre arbitra) · ⇄ alternativas: marcar uma desmarca as outras.</p>` : ""}
         ${base ? (pecs.length ? pecs.map((p, i) => {
           const ok = valida(p);
+          const marcada = s.pecsMarcadas.has(i) && ok;
+          const tipo = p.muda ? `<span class="pec-tipo" title="Muda a magia criada">⚙</span>`
+            : `<span class="pec-tipo" title="Só fica registrada na magia (efeito narrativo)">✎</span>`;
+          const alt = p.grupo ? ` <span class="pec-alt" title="Alternativa: só uma destas vale">⇄</span>` : "";
+          // O tipo de dano que a peculiaridade pede (Armadura Arcana).
+          const escolha = marcada && p.pede === "dtype"
+            ? `<label class="pec-escolha">Tipo de dano: <select name="pec-dtype" data-pec="${i}">${
+              this.#opcoes(Object.entries(DTYPES), s.pecEscolhas?.[i]?.damageType || "fogo", "—").replace('<option value="">—</option>', "")}</select></label>`
+            : "";
           return `
           <label class="pec ${ok ? "" : "fora"}" ${ok ? "" : `title="Não vale no Círculo ${esc(s.tier)}"`}>
-            <input type="checkbox" name="pec" value="${i}" ${s.pecsMarcadas.has(i) && ok ? "checked" : ""} ${ok ? "" : "disabled"}>
-            <b>${p.mod >= 0 ? "+" : ""}${p.mod}</b> — ${esc(p.texto)}</label>`;
+            <input type="checkbox" name="pec" value="${i}" ${marcada ? "checked" : ""} ${ok ? "" : "disabled"}>
+            ${tipo} <b>${p.mod >= 0 ? "+" : ""}${p.mod}</b> — ${esc(p.texto)}${alt}</label>${escolha}`;
         }).join("")
           : `<p class="dica">Nenhuma peculiaridade com modificador numérico encontrada nesta magia.</p>`)
         : `<p class="dica">Escolha a magia de base para listar as peculiaridades dela.</p>`}
@@ -2147,14 +2891,27 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     const on = (sel, ev, fn) => root.querySelectorAll(sel).forEach((n) => n.addEventListener(ev, fn));
     on('select[name=tier]', "change", (e) => { s.tier = e.target.value; this.render(); });
     on('select[name=palavra1]', "change", (e) => {
-      s.palavra1 = e.target.value; s.baseId = ""; s.pecsMarcadas.clear();
+      s.palavra1 = e.target.value; s.baseId = ""; s.pecsMarcadas.clear(); s.pecEscolhas = {};
       this.render();
     });
-    on('select[name=baseId]', "change", (e) => { s.baseId = e.target.value; s.pecsMarcadas.clear(); s.criaturas = []; this.render(); });
+    on('select[name=baseId]', "change", (e) => { s.baseId = e.target.value; s.pecsMarcadas.clear(); s.pecEscolhas = {}; s.criaturas = []; this.render(); });
     on('input[name=pec]', "change", (e) => {
       const i = Number(e.target.value);
-      e.target.checked ? s.pecsMarcadas.add(i) : s.pecsMarcadas.delete(i);
+      if (e.target.checked) {
+        s.pecsMarcadas.add(i);
+        // Alternativas: marcar uma desmarca as outras do mesmo grupo.
+        const grupo = this.pecsAtuais?.[i]?.grupo;
+        if (grupo) {
+          this.pecsAtuais.forEach((p, k) => { if (k !== i && p.grupo === grupo) s.pecsMarcadas.delete(k); });
+        }
+      } else {
+        s.pecsMarcadas.delete(i);
+      }
       this.render();
+    });
+    on('select[name=pec-dtype]', "change", (e) => {
+      const i = Number(e.target.dataset.pec);
+      (s.pecEscolhas ??= {})[i] = { damageType: e.target.value };
     });
     on('input[name=ajuste]', "change", (e) => { s.ajuste = Number(e.target.value) || 0; this.render(); });
     for (const n of [2, 3, 4, 5]) {
@@ -2225,7 +2982,9 @@ export class SpellForgeApp extends foundry.applications.api.ApplicationV2 {
     }
 
     const pecsAll = parsePeculiaridades(base);
-    estado.pecs = [...s.pecsMarcadas].sort((a, b) => a - b).map((i) => pecsAll[i]).filter(Boolean);
+    estado.pecs = [...s.pecsMarcadas].sort((a, b) => a - b).map((i) => (pecsAll[i]
+      ? { ...pecsAll[i], escolha: pecsAll[i].pede === "dtype" ? { damageType: s.pecEscolhas?.[i]?.damageType || "fogo" } : {} }
+      : null)).filter(Boolean);
     const data = await construirMagia(estado, { animar: animacoesLigadas() });
     // keepId: as ações em cadeia já apontam para o id que a magia vai ter.
     const [item] = await this.actor.createEmbeddedDocuments("Item", [data], { keepId: true });

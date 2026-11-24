@@ -199,11 +199,14 @@ ok(enc.custoDaAtivacao('Ação Rápida') === 'simple' && enc.custoDaAtivacao('Re
 d = encantar(sint('Anel de Prata', 'Joia'), 'Menor', ['saeculorum-movimento-rapido']);
 let mov = d.system.actions[0];
 ok(mov.actionCost === 'free' && mov.appliesEffects[0].fxType === 'action' && mov.appliesEffects[0].fxTarget === 'acao:movement'
-   && mov.appliesEffects[0].durationMode === 'rounds' && eco.acoesNaHora(mov).join() === 'movement',
-   'Movimento Rápido: ação livre, +1 movimento nesta rodada (o módulo devolve a ação na hora)');
+   && mov.appliesEffects[0].durationMode === 'rounds' && eco.acoesNaHora === undefined,
+   'Movimento Rápido: ação livre, +1 movimento nesta rodada (o sistema build 32 já dá a ação na hora: o módulo não devolve nada)');
 d = encantar(sint('Anel de Prata', 'Joia'), 'Intermediário', ['saeculorum-aceleracao']);
-ok(d.system.actions[0].appliesEffects.map((e) => e.fxTarget).join() === 'acao:standard,acao:movement,acao:simple'
-   && eco.acoesNaHora(d.system.actions[0]).length === 3, 'Aceleração: um turno adicional (padrão, movimento e simples)');
+ok(d.system.actions[0].appliesEffects.length === 1 && d.system.actions[0].appliesEffects[0].fxTarget === 'acao:turno'
+   && d.system.actions[0].appliesEffects[0].fxValue === '1', 'Aceleração: um turno adicional (acao:turno — +1 de cada ação, a reação também)');
+d = encantar(sint('Bomba Alquímica', 'Suprimento'), 'Menor', ['saeculorum-letargia-temporal']);
+ok(d.system.actions.some((x) => (x.appliesEffects ?? []).some((e) => e.fxType === 'action' && e.fxTarget === 'acao:reaction' && e.fxValue === '-1' && e.resist && e.resistAttr === 'forca')),
+   'Letargia Temporal: "incapazes de fazer reações" é −1 reação por rodada (Força anula), não só um lembrete');
 const rapidez = P('saeculorum-rapidez');
 d = enc.construirEncantamento(sint('Poção', 'Suprimento'), { escolhas: [{ prop: rapidez, palavra: 'saeculorum', variante: rapidez.variantes[1] }] }, { animar: false });
 ok(d.system.actions[0].actionCost === 'simple' && d.system.actions[0].appliesEffects[0].fxTarget === 'acao:movement'

@@ -19,7 +19,7 @@
     "metamagics": [],
     "actions": [
       {
-        "label": "Força da Natureza (área persistente, dano por terreno)",
+        "label": "Força da Natureza (área persistente em volta de você, dano por terreno)",
         "level": "all",
         "canRoll": true,
         "rollAttr": "conjuracao",
@@ -67,13 +67,13 @@
         "coneAngle": "45",
         "isWeapon": false,
         "isMelee": false,
-        "range": "0",
+        "range": "1",
         "area": "2*@nivel",
         "macroUuid": "",
         "macroName": "",
         "macroEnabled": true,
         "aaConfig": {
-          "id": "nLQMssCdNwPmrTNW",
+          "id": "adH5J84sL9H7zAIz",
           "label": "Força da Natureza",
           "menu": "ontoken",
           "macro": {

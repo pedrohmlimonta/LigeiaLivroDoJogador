@@ -132,11 +132,19 @@ MAGIAS_2 = [
     _m("Lentidão", "saeculorum", "Ação", "Uma criatura", "", "3m x Círculo x Nível", "Uma cena",
        "Você sussurra a palavra saeculorum, distorcendo o tempo em volta de seu alvo, fazendo com que tudo se mova rápido demais para ele.\n\nEfeitos: O alvo deve ser bem sucedido em uma rolagem de Agilidade oposta a Conjuração ou ficará lento e não poderá fazer reações pela duração da magia (Agilidade anula).\n\nConhecimento (Arcano) concede +1 em Conjuração para esta conjuração.",
        "O alvo fica imobilizado e não pode fazer reações até o fim da cena (Agilidade anula) (apenas Círculo Intermediário ou Maior) (-2). O alvo fica paralisado até o fim da cena (Agilidade anula) (apenas Círculo Maior) (-4). Necessita de componentes gestuais (apenas Círculo Menor) (+1). Necessita de componentes materiais ou foco (apenas Círculo Intermediário ou Menor) (+1).",
+       # "ficará lento e não poderá fazer reações": a condição Lento (metade
+       # do deslocamento) e, à parte, -1 reação por rodada (sistema build 31+:
+       # efeito de ações; a reação é 1 por rodada, então zera). As
+       # peculiaridades trocam o Lento por Imobilizado ou Paralisado.
        actions=[action("Lentidão (Conjuração vs Agilidade)",
                        roll_attr="conjuracao", defense_attr="agilidade", rng=6, cost_mp=1,
-                       applies_effects=[applies("Lento, sem reações (Agilidade anula)",
+                       applies_effects=[applies("Lento (Agilidade anula)",
                                                 fx_type="condition", fx_target="lento",
                                                 duration_mode="scene", resist=True,
+                                                resist_attr="agilidade"),
+                                        applies("Sem reações (Agilidade anula)",
+                                                fx_type="action", fx_target="acao:reaction",
+                                                fx_value=-1, duration_mode="scene", resist=True,
                                                 resist_attr="agilidade")])]),
     _m("Velocidade", "saeculorum", "Ação", "Uma criatura", "", "Toque", "Uma cena",
        "Você toca seu alvo enquanto pronuncia a palavra saeculorum, fazendo com que o tempo flua mais devagar para ele.\n\nEfeitos: O alvo recebe uma ação de movimento adicional em cada um de seus turnos, pela duração da magia.\n\nConhecimento (Arcano) concede +1 em Conjuração para esta conjuração.",
